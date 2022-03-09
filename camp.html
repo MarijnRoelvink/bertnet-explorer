@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">camp</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "camp"
+    let relations = [{'fro': 'camp', 'to': 'preparation', 'type': 'HasA', 'score': 0.0019398366566747427, 'wm_score': 0.41408083, 'final': 0.12558213465967233}, {'fro': 'camp', 'to': 'training', 'type': 'HasA', 'score': 0.0026202972512692213, 'wm_score': 0.5978905, 'final': 0.1812013580758885}, {'fro': 'army', 'to': 'camp', 'type': 'HasA', 'score': 0.026468854397535324, 'wm_score': 0.607272, 'final': 0.20070979807827474}, {'fro': 'taliban', 'to': 'camp', 'type': 'HasA', 'score': 0.023944132030010223, 'wm_score': 0.43886867, 'final': 0.14842149342100716}, {'fro': 'un', 'to': 'camp', 'type': 'HasA', 'score': 0.019543655216693878, 'wm_score': 0.358327, 'final': 0.12117865865168573}, {'fro': 'philippines', 'to': 'camp', 'type': 'HasA', 'score': 0.015359665267169476, 'wm_score': 0.31774545, 'final': 0.10607540068701864}, {'fro': 'pentagon', 'to': 'camp', 'type': 'HasA', 'score': 0.013051613233983517, 'wm_score': 0.32508385, 'final': 0.10666128426378847}, {'fro': 'idf', 'to': 'camp', 'type': 'HasA', 'score': 0.011542651802301407, 'wm_score': 0.32294422, 'final': 0.10496312226161099}, {'fro': 'us', 'to': 'camp', 'type': 'HasA', 'score': 0.011541186831891537, 'wm_score': 0.37832978, 'final': 0.1215777647823241}, {'fro': 'military', 'to': 'camp', 'type': 'HasA', 'score': 0.011060979217290878, 'wm_score': 0.5385496, 'final': 0.16930756545210363}, {'fro': 'team', 'to': 'camp', 'type': 'HasA', 'score': 0.010390540584921837, 'wm_score': 0.46142107, 'final': 0.1456996994094453}, {'fro': 'tribe', 'to': 'camp', 'type': 'HasA', 'score': 0.009164654649794102, 'wm_score': 0.33366156, 'final': 0.10651372625485589}, {'fro': 'jungle', 'to': 'camp', 'type': 'HasA', 'score': 0.0088530033826828, 'wm_score': 0.46572444, 'final': 0.145914434367878}, {'fro': 'province', 'to': 'camp', 'type': 'HasA', 'score': 0.008602051064372063, 'wm_score': 0.32208455, 'final': 0.10264680074506047}, {'fro': 'city', 'to': 'camp', 'type': 'HasA', 'score': 0.008043995127081871, 'wm_score': 0.4688865, 'final': 0.14629674658895733}, {'fro': 'zoo', 'to': 'camp', 'type': 'HasA', 'score': 0.006573173683136702, 'wm_score': 0.3463571, 'final': 0.1085083515781957}, {'fro': 'group', 'to': 'camp', 'type': 'HasA', 'score': 0.006243752781301737, 'wm_score': 0.45718032, 'final': 0.1415247229469112}, {'fro': 'country', 'to': 'camp', 'type': 'HasA', 'score': 0.00526552926748991, 'wm_score': 0.4022445, 'final': 0.12435922048724295}, {'fro': 'navy', 'to': 'camp', 'type': 'HasA', 'score': 0.004951524082571268, 'wm_score': 0.37923214, 'final': 0.11723570885779991}, {'fro': 'state', 'to': 'camp', 'type': 'HasA', 'score': 0.004721466451883316, 'wm_score': 0.33452743, 'final': 0.10366325551631835}, {'fro': 'camp', 'to': 'curfew', 'type': 'HasA', 'score': 0.08572385460138321, 'wm_score': 0.22941819, 'final': 0.12883215522096825}, {'fro': 'camp', 'to': 'website', 'type': 'HasA', 'score': 0.026082560420036316, 'wm_score': 0.30913943, 'final': 0.11099962129402544}, {'fro': 'camp', 'to': 'tent', 'type': 'HasA', 'score': 0.017773298546671867, 'wm_score': 0.60383654, 'final': 0.19359227098267034}, {'fro': 'camp', 'to': 'plan', 'type': 'HasA', 'score': 0.009682269766926765, 'wm_score': 0.4363585, 'final': 0.13768513883684874}, {'fro': 'camp', 'to': 'fence', 'type': 'HasA', 'score': 0.008855790831148624, 'wm_score': 0.42048657, 'final': 0.13234502458180405}, {'fro': 'camp', 'to': 'future', 'type': 'HasA', 'score': 0.007544724270701408, 'wm_score': 0.32805073, 'final': 0.103696525989491}, {'fro': 'camp', 'to': 'history', 'type': 'HasA', 'score': 0.00666822912171483, 'wm_score': 0.35122308, 'final': 0.11003468438520041}, {'fro': 'camp', 'to': 'schedule', 'type': 'HasA', 'score': 0.006097360048443079, 'wm_score': 0.36293283, 'final': 0.11314800103391016}, {'fro': 'camp', 'to': 'spokesman', 'type': 'HasA', 'score': 0.005782765801995993, 'wm_score': 0.37233624, 'final': 0.1157488080613972}, {'fro': 'camp', 'to': 'museum', 'type': 'HasA', 'score': 0.005673870909959078, 'wm_score': 0.35724112, 'final': 0.11114404563697138}, {'fro': 'camp', 'to': 'mission', 'type': 'HasA', 'score': 0.005224672611802816, 'wm_score': 0.44484955, 'final': 0.13711213582826198}, {'fro': 'camp', 'to': 'manager', 'type': 'HasA', 'score': 0.005127274431288242, 'wm_score': 0.34205514, 'final': 0.10620563410190177}, {'fro': 'camp', 'to': 'zoo', 'type': 'HasA', 'score': 0.004855392035096884, 'wm_score': 0.3463571, 'final': 0.10730590442456783}, {'fro': 'camp', 'to': 'cemetery', 'type': 'HasA', 'score': 0.0046371230855584145, 'wm_score': 0.45142865, 'final': 0.1386745811598909}, {'fro': 'camp', 'to': 'problem', 'type': 'HasA', 'score': 0.003996752202510834, 'wm_score': 0.34300378, 'final': 0.10569886054175759}, {'fro': 'camp', 'to': 'perimeter', 'type': 'HasA', 'score': 0.003822196740657091, 'wm_score': 0.37335074, 'final': 0.11468075971845998}, {'fro': 'soldier', 'to': 'camp', 'type': 'AtLocation', 'score': 0.06737835705280304, 'wm_score': 0.49001896, 'final': 0.19417053793696215}, {'fro': 'boy', 'to': 'camp', 'type': 'AtLocation', 'score': 0.05961506441235542, 'wm_score': 0.43613183, 'final': 0.17257009408864882}, {'fro': 'medic', 'to': 'camp', 'type': 'AtLocation', 'score': 0.04069187864661217, 'wm_score': 0.26081023, 'final': 0.10672738405262852}, {'fro': 'child', 'to': 'camp', 'type': 'AtLocation', 'score': 0.029850643128156662, 'wm_score': 0.3630458, 'final': 0.12980919018970966}, {'fro': 'girl', 'to': 'camp', 'type': 'AtLocation', 'score': 0.029518211260437965, 'wm_score': 0.361575, 'final': 0.1291352478823066}, {'fro': 'sniper', 'to': 'camp', 'type': 'AtLocation', 'score': 0.018364017829298973, 'wm_score': 0.3116056, 'final': 0.10633649248050929}, {'fro': 'prisoner', 'to': 'camp', 'type': 'AtLocation', 'score': 0.01763046719133854, 'wm_score': 0.54126346, 'final': 0.174720365033937}, {'fro': 'scout', 'to': 'camp', 'type': 'AtLocation', 'score': 0.015925370156764984, 'wm_score': 0.4514745, 'final': 0.1465901091097355}, {'fro': 'fighter', 'to': 'camp', 'type': 'AtLocation', 'score': 0.014842689037322998, 'wm_score': 0.34538904, 'final': 0.11400659432612611}, {'fro': 'dog', 'to': 'camp', 'type': 'AtLocation', 'score': 0.01283026672899723, 'wm_score': 0.36200243, 'final': 0.11758191571029807}, {'fro': 'man', 'to': 'camp', 'type': 'AtLocation', 'score': 0.010715019889175892, 'wm_score': 0.40964168, 'final': 0.13039301792242314}, {'fro': 'woman', 'to': 'camp', 'type': 'AtLocation', 'score': 0.010642113164067268, 'wm_score': 0.3201115, 'final': 0.1034829292148471}, {'fro': 'refugee', 'to': 'camp', 'type': 'AtLocation', 'score': 0.010021539404988289, 'wm_score': 0.6411122, 'final': 0.19934873758349184}, {'fro': 'guard', 'to': 'camp', 'type': 'AtLocation', 'score': 0.009751643985509872, 'wm_score': 0.5309788, 'final': 0.16611979078985692}, {'fro': 'doctor', 'to': 'camp', 'type': 'AtLocation', 'score': 0.009356454014778137, 'wm_score': 0.34072477, 'final': 0.10876694881034471}, {'fro': 'nurse', 'to': 'camp', 'type': 'AtLocation', 'score': 0.009090874344110489, 'wm_score': 0.3275026, 'final': 0.10461439204087736}, {'fro': 'student', 'to': 'camp', 'type': 'AtLocation', 'score': 0.006728386506438255, 'wm_score': 0.38207805, 'final': 0.1193332855545068}, {'fro': 'volunteer', 'to': 'camp', 'type': 'AtLocation', 'score': 0.0052550360560417175, 'wm_score': 0.4245642, 'final': 0.13104778523922922}, {'fro': 'kid', 'to': 'camp', 'type': 'AtLocation', 'score': 0.005167854018509388, 'wm_score': 0.32848606, 'final': 0.1021633158129566}, {'fro': 'marine', 'to': 'camp', 'type': 'AtLocation', 'score': 0.00490140076726675, 'wm_score': 0.41579807, 'final': 0.12817040153708675}, {'fro': 'tent', 'to': 'camp', 'type': 'AtLocation', 'score': 0.004712969996035099, 'wm_score': 0.60383654, 'final': 0.1844500409972246}, {'fro': 'camp', 'to': 'works', 'type': 'AtLocation', 'score': 0.10820000618696213, 'wm_score': 0.26400974, 'final': 0.15494292633087348}, {'fro': 'camp', 'to': 'open', 'type': 'AtLocation', 'score': 0.07129703462123871, 'wm_score': 0.35363814, 'final': 0.1559993662348671}, {'fro': 'camp', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.03988804295659065, 'wm_score': 0.45537323, 'final': 0.16453359906961348}, {'fro': 'camp', 'to': 'area', 'type': 'AtLocation', 'score': 0.0394403338432312, 'wm_score': 0.5686586, 'final': 0.19820581369026186}, {'fro': 'camp', 'to': 'mountains', 'type': 'AtLocation', 'score': 0.0347503162920475, 'wm_score': 0.36547694, 'final': 0.13396830340443325}, {'fro': 'camp', 'to': 'woods', 'type': 'AtLocation', 'score': 0.03102688305079937, 'wm_score': 0.33576784, 'final': 0.12244917013555956}, {'fro': 'camp', 'to': 'south', 'type': 'AtLocation', 'score': 0.028027620166540146, 'wm_score': 0.47145474, 'final': 0.1610557561165781}, {'fro': 'camp', 'to': 'north', 'type': 'AtLocation', 'score': 0.023411879315972328, 'wm_score': 0.47570497, 'final': 0.15909980652118066}, {'fro': 'camp', 'to': 'air', 'type': 'AtLocation', 'score': 0.01981564238667488, 'wm_score': 0.4255771, 'final': 0.14154407967067245}, {'fro': 'camp', 'to': 'middle', 'type': 'AtLocation', 'score': 0.018299665302038193, 'wm_score': 0.4397651, 'final': 0.14473929571142674}, {'fro': 'camp', 'to': 'region', 'type': 'AtLocation', 'score': 0.01782371662557125, 'wm_score': 0.36766303, 'final': 0.12277551063789989}, {'fro': 'camp', 'to': 'northeast', 'type': 'AtLocation', 'score': 0.015549293719232082, 'wm_score': 0.3866427, 'final': 0.12687731560346246}, {'fro': 'camp', 'to': 'water', 'type': 'AtLocation', 'score': 0.012674792669713497, 'wm_score': 0.35221758, 'final': 0.11453762886879945}, {'fro': 'camp', 'to': 'ground', 'type': 'AtLocation', 'score': 0.011958347633481026, 'wm_score': 0.5310315, 'final': 0.16768029334343673}, {'fro': 'camp', 'to': 'desert', 'type': 'AtLocation', 'score': 0.01190226711332798, 'wm_score': 0.49794787, 'final': 0.1577159479793296}, {'fro': 'camp', 'to': 'northwest', 'type': 'AtLocation', 'score': 0.010850032791495323, 'wm_score': 0.36695307, 'final': 0.11768094395404674}, {'fro': 'camp', 'to': 'east', 'type': 'AtLocation', 'score': 0.010658638551831245, 'wm_score': 0.45381713, 'final': 0.1436061859862819}, {'fro': 'camp', 'to': 'making', 'type': 'AtLocation', 'score': 0.009735957719385624, 'wm_score': 0.33709082, 'final': 0.10794241640356995}, {'fro': 'camp', 'to': 'ruins', 'type': 'AtLocation', 'score': 0.008459310978651047, 'wm_score': 0.32335275, 'final': 0.10292734268505575}, {'fro': 'camp', 'to': 'west', 'type': 'AtLocation', 'score': 0.00836408231407404, 'wm_score': 0.49710378, 'final': 0.15498599161985185}, {'fro': 'camp', 'to': 'hills', 'type': 'AtLocation', 'score': 0.007600840646773577, 'wm_score': 0.39433527, 'final': 0.12362116945274151}, {'fro': 'camp', 'to': 'southeast', 'type': 'AtLocation', 'score': 0.006552858743816614, 'wm_score': 0.36016634, 'final': 0.11263690312067164}, {'fro': 'camp', 'to': 'neighbourhood', 'type': 'AtLocation', 'score': 0.006231238599866629, 'wm_score': 0.32156986, 'final': 0.10083282501990665}, {'fro': 'camp', 'to': 'wilderness', 'type': 'AtLocation', 'score': 0.005952101666480303, 'wm_score': 0.3494382, 'final': 0.10899793116653622}, {'fro': 'camp', 'to': 'southwest', 'type': 'AtLocation', 'score': 0.005670194048434496, 'wm_score': 0.3548217, 'final': 0.11041564583390417}, {'fro': 'camp', 'to': 'forest', 'type': 'AtLocation', 'score': 0.004858172032982111, 'wm_score': 0.33697915, 'final': 0.10449446542308749}, {'fro': 'camp', 'to': 'centre', 'type': 'AtLocation', 'score': 0.00462702102959156, 'wm_score': 0.45656484, 'final': 0.1402083667207141}, {'fro': 'camp', 'to': 'park', 'type': 'AtLocation', 'score': 0.0041957697831094265, 'wm_score': 0.45001072, 'final': 0.1379402548481766}, {'fro': 'camp', 'to': 'future', 'type': 'AtLocation', 'score': 0.004139391705393791, 'wm_score': 0.32805073, 'final': 0.10131279319377566}, {'fro': 'camp', 'to': 'remote', 'type': 'HasA', 'score': 0.00401198398321867, 'wm_score': 0.42010963, 'final': 0.12884127778825308}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

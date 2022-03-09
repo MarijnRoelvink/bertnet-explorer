@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">chain</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "chain"
+    let relations = [{'fro': 'chain', 'to': 'dealer', 'type': 'HasA', 'score': 0.0039009263273328543, 'wm_score': 0.3364272, 'final': 0.103658808429133}, {'fro': 'chain', 'to': 'customer', 'type': 'HasA', 'score': 0.009647157043218613, 'wm_score': 0.46490008, 'final': 0.14622303393025304}, {'fro': 'chain', 'to': 'owner', 'type': 'HasA', 'score': 0.0036325999535620213, 'wm_score': 0.47037393, 'final': 0.14365499896749345}, {'fro': 'chain', 'to': 'employee', 'type': 'HasA', 'score': 0.009664769284427166, 'wm_score': 0.36586973, 'final': 0.11652625749909903}, {'fro': 'chain', 'to': 'supermarket', 'type': 'HasA', 'score': 0.011460835114121437, 'wm_score': 0.73998946, 'final': 0.23001942257988503}, {'fro': 'value', 'to': 'chain', 'type': 'AtLocation', 'score': 0.004884892143309116, 'wm_score': 0.39404204, 'final': 0.12163203650031638}, {'fro': 'order', 'to': 'chain', 'type': 'AtLocation', 'score': 0.0006248202989809215, 'wm_score': 0.40581557, 'final': 0.12218204520928667}, {'fro': 'chain', 'to': 'store', 'type': 'HasA', 'score': 0.011614961549639702, 'wm_score': 0.745652, 'final': 0.2318260730847478}, {'fro': 'chain', 'to': 'profit', 'type': 'HasA', 'score': 0.00298478314653039, 'wm_score': 0.40025526, 'final': 0.12216592620257129}, {'fro': 'restaurant', 'to': 'chain', 'type': 'HasA', 'score': 0.05907939001917839, 'wm_score': 0.5907098, 'final': 0.2185685130134249}, {'fro': 'supermarket', 'to': 'chain', 'type': 'HasA', 'score': 0.04102445766329765, 'wm_score': 0.73998946, 'final': 0.2507139583643084}, {'fro': 'store', 'to': 'chain', 'type': 'HasA', 'score': 0.02737690880894661, 'wm_score': 0.745652, 'final': 0.24285943616626265}, {'fro': 'mall', 'to': 'chain', 'type': 'HasA', 'score': 0.021850954741239548, 'wm_score': 0.59122515, 'final': 0.1926632133188677}, {'fro': 'cafe', 'to': 'chain', 'type': 'HasA', 'score': 0.015746308490633965, 'wm_score': 0.43602723, 'final': 0.14183058494344378}, {'fro': 'bakery', 'to': 'chain', 'type': 'HasA', 'score': 0.013033785857260227, 'wm_score': 0.4960659, 'final': 0.15794342010008217}, {'fro': 'company', 'to': 'chain', 'type': 'HasA', 'score': 0.01044898759573698, 'wm_score': 0.58408666, 'final': 0.1825402893170159}, {'fro': 'shop', 'to': 'chain', 'type': 'HasA', 'score': 0.009382164105772972, 'wm_score': 0.6162825, 'final': 0.1914522648740411}, {'fro': 'brewery', 'to': 'chain', 'type': 'HasA', 'score': 0.009115863591432571, 'wm_score': 0.39842138, 'final': 0.1259075185140028}, {'fro': 'hotel', 'to': 'chain', 'type': 'HasA', 'score': 0.008371659554541111, 'wm_score': 0.50010324, 'final': 0.15589113368817878}, {'fro': 'pub', 'to': 'chain', 'type': 'HasA', 'score': 0.007943290285766125, 'wm_score': 0.4346774, 'final': 0.1359635232000363}, {'fro': 'gym', 'to': 'chain', 'type': 'HasA', 'score': 0.005765605252236128, 'wm_score': 0.34550267, 'final': 0.1076867246765653}, {'fro': 'site', 'to': 'chain', 'type': 'HasA', 'score': 0.005272107198834419, 'wm_score': 0.45246604, 'final': 0.13943028703918411}, {'fro': 'starbucks', 'to': 'chain', 'type': 'HasA', 'score': 0.004838945344090462, 'wm_score': 0.56452644, 'final': 0.17274519374086333}, {'fro': 'building', 'to': 'chain', 'type': 'HasA', 'score': 0.004322851542383432, 'wm_score': 0.47018513, 'final': 0.14408153507966845}, {'fro': 'bank', 'to': 'chain', 'type': 'HasA', 'score': 0.004319686442613602, 'wm_score': 0.40634418, 'final': 0.12492703450982953}, {'fro': 'diner', 'to': 'chain', 'type': 'HasA', 'score': 0.0040720677934587, 'wm_score': 0.35189873, 'final': 0.10842006645542111}, {'fro': 'house', 'to': 'chain', 'type': 'HasA', 'score': 0.004059372935444117, 'wm_score': 0.3485157, 'final': 0.1073962710548109}, {'fro': 'bookstore', 'to': 'chain', 'type': 'HasA', 'score': 0.004037148784846067, 'wm_score': 0.54645973, 'final': 0.16676392314939228}, {'fro': 'retailer', 'to': 'chain', 'type': 'HasA', 'score': 0.004031721968203783, 'wm_score': 0.65341127, 'final': 0.19884558637774266}, {'fro': 'city', 'to': 'chain', 'type': 'HasA', 'score': 0.0035177948884665966, 'wm_score': 0.33779645, 'final': 0.10380139142192664}, {'fro': 'dog', 'to': 'chain', 'type': 'HasA', 'score': 0.0033968056086450815, 'wm_score': 0.3772026, 'final': 0.11553854392605158}, {'fro': 'park', 'to': 'chain', 'type': 'HasA', 'score': 0.0031408770009875298, 'wm_score': 0.34210986, 'final': 0.10483157190069128}, {'fro': 'chicken', 'to': 'chain', 'type': 'HasA', 'score': 0.0029831102583557367, 'wm_score': 0.3887008, 'final': 0.11869841718084903}, {'fro': 'bar', 'to': 'chain', 'type': 'HasA', 'score': 0.002708675805479288, 'wm_score': 0.4776953, 'final': 0.1452046630638355}, {'fro': 'seller', 'to': 'chain', 'type': 'HasA', 'score': 0.002684703329578042, 'wm_score': 0.38474447, 'final': 0.11730263333070465}, {'fro': 'firm', 'to': 'chain', 'type': 'HasA', 'score': 0.002603203058242798, 'wm_score': 0.47092846, 'final': 0.14310078014076996}, {'fro': 'station', 'to': 'chain', 'type': 'HasA', 'score': 0.002554657170549035, 'wm_score': 0.3676551, 'final': 0.11208479001938434}, {'fro': 'chain', 'to': 'logo', 'type': 'HasA', 'score': 0.05012132599949837, 'wm_score': 0.32191467, 'final': 0.13165932919964887}, {'fro': 'chain', 'to': 'website', 'type': 'HasA', 'score': 0.04664662480354309, 'wm_score': 0.33805478, 'final': 0.13406907136248017}, {'fro': 'chain', 'to': 'trademark', 'type': 'HasA', 'score': 0.033178381621837616, 'wm_score': 0.3090282, 'final': 0.11593332713528634}, {'fro': 'chain', 'to': 'distributor', 'type': 'HasA', 'score': 0.017219580709934235, 'wm_score': 0.4824971, 'final': 0.156802836496954}, {'fro': 'chain', 'to': 'competitor', 'type': 'HasA', 'score': 0.016966281458735466, 'wm_score': 0.4166244, 'final': 0.13686371702111486}, {'fro': 'chain', 'to': 'bakery', 'type': 'HasA', 'score': 0.015420819632709026, 'wm_score': 0.4960659, 'final': 0.15961434374289635}, {'fro': 'chain', 'to': 'menu', 'type': 'HasA', 'score': 0.013987235724925995, 'wm_score': 0.39393973, 'final': 0.12797298400744822}, {'fro': 'chain', 'to': 'warehouse', 'type': 'HasA', 'score': 0.012363390065729618, 'wm_score': 0.57635486, 'final': 0.18156083104601078}, {'fro': 'chain', 'to': 'freezer', 'type': 'HasA', 'score': 0.010773682966828346, 'wm_score': 0.30868378, 'final': 0.10014671207677986}, {'fro': 'chain', 'to': 'starbucks', 'type': 'HasA', 'score': 0.008601619862020016, 'wm_score': 0.56452644, 'final': 0.17537906590341404}, {'fro': 'chain', 'to': 'restaurant', 'type': 'HasA', 'score': 0.007247616536915302, 'wm_score': 0.5907098, 'final': 0.18228627157584074}, {'fro': 'chain', 'to': 'subsidiary', 'type': 'HasA', 'score': 0.006991561036556959, 'wm_score': 0.5162063, 'final': 0.1597559827255899}, {'fro': 'chain', 'to': 'pharmacy', 'type': 'HasA', 'score': 0.006811667699366808, 'wm_score': 0.5389946, 'final': 0.1664665473895568}, {'fro': 'chain', 'to': 'twist', 'type': 'HasA', 'score': 0.006187260150909424, 'wm_score': 0.39033625, 'final': 0.12143195710563662}, {'fro': 'chain', 'to': 'buyer', 'type': 'HasA', 'score': 0.005595782771706581, 'wm_score': 0.32056817, 'final': 0.10008749894019461}, {'fro': 'chain', 'to': 'rival', 'type': 'HasA', 'score': 0.005520051345229149, 'wm_score': 0.38583192, 'final': 0.11961361194166042}, {'fro': 'chain', 'to': 'bookstore', 'type': 'HasA', 'score': 0.0048665618523955345, 'wm_score': 0.54645973, 'final': 0.1673445122966769}, {'fro': 'chain', 'to': 'cafe', 'type': 'HasA', 'score': 0.004649324808269739, 'wm_score': 0.43602723, 'final': 0.13406269636578882}, {'fro': 'chain', 'to': 'stake', 'type': 'HasA', 'score': 0.0045221224427223206, 'wm_score': 0.35004568, 'final': 0.10817918970990566}, {'fro': 'chain', 'to': 'problem', 'type': 'HasA', 'score': 0.004490261431783438, 'wm_score': 0.3708573, 'final': 0.11440037300224842}, {'fro': 'chain', 'to': 'monopoly', 'type': 'HasA', 'score': 0.004124954342842102, 'wm_score': 0.34385973, 'final': 0.10604538703998949}, {'fro': 'chain', 'to': 'location', 'type': 'HasA', 'score': 0.0034514323342591524, 'wm_score': 0.45832497, 'final': 0.13991349363398142}, {'fro': 'chicken', 'to': 'chain', 'type': 'AtLocation', 'score': 0.04674280434846878, 'wm_score': 0.3887008, 'final': 0.14933020304392816}, {'fro': 'burger', 'to': 'chain', 'type': 'AtLocation', 'score': 0.02671620436012745, 'wm_score': 0.56008303, 'final': 0.18672625205208923}, {'fro': 'knife', 'to': 'chain', 'type': 'AtLocation', 'score': 0.02481757663190365, 'wm_score': 0.32737604, 'final': 0.11558511564233256}, {'fro': 'pizza', 'to': 'chain', 'type': 'AtLocation', 'score': 0.015107732266187668, 'wm_score': 0.54071826, 'final': 0.1727908905863314}, {'fro': 'taco', 'to': 'chain', 'type': 'AtLocation', 'score': 0.010095400735735893, 'wm_score': 0.44750392, 'final': 0.14131795651501516}, {'fro': 'gun', 'to': 'chain', 'type': 'AtLocation', 'score': 0.01007261872291565, 'wm_score': 0.31967548, 'final': 0.10295347710604098}, {'fro': 'dog', 'to': 'chain', 'type': 'AtLocation', 'score': 0.009922369383275509, 'wm_score': 0.3772026, 'final': 0.12010643856829287}, {'fro': 'starbucks', 'to': 'chain', 'type': 'AtLocation', 'score': 0.009542286396026611, 'wm_score': 0.56452644, 'final': 0.17603753247721865}, {'fro': 'horse', 'to': 'chain', 'type': 'AtLocation', 'score': 0.009464118629693985, 'wm_score': 0.32125574, 'final': 0.1030016050407858}, {'fro': 'bomb', 'to': 'chain', 'type': 'AtLocation', 'score': 0.006944186985492706, 'wm_score': 0.33628643, 'final': 0.10574685988984492}, {'fro': 'brick', 'to': 'chain', 'type': 'AtLocation', 'score': 0.006299756001681089, 'wm_score': 0.35130304, 'final': 0.10980074120117678}, {'fro': 'cow', 'to': 'chain', 'type': 'AtLocation', 'score': 0.006270990241318941, 'wm_score': 0.32482284, 'final': 0.10183654516892328}, {'fro': 'banana', 'to': 'chain', 'type': 'AtLocation', 'score': 0.005986371543258429, 'wm_score': 0.32733938, 'final': 0.10239227408028091}, {'fro': 'fish', 'to': 'chain', 'type': 'AtLocation', 'score': 0.005764778237789869, 'wm_score': 0.34911054, 'final': 0.10876850676645293}, {'fro': 'third', 'to': 'chain', 'type': 'AtLocation', 'score': 0.005684460513293743, 'wm_score': 0.35375327, 'final': 0.11010510335930564}, {'fro': 'beer', 'to': 'chain', 'type': 'AtLocation', 'score': 0.0056393686681985855, 'wm_score': 0.3860583, 'final': 0.11976504806773904}, {'fro': 'sandwich', 'to': 'chain', 'type': 'AtLocation', 'score': 0.00532959122210741, 'wm_score': 0.44449145, 'final': 0.1370781488554752}, {'fro': 'cat', 'to': 'chain', 'type': 'AtLocation', 'score': 0.004799114540219307, 'wm_score': 0.3783894, 'final': 0.11687620017815353}, {'fro': 'restaurant', 'to': 'chain', 'type': 'AtLocation', 'score': 0.004668615758419037, 'wm_score': 0.5907098, 'final': 0.18048097103089333}, {'fro': 'shoe', 'to': 'chain', 'type': 'AtLocation', 'score': 0.003707916708663106, 'wm_score': 0.46924794, 'final': 0.1433699236960642}, {'fro': 'truck', 'to': 'chain', 'type': 'AtLocation', 'score': 0.003635099856182933, 'wm_score': 0.4067132, 'final': 0.12455852989932807}, {'fro': 'competitor', 'to': 'chain', 'type': 'AtLocation', 'score': 0.0035911910235881805, 'wm_score': 0.4166244, 'final': 0.12750115371651174}, {'fro': 'chain', 'to': 'works', 'type': 'AtLocation', 'score': 0.556664764881134, 'wm_score': 0.30148655, 'final': 0.48011130041679384}, {'fro': 'chain', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.06970227509737015, 'wm_score': 0.2809739, 'final': 0.13308376256815913}, {'fro': 'chain', 'to': 'making', 'type': 'AtLocation', 'score': 0.0221584253013134, 'wm_score': 0.3982086, 'final': 0.13497347771091942}, {'fro': 'chain', 'to': 'neighborhood', 'type': 'AtLocation', 'score': 0.010049862787127495, 'wm_score': 0.3793187, 'final': 0.12083051395098926}, {'fro': 'chain', 'to': 'running', 'type': 'AtLocation', 'score': 0.005456813145428896, 'wm_score': 0.3513788, 'final': 0.10923340920180025}, {'fro': 'chain', 'to': 'distance', 'type': 'AtLocation', 'score': 0.004639496561139822, 'wm_score': 0.4047662, 'final': 0.1246775075927979}, {'fro': 'chain', 'to': 'loop', 'type': 'AtLocation', 'score': 0.004601319786161184, 'wm_score': 0.41875848, 'final': 0.12884846785031284}, {'fro': 'chain', 'to': 'area', 'type': 'AtLocation', 'score': 0.004141734912991524, 'wm_score': 0.41159907, 'final': 0.1263789354390941}, {'fro': 'chain', 'to': 'building', 'type': 'AtLocation', 'score': 0.003904575714841485, 'wm_score': 0.47018513, 'final': 0.14378874200038907}, {'fro': 'chain', 'to': 'open', 'type': 'AtLocation', 'score': 0.002951122587546706, 'wm_score': 0.36056468, 'final': 0.11023518981128272}, {'fro': 'chain', 'to': 'supply', 'type': 'AtLocation', 'score': 0.0026674524415284395, 'wm_score': 0.42027676, 'final': 0.12795024470906993}, {'fro': 'chain', 'to': 'cards', 'type': 'AtLocation', 'score': 0.0025725741870701313, 'wm_score': 0.3440174, 'final': 0.1050060219309491}, {'fro': 'chain', 'to': 'store', 'type': 'AtLocation', 'score': 0.0025142657104879618, 'wm_score': 0.745652, 'final': 0.22545558599734158}, {'fro': 'chain', 'to': 'bag', 'type': 'AtLocation', 'score': 0.002445911057293415, 'wm_score': 0.3830077, 'final': 0.11661444774010542}, {'fro': 'chain', 'to': 'shop', 'type': 'HasA', 'score': 0.004654425662010908, 'wm_score': 0.6162825, 'final': 0.18814284796340766}, {'fro': 'chain', 'to': 'rope', 'type': 'AtLocation', 'score': 0.003568032756447792, 'wm_score': 0.35418516, 'final': 0.10875317092951348}, {'fro': 'chain', 'to': 'internal', 'type': 'HasA', 'score': 0.0034505457151681185, 'wm_score': 0.3315818, 'final': 0.1018899220006177}, {'fro': 'loop', 'to': 'chain', 'type': 'AtLocation', 'score': 0.004874656442552805, 'wm_score': 0.41875848, 'final': 0.12903980350978697}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

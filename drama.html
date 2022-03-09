@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">drama</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "drama"
+    let relations = [{'fro': 'bbc', 'to': 'drama', 'type': 'HasA', 'score': 0.037985626608133316, 'wm_score': 0.5411234, 'final': 0.18892695862569334}, {'fro': 'show', 'to': 'drama', 'type': 'HasA', 'score': 0.019731469452381134, 'wm_score': 0.62404597, 'final': 0.20102581961666682}, {'fro': 'queen', 'to': 'drama', 'type': 'HasA', 'score': 0.0192132405936718, 'wm_score': 0.3736969, 'final': 0.1255583384155703}, {'fro': 'film', 'to': 'drama', 'type': 'HasA', 'score': 0.01555438619107008, 'wm_score': 0.7929169, 'final': 0.2487631403337491}, {'fro': 'simpsons', 'to': 'drama', 'type': 'HasA', 'score': 0.011780446395277977, 'wm_score': 0.37559074, 'final': 0.12092353447669459}, {'fro': 'cw', 'to': 'drama', 'type': 'HasA', 'score': 0.011768341064453125, 'wm_score': 0.3436027, 'final': 0.1113186487451172}, {'fro': 'voice', 'to': 'drama', 'type': 'HasA', 'score': 0.010567701421678066, 'wm_score': 0.44835725, 'final': 0.14190456599517465}, {'fro': 'movie', 'to': 'drama', 'type': 'HasA', 'score': 0.007899911142885685, 'wm_score': 0.7655294, 'final': 0.23518875780002002}, {'fro': 'soap', 'to': 'drama', 'type': 'HasA', 'score': 0.007464008405804634, 'wm_score': 0.5308752, 'final': 0.16448736588406326}, {'fro': 'apprentice', 'to': 'drama', 'type': 'HasA', 'score': 0.007234937511384487, 'wm_score': 0.35917372, 'final': 0.11281657225796915}, {'fro': 'academy', 'to': 'drama', 'type': 'HasA', 'score': 0.006838569883257151, 'wm_score': 0.5598347, 'final': 0.17273740891828002}, {'fro': 'episode', 'to': 'drama', 'type': 'HasA', 'score': 0.005946049932390451, 'wm_score': 0.6707641, 'final': 0.20539146495267332}, {'fro': 'uk', 'to': 'drama', 'type': 'HasA', 'score': 0.005904212594032288, 'wm_score': 0.33757055, 'final': 0.10540411381582263}, {'fro': 'bachelor', 'to': 'drama', 'type': 'HasA', 'score': 0.005767865106463432, 'wm_score': 0.36713278, 'final': 0.11417733957452442}, {'fro': 'programme', 'to': 'drama', 'type': 'HasA', 'score': 0.005718947388231754, 'wm_score': 0.4801326, 'final': 0.14804304317176226}, {'fro': 'who', 'to': 'drama', 'type': 'HasA', 'score': 0.004861162975430489, 'wm_score': 0.3219983, 'final': 0.10000230408280136}, {'fro': 'future', 'to': 'drama', 'type': 'HasA', 'score': 0.0040460736490786076, 'wm_score': 0.3640414, 'final': 0.11204467155435505}, {'fro': 'independent', 'to': 'drama', 'type': 'HasA', 'score': 0.004032482858747244, 'wm_score': 0.34491092, 'final': 0.10629601400112308}, {'fro': 'series', 'to': 'drama', 'type': 'HasA', 'score': 0.004012316931039095, 'wm_score': 0.6472406, 'final': 0.19698080185172742}, {'fro': 'rock', 'to': 'drama', 'type': 'HasA', 'score': 0.003924481105059385, 'wm_score': 0.39223075, 'final': 0.12041636177354159}, {'fro': 'game', 'to': 'drama', 'type': 'HasA', 'score': 0.003481531050056219, 'wm_score': 0.40807676, 'final': 0.12486009973503936}, {'fro': 'actress', 'to': 'drama', 'type': 'HasA', 'score': 0.0030223496723920107, 'wm_score': 0.5908314, 'final': 0.17936506477067443}, {'fro': 'drama', 'to': 'twist', 'type': 'HasA', 'score': 0.3077995181083679, 'wm_score': 0.4952028, 'final': 0.36402050267585756}, {'fro': 'drama', 'to': 'premiere', 'type': 'HasA', 'score': 0.04897015169262886, 'wm_score': 0.6211578, 'final': 0.22062644618484023}, {'fro': 'drama', 'to': 'trailer', 'type': 'HasA', 'score': 0.04346834868192673, 'wm_score': 0.25494167, 'final': 0.10691034507734871}, {'fro': 'drama', 'to': 'sequel', 'type': 'HasA', 'score': 0.021349266171455383, 'wm_score': 0.57112515, 'final': 0.18628203132001878}, {'fro': 'drama', 'to': 'climax', 'type': 'HasA', 'score': 0.018735341727733612, 'wm_score': 0.4160134, 'final': 0.13791875920941354}, {'fro': 'drama', 'to': 'future', 'type': 'HasA', 'score': 0.01790943555533886, 'wm_score': 0.3640414, 'final': 0.12174902488873722}, {'fro': 'drama', 'to': 'finale', 'type': 'HasA', 'score': 0.014758983626961708, 'wm_score': 0.5619555, 'final': 0.17891793853887322}, {'fro': 'drama', 'to': 'winner', 'type': 'HasA', 'score': 0.014121463522315025, 'wm_score': 0.3785705, 'final': 0.12345617446562053}, {'fro': 'drama', 'to': 'cameo', 'type': 'HasA', 'score': 0.013693415559828281, 'wm_score': 0.44695973, 'final': 0.14367330989187982}, {'fro': 'drama', 'to': 'cast', 'type': 'HasA', 'score': 0.013391600921750069, 'wm_score': 0.5593563, 'final': 0.1771810106452251}, {'fro': 'drama', 'to': 'star', 'type': 'HasA', 'score': 0.01172260008752346, 'wm_score': 0.5413195, 'final': 0.17060167006126642}, {'fro': 'drama', 'to': 'soundtrack', 'type': 'HasA', 'score': 0.009391531348228455, 'wm_score': 0.54307437, 'final': 0.16949638294375996}, {'fro': 'drama', 'to': 'plot', 'type': 'HasA', 'score': 0.008065666072070599, 'wm_score': 0.47375473, 'final': 0.14777238525044945}, {'fro': 'drama', 'to': 'villain', 'type': 'HasA', 'score': 0.005867152474820614, 'wm_score': 0.4874093, 'final': 0.15032979673237445}, {'fro': 'drama', 'to': 'theme', 'type': 'HasA', 'score': 0.005751581396907568, 'wm_score': 0.54049337, 'final': 0.1661741179778353}, {'fro': 'drama', 'to': 'budget', 'type': 'HasA', 'score': 0.005746680311858654, 'wm_score': 0.3532939, 'final': 0.11001084621830108}, {'fro': 'drama', 'to': 'comeback', 'type': 'HasA', 'score': 0.0047881281934678555, 'wm_score': 0.40223622, 'final': 0.12402255573542752}, {'fro': 'drama', 'to': 'narrator', 'type': 'HasA', 'score': 0.0039396584033966064, 'wm_score': 0.4024914, 'final': 0.12350518088237765}, {'fro': 'drama', 'to': 'secret', 'type': 'HasA', 'score': 0.0036084759049117565, 'wm_score': 0.38938007, 'final': 0.11933995413343824}, {'fro': 'drama', 'to': 'premise', 'type': 'HasA', 'score': 0.0034657162614166737, 'wm_score': 0.44740117, 'final': 0.1366463523829917}, {'fro': 'drama', 'to': 'conclusion', 'type': 'HasA', 'score': 0.003434747224673629, 'wm_score': 0.33067733, 'final': 0.10160752205727154}, {'fro': 'drama', 'to': 'revival', 'type': 'HasA', 'score': 0.003235060954466462, 'wm_score': 0.47139737, 'final': 0.14368375366812655}, {'fro': 'drama', 'to': 'storyline', 'type': 'HasA', 'score': 0.0032111562322825193, 'wm_score': 0.5499221, 'final': 0.1672244393625978}, {'fro': 'drama', 'to': 'charm', 'type': 'HasA', 'score': 0.0031944364309310913, 'wm_score': 0.36540827, 'final': 0.11185858650165177}, {'fro': 'drama', 'to': 'mystery', 'type': 'HasA', 'score': 0.003184122499078512, 'wm_score': 0.6311877, 'final': 0.19158519574935498}, {'fro': 'cameo', 'to': 'drama', 'type': 'AtLocation', 'score': 0.045819614082574844, 'wm_score': 0.44695973, 'final': 0.1661616488578024}, {'fro': 'woman', 'to': 'drama', 'type': 'AtLocation', 'score': 0.037370532751083374, 'wm_score': 0.4230258, 'final': 0.15306711292575836}, {'fro': 'girl', 'to': 'drama', 'type': 'AtLocation', 'score': 0.029823411256074905, 'wm_score': 0.46837452, 'final': 0.16138874387925245}, {'fro': 'kiss', 'to': 'drama', 'type': 'AtLocation', 'score': 0.01416811253875494, 'wm_score': 0.32462195, 'final': 0.10730426377712847}, {'fro': 'boy', 'to': 'drama', 'type': 'AtLocation', 'score': 0.013218997046351433, 'wm_score': 0.428434, 'final': 0.13778349793244601}, {'fro': 'vampire', 'to': 'drama', 'type': 'AtLocation', 'score': 0.01315964013338089, 'wm_score': 0.46581733, 'final': 0.14895694709336663}, {'fro': 'child', 'to': 'drama', 'type': 'AtLocation', 'score': 0.01178201474249363, 'wm_score': 0.42839095, 'final': 0.13676469531974556}, {'fro': 'villain', 'to': 'drama', 'type': 'AtLocation', 'score': 0.011294608004391193, 'wm_score': 0.4874093, 'final': 0.15412901560307385}, {'fro': 'man', 'to': 'drama', 'type': 'AtLocation', 'score': 0.010637607425451279, 'wm_score': 0.46484813, 'final': 0.14690076419781595}, {'fro': 'character', 'to': 'drama', 'type': 'AtLocation', 'score': 0.010278170928359032, 'wm_score': 0.63721085, 'final': 0.19835797464985136}, {'fro': 'twist', 'to': 'drama', 'type': 'AtLocation', 'score': 0.010237953625619411, 'wm_score': 0.4952028, 'final': 0.15572740753793363}, {'fro': 'role', 'to': 'drama', 'type': 'AtLocation', 'score': 0.009308233857154846, 'wm_score': 0.5611025, 'final': 0.1748465137000084}, {'fro': 'baby', 'to': 'drama', 'type': 'AtLocation', 'score': 0.008891326375305653, 'wm_score': 0.32125047, 'final': 0.10259906946271397}, {'fro': 'lesbian', 'to': 'drama', 'type': 'AtLocation', 'score': 0.008081497624516487, 'wm_score': 0.33981574, 'final': 0.10760177033716155}, {'fro': 'scene', 'to': 'drama', 'type': 'AtLocation', 'score': 0.007076011039316654, 'wm_score': 0.5838573, 'final': 0.18011039772752171}, {'fro': 'flashback', 'to': 'drama', 'type': 'AtLocation', 'score': 0.00641845865175128, 'wm_score': 0.42107087, 'final': 0.13081418205622591}, {'fro': 'third', 'to': 'drama', 'type': 'AtLocation', 'score': 0.0055488096550107, 'wm_score': 0.34845743, 'final': 0.10842139575850751}, {'fro': 'ghost', 'to': 'drama', 'type': 'AtLocation', 'score': 0.004981236066669226, 'wm_score': 0.44001037, 'final': 0.13548997624666848}, {'fro': 'zombie', 'to': 'drama', 'type': 'AtLocation', 'score': 0.004847897216677666, 'wm_score': 0.345252, 'final': 0.10696912805167438}, {'fro': 'doctor', 'to': 'drama', 'type': 'AtLocation', 'score': 0.004515247885137796, 'wm_score': 0.40476662, 'final': 0.12459065951959647}, {'fro': 'detective', 'to': 'drama', 'type': 'AtLocation', 'score': 0.004360572434961796, 'wm_score': 0.50011104, 'final': 0.15308571270447327}, {'fro': 'star', 'to': 'drama', 'type': 'AtLocation', 'score': 0.004098879639059305, 'wm_score': 0.5413195, 'final': 0.1652650657473415}, {'fro': 'monster', 'to': 'drama', 'type': 'AtLocation', 'score': 0.004041432868689299, 'wm_score': 0.39589858, 'final': 0.12159857700808252}, {'fro': 'drama', 'to': 'works', 'type': 'AtLocation', 'score': 0.7705315351486206, 'wm_score': 0.4846428, 'final': 0.6847649146040344}, {'fro': 'drama', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.1127188429236412, 'wm_score': 0.10256885, 'final': 0.10967384504654884}, {'fro': 'drama', 'to': 'making', 'type': 'AtLocation', 'score': 0.05976960062980652, 'wm_score': 0.36555427, 'final': 0.1515050014408646}, {'fro': 'drama', 'to': 'air', 'type': 'AtLocation', 'score': 0.010476669296622276, 'wm_score': 0.3157125, 'final': 0.1020474185076356}, {'fro': 'drama', 'to': 'books', 'type': 'AtLocation', 'score': 0.0018833803478628397, 'wm_score': 0.3940729, 'final': 0.119540236243504}, {'fro': 'drama', 'to': 'running', 'type': 'AtLocation', 'score': 0.0018152479315176606, 'wm_score': 0.38897458, 'final': 0.11796304755206238}, {'fro': 'drama', 'to': 'news', 'type': 'AtLocation', 'score': 0.0016162974061444402, 'wm_score': 0.43348408, 'final': 0.13117663218430112}, {'fro': 'drama', 'to': 'background', 'type': 'AtLocation', 'score': 0.0012129672104492784, 'wm_score': 0.45526236, 'final': 0.1374277850473145}, {'fro': 'drama', 'to': 'way', 'type': 'AtLocation', 'score': 0.0009483055910095572, 'wm_score': 0.3931051, 'final': 0.1185953439137067}, {'fro': 'drama', 'to': 'mix', 'type': 'AtLocation', 'score': 0.0003989529504906386, 'wm_score': 0.39245775, 'final': 0.11801659206534347}, {'fro': 'drama', 'to': 'theatre', 'type': 'AtLocation', 'score': 0.0003915324923582375, 'wm_score': 0.6083586, 'final': 0.1827816527446508}, {'fro': 'drama', 'to': 'future', 'type': 'AtLocation', 'score': 0.00036541925510391593, 'wm_score': 0.3640414, 'final': 0.10946821347857276}, {'fro': 'drama', 'to': 'spotlight', 'type': 'AtLocation', 'score': 0.00032873512827791274, 'wm_score': 0.42663807, 'final': 0.12822153558979457}, {'fro': 'drama', 'to': 'theaters', 'type': 'AtLocation', 'score': 0.0003000200667884201, 'wm_score': 0.41374803, 'final': 0.12433442304675191}, {'fro': 'drama', 'to': 'middle', 'type': 'AtLocation', 'score': 0.0002801467489916831, 'wm_score': 0.3783327, 'final': 0.1136959127242942}, {'fro': 'drama', 'to': 'picture', 'type': 'AtLocation', 'score': 0.00025338298291899264, 'wm_score': 0.5663909, 'final': 0.17009463808804334}, {'fro': 'drama', 'to': 'shadows', 'type': 'AtLocation', 'score': 0.00022761222498957068, 'wm_score': 0.42195323, 'final': 0.12674529755749273}, {'fro': 'drama', 'to': 'library', 'type': 'AtLocation', 'score': 0.00016608105215709656, 'wm_score': 0.33604258, 'final': 0.10092903073650998}, {'fro': 'drama', 'to': 'period', 'type': 'HasA', 'score': 0.003274280345067382, 'wm_score': 0.34061182, 'final': 0.10447554224154718}, {'fro': 'drama', 'to': 'beginning', 'type': 'HasA', 'score': 0.004094305913895369, 'wm_score': 0.43923593, 'final': 0.1346367931397268}, {'fro': 'drama', 'to': 'tone', 'type': 'HasA', 'score': 0.003476401325315237, 'wm_score': 0.3457962, 'final': 0.10617234092772068}, {'fro': 'drama', 'to': 'actress', 'type': 'HasA', 'score': 0.0036239211913198233, 'wm_score': 0.5908314, 'final': 0.1797861648339239}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

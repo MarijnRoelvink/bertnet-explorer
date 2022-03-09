@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">salary</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "salary"
+    let relations = [{'fro': 'salary', 'to': 'contract', 'type': 'AtLocation', 'score': 0.005209608934819698, 'wm_score': 0.6219832, 'final': 0.1902416862543738}, {'fro': 'salary', 'to': 'minimum', 'type': 'HasA', 'score': 0.0030658754985779524, 'wm_score': 0.693603, 'final': 0.21022701284900458}, {'fro': 'salary', 'to': 'minimum', 'type': 'AtLocation', 'score': 0.015104932710528374, 'wm_score': 0.693603, 'final': 0.21865435289736987}, {'fro': 'salary', 'to': 'cap', 'type': 'AtLocation', 'score': 0.007330835796892643, 'wm_score': 0.5919187, 'final': 0.18270719505782487}, {'fro': 'player', 'to': 'salary', 'type': 'HasA', 'score': 0.14856953918933868, 'wm_score': 0.4401064, 'final': 0.2360305974325371}, {'fro': 'coach', 'to': 'salary', 'type': 'HasA', 'score': 0.011512265540659428, 'wm_score': 0.32267293, 'final': 0.10486046487846162}, {'fro': 'manager', 'to': 'salary', 'type': 'HasA', 'score': 0.010853953659534454, 'wm_score': 0.35331017, 'final': 0.11359081856167412}, {'fro': 'owner', 'to': 'salary', 'type': 'HasA', 'score': 0.010580683127045631, 'wm_score': 0.32348943, 'final': 0.10445330718893196}, {'fro': 'team', 'to': 'salary', 'type': 'HasA', 'score': 0.009625391103327274, 'wm_score': 0.3270634, 'final': 0.10485679377232911}, {'fro': 'club', 'to': 'salary', 'type': 'HasA', 'score': 0.00513047818094492, 'wm_score': 0.4073681, 'final': 0.12580176472666146}, {'fro': 'employee', 'to': 'salary', 'type': 'HasA', 'score': 0.004431272856891155, 'wm_score': 0.5976384, 'final': 0.18239341099982384}, {'fro': 'nfl', 'to': 'salary', 'type': 'HasA', 'score': 0.004092004615813494, 'wm_score': 0.50734645, 'final': 0.15506833823106947}, {'fro': 'pitcher', 'to': 'salary', 'type': 'HasA', 'score': 0.00353358406573534, 'wm_score': 0.36073586, 'final': 0.11069426684601477}, {'fro': 'salary', 'to': 'ceiling', 'type': 'HasA', 'score': 0.12221796810626984, 'wm_score': 0.3770653, 'final': 0.1986721676743889}, {'fro': 'salary', 'to': 'downside', 'type': 'HasA', 'score': 0.0762118548154831, 'wm_score': 0.19459498, 'final': 0.11172679237083817}, {'fro': 'salary', 'to': 'premium', 'type': 'HasA', 'score': 0.0650850161910057, 'wm_score': 0.5072118, 'final': 0.197723051333704}, {'fro': 'salary', 'to': 'difference', 'type': 'HasA', 'score': 0.020513802766799927, 'wm_score': 0.47074348, 'final': 0.15558270593675996}, {'fro': 'salary', 'to': 'value', 'type': 'HasA', 'score': 0.02006581425666809, 'wm_score': 0.5196316, 'final': 0.1699355499796677}, {'fro': 'salary', 'to': 'cap', 'type': 'HasA', 'score': 0.019988691434264183, 'wm_score': 0.5919187, 'final': 0.19156769400398496}, {'fro': 'salary', 'to': 'future', 'type': 'HasA', 'score': 0.018944721668958664, 'wm_score': 0.38481337, 'final': 0.12870531616827108}, {'fro': 'salary', 'to': 'limit', 'type': 'HasA', 'score': 0.018789496272802353, 'wm_score': 0.5453269, 'final': 0.17675071739096165}, {'fro': 'salary', 'to': 'price', 'type': 'HasA', 'score': 0.0176442489027977, 'wm_score': 0.549639, 'final': 0.1772426742319584}, {'fro': 'salary', 'to': 'cut', 'type': 'HasA', 'score': 0.011010363698005676, 'wm_score': 0.5031074, 'final': 0.15863947458860397}, {'fro': 'salary', 'to': 'penalty', 'type': 'HasA', 'score': 0.010673066601157188, 'wm_score': 0.35338566, 'final': 0.11348684462081005}, {'fro': 'salary', 'to': 'cost', 'type': 'HasA', 'score': 0.01002097874879837, 'wm_score': 0.60219014, 'final': 0.18767172712415892}, {'fro': 'salary', 'to': 'rise', 'type': 'HasA', 'score': 0.009856448508799076, 'wm_score': 0.38806373, 'final': 0.12331863295615937}, {'fro': 'salary', 'to': 'raise', 'type': 'HasA', 'score': 0.008567776530981064, 'wm_score': 0.51266956, 'final': 0.15979831157168675}, {'fro': 'salary', 'to': 'bonus', 'type': 'HasA', 'score': 0.007834300398826599, 'wm_score': 0.5856122, 'final': 0.18116767027917866}, {'fro': 'salary', 'to': 'clause', 'type': 'HasA', 'score': 0.007733943872153759, 'wm_score': 0.38420907, 'final': 0.12067648171050764}, {'fro': 'salary', 'to': 'guarantee', 'type': 'HasA', 'score': 0.007088731974363327, 'wm_score': 0.46470064, 'final': 0.14437230438205434}, {'fro': 'salary', 'to': 'problem', 'type': 'HasA', 'score': 0.005857120733708143, 'wm_score': 0.3413943, 'final': 0.1065182745135957}, {'fro': 'salary', 'to': 'priority', 'type': 'HasA', 'score': 0.005348340608179569, 'wm_score': 0.3636513, 'final': 0.11283922842572572}, {'fro': 'salary', 'to': 'structure', 'type': 'HasA', 'score': 0.005097327753901482, 'wm_score': 0.3397985, 'final': 0.10550767942773105}, {'fro': 'salary', 'to': 'return', 'type': 'HasA', 'score': 0.00506444089114666, 'wm_score': 0.47170675, 'final': 0.14505713362380268}, {'fro': 'salary', 'to': 'potential', 'type': 'HasA', 'score': 0.0048986030742526054, 'wm_score': 0.37465972, 'final': 0.11582693815197684}, {'fro': 'salary', 'to': 'payoff', 'type': 'HasA', 'score': 0.0047959317453205585, 'wm_score': 0.4606171, 'final': 0.1415422822217244}, {'fro': 'salary', 'to': 'deductible', 'type': 'HasA', 'score': 0.0046713342890143394, 'wm_score': 0.41374058, 'final': 0.12739210800231007}, {'fro': 'salary', 'to': 'budget', 'type': 'HasA', 'score': 0.004075311589986086, 'wm_score': 0.54682463, 'final': 0.1669001071129903}, {'fro': 'bonus', 'to': 'salary', 'type': 'AtLocation', 'score': 0.06781811267137527, 'wm_score': 0.5856122, 'final': 0.22315633886996272}, {'fro': 'penny', 'to': 'salary', 'type': 'AtLocation', 'score': 0.03366724029183388, 'wm_score': 0.39736217, 'final': 0.14277571920428372}, {'fro': 'penalty', 'to': 'salary', 'type': 'AtLocation', 'score': 0.024987462908029556, 'wm_score': 0.35338566, 'final': 0.1235069220356207}, {'fro': 'surplus', 'to': 'salary', 'type': 'AtLocation', 'score': 0.021297484636306763, 'wm_score': 0.43789524, 'final': 0.14627681124541475}, {'fro': 'difference', 'to': 'salary', 'type': 'AtLocation', 'score': 0.020887386053800583, 'wm_score': 0.47074348, 'final': 0.15584421423766043}, {'fro': 'premium', 'to': 'salary', 'type': 'AtLocation', 'score': 0.019179558381438255, 'wm_score': 0.5072118, 'final': 0.1655892308670068}, {'fro': 'dollar', 'to': 'salary', 'type': 'AtLocation', 'score': 0.016087088733911514, 'wm_score': 0.42779878, 'final': 0.13960059611373807}, {'fro': 'clause', 'to': 'salary', 'type': 'AtLocation', 'score': 0.010701268911361694, 'wm_score': 0.38420907, 'final': 0.1227536092379532}, {'fro': 'balance', 'to': 'salary', 'type': 'AtLocation', 'score': 0.010187400504946709, 'wm_score': 0.4672135, 'final': 0.1472952303534627}, {'fro': 'stake', 'to': 'salary', 'type': 'AtLocation', 'score': 0.009604784660041332, 'wm_score': 0.31200936, 'final': 0.10032615726202895}, {'fro': 'lot', 'to': 'salary', 'type': 'AtLocation', 'score': 0.009263825602829456, 'wm_score': 0.37246352, 'final': 0.11822373392198064}, {'fro': 'value', 'to': 'salary', 'type': 'AtLocation', 'score': 0.009149528108537197, 'wm_score': 0.5196316, 'final': 0.16229414967597605}, {'fro': 'cut', 'to': 'salary', 'type': 'AtLocation', 'score': 0.008657560683786869, 'wm_score': 0.5031074, 'final': 0.15699251247865081}, {'fro': 'profit', 'to': 'salary', 'type': 'AtLocation', 'score': 0.00857686810195446, 'wm_score': 0.4215659, 'final': 0.13247357767136814}, {'fro': 'drop', 'to': 'salary', 'type': 'AtLocation', 'score': 0.008386651054024696, 'wm_score': 0.48221135, 'final': 0.1505340607378173}, {'fro': 'guarantee', 'to': 'salary', 'type': 'AtLocation', 'score': 0.006607494782656431, 'wm_score': 0.46470064, 'final': 0.1440354383478595}, {'fro': 'gap', 'to': 'salary', 'type': 'AtLocation', 'score': 0.005889097694307566, 'wm_score': 0.36299524, 'final': 0.1130209403860153}, {'fro': 'reduction', 'to': 'salary', 'type': 'AtLocation', 'score': 0.005871751811355352, 'wm_score': 0.51623976, 'final': 0.1589821542679488}, {'fro': 'change', 'to': 'salary', 'type': 'AtLocation', 'score': 0.00584418186917901, 'wm_score': 0.4078536, 'final': 0.12644700730842534}, {'fro': 'bargain', 'to': 'salary', 'type': 'AtLocation', 'score': 0.005780701991170645, 'wm_score': 0.36936617, 'final': 0.11485634239381946}, {'fro': 'risk', 'to': 'salary', 'type': 'AtLocation', 'score': 0.005757424049079418, 'wm_score': 0.32012537, 'final': 0.10006780783435562}, {'fro': 'lump', 'to': 'salary', 'type': 'AtLocation', 'score': 0.00567599106580019, 'wm_score': 0.46701527, 'final': 0.14407777474606015}, {'fro': 'shortfall', 'to': 'salary', 'type': 'AtLocation', 'score': 0.005578132346272469, 'wm_score': 0.49958774, 'final': 0.15378101464239077}, {'fro': 'raise', 'to': 'salary', 'type': 'AtLocation', 'score': 0.0055468445643782616, 'wm_score': 0.51266956, 'final': 0.1576836591950648}, {'fro': 'percentage', 'to': 'salary', 'type': 'AtLocation', 'score': 0.005322858691215515, 'wm_score': 0.55330527, 'final': 0.16971758208385085}, {'fro': 'rise', 'to': 'salary', 'type': 'AtLocation', 'score': 0.00501379044726491, 'wm_score': 0.38806373, 'final': 0.11992877231308545}, {'fro': 'point', 'to': 'salary', 'type': 'AtLocation', 'score': 0.0046214754693210125, 'wm_score': 0.3840919, 'final': 0.11846260282852472}, {'fro': 'discount', 'to': 'salary', 'type': 'AtLocation', 'score': 0.004522882867604494, 'wm_score': 0.39267716, 'final': 0.12096916600732317}, {'fro': 'player', 'to': 'salary', 'type': 'AtLocation', 'score': 0.003978789784014225, 'wm_score': 0.4401064, 'final': 0.13481707284880998}, {'fro': 'salary', 'to': 'ballpark', 'type': 'AtLocation', 'score': 0.12148116528987885, 'wm_score': 0.37829012, 'final': 0.1985238517029152}, {'fro': 'salary', 'to': 'cards', 'type': 'AtLocation', 'score': 0.07622990757226944, 'wm_score': 0.34585077, 'final': 0.1571161663005886}, {'fro': 'salary', 'to': 'balance', 'type': 'AtLocation', 'score': 0.06314181536436081, 'wm_score': 0.4672135, 'final': 0.18436332075505257}, {'fro': 'salary', 'to': 'billions', 'type': 'AtLocation', 'score': 0.058451566845178604, 'wm_score': 0.34807888, 'final': 0.14533976079162503}, {'fro': 'salary', 'to': 'air', 'type': 'AtLocation', 'score': 0.0533188059926033, 'wm_score': 0.21532066, 'final': 0.10191936219482231}, {'fro': 'salary', 'to': 'thousands', 'type': 'AtLocation', 'score': 0.05324634537100792, 'wm_score': 0.25853133, 'final': 0.11483184075970555}, {'fro': 'salary', 'to': 'bank', 'type': 'AtLocation', 'score': 0.04661200940608978, 'wm_score': 0.29204205, 'final': 0.12024102158426286}, {'fro': 'salary', 'to': 'millions', 'type': 'AtLocation', 'score': 0.034649938344955444, 'wm_score': 0.3366268, 'final': 0.12524299684146883}, {'fro': 'salary', 'to': 'making', 'type': 'AtLocation', 'score': 0.019330009818077087, 'wm_score': 0.3888232, 'final': 0.13017796687265398}, {'fro': 'salary', 'to': 'bargain', 'type': 'AtLocation', 'score': 0.015179838985204697, 'wm_score': 0.36936617, 'final': 0.1214357382896433}, {'fro': 'salary', 'to': 'future', 'type': 'AtLocation', 'score': 0.01081079337745905, 'wm_score': 0.38481337, 'final': 0.12301156636422135}, {'fro': 'salary', 'to': 'calculation', 'type': 'AtLocation', 'score': 0.0064997244626283646, 'wm_score': 0.34182295, 'final': 0.10709669212383988}, {'fro': 'salary', 'to': 'bill', 'type': 'AtLocation', 'score': 0.005051265470683575, 'wm_score': 0.44235885, 'final': 0.13624354082947854}, {'fro': 'salary', 'to': 'money', 'type': 'AtLocation', 'score': 0.005030022468417883, 'wm_score': 0.48547918, 'final': 0.14916476972789253}, {'fro': 'salary', 'to': 'past', 'type': 'AtLocation', 'score': 0.0031848058570176363, 'wm_score': 0.3564277, 'final': 0.10915767409991237}, {'fro': 'salary', 'to': 'budget', 'type': 'AtLocation', 'score': 0.0024011372588574886, 'wm_score': 0.54682463, 'final': 0.1657281850812003}, {'fro': 'salary', 'to': 'pay', 'type': 'AtLocation', 'score': 0.003338472219184041, 'wm_score': 0.731492, 'final': 0.22178453055342887}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

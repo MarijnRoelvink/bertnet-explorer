@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">tackle</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "tackle"
+    let relations = [{'fro': 'tackle', 'to': 'draft', 'type': 'AtLocation', 'score': 0.009327084757387638, 'wm_score': 0.51122665, 'final': 0.15989695433017137}, {'fro': 'ball', 'to': 'tackle', 'type': 'HasA', 'score': 0.060435034334659576, 'wm_score': 0.43140203, 'final': 0.17172513303426173}, {'fro': 'defender', 'to': 'tackle', 'type': 'HasA', 'score': 0.02365611493587494, 'wm_score': 0.37925842, 'final': 0.13033680645511247}, {'fro': 'fullback', 'to': 'tackle', 'type': 'HasA', 'score': 0.022168125957250595, 'wm_score': 0.5962303, 'final': 0.19438677817007546}, {'fro': 'player', 'to': 'tackle', 'type': 'HasA', 'score': 0.014076613821089268, 'wm_score': 0.48398903, 'final': 0.1550503386747625}, {'fro': 'game', 'to': 'tackle', 'type': 'HasA', 'score': 0.01395048201084137, 'wm_score': 0.45500594, 'final': 0.14626711940758896}, {'fro': 'team', 'to': 'tackle', 'type': 'HasA', 'score': 0.011509262956678867, 'wm_score': 0.41356465, 'final': 0.1321258790696752}, {'fro': 'sack', 'to': 'tackle', 'type': 'HasA', 'score': 0.010415577329695225, 'wm_score': 0.4047056, 'final': 0.12870258413078667}, {'fro': 'defense', 'to': 'tackle', 'type': 'HasA', 'score': 0.009529229253530502, 'wm_score': 0.41460118, 'final': 0.13105081447747138}, {'fro': 'pitch', 'to': 'tackle', 'type': 'HasA', 'score': 0.009468371979892254, 'wm_score': 0.35067043, 'final': 0.11182898938592459}, {'fro': 'kicker', 'to': 'tackle', 'type': 'HasA', 'score': 0.008380228653550148, 'wm_score': 0.4911473, 'final': 0.15321035005748512}, {'fro': 'referee', 'to': 'tackle', 'type': 'HasA', 'score': 0.008175468072295189, 'wm_score': 0.34211504, 'final': 0.10835733965060665}, {'fro': 'line', 'to': 'tackle', 'type': 'HasA', 'score': 0.007963525131344795, 'wm_score': 0.3263029, 'final': 0.10346533759194138}, {'fro': 'midfielder', 'to': 'tackle', 'type': 'HasA', 'score': 0.00631170067936182, 'wm_score': 0.38498175, 'final': 0.1199127154755533}, {'fro': 'play', 'to': 'tackle', 'type': 'HasA', 'score': 0.006112232338637114, 'wm_score': 0.46930256, 'final': 0.145069330637046}, {'fro': 'rookie', 'to': 'tackle', 'type': 'HasA', 'score': 0.0054463730193674564, 'wm_score': 0.52934444, 'final': 0.16261579311355723}, {'fro': 'winger', 'to': 'tackle', 'type': 'HasA', 'score': 0.005409738514572382, 'wm_score': 0.477802, 'final': 0.14712741696020068}, {'fro': 'guy', 'to': 'tackle', 'type': 'HasA', 'score': 0.005051599815487862, 'wm_score': 0.40834033, 'final': 0.12603821887084152}, {'fro': 'coach', 'to': 'tackle', 'type': 'HasA', 'score': 0.004992423113435507, 'wm_score': 0.4422235, 'final': 0.13616174617940485}, {'fro': 'linebacker', 'to': 'tackle', 'type': 'HasA', 'score': 0.004403985105454922, 'wm_score': 0.61332315, 'final': 0.1870797345738185}, {'fro': 'lions', 'to': 'tackle', 'type': 'HasA', 'score': 0.004281241446733475, 'wm_score': 0.35165876, 'final': 0.10849449701271345}, {'fro': 'quarterback', 'to': 'tackle', 'type': 'HasA', 'score': 0.00425987783819437, 'wm_score': 0.5819985, 'final': 0.1775814644867361}, {'fro': 'receiver', 'to': 'tackle', 'type': 'HasA', 'score': 0.0037634451873600483, 'wm_score': 0.52794313, 'final': 0.16101735063115205}, {'fro': 'opponent', 'to': 'tackle', 'type': 'HasA', 'score': 0.0036051906645298004, 'wm_score': 0.3775212, 'final': 0.11577999346517087}, {'fro': 'striker', 'to': 'tackle', 'type': 'HasA', 'score': 0.003479517763480544, 'wm_score': 0.361587, 'final': 0.1109117624344364}, {'fro': 'goal', 'to': 'tackle', 'type': 'HasA', 'score': 0.0034662927500903606, 'wm_score': 0.45942765, 'final': 0.14025469992506326}, {'fro': 'nfl', 'to': 'tackle', 'type': 'HasA', 'score': 0.0032575479708611965, 'wm_score': 0.44078264, 'final': 0.13451507557960285}, {'fro': 'tackle', 'to': 'concussion', 'type': 'HasA', 'score': 0.09006848186254501, 'wm_score': 0.3495016, 'final': 0.16789841730378152}, {'fro': 'tackle', 'to': 'penalty', 'type': 'HasA', 'score': 0.029849916696548462, 'wm_score': 0.39236045, 'final': 0.13860307668758393}, {'fro': 'tackle', 'to': 'chance', 'type': 'HasA', 'score': 0.02898060344159603, 'wm_score': 0.40946838, 'final': 0.14312693640911725}, {'fro': 'tackle', 'to': 'problem', 'type': 'HasA', 'score': 0.01593792624771595, 'wm_score': 0.49230695, 'final': 0.1588486333734012}, {'fro': 'tackle', 'to': 'catch', 'type': 'HasA', 'score': 0.012856998480856419, 'wm_score': 0.4772707, 'final': 0.15218110893659953}, {'fro': 'tackle', 'to': 'defender', 'type': 'HasA', 'score': 0.010915141552686691, 'wm_score': 0.37925842, 'final': 0.1214181250868807}, {'fro': 'tackle', 'to': 'sack', 'type': 'HasA', 'score': 0.01069732941687107, 'wm_score': 0.4047056, 'final': 0.12889981059180977}, {'fro': 'tackle', 'to': 'leg', 'type': 'HasA', 'score': 0.009428231976926327, 'wm_score': 0.3134579, 'final': 0.10063713238384846}, {'fro': 'tackle', 'to': 'touchdown', 'type': 'HasA', 'score': 0.007521510124206543, 'wm_score': 0.41104707, 'final': 0.1285791780869446}, {'fro': 'tackle', 'to': 'nose', 'type': 'HasA', 'score': 0.00567803205922246, 'wm_score': 0.33243388, 'final': 0.10370478644145574}, {'fro': 'tackle', 'to': 'future', 'type': 'HasA', 'score': 0.005597876384854317, 'wm_score': 0.40770984, 'final': 0.12623146546939804}, {'fro': 'tackle', 'to': 'potential', 'type': 'HasA', 'score': 0.00474850507453084, 'wm_score': 0.37454906, 'final': 0.1156886715521716}, {'fro': 'tackle', 'to': 'role', 'type': 'HasA', 'score': 0.004475316498428583, 'wm_score': 0.36622444, 'final': 0.11300005354890003}, {'fro': 'tackle', 'to': 'hook', 'type': 'HasA', 'score': 0.00436657527461648, 'wm_score': 0.42615315, 'final': 0.13090254769223156}, {'fro': 'defender', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.08980926871299744, 'wm_score': 0.37925842, 'final': 0.17664401409909822}, {'fro': 'man', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.03367780148983002, 'wm_score': 0.28070554, 'final': 0.10778612304288102}, {'fro': 'linebacker', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.029247339814901352, 'wm_score': 0.61332315, 'final': 0.204470082870431}, {'fro': 'fullback', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.02716906927525997, 'wm_score': 0.5962303, 'final': 0.197887438492682}, {'fro': 'blocker', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.018484173342585564, 'wm_score': 0.30548835, 'final': 0.10458542633980991}, {'fro': 'ball', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.018372049555182457, 'wm_score': 0.43140203, 'final': 0.14228104368862773}, {'fro': 'player', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.017112305387854576, 'wm_score': 0.48398903, 'final': 0.1571753227714982}, {'fro': 'lineman', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.013826734386384487, 'wm_score': 0.61522055, 'final': 0.19424487907046917}, {'fro': 'teammate', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.01133790984749794, 'wm_score': 0.34874967, 'final': 0.11256143789324857}, {'fro': 'sack', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.010962335392832756, 'wm_score': 0.4047056, 'final': 0.12908531477498295}, {'fro': 'safety', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.009622698649764061, 'wm_score': 0.46257097, 'final': 0.14550718005483487}, {'fro': 'receiver', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.009539240971207619, 'wm_score': 0.52794313, 'final': 0.16506040767984537}, {'fro': 'cornerback', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.0069159553386271, 'wm_score': 0.55873585, 'final': 0.172461923737039}, {'fro': 'guy', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.006310869939625263, 'wm_score': 0.40834033, 'final': 0.12691970795773772}, {'fro': 'penalty', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.005565888248383999, 'wm_score': 0.39236045, 'final': 0.12160425677386882}, {'fro': 'guard', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.0050057535991072655, 'wm_score': 0.45703295, 'final': 0.1406139125193751}, {'fro': 'threat', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.004847811535000801, 'wm_score': 0.42552418, 'final': 0.13105072207450055}, {'fro': 'knee', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.004520993214100599, 'wm_score': 0.44674006, 'final': 0.13718671324987045}, {'fro': 'corner', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.004101011902093887, 'wm_score': 0.34129575, 'final': 0.10525943333146573}, {'fro': 'winger', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.0040045264177024364, 'wm_score': 0.477802, 'final': 0.14614376849239172}, {'fro': 'striker', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.003936967346817255, 'wm_score': 0.361587, 'final': 0.1112319771427721}, {'fro': 'rookie', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.0038019930943846703, 'wm_score': 0.52934444, 'final': 0.1614647271660693}, {'fro': 'shoulder', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.0035219101700931787, 'wm_score': 0.47075152, 'final': 0.14369079311906524}, {'fro': 'pass', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.0034335991367697716, 'wm_score': 0.52431905, 'final': 0.15969923439573888}, {'fro': 'foul', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.0032685392070561647, 'wm_score': 0.41952604, 'final': 0.12814578944493932}, {'fro': 'catch', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.003026260994374752, 'wm_score': 0.4772707, 'final': 0.14529959269606235}, {'fro': 'tackle', 'to': 'air', 'type': 'AtLocation', 'score': 0.30274373292922974, 'wm_score': 0.16048563, 'final': 0.26006630205046083}, {'fro': 'tackle', 'to': 'backfield', 'type': 'AtLocation', 'score': 0.08197316527366638, 'wm_score': 0.37225574, 'final': 0.1690579376915665}, {'fro': 'tackle', 'to': 'box', 'type': 'AtLocation', 'score': 0.05099683254957199, 'wm_score': 0.22982153, 'final': 0.10464424178470041}, {'fro': 'tackle', 'to': 'way', 'type': 'AtLocation', 'score': 0.016712695360183716, 'wm_score': 0.402964, 'final': 0.13258808675212863}, {'fro': 'tackle', 'to': 'area', 'type': 'AtLocation', 'score': 0.012545146979391575, 'wm_score': 0.31741303, 'final': 0.10400551188557411}, {'fro': 'tackle', 'to': 'zone', 'type': 'AtLocation', 'score': 0.011935531161725521, 'wm_score': 0.38844937, 'final': 0.12488968281320788}, {'fro': 'tackle', 'to': 'game', 'type': 'AtLocation', 'score': 0.01111576333642006, 'wm_score': 0.45500594, 'final': 0.14428281633549406}, {'fro': 'tackle', 'to': 'middle', 'type': 'AtLocation', 'score': 0.007805357687175274, 'wm_score': 0.46962592, 'final': 0.14635152638102272}, {'fro': 'tackle', 'to': 'making', 'type': 'AtLocation', 'score': 0.0073046693578362465, 'wm_score': 0.36015704, 'final': 0.11316038055048538}, {'fro': 'tackle', 'to': 'sack', 'type': 'AtLocation', 'score': 0.005748705472797155, 'wm_score': 0.4047056, 'final': 0.12543577383095803}, {'fro': 'tackle', 'to': 'rough', 'type': 'AtLocation', 'score': 0.005378544330596924, 'wm_score': 0.33409768, 'final': 0.10399428503141786}, {'fro': 'tackle', 'to': 'field', 'type': 'AtLocation', 'score': 0.004257132764905691, 'wm_score': 0.35153764, 'final': 0.10844128493543399}, {'fro': 'tackle', 'to': 'corner', 'type': 'AtLocation', 'score': 0.004028385505080223, 'wm_score': 0.34129575, 'final': 0.10520859485355617}, {'fro': 'tackle', 'to': 'line', 'type': 'AtLocation', 'score': 0.003500406164675951, 'wm_score': 0.3263029, 'final': 0.10034115431527318}, {'fro': 'tackle', 'to': 'running', 'type': 'AtLocation', 'score': 0.002628871239721775, 'wm_score': 0.44224414, 'final': 0.13451345186780528}, {'fro': 'tackle', 'to': 'pick', 'type': 'AtLocation', 'score': 0.0068062483333051205, 'wm_score': 0.5157618, 'final': 0.1594929138333136}, {'fro': 'tackle', 'to': 'kick', 'type': 'AtLocation', 'score': 0.003598161041736603, 'wm_score': 0.4892106, 'final': 0.14928189272921563}, {'fro': 'tackle', 'to': 'pass', 'type': 'AtLocation', 'score': 0.022809896618127823, 'wm_score': 0.52431905, 'final': 0.1732626426326895}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

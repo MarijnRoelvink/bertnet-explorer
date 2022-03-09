@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">basket</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "basket"
+    let relations = [{'fro': 'food', 'to': 'basket', 'type': 'AtLocation', 'score': 0.005761646665632725, 'wm_score': 0.34893423, 'final': 0.10871342166594293}, {'fro': 'currency', 'to': 'basket', 'type': 'AtLocation', 'score': 0.010505654849112034, 'wm_score': 0.44610527, 'final': 0.14118553939437845}, {'fro': 'bread', 'to': 'basket', 'type': 'AtLocation', 'score': 0.009921807795763016, 'wm_score': 0.39078158, 'final': 0.12417973945703413}, {'fro': 'chicken', 'to': 'basket', 'type': 'HasA', 'score': 0.005316836293786764, 'wm_score': 0.35615414, 'final': 0.11056802740565076}, {'fro': 'nba', 'to': 'basket', 'type': 'HasA', 'score': 0.0035955498460680246, 'wm_score': 0.38173282, 'final': 0.11703673089224763}, {'fro': 'ball', 'to': 'basket', 'type': 'HasA', 'score': 0.0033819065429270267, 'wm_score': 0.60695755, 'final': 0.18445459958004895}, {'fro': 'basket', 'to': 'lid', 'type': 'HasA', 'score': 0.2501833140850067, 'wm_score': 0.27214712, 'final': 0.2567724558595047}, {'fro': 'basket', 'to': 'hole', 'type': 'HasA', 'score': 0.010532085783779621, 'wm_score': 0.33361644, 'final': 0.10745739204864575}, {'fro': 'basket', 'to': 'catch', 'type': 'HasA', 'score': 0.004013017751276493, 'wm_score': 0.43942273, 'final': 0.13463593142589356}, {'fro': 'basket', 'to': 'timer', 'type': 'HasA', 'score': 0.00387904467061162, 'wm_score': 0.3259848, 'final': 0.10051077126942816}, {'fro': 'basket', 'to': 'bottom', 'type': 'HasA', 'score': 0.002884660614654422, 'wm_score': 0.434838, 'final': 0.13247066243025812}, {'fro': 'chicken', 'to': 'basket', 'type': 'AtLocation', 'score': 0.07269065827131271, 'wm_score': 0.35615414, 'final': 0.15772970278991894}, {'fro': 'fork', 'to': 'basket', 'type': 'AtLocation', 'score': 0.0576116144657135, 'wm_score': 0.2878241, 'final': 0.12667536012599948}, {'fro': 'shoe', 'to': 'basket', 'type': 'AtLocation', 'score': 0.0521034300327301, 'wm_score': 0.38711774, 'final': 0.1526077230229111}, {'fro': 'peach', 'to': 'basket', 'type': 'AtLocation', 'score': 0.04812965169548988, 'wm_score': 0.26730078, 'final': 0.11388099018684293}, {'fro': 'banana', 'to': 'basket', 'type': 'AtLocation', 'score': 0.02987133152782917, 'wm_score': 0.288106, 'final': 0.10734173206948042}, {'fro': 'fruit', 'to': 'basket', 'type': 'AtLocation', 'score': 0.021244395524263382, 'wm_score': 0.43502143, 'final': 0.14537750586698436}, {'fro': 'ball', 'to': 'basket', 'type': 'AtLocation', 'score': 0.020431317389011383, 'wm_score': 0.60695755, 'final': 0.196389187172308}, {'fro': 'fish', 'to': 'basket', 'type': 'AtLocation', 'score': 0.010205448605120182, 'wm_score': 0.36856323, 'final': 0.11771278302358415}, {'fro': 'gift', 'to': 'basket', 'type': 'AtLocation', 'score': 0.008099563419818878, 'wm_score': 0.32846332, 'final': 0.10420869039387323}, {'fro': 'hat', 'to': 'basket', 'type': 'AtLocation', 'score': 0.007525858003646135, 'wm_score': 0.3956476, 'final': 0.12396238060255231}, {'fro': 'coin', 'to': 'basket', 'type': 'AtLocation', 'score': 0.006928379647433758, 'wm_score': 0.40800205, 'final': 0.12725048075320364}, {'fro': 'chip', 'to': 'basket', 'type': 'AtLocation', 'score': 0.004955509677529335, 'wm_score': 0.4108446, 'final': 0.12672223677427055}, {'fro': 'knife', 'to': 'basket', 'type': 'AtLocation', 'score': 0.004681136459112167, 'wm_score': 0.41224536, 'final': 0.12695040352137854}, {'fro': 'basket', 'to': 'freezer', 'type': 'AtLocation', 'score': 0.09058166295289993, 'wm_score': 0.27524734, 'final': 0.14598136606702997}, {'fro': 'basket', 'to': 'bag', 'type': 'AtLocation', 'score': 0.03823745250701904, 'wm_score': 0.4952454, 'final': 0.17533983675491335}, {'fro': 'basket', 'to': 'trash', 'type': 'AtLocation', 'score': 0.020794197916984558, 'wm_score': 0.32738408, 'final': 0.11277116254188921}, {'fro': 'basket', 'to': 'corner', 'type': 'AtLocation', 'score': 0.012796929106116295, 'wm_score': 0.41373268, 'final': 0.13307765437428143}, {'fro': 'basket', 'to': 'balance', 'type': 'AtLocation', 'score': 0.012529216706752777, 'wm_score': 0.3901674, 'final': 0.12582067169472697}, {'fro': 'basket', 'to': 'box', 'type': 'AtLocation', 'score': 0.004863400477916002, 'wm_score': 0.39162186, 'final': 0.12089093833454122}, {'fro': 'basket', 'to': 'frame', 'type': 'AtLocation', 'score': 0.0040789335034787655, 'wm_score': 0.34078968, 'final': 0.10509215745243514}, {'fro': 'pie', 'to': 'basket', 'type': 'AtLocation', 'score': 0.0017995992675423622, 'wm_score': 0.35794756, 'final': 0.10864398748727967}, {'fro': 'cookie', 'to': 'basket', 'type': 'AtLocation', 'score': 0.0018114427803084254, 'wm_score': 0.4259908, 'final': 0.1290652499462159}, {'fro': 'salad', 'to': 'basket', 'type': 'AtLocation', 'score': 0.0037223701365292072, 'wm_score': 0.32924157, 'final': 0.10137813009557047}, {'fro': 'hand', 'to': 'basket', 'type': 'AtLocation', 'score': 0.008737181313335896, 'wm_score': 0.439631, 'final': 0.13800532691933515}, {'fro': 'value', 'to': 'basket', 'type': 'AtLocation', 'score': 0.006802016403526068, 'wm_score': 0.35272253, 'final': 0.11057817048246826}, {'fro': 'card', 'to': 'basket', 'type': 'AtLocation', 'score': 0.0046597677282989025, 'wm_score': 0.38211766, 'final': 0.11789713540980926}, {'fro': 'cash', 'to': 'basket', 'type': 'AtLocation', 'score': 0.003489601891487837, 'wm_score': 0.34944266, 'final': 0.1072755193240415}, {'fro': 'item', 'to': 'basket', 'type': 'AtLocation', 'score': 0.010448663495481014, 'wm_score': 0.30924886, 'final': 0.10008872244683674}, {'fro': 'egg', 'to': 'basket', 'type': 'AtLocation', 'score': 0.030801651999354362, 'wm_score': 0.32430103, 'final': 0.11885146539954805}, {'fro': 'plastic', 'to': 'basket', 'type': 'AtLocation', 'score': 0.004349731840193272, 'wm_score': 0.37831137, 'final': 0.1165382232881353}, {'fro': 'pack', 'to': 'basket', 'type': 'AtLocation', 'score': 0.0033809756860136986, 'wm_score': 0.41843033, 'final': 0.12789578198020962}, {'fro': 'weight', 'to': 'basket', 'type': 'AtLocation', 'score': 0.009292452596127987, 'wm_score': 0.35041198, 'final': 0.1116283108172896}, {'fro': 'bat', 'to': 'basket', 'type': 'AtLocation', 'score': 0.004359971731901169, 'wm_score': 0.34269232, 'final': 0.10585967621233083}, {'fro': 'catch', 'to': 'basket', 'type': 'AtLocation', 'score': 0.003568515181541443, 'wm_score': 0.43942273, 'final': 0.13432477962707903}, {'fro': 'finger', 'to': 'basket', 'type': 'AtLocation', 'score': 0.00409278180450201, 'wm_score': 0.39713603, 'final': 0.12200575626315142}, {'fro': 'hook', 'to': 'basket', 'type': 'AtLocation', 'score': 0.008909027092158794, 'wm_score': 0.3547495, 'final': 0.11266116896451117}, {'fro': 'rice', 'to': 'basket', 'type': 'AtLocation', 'score': 0.005598810501396656, 'wm_score': 0.34944332, 'final': 0.10875216335097768}, {'fro': 'bag', 'to': 'basket', 'type': 'AtLocation', 'score': 0.011404051445424557, 'wm_score': 0.4952454, 'final': 0.1565564560117972}, {'fro': 'cake', 'to': 'basket', 'type': 'AtLocation', 'score': 0.0016736185643821955, 'wm_score': 0.3864077, 'final': 0.11709384299506756}, {'fro': 'towel', 'to': 'basket', 'type': 'AtLocation', 'score': 0.025994159281253815, 'wm_score': 0.41877535, 'final': 0.14382851649687767}, {'fro': 'wheel', 'to': 'basket', 'type': 'AtLocation', 'score': 0.013759522698819637, 'wm_score': 0.3065227, 'final': 0.10158847588917376}, {'fro': 'glove', 'to': 'basket', 'type': 'AtLocation', 'score': 0.006587737239897251, 'wm_score': 0.48494697, 'final': 0.1500955070679281}, {'fro': 'plate', 'to': 'basket', 'type': 'AtLocation', 'score': 0.0027210756670683622, 'wm_score': 0.50145626, 'final': 0.1523416309669479}, {'fro': 'slice', 'to': 'basket', 'type': 'AtLocation', 'score': 0.004492846317589283, 'wm_score': 0.36004198, 'final': 0.11115758642231252}, {'fro': 'put', 'to': 'basket', 'type': 'AtLocation', 'score': 0.007035576738417149, 'wm_score': 0.41212356, 'final': 0.12856197171689202}, {'fro': 'swing', 'to': 'basket', 'type': 'AtLocation', 'score': 0.006443969905376434, 'wm_score': 0.33869517, 'final': 0.10611932993376351}, {'fro': 'wrap', 'to': 'basket', 'type': 'AtLocation', 'score': 0.006732667330652475, 'wm_score': 0.36418098, 'final': 0.11396716113145675}, {'fro': 'bearing', 'to': 'basket', 'type': 'AtLocation', 'score': 0.00313960132189095, 'wm_score': 0.33064193, 'final': 0.10139029992532367}, {'fro': 'basket', 'to': 'dollar', 'type': 'AtLocation', 'score': 0.00247695529833436, 'wm_score': 0.3407367, 'final': 0.10395487870883406}, {'fro': 'dollar', 'to': 'basket', 'type': 'AtLocation', 'score': 0.008163615129888058, 'wm_score': 0.3407367, 'final': 0.10793554059092166}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

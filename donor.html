@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">donor</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "donor"
+    let relations = [{'fro': 'donor', 'to': 'family', 'type': 'HasA', 'score': 0.004702345002442598, 'wm_score': 0.38295516, 'final': 0.11817818950170984}, {'fro': 'donor', 'to': 'organization', 'type': 'AtLocation', 'score': 0.011160937137901783, 'wm_score': 0.48247668, 'final': 0.15255565999653126}, {'fro': 'donor', 'to': 'child', 'type': 'HasA', 'score': 0.00817573256790638, 'wm_score': 0.37470976, 'final': 0.11813594079753449}, {'fro': 'donor', 'to': 'effort', 'type': 'AtLocation', 'score': 0.005497874692082405, 'wm_score': 0.38269886, 'final': 0.11865817028445769}, {'fro': 'foundation', 'to': 'donor', 'type': 'HasA', 'score': 0.006405978929251432, 'wm_score': 0.44070432, 'final': 0.136695481250476}, {'fro': 'donor', 'to': 'foundation', 'type': 'AtLocation', 'score': 0.01849132403731346, 'wm_score': 0.44070432, 'final': 0.14515522282611942}, {'fro': 'charity', 'to': 'donor', 'type': 'HasA', 'score': 0.003548033069819212, 'wm_score': 0.5436451, 'final': 0.16557715314887347}, {'fro': 'donor', 'to': 'charity', 'type': 'AtLocation', 'score': 0.019262021407485008, 'wm_score': 0.5436451, 'final': 0.17657694498523951}, {'fro': 'donor', 'to': 'initiative', 'type': 'AtLocation', 'score': 0.004104978870600462, 'wm_score': 0.40481928, 'final': 0.12431926920942034}, {'fro': 'donor', 'to': 'procedure', 'type': 'HasA', 'score': 0.002639804035425186, 'wm_score': 0.3564242, 'final': 0.10877512282479765}, {'fro': 'donor', 'to': 'project', 'type': 'AtLocation', 'score': 0.003408884396776557, 'wm_score': 0.34857342, 'final': 0.10695824507774361}, {'fro': 'donor', 'to': 'breast', 'type': 'HasA', 'score': 0.007654217071831226, 'wm_score': 0.37475792, 'final': 0.11778532795028188}, {'fro': 'donor', 'to': 'trust', 'type': 'AtLocation', 'score': 0.003490242175757885, 'wm_score': 0.3606147, 'final': 0.11062757952303054}, {'fro': 'donor', 'to': 'support', 'type': 'AtLocation', 'score': 0.006018537096679211, 'wm_score': 0.45914286, 'final': 0.14195583396767547}, {'fro': 'donor', 'to': 'deceased', 'type': 'HasA', 'score': 0.0035456838086247444, 'wm_score': 0.35181534, 'final': 0.10802658066603733}, {'fro': 'donor', 'to': 'recipient', 'type': 'HasA', 'score': 0.005726718343794346, 'wm_score': 0.55066705, 'final': 0.16920881784065608}, {'fro': 'donor', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.005794523283839226, 'wm_score': 0.55066705, 'final': 0.1692562812986875}, {'fro': 'organization', 'to': 'donor', 'type': 'HasA', 'score': 0.012650476768612862, 'wm_score': 0.48247668, 'final': 0.153598337738029}, {'fro': 'recipient', 'to': 'donor', 'type': 'HasA', 'score': 0.0069939494132995605, 'wm_score': 0.55066705, 'final': 0.17009587958930972}, {'fro': 'group', 'to': 'donor', 'type': 'HasA', 'score': 0.0064736902713775635, 'wm_score': 0.3391943, 'final': 0.10628987318996432}, {'fro': 'hospital', 'to': 'donor', 'type': 'HasA', 'score': 0.005576801486313343, 'wm_score': 0.35361153, 'final': 0.10998722004041936}, {'fro': 'dnc', 'to': 'donor', 'type': 'HasA', 'score': 0.005265598185360432, 'wm_score': 0.3432861, 'final': 0.10667174872975231}, {'fro': 'family', 'to': 'donor', 'type': 'HasA', 'score': 0.004988488275557756, 'wm_score': 0.38295516, 'final': 0.11837848979289045}, {'fro': 'bank', 'to': 'donor', 'type': 'HasA', 'score': 0.004713933914899826, 'wm_score': 0.3391181, 'final': 0.10503518374042987}, {'fro': 'donor', 'to': 'choice', 'type': 'HasA', 'score': 0.024692051112651825, 'wm_score': 0.27858698, 'final': 0.10086052977885628}, {'fro': 'donor', 'to': 'plan', 'type': 'HasA', 'score': 0.016358565539121628, 'wm_score': 0.31794143, 'final': 0.10683342487738516}, {'fro': 'donor', 'to': 'sponsor', 'type': 'HasA', 'score': 0.014127527363598347, 'wm_score': 0.42445529, 'final': 0.13722585615451885}, {'fro': 'donor', 'to': 'gift', 'type': 'HasA', 'score': 0.011515803635120392, 'wm_score': 0.3704832, 'final': 0.11920602254458429}, {'fro': 'donor', 'to': 'donation', 'type': 'HasA', 'score': 0.009026987478137016, 'wm_score': 0.6624551, 'final': 0.20505542123469594}, {'fro': 'donor', 'to': 'response', 'type': 'HasA', 'score': 0.007443646900355816, 'wm_score': 0.383949, 'final': 0.12039525283024909}, {'fro': 'donor', 'to': 'partner', 'type': 'HasA', 'score': 0.007298163138329983, 'wm_score': 0.39082634, 'final': 0.122356616196831}, {'fro': 'donor', 'to': 'baby', 'type': 'HasA', 'score': 0.0068095228634774685, 'wm_score': 0.33014965, 'final': 0.10381156100443426}, {'fro': 'kidney', 'to': 'donor', 'type': 'AtLocation', 'score': 0.04046344757080078, 'wm_score': 0.5786599, 'final': 0.20192238329956055}, {'fro': 'donation', 'to': 'donor', 'type': 'AtLocation', 'score': 0.037003591656684875, 'wm_score': 0.6624551, 'final': 0.22463904415967945}, {'fro': 'child', 'to': 'donor', 'type': 'AtLocation', 'score': 0.018782952800393105, 'wm_score': 0.37470976, 'final': 0.1255609949602752}, {'fro': 'baby', 'to': 'donor', 'type': 'AtLocation', 'score': 0.01776600070297718, 'wm_score': 0.33014965, 'final': 0.11148109549208404}, {'fro': 'reward', 'to': 'donor', 'type': 'AtLocation', 'score': 0.012971680611371994, 'wm_score': 0.37634003, 'final': 0.12198218542796041}, {'fro': 'trust', 'to': 'donor', 'type': 'AtLocation', 'score': 0.010516676120460033, 'wm_score': 0.3606147, 'final': 0.11554608328432205}, {'fro': 'lump', 'to': 'donor', 'type': 'AtLocation', 'score': 0.010481460951268673, 'wm_score': 0.37541494, 'final': 0.11996150466588808}, {'fro': 'sibling', 'to': 'donor', 'type': 'AtLocation', 'score': 0.010336384177207947, 'wm_score': 0.3633042, 'final': 0.11622672892404558}, {'fro': 'gift', 'to': 'donor', 'type': 'AtLocation', 'score': 0.010097751393914223, 'wm_score': 0.3704832, 'final': 0.11821338597573997}, {'fro': 'partner', 'to': 'donor', 'type': 'AtLocation', 'score': 0.007543438579887152, 'wm_score': 0.39082634, 'final': 0.12252830900592102}, {'fro': 'pig', 'to': 'donor', 'type': 'AtLocation', 'score': 0.0066558485850691795, 'wm_score': 0.3574555, 'final': 0.11189574400954844}, {'fro': 'recipient', 'to': 'donor', 'type': 'AtLocation', 'score': 0.006056047976016998, 'wm_score': 0.55066705, 'final': 0.16943934858321194}, {'fro': 'heart', 'to': 'donor', 'type': 'AtLocation', 'score': 0.00539772491902113, 'wm_score': 0.4027428, 'final': 0.1246012474433148}, {'fro': 'bone', 'to': 'donor', 'type': 'AtLocation', 'score': 0.004131851717829704, 'wm_score': 0.45291457, 'final': 0.13876666720248082}, {'fro': 'family', 'to': 'donor', 'type': 'AtLocation', 'score': 0.003747333539649844, 'wm_score': 0.38295516, 'final': 0.11750968147775491}, {'fro': 'donor', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.081284299492836, 'wm_score': 0.15308769, 'final': 0.1028253166449852}, {'fro': 'donor', 'to': 'process', 'type': 'AtLocation', 'score': 0.029284458607435226, 'wm_score': 0.3883528, 'final': 0.13700496102520468}, {'fro': 'donor', 'to': 'hospital', 'type': 'AtLocation', 'score': 0.02754078432917595, 'wm_score': 0.35361153, 'final': 0.1253620080304232}, {'fro': 'donor', 'to': 'bank', 'type': 'AtLocation', 'score': 0.02072562836110592, 'wm_score': 0.3391181, 'final': 0.11624336985277414}, {'fro': 'donor', 'to': 'fundraiser', 'type': 'AtLocation', 'score': 0.01554692629724741, 'wm_score': 0.4236875, 'final': 0.1379890984080732}, {'fro': 'donor', 'to': 'family', 'type': 'AtLocation', 'score': 0.015050974674522877, 'wm_score': 0.38295516, 'final': 0.12542223027216604}, {'fro': 'donor', 'to': 'fund', 'type': 'AtLocation', 'score': 0.007997775450348854, 'wm_score': 0.539699, 'final': 0.16750814281524423}, {'fro': 'donor', 'to': 'registry', 'type': 'AtLocation', 'score': 0.007352292537689209, 'wm_score': 0.3573596, 'final': 0.11235448477638246}, {'fro': 'donor', 'to': 'rescue', 'type': 'AtLocation', 'score': 0.006950840819627047, 'wm_score': 0.31948876, 'final': 0.10071221657373894}, {'fro': 'donor', 'to': 'program', 'type': 'AtLocation', 'score': 0.006283838767558336, 'wm_score': 0.40353853, 'final': 0.12546024613729084}, {'fro': 'donor', 'to': 'group', 'type': 'AtLocation', 'score': 0.0049328249879181385, 'wm_score': 0.3391943, 'final': 0.1052112674915427}, {'fro': 'fundraiser', 'to': 'donor', 'type': 'HasA', 'score': 0.00288199121132493, 'wm_score': 0.4236875, 'final': 0.12912364384792746}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

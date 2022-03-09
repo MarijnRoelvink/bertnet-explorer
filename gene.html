@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">gene</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "gene"
+    let relations = [{'fro': 'disease', 'to': 'gene', 'type': 'HasA', 'score': 0.0019202780677005649, 'wm_score': 0.4825546, 'final': 0.1461105746473904}, {'fro': 'gene', 'to': 'disease', 'type': 'AtLocation', 'score': 0.018137609586119652, 'wm_score': 0.4825546, 'final': 0.15746270671028378}, {'fro': 'gene', 'to': 'cancer', 'type': 'AtLocation', 'score': 0.015259547159075737, 'wm_score': 0.5366984, 'final': 0.17169120301135304}, {'fro': 'gene', 'to': 'virus', 'type': 'AtLocation', 'score': 0.007852215319871902, 'wm_score': 0.51171553, 'final': 0.15901120972391036}, {'fro': 'virus', 'to': 'gene', 'type': 'HasA', 'score': 0.063633993268013, 'wm_score': 0.51171553, 'final': 0.19805845428760913}, {'fro': 'parasite', 'to': 'gene', 'type': 'HasA', 'score': 0.03362927958369255, 'wm_score': 0.36297974, 'final': 0.1324344177085848}, {'fro': 'frog', 'to': 'gene', 'type': 'HasA', 'score': 0.01509784534573555, 'wm_score': 0.30344194, 'final': 0.1016010737420149}, {'fro': 'cat', 'to': 'gene', 'type': 'HasA', 'score': 0.014699435792863369, 'wm_score': 0.29957116, 'final': 0.10016095305500437}, {'fro': 'brain', 'to': 'gene', 'type': 'HasA', 'score': 0.014042079448699951, 'wm_score': 0.5914749, 'final': 0.18727192561409}, {'fro': 'dog', 'to': 'gene', 'type': 'HasA', 'score': 0.012606315314769745, 'wm_score': 0.3099043, 'final': 0.10179571072033884}, {'fro': 'shark', 'to': 'gene', 'type': 'HasA', 'score': 0.011805281043052673, 'wm_score': 0.3299888, 'final': 0.1072603367301369}, {'fro': 'embryo', 'to': 'gene', 'type': 'HasA', 'score': 0.011264635249972343, 'wm_score': 0.44623563, 'final': 0.14175593367498066}, {'fro': 'mouse', 'to': 'gene', 'type': 'HasA', 'score': 0.011040975339710712, 'wm_score': 0.4894571, 'final': 0.15456581273779751}, {'fro': 'protein', 'to': 'gene', 'type': 'HasA', 'score': 0.01032476406544447, 'wm_score': 0.6094612, 'final': 0.19006569484581115}, {'fro': 'fetus', 'to': 'gene', 'type': 'HasA', 'score': 0.010276000946760178, 'wm_score': 0.3363609, 'final': 0.10810147066273215}, {'fro': 'spider', 'to': 'gene', 'type': 'HasA', 'score': 0.009234745055437088, 'wm_score': 0.31993464, 'final': 0.10244471353880598}, {'fro': 'rat', 'to': 'gene', 'type': 'HasA', 'score': 0.007486638147383928, 'wm_score': 0.36753023, 'final': 0.11549971570316876}, {'fro': 'bird', 'to': 'gene', 'type': 'HasA', 'score': 0.007483768276870251, 'wm_score': 0.3930087, 'final': 0.1231412477938092}, {'fro': 'mutation', 'to': 'gene', 'type': 'HasA', 'score': 0.007320222444832325, 'wm_score': 0.6822263, 'final': 0.20979204571138266}, {'fro': 'cow', 'to': 'gene', 'type': 'HasA', 'score': 0.0064431969076395035, 'wm_score': 0.3562237, 'final': 0.11137734783534767}, {'fro': 'fox', 'to': 'gene', 'type': 'HasA', 'score': 0.006110392510890961, 'wm_score': 0.3287186, 'final': 0.10289285475762369}, {'fro': 'heart', 'to': 'gene', 'type': 'HasA', 'score': 0.006077840458601713, 'wm_score': 0.3857016, 'final': 0.1199649683210212}, {'fro': 'fungus', 'to': 'gene', 'type': 'HasA', 'score': 0.006000080611556768, 'wm_score': 0.33734918, 'final': 0.10540481042808976}, {'fro': 'animal', 'to': 'gene', 'type': 'HasA', 'score': 0.005486615467816591, 'wm_score': 0.38851216, 'final': 0.12039427882747163}, {'fro': 'flu', 'to': 'gene', 'type': 'HasA', 'score': 0.005436115898191929, 'wm_score': 0.33387727, 'final': 0.10396846212873437}, {'fro': 'gene', 'to': 'mutation', 'type': 'HasA', 'score': 0.05288027226924896, 'wm_score': 0.6822263, 'final': 0.2416840805884743}, {'fro': 'gene', 'to': 'role', 'type': 'HasA', 'score': 0.036073800176382065, 'wm_score': 0.3534015, 'final': 0.13127211012346746}, {'fro': 'gene', 'to': 'link', 'type': 'HasA', 'score': 0.030227147042751312, 'wm_score': 0.38218164, 'final': 0.13581349492992592}, {'fro': 'gene', 'to': 'name', 'type': 'HasA', 'score': 0.01826566457748413, 'wm_score': 0.39970082, 'final': 0.1326962112042389}, {'fro': 'gene', 'to': 'function', 'type': 'HasA', 'score': 0.01557670533657074, 'wm_score': 0.467179, 'final': 0.15105739373559954}, {'fro': 'gene', 'to': 'difference', 'type': 'HasA', 'score': 0.015145424753427505, 'wm_score': 0.30942518, 'final': 0.10342935132739928}, {'fro': 'gene', 'to': 'variant', 'type': 'HasA', 'score': 0.01393572986125946, 'wm_score': 0.46501985, 'final': 0.14926096590288163}, {'fro': 'gene', 'to': 'fingerprint', 'type': 'HasA', 'score': 0.013518493622541428, 'wm_score': 0.33735386, 'final': 0.11066910353577902}, {'fro': 'gene', 'to': 'signature', 'type': 'HasA', 'score': 0.011975145898759365, 'wm_score': 0.34506154, 'final': 0.11190106412913157}, {'fro': 'gene', 'to': 'structure', 'type': 'HasA', 'score': 0.011123626492917538, 'wm_score': 0.34273958, 'final': 0.11060841254504228}, {'fro': 'gene', 'to': 'correlation', 'type': 'HasA', 'score': 0.00880423840135336, 'wm_score': 0.31377676, 'final': 0.10029599488094736}, {'fro': 'gene', 'to': 'receptor', 'type': 'HasA', 'score': 0.008317215368151665, 'wm_score': 0.4906994, 'final': 0.1530318707577062}, {'fro': 'gene', 'to': 'cousin', 'type': 'HasA', 'score': 0.005748072173446417, 'wm_score': 0.3543878, 'final': 0.1103399905214125}, {'fro': 'gene', 'to': 'copy', 'type': 'HasA', 'score': 0.0053795212879776955, 'wm_score': 0.37210518, 'final': 0.1153972189015844}, {'fro': 'gene', 'to': 'deletion', 'type': 'HasA', 'score': 0.005166241899132729, 'wm_score': 0.4434582, 'final': 0.13665382932939293}, {'fro': 'gene', 'to': 'pattern', 'type': 'HasA', 'score': 0.004987034481018782, 'wm_score': 0.38516945, 'final': 0.11904175913671317}, {'fro': 'mutation', 'to': 'gene', 'type': 'AtLocation', 'score': 0.2969394326210022, 'wm_score': 0.6822263, 'final': 0.4125254928347015}, {'fro': 'protein', 'to': 'gene', 'type': 'AtLocation', 'score': 0.1647569239139557, 'wm_score': 0.6094612, 'final': 0.298168206739769}, {'fro': 'virus', 'to': 'gene', 'type': 'AtLocation', 'score': 0.030017515644431114, 'wm_score': 0.51171553, 'final': 0.1745269199511018}, {'fro': 'molecule', 'to': 'gene', 'type': 'AtLocation', 'score': 0.017454344779253006, 'wm_score': 0.5039993, 'final': 0.16341783134547713}, {'fro': 'receptor', 'to': 'gene', 'type': 'AtLocation', 'score': 0.016918348148465157, 'wm_score': 0.4906994, 'final': 0.15905266370392562}, {'fro': 'difference', 'to': 'gene', 'type': 'AtLocation', 'score': 0.014561234973371029, 'wm_score': 0.30942518, 'final': 0.10302041848135973}, {'fro': 'variant', 'to': 'gene', 'type': 'AtLocation', 'score': 0.010976720601320267, 'wm_score': 0.46501985, 'final': 0.1471896594209242}, {'fro': 'link', 'to': 'gene', 'type': 'AtLocation', 'score': 0.009404030628502369, 'wm_score': 0.38218164, 'final': 0.12123731343995167}, {'fro': 'defect', 'to': 'gene', 'type': 'AtLocation', 'score': 0.0079051423817873, 'wm_score': 0.32210976, 'final': 0.10216652766725114}, {'fro': 'variation', 'to': 'gene', 'type': 'AtLocation', 'score': 0.005991731770336628, 'wm_score': 0.43205023, 'final': 0.13380928123923563}, {'fro': 'chemical', 'to': 'gene', 'type': 'AtLocation', 'score': 0.005876670591533184, 'wm_score': 0.38581464, 'final': 0.11985806141407325}, {'fro': 'mutant', 'to': 'gene', 'type': 'AtLocation', 'score': 0.005424054339528084, 'wm_score': 0.44594622, 'final': 0.1375807040376697}, {'fro': 'tumor', 'to': 'gene', 'type': 'AtLocation', 'score': 0.005238206125795841, 'wm_score': 0.5643987, 'final': 0.17298635428805711}, {'fro': 'marker', 'to': 'gene', 'type': 'AtLocation', 'score': 0.004646648187190294, 'wm_score': 0.37809932, 'final': 0.11668244973103323}, {'fro': 'change', 'to': 'gene', 'type': 'AtLocation', 'score': 0.004362005274742842, 'wm_score': 0.35784453, 'final': 0.11040676269232}, {'fro': 'toxin', 'to': 'gene', 'type': 'AtLocation', 'score': 0.004005760420113802, 'wm_score': 0.43769974, 'final': 0.13411395429407968}, {'fro': 'fragment', 'to': 'gene', 'type': 'AtLocation', 'score': 0.003263926599174738, 'wm_score': 0.3346917, 'final': 0.10269225861942233}, {'fro': 'fingerprint', 'to': 'gene', 'type': 'AtLocation', 'score': 0.0031173843890428543, 'wm_score': 0.33735386, 'final': 0.10338832707233002}, {'fro': 'switch', 'to': 'gene', 'type': 'AtLocation', 'score': 0.0029336160514503717, 'wm_score': 0.3411268, 'final': 0.10439157123601528}, {'fro': 'drug', 'to': 'gene', 'type': 'AtLocation', 'score': 0.002855126280337572, 'wm_score': 0.3784123, 'final': 0.11552227839623631}, {'fro': 'cell', 'to': 'gene', 'type': 'AtLocation', 'score': 0.0025007787626236677, 'wm_score': 0.54301095, 'final': 0.16465383013383658}, {'fro': 'deletion', 'to': 'gene', 'type': 'AtLocation', 'score': 0.0023725698702037334, 'wm_score': 0.4434582, 'final': 0.13469825890914264}, {'fro': 'factor', 'to': 'gene', 'type': 'AtLocation', 'score': 0.0023484264966100454, 'wm_score': 0.40828323, 'final': 0.12412886754762704}, {'fro': 'cancer', 'to': 'gene', 'type': 'AtLocation', 'score': 0.002346588298678398, 'wm_score': 0.5366984, 'final': 0.1626521318090749}, {'fro': 'component', 'to': 'gene', 'type': 'AtLocation', 'score': 0.0022779731079936028, 'wm_score': 0.32806355, 'final': 0.10001364617559554}, {'fro': 'chromosome', 'to': 'gene', 'type': 'AtLocation', 'score': 0.002254383871331811, 'wm_score': 0.58693135, 'final': 0.1776574737099323}, {'fro': 'gene', 'to': 'dna', 'type': 'AtLocation', 'score': 0.13772277534008026, 'wm_score': 0.601923, 'final': 0.2769828427380562}, {'fro': 'gene', 'to': 'genome', 'type': 'AtLocation', 'score': 0.08371403813362122, 'wm_score': 0.5640074, 'final': 0.22780204669353488}, {'fro': 'gene', 'to': 'blood', 'type': 'AtLocation', 'score': 0.0276168342679739, 'wm_score': 0.45454496, 'final': 0.15569527198758176}, {'fro': 'gene', 'to': 'nucleus', 'type': 'AtLocation', 'score': 0.024537283927202225, 'wm_score': 0.37128597, 'final': 0.1285618897490416}, {'fro': 'gene', 'to': 'genes', 'type': 'AtLocation', 'score': 0.020566388964653015, 'wm_score': 0.77055216, 'final': 0.24556212027525717}, {'fro': 'gene', 'to': 'brain', 'type': 'AtLocation', 'score': 0.0187083650380373, 'wm_score': 0.5914749, 'final': 0.19053832552662617}, {'fro': 'gene', 'to': 'system', 'type': 'AtLocation', 'score': 0.013009488582611084, 'wm_score': 0.34253734, 'final': 0.11186784400782779}, {'fro': 'gene', 'to': 'cell', 'type': 'AtLocation', 'score': 0.010202591307461262, 'wm_score': 0.54301095, 'final': 0.1700450989152229}, {'fro': 'gene', 'to': 'protein', 'type': 'AtLocation', 'score': 0.010042451322078705, 'wm_score': 0.6094612, 'final': 0.18986807592545513}, {'fro': 'gene', 'to': 'bloodstream', 'type': 'AtLocation', 'score': 0.008979984559118748, 'wm_score': 0.33983138, 'final': 0.10823540319138314}, {'fro': 'gene', 'to': 'transcript', 'type': 'AtLocation', 'score': 0.007420136593282223, 'wm_score': 0.34360126, 'final': 0.10827447361529757}, {'fro': 'gene', 'to': 'body', 'type': 'AtLocation', 'score': 0.007409155368804932, 'wm_score': 0.36234146, 'final': 0.11388884675816346}, {'fro': 'gene', 'to': 'egg', 'type': 'AtLocation', 'score': 0.007173095364123583, 'wm_score': 0.33769757, 'final': 0.10633043775488653}, {'fro': 'gene', 'to': 'receptor', 'type': 'AtLocation', 'score': 0.006484438199549913, 'wm_score': 0.4906994, 'final': 0.15174892673968496}, {'fro': 'gene', 'to': 'liver', 'type': 'AtLocation', 'score': 0.00514347106218338, 'wm_score': 0.48812306, 'final': 0.1500373477435284}, {'fro': 'gene', 'to': 'embryo', 'type': 'AtLocation', 'score': 0.0042641316540539265, 'wm_score': 0.44623563, 'final': 0.13685558115783777}, {'fro': 'gene', 'to': 'molecule', 'type': 'AtLocation', 'score': 0.0042251055128872395, 'wm_score': 0.5039993, 'final': 0.1541573638590211}, {'fro': 'gene', 'to': 'sperm', 'type': 'AtLocation', 'score': 0.004104151856154203, 'wm_score': 0.42483747, 'final': 0.13032414729930797}, {'fro': 'gene', 'to': 'pathway', 'type': 'AtLocation', 'score': 0.004058941267430782, 'wm_score': 0.45490527, 'final': 0.13931283988720156}, {'fro': 'gene', 'to': 'cells', 'type': 'AtLocation', 'score': 0.0037123565562069416, 'wm_score': 0.54267156, 'final': 0.1654001175893449}, {'fro': 'gene', 'to': 'organism', 'type': 'AtLocation', 'score': 0.0036748459096997976, 'wm_score': 0.5308183, 'final': 0.16181788213678988}, {'fro': 'gene', 'to': 'human', 'type': 'AtLocation', 'score': 0.006429463624954224, 'wm_score': 0.4085453, 'final': 0.12706421453746797}, {'fro': 'gene', 'to': 'parasite', 'type': 'AtLocation', 'score': 0.00823151133954525, 'wm_score': 0.36297974, 'final': 0.11465597993768169}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

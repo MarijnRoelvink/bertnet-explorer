@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">quiet</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "quiet"
+    let relations = [{'fro': 'afternoon', 'to': 'quiet', 'type': 'HasA', 'score': 0.005141611211001873, 'wm_score': 0.60262525, 'final': 0.18438670284770134}, {'fro': 'evening', 'to': 'quiet', 'type': 'HasA', 'score': 0.003076647175475955, 'wm_score': 0.51642096, 'final': 0.15707994102283318}, {'fro': 'world', 'to': 'quiet', 'type': 'HasA', 'score': 0.008640386164188385, 'wm_score': 0.31872892, 'final': 0.1016669463149319}, {'fro': 'city', 'to': 'quiet', 'type': 'HasA', 'score': 0.007738938555121422, 'wm_score': 0.4328485, 'final': 0.135271806988585}, {'fro': 'house', 'to': 'quiet', 'type': 'HasA', 'score': 0.007370862178504467, 'wm_score': 0.47086978, 'final': 0.14642053752495315}, {'fro': 'airport', 'to': 'quiet', 'type': 'HasA', 'score': 0.0064099133014678955, 'wm_score': 0.35385302, 'final': 0.11064284531102755}, {'fro': 'street', 'to': 'quiet', 'type': 'HasA', 'score': 0.005393249914050102, 'wm_score': 0.50077546, 'final': 0.15400791293983507}, {'fro': 'room', 'to': 'quiet', 'type': 'HasA', 'score': 0.005103169474750757, 'wm_score': 0.5436815, 'final': 0.16667666863232558}, {'fro': 'cabin', 'to': 'quiet', 'type': 'HasA', 'score': 0.005048686638474464, 'wm_score': 0.34869573, 'final': 0.10814279964693214}, {'fro': 'kitchen', 'to': 'quiet', 'type': 'HasA', 'score': 0.004831254016608, 'wm_score': 0.34707728, 'final': 0.10750506181162561}, {'fro': 'sky', 'to': 'quiet', 'type': 'HasA', 'score': 0.004712248221039772, 'wm_score': 0.35887682, 'final': 0.11096161975472785}, {'fro': 'pub', 'to': 'quiet', 'type': 'HasA', 'score': 0.004653510637581348, 'wm_score': 0.32644653, 'final': 0.10119141644630696}, {'fro': 'park', 'to': 'quiet', 'type': 'HasA', 'score': 0.004639320075511932, 'wm_score': 0.37594602, 'final': 0.11603133005285837}, {'fro': 'beach', 'to': 'quiet', 'type': 'HasA', 'score': 0.0043933498673141, 'wm_score': 0.36620647, 'final': 0.11293728590711989}, {'fro': 'office', 'to': 'quiet', 'type': 'HasA', 'score': 0.004382273647934198, 'wm_score': 0.38406998, 'final': 0.11828858555355394}, {'fro': 'valley', 'to': 'quiet', 'type': 'HasA', 'score': 0.003751309122890234, 'wm_score': 0.36496592, 'final': 0.11211569238602317}, {'fro': 'bathroom', 'to': 'quiet', 'type': 'HasA', 'score': 0.0034097637981176376, 'wm_score': 0.3330995, 'final': 0.10231668465868236}, {'fro': 'bedroom', 'to': 'quiet', 'type': 'HasA', 'score': 0.0033354477491229773, 'wm_score': 0.47837794, 'final': 0.1458481954243861}, {'fro': 'desert', 'to': 'quiet', 'type': 'HasA', 'score': 0.0033303494565188885, 'wm_score': 0.37731364, 'final': 0.11552533661956324}, {'fro': 'future', 'to': 'quiet', 'type': 'HasA', 'score': 0.0032174759544432163, 'wm_score': 0.37148127, 'final': 0.11369661416811026}, {'fro': 'town', 'to': 'quiet', 'type': 'HasA', 'score': 0.0030484753660857677, 'wm_score': 0.4687646, 'final': 0.14276331275626006}, {'fro': 'quiet', 'to': 'purpose', 'type': 'HasA', 'score': 0.06388799846172333, 'wm_score': 0.32360357, 'final': 0.14180266992320634}, {'fro': 'quiet', 'to': 'voice', 'type': 'HasA', 'score': 0.04019421339035034, 'wm_score': 0.4597826, 'final': 0.16607072937324524}, {'fro': 'quiet', 'to': 'reason', 'type': 'HasA', 'score': 0.03667424991726875, 'wm_score': 0.46912947, 'final': 0.16641081594208815}, {'fro': 'quiet', 'to': 'meaning', 'type': 'HasA', 'score': 0.03641117364168167, 'wm_score': 0.38643023, 'final': 0.14141689054917717}, {'fro': 'quiet', 'to': 'charm', 'type': 'HasA', 'score': 0.03506336733698845, 'wm_score': 0.4924292, 'final': 0.17227311713589194}, {'fro': 'quiet', 'to': 'vengeance', 'type': 'HasA', 'score': 0.029757751151919365, 'wm_score': 0.2713497, 'final': 0.10223533580634359}, {'fro': 'quiet', 'to': 'price', 'type': 'HasA', 'score': 0.02756229043006897, 'wm_score': 0.34083527, 'final': 0.1215441843010483}, {'fro': 'quiet', 'to': 'place', 'type': 'HasA', 'score': 0.024073224514722824, 'wm_score': 0.4704674, 'final': 0.15799147716030598}, {'fro': 'quiet', 'to': 'comeback', 'type': 'HasA', 'score': 0.01461993157863617, 'wm_score': 0.35459098, 'final': 0.11661124610504534}, {'fro': 'quiet', 'to': 'sound', 'type': 'HasA', 'score': 0.014028657227754593, 'wm_score': 0.4668141, 'final': 0.14986429005942822}, {'fro': 'quiet', 'to': 'saying', 'type': 'HasA', 'score': 0.010621346533298492, 'wm_score': 0.37080538, 'final': 0.11867655657330896}, {'fro': 'quiet', 'to': 'role', 'type': 'HasA', 'score': 0.010193973779678345, 'wm_score': 0.3538571, 'final': 0.11329291164577486}, {'fro': 'quiet', 'to': 'difference', 'type': 'HasA', 'score': 0.009740098379552364, 'wm_score': 0.32740402, 'final': 0.10503927486568668}, {'fro': 'quiet', 'to': 'problem', 'type': 'HasA', 'score': 0.009541365318000317, 'wm_score': 0.33347565, 'final': 0.10672165072260023}, {'fro': 'quiet', 'to': 'return', 'type': 'HasA', 'score': 0.007831704802811146, 'wm_score': 0.47501984, 'final': 0.14798814536196783}, {'fro': 'quiet', 'to': 'chance', 'type': 'HasA', 'score': 0.006294860504567623, 'wm_score': 0.42077696, 'final': 0.13063949035319736}, {'fro': 'quiet', 'to': 'secret', 'type': 'HasA', 'score': 0.006273764185607433, 'wm_score': 0.35267282, 'final': 0.11019348092992522}, {'fro': 'quiet', 'to': 'home', 'type': 'HasA', 'score': 0.006092860829085112, 'wm_score': 0.5235212, 'final': 0.16132136258035962}, {'fro': 'quiet', 'to': 'way', 'type': 'HasA', 'score': 0.0060262721963226795, 'wm_score': 0.54313767, 'final': 0.1671596915374259}, {'fro': 'quiet', 'to': 'past', 'type': 'HasA', 'score': 0.005675624590367079, 'wm_score': 0.45999745, 'final': 0.14197217221325698}, {'fro': 'quiet', 'to': 'calling', 'type': 'HasA', 'score': 0.003766583511605859, 'wm_score': 0.40982437, 'final': 0.1255839194581241}, {'fro': 'whisper', 'to': 'quiet', 'type': 'AtLocation', 'score': 0.02618461288511753, 'wm_score': 0.38083524, 'final': 0.13257980101958228}, {'fro': 'ghost', 'to': 'quiet', 'type': 'AtLocation', 'score': 0.015960315242409706, 'wm_score': 0.3365755, 'final': 0.11214487066968681}, {'fro': 'cat', 'to': 'quiet', 'type': 'AtLocation', 'score': 0.01583472266793251, 'wm_score': 0.30533487, 'final': 0.10268476686755276}, {'fro': 'voice', 'to': 'quiet', 'type': 'AtLocation', 'score': 0.005689067300409079, 'wm_score': 0.4597826, 'final': 0.14191712711028637}, {'fro': 'man', 'to': 'quiet', 'type': 'AtLocation', 'score': 0.005516463425010443, 'wm_score': 0.5001137, 'final': 0.15389563439750734}, {'fro': 'house', 'to': 'quiet', 'type': 'AtLocation', 'score': 0.005409151315689087, 'wm_score': 0.47086978, 'final': 0.1450473399209824}, {'fro': 'dog', 'to': 'quiet', 'type': 'AtLocation', 'score': 0.004748473409563303, 'wm_score': 0.33942318, 'final': 0.10515088538669433}, {'fro': 'boy', 'to': 'quiet', 'type': 'AtLocation', 'score': 0.004530294798314571, 'wm_score': 0.40670955, 'final': 0.1251840713588202}, {'fro': 'soul', 'to': 'quiet', 'type': 'AtLocation', 'score': 0.003972264472395182, 'wm_score': 0.4087516, 'final': 0.12540606513067665}, {'fro': 'quiet', 'to': 'air', 'type': 'AtLocation', 'score': 0.42471882700920105, 'wm_score': 0.31072265, 'final': 0.3905199739064407}, {'fro': 'quiet', 'to': 'distance', 'type': 'AtLocation', 'score': 0.05225503444671631, 'wm_score': 0.37921223, 'final': 0.15034219311270142}, {'fro': 'quiet', 'to': 'background', 'type': 'AtLocation', 'score': 0.03826864808797836, 'wm_score': 0.4105137, 'final': 0.14994216366158486}, {'fro': 'quiet', 'to': 'works', 'type': 'AtLocation', 'score': 0.026739247143268585, 'wm_score': 0.28518206, 'final': 0.10427209100028802}, {'fro': 'quiet', 'to': 'shadows', 'type': 'AtLocation', 'score': 0.02089403197169304, 'wm_score': 0.3498594, 'final': 0.11958364238018514}, {'fro': 'quiet', 'to': 'making', 'type': 'AtLocation', 'score': 0.019281938672065735, 'wm_score': 0.40379995, 'final': 0.13463734207044603}, {'fro': 'quiet', 'to': 'room', 'type': 'AtLocation', 'score': 0.019211584702134132, 'wm_score': 0.5436815, 'final': 0.17655255929149394}, {'fro': 'quiet', 'to': 'woods', 'type': 'AtLocation', 'score': 0.0147835249081254, 'wm_score': 0.3523599, 'final': 0.11605643743568779}, {'fro': 'quiet', 'to': 'sky', 'type': 'AtLocation', 'score': 0.011926218867301941, 'wm_score': 0.35887682, 'final': 0.11601139920711137}, {'fro': 'quiet', 'to': 'streets', 'type': 'AtLocation', 'score': 0.009850261732935905, 'wm_score': 0.5155661, 'final': 0.16156501321305516}, {'fro': 'quiet', 'to': 'middle', 'type': 'AtLocation', 'score': 0.00785135105252266, 'wm_score': 0.45577055, 'final': 0.1422271107367659}, {'fro': 'quiet', 'to': 'corner', 'type': 'AtLocation', 'score': 0.007415497209876776, 'wm_score': 0.4080402, 'final': 0.12760290804691377}, {'fro': 'quiet', 'to': 'way', 'type': 'AtLocation', 'score': 0.007267638109624386, 'wm_score': 0.54313767, 'final': 0.16802864767673711}, {'fro': 'quiet', 'to': 'neighbourhood', 'type': 'AtLocation', 'score': 0.005664951168000698, 'wm_score': 0.3301868, 'final': 0.1030215058176005}, {'fro': 'quiet', 'to': 'water', 'type': 'AtLocation', 'score': 0.005531633272767067, 'wm_score': 0.34334394, 'final': 0.10687532529093696}, {'fro': 'quiet', 'to': 'garden', 'type': 'AtLocation', 'score': 0.004772874526679516, 'wm_score': 0.4139636, 'final': 0.12753009216867567}, {'fro': 'quiet', 'to': 'darkness', 'type': 'AtLocation', 'score': 0.0039548976346850395, 'wm_score': 0.46137363, 'final': 0.14118051734427955}, {'fro': 'quiet', 'to': 'road', 'type': 'AtLocation', 'score': 0.0038107982836663723, 'wm_score': 0.4141876, 'final': 0.12692383879856647}, {'fro': 'quiet', 'to': 'breeze', 'type': 'AtLocation', 'score': 0.003507355460897088, 'wm_score': 0.34687054, 'final': 0.10651631082262797}, {'fro': 'quiet', 'to': 'dark', 'type': 'AtLocation', 'score': 0.0031206668354570866, 'wm_score': 0.5580523, 'final': 0.16960015678481996}, {'fro': 'quiet', 'to': 'peace', 'type': 'AtLocation', 'score': 0.0030537976417690516, 'wm_score': 0.39804864, 'final': 0.12155225034923835}, {'fro': 'quiet', 'to': 'house', 'type': 'AtLocation', 'score': 0.0030524989124387503, 'wm_score': 0.47086978, 'final': 0.14339768323870716}, {'fro': 'quiet', 'to': 'night', 'type': 'AtLocation', 'score': 0.0029864353127777576, 'wm_score': 0.55890274, 'final': 0.16976132671894442}, {'fro': 'quiet', 'to': 'neighborhood', 'type': 'AtLocation', 'score': 0.0028348115738481283, 'wm_score': 0.5309892, 'final': 0.16128112810169373}, {'fro': 'quiet', 'to': 'ground', 'type': 'AtLocation', 'score': 0.0023933486081659794, 'wm_score': 0.46924978, 'final': 0.1424502780257162}, {'fro': 'quiet', 'to': 'building', 'type': 'AtLocation', 'score': 0.002281985944136977, 'wm_score': 0.38935792, 'final': 0.1184047661608959}, {'fro': 'quiet', 'to': 'street', 'type': 'AtLocation', 'score': 0.0022257675882428885, 'wm_score': 0.50077546, 'final': 0.15179067531177}, {'fro': 'quiet', 'to': 'skies', 'type': 'AtLocation', 'score': 0.002079855417832732, 'wm_score': 0.41516918, 'final': 0.12600665279248294}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

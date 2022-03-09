@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">mortgage</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "mortgage"
+    let relations = [{'fro': 'property', 'to': 'mortgage', 'type': 'HasA', 'score': 0.013545067980885506, 'wm_score': 0.57308984, 'final': 0.18140849958661986}, {'fro': 'dealer', 'to': 'mortgage', 'type': 'HasA', 'score': 0.007678595837205648, 'wm_score': 0.38198662, 'final': 0.11997100308604397}, {'fro': 'housing', 'to': 'mortgage', 'type': 'HasA', 'score': 0.004895576275885105, 'wm_score': 0.5887685, 'final': 0.1800574533931196}, {'fro': 'estate', 'to': 'mortgage', 'type': 'HasA', 'score': 0.013372247107326984, 'wm_score': 0.5826374, 'final': 0.1841517929751289}, {'fro': 'owner', 'to': 'mortgage', 'type': 'HasA', 'score': 0.01384967751801014, 'wm_score': 0.3042521, 'final': 0.10097040426260712}, {'fro': 'mortgage', 'to': 'owner', 'type': 'AtLocation', 'score': 0.016839245334267616, 'wm_score': 0.3042521, 'final': 0.10306310173398736}, {'fro': 'buyer', 'to': 'mortgage', 'type': 'HasA', 'score': 0.012552042491734028, 'wm_score': 0.4370142, 'final': 0.13989068974421384}, {'fro': 'mortgage', 'to': 'buyer', 'type': 'AtLocation', 'score': 0.008265412412583828, 'wm_score': 0.4370142, 'final': 0.13689004868880872}, {'fro': 'home', 'to': 'mortgage', 'type': 'HasA', 'score': 0.0060521806590259075, 'wm_score': 0.36305293, 'final': 0.11315240546131816}, {'fro': 'mortgage', 'to': 'risk', 'type': 'AtLocation', 'score': 0.008658465929329395, 'wm_score': 0.47410122, 'final': 0.1482912921505306}, {'fro': 'rent', 'to': 'mortgage', 'type': 'HasA', 'score': 0.00846954993903637, 'wm_score': 0.50665843, 'final': 0.15792621395732548}, {'fro': 'mortgage', 'to': 'rent', 'type': 'AtLocation', 'score': 0.009686676785349846, 'wm_score': 0.50665843, 'final': 0.1587782027497449}, {'fro': 'bank', 'to': 'mortgage', 'type': 'HasA', 'score': 0.009334576316177845, 'wm_score': 0.59400326, 'final': 0.18473518142132453}, {'fro': 'mortgage', 'to': 'bank', 'type': 'AtLocation', 'score': 0.010974702425301075, 'wm_score': 0.59400326, 'final': 0.1858832696977108}, {'fro': 'mortgage', 'to': 'trust', 'type': 'AtLocation', 'score': 0.003589739790186286, 'wm_score': 0.4242432, 'final': 0.12978577785313042}, {'fro': 'borrower', 'to': 'mortgage', 'type': 'HasA', 'score': 0.12119872868061066, 'wm_score': 0.63581574, 'final': 0.27558383207642745}, {'fro': 'applicant', 'to': 'mortgage', 'type': 'HasA', 'score': 0.055701375007629395, 'wm_score': 0.2135294, 'final': 0.10304978250534058}, {'fro': 'homeowner', 'to': 'mortgage', 'type': 'HasA', 'score': 0.0404229499399662, 'wm_score': 0.5448979, 'final': 0.19176543495797638}, {'fro': 'seller', 'to': 'mortgage', 'type': 'HasA', 'score': 0.02492467127740383, 'wm_score': 0.35805368, 'final': 0.1248633738941827}, {'fro': 'customer', 'to': 'mortgage', 'type': 'HasA', 'score': 0.014862067066133022, 'wm_score': 0.41303512, 'final': 0.13431398294629313}, {'fro': 'landlord', 'to': 'mortgage', 'type': 'HasA', 'score': 0.009262948296964169, 'wm_score': 0.38518983, 'final': 0.12204101280787494}, {'fro': 'lender', 'to': 'mortgage', 'type': 'HasA', 'score': 0.00666334992274642, 'wm_score': 0.7044107, 'final': 0.2159875549459225}, {'fro': 'family', 'to': 'mortgage', 'type': 'HasA', 'score': 0.006606786511838436, 'wm_score': 0.32162052, 'final': 0.10111090655828692}, {'fro': 'tenant', 'to': 'mortgage', 'type': 'HasA', 'score': 0.0061930445954203606, 'wm_score': 0.35839805, 'final': 0.11185454621679428}, {'fro': 'developer', 'to': 'mortgage', 'type': 'HasA', 'score': 0.00506708724424243, 'wm_score': 0.376701, 'final': 0.11655726107096973}, {'fro': 'client', 'to': 'mortgage', 'type': 'HasA', 'score': 0.004907921422272921, 'wm_score': 0.35187778, 'final': 0.10899887899559105}, {'fro': 'company', 'to': 'mortgage', 'type': 'HasA', 'score': 0.004425466991961002, 'wm_score': 0.4168848, 'final': 0.12816326689437274}, {'fro': 'mortgage', 'to': 'history', 'type': 'HasA', 'score': 0.050694018602371216, 'wm_score': 0.23014873, 'final': 0.10453043202165986}, {'fro': 'mortgage', 'to': 'problem', 'type': 'HasA', 'score': 0.04817778244614601, 'wm_score': 0.364048, 'final': 0.14293884771230222}, {'fro': 'mortgage', 'to': 'ceiling', 'type': 'HasA', 'score': 0.04191986098885536, 'wm_score': 0.25754654, 'final': 0.10660786469219875}, {'fro': 'mortgage', 'to': 'premium', 'type': 'HasA', 'score': 0.0385596863925457, 'wm_score': 0.3799881, 'final': 0.140988210474782}, {'fro': 'mortgage', 'to': 'guarantee', 'type': 'HasA', 'score': 0.02822238765656948, 'wm_score': 0.44479758, 'final': 0.15319494535959866}, {'fro': 'mortgage', 'to': 'limit', 'type': 'HasA', 'score': 0.024951837956905365, 'wm_score': 0.38417917, 'final': 0.13272003756983378}, {'fro': 'mortgage', 'to': 'future', 'type': 'HasA', 'score': 0.01982988603413105, 'wm_score': 0.33941793, 'final': 0.11570629922389174}, {'fro': 'mortgage', 'to': 'risk', 'type': 'HasA', 'score': 0.018166393041610718, 'wm_score': 0.47410122, 'final': 0.15494684112912752}, {'fro': 'mortgage', 'to': 'buyer', 'type': 'HasA', 'score': 0.01782732643187046, 'wm_score': 0.4370142, 'final': 0.14358338850230934}, {'fro': 'mortgage', 'to': 'deductible', 'type': 'HasA', 'score': 0.01603657193481922, 'wm_score': 0.38295066, 'final': 0.12611079835437347}, {'fro': 'mortgage', 'to': 'downside', 'type': 'HasA', 'score': 0.015442308969795704, 'wm_score': 0.29742655, 'final': 0.10003758127885701}, {'fro': 'mortgage', 'to': 'value', 'type': 'HasA', 'score': 0.011923518031835556, 'wm_score': 0.47398376, 'final': 0.1505415906222849}, {'fro': 'mortgage', 'to': 'price', 'type': 'HasA', 'score': 0.00704948278144002, 'wm_score': 0.47247523, 'final': 0.14667720694700806}, {'fro': 'mortgage', 'to': 'record', 'type': 'HasA', 'score': 0.007028022315353155, 'wm_score': 0.3424251, 'final': 0.10764714562074722}, {'fro': 'mortgage', 'to': 'deposit', 'type': 'HasA', 'score': 0.006932537071406841, 'wm_score': 0.54328763, 'final': 0.16783906494998482}, {'fro': 'mortgage', 'to': 'payoff', 'type': 'HasA', 'score': 0.005261015612632036, 'wm_score': 0.32737288, 'final': 0.10189457492884244}, {'fro': 'mortgage', 'to': 'stake', 'type': 'HasA', 'score': 0.004906420595943928, 'wm_score': 0.3666169, 'final': 0.11341956441716076}, {'fro': 'loan', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.0320872962474823, 'wm_score': 0.69749963, 'final': 0.23171099637323767}, {'fro': 'deposit', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.014117743819952011, 'wm_score': 0.54328763, 'final': 0.17286870967396645}, {'fro': 'dollar', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.013168925419449806, 'wm_score': 0.47698712, 'final': 0.15231438379361487}, {'fro': 'buyer', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.012958654202520847, 'wm_score': 0.4370142, 'final': 0.14017531794176463}, {'fro': 'risk', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.010095309466123581, 'wm_score': 0.47410122, 'final': 0.14929708262628652}, {'fro': 'lender', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.008672956377267838, 'wm_score': 0.7044107, 'final': 0.2173942794640875}, {'fro': 'stake', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.008637594990432262, 'wm_score': 0.3666169, 'final': 0.11603138649330261}, {'fro': 'balance', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.007160339504480362, 'wm_score': 0.43235213, 'final': 0.13471787665313625}, {'fro': 'chip', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.006796000059694052, 'wm_score': 0.34166148, 'final': 0.10725564404178586}, {'fro': 'bubble', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.006359852850437164, 'wm_score': 0.44517767, 'final': 0.13800519799530606}, {'fro': 'note', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.006164939142763615, 'wm_score': 0.36727044, 'final': 0.11449658939993454}, {'fro': 'borrower', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.005351009778678417, 'wm_score': 0.63581574, 'final': 0.1944904288450749}, {'fro': 'house', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.005311200860887766, 'wm_score': 0.3383973, 'final': 0.10523703060262146}, {'fro': 'check', 'to': 'mortgage', 'type': 'AtLocation', 'score': 0.005056098103523254, 'wm_score': 0.38178474, 'final': 0.1180746906724663}, {'fro': 'mortgage', 'to': 'cards', 'type': 'AtLocation', 'score': 0.2427954226732254, 'wm_score': 0.42475763, 'final': 0.2973840848712578}, {'fro': 'mortgage', 'to': 'works', 'type': 'AtLocation', 'score': 0.13418696820735931, 'wm_score': 0.14434502, 'final': 0.1372343837451515}, {'fro': 'mortgage', 'to': 'balance', 'type': 'AtLocation', 'score': 0.06497024744749069, 'wm_score': 0.43235213, 'final': 0.1751848122132435}, {'fro': 'mortgage', 'to': 'making', 'type': 'AtLocation', 'score': 0.018384970724582672, 'wm_score': 0.29887033, 'final': 0.1025305785072079}, {'fro': 'mortgage', 'to': 'market', 'type': 'AtLocation', 'score': 0.017107775434851646, 'wm_score': 0.50473964, 'final': 0.1633973348043962}, {'fro': 'mortgage', 'to': 'future', 'type': 'AtLocation', 'score': 0.012173797935247421, 'wm_score': 0.33941793, 'final': 0.1103470375546732}, {'fro': 'mortgage', 'to': 'bargain', 'type': 'AtLocation', 'score': 0.003211480565369129, 'wm_score': 0.384847, 'final': 0.11770213639575841}, {'fro': 'mortgage', 'to': 'system', 'type': 'AtLocation', 'score': 0.002568851225078106, 'wm_score': 0.33877105, 'final': 0.10342951085755468}, {'fro': 'mortgage', 'to': 'billions', 'type': 'AtLocation', 'score': 0.002339135156944394, 'wm_score': 0.4403045, 'final': 0.1337287446098611}, {'fro': 'mortgage', 'to': 'money', 'type': 'AtLocation', 'score': 0.0020503706764429808, 'wm_score': 0.51844573, 'final': 0.15696897847351013}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

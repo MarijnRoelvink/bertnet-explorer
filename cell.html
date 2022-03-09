@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">cell</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "cell"
+    let relations = [{'fro': 'cell', 'to': 'disease', 'type': 'AtLocation', 'score': 0.005539407953619957, 'wm_score': 0.45976466, 'final': 0.141806983567534}, {'fro': 'phone', 'to': 'cell', 'type': 'HasA', 'score': 0.02607305906713009, 'wm_score': 0.5956867, 'final': 0.1969571513469911}, {'fro': 'brain', 'to': 'cell', 'type': 'HasA', 'score': 0.014903576113283634, 'wm_score': 0.62720025, 'final': 0.19859257827929858}, {'fro': 'iphone', 'to': 'cell', 'type': 'HasA', 'score': 0.012470610439777374, 'wm_score': 0.36094803, 'final': 0.11701383630784418}, {'fro': 'virus', 'to': 'cell', 'type': 'HasA', 'score': 0.009980532340705395, 'wm_score': 0.43594944, 'final': 0.1377712046384938}, {'fro': 'toilet', 'to': 'cell', 'type': 'HasA', 'score': 0.009083184413611889, 'wm_score': 0.3126151, 'final': 0.10014275908952833}, {'fro': 'embryo', 'to': 'cell', 'type': 'HasA', 'score': 0.006940192077308893, 'wm_score': 0.5107356, 'final': 0.15807881445411623}, {'fro': 'user', 'to': 'cell', 'type': 'HasA', 'score': 0.006522430572658777, 'wm_score': 0.4588201, 'final': 0.14221173140086119}, {'fro': 'mouse', 'to': 'cell', 'type': 'HasA', 'score': 0.006401688791811466, 'wm_score': 0.48745465, 'final': 0.15071757715426803}, {'fro': 'device', 'to': 'cell', 'type': 'HasA', 'score': 0.006129284854978323, 'wm_score': 0.58251464, 'final': 0.17904489139848484}, {'fro': 'camera', 'to': 'cell', 'type': 'HasA', 'score': 0.006081643979996443, 'wm_score': 0.43019125, 'final': 0.13331452578599753}, {'fro': 'parasite', 'to': 'cell', 'type': 'HasA', 'score': 0.005897697526961565, 'wm_score': 0.35846373, 'final': 0.11166750726887312}, {'fro': 'fetus', 'to': 'cell', 'type': 'HasA', 'score': 0.005520669277757406, 'wm_score': 0.38705236, 'final': 0.1199801764944302}, {'fro': 'baby', 'to': 'cell', 'type': 'HasA', 'score': 0.005315108224749565, 'wm_score': 0.37211862, 'final': 0.11535616175732472}, {'fro': 'heart', 'to': 'cell', 'type': 'HasA', 'score': 0.005155053921043873, 'wm_score': 0.5028362, 'final': 0.15445939774473072}, {'fro': 'worm', 'to': 'cell', 'type': 'HasA', 'score': 0.005111679434776306, 'wm_score': 0.3951327, 'final': 0.12211798560434343}, {'fro': 'penis', 'to': 'cell', 'type': 'HasA', 'score': 0.004672435577958822, 'wm_score': 0.32259923, 'final': 0.1000504739045712}, {'fro': 'cell', 'to': 'nucleus', 'type': 'HasA', 'score': 0.02262990176677704, 'wm_score': 0.4590676, 'final': 0.15356121123674396}, {'fro': 'cell', 'to': 'home', 'type': 'HasA', 'score': 0.010554265230894089, 'wm_score': 0.38500416, 'final': 0.12288923366162588}, {'fro': 'cell', 'to': 'pulse', 'type': 'HasA', 'score': 0.010065783746540546, 'wm_score': 0.316357, 'final': 0.10195314862257839}, {'fro': 'cell', 'to': 'purpose', 'type': 'HasA', 'score': 0.007612152025103569, 'wm_score': 0.33311248, 'final': 0.1052622504175725}, {'fro': 'cell', 'to': 'camera', 'type': 'HasA', 'score': 0.006991648115217686, 'wm_score': 0.43019125, 'final': 0.1339515286806524}, {'fro': 'cell', 'to': 'wall', 'type': 'HasA', 'score': 0.006637986749410629, 'wm_score': 0.33085817, 'final': 0.10390404172458745}, {'fro': 'cell', 'to': 'prototype', 'type': 'HasA', 'score': 0.006490615196526051, 'wm_score': 0.32777888, 'final': 0.10287709463756825}, {'fro': 'cell', 'to': 'window', 'type': 'HasA', 'score': 0.0056763906031847, 'wm_score': 0.38311103, 'final': 0.11890678242222931}, {'fro': 'cell', 'to': 'function', 'type': 'HasA', 'score': 0.005423706956207752, 'wm_score': 0.5434991, 'final': 0.16684632486934545}, {'fro': 'cell', 'to': 'message', 'type': 'HasA', 'score': 0.005156670231372118, 'wm_score': 0.42909458, 'final': 0.1323380431619605}, {'fro': 'cell', 'to': 'solution', 'type': 'HasA', 'score': 0.00466926721855998, 'wm_score': 0.35531735, 'final': 0.109863692052992}, {'fro': 'cell', 'to': 'fuse', 'type': 'HasA', 'score': 0.004664327017962933, 'wm_score': 0.36460245, 'final': 0.11264576391257407}, {'fro': 'cell', 'to': 'microphone', 'type': 'HasA', 'score': 0.004456865601241589, 'wm_score': 0.41306537, 'final': 0.12703941692086912}, {'fro': 'cell', 'to': 'microscope', 'type': 'HasA', 'score': 0.004418931435793638, 'wm_score': 0.35189182, 'final': 0.10866079800505557}, {'fro': 'cell', 'to': 'generator', 'type': 'HasA', 'score': 0.004325546324253082, 'wm_score': 0.39184213, 'final': 0.12058052142697717}, {'fro': 'cell', 'to': 'heart', 'type': 'HasA', 'score': 0.004121376201510429, 'wm_score': 0.5028362, 'final': 0.15373582334105731}, {'fro': 'cell', 'to': 'membrane', 'type': 'HasA', 'score': 0.0036812734324485064, 'wm_score': 0.5642935, 'final': 0.17186494140271397}, {'fro': 'cell', 'to': 'target', 'type': 'HasA', 'score': 0.0036656209267675877, 'wm_score': 0.41596442, 'final': 0.12735526064873734}, {'fro': 'virus', 'to': 'cell', 'type': 'AtLocation', 'score': 0.0919097289443016, 'wm_score': 0.43594944, 'final': 0.19512164226101114}, {'fro': 'tumor', 'to': 'cell', 'type': 'AtLocation', 'score': 0.06862267851829529, 'wm_score': 0.5859668, 'final': 0.22382591496280674}, {'fro': 'neuron', 'to': 'cell', 'type': 'AtLocation', 'score': 0.049533747136592865, 'wm_score': 0.48432934, 'final': 0.17997242499561503}, {'fro': 'fetus', 'to': 'cell', 'type': 'AtLocation', 'score': 0.03576319292187691, 'wm_score': 0.38705236, 'final': 0.14114994304531384}, {'fro': 'protein', 'to': 'cell', 'type': 'AtLocation', 'score': 0.03084453195333481, 'wm_score': 0.48024052, 'final': 0.16566332836733438}, {'fro': 'patient', 'to': 'cell', 'type': 'AtLocation', 'score': 0.020179705694317818, 'wm_score': 0.52959, 'final': 0.1730027939860225}, {'fro': 'parasite', 'to': 'cell', 'type': 'AtLocation', 'score': 0.018998561426997185, 'wm_score': 0.35846373, 'final': 0.12083811199889805}, {'fro': 'rat', 'to': 'cell', 'type': 'AtLocation', 'score': 0.01661568507552147, 'wm_score': 0.3666659, 'final': 0.12163074955286504}, {'fro': 'mouse', 'to': 'cell', 'type': 'AtLocation', 'score': 0.013540391810238361, 'wm_score': 0.48745465, 'final': 0.15571466926716687}, {'fro': 'worm', 'to': 'cell', 'type': 'AtLocation', 'score': 0.0069467900320887566, 'wm_score': 0.3951327, 'final': 0.12340256302246215}, {'fro': 'sperm', 'to': 'cell', 'type': 'AtLocation', 'score': 0.0068154362961649895, 'wm_score': 0.47613555, 'final': 0.14761147040731554}, {'fro': 'baby', 'to': 'cell', 'type': 'AtLocation', 'score': 0.006075316574424505, 'wm_score': 0.37211862, 'final': 0.11588830760209717}, {'fro': 'child', 'to': 'cell', 'type': 'AtLocation', 'score': 0.005854790098965168, 'wm_score': 0.43530917, 'final': 0.13469110406927565}, {'fro': 'nucleus', 'to': 'cell', 'type': 'AtLocation', 'score': 0.005407916847616434, 'wm_score': 0.4590676, 'final': 0.14150582179333154}, {'fro': 'signal', 'to': 'cell', 'type': 'AtLocation', 'score': 0.005281871650367975, 'wm_score': 0.48961246, 'final': 0.15058104815525764}, {'fro': 'prisoner', 'to': 'cell', 'type': 'AtLocation', 'score': 0.005218310281634331, 'wm_score': 0.38935882, 'final': 0.12046046319714404}, {'fro': 'receptor', 'to': 'cell', 'type': 'AtLocation', 'score': 0.004316536709666252, 'wm_score': 0.4475354, 'final': 0.1372821956967664}, {'fro': 'cancer', 'to': 'cell', 'type': 'AtLocation', 'score': 0.004235296975821257, 'wm_score': 0.553114, 'final': 0.1688989078830749}, {'fro': 'person', 'to': 'cell', 'type': 'AtLocation', 'score': 0.004191886633634567, 'wm_score': 0.42831162, 'final': 0.13142780664354423}, {'fro': 'hole', 'to': 'cell', 'type': 'AtLocation', 'score': 0.003797244979068637, 'wm_score': 0.3258132, 'final': 0.10040203148534807}, {'fro': 'cell', 'to': 'background', 'type': 'AtLocation', 'score': 0.059542641043663025, 'wm_score': 0.29924685, 'final': 0.13145390373056415}, {'fro': 'cell', 'to': 'freezer', 'type': 'AtLocation', 'score': 0.04481857270002365, 'wm_score': 0.30429316, 'final': 0.12266094889001658}, {'fro': 'cell', 'to': 'womb', 'type': 'AtLocation', 'score': 0.01861957274377346, 'wm_score': 0.35894907, 'final': 0.12071842192064143}, {'fro': 'cell', 'to': 'air', 'type': 'AtLocation', 'score': 0.018018590286374092, 'wm_score': 0.29619232, 'final': 0.10147070920046188}, {'fro': 'cell', 'to': 'toilet', 'type': 'AtLocation', 'score': 0.017850326374173164, 'wm_score': 0.3126151, 'final': 0.10627975846192123}, {'fro': 'cell', 'to': 'nucleus', 'type': 'AtLocation', 'score': 0.014441856183111668, 'wm_score': 0.4590676, 'final': 0.1478295793281782}, {'fro': 'cell', 'to': 'wall', 'type': 'AtLocation', 'score': 0.010832637548446655, 'wm_score': 0.33085817, 'final': 0.10684029728391267}, {'fro': 'cell', 'to': 'basement', 'type': 'AtLocation', 'score': 0.010790785774588585, 'wm_score': 0.42536888, 'final': 0.13516421404221202}, {'fro': 'cell', 'to': 'blood', 'type': 'AtLocation', 'score': 0.01045156829059124, 'wm_score': 0.53787494, 'final': 0.1686785798034139}, {'fro': 'cell', 'to': 'embryo', 'type': 'AtLocation', 'score': 0.010265655815601349, 'wm_score': 0.5107356, 'final': 0.16040663907092095}, {'fro': 'cell', 'to': 'middle', 'type': 'AtLocation', 'score': 0.009050307795405388, 'wm_score': 0.35447553, 'final': 0.11267787445678377}, {'fro': 'cell', 'to': 'lab', 'type': 'AtLocation', 'score': 0.008848045952618122, 'wm_score': 0.5353677, 'final': 0.16680394216683272}, {'fro': 'cell', 'to': 'tank', 'type': 'AtLocation', 'score': 0.00795457698404789, 'wm_score': 0.33868924, 'final': 0.10717497588883354}, {'fro': 'cell', 'to': 'uterus', 'type': 'AtLocation', 'score': 0.007264009676873684, 'wm_score': 0.3717438, 'final': 0.1166079467738116}, {'fro': 'cell', 'to': 'brain', 'type': 'AtLocation', 'score': 0.007029443047940731, 'wm_score': 0.62720025, 'final': 0.19308068513355856}, {'fro': 'cell', 'to': 'bag', 'type': 'AtLocation', 'score': 0.006489532999694347, 'wm_score': 0.3315143, 'final': 0.10399696309978605}, {'fro': 'cell', 'to': 'bloodstream', 'type': 'AtLocation', 'score': 0.00642917025834322, 'wm_score': 0.42691392, 'final': 0.13257459518084028}, {'fro': 'cell', 'to': 'trunk', 'type': 'AtLocation', 'score': 0.0064030978828668594, 'wm_score': 0.4047786, 'final': 0.12591574851800683}, {'fro': 'cell', 'to': 'shell', 'type': 'AtLocation', 'score': 0.006227883975952864, 'wm_score': 0.34690675, 'final': 0.10843154378316702}, {'fro': 'cell', 'to': 'cells', 'type': 'AtLocation', 'score': 0.0056300475262105465, 'wm_score': 0.8263835, 'final': 0.2518560832683474}, {'fro': 'cell', 'to': 'body', 'type': 'AtLocation', 'score': 0.004892435390502214, 'wm_score': 0.45848522, 'final': 0.14097027077335159}, {'fro': 'cell', 'to': 'virus', 'type': 'AtLocation', 'score': 0.007848928682506084, 'wm_score': 0.43594944, 'final': 0.13627908207775427}, {'fro': 'cell', 'to': 'sample', 'type': 'AtLocation', 'score': 0.0054887705482542515, 'wm_score': 0.36913648, 'final': 0.11458308338377798}, {'fro': 'cell', 'to': 'gene', 'type': 'AtLocation', 'score': 0.0025007787626236677, 'wm_score': 0.54301095, 'final': 0.16465383013383658}, {'fro': 'gene', 'to': 'cell', 'type': 'AtLocation', 'score': 0.010202591307461262, 'wm_score': 0.54301095, 'final': 0.1700450989152229}, {'fro': 'cell', 'to': 'muscle', 'type': 'AtLocation', 'score': 0.0034425605554133654, 'wm_score': 0.461498, 'final': 0.14085919238878938}, {'fro': 'cell', 'to': 'nerve', 'type': 'AtLocation', 'score': 0.005409690085798502, 'wm_score': 0.5205122, 'final': 0.15994044306005897}, {'fro': 'nerve', 'to': 'cell', 'type': 'AtLocation', 'score': 0.006082187872380018, 'wm_score': 0.5205122, 'final': 0.16041119151066605}, {'fro': 'suspect', 'to': 'cell', 'type': 'HasA', 'score': 0.0038976967334747314, 'wm_score': 0.4687241, 'final': 0.14334561771343232}, {'fro': 'cell', 'to': 'suspect', 'type': 'AtLocation', 'score': 0.002400559838861227, 'wm_score': 0.4687241, 'final': 0.14229762188720288}, {'fro': 'cell', 'to': 'fetus', 'type': 'AtLocation', 'score': 0.003393033053725958, 'wm_score': 0.38705236, 'final': 0.11849083113760818}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

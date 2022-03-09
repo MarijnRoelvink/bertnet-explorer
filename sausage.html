@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">sausage</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "sausage"
+    let relations = [{'fro': 'sausage', 'to': 'meat', 'type': 'HasA', 'score': 0.0069118039682507515, 'wm_score': 0.6825639, 'final': 0.20960743277777555}, {'fro': 'sausage', 'to': 'oven', 'type': 'AtLocation', 'score': 0.03331749141216278, 'wm_score': 0.5162878, 'final': 0.17820858398851397}, {'fro': 'sausage', 'to': 'recipe', 'type': 'AtLocation', 'score': 0.005332421977072954, 'wm_score': 0.51347995, 'final': 0.1577766803839511}, {'fro': 'sausage', 'to': 'steak', 'type': 'AtLocation', 'score': 0.005738072097301483, 'wm_score': 0.6605013, 'final': 0.20216704046811104}, {'fro': 'sausage', 'to': 'mixture', 'type': 'HasA', 'score': 0.01480883825570345, 'wm_score': 0.44167238, 'final': 0.14286790077899245}, {'fro': 'sausage', 'to': 'mixture', 'type': 'AtLocation', 'score': 0.004440804477781057, 'wm_score': 0.44167238, 'final': 0.13561027713444676}, {'fro': 'sausage', 'to': 'refrigerator', 'type': 'AtLocation', 'score': 0.005109705496579409, 'wm_score': 0.4229771, 'final': 0.1304699238476056}, {'fro': 'sausage', 'to': 'menu', 'type': 'AtLocation', 'score': 0.009071356616914272, 'wm_score': 0.3983397, 'final': 0.12585185963184}, {'fro': 'sausage', 'to': 'potato', 'type': 'HasA', 'score': 0.004588922951370478, 'wm_score': 0.680564, 'final': 0.20738144606595935}, {'fro': 'sausage', 'to': 'apple', 'type': 'HasA', 'score': 0.0027765571139752865, 'wm_score': 0.33124614, 'final': 0.10131743197978271}, {'fro': 'sausage', 'to': 'pizza', 'type': 'AtLocation', 'score': 0.01013016514480114, 'wm_score': 0.6262015, 'final': 0.19495156560136082}, {'fro': 'sausage', 'to': 'salt', 'type': 'HasA', 'score': 0.004457802977412939, 'wm_score': 0.39304268, 'final': 0.12103326608418907}, {'fro': 'sausage', 'to': 'egg', 'type': 'HasA', 'score': 0.004643940832465887, 'wm_score': 0.5379375, 'final': 0.1646320085827261}, {'fro': 'sausage', 'to': 'taste', 'type': 'HasA', 'score': 0.01317801047116518, 'wm_score': 0.45950508, 'final': 0.14707613132981565}, {'fro': 'sausage', 'to': 'dish', 'type': 'AtLocation', 'score': 0.004602436907589436, 'wm_score': 0.6136131, 'final': 0.18730563583531265}, {'fro': 'sausage', 'to': 'breakfast', 'type': 'AtLocation', 'score': 0.017207402735948563, 'wm_score': 0.44037116, 'final': 0.144156529915164}, {'fro': 'sausage', 'to': 'milk', 'type': 'HasA', 'score': 0.0025007028598338366, 'wm_score': 0.46181005, 'final': 0.1402935070018837}, {'fro': 'sausage', 'to': 'lunch', 'type': 'AtLocation', 'score': 0.010511497035622597, 'wm_score': 0.33207846, 'final': 0.10698158592493584}, {'fro': 'sausage', 'to': 'sandwich', 'type': 'AtLocation', 'score': 0.020403020083904266, 'wm_score': 0.6612671, 'final': 0.212662244058733}, {'fro': 'sausage', 'to': 'bite', 'type': 'HasA', 'score': 0.009635956026613712, 'wm_score': 0.38568127, 'final': 0.12244955021862962}, {'fro': 'sausage', 'to': 'slice', 'type': 'HasA', 'score': 0.010665375739336014, 'wm_score': 0.53302056, 'final': 0.16737193101753522}, {'fro': 'sausage', 'to': 'slice', 'type': 'AtLocation', 'score': 0.006166287697851658, 'wm_score': 0.53302056, 'final': 0.16422256938849616}, {'fro': 'sausage', 'to': 'cook', 'type': 'AtLocation', 'score': 0.0049790856428444386, 'wm_score': 0.47218746, 'final': 0.14514159794999112}, {'fro': 'sausage', 'to': 'fork', 'type': 'HasA', 'score': 0.010411704890429974, 'wm_score': 0.36227652, 'final': 0.11597114942330099}, {'fro': 'sausage', 'to': 'flavour', 'type': 'HasA', 'score': 0.019223380833864212, 'wm_score': 0.30212227, 'final': 0.10409304758370497}, {'fro': 'sausage', 'to': 'taco', 'type': 'AtLocation', 'score': 0.003345886245369911, 'wm_score': 0.40759626, 'final': 0.12462099837175895}, {'fro': 'sausage', 'to': 'pan', 'type': 'AtLocation', 'score': 0.0073180655017495155, 'wm_score': 0.36677626, 'final': 0.11515552385122468}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">payment</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "payment"
+    let relations = [{'fro': 'user', 'to': 'payment', 'type': 'HasA', 'score': 0.03684842586517334, 'wm_score': 0.42461386, 'final': 0.15317805610562135}, {'fro': 'customer', 'to': 'payment', 'type': 'HasA', 'score': 0.02811376564204693, 'wm_score': 0.57386684, 'final': 0.19183968794943287}, {'fro': 'victim', 'to': 'payment', 'type': 'HasA', 'score': 0.020193928852677345, 'wm_score': 0.3340934, 'final': 0.11436377019687416}, {'fro': 'recipient', 'to': 'payment', 'type': 'HasA', 'score': 0.01998980902135372, 'wm_score': 0.38120276, 'final': 0.12835369431494761}, {'fro': 'company', 'to': 'payment', 'type': 'HasA', 'score': 0.011734681203961372, 'wm_score': 0.46991003, 'final': 0.14918728584277297}, {'fro': 'subscriber', 'to': 'payment', 'type': 'HasA', 'score': 0.011146033182740211, 'wm_score': 0.46594822, 'final': 0.14758668922791818}, {'fro': 'register', 'to': 'payment', 'type': 'HasA', 'score': 0.006204630248248577, 'wm_score': 0.31916088, 'final': 0.10009150517377402}, {'fro': 'account', 'to': 'payment', 'type': 'HasA', 'score': 0.005806933622807264, 'wm_score': 0.5947447, 'final': 0.18248826353596512}, {'fro': 'buyer', 'to': 'payment', 'type': 'HasA', 'score': 0.0055098882876336575, 'wm_score': 0.47623736, 'final': 0.1467281298013436}, {'fro': 'airline', 'to': 'payment', 'type': 'HasA', 'score': 0.004964480642229319, 'wm_score': 0.4323671, 'final': 0.13318526644956052}, {'fro': 'firm', 'to': 'payment', 'type': 'HasA', 'score': 0.0047728740610182285, 'wm_score': 0.36155784, 'final': 0.11180836384271278}, {'fro': 'seller', 'to': 'payment', 'type': 'HasA', 'score': 0.004453902132809162, 'wm_score': 0.39984143, 'final': 0.12307016049296643}, {'fro': 'bank', 'to': 'payment', 'type': 'HasA', 'score': 0.004444796126335859, 'wm_score': 0.45484138, 'final': 0.1395637712884351}, {'fro': 'client', 'to': 'payment', 'type': 'HasA', 'score': 0.004158066585659981, 'wm_score': 0.50843334, 'final': 0.15544064860996198}, {'fro': 'patient', 'to': 'payment', 'type': 'HasA', 'score': 0.0036456568632274866, 'wm_score': 0.39770812, 'final': 0.12186439580425926}, {'fro': 'bill', 'to': 'payment', 'type': 'HasA', 'score': 0.0034786472097039223, 'wm_score': 0.42376447, 'final': 0.12956439404679276}, {'fro': 'payment', 'to': 'limit', 'type': 'HasA', 'score': 0.032986294478178024, 'wm_score': 0.56044245, 'final': 0.19122314113472466}, {'fro': 'payment', 'to': 'receipt', 'type': 'HasA', 'score': 0.02960018254816532, 'wm_score': 0.5648747, 'final': 0.19018253778371574}, {'fro': 'payment', 'to': 'delay', 'type': 'HasA', 'score': 0.02844098210334778, 'wm_score': 0.5011607, 'final': 0.1702568974723435}, {'fro': 'payment', 'to': 'fee', 'type': 'HasA', 'score': 0.02694644033908844, 'wm_score': 0.74055225, 'final': 0.24102818323736194}, {'fro': 'payment', 'to': 'date', 'type': 'HasA', 'score': 0.026630830019712448, 'wm_score': 0.49265656, 'final': 0.16643854901379873}, {'fro': 'payment', 'to': 'penalty', 'type': 'HasA', 'score': 0.0235598124563694, 'wm_score': 0.38784134, 'final': 0.1328442707194586}, {'fro': 'payment', 'to': 'cost', 'type': 'HasA', 'score': 0.01955121010541916, 'wm_score': 0.6835191, 'final': 0.21874157707379346}, {'fro': 'payment', 'to': 'guarantee', 'type': 'HasA', 'score': 0.016496192663908005, 'wm_score': 0.62529516, 'final': 0.19913588286473563}, {'fro': 'payment', 'to': 'refund', 'type': 'HasA', 'score': 0.013134300708770752, 'wm_score': 0.71082705, 'final': 0.22244212549613956}, {'fro': 'payment', 'to': 'return', 'type': 'HasA', 'score': 0.013033045455813408, 'wm_score': 0.5212465, 'final': 0.16549708181906939}, {'fro': 'payment', 'to': 'difference', 'type': 'HasA', 'score': 0.012506628409028053, 'wm_score': 0.38694692, 'final': 0.12483871588631966}, {'fro': 'payment', 'to': 'priority', 'type': 'HasA', 'score': 0.012303893454372883, 'wm_score': 0.41601494, 'final': 0.13341720741806104}, {'fro': 'payment', 'to': 'link', 'type': 'HasA', 'score': 0.010435766540467739, 'wm_score': 0.33079875, 'final': 0.10654466157832743}, {'fro': 'payment', 'to': 'problem', 'type': 'HasA', 'score': 0.010319401510059834, 'wm_score': 0.4087446, 'final': 0.1298469610570419}, {'fro': 'payment', 'to': 'clause', 'type': 'HasA', 'score': 0.009657159447669983, 'wm_score': 0.40336722, 'final': 0.127770177613369}, {'fro': 'payment', 'to': 'deadline', 'type': 'HasA', 'score': 0.008769102394580841, 'wm_score': 0.5010417, 'final': 0.15645088167620663}, {'fro': 'payment', 'to': 'toll', 'type': 'HasA', 'score': 0.008735564537346363, 'wm_score': 0.39615148, 'final': 0.12496033917614248}, {'fro': 'payment', 'to': 'future', 'type': 'HasA', 'score': 0.008216656744480133, 'wm_score': 0.45733306, 'final': 0.14295157772113612}, {'fro': 'payment', 'to': 'condition', 'type': 'HasA', 'score': 0.008091668598353863, 'wm_score': 0.38170734, 'final': 0.12017637001884772}, {'fro': 'payment', 'to': 'recipient', 'type': 'HasA', 'score': 0.008022935129702091, 'wm_score': 0.38120276, 'final': 0.11997688259079148}, {'fro': 'payment', 'to': 'value', 'type': 'HasA', 'score': 0.00791449099779129, 'wm_score': 0.58614004, 'final': 0.18138215569845392}, {'fro': 'payment', 'to': 'risk', 'type': 'HasA', 'score': 0.006289111915975809, 'wm_score': 0.43673313, 'final': 0.1354223173411831}, {'fro': 'payment', 'to': 'price', 'type': 'HasA', 'score': 0.006287462543696165, 'wm_score': 0.5648107, 'final': 0.17384443378058737}, {'fro': 'payment', 'to': 'cancellation', 'type': 'HasA', 'score': 0.006113786716014147, 'wm_score': 0.49594966, 'final': 0.15306454870120992}, {'fro': 'payment', 'to': 'payoff', 'type': 'HasA', 'score': 0.005215731915086508, 'wm_score': 0.4558832, 'final': 0.14041597234056058}, {'fro': 'payment', 'to': 'breakdown', 'type': 'HasA', 'score': 0.004574749618768692, 'wm_score': 0.36058897, 'final': 0.1113790157331381}, {'fro': 'fee', 'to': 'payment', 'type': 'AtLocation', 'score': 0.03690450266003609, 'wm_score': 0.74055225, 'final': 0.2479988268620253}, {'fro': 'balance', 'to': 'payment', 'type': 'AtLocation', 'score': 0.03480591997504234, 'wm_score': 0.47820118, 'final': 0.16782449798252966}, {'fro': 'check', 'to': 'payment', 'type': 'AtLocation', 'score': 0.02394111268222332, 'wm_score': 0.5621397, 'final': 0.18540068887755634}, {'fro': 'refund', 'to': 'payment', 'type': 'AtLocation', 'score': 0.0207320936024189, 'wm_score': 0.71082705, 'final': 0.22776058052169326}, {'fro': 'receipt', 'to': 'payment', 'type': 'AtLocation', 'score': 0.01557883806526661, 'wm_score': 0.5648747, 'final': 0.18036759664568663}, {'fro': 'difference', 'to': 'payment', 'type': 'AtLocation', 'score': 0.01495809480547905, 'wm_score': 0.38694692, 'final': 0.12655474236383535}, {'fro': 'penalty', 'to': 'payment', 'type': 'AtLocation', 'score': 0.014313898980617523, 'wm_score': 0.38784134, 'final': 0.12637213128643227}, {'fro': 'commission', 'to': 'payment', 'type': 'AtLocation', 'score': 0.013497644104063511, 'wm_score': 0.36019284, 'final': 0.11750620287284448}, {'fro': 'deposit', 'to': 'payment', 'type': 'AtLocation', 'score': 0.011178656481206417, 'wm_score': 0.60431504, 'final': 0.18911957153684453}, {'fro': 'guarantee', 'to': 'payment', 'type': 'AtLocation', 'score': 0.010595048777759075, 'wm_score': 0.62529516, 'final': 0.19500508214443138}, {'fro': 'clause', 'to': 'payment', 'type': 'AtLocation', 'score': 0.009149273857474327, 'wm_score': 0.40336722, 'final': 0.12741465770023205}, {'fro': 'line', 'to': 'payment', 'type': 'AtLocation', 'score': 0.009088694117963314, 'wm_score': 0.37521785, 'final': 0.11892744088257434}, {'fro': 'royalty', 'to': 'payment', 'type': 'AtLocation', 'score': 0.008527019992470741, 'wm_score': 0.56052905, 'final': 0.17412762899472953}, {'fro': 'loan', 'to': 'payment', 'type': 'AtLocation', 'score': 0.008309331722557545, 'wm_score': 0.70231825, 'final': 0.21651200720579034}, {'fro': 'dollar', 'to': 'payment', 'type': 'AtLocation', 'score': 0.008020889945328236, 'wm_score': 0.48737252, 'final': 0.1518263789617298}, {'fro': 'profit', 'to': 'payment', 'type': 'AtLocation', 'score': 0.007679065689444542, 'wm_score': 0.4510378, 'final': 0.14068668598261122}, {'fro': 'bonus', 'to': 'payment', 'type': 'AtLocation', 'score': 0.0066981068812310696, 'wm_score': 0.58031094, 'final': 0.1787819568168618}, {'fro': 'lump', 'to': 'payment', 'type': 'AtLocation', 'score': 0.006387124769389629, 'wm_score': 0.48521513, 'final': 0.15003552633857276}, {'fro': 'customer', 'to': 'payment', 'type': 'AtLocation', 'score': 0.006236276589334011, 'wm_score': 0.57386684, 'final': 0.17652544561253383}, {'fro': 'vat', 'to': 'payment', 'type': 'AtLocation', 'score': 0.006108212750405073, 'wm_score': 0.43554598, 'final': 0.13493954292528357}, {'fro': 'portion', 'to': 'payment', 'type': 'AtLocation', 'score': 0.005958288908004761, 'wm_score': 0.4688124, 'final': 0.14481452223560337}, {'fro': 'charge', 'to': 'payment', 'type': 'AtLocation', 'score': 0.005642980802804232, 'wm_score': 0.54257816, 'final': 0.166723534561963}, {'fro': 'risk', 'to': 'payment', 'type': 'AtLocation', 'score': 0.005169246345758438, 'wm_score': 0.43673313, 'final': 0.13463841144203093}, {'fro': 'debt', 'to': 'payment', 'type': 'AtLocation', 'score': 0.004605592228472233, 'wm_score': 0.6797796, 'final': 0.2071577945599306}, {'fro': 'condition', 'to': 'payment', 'type': 'AtLocation', 'score': 0.004563118331134319, 'wm_score': 0.38170734, 'final': 0.11770638483179405}, {'fro': 'payment', 'to': 'cards', 'type': 'AtLocation', 'score': 0.2096341997385025, 'wm_score': 0.566486, 'final': 0.3166897398169518}, {'fro': 'payment', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.14190931618213654, 'wm_score': 0.2844044, 'final': 0.18465784132749558}, {'fro': 'payment', 'to': 'mail', 'type': 'AtLocation', 'score': 0.12297483533620834, 'wm_score': 0.40381902, 'final': 0.20722809073534584}, {'fro': 'payment', 'to': 'works', 'type': 'AtLocation', 'score': 0.10723274201154709, 'wm_score': 0.27928478, 'final': 0.15884835340808298}, {'fro': 'payment', 'to': 'balance', 'type': 'AtLocation', 'score': 0.08762603998184204, 'wm_score': 0.47820118, 'final': 0.20479858198728945}, {'fro': 'payment', 'to': 'bank', 'type': 'AtLocation', 'score': 0.04780826345086098, 'wm_score': 0.45484138, 'final': 0.1699181984156027}, {'fro': 'payment', 'to': 'queue', 'type': 'AtLocation', 'score': 0.02865426614880562, 'wm_score': 0.29152057, 'final': 0.10751415730416394}, {'fro': 'payment', 'to': 'bag', 'type': 'AtLocation', 'score': 0.0261638592928648, 'wm_score': 0.33272246, 'final': 0.11813143950500538}, {'fro': 'payment', 'to': 'future', 'type': 'AtLocation', 'score': 0.016475394368171692, 'wm_score': 0.45733306, 'final': 0.14873269405772022}, {'fro': 'payment', 'to': 'form', 'type': 'AtLocation', 'score': 0.013958409428596497, 'wm_score': 0.35771918, 'final': 0.11708664060001757}, {'fro': 'payment', 'to': 'bill', 'type': 'AtLocation', 'score': 0.012505079619586468, 'wm_score': 0.42376447, 'final': 0.13588289673371054}, {'fro': 'payment', 'to': 'making', 'type': 'AtLocation', 'score': 0.007116949185729027, 'wm_score': 0.4552836, 'final': 0.14156694443001033}, {'fro': 'payment', 'to': 'system', 'type': 'AtLocation', 'score': 0.006839050445705652, 'wm_score': 0.48086664, 'final': 0.149047327311994}, {'fro': 'payment', 'to': 'process', 'type': 'AtLocation', 'score': 0.006034623831510544, 'wm_score': 0.42100918, 'final': 0.1305269906820574}, {'fro': 'payment', 'to': 'thousands', 'type': 'AtLocation', 'score': 0.004913784097880125, 'wm_score': 0.36518425, 'final': 0.11299492386851609}, {'fro': 'payment', 'to': 'hundreds', 'type': 'AtLocation', 'score': 0.0037765728775411844, 'wm_score': 0.3535338, 'final': 0.10870374101427885}, {'fro': 'payment', 'to': 'papers', 'type': 'AtLocation', 'score': 0.003398194443434477, 'wm_score': 0.3652138, 'final': 0.11194287611040414}, {'fro': 'payment', 'to': 'supply', 'type': 'AtLocation', 'score': 0.002929812064394355, 'wm_score': 0.4450313, 'final': 0.13556025844507608}, {'fro': 'payment', 'to': 'details', 'type': 'AtLocation', 'score': 0.002524064388126135, 'wm_score': 0.44319427, 'final': 0.1347251260716883}, {'fro': 'payment', 'to': 'money', 'type': 'AtLocation', 'score': 0.002313043922185898, 'wm_score': 0.6366435, 'final': 0.19261218074553016}, {'fro': 'payment', 'to': 'contract', 'type': 'AtLocation', 'score': 0.0020671463571488857, 'wm_score': 0.57666147, 'final': 0.17444544345000426}, {'fro': 'payment', 'to': 'paper', 'type': 'AtLocation', 'score': 0.0019833119586110115, 'wm_score': 0.36293218, 'final': 0.11026797237102773}, {'fro': 'payment', 'to': 'line', 'type': 'AtLocation', 'score': 0.0019770103972405195, 'wm_score': 0.37521785, 'final': 0.11394926227806838}, {'fro': 'payment', 'to': 'way', 'type': 'AtLocation', 'score': 0.0016214977949857712, 'wm_score': 0.3407789, 'final': 0.10336871845649005}, {'fro': 'payment', 'to': 'meantime', 'type': 'AtLocation', 'score': 0.0015324050327762961, 'wm_score': 0.36631072, 'final': 0.11096589952294342}, {'fro': 'payment', 'to': 'obligation', 'type': 'AtLocation', 'score': 0.004246164578944445, 'wm_score': 0.4724981, 'final': 0.14472174520526113}, {'fro': 'payment', 'to': 'option', 'type': 'AtLocation', 'score': 0.004730643704533577, 'wm_score': 0.5937118, 'final': 0.18142499059317355}, {'fro': 'payment', 'to': 'fee', 'type': 'AtLocation', 'score': 0.004938959609717131, 'wm_score': 0.74055225, 'final': 0.22562294672680203}, {'fro': 'payment', 'to': 'guarantee', 'type': 'AtLocation', 'score': 0.0071350280195474625, 'wm_score': 0.62529516, 'final': 0.19258306761368324}, {'fro': 'payment', 'to': 'reward', 'type': 'AtLocation', 'score': 0.003160150023177266, 'wm_score': 0.5543157, 'final': 0.1685068150162241}, {'fro': 'payment', 'to': 'deadline', 'type': 'AtLocation', 'score': 0.003818732686340809, 'wm_score': 0.5010417, 'final': 0.1529856228804386}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">citation</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "citation"
+    let relations = [{'fro': 'paper', 'to': 'citation', 'type': 'HasA', 'score': 0.004390430171042681, 'wm_score': 0.33828285, 'final': 0.1045581561197299}, {'fro': 'citation', 'to': 'paper', 'type': 'AtLocation', 'score': 0.009818731807172298, 'wm_score': 0.33828285, 'final': 0.10835796726502063}, {'fro': 'article', 'to': 'citation', 'type': 'HasA', 'score': 0.008940290659666061, 'wm_score': 0.4551997, 'final': 0.14281811346176626}, {'fro': 'citation', 'to': 'article', 'type': 'AtLocation', 'score': 0.008094284683465958, 'wm_score': 0.4551997, 'final': 0.14222590927842618}, {'fro': 'citation', 'to': 'statement', 'type': 'AtLocation', 'score': 0.007124296389520168, 'wm_score': 0.31874192, 'final': 0.10060958347266413}, {'fro': 'description', 'to': 'citation', 'type': 'HasA', 'score': 0.0031128546688705683, 'wm_score': 0.4176706, 'final': 0.1274801782682094}, {'fro': 'note', 'to': 'citation', 'type': 'HasA', 'score': 0.020094076171517372, 'wm_score': 0.38814408, 'final': 0.13050907732006217}, {'fro': 'citation', 'to': 'note', 'type': 'AtLocation', 'score': 0.007948209531605244, 'wm_score': 0.38814408, 'final': 0.12200697067212368}, {'fro': 'notice', 'to': 'citation', 'type': 'HasA', 'score': 0.01915552280843258, 'wm_score': 0.3156315, 'final': 0.10809831596590283}, {'fro': 'reference', 'to': 'citation', 'type': 'HasA', 'score': 0.012185719795525074, 'wm_score': 0.36814517, 'final': 0.11897355485686759}, {'fro': 'citation', 'to': 'reference', 'type': 'AtLocation', 'score': 0.007550462614744902, 'wm_score': 0.36814517, 'final': 0.11572887483032146}, {'fro': 'letter', 'to': 'citation', 'type': 'HasA', 'score': 0.010811634361743927, 'wm_score': 0.40716606, 'final': 0.12971796205322078}, {'fro': 'citation', 'to': 'letter', 'type': 'AtLocation', 'score': 0.004762690514326096, 'wm_score': 0.40716606, 'final': 0.1254837013600283}, {'fro': 'copy', 'to': 'citation', 'type': 'HasA', 'score': 0.010202612727880478, 'wm_score': 0.3368218, 'final': 0.10818836890951636}, {'fro': 'citation', 'to': 'copy', 'type': 'AtLocation', 'score': 0.0023291190154850483, 'wm_score': 0.3368218, 'final': 0.10267692331083955}, {'fro': 'essay', 'to': 'citation', 'type': 'HasA', 'score': 0.010521680116653442, 'wm_score': 0.45825016, 'final': 0.14484022408165742}, {'fro': 'citation', 'to': 'essay', 'type': 'AtLocation', 'score': 0.008212989196181297, 'wm_score': 0.45825016, 'final': 0.14322414043732692}, {'fro': 'document', 'to': 'citation', 'type': 'HasA', 'score': 0.02838810905814171, 'wm_score': 0.3476757, 'final': 0.1241743863406992}, {'fro': 'citation', 'to': 'document', 'type': 'AtLocation', 'score': 0.007388079073280096, 'wm_score': 0.3476757, 'final': 0.10947436535129608}, {'fro': 'award', 'to': 'citation', 'type': 'HasA', 'score': 0.015934733673930168, 'wm_score': 0.5240594, 'final': 0.16837213357175113}, {'fro': 'read', 'to': 'citation', 'type': 'HasA', 'score': 0.002810163190588355, 'wm_score': 0.36831525, 'final': 0.11246168923341186}, {'fro': 'report', 'to': 'citation', 'type': 'HasA', 'score': 0.004253878723829985, 'wm_score': 0.32958335, 'final': 0.101852720106681}, {'fro': 'mention', 'to': 'citation', 'type': 'HasA', 'score': 0.00727842515334487, 'wm_score': 0.3399236, 'final': 0.10707197760734143}, {'fro': 'mention', 'to': 'citation', 'type': 'AtLocation', 'score': 0.004014553036540747, 'wm_score': 0.3399236, 'final': 0.10478726712557854}, {'fro': 'quote', 'to': 'citation', 'type': 'HasA', 'score': 0.025110485032200813, 'wm_score': 0.31202012, 'final': 0.11118337552254058}, {'fro': 'footnote', 'to': 'citation', 'type': 'HasA', 'score': 0.058440081775188446, 'wm_score': 0.30312693, 'final': 0.13184613624263192}, {'fro': 'citation', 'to': 'footnote', 'type': 'AtLocation', 'score': 0.01924007758498192, 'wm_score': 0.30312693, 'final': 0.10440613330948736}, {'fro': 'footnote', 'to': 'citation', 'type': 'AtLocation', 'score': 0.02837083674967289, 'wm_score': 0.30312693, 'final': 0.11079766472477104}, {'fro': 'disclaimer', 'to': 'citation', 'type': 'HasA', 'score': 0.0024201672058552504, 'wm_score': 0.3813258, 'final': 0.11609185704409869}, {'fro': 'citation', 'to': 'disclaimer', 'type': 'AtLocation', 'score': 0.0027673912700265646, 'wm_score': 0.3813258, 'final': 0.1163349138890186}, {'fro': 'warrant', 'to': 'citation', 'type': 'HasA', 'score': 0.002289516618475318, 'wm_score': 0.3624218, 'final': 0.11032920163293275}, {'fro': 'summary', 'to': 'citation', 'type': 'HasA', 'score': 0.012799308635294437, 'wm_score': 0.35655397, 'final': 0.11592570704470612}, {'fro': 'citation', 'to': 'summary', 'type': 'AtLocation', 'score': 0.008727429434657097, 'wm_score': 0.35655397, 'final': 0.11307539160425999}, {'fro': 'author', 'to': 'citation', 'type': 'HasA', 'score': 0.02761019393801689, 'wm_score': 0.2790072, 'final': 0.10302929575661184}, {'fro': 'publication', 'to': 'citation', 'type': 'HasA', 'score': 0.009320693090558052, 'wm_score': 0.43217155, 'final': 0.13617595016339065}, {'fro': 'book', 'to': 'citation', 'type': 'HasA', 'score': 0.008465709164738655, 'wm_score': 0.3693214, 'final': 0.11672241641531708}, {'fro': 'statement', 'to': 'citation', 'type': 'HasA', 'score': 0.006404277868568897, 'wm_score': 0.31874192, 'final': 0.10010557050799825}, {'fro': 'pamphlet', 'to': 'citation', 'type': 'HasA', 'score': 0.0037367758341133595, 'wm_score': 0.3267709, 'final': 0.10064701308387936}, {'fro': 'citation', 'to': 'footnote', 'type': 'HasA', 'score': 0.12099641561508179, 'wm_score': 0.30312693, 'final': 0.17563556993055726}, {'fro': 'citation', 'to': 'typo', 'type': 'HasA', 'score': 0.05166187137365341, 'wm_score': 0.2795837, 'final': 0.1200384199615574}, {'fro': 'citation', 'to': 'disclaimer', 'type': 'HasA', 'score': 0.04745364561676979, 'wm_score': 0.3813258, 'final': 0.14761529193173886}, {'fro': 'citation', 'to': 'correction', 'type': 'HasA', 'score': 0.015662018209695816, 'wm_score': 0.31447548, 'final': 0.10530605674678707}, {'fro': 'citation', 'to': 'copy', 'type': 'HasA', 'score': 0.011749634519219398, 'wm_score': 0.3368218, 'final': 0.1092712841634536}, {'fro': 'citation', 'to': 'merit', 'type': 'HasA', 'score': 0.009546693414449692, 'wm_score': 0.5450156, 'final': 0.17018736539011484}, {'fro': 'citation', 'to': 'translation', 'type': 'HasA', 'score': 0.008390056900680065, 'wm_score': 0.33221567, 'final': 0.10553774083047607}, {'fro': 'citation', 'to': 'caption', 'type': 'HasA', 'score': 0.005268832203000784, 'wm_score': 0.37609848, 'final': 0.11651772654210056}, {'fro': 'citation', 'to': 'summary', 'type': 'HasA', 'score': 0.005175342317670584, 'wm_score': 0.35655397, 'final': 0.11058893062236942}, {'fro': 'citation', 'to': 'history', 'type': 'HasA', 'score': 0.004805101081728935, 'wm_score': 0.32541806, 'final': 0.10098898875721027}, {'fro': 'citation', 'to': 'bearing', 'type': 'HasA', 'score': 0.004076158162206411, 'wm_score': 0.43707955, 'final': 0.1339771757135445}, {'fro': 'typo', 'to': 'citation', 'type': 'AtLocation', 'score': 0.12658151984214783, 'wm_score': 0.2795837, 'final': 0.1724821738895035}, {'fro': 'correction', 'to': 'citation', 'type': 'AtLocation', 'score': 0.04391821101307869, 'wm_score': 0.31447548, 'final': 0.12508539170915509}, {'fro': 'quotation', 'to': 'citation', 'type': 'AtLocation', 'score': 0.015732629224658012, 'wm_score': 0.34972563, 'final': 0.11593052945726062}, {'fro': 'quote', 'to': 'citation', 'type': 'AtLocation', 'score': 0.01344437524676323, 'wm_score': 0.31202012, 'final': 0.10301709867273427}, {'fro': 'note', 'to': 'citation', 'type': 'AtLocation', 'score': 0.010253469459712505, 'wm_score': 0.38814408, 'final': 0.12362065262179876}, {'fro': 'paragraph', 'to': 'citation', 'type': 'AtLocation', 'score': 0.009609434753656387, 'wm_score': 0.36372706, 'final': 0.11584472232755949}, {'fro': 'disclaimer', 'to': 'citation', 'type': 'AtLocation', 'score': 0.008364265784621239, 'wm_score': 0.3813258, 'final': 0.12025272604923488}, {'fro': 'reference', 'to': 'citation', 'type': 'AtLocation', 'score': 0.004551156423985958, 'wm_score': 0.36814517, 'final': 0.1136293604967902}, {'fro': 'photo', 'to': 'citation', 'type': 'AtLocation', 'score': 0.0042927754111588, 'wm_score': 0.3434267, 'final': 0.10603295278781116}, {'fro': 'letter', 'to': 'citation', 'type': 'AtLocation', 'score': 0.0032963452395051718, 'wm_score': 0.40716606, 'final': 0.12445725966765364}, {'fro': 'picture', 'to': 'citation', 'type': 'AtLocation', 'score': 0.002748725702986121, 'wm_score': 0.32983103, 'final': 0.1008734169920903}, {'fro': 'citation', 'to': 'works', 'type': 'AtLocation', 'score': 0.3001815974712372, 'wm_score': 0.19552621, 'final': 0.26878498122986605}, {'fro': 'citation', 'to': 'appendix', 'type': 'AtLocation', 'score': 0.021086229011416435, 'wm_score': 0.30764234, 'final': 0.10705306230799153}, {'fro': 'citation', 'to': 'book', 'type': 'AtLocation', 'score': 0.018269436433911324, 'wm_score': 0.3693214, 'final': 0.12358502550373794}, {'fro': 'citation', 'to': 'text', 'type': 'AtLocation', 'score': 0.014318431727588177, 'wm_score': 0.3416134, 'final': 0.11250692220931174}, {'fro': 'citation', 'to': 'order', 'type': 'AtLocation', 'score': 0.008170247077941895, 'wm_score': 0.31494397, 'final': 0.10020236395455935}, {'fro': 'citation', 'to': 'database', 'type': 'AtLocation', 'score': 0.007093154825270176, 'wm_score': 0.31810594, 'final': 0.10039699037768914}, {'fro': 'citation', 'to': 'literature', 'type': 'AtLocation', 'score': 0.006980895064771175, 'wm_score': 0.43695536, 'final': 0.13597323454533985}, {'fro': 'citation', 'to': 'headline', 'type': 'AtLocation', 'score': 0.004573818761855364, 'wm_score': 0.38594872, 'final': 0.11898628913329877}, {'fro': 'translation', 'to': 'citation', 'type': 'HasA', 'score': 0.002121191006153822, 'wm_score': 0.33221567, 'final': 0.1011495347043077}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

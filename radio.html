@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">radio</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "radio"
+    let relations = [{'fro': 'telegraph', 'to': 'radio', 'type': 'HasA', 'score': 0.15780098736286163, 'wm_score': 0.48337495, 'final': 0.25547317615400317}, {'fro': 'bbc', 'to': 'radio', 'type': 'HasA', 'score': 0.13404163718223572, 'wm_score': 0.70722693, 'final': 0.30599722502756505}, {'fro': 'guardian', 'to': 'radio', 'type': 'HasA', 'score': 0.061252787709236145, 'wm_score': 0.3971052, 'final': 0.16200851139646533}, {'fro': 'station', 'to': 'radio', 'type': 'HasA', 'score': 0.04235906898975372, 'wm_score': 0.7191021, 'final': 0.24538197829282765}, {'fro': 'independent', 'to': 'radio', 'type': 'HasA', 'score': 0.04078669473528862, 'wm_score': 0.5131747, 'final': 0.18250309631470205}, {'fro': 'cbc', 'to': 'radio', 'type': 'HasA', 'score': 0.02550285868346691, 'wm_score': 0.5985224, 'final': 0.19740872107842686}, {'fro': 'herald', 'to': 'radio', 'type': 'HasA', 'score': 0.016164537519216537, 'wm_score': 0.38501757, 'final': 0.1268204472634516}, {'fro': 'observer', 'to': 'radio', 'type': 'HasA', 'score': 0.014340557157993317, 'wm_score': 0.38842234, 'final': 0.12656509201059532}, {'fro': 'world', 'to': 'radio', 'type': 'HasA', 'score': 0.013386859558522701, 'wm_score': 0.35155, 'final': 0.1148358016909659}, {'fro': 'nation', 'to': 'radio', 'type': 'HasA', 'score': 0.012455597519874573, 'wm_score': 0.36917612, 'final': 0.11947175426391222}, {'fro': 'local', 'to': 'radio', 'type': 'HasA', 'score': 0.012289710342884064, 'wm_score': 0.54955995, 'final': 0.17347078224001886}, {'fro': 'times', 'to': 'radio', 'type': 'HasA', 'score': 0.012178231030702591, 'wm_score': 0.47936863, 'final': 0.15233535072149182}, {'fro': 'tribune', 'to': 'radio', 'type': 'HasA', 'score': 0.011502320878207684, 'wm_score': 0.3517479, 'final': 0.11357599461474539}, {'fro': 'star', 'to': 'radio', 'type': 'HasA', 'score': 0.010829580947756767, 'wm_score': 0.42476672, 'final': 0.13501072266342976}, {'fro': 'voice', 'to': 'radio', 'type': 'HasA', 'score': 0.008267509751021862, 'wm_score': 0.56735176, 'final': 0.17599278482571531}, {'fro': 'republic', 'to': 'radio', 'type': 'HasA', 'score': 0.007367138285189867, 'wm_score': 0.34467238, 'final': 0.10855871079963293}, {'fro': 'australian', 'to': 'radio', 'type': 'HasA', 'score': 0.006949570029973984, 'wm_score': 0.35528266, 'final': 0.1114494970209818}, {'fro': 'post', 'to': 'radio', 'type': 'HasA', 'score': 0.006807176396250725, 'wm_score': 0.44533938, 'final': 0.13836683747737552}, {'fro': 'conversation', 'to': 'radio', 'type': 'HasA', 'score': 0.005817640572786331, 'wm_score': 0.42203826, 'final': 0.13068382640095047}, {'fro': 'citizen', 'to': 'radio', 'type': 'HasA', 'score': 0.005505431909114122, 'wm_score': 0.35315746, 'final': 0.1098010403363799}, {'fro': 'news', 'to': 'radio', 'type': 'HasA', 'score': 0.00538571598008275, 'wm_score': 0.63688815, 'final': 0.19483644618605794}, {'fro': 'globe', 'to': 'radio', 'type': 'HasA', 'score': 0.005123822018504143, 'wm_score': 0.3837573, 'final': 0.11871386541295292}, {'fro': 'mirror', 'to': 'radio', 'type': 'HasA', 'score': 0.004698396194726229, 'wm_score': 0.322573, 'final': 0.10006077733630837}, {'fro': 'wire', 'to': 'radio', 'type': 'HasA', 'score': 0.004603520035743713, 'wm_score': 0.33263212, 'final': 0.1030121000250206}, {'fro': 'cw', 'to': 'radio', 'type': 'HasA', 'score': 0.003720102831721306, 'wm_score': 0.358013, 'final': 0.11000797198220494}, {'fro': 'gazette', 'to': 'radio', 'type': 'HasA', 'score': 0.0034985013771802187, 'wm_score': 0.35838315, 'final': 0.10996389596402617}, {'fro': 'abc', 'to': 'radio', 'type': 'HasA', 'score': 0.00302589638158679, 'wm_score': 0.6297658, 'final': 0.1910478674671108}, {'fro': 'capital', 'to': 'radio', 'type': 'HasA', 'score': 0.0028029545210301876, 'wm_score': 0.3551024, 'final': 0.10849278816472115}, {'fro': 'national', 'to': 'radio', 'type': 'HasA', 'score': 0.0027077284175902605, 'wm_score': 0.46720174, 'final': 0.1420559318923132}, {'fro': 'uk', 'to': 'radio', 'type': 'HasA', 'score': 0.002635712269693613, 'wm_score': 0.5308707, 'final': 0.16110620858878558}, {'fro': 'radio', 'to': 'pulse', 'type': 'HasA', 'score': 0.0785205066204071, 'wm_score': 0.299716, 'final': 0.14487915463428497}, {'fro': 'radio', 'to': 'microphone', 'type': 'HasA', 'score': 0.062478721141815186, 'wm_score': 0.41027886, 'final': 0.16681876279927066}, {'fro': 'radio', 'to': 'playlist', 'type': 'HasA', 'score': 0.05229461193084717, 'wm_score': 0.38373464, 'final': 0.15172662035159304}, {'fro': 'radio', 'to': 'translator', 'type': 'HasA', 'score': 0.03775634244084358, 'wm_score': 0.47390795, 'final': 0.16860182470859053}, {'fro': 'radio', 'to': 'sound', 'type': 'HasA', 'score': 0.035803791135549545, 'wm_score': 0.52321494, 'final': 0.1820271357948847}, {'fro': 'radio', 'to': 'voice', 'type': 'HasA', 'score': 0.023037152364850044, 'wm_score': 0.56735176, 'final': 0.18633153465539506}, {'fro': 'radio', 'to': 'broadcaster', 'type': 'HasA', 'score': 0.017771843820810318, 'wm_score': 0.6758512, 'final': 0.21519565067456725}, {'fro': 'radio', 'to': 'link', 'type': 'HasA', 'score': 0.017067933455109596, 'wm_score': 0.43498695, 'final': 0.14244363841857674}, {'fro': 'radio', 'to': 'transcript', 'type': 'HasA', 'score': 0.01243129838258028, 'wm_score': 0.36129183, 'final': 0.11708945786780621}, {'fro': 'radio', 'to': 'podcast', 'type': 'HasA', 'score': 0.010374709963798523, 'wm_score': 0.42982414, 'final': 0.13620953897465898}, {'fro': 'radio', 'to': 'soundtrack', 'type': 'HasA', 'score': 0.010162399150431156, 'wm_score': 0.37045056, 'final': 0.11824884740530181}, {'fro': 'radio', 'to': 'subscription', 'type': 'HasA', 'score': 0.007714228238910437, 'wm_score': 0.37942466, 'final': 0.11922735776723734}, {'fro': 'radio', 'to': 'reporter', 'type': 'HasA', 'score': 0.007433225400745869, 'wm_score': 0.5474508, 'final': 0.16943849778052214}, {'fro': 'radio', 'to': 'response', 'type': 'HasA', 'score': 0.007217141333967447, 'wm_score': 0.4127636, 'final': 0.12888107893377723}, {'fro': 'radio', 'to': 'transmitter', 'type': 'HasA', 'score': 0.006093959789723158, 'wm_score': 0.5147515, 'final': 0.15869122185280624}, {'fro': 'radio', 'to': 'history', 'type': 'HasA', 'score': 0.005606967024505138, 'wm_score': 0.34370118, 'final': 0.10703523091715361}, {'fro': 'radio', 'to': 'player', 'type': 'HasA', 'score': 0.004818669054657221, 'wm_score': 0.34187007, 'final': 0.10593408933826007}, {'fro': 'radio', 'to': 'recorder', 'type': 'HasA', 'score': 0.003949190955609083, 'wm_score': 0.38023585, 'final': 0.11683518866892637}, {'fro': 'radio', 'to': 'producer', 'type': 'HasA', 'score': 0.003709641983732581, 'wm_score': 0.45249057, 'final': 0.13834392038861285}, {'fro': 'radio', 'to': 'website', 'type': 'HasA', 'score': 0.003662153147161007, 'wm_score': 0.518229, 'final': 0.15803220720301275}, {'fro': 'radio', 'to': 'message', 'type': 'HasA', 'score': 0.0036613570991903543, 'wm_score': 0.48627022, 'final': 0.14844401596943324}, {'fro': 'song', 'to': 'radio', 'type': 'AtLocation', 'score': 0.05443606898188591, 'wm_score': 0.4435726, 'final': 0.17117702828732018}, {'fro': 'pirate', 'to': 'radio', 'type': 'AtLocation', 'score': 0.01464600209146738, 'wm_score': 0.40218893, 'final': 0.13090888046402718}, {'fro': 'message', 'to': 'radio', 'type': 'AtLocation', 'score': 0.014429129660129547, 'wm_score': 0.48627022, 'final': 0.1559814567620907}, {'fro': 'blast', 'to': 'radio', 'type': 'AtLocation', 'score': 0.013039412908256054, 'wm_score': 0.31703076, 'final': 0.10423681703577925}, {'fro': 'tune', 'to': 'radio', 'type': 'AtLocation', 'score': 0.011656372807919979, 'wm_score': 0.42516083, 'final': 0.135707709965544}, {'fro': 'recording', 'to': 'radio', 'type': 'AtLocation', 'score': 0.008770383894443512, 'wm_score': 0.5453484, 'final': 0.16974378872611046}, {'fro': 'joke', 'to': 'radio', 'type': 'AtLocation', 'score': 0.008410290814936161, 'wm_score': 0.3507821, 'final': 0.11112183357045533}, {'fro': 'commercial', 'to': 'radio', 'type': 'AtLocation', 'score': 0.007289329543709755, 'wm_score': 0.5395746, 'final': 0.16697491068059686}, {'fro': 'fox', 'to': 'radio', 'type': 'AtLocation', 'score': 0.007183776702731848, 'wm_score': 0.54820824, 'final': 0.16949111569191233}, {'fro': 'caller', 'to': 'radio', 'type': 'AtLocation', 'score': 0.006387427449226379, 'wm_score': 0.4694186, 'final': 0.1452967792144585}, {'fro': 'report', 'to': 'radio', 'type': 'AtLocation', 'score': 0.0063602253794670105, 'wm_score': 0.36128575, 'final': 0.11283788276562692}, {'fro': 'question', 'to': 'radio', 'type': 'AtLocation', 'score': 0.005391453392803669, 'wm_score': 0.33093104, 'final': 0.10305332937496259}, {'fro': 'man', 'to': 'radio', 'type': 'AtLocation', 'score': 0.005322805140167475, 'wm_score': 0.3402896, 'final': 0.10581284359811725}, {'fro': 'voice', 'to': 'radio', 'type': 'AtLocation', 'score': 0.005076571833342314, 'wm_score': 0.56735176, 'final': 0.17375912828333964}, {'fro': 'theme', 'to': 'radio', 'type': 'AtLocation', 'score': 0.003966629970818758, 'wm_score': 0.37079677, 'final': 0.11401567197957314}, {'fro': 'dj', 'to': 'radio', 'type': 'AtLocation', 'score': 0.003801574930548668, 'wm_score': 0.45008206, 'final': 0.13768572045138408}, {'fro': 'headline', 'to': 'radio', 'type': 'AtLocation', 'score': 0.00366159132681787, 'wm_score': 0.36187643, 'final': 0.11112604292877254}, {'fro': 'line', 'to': 'radio', 'type': 'AtLocation', 'score': 0.0035887670237571, 'wm_score': 0.4747063, 'final': 0.14492402691663}, {'fro': 'radio', 'to': 'works', 'type': 'AtLocation', 'score': 0.31316232681274414, 'wm_score': 0.40950602, 'final': 0.34206543476892093}, {'fro': 'radio', 'to': 'background', 'type': 'AtLocation', 'score': 0.09078697115182877, 'wm_score': 0.34706897, 'final': 0.16767157080628015}, {'fro': 'radio', 'to': 'air', 'type': 'AtLocation', 'score': 0.0330946259200573, 'wm_score': 0.5064608, 'final': 0.17510447814404012}, {'fro': 'radio', 'to': 'mix', 'type': 'AtLocation', 'score': 0.017988672479987144, 'wm_score': 0.34878096, 'final': 0.11722635873599101}, {'fro': 'radio', 'to': 'news', 'type': 'AtLocation', 'score': 0.017638755962252617, 'wm_score': 0.63688815, 'final': 0.20341357417357686}, {'fro': 'radio', 'to': 'making', 'type': 'AtLocation', 'score': 0.009856593795120716, 'wm_score': 0.40746766, 'final': 0.12913991365658453}, {'fro': 'radio', 'to': 'sky', 'type': 'AtLocation', 'score': 0.009075991809368134, 'wm_score': 0.49258357, 'final': 0.15412826526655773}, {'fro': 'radio', 'to': 'mail', 'type': 'AtLocation', 'score': 0.00637049600481987, 'wm_score': 0.37867475, 'final': 0.11806177220337392}, {'fro': 'radio', 'to': 'audience', 'type': 'AtLocation', 'score': 0.006332426331937313, 'wm_score': 0.48101956, 'final': 0.14873856643235614}, {'fro': 'radio', 'to': 'area', 'type': 'AtLocation', 'score': 0.0048459600657224655, 'wm_score': 0.38919342, 'final': 0.12015019804600574}, {'fro': 'radio', 'to': 'region', 'type': 'AtLocation', 'score': 0.0046064769849181175, 'wm_score': 0.32311806, 'final': 0.1001599518894427}, {'fro': 'radio', 'to': 'house', 'type': 'AtLocation', 'score': 0.0044945660047233105, 'wm_score': 0.3229072, 'final': 0.10001835620330633}, {'fro': 'radio', 'to': 'system', 'type': 'AtLocation', 'score': 0.004406548570841551, 'wm_score': 0.46058226, 'final': 0.1412592619995891}, {'fro': 'radio', 'to': 'open', 'type': 'AtLocation', 'score': 0.0037711486220359802, 'wm_score': 0.34460586, 'final': 0.1060215620354252}, {'fro': 'radio', 'to': 'studio', 'type': 'AtLocation', 'score': 0.00358556117862463, 'wm_score': 0.52026296, 'final': 0.15858878082503727}, {'fro': 'radio', 'to': 'garage', 'type': 'AtLocation', 'score': 0.0032398593612015247, 'wm_score': 0.32622045, 'final': 0.10013403655284107}, {'fro': 'radio', 'to': 'field', 'type': 'AtLocation', 'score': 0.002934129210188985, 'wm_score': 0.3599928, 'final': 0.1100517304471323}, {'fro': 'radio', 'to': 'distance', 'type': 'AtLocation', 'score': 0.002893315628170967, 'wm_score': 0.36547187, 'final': 0.11166688193971969}, {'fro': 'radio', 'to': 'black', 'type': 'AtLocation', 'score': 0.0026376594323664904, 'wm_score': 0.34208226, 'final': 0.10447103960265657}, {'fro': 'car', 'to': 'radio', 'type': 'HasA', 'score': 0.011473651975393295, 'wm_score': 0.3577654, 'final': 0.11536117638277532}, {'fro': 'radio', 'to': 'signal', 'type': 'HasA', 'score': 0.006943385116755962, 'wm_score': 0.52865523, 'final': 0.1634569385817292}, {'fro': 'signal', 'to': 'radio', 'type': 'AtLocation', 'score': 0.002534845843911171, 'wm_score': 0.52865523, 'final': 0.16037096109073784}, {'fro': 'radio', 'to': 'noise', 'type': 'HasA', 'score': 0.0047974796034395695, 'wm_score': 0.39791432, 'final': 0.12273253172240772}, {'fro': 'helicopter', 'to': 'radio', 'type': 'HasA', 'score': 0.005120546091347933, 'wm_score': 0.36699113, 'final': 0.11368172126394357}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

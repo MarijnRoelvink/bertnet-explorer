@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">diet</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "diet"
+    let relations = [{'fro': 'meat', 'to': 'diet', 'type': 'AtLocation', 'score': 0.004038563463836908, 'wm_score': 0.54453254, 'final': 0.16618675642468586}, {'fro': 'variety', 'to': 'diet', 'type': 'AtLocation', 'score': 0.006529541686177254, 'wm_score': 0.40669173, 'final': 0.1265781981803241}, {'fro': 'disease', 'to': 'diet', 'type': 'AtLocation', 'score': 0.008476764895021915, 'wm_score': 0.39781332, 'final': 0.12527773142651535}, {'fro': 'potato', 'to': 'diet', 'type': 'AtLocation', 'score': 0.005618120077997446, 'wm_score': 0.4278624, 'final': 0.13229140405459822}, {'fro': 'fat', 'to': 'diet', 'type': 'AtLocation', 'score': 0.027470415458083153, 'wm_score': 0.607315, 'final': 0.20142379082065826}, {'fro': 'salt', 'to': 'diet', 'type': 'AtLocation', 'score': 0.002150916261598468, 'wm_score': 0.3848764, 'final': 0.11696856138311895}, {'fro': 'sugar', 'to': 'diet', 'type': 'AtLocation', 'score': 0.019998401403427124, 'wm_score': 0.48034194, 'final': 0.15810146298239902}, {'fro': 'vegetable', 'to': 'diet', 'type': 'AtLocation', 'score': 0.005954598542302847, 'wm_score': 0.40564817, 'final': 0.125862669979612}, {'fro': 'breakfast', 'to': 'diet', 'type': 'AtLocation', 'score': 0.003146346425637603, 'wm_score': 0.47438097, 'final': 0.14451673349794636}, {'fro': 'milk', 'to': 'diet', 'type': 'AtLocation', 'score': 0.002476237015798688, 'wm_score': 0.52942383, 'final': 0.1605605149110591}, {'fro': 'vegetarian', 'to': 'diet', 'type': 'HasA', 'score': 0.006863764021545649, 'wm_score': 0.6139686, 'final': 0.18899521481508197}, {'fro': 'vegan', 'to': 'diet', 'type': 'HasA', 'score': 0.0063267601653933525, 'wm_score': 0.5047883, 'final': 0.15586522211577536}, {'fro': 'dog', 'to': 'diet', 'type': 'HasA', 'score': 0.006038430146872997, 'wm_score': 0.3487085, 'final': 0.10883945110281111}, {'fro': 'baby', 'to': 'diet', 'type': 'HasA', 'score': 0.0052949246019124985, 'wm_score': 0.39830622, 'final': 0.12319831322133877}, {'fro': 'diet', 'to': 'downside', 'type': 'HasA', 'score': 0.1979224532842636, 'wm_score': 0.15406105, 'final': 0.18476403229898453}, {'fro': 'diet', 'to': 'twist', 'type': 'HasA', 'score': 0.0701393261551857, 'wm_score': 0.18564108, 'final': 0.10478985230863}, {'fro': 'diet', 'to': 'purpose', 'type': 'HasA', 'score': 0.03814780339598656, 'wm_score': 0.3021173, 'final': 0.1173386523771906}, {'fro': 'diet', 'to': 'problem', 'type': 'HasA', 'score': 0.029036933556199074, 'wm_score': 0.3261596, 'final': 0.11817373348933936}, {'fro': 'diet', 'to': 'limit', 'type': 'HasA', 'score': 0.020273886620998383, 'wm_score': 0.32862413, 'final': 0.11277895963469889}, {'fro': 'diet', 'to': 'price', 'type': 'HasA', 'score': 0.01018559467047453, 'wm_score': 0.31542704, 'final': 0.10175802826933218}, {'fro': 'diet', 'to': 'cost', 'type': 'HasA', 'score': 0.01012134738266468, 'wm_score': 0.34089637, 'final': 0.10935385416786529}, {'fro': 'diet', 'to': 'cure', 'type': 'HasA', 'score': 0.008126064203679562, 'wm_score': 0.4031077, 'final': 0.1266205549425757}, {'fro': 'diet', 'to': 'benefit', 'type': 'HasA', 'score': 0.006509753409773111, 'wm_score': 0.3252306, 'final': 0.10212600738684119}, {'fro': 'diet', 'to': 'choice', 'type': 'HasA', 'score': 0.0049442993476986885, 'wm_score': 0.38882944, 'final': 0.1201098415433891}, {'fro': 'diet', 'to': 'risk', 'type': 'HasA', 'score': 0.004670176655054092, 'wm_score': 0.3788455, 'final': 0.11692277365853788}, {'fro': 'diet', 'to': 'solution', 'type': 'HasA', 'score': 0.0038661633152514696, 'wm_score': 0.33969602, 'final': 0.10461512032067603}, {'fro': 'banana', 'to': 'diet', 'type': 'AtLocation', 'score': 0.04074927046895027, 'wm_score': 0.25080374, 'final': 0.1037656113282652}, {'fro': 'vegetarian', 'to': 'diet', 'type': 'AtLocation', 'score': 0.026760084554553032, 'wm_score': 0.6139686, 'final': 0.20292263918818715}, {'fro': 'tomato', 'to': 'diet', 'type': 'AtLocation', 'score': 0.019054898992180824, 'wm_score': 0.32136568, 'final': 0.1097481332945266}, {'fro': 'salad', 'to': 'diet', 'type': 'AtLocation', 'score': 0.01772822067141533, 'wm_score': 0.38338542, 'final': 0.12742538046999075}, {'fro': 'fish', 'to': 'diet', 'type': 'AtLocation', 'score': 0.01716144196689129, 'wm_score': 0.44182622, 'final': 0.1445608753768239}, {'fro': 'rat', 'to': 'diet', 'type': 'AtLocation', 'score': 0.014664771035313606, 'wm_score': 0.3237281, 'final': 0.10738376972471954}, {'fro': 'chicken', 'to': 'diet', 'type': 'AtLocation', 'score': 0.014229696244001389, 'wm_score': 0.45124123, 'final': 0.145333156370801}, {'fro': 'protein', 'to': 'diet', 'type': 'AtLocation', 'score': 0.014054583385586739, 'wm_score': 0.466207, 'final': 0.14970030836991075}, {'fro': 'steak', 'to': 'diet', 'type': 'AtLocation', 'score': 0.013799828477203846, 'wm_score': 0.34165537, 'final': 0.1121564909340427}, {'fro': 'vitamin', 'to': 'diet', 'type': 'AtLocation', 'score': 0.011827574111521244, 'wm_score': 0.5640929, 'final': 0.1775071718780649}, {'fro': 'vegan', 'to': 'diet', 'type': 'AtLocation', 'score': 0.009346330538392067, 'wm_score': 0.5047883, 'final': 0.15797892137687444}, {'fro': 'burger', 'to': 'diet', 'type': 'AtLocation', 'score': 0.006347324699163437, 'wm_score': 0.3904224, 'final': 0.12156984728941442}, {'fro': 'goat', 'to': 'diet', 'type': 'AtLocation', 'score': 0.005081788636744022, 'wm_score': 0.32694256, 'final': 0.10164002004572083}, {'fro': 'baby', 'to': 'diet', 'type': 'AtLocation', 'score': 0.004220285452902317, 'wm_score': 0.39830622, 'final': 0.12244606581703164}, {'fro': 'calorie', 'to': 'diet', 'type': 'AtLocation', 'score': 0.004195209126919508, 'wm_score': 0.61016595, 'final': 0.1859864313888437}, {'fro': 'change', 'to': 'diet', 'type': 'AtLocation', 'score': 0.004187582526355982, 'wm_score': 0.38774538, 'final': 0.11925492176844919}, {'fro': 'diet', 'to': 'works', 'type': 'AtLocation', 'score': 0.28919532895088196, 'wm_score': 0.19176826, 'final': 0.25996720826561737}, {'fro': 'diet', 'to': 'pudding', 'type': 'AtLocation', 'score': 0.10275372862815857, 'wm_score': 0.2125688, 'final': 0.13569825003971098}, {'fro': 'diet', 'to': 'making', 'type': 'AtLocation', 'score': 0.03538886457681656, 'wm_score': 0.28641605, 'final': 0.11069702020377159}, {'fro': 'diet', 'to': 'genes', 'type': 'AtLocation', 'score': 0.02533756010234356, 'wm_score': 0.3283723, 'final': 0.1162479820716405}, {'fro': 'diet', 'to': 'mix', 'type': 'AtLocation', 'score': 0.02038920484483242, 'wm_score': 0.3801816, 'final': 0.1283269233913827}, {'fro': 'diet', 'to': 'recipe', 'type': 'AtLocation', 'score': 0.01751822419464588, 'wm_score': 0.44625288, 'final': 0.14613862093625216}, {'fro': 'diet', 'to': 'bag', 'type': 'AtLocation', 'score': 0.011911067180335522, 'wm_score': 0.32501322, 'final': 0.10584171302623488}, {'fro': 'diet', 'to': 'balance', 'type': 'AtLocation', 'score': 0.011497259140014648, 'wm_score': 0.32213008, 'final': 0.10468710539801025}, {'fro': 'diet', 'to': 'books', 'type': 'AtLocation', 'score': 0.01093171164393425, 'wm_score': 0.32333112, 'final': 0.104651534150754}, {'fro': 'diet', 'to': 'bottle', 'type': 'AtLocation', 'score': 0.008740548975765705, 'wm_score': 0.3745804, 'final': 0.118492504283036}, {'fro': 'diet', 'to': 'kitchen', 'type': 'AtLocation', 'score': 0.007223449647426605, 'wm_score': 0.33716708, 'final': 0.10620653875319865}, {'fro': 'diet', 'to': 'water', 'type': 'AtLocation', 'score': 0.006091130897402763, 'wm_score': 0.36681274, 'final': 0.11430761362818197}, {'fro': 'diet', 'to': 'book', 'type': 'AtLocation', 'score': 0.004209625069051981, 'wm_score': 0.33739832, 'final': 0.10416623354833639}, {'fro': 'diet', 'to': 'blood', 'type': 'AtLocation', 'score': 0.003953404258936644, 'wm_score': 0.37299192, 'final': 0.11466495898125566}, {'fro': 'diet', 'to': 'menu', 'type': 'AtLocation', 'score': 0.0026654626708477736, 'wm_score': 0.49796003, 'final': 0.15125383286959346}, {'fro': 'diet', 'to': 'recipes', 'type': 'AtLocation', 'score': 0.002622900065034628, 'wm_score': 0.48966205, 'final': 0.14873464504552428}, {'fro': 'treat', 'to': 'diet', 'type': 'AtLocation', 'score': 0.0023884165566414595, 'wm_score': 0.4424938, 'final': 0.13442003158964905}, {'fro': 'cure', 'to': 'diet', 'type': 'AtLocation', 'score': 0.0004515598702710122, 'wm_score': 0.4031077, 'final': 0.12124840190918973}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

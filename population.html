@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">population</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "population"
+    let relations = [{'fro': 'philippines', 'to': 'population', 'type': 'HasA', 'score': 0.16452620923519135, 'wm_score': 0.344801, 'final': 0.21860864646463396}, {'fro': 'netherlands', 'to': 'population', 'type': 'HasA', 'score': 0.10002601146697998, 'wm_score': 0.3179174, 'final': 0.165393428026886}, {'fro': 'island', 'to': 'population', 'type': 'HasA', 'score': 0.039261553436517715, 'wm_score': 0.4436894, 'final': 0.16058990740556242}, {'fro': 'uk', 'to': 'population', 'type': 'HasA', 'score': 0.03563062846660614, 'wm_score': 0.32668638, 'final': 0.12294735392662431}, {'fro': 'country', 'to': 'population', 'type': 'HasA', 'score': 0.03273968771100044, 'wm_score': 0.585294, 'final': 0.19850598139770034}, {'fro': 'city', 'to': 'population', 'type': 'HasA', 'score': 0.029977139085531235, 'wm_score': 0.49352914, 'final': 0.16904273935987188}, {'fro': 'us', 'to': 'population', 'type': 'HasA', 'score': 0.02748607099056244, 'wm_score': 0.36958492, 'final': 0.13011572569339372}, {'fro': 'region', 'to': 'population', 'type': 'HasA', 'score': 0.025706546381115913, 'wm_score': 0.58820635, 'final': 0.19445648746678118}, {'fro': 'province', 'to': 'population', 'type': 'HasA', 'score': 0.022893046960234642, 'wm_score': 0.47140566, 'final': 0.15744683087216427}, {'fro': 'state', 'to': 'population', 'type': 'HasA', 'score': 0.01575862243771553, 'wm_score': 0.4801066, 'final': 0.1550630157064009}, {'fro': 'world', 'to': 'population', 'type': 'HasA', 'score': 0.012508421204984188, 'wm_score': 0.41216016, 'final': 0.13240394284348894}, {'fro': 'area', 'to': 'population', 'type': 'HasA', 'score': 0.011183226481080055, 'wm_score': 0.63061595, 'final': 0.19701304353675608}, {'fro': 'continent', 'to': 'population', 'type': 'HasA', 'score': 0.009856210090219975, 'wm_score': 0.47733927, 'final': 0.150101128063154}, {'fro': 'congo', 'to': 'population', 'type': 'HasA', 'score': 0.00946043711155653, 'wm_score': 0.3186025, 'final': 0.1022030559780896}, {'fro': 'county', 'to': 'population', 'type': 'HasA', 'score': 0.008929924108088017, 'wm_score': 0.427504, 'final': 0.13450214687566162}, {'fro': 'kingdom', 'to': 'population', 'type': 'HasA', 'score': 0.008017606101930141, 'wm_score': 0.42877042, 'final': 0.13424345027135112}, {'fro': 'eu', 'to': 'population', 'type': 'HasA', 'score': 0.007855328731238842, 'wm_score': 0.35522366, 'final': 0.1120658281118672}, {'fro': 'town', 'to': 'population', 'type': 'HasA', 'score': 0.006732501555234194, 'wm_score': 0.50142133, 'final': 0.15513915008866394}, {'fro': 'nation', 'to': 'population', 'type': 'HasA', 'score': 0.006537273526191711, 'wm_score': 0.52965784, 'final': 0.16347344346833426}, {'fro': 'village', 'to': 'population', 'type': 'HasA', 'score': 0.006285893265157938, 'wm_score': 0.54792124, 'final': 0.1687764972856106}, {'fro': 'caribbean', 'to': 'population', 'type': 'HasA', 'score': 0.006036575883626938, 'wm_score': 0.3355993, 'final': 0.10490539311853886}, {'fro': 'mediterranean', 'to': 'population', 'type': 'HasA', 'score': 0.005207045469433069, 'wm_score': 0.3403008, 'final': 0.10573517182860316}, {'fro': 'district', 'to': 'population', 'type': 'HasA', 'score': 0.004746660590171814, 'wm_score': 0.42667332, 'final': 0.1313246584131203}, {'fro': 'site', 'to': 'population', 'type': 'HasA', 'score': 0.004421522840857506, 'wm_score': 0.34677547, 'final': 0.10712770698860026}, {'fro': 'municipality', 'to': 'population', 'type': 'HasA', 'score': 0.0039158477447927, 'wm_score': 0.51572365, 'final': 0.15745818842135492}, {'fro': 'valley', 'to': 'population', 'type': 'HasA', 'score': 0.003347849939018488, 'wm_score': 0.36477786, 'final': 0.11177685295731296}, {'fro': 'territory', 'to': 'population', 'type': 'HasA', 'score': 0.0033196399454027414, 'wm_score': 0.53857493, 'final': 0.16389622696178194}, {'fro': 'capital', 'to': 'population', 'type': 'HasA', 'score': 0.0030543163884431124, 'wm_score': 0.44395095, 'final': 0.13532330647191018}, {'fro': 'republic', 'to': 'population', 'type': 'HasA', 'score': 0.0026436736807227135, 'wm_score': 0.37471557, 'final': 0.11426524257650592}, {'fro': 'population', 'to': 'majority', 'type': 'HasA', 'score': 0.036906853318214417, 'wm_score': 0.5577054, 'final': 0.19314641732275012}, {'fro': 'population', 'to': 'limit', 'type': 'HasA', 'score': 0.03680787235498428, 'wm_score': 0.3497547, 'final': 0.130691920648489}, {'fro': 'population', 'to': 'split', 'type': 'HasA', 'score': 0.03126448392868042, 'wm_score': 0.3828838, 'final': 0.1367502787500763}, {'fro': 'population', 'to': 'surplus', 'type': 'HasA', 'score': 0.030572356656193733, 'wm_score': 0.41791078, 'final': 0.1467738836593356}, {'fro': 'population', 'to': 'plurality', 'type': 'HasA', 'score': 0.029694687575101852, 'wm_score': 0.31131887, 'final': 0.11418194230257131}, {'fro': 'population', 'to': 'choice', 'type': 'HasA', 'score': 0.025391653180122375, 'wm_score': 0.30515707, 'final': 0.10932127822608567}, {'fro': 'population', 'to': 'problem', 'type': 'HasA', 'score': 0.024908825755119324, 'wm_score': 0.42426682, 'final': 0.14471622402858353}, {'fro': 'population', 'to': 'tendency', 'type': 'HasA', 'score': 0.015514399856328964, 'wm_score': 0.36374775, 'final': 0.11998440489943028}, {'fro': 'population', 'to': 'shortage', 'type': 'HasA', 'score': 0.012261517345905304, 'wm_score': 0.37550628, 'final': 0.12123494614213373}, {'fro': 'population', 'to': 'decline', 'type': 'HasA', 'score': 0.010293122380971909, 'wm_score': 0.542191, 'final': 0.16986248566668033}, {'fro': 'population', 'to': 'minority', 'type': 'HasA', 'score': 0.009933382272720337, 'wm_score': 0.53143096, 'final': 0.16638265559090426}, {'fro': 'population', 'to': 'breakdown', 'type': 'HasA', 'score': 0.009133676066994667, 'wm_score': 0.34608957, 'final': 0.11022044424689628}, {'fro': 'population', 'to': 'quota', 'type': 'HasA', 'score': 0.008476021699607372, 'wm_score': 0.34968972, 'final': 0.11084013118972517}, {'fro': 'population', 'to': 'deficit', 'type': 'HasA', 'score': 0.0079434709623456, 'wm_score': 0.41880563, 'final': 0.13120211867364193}, {'fro': 'population', 'to': 'crisis', 'type': 'HasA', 'score': 0.007236427627503872, 'wm_score': 0.40117738, 'final': 0.12541871333925272}, {'fro': 'population', 'to': 'preference', 'type': 'HasA', 'score': 0.006688505411148071, 'wm_score': 0.38848308, 'final': 0.12122687778780365}, {'fro': 'population', 'to': 'future', 'type': 'HasA', 'score': 0.005760487634688616, 'wm_score': 0.3329632, 'final': 0.10392130134428204}, {'fro': 'population', 'to': 'say', 'type': 'HasA', 'score': 0.00572814978659153, 'wm_score': 0.41554075, 'final': 0.1286719298506141}, {'fro': 'population', 'to': 'share', 'type': 'HasA', 'score': 0.005538485944271088, 'wm_score': 0.42141747, 'final': 0.1303021811609898}, {'fro': 'population', 'to': 'peak', 'type': 'HasA', 'score': 0.005403499584645033, 'wm_score': 0.38573357, 'final': 0.11950252070925155}, {'fro': 'population', 'to': 'target', 'type': 'HasA', 'score': 0.004890209995210171, 'wm_score': 0.4251414, 'final': 0.13096556699664713}, {'fro': 'population', 'to': 'shortfall', 'type': 'HasA', 'score': 0.0046356129460036755, 'wm_score': 0.35533363, 'final': 0.10984501806220259}, {'fro': 'population', 'to': 'change', 'type': 'HasA', 'score': 0.004396551754325628, 'wm_score': 0.41591984, 'final': 0.12785353822802795}, {'fro': 'population', 'to': 'rise', 'type': 'HasA', 'score': 0.004268560092896223, 'wm_score': 0.53595906, 'final': 0.1637757100650274}, {'fro': 'virus', 'to': 'population', 'type': 'AtLocation', 'score': 0.019372038543224335, 'wm_score': 0.37622246, 'final': 0.12642716498025705}, {'fro': 'change', 'to': 'population', 'type': 'AtLocation', 'score': 0.011523794382810593, 'wm_score': 0.41591984, 'final': 0.13284260806796744}, {'fro': 'minority', 'to': 'population', 'type': 'AtLocation', 'score': 0.011436918750405312, 'wm_score': 0.53143096, 'final': 0.16743513112528374}, {'fro': 'deer', 'to': 'population', 'type': 'AtLocation', 'score': 0.00952561292797327, 'wm_score': 0.3354072, 'final': 0.1072900890495813}, {'fro': 'bird', 'to': 'population', 'type': 'AtLocation', 'score': 0.00849109422415495, 'wm_score': 0.39069158, 'final': 0.12315123995690846}, {'fro': 'woman', 'to': 'population', 'type': 'AtLocation', 'score': 0.007774149067699909, 'wm_score': 0.37603265, 'final': 0.11825169934738995}, {'fro': 'sexual', 'to': 'population', 'type': 'AtLocation', 'score': 0.007628030609339476, 'wm_score': 0.32326704, 'final': 0.10231973342653765}, {'fro': 'male', 'to': 'population', 'type': 'AtLocation', 'score': 0.006173580419272184, 'wm_score': 0.50359005, 'final': 0.15539852129349058}, {'fro': 'gap', 'to': 'population', 'type': 'AtLocation', 'score': 0.005626289639621973, 'wm_score': 0.42243156, 'final': 0.1306678707477354}, {'fro': 'child', 'to': 'population', 'type': 'AtLocation', 'score': 0.005505346693098545, 'wm_score': 0.4333378, 'final': 0.133855082685169}, {'fro': 'difference', 'to': 'population', 'type': 'AtLocation', 'score': 0.005357698071748018, 'wm_score': 0.4020598, 'final': 0.12436832865022364}, {'fro': 'decrease', 'to': 'population', 'type': 'AtLocation', 'score': 0.00480355741456151, 'wm_score': 0.5659394, 'final': 0.17314431019019308}, {'fro': 'depression', 'to': 'population', 'type': 'AtLocation', 'score': 0.004768749233335257, 'wm_score': 0.33927226, 'final': 0.10511980246333469}, {'fro': 'population', 'to': 'foreground', 'type': 'AtLocation', 'score': 0.14661458134651184, 'wm_score': 0.09311891, 'final': 0.13056587994255828}, {'fro': 'population', 'to': 'background', 'type': 'AtLocation', 'score': 0.05088786780834198, 'wm_score': 0.31355265, 'final': 0.1296873024658394}, {'fro': 'population', 'to': 'wild', 'type': 'AtLocation', 'score': 0.03565460070967674, 'wm_score': 0.36650687, 'final': 0.13491028149677373}, {'fro': 'population', 'to': 'minority', 'type': 'AtLocation', 'score': 0.03438024967908859, 'wm_score': 0.53143096, 'final': 0.18349546277536205}, {'fro': 'population', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.015606080181896687, 'wm_score': 0.3872826, 'final': 0.12710903612732768}, {'fro': 'population', 'to': 'middle', 'type': 'AtLocation', 'score': 0.013027410954236984, 'wm_score': 0.456371, 'final': 0.14603048766796592}, {'fro': 'population', 'to': 'region', 'type': 'AtLocation', 'score': 0.011257159523665905, 'wm_score': 0.58820635, 'final': 0.18434191666656616}, {'fro': 'population', 'to': 'balance', 'type': 'AtLocation', 'score': 0.010687122121453285, 'wm_score': 0.34341908, 'final': 0.11050670948501731}, {'fro': 'population', 'to': 'philippines', 'type': 'AtLocation', 'score': 0.010152406990528107, 'wm_score': 0.344801, 'final': 0.1105469848933697}, {'fro': 'population', 'to': 'mix', 'type': 'AtLocation', 'score': 0.007398970425128937, 'wm_score': 0.3628436, 'final': 0.11403235929759027}, {'fro': 'population', 'to': 'zone', 'type': 'AtLocation', 'score': 0.00684579461812973, 'wm_score': 0.45632306, 'final': 0.14168897423269083}, {'fro': 'population', 'to': 'water', 'type': 'AtLocation', 'score': 0.00606729369610548, 'wm_score': 0.37725484, 'final': 0.11742355758727385}, {'fro': 'population', 'to': 'northeast', 'type': 'AtLocation', 'score': 0.005602085031569004, 'wm_score': 0.42084396, 'final': 0.1301746475220983}, {'fro': 'population', 'to': 'suburbs', 'type': 'AtLocation', 'score': 0.005349667277187109, 'wm_score': 0.4763308, 'final': 0.146644007094031}, {'fro': 'population', 'to': 'periphery', 'type': 'AtLocation', 'score': 0.005281954072415829, 'wm_score': 0.32766134, 'final': 0.1019957698506911}, {'fro': 'population', 'to': 'center', 'type': 'AtLocation', 'score': 0.004343689884990454, 'wm_score': 0.394145, 'final': 0.12128408291949334}, {'fro': 'population', 'to': 'centre', 'type': 'AtLocation', 'score': 0.004342919681221247, 'wm_score': 0.38974294, 'final': 0.11996292577685488}, {'fro': 'population', 'to': 'south', 'type': 'AtLocation', 'score': 0.004184279125183821, 'wm_score': 0.47117013, 'final': 0.1442800343876287}, {'fro': 'population', 'to': 'north', 'type': 'AtLocation', 'score': 0.003957400564104319, 'wm_score': 0.45746785, 'final': 0.14001053539487307}, {'fro': 'population', 'to': 'decline', 'type': 'AtLocation', 'score': 0.0038119228556752205, 'wm_score': 0.542191, 'final': 0.16532564599897265}, {'fro': 'population', 'to': 'neighbourhood', 'type': 'AtLocation', 'score': 0.003717637388035655, 'wm_score': 0.4647978, 'final': 0.142041686171625}, {'fro': 'population', 'to': 'mediterranean', 'type': 'AtLocation', 'score': 0.0036101231817156076, 'wm_score': 0.3403008, 'final': 0.10461732622720094}, {'fro': 'population', 'to': 'millions', 'type': 'AtLocation', 'score': 0.0035976474173367023, 'wm_score': 0.4014457, 'final': 0.12295206319213572}, {'fro': 'population', 'to': 'increase', 'type': 'HasA', 'score': 0.0027785052079707384, 'wm_score': 0.578551, 'final': 0.17551025364557954}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

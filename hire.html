@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">hire</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "hire"
+    let relations = [{'fro': 'team', 'to': 'hire', 'type': 'HasA', 'score': 0.029206465929746628, 'wm_score': 0.36794436, 'final': 0.13082783415082266}, {'fro': 'nfl', 'to': 'hire', 'type': 'HasA', 'score': 0.02428792044520378, 'wm_score': 0.3280458, 'final': 0.11541528431164266}, {'fro': 'company', 'to': 'hire', 'type': 'HasA', 'score': 0.014142462983727455, 'wm_score': 0.41590884, 'final': 0.13467237608860924}, {'fro': 'mayor', 'to': 'hire', 'type': 'HasA', 'score': 0.008799043484032154, 'wm_score': 0.3150874, 'final': 0.10068555043882253}, {'fro': 'coach', 'to': 'hire', 'type': 'HasA', 'score': 0.007974953390657902, 'wm_score': 0.38283962, 'final': 0.12043435337346055}, {'fro': 'boss', 'to': 'hire', 'type': 'HasA', 'score': 0.007337201852351427, 'wm_score': 0.4040476, 'final': 0.12635032129664603}, {'fro': 'firm', 'to': 'hire', 'type': 'HasA', 'score': 0.00648484705016017, 'wm_score': 0.38939106, 'final': 0.12135671093511213}, {'fro': 'agency', 'to': 'hire', 'type': 'HasA', 'score': 0.005957439541816711, 'wm_score': 0.3289499, 'final': 0.10285517767927173}, {'fro': 'manager', 'to': 'hire', 'type': 'HasA', 'score': 0.0053963144309818745, 'wm_score': 0.43960577, 'final': 0.13565915110168733}, {'fro': 'fbi', 'to': 'hire', 'type': 'HasA', 'score': 0.00536181079223752, 'wm_score': 0.36943126, 'final': 0.11458264555456626}, {'fro': 'ceo', 'to': 'hire', 'type': 'HasA', 'score': 0.004461218137294054, 'wm_score': 0.35678926, 'final': 0.11015963069610585}, {'fro': 'department', 'to': 'hire', 'type': 'HasA', 'score': 0.00430287467315793, 'wm_score': 0.3756492, 'final': 0.11570677227121057}, {'fro': 'hire', 'to': 'downside', 'type': 'HasA', 'score': 0.18779125809669495, 'wm_score': 0.060891308, 'final': 0.14972127306768646}, {'fro': 'hire', 'to': 'lawyer', 'type': 'HasA', 'score': 0.02193276584148407, 'wm_score': 0.3776577, 'final': 0.12865024608903886}, {'fro': 'hire', 'to': 'future', 'type': 'HasA', 'score': 0.016078677028417587, 'wm_score': 0.37475312, 'final': 0.12368100991989232}, {'fro': 'hire', 'to': 'chance', 'type': 'HasA', 'score': 0.007418807130306959, 'wm_score': 0.35717642, 'final': 0.11234609099121488}, {'fro': 'hire', 'to': 'potential', 'type': 'HasA', 'score': 0.006993079092353582, 'wm_score': 0.33611724, 'final': 0.10573032736464752}, {'fro': 'hire', 'to': 'cost', 'type': 'HasA', 'score': 0.006933783646672964, 'wm_score': 0.46944433, 'final': 0.1456869475526711}, {'fro': 'hire', 'to': 'sponsor', 'type': 'HasA', 'score': 0.0068536303006112576, 'wm_score': 0.3964898, 'final': 0.1237444812104279}, {'fro': 'hire', 'to': 'reason', 'type': 'HasA', 'score': 0.004784294404089451, 'wm_score': 0.37412614, 'final': 0.11558684808286264}, {'fro': 'buyer', 'to': 'hire', 'type': 'AtLocation', 'score': 0.020528746768832207, 'wm_score': 0.41692513, 'final': 0.13944766173818257}, {'fro': 'replacement', 'to': 'hire', 'type': 'AtLocation', 'score': 0.015960033982992172, 'wm_score': 0.40074047, 'final': 0.13139416478809454}, {'fro': 'veteran', 'to': 'hire', 'type': 'AtLocation', 'score': 0.011063913814723492, 'wm_score': 0.3738472, 'final': 0.11989889967030647}, {'fro': 'change', 'to': 'hire', 'type': 'AtLocation', 'score': 0.010137145407497883, 'wm_score': 0.3558123, 'final': 0.11383969178524855}, {'fro': 'contract', 'to': 'hire', 'type': 'AtLocation', 'score': 0.009246467612683773, 'wm_score': 0.37649179, 'final': 0.11942006432887865}, {'fro': 'fit', 'to': 'hire', 'type': 'AtLocation', 'score': 0.00849380437284708, 'wm_score': 0.3471435, 'final': 0.11008871306099297}, {'fro': 'lawyer', 'to': 'hire', 'type': 'AtLocation', 'score': 0.008361761458218098, 'wm_score': 0.3776577, 'final': 0.11915054302075268}, {'fro': 'lot', 'to': 'hire', 'type': 'AtLocation', 'score': 0.00713278679177165, 'wm_score': 0.3973177, 'final': 0.12418826075424017}, {'fro': 'consultant', 'to': 'hire', 'type': 'AtLocation', 'score': 0.006253663916140795, 'wm_score': 0.42206028, 'final': 0.13099564874129857}, {'fro': 'coach', 'to': 'hire', 'type': 'AtLocation', 'score': 0.005531769711524248, 'wm_score': 0.38283962, 'final': 0.11872412479806699}, {'fro': 'deal', 'to': 'hire', 'type': 'AtLocation', 'score': 0.004840487148612738, 'wm_score': 0.37782994, 'final': 0.11673732300402893}, {'fro': 'partner', 'to': 'hire', 'type': 'AtLocation', 'score': 0.0047489008866250515, 'wm_score': 0.35800952, 'final': 0.11072708662063756}, {'fro': 'manager', 'to': 'hire', 'type': 'AtLocation', 'score': 0.004627276677638292, 'wm_score': 0.43960577, 'final': 0.13512082467434683}, {'fro': 'mentor', 'to': 'hire', 'type': 'AtLocation', 'score': 0.004286348354071379, 'wm_score': 0.348109, 'final': 0.10743314384784998}, {'fro': 'proposal', 'to': 'hire', 'type': 'AtLocation', 'score': 0.00422900402918458, 'wm_score': 0.32622164, 'final': 0.10082679482042922}, {'fro': 'bid', 'to': 'hire', 'type': 'AtLocation', 'score': 0.004151366651058197, 'wm_score': 0.33182615, 'final': 0.10245380165574075}, {'fro': 'friend', 'to': 'hire', 'type': 'AtLocation', 'score': 0.003994291182607412, 'wm_score': 0.33120862, 'final': 0.1021585898278252}, {'fro': 'supervisor', 'to': 'hire', 'type': 'AtLocation', 'score': 0.003939418587833643, 'wm_score': 0.32505804, 'final': 0.10027500501148356}, {'fro': 'hire', 'to': 'works', 'type': 'AtLocation', 'score': 0.5837180018424988, 'wm_score': 0.32770014, 'final': 0.5069126432897492}, {'fro': 'hire', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.34091702103614807, 'wm_score': 0.11257322, 'final': 0.27241388072530365}, {'fro': 'hire', 'to': 'cards', 'type': 'AtLocation', 'score': 0.04579215124249458, 'wm_score': 0.2773175, 'final': 0.11524975586974623}, {'fro': 'hire', 'to': 'making', 'type': 'AtLocation', 'score': 0.0026370291598141193, 'wm_score': 0.39974317, 'final': 0.1217688714118699}, {'fro': 'hire', 'to': 'running', 'type': 'AtLocation', 'score': 0.0019236496882513165, 'wm_score': 0.3381394, 'final': 0.10278837478177592}, {'fro': 'hire', 'to': 'planning', 'type': 'AtLocation', 'score': 0.00013158754154574126, 'wm_score': 0.47058776, 'final': 0.14126843927908203}, {'fro': 'hire', 'to': 'way', 'type': 'AtLocation', 'score': 0.00012071696255588904, 'wm_score': 0.39534035, 'final': 0.11868660687378914}, {'fro': 'hire', 'to': 'future', 'type': 'AtLocation', 'score': 0.00011466230353107676, 'wm_score': 0.37475312, 'final': 0.11250619961247177}, {'fro': 'hire', 'to': 'work', 'type': 'AtLocation', 'score': 7.731273217359558e-05, 'wm_score': 0.5012376, 'final': 0.15042539891252152}, {'fro': 'hire', 'to': 'plan', 'type': 'AtLocation', 'score': 7.493006705772132e-05, 'wm_score': 0.45895088, 'final': 0.13773771504694043}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

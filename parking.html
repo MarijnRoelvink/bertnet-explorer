@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">parking</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "parking"
+    let relations = [{'fro': 'building', 'to': 'parking', 'type': 'HasA', 'score': 0.03006860613822937, 'wm_score': 0.5641371, 'final': 0.19028915429676058}, {'fro': 'mall', 'to': 'parking', 'type': 'HasA', 'score': 0.026494638994336128, 'wm_score': 0.6417612, 'final': 0.21107460729603533}, {'fro': 'park', 'to': 'parking', 'type': 'HasA', 'score': 0.017055727541446686, 'wm_score': 0.52047455, 'final': 0.16808137427901268}, {'fro': 'airport', 'to': 'parking', 'type': 'HasA', 'score': 0.014132603071630001, 'wm_score': 0.60364115, 'final': 0.19098516715014102}, {'fro': 'gym', 'to': 'parking', 'type': 'HasA', 'score': 0.012274157255887985, 'wm_score': 0.50733405, 'final': 0.1607921250791216}, {'fro': 'restaurant', 'to': 'parking', 'type': 'HasA', 'score': 0.012172926217317581, 'wm_score': 0.51429045, 'final': 0.16280818335212233}, {'fro': 'garage', 'to': 'parking', 'type': 'HasA', 'score': 0.012099016457796097, 'wm_score': 0.6580008, 'final': 0.2058695515204573}, {'fro': 'library', 'to': 'parking', 'type': 'HasA', 'score': 0.011077795177698135, 'wm_score': 0.34404618, 'final': 0.11096831062438871}, {'fro': 'site', 'to': 'parking', 'type': 'HasA', 'score': 0.009641891345381737, 'wm_score': 0.5197249, 'final': 0.16266679394176725}, {'fro': 'hotel', 'to': 'parking', 'type': 'HasA', 'score': 0.00937904417514801, 'wm_score': 0.60154116, 'final': 0.18702767892260364}, {'fro': 'stadium', 'to': 'parking', 'type': 'HasA', 'score': 0.007990481331944466, 'wm_score': 0.4641071, 'final': 0.14482546693236115}, {'fro': 'store', 'to': 'parking', 'type': 'HasA', 'score': 0.007312694098800421, 'wm_score': 0.57845986, 'final': 0.17865684386916034}, {'fro': 'cafe', 'to': 'parking', 'type': 'HasA', 'score': 0.007070309016853571, 'wm_score': 0.4869477, 'final': 0.15103352631179753}, {'fro': 'gallery', 'to': 'parking', 'type': 'HasA', 'score': 0.006963309831917286, 'wm_score': 0.3467757, 'final': 0.10890702688234213}, {'fro': 'museum', 'to': 'parking', 'type': 'HasA', 'score': 0.0066583347506821156, 'wm_score': 0.35159582, 'final': 0.11013958032547749}, {'fro': 'street', 'to': 'parking', 'type': 'HasA', 'score': 0.006445717066526413, 'wm_score': 0.4694818, 'final': 0.1453565419465685}, {'fro': 'supermarket', 'to': 'parking', 'type': 'HasA', 'score': 0.0061482591554522514, 'wm_score': 0.37458158, 'final': 0.1166782554088166}, {'fro': 'roof', 'to': 'parking', 'type': 'HasA', 'score': 0.005817991215735674, 'wm_score': 0.5204179, 'final': 0.16019796385101498}, {'fro': 'venue', 'to': 'parking', 'type': 'HasA', 'score': 0.005771047435700893, 'wm_score': 0.47849607, 'final': 0.14758855420499065}, {'fro': 'car', 'to': 'parking', 'type': 'HasA', 'score': 0.005752101540565491, 'wm_score': 0.59901774, 'final': 0.18373179307839588}, {'fro': 'city', 'to': 'parking', 'type': 'HasA', 'score': 0.005277796182781458, 'wm_score': 0.47261688, 'final': 0.14547952132794703}, {'fro': 'facility', 'to': 'parking', 'type': 'HasA', 'score': 0.005162155721336603, 'wm_score': 0.5268104, 'final': 0.16165662900493566}, {'fro': 'property', 'to': 'parking', 'type': 'HasA', 'score': 0.005147441755980253, 'wm_score': 0.46944866, 'final': 0.1444378072291862}, {'fro': 'pub', 'to': 'parking', 'type': 'HasA', 'score': 0.00506254006177187, 'wm_score': 0.39169255, 'final': 0.12105154304324033}, {'fro': 'streetcar', 'to': 'parking', 'type': 'HasA', 'score': 0.004663385450839996, 'wm_score': 0.3479184, 'final': 0.10763988981558803}, {'fro': 'bridge', 'to': 'parking', 'type': 'HasA', 'score': 0.004641438368707895, 'wm_score': 0.46956548, 'final': 0.14411865085809555}, {'fro': 'school', 'to': 'parking', 'type': 'HasA', 'score': 0.0043855165131390095, 'wm_score': 0.3885835, 'final': 0.11964491155919733}, {'fro': 'station', 'to': 'parking', 'type': 'HasA', 'score': 0.004351106006652117, 'wm_score': 0.53788495, 'final': 0.16441125920465652}, {'fro': 'bus', 'to': 'parking', 'type': 'HasA', 'score': 0.004187461454421282, 'wm_score': 0.6215036, 'final': 0.18938230301809494}, {'fro': 'bathroom', 'to': 'parking', 'type': 'HasA', 'score': 0.004059736151248217, 'wm_score': 0.49149883, 'final': 0.15029146430587376}, {'fro': 'house', 'to': 'parking', 'type': 'HasA', 'score': 0.004018529783934355, 'wm_score': 0.39407104, 'final': 0.12103428284875406}, {'fro': 'toilet', 'to': 'parking', 'type': 'HasA', 'score': 0.003988123964518309, 'wm_score': 0.383035, 'final': 0.11770218677516284}, {'fro': 'hospital', 'to': 'parking', 'type': 'HasA', 'score': 0.003984071779996157, 'wm_score': 0.37494576, 'final': 0.11527257824599733}, {'fro': 'basement', 'to': 'parking', 'type': 'HasA', 'score': 0.003937792964279652, 'wm_score': 0.48873067, 'final': 0.14937565607499576}, {'fro': 'parking', 'to': 'problem', 'type': 'HasA', 'score': 0.0647546723484993, 'wm_score': 0.35706177, 'final': 0.15244680164394953}, {'fro': 'parking', 'to': 'limit', 'type': 'HasA', 'score': 0.04241679981350899, 'wm_score': 0.3966027, 'final': 0.1486725698694563}, {'fro': 'parking', 'to': 'ceiling', 'type': 'HasA', 'score': 0.02516186609864235, 'wm_score': 0.41961437, 'final': 0.14349761726904967}, {'fro': 'parking', 'to': 'lock', 'type': 'HasA', 'score': 0.014115214347839355, 'wm_score': 0.33684117, 'final': 0.11093300104348758}, {'fro': 'parking', 'to': 'priority', 'type': 'HasA', 'score': 0.012053628452122211, 'wm_score': 0.31114358, 'final': 0.10178061391648556}, {'fro': 'parking', 'to': 'roof', 'type': 'HasA', 'score': 0.010345147922635078, 'wm_score': 0.5204179, 'final': 0.16336697354584456}, {'fro': 'parking', 'to': 'lot', 'type': 'HasA', 'score': 0.010301739908754826, 'wm_score': 0.50234014, 'final': 0.15791325993612843}, {'fro': 'parking', 'to': 'permit', 'type': 'HasA', 'score': 0.009326864965260029, 'wm_score': 0.4657326, 'final': 0.14624858547568204}, {'fro': 'parking', 'to': 'purpose', 'type': 'HasA', 'score': 0.008147862739861012, 'wm_score': 0.3592896, 'final': 0.11349038391790273}, {'fro': 'parking', 'to': 'stall', 'type': 'HasA', 'score': 0.006685982458293438, 'wm_score': 0.37309766, 'final': 0.11660948572080541}, {'fro': 'parking', 'to': 'floor', 'type': 'HasA', 'score': 0.005976677872240543, 'wm_score': 0.5744362, 'final': 0.1765145345105684}, {'fro': 'parking', 'to': 'bar', 'type': 'HasA', 'score': 0.005858825985342264, 'wm_score': 0.49980113, 'final': 0.1540415171897396}, {'fro': 'parking', 'to': 'wall', 'type': 'HasA', 'score': 0.005717318970710039, 'wm_score': 0.36771834, 'final': 0.11431762527949704}, {'fro': 'parking', 'to': 'view', 'type': 'HasA', 'score': 0.00522986613214016, 'wm_score': 0.345431, 'final': 0.10729020629249812}, {'fro': 'parking', 'to': 'vacancy', 'type': 'HasA', 'score': 0.005101657472550869, 'wm_score': 0.3466081, 'final': 0.10755359023078562}, {'fro': 'parking', 'to': 'camera', 'type': 'HasA', 'score': 0.004955151583999395, 'wm_score': 0.3687343, 'final': 0.1140888961087996}, {'fro': 'parking', 'to': 'balcony', 'type': 'HasA', 'score': 0.004775900859385729, 'wm_score': 0.4500318, 'final': 0.13835267060157003}, {'fro': 'parking', 'to': 'fee', 'type': 'HasA', 'score': 0.004370162729173899, 'wm_score': 0.4232369, 'final': 0.13003018391042176}, {'fro': 'parking', 'to': 'fence', 'type': 'HasA', 'score': 0.0038601511623710394, 'wm_score': 0.5437223, 'final': 0.16581879581365974}, {'fro': 'parking', 'to': 'lift', 'type': 'HasA', 'score': 0.0037392249796539545, 'wm_score': 0.34125638, 'final': 0.1049943714857578}, {'fro': 'car', 'to': 'parking', 'type': 'AtLocation', 'score': 0.038412850350141525, 'wm_score': 0.59901774, 'final': 0.20659431724509908}, {'fro': 'bike', 'to': 'parking', 'type': 'AtLocation', 'score': 0.01669936813414097, 'wm_score': 0.547572, 'final': 0.1759611576938987}, {'fro': 'tree', 'to': 'parking', 'type': 'AtLocation', 'score': 0.01394349243491888, 'wm_score': 0.32124352, 'final': 0.10613350070444323}, {'fro': 'sign', 'to': 'parking', 'type': 'AtLocation', 'score': 0.01219763420522213, 'wm_score': 0.3301556, 'final': 0.1075850239436555}, {'fro': 'truck', 'to': 'parking', 'type': 'AtLocation', 'score': 0.010226759128272533, 'wm_score': 0.564276, 'final': 0.17644153138979082}, {'fro': 'sticker', 'to': 'parking', 'type': 'AtLocation', 'score': 0.00994793139398098, 'wm_score': 0.38934702, 'final': 0.1237676579757867}, {'fro': 'wheelchair', 'to': 'parking', 'type': 'AtLocation', 'score': 0.009831340052187443, 'wm_score': 0.40468994, 'final': 0.12828892003653122}, {'fro': 'vehicle', 'to': 'parking', 'type': 'AtLocation', 'score': 0.009062964469194412, 'wm_score': 0.55562603, 'final': 0.17303188412843612}, {'fro': 'motorcycle', 'to': 'parking', 'type': 'AtLocation', 'score': 0.008941546082496643, 'wm_score': 0.35099092, 'final': 0.11155635825774766}, {'fro': 'bicycle', 'to': 'parking', 'type': 'AtLocation', 'score': 0.008926907554268837, 'wm_score': 0.5387248, 'final': 0.16786627528798823}, {'fro': 'camera', 'to': 'parking', 'type': 'AtLocation', 'score': 0.006042339373379946, 'wm_score': 0.3687343, 'final': 0.11484992756136599}, {'fro': 'jeep', 'to': 'parking', 'type': 'AtLocation', 'score': 0.006017853040248156, 'wm_score': 0.39646396, 'final': 0.12315168512817372}, {'fro': 'tire', 'to': 'parking', 'type': 'AtLocation', 'score': 0.005885180551558733, 'wm_score': 0.35862738, 'final': 0.11170784038609113}, {'fro': 'tractor', 'to': 'parking', 'type': 'AtLocation', 'score': 0.005594553425908089, 'wm_score': 0.36106563, 'final': 0.11223587639813569}, {'fro': 'bomb', 'to': 'parking', 'type': 'AtLocation', 'score': 0.0052016787230968475, 'wm_score': 0.38681787, 'final': 0.1196865361061678}, {'fro': 'parking', 'to': 'works', 'type': 'AtLocation', 'score': 0.20094311237335205, 'wm_score': 0.2552035, 'final': 0.21722122866134644}, {'fro': 'parking', 'to': 'air', 'type': 'AtLocation', 'score': 0.06498073041439056, 'wm_score': 0.40083596, 'final': 0.16573729929007341}, {'fro': 'parking', 'to': 'garage', 'type': 'AtLocation', 'score': 0.04284540191292763, 'wm_score': 0.6580008, 'final': 0.22739202133904937}, {'fro': 'parking', 'to': 'shade', 'type': 'AtLocation', 'score': 0.03477969020605087, 'wm_score': 0.29246342, 'final': 0.11208480914423562}, {'fro': 'parking', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.030900878831744194, 'wm_score': 0.5781931, 'final': 0.19508854518222096}, {'fro': 'parking', 'to': 'distance', 'type': 'AtLocation', 'score': 0.027791107073426247, 'wm_score': 0.4596092, 'final': 0.15733653495139838}, {'fro': 'parking', 'to': 'way', 'type': 'AtLocation', 'score': 0.023303750902414322, 'wm_score': 0.38673112, 'final': 0.13233196163169003}, {'fro': 'parking', 'to': 'street', 'type': 'AtLocation', 'score': 0.012593269348144531, 'wm_score': 0.4694818, 'final': 0.1496598285437012}, {'fro': 'parking', 'to': 'park', 'type': 'AtLocation', 'score': 0.011785599403083324, 'wm_score': 0.52047455, 'final': 0.16439228458215832}, {'fro': 'parking', 'to': 'open', 'type': 'AtLocation', 'score': 0.010895740240812302, 'wm_score': 0.4429201, 'final': 0.14050304816856862}, {'fro': 'parking', 'to': 'zone', 'type': 'AtLocation', 'score': 0.010598227381706238, 'wm_score': 0.38813555, 'final': 0.12385942416719438}, {'fro': 'parking', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.008794328197836876, 'wm_score': 0.45312795, 'final': 0.14209441473848583}, {'fro': 'parking', 'to': 'neighborhood', 'type': 'AtLocation', 'score': 0.00861568097025156, 'wm_score': 0.5518603, 'final': 0.17158906667917612}, {'fro': 'parking', 'to': 'corner', 'type': 'AtLocation', 'score': 0.008100664243102074, 'wm_score': 0.48736337, 'final': 0.15187947597017148}, {'fro': 'parking', 'to': 'area', 'type': 'AtLocation', 'score': 0.008090117946267128, 'wm_score': 0.55124253, 'final': 0.17103584156238702}, {'fro': 'parking', 'to': 'window', 'type': 'AtLocation', 'score': 0.007904904894530773, 'wm_score': 0.5874217, 'final': 0.18175994342617158}, {'fro': 'parking', 'to': 'making', 'type': 'AtLocation', 'score': 0.007752475328743458, 'wm_score': 0.34384605, 'final': 0.10858054773012045}, {'fro': 'parking', 'to': 'rear', 'type': 'AtLocation', 'score': 0.005810008384287357, 'wm_score': 0.4607961, 'final': 0.14230583586900117}, {'fro': 'parking', 'to': 'queue', 'type': 'AtLocation', 'score': 0.005772408097982407, 'wm_score': 0.42020568, 'final': 0.1301023896685877}, {'fro': 'parking', 'to': 'yard', 'type': 'AtLocation', 'score': 0.0056383623741567135, 'wm_score': 0.50934523, 'final': 0.15675042266190972}, {'fro': 'parking', 'to': 'building', 'type': 'AtLocation', 'score': 0.005464309826493263, 'wm_score': 0.5641371, 'final': 0.1730661468785453}, {'fro': 'parking', 'to': 'water', 'type': 'AtLocation', 'score': 0.0053928205743432045, 'wm_score': 0.4351868, 'final': 0.13433101440204026}, {'fro': 'parking', 'to': 'cards', 'type': 'AtLocation', 'score': 0.005133796948939562, 'wm_score': 0.44021124, 'final': 0.1356570298642577}, {'fro': 'parking', 'to': 'basement', 'type': 'AtLocation', 'score': 0.0049067032523453236, 'wm_score': 0.48873067, 'final': 0.15005389327664173}, {'fro': 'parking', 'to': 'bag', 'type': 'AtLocation', 'score': 0.0047338614240288734, 'wm_score': 0.45618224, 'final': 0.14016837499682025}, {'fro': 'parking', 'to': 'ballpark', 'type': 'AtLocation', 'score': 0.004443787038326263, 'wm_score': 0.4379777, 'final': 0.13450396092682843}, {'fro': 'parking', 'to': 'trunk', 'type': 'AtLocation', 'score': 0.004409255925565958, 'wm_score': 0.4506882, 'final': 0.1382929391478962}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">comet</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "comet"
+    let relations = [{'fro': 'comet', 'to': 'atmosphere', 'type': 'AtLocation', 'score': 0.037798818200826645, 'wm_score': 0.3318842, 'final': 0.12602443274057867}, {'fro': 'comet', 'to': 'light', 'type': 'AtLocation', 'score': 0.03972642868757248, 'wm_score': 0.28737172, 'final': 0.11402001608130075}, {'fro': 'comet', 'to': 'space', 'type': 'AtLocation', 'score': 0.011601804755628109, 'wm_score': 0.32647365, 'final': 0.10606335832893969}, {'fro': 'comet', 'to': 'earth', 'type': 'HasA', 'score': 0.0025230187457054853, 'wm_score': 0.54017484, 'final': 0.1638185651219939}, {'fro': 'comet', 'to': 'earth', 'type': 'AtLocation', 'score': 0.01834278181195259, 'wm_score': 0.54017484, 'final': 0.17489239926836686}, {'fro': 'comet', 'to': 'sky', 'type': 'HasA', 'score': 0.007183126639574766, 'wm_score': 0.3761083, 'final': 0.11786067864770236}, {'fro': 'comet', 'to': 'sky', 'type': 'AtLocation', 'score': 0.11502207070589066, 'wm_score': 0.3761083, 'final': 0.1933479394941235}, {'fro': 'comet', 'to': 'path', 'type': 'AtLocation', 'score': 0.019371936097741127, 'wm_score': 0.29810777, 'final': 0.1029926862684188}, {'fro': 'comet', 'to': 'dust', 'type': 'AtLocation', 'score': 0.010475367307662964, 'wm_score': 0.466407, 'final': 0.1472548571153641}, {'fro': 'comet', 'to': 'moon', 'type': 'HasA', 'score': 0.0019498510519042611, 'wm_score': 0.4598729, 'final': 0.13932676573633299}, {'fro': 'moon', 'to': 'comet', 'type': 'HasA', 'score': 0.0036693562287837267, 'wm_score': 0.4598729, 'final': 0.14053041936014862}, {'fro': 'comet', 'to': 'moon', 'type': 'AtLocation', 'score': 0.12451183050870895, 'wm_score': 0.4598729, 'final': 0.22512015135609628}, {'fro': 'comet', 'to': 'planet', 'type': 'AtLocation', 'score': 0.05114321783185005, 'wm_score': 0.5395174, 'final': 0.19765547248229506}, {'fro': 'comet', 'to': 'universe', 'type': 'AtLocation', 'score': 0.007723431568592787, 'wm_score': 0.38258237, 'final': 0.12018111309801496}, {'fro': 'comet', 'to': 'titanic', 'type': 'AtLocation', 'score': 0.008629081770777702, 'wm_score': 0.40666354, 'final': 0.1280394192395444}, {'fro': 'comet', 'to': 'clouds', 'type': 'AtLocation', 'score': 0.12846027314662933, 'wm_score': 0.42878264, 'final': 0.21855698320264055}, {'fro': 'comet', 'to': 'resonance', 'type': 'AtLocation', 'score': 0.01840154081583023, 'wm_score': 0.32097086, 'final': 0.10917233657108118}, {'fro': 'comet', 'to': 'galaxy', 'type': 'AtLocation', 'score': 0.10261479020118713, 'wm_score': 0.48620707, 'final': 0.21769247414083104}, {'fro': 'comet', 'to': 'observatory', 'type': 'HasA', 'score': 0.0085071986541152, 'wm_score': 0.3758341, 'final': 0.11870526905788066}, {'fro': 'comet', 'to': 'observatory', 'type': 'AtLocation', 'score': 0.03658793494105339, 'wm_score': 0.3758341, 'final': 0.1383617844587374}, {'fro': 'comet', 'to': 'crater', 'type': 'HasA', 'score': 0.010740911588072777, 'wm_score': 0.5205585, 'final': 0.16368618811165098}, {'fro': 'earth', 'to': 'comet', 'type': 'HasA', 'score': 0.12153557687997818, 'wm_score': 0.54017484, 'final': 0.24712735581598477}, {'fro': 'sun', 'to': 'comet', 'type': 'HasA', 'score': 0.0756927952170372, 'wm_score': 0.26763016, 'final': 0.13327400465192607}, {'fro': 'planet', 'to': 'comet', 'type': 'HasA', 'score': 0.023966079577803612, 'wm_score': 0.5395174, 'final': 0.17863147570446256}, {'fro': 'asteroid', 'to': 'comet', 'type': 'HasA', 'score': 0.01966029964387417, 'wm_score': 0.6926371, 'final': 0.22155333975071195}, {'fro': 'arctic', 'to': 'comet', 'type': 'HasA', 'score': 0.01921701617538929, 'wm_score': 0.32670566, 'final': 0.11146360932277252}, {'fro': 'universe', 'to': 'comet', 'type': 'HasA', 'score': 0.01288633607327938, 'wm_score': 0.38258237, 'final': 0.12379514625129558}, {'fro': 'sky', 'to': 'comet', 'type': 'HasA', 'score': 0.007109449245035648, 'wm_score': 0.3761083, 'final': 0.11780910447152497}, {'fro': 'galaxy', 'to': 'comet', 'type': 'HasA', 'score': 0.003376570763066411, 'wm_score': 0.48620707, 'final': 0.14822572053414654}, {'fro': 'ocean', 'to': 'comet', 'type': 'HasA', 'score': 0.002799451816827059, 'wm_score': 0.36238697, 'final': 0.11067570727177896}, {'fro': 'cosmos', 'to': 'comet', 'type': 'HasA', 'score': 0.0022236360237002373, 'wm_score': 0.34344012, 'final': 0.10458858121659019}, {'fro': 'rover', 'to': 'comet', 'type': 'HasA', 'score': 0.0013587578432634473, 'wm_score': 0.43139896, 'final': 0.13037081849028442}, {'fro': 'comet', 'to': 'nucleus', 'type': 'HasA', 'score': 0.1191367357969284, 'wm_score': 0.38072243, 'final': 0.1976124440578499}, {'fro': 'comet', 'to': 'tail', 'type': 'HasA', 'score': 0.06065760552883148, 'wm_score': 0.47939104, 'final': 0.18627763587018206}, {'fro': 'comet', 'to': 'path', 'type': 'HasA', 'score': 0.031193679198622704, 'wm_score': 0.29810777, 'final': 0.1112679064390359}, {'fro': 'comet', 'to': 'companion', 'type': 'HasA', 'score': 0.008984009735286236, 'wm_score': 0.35051617, 'final': 0.11144365781470039}, {'fro': 'comet', 'to': 'trajectory', 'type': 'HasA', 'score': 0.007000484969466925, 'wm_score': 0.43721184, 'final': 0.13606389147862685}, {'fro': 'comet', 'to': 'resonance', 'type': 'HasA', 'score': 0.005324489902704954, 'wm_score': 0.32097086, 'final': 0.10001840093189349}, {'fro': 'crater', 'to': 'comet', 'type': 'AtLocation', 'score': 0.03465462476015091, 'wm_score': 0.5205585, 'final': 0.18042578733210568}, {'fro': 'meteor', 'to': 'comet', 'type': 'AtLocation', 'score': 0.030567582696676254, 'wm_score': 0.5959779, 'final': 0.2001906778876734}, {'fro': 'nucleus', 'to': 'comet', 'type': 'AtLocation', 'score': 0.02959989197552204, 'wm_score': 0.38072243, 'final': 0.13493665338286545}, {'fro': 'hole', 'to': 'comet', 'type': 'AtLocation', 'score': 0.015910757705569267, 'wm_score': 0.30114484, 'final': 0.10148098239389851}, {'fro': 'neutron', 'to': 'comet', 'type': 'AtLocation', 'score': 0.013228576630353928, 'wm_score': 0.40039307, 'final': 0.12937792464124775}, {'fro': 'photon', 'to': 'comet', 'type': 'AtLocation', 'score': 0.00814830418676138, 'wm_score': 0.4206491, 'final': 0.13189854293073297}, {'fro': 'fireball', 'to': 'comet', 'type': 'AtLocation', 'score': 0.007523153442889452, 'wm_score': 0.4172095, 'final': 0.13042905741002264}, {'fro': 'cloud', 'to': 'comet', 'type': 'AtLocation', 'score': 0.006054803263396025, 'wm_score': 0.3879899, 'final': 0.12063533228437723}, {'fro': 'rocket', 'to': 'comet', 'type': 'AtLocation', 'score': 0.0047952644526958466, 'wm_score': 0.35989714, 'final': 0.11132582711688711}, {'fro': 'probe', 'to': 'comet', 'type': 'AtLocation', 'score': 0.004694517236202955, 'wm_score': 0.3789248, 'final': 0.11696360206534209}, {'fro': 'telescope', 'to': 'comet', 'type': 'AtLocation', 'score': 0.004518407862633467, 'wm_score': 0.48111713, 'final': 0.14749802450384344}, {'fro': 'particle', 'to': 'comet', 'type': 'AtLocation', 'score': 0.004222775809466839, 'wm_score': 0.42543408, 'final': 0.1305861670666268}, {'fro': 'spacecraft', 'to': 'comet', 'type': 'AtLocation', 'score': 0.004075910896062851, 'wm_score': 0.6324098, 'final': 0.19257607762724402}, {'fro': 'planet', 'to': 'comet', 'type': 'AtLocation', 'score': 0.0025732177309691906, 'wm_score': 0.5395174, 'final': 0.16365647241167847}, {'fro': 'ghost', 'to': 'comet', 'type': 'AtLocation', 'score': 0.0025446165818721056, 'wm_score': 0.33203, 'final': 0.10139023160731049}, {'fro': 'spaceship', 'to': 'comet', 'type': 'AtLocation', 'score': 0.0023176069371402264, 'wm_score': 0.5602405, 'final': 0.1696944748559982}, {'fro': 'fragment', 'to': 'comet', 'type': 'AtLocation', 'score': 0.002235507359728217, 'wm_score': 0.4337436, 'final': 0.1316879351518098}, {'fro': 'dinosaur', 'to': 'comet', 'type': 'AtLocation', 'score': 0.002208616118878126, 'wm_score': 0.41388077, 'final': 0.12571026228321472}, {'fro': 'galaxy', 'to': 'comet', 'type': 'AtLocation', 'score': 0.0020801618229597807, 'wm_score': 0.48620707, 'final': 0.14731823427607188}, {'fro': 'rover', 'to': 'comet', 'type': 'AtLocation', 'score': 0.0019766362383961678, 'wm_score': 0.43139896, 'final': 0.13080333336687733}, {'fro': 'comet', 'to': 'foreground', 'type': 'AtLocation', 'score': 0.23295925557613373, 'wm_score': 0.19228256, 'final': 0.2207562469032936}, {'fro': 'comet', 'to': 'air', 'type': 'AtLocation', 'score': 0.10158521682024002, 'wm_score': 0.19802114, 'final': 0.130515993774168}, {'fro': 'comet', 'to': 'horizon', 'type': 'AtLocation', 'score': 0.0065896655432879925, 'wm_score': 0.4042439, 'final': 0.1258859358803016}, {'fro': 'comet', 'to': 'heavens', 'type': 'AtLocation', 'score': 0.004575170576572418, 'wm_score': 0.44121715, 'final': 0.13556776440360072}, {'fro': 'comet', 'to': 'cloud', 'type': 'AtLocation', 'score': 0.0026000679936259985, 'wm_score': 0.3879899, 'final': 0.11821701759553821}, {'fro': 'comet', 'to': 'infrared', 'type': 'AtLocation', 'score': 0.0020795604214072227, 'wm_score': 0.3843432, 'final': 0.11675865229498507}, {'fro': 'comet', 'to': 'constellation', 'type': 'AtLocation', 'score': 0.0015361277619376779, 'wm_score': 0.38033506, 'final': 0.11517580743335638}, {'fro': 'comet', 'to': 'ocean', 'type': 'AtLocation', 'score': 0.0013352156383916736, 'wm_score': 0.36238697, 'final': 0.10965074194687419}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

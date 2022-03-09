@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">royal</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "royal"
+    let relations = [{'fro': 'vatican', 'to': 'royal', 'type': 'HasA', 'score': 0.10200215876102448, 'wm_score': 0.2392842, 'final': 0.14318677113271716}, {'fro': 'uk', 'to': 'royal', 'type': 'HasA', 'score': 0.09066516906023026, 'wm_score': 0.5082754, 'final': 0.2159482383421612}, {'fro': 'queen', 'to': 'royal', 'type': 'HasA', 'score': 0.06706596910953522, 'wm_score': 0.7065027, 'final': 0.2588969883766747}, {'fro': 'bbc', 'to': 'royal', 'type': 'HasA', 'score': 0.03900538757443428, 'wm_score': 0.4001153, 'final': 0.147338361302104}, {'fro': 'monarchy', 'to': 'royal', 'type': 'HasA', 'score': 0.03732886537909508, 'wm_score': 0.4270187, 'final': 0.15423581576536655}, {'fro': 'netherlands', 'to': 'royal', 'type': 'HasA', 'score': 0.03425740823149681, 'wm_score': 0.36312884, 'final': 0.1329188377620478}, {'fro': 'us', 'to': 'royal', 'type': 'HasA', 'score': 0.01817857101559639, 'wm_score': 0.36298946, 'final': 0.12162183771091747}, {'fro': 'palace', 'to': 'royal', 'type': 'HasA', 'score': 0.013941929675638676, 'wm_score': 0.6179094, 'final': 0.19513217077294712}, {'fro': 'prince', 'to': 'royal', 'type': 'HasA', 'score': 0.01344777550548315, 'wm_score': 0.6175815, 'final': 0.19468789285383825}, {'fro': 'king', 'to': 'royal', 'type': 'HasA', 'score': 0.009949129074811935, 'wm_score': 0.6033676, 'final': 0.18797467035236837}, {'fro': 'kingdom', 'to': 'royal', 'type': 'HasA', 'score': 0.009662634693086147, 'wm_score': 0.57106316, 'final': 0.17808279228516033}, {'fro': 'country', 'to': 'royal', 'type': 'HasA', 'score': 0.008818249218165874, 'wm_score': 0.35143116, 'final': 0.11160212245271613}, {'fro': 'world', 'to': 'royal', 'type': 'HasA', 'score': 0.006814767140895128, 'wm_score': 0.3536004, 'final': 0.1108504569986266}, {'fro': 'duchess', 'to': 'royal', 'type': 'HasA', 'score': 0.006199025083333254, 'wm_score': 0.4372198, 'final': 0.1355052575583333}, {'fro': 'nhs', 'to': 'royal', 'type': 'HasA', 'score': 0.0050943768583238125, 'wm_score': 0.32182023, 'final': 0.10011213280082668}, {'fro': 'island', 'to': 'royal', 'type': 'HasA', 'score': 0.004686777014285326, 'wm_score': 0.34403372, 'final': 0.10649085990999975}, {'fro': 'emperor', 'to': 'royal', 'type': 'HasA', 'score': 0.004404478240758181, 'wm_score': 0.36623472, 'final': 0.11295355076853075}, {'fro': 'throne', 'to': 'royal', 'type': 'HasA', 'score': 0.004269272089004517, 'wm_score': 0.51693285, 'final': 0.15806834546230317}, {'fro': 'princess', 'to': 'royal', 'type': 'HasA', 'score': 0.004266577772796154, 'wm_score': 0.5848468, 'final': 0.17844064444095734}, {'fro': 'navy', 'to': 'royal', 'type': 'HasA', 'score': 0.0042548710480332375, 'wm_score': 0.56350267, 'final': 0.1720292107336233}, {'fro': 'crown', 'to': 'royal', 'type': 'HasA', 'score': 0.0035086609423160553, 'wm_score': 0.60914314, 'final': 0.18519900465962127}, {'fro': 'family', 'to': 'royal', 'type': 'HasA', 'score': 0.003304340410977602, 'wm_score': 0.4743455, 'final': 0.14461668828768431}, {'fro': 'royal', 'to': 'son', 'type': 'HasA', 'score': 0.03954022005200386, 'wm_score': 0.4376525, 'final': 0.1589739040364027}, {'fro': 'royal', 'to': 'lawyer', 'type': 'HasA', 'score': 0.03458046540617943, 'wm_score': 0.27378666, 'final': 0.10634232378432562}, {'fro': 'royal', 'to': 'daughter', 'type': 'HasA', 'score': 0.03410986438393593, 'wm_score': 0.4151674, 'final': 0.1484271250687552}, {'fro': 'royal', 'to': 'secret', 'type': 'HasA', 'score': 0.02267851121723652, 'wm_score': 0.39207417, 'final': 0.13349720885206556}, {'fro': 'royal', 'to': 'mistress', 'type': 'HasA', 'score': 0.0130167780444026, 'wm_score': 0.36430785, 'final': 0.11840409963108182}, {'fro': 'royal', 'to': 'favourite', 'type': 'HasA', 'score': 0.009195590391755104, 'wm_score': 0.31968373, 'final': 0.10234203227422858}, {'fro': 'royal', 'to': 'future', 'type': 'HasA', 'score': 0.008256334811449051, 'wm_score': 0.32903486, 'final': 0.10448989236801436}, {'fro': 'royal', 'to': 'role', 'type': 'HasA', 'score': 0.005946344695985317, 'wm_score': 0.35828692, 'final': 0.11164851728718973}, {'fro': 'royal', 'to': 'brother', 'type': 'HasA', 'score': 0.004420275334268808, 'wm_score': 0.39234748, 'final': 0.1207984367339882}, {'fro': 'royal', 'to': 'stake', 'type': 'HasA', 'score': 0.004127642139792442, 'wm_score': 0.37307507, 'final': 0.11481187049785474}, {'fro': 'royal', 'to': 'grandson', 'type': 'HasA', 'score': 0.003690437413752079, 'wm_score': 0.33401644, 'final': 0.10278823818962649}, {'fro': 'horse', 'to': 'royal', 'type': 'AtLocation', 'score': 0.024453047662973404, 'wm_score': 0.4397372, 'final': 0.1490382933640814}, {'fro': 'lion', 'to': 'royal', 'type': 'AtLocation', 'score': 0.01807086169719696, 'wm_score': 0.41866466, 'final': 0.1382490011880379}, {'fro': 'prince', 'to': 'royal', 'type': 'AtLocation', 'score': 0.01031093206256628, 'wm_score': 0.6175815, 'final': 0.19249210244379644}, {'fro': 'tiger', 'to': 'royal', 'type': 'AtLocation', 'score': 0.009460254572331905, 'wm_score': 0.31472504, 'final': 0.10103969020063236}, {'fro': 'woman', 'to': 'royal', 'type': 'AtLocation', 'score': 0.00869290716946125, 'wm_score': 0.32270318, 'final': 0.10289598901862287}, {'fro': 'princess', 'to': 'royal', 'type': 'AtLocation', 'score': 0.007538461126387119, 'wm_score': 0.5848468, 'final': 0.180730962788471}, {'fro': 'dragon', 'to': 'royal', 'type': 'AtLocation', 'score': 0.007321041543036699, 'wm_score': 0.34776503, 'final': 0.10945423808012571}, {'fro': 'knight', 'to': 'royal', 'type': 'AtLocation', 'score': 0.006257380358874798, 'wm_score': 0.46648282, 'final': 0.1443250122512124}, {'fro': 'man', 'to': 'royal', 'type': 'AtLocation', 'score': 0.004600249696522951, 'wm_score': 0.3847584, 'final': 0.11864769478756608}, {'fro': 'royal', 'to': 'works', 'type': 'AtLocation', 'score': 0.0375748835504055, 'wm_score': 0.40804815, 'final': 0.14871686348528387}, {'fro': 'royal', 'to': 'making', 'type': 'AtLocation', 'score': 0.03408508002758026, 'wm_score': 0.33627313, 'final': 0.12474149501930619}, {'fro': 'royal', 'to': 'news', 'type': 'AtLocation', 'score': 0.031684257090091705, 'wm_score': 0.28315282, 'final': 0.10712482596306422}, {'fro': 'royal', 'to': 'bath', 'type': 'AtLocation', 'score': 0.012403212487697601, 'wm_score': 0.48962867, 'final': 0.15557084974138832}, {'fro': 'royal', 'to': 'palace', 'type': 'AtLocation', 'score': 0.0124006113037467, 'wm_score': 0.6179094, 'final': 0.19405324791262274}, {'fro': 'royal', 'to': 'background', 'type': 'AtLocation', 'score': 0.012026341632008553, 'wm_score': 0.36444062, 'final': 0.117750625142406}, {'fro': 'royal', 'to': 'air', 'type': 'AtLocation', 'score': 0.009580649435520172, 'wm_score': 0.51254666, 'final': 0.16047045260486417}, {'fro': 'royal', 'to': 'hospital', 'type': 'AtLocation', 'score': 0.007289699278771877, 'wm_score': 0.4224723, 'final': 0.13184447949514033}, {'fro': 'royal', 'to': 'garden', 'type': 'AtLocation', 'score': 0.007073010317981243, 'wm_score': 0.43164572, 'final': 0.13444482322258688}, {'fro': 'royal', 'to': 'castle', 'type': 'AtLocation', 'score': 0.005778678227216005, 'wm_score': 0.48159766, 'final': 0.1485243727590512}, {'fro': 'royal', 'to': 'dock', 'type': 'AtLocation', 'score': 0.0054649002850055695, 'wm_score': 0.34164447, 'final': 0.1063187711995039}, {'fro': 'royal', 'to': 'water', 'type': 'AtLocation', 'score': 0.005335797090083361, 'wm_score': 0.3401953, 'final': 0.10579364796305836}, {'fro': 'royal', 'to': 'kingdom', 'type': 'AtLocation', 'score': 0.0056677511893212795, 'wm_score': 0.57106316, 'final': 0.17528637383252493}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

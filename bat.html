@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">bat</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "bat"
+    let relations = [{'fro': 'bat', 'to': 'baseball', 'type': 'HasA', 'score': 0.004696742165833712, 'wm_score': 0.48603186, 'final': 0.1490972775160836}, {'fro': 'bat', 'to': 'baseball', 'type': 'AtLocation', 'score': 0.053180985152721405, 'wm_score': 0.48603186, 'final': 0.18303624760690498}, {'fro': 'bat', 'to': 'hat', 'type': 'AtLocation', 'score': 0.004543560557067394, 'wm_score': 0.51598, 'final': 0.15797449238994718}, {'fro': 'bat', 'to': 'hand', 'type': 'AtLocation', 'score': 0.004723085556179285, 'wm_score': 0.44780093, 'final': 0.1376464388893255}, {'fro': 'bat', 'to': 'ball', 'type': 'AtLocation', 'score': 0.025233885273337364, 'wm_score': 0.63899994, 'final': 0.2093637016913362}, {'fro': 'bat', 'to': 'bowl', 'type': 'AtLocation', 'score': 0.007961724884808064, 'wm_score': 0.35086256, 'final': 0.11083197541936567}, {'fro': 'bat', 'to': 'bench', 'type': 'AtLocation', 'score': 0.005781078245490789, 'wm_score': 0.4467956, 'final': 0.13808543477184357}, {'fro': 'boy', 'to': 'bat', 'type': 'HasA', 'score': 0.023802729323506355, 'wm_score': 0.36495358, 'final': 0.12614798452645445}, {'fro': 'cat', 'to': 'bat', 'type': 'HasA', 'score': 0.021970950067043304, 'wm_score': 0.38799912, 'final': 0.1317794010469303}, {'fro': 'man', 'to': 'bat', 'type': 'HasA', 'score': 0.018042365089058876, 'wm_score': 0.40750784, 'final': 0.13488200756234123}, {'fro': 'player', 'to': 'bat', 'type': 'HasA', 'score': 0.01401691697537899, 'wm_score': 0.37339485, 'final': 0.12183029688276531}, {'fro': 'ball', 'to': 'bat', 'type': 'HasA', 'score': 0.013704757206141949, 'wm_score': 0.63899994, 'final': 0.2012933120442994}, {'fro': 'guy', 'to': 'bat', 'type': 'HasA', 'score': 0.0126781165599823, 'wm_score': 0.38972735, 'final': 0.12579288659198762}, {'fro': 'kid', 'to': 'bat', 'type': 'HasA', 'score': 0.012609109282493591, 'wm_score': 0.3544614, 'final': 0.11516479649774553}, {'fro': 'devil', 'to': 'bat', 'type': 'HasA', 'score': 0.009196508675813675, 'wm_score': 0.41283852, 'final': 0.1302891120730696}, {'fro': 'team', 'to': 'bat', 'type': 'HasA', 'score': 0.00907241739332676, 'wm_score': 0.34227708, 'final': 0.10903381617532874}, {'fro': 'tiger', 'to': 'bat', 'type': 'HasA', 'score': 0.007476045284420252, 'wm_score': 0.3757788, 'final': 0.1179668716990942}, {'fro': 'monkey', 'to': 'bat', 'type': 'HasA', 'score': 0.006676032207906246, 'wm_score': 0.45471007, 'final': 0.1410862435455344}, {'fro': 'bird', 'to': 'bat', 'type': 'HasA', 'score': 0.006480475887656212, 'wm_score': 0.43822956, 'final': 0.13600520112135936}, {'fro': 'dog', 'to': 'bat', 'type': 'HasA', 'score': 0.005791415460407734, 'wm_score': 0.36978912, 'final': 0.11499072682228544}, {'fro': 'elephant', 'to': 'bat', 'type': 'HasA', 'score': 0.00520787900313735, 'wm_score': 0.40475094, 'final': 0.12507079730219617}, {'fro': 'shark', 'to': 'bat', 'type': 'HasA', 'score': 0.004922071937471628, 'wm_score': 0.37679178, 'final': 0.11648298435623017}, {'fro': 'pitcher', 'to': 'bat', 'type': 'HasA', 'score': 0.004314009565860033, 'wm_score': 0.5343297, 'final': 0.16331871669610204}, {'fro': 'catcher', 'to': 'bat', 'type': 'HasA', 'score': 0.003945942502468824, 'wm_score': 0.47054166, 'final': 0.1439246577517282}, {'fro': 'bat', 'to': 'handle', 'type': 'HasA', 'score': 0.046588145196437836, 'wm_score': 0.23064771, 'final': 0.10180601463750649}, {'fro': 'bat', 'to': 'home', 'type': 'HasA', 'score': 0.017275037243962288, 'wm_score': 0.38976687, 'final': 0.12902258707077363}, {'fro': 'bat', 'to': 'chance', 'type': 'HasA', 'score': 0.01013624481856823, 'wm_score': 0.38084716, 'final': 0.12134951937299779}, {'fro': 'bat', 'to': 'ball', 'type': 'HasA', 'score': 0.008239843882620335, 'wm_score': 0.63899994, 'final': 0.19746787271783428}, {'fro': 'bat', 'to': 'catch', 'type': 'HasA', 'score': 0.007925715297460556, 'wm_score': 0.57946324, 'final': 0.17938697270822243}, {'fro': 'bat', 'to': 'leg', 'type': 'HasA', 'score': 0.006104586645960808, 'wm_score': 0.4562654, 'final': 0.14115283065217257}, {'fro': 'bat', 'to': 'ring', 'type': 'HasA', 'score': 0.006098442245274782, 'wm_score': 0.31949395, 'final': 0.10011709457169236}, {'fro': 'bat', 'to': 'tail', 'type': 'HasA', 'score': 0.005353777669370174, 'wm_score': 0.48719454, 'final': 0.14990600636855914}, {'fro': 'bat', 'to': 'swing', 'type': 'HasA', 'score': 0.005229154136031866, 'wm_score': 0.46565473, 'final': 0.14335682689522233}, {'fro': 'bat', 'to': 'helmet', 'type': 'HasA', 'score': 0.005205326247960329, 'wm_score': 0.4379382, 'final': 0.13502518837357227}, {'fro': 'bat', 'to': 'tip', 'type': 'HasA', 'score': 0.004413672722876072, 'wm_score': 0.379796, 'final': 0.11702837090601327}, {'fro': 'ball', 'to': 'bat', 'type': 'AtLocation', 'score': 0.1446477472782135, 'wm_score': 0.63899994, 'final': 0.2929534050947495}, {'fro': 'cat', 'to': 'bat', 'type': 'AtLocation', 'score': 0.021565288305282593, 'wm_score': 0.38799912, 'final': 0.13149543781369782}, {'fro': 'man', 'to': 'bat', 'type': 'AtLocation', 'score': 0.01570538431406021, 'wm_score': 0.40750784, 'final': 0.13324612101984218}, {'fro': 'swing', 'to': 'bat', 'type': 'AtLocation', 'score': 0.013325554318726063, 'wm_score': 0.46565473, 'final': 0.14902430702310826}, {'fro': 'glove', 'to': 'bat', 'type': 'AtLocation', 'score': 0.011142309755086899, 'wm_score': 0.5610204, 'final': 0.17610573682856084}, {'fro': 'batter', 'to': 'bat', 'type': 'AtLocation', 'score': 0.011081746779382229, 'wm_score': 0.47650635, 'final': 0.15070912774556758}, {'fro': 'pitch', 'to': 'bat', 'type': 'AtLocation', 'score': 0.008778521791100502, 'wm_score': 0.6610571, 'final': 0.20446209525377035}, {'fro': 'run', 'to': 'bat', 'type': 'AtLocation', 'score': 0.008058813400566578, 'wm_score': 0.41331002, 'final': 0.12963417538039662}, {'fro': 'strike', 'to': 'bat', 'type': 'AtLocation', 'score': 0.007524294778704643, 'wm_score': 0.36893976, 'final': 0.11594893434509326}, {'fro': 'fastball', 'to': 'bat', 'type': 'AtLocation', 'score': 0.006393396761268377, 'wm_score': 0.47864226, 'final': 0.1480680557328879}, {'fro': 'bullet', 'to': 'bat', 'type': 'AtLocation', 'score': 0.0063460273668169975, 'wm_score': 0.36276203, 'final': 0.11327082815677192}, {'fro': 'boy', 'to': 'bat', 'type': 'AtLocation', 'score': 0.0062168063595891, 'wm_score': 0.36495358, 'final': 0.11383783845171239}, {'fro': 'hit', 'to': 'bat', 'type': 'AtLocation', 'score': 0.00575847364962101, 'wm_score': 0.5045408, 'final': 0.15539317155473475}, {'fro': 'rabbit', 'to': 'bat', 'type': 'AtLocation', 'score': 0.005529019981622696, 'wm_score': 0.34704483, 'final': 0.10798376298713591}, {'fro': 'homer', 'to': 'bat', 'type': 'AtLocation', 'score': 0.005415196064859629, 'wm_score': 0.47032732, 'final': 0.14488883324540175}, {'fro': 'fielder', 'to': 'bat', 'type': 'AtLocation', 'score': 0.003974243067204952, 'wm_score': 0.50254136, 'final': 0.1535443781470435}, {'fro': 'bird', 'to': 'bat', 'type': 'AtLocation', 'score': 0.003574576461687684, 'wm_score': 0.43822956, 'final': 0.13397107152318138}, {'fro': 'punch', 'to': 'bat', 'type': 'AtLocation', 'score': 0.00334381521679461, 'wm_score': 0.3927042, 'final': 0.12015193065175624}, {'fro': 'catch', 'to': 'bat', 'type': 'AtLocation', 'score': 0.0033231228590011597, 'wm_score': 0.57946324, 'final': 0.17616515800130084}, {'fro': 'player', 'to': 'bat', 'type': 'AtLocation', 'score': 0.0032832829747349024, 'wm_score': 0.37339485, 'final': 0.11431675308231445}, {'fro': 'team', 'to': 'bat', 'type': 'AtLocation', 'score': 0.003035642672330141, 'wm_score': 0.34227708, 'final': 0.10480807387063111}, {'fro': 'fly', 'to': 'bat', 'type': 'AtLocation', 'score': 0.00271439366042614, 'wm_score': 0.5050392, 'final': 0.15341183556229832}, {'fro': 'cricket', 'to': 'bat', 'type': 'AtLocation', 'score': 0.0025504380464553833, 'wm_score': 0.5580014, 'final': 0.1691857266325188}, {'fro': 'catcher', 'to': 'bat', 'type': 'AtLocation', 'score': 0.0024893314111977816, 'wm_score': 0.47054166, 'final': 0.14290502998783847}, {'fro': 'hitter', 'to': 'bat', 'type': 'AtLocation', 'score': 0.0023671751841902733, 'wm_score': 0.52744937, 'final': 0.15989183362893322}, {'fro': 'spot', 'to': 'bat', 'type': 'AtLocation', 'score': 0.0023112238850444555, 'wm_score': 0.35406014, 'final': 0.10783589871953114}, {'fro': 'bat', 'to': 'air', 'type': 'AtLocation', 'score': 0.2860056757926941, 'wm_score': 0.20765343, 'final': 0.2625000020548859}, {'fro': 'bat', 'to': 'sky', 'type': 'AtLocation', 'score': 0.07196331769227982, 'wm_score': 0.23961511, 'final': 0.12225885538459588}, {'fro': 'bat', 'to': 'bag', 'type': 'AtLocation', 'score': 0.02910505048930645, 'wm_score': 0.36127228, 'final': 0.12875521934251455}, {'fro': 'bat', 'to': 'cage', 'type': 'AtLocation', 'score': 0.017781296744942665, 'wm_score': 0.33107942, 'final': 0.11177073372145988}, {'fro': 'bat', 'to': 'ground', 'type': 'AtLocation', 'score': 0.011422880925238132, 'wm_score': 0.4214831, 'final': 0.1344409466476667}, {'fro': 'bat', 'to': 'ring', 'type': 'AtLocation', 'score': 0.010962190106511116, 'wm_score': 0.31949395, 'final': 0.1035217180745578}, {'fro': 'bat', 'to': 'outfield', 'type': 'AtLocation', 'score': 0.009200180880725384, 'wm_score': 0.4418285, 'final': 0.1389886766165078}, {'fro': 'bat', 'to': 'stands', 'type': 'AtLocation', 'score': 0.00811235886067152, 'wm_score': 0.34668863, 'final': 0.10968524020247007}, {'fro': 'bat', 'to': 'box', 'type': 'AtLocation', 'score': 0.007564881816506386, 'wm_score': 0.371064, 'final': 0.11661461727155449}, {'fro': 'bat', 'to': 'wild', 'type': 'AtLocation', 'score': 0.006096306256949902, 'wm_score': 0.3670623, 'final': 0.11438610437986495}, {'fro': 'bat', 'to': 'ballpark', 'type': 'AtLocation', 'score': 0.0056770797818899155, 'wm_score': 0.3607408, 'final': 0.11219619584732295}, {'fro': 'bat', 'to': 'wings', 'type': 'AtLocation', 'score': 0.004739307798445225, 'wm_score': 0.37652704, 'final': 0.11627562745891167}, {'fro': 'bat', 'to': 'corner', 'type': 'AtLocation', 'score': 0.004658944439142942, 'wm_score': 0.33422488, 'final': 0.10352872510740008}, {'fro': 'bat', 'to': 'basket', 'type': 'AtLocation', 'score': 0.004359971731901169, 'wm_score': 0.34269232, 'final': 0.10585967621233083}, {'fro': 'bat', 'to': 'hook', 'type': 'HasA', 'score': 0.0033189388923346996, 'wm_score': 0.36133343, 'final': 0.11072328622463432}, {'fro': 'bat', 'to': 'glove', 'type': 'AtLocation', 'score': 0.02114146202802658, 'wm_score': 0.5610204, 'final': 0.18310514341961862}, {'fro': 'bat', 'to': 'plate', 'type': 'HasA', 'score': 0.0025356558617204428, 'wm_score': 0.47498038, 'final': 0.1442690731032043}, {'fro': 'bat', 'to': 'plate', 'type': 'AtLocation', 'score': 0.03511881083250046, 'wm_score': 0.47498038, 'final': 0.16707728158275031}, {'fro': 'bat', 'to': 'fly', 'type': 'HasA', 'score': 0.0034947164822369814, 'wm_score': 0.5050392, 'final': 0.15395806153756592}, {'fro': 'bat', 'to': 'kick', 'type': 'HasA', 'score': 0.004110592883080244, 'wm_score': 0.32440928, 'final': 0.10020019901815619}, {'fro': 'bat', 'to': 'pitch', 'type': 'HasA', 'score': 0.0024136698339134455, 'wm_score': 0.6610571, 'final': 0.20000669888373943}, {'fro': 'bat', 'to': 'pitch', 'type': 'AtLocation', 'score': 0.01981459930539131, 'wm_score': 0.6610571, 'final': 0.21218734951377394}, {'fro': 'bat', 'to': 'swing', 'type': 'AtLocation', 'score': 0.03581474348902702, 'wm_score': 0.46565473, 'final': 0.16476673944231893}, {'fro': 'bat', 'to': 'punch', 'type': 'HasA', 'score': 0.004132454749196768, 'wm_score': 0.3927042, 'final': 0.12070397832443776}, {'fro': 'bat', 'to': 'wings', 'type': 'HasA', 'score': 0.00391780212521553, 'wm_score': 0.37652704, 'final': 0.11570057348765088}, {'fro': 'bat', 'to': 'franchise', 'type': 'AtLocation', 'score': 0.006708073429763317, 'wm_score': 0.3241234, 'final': 0.10193267140083434}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

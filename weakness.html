@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">weakness</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "weakness"
+    let relations = [{'fro': 'ability', 'to': 'weakness', 'type': 'HasA', 'score': 0.0074560372158885, 'wm_score': 0.4444372, 'final': 0.13855038605112197}, {'fro': 'industry', 'to': 'weakness', 'type': 'HasA', 'score': 0.006329976487904787, 'wm_score': 0.3664663, 'final': 0.11437087354153337}, {'fro': 'strategy', 'to': 'weakness', 'type': 'HasA', 'score': 0.014210782945156097, 'wm_score': 0.3981682, 'final': 0.12939800806160928}, {'fro': 'weakness', 'to': 'strategy', 'type': 'AtLocation', 'score': 0.004289828706532717, 'wm_score': 0.3981682, 'final': 0.12245334009457293}, {'fro': 'combination', 'to': 'weakness', 'type': 'HasA', 'score': 0.005083209834992886, 'wm_score': 0.45204437, 'final': 0.13917155788449503}, {'fro': 'weakness', 'to': 'failure', 'type': 'AtLocation', 'score': 0.005571122746914625, 'wm_score': 0.47293073, 'final': 0.14577900492284027}, {'fro': 'performance', 'to': 'weakness', 'type': 'HasA', 'score': 0.0034570388961583376, 'wm_score': 0.36974758, 'final': 0.11334420122731086}, {'fro': 'weakness', 'to': 'performance', 'type': 'AtLocation', 'score': 0.008294922299683094, 'wm_score': 0.36974758, 'final': 0.11673071960977818}, {'fro': 'skill', 'to': 'weakness', 'type': 'HasA', 'score': 0.011094030924141407, 'wm_score': 0.33186245, 'final': 0.107324556646899}, {'fro': 'weakness', 'to': 'skill', 'type': 'AtLocation', 'score': 0.011149791069328785, 'wm_score': 0.33186245, 'final': 0.10736358874853016}, {'fro': 'patience', 'to': 'weakness', 'type': 'HasA', 'score': 0.005076108034700155, 'wm_score': 0.33697715, 'final': 0.10464642062429012}, {'fro': 'argument', 'to': 'weakness', 'type': 'HasA', 'score': 0.00980293843895197, 'wm_score': 0.3260997, 'final': 0.10469196690726638}, {'fro': 'currency', 'to': 'weakness', 'type': 'HasA', 'score': 0.016221700236201286, 'wm_score': 0.5578662, 'final': 0.17871505016534092}, {'fro': 'difficulty', 'to': 'weakness', 'type': 'HasA', 'score': 0.005031178239732981, 'wm_score': 0.48332128, 'final': 0.14851820876781313}, {'fro': 'leadership', 'to': 'weakness', 'type': 'HasA', 'score': 0.0038624880835413933, 'wm_score': 0.34610054, 'final': 0.10653390365847899}, {'fro': 'sector', 'to': 'weakness', 'type': 'HasA', 'score': 0.01572628691792488, 'wm_score': 0.47012478, 'final': 0.15204583484254744}, {'fro': 'assumption', 'to': 'weakness', 'type': 'HasA', 'score': 0.004844310227781534, 'wm_score': 0.35377526, 'final': 0.10952359515944708}, {'fro': 'euro', 'to': 'weakness', 'type': 'HasA', 'score': 0.028680147603154182, 'wm_score': 0.40969598, 'final': 0.14298489732220795}, {'fro': 'economy', 'to': 'weakness', 'type': 'HasA', 'score': 0.01567371003329754, 'wm_score': 0.5689127, 'final': 0.1816454070233083}, {'fro': 'dollar', 'to': 'weakness', 'type': 'HasA', 'score': 0.015242476016283035, 'wm_score': 0.56686735, 'final': 0.18072993821139816}, {'fro': 'market', 'to': 'weakness', 'type': 'HasA', 'score': 0.012767036445438862, 'wm_score': 0.6127379, 'final': 0.1927582955118072}, {'fro': 'ecb', 'to': 'weakness', 'type': 'HasA', 'score': 0.00941899511963129, 'wm_score': 0.31383526, 'final': 0.10074387458374191}, {'fro': 'fed', 'to': 'weakness', 'type': 'HasA', 'score': 0.008793345652520657, 'wm_score': 0.41409594, 'final': 0.1303841239567645}, {'fro': 'bank', 'to': 'weakness', 'type': 'HasA', 'score': 0.004621149972081184, 'wm_score': 0.34379816, 'final': 0.10637425298045686}, {'fro': 'us', 'to': 'weakness', 'type': 'HasA', 'score': 0.004493358079344034, 'wm_score': 0.3713954, 'final': 0.11456397065554083}, {'fro': 'yen', 'to': 'weakness', 'type': 'HasA', 'score': 0.0029767919331789017, 'wm_score': 0.5296979, 'final': 0.16099312435322527}, {'fro': 'weakness', 'to': 'downside', 'type': 'HasA', 'score': 0.17693036794662476, 'wm_score': 0.57086504, 'final': 0.2951107695626374}, {'fro': 'weakness', 'to': 'cure', 'type': 'HasA', 'score': 0.056272365152835846, 'wm_score': 0.30518854, 'final': 0.1309472176069851}, {'fro': 'weakness', 'to': 'potential', 'type': 'HasA', 'score': 0.033027734607458115, 'wm_score': 0.43656963, 'final': 0.1540903032252207}, {'fro': 'weakness', 'to': 'consequence', 'type': 'HasA', 'score': 0.03268861770629883, 'wm_score': 0.47356763, 'final': 0.16495232139440918}, {'fro': 'weakness', 'to': 'remedy', 'type': 'HasA', 'score': 0.026105618104338646, 'wm_score': 0.31131858, 'final': 0.11166950667303707}, {'fro': 'weakness', 'to': 'chance', 'type': 'HasA', 'score': 0.023296581581234932, 'wm_score': 0.28885844, 'final': 0.10296513910686446}, {'fro': 'weakness', 'to': 'bite', 'type': 'HasA', 'score': 0.02191052958369255, 'wm_score': 0.3102165, 'final': 0.1084023207085848}, {'fro': 'weakness', 'to': 'reason', 'type': 'HasA', 'score': 0.018639184534549713, 'wm_score': 0.4987188, 'final': 0.16266306917418483}, {'fro': 'weakness', 'to': 'future', 'type': 'HasA', 'score': 0.016164934262633324, 'wm_score': 0.36608467, 'final': 0.12114085498384335}, {'fro': 'weakness', 'to': 'role', 'type': 'HasA', 'score': 0.01489226147532463, 'wm_score': 0.34256932, 'final': 0.11319537903272725}, {'fro': 'weakness', 'to': 'price', 'type': 'HasA', 'score': 0.011726786382496357, 'wm_score': 0.509585, 'final': 0.16108425046774744}, {'fro': 'weakness', 'to': 'problem', 'type': 'HasA', 'score': 0.011674074456095695, 'wm_score': 0.46443093, 'final': 0.14750113111926702}, {'fro': 'weakness', 'to': 'response', 'type': 'HasA', 'score': 0.007321532815694809, 'wm_score': 0.39242378, 'final': 0.12285220697098638}, {'fro': 'weakness', 'to': 'meaning', 'type': 'HasA', 'score': 0.0068094790913164616, 'wm_score': 0.3282368, 'final': 0.10323767536392153}, {'fro': 'weakness', 'to': 'cause', 'type': 'HasA', 'score': 0.006564582232385874, 'wm_score': 0.5009227, 'final': 0.15487201756267016}, {'fro': 'weakness', 'to': 'hand', 'type': 'HasA', 'score': 0.006410820409655571, 'wm_score': 0.33951706, 'final': 0.10634269228675891}, {'fro': 'weakness', 'to': 'drawback', 'type': 'HasA', 'score': 0.006167448591440916, 'wm_score': 0.34407932, 'final': 0.10754101001400866}, {'fro': 'weakness', 'to': 'tendency', 'type': 'HasA', 'score': 0.005579455755650997, 'wm_score': 0.58436507, 'final': 0.17921514002895575}, {'fro': 'weakness', 'to': 'cost', 'type': 'HasA', 'score': 0.004537424072623253, 'wm_score': 0.367283, 'final': 0.11336109685083631}, {'fro': 'weakness', 'to': 'benefit', 'type': 'HasA', 'score': 0.004320116713643074, 'wm_score': 0.38816684, 'final': 0.11947413369955018}, {'fro': 'weakness', 'to': 'pattern', 'type': 'HasA', 'score': 0.003753629280254245, 'wm_score': 0.4592533, 'final': 0.140403530496178}, {'fro': 'factor', 'to': 'weakness', 'type': 'AtLocation', 'score': 0.00760203180834651, 'wm_score': 0.44911814, 'final': 0.14005686426584257}, {'fro': 'strength', 'to': 'weakness', 'type': 'AtLocation', 'score': 0.006388361100107431, 'wm_score': 0.6427081, 'final': 0.19728428277007523}, {'fro': 'danger', 'to': 'weakness', 'type': 'AtLocation', 'score': 0.0062699574045836926, 'wm_score': 0.4630729, 'final': 0.1433108401832086}, {'fro': 'vulnerability', 'to': 'weakness', 'type': 'AtLocation', 'score': 0.006110367365181446, 'wm_score': 0.5711303, 'final': 0.17561634715562705}, {'fro': 'signal', 'to': 'weakness', 'type': 'AtLocation', 'score': 0.006098299752920866, 'wm_score': 0.40464044, 'final': 0.12566094182704463}, {'fro': 'spark', 'to': 'weakness', 'type': 'AtLocation', 'score': 0.0058522350154817104, 'wm_score': 0.38576275, 'final': 0.11982538951083721}, {'fro': 'flaw', 'to': 'weakness', 'type': 'AtLocation', 'score': 0.004778553266078234, 'wm_score': 0.34479782, 'final': 0.10678433328625478}, {'fro': 'price', 'to': 'weakness', 'type': 'AtLocation', 'score': 0.004708858672529459, 'wm_score': 0.509585, 'final': 0.1561717010707706}, {'fro': 'dollar', 'to': 'weakness', 'type': 'AtLocation', 'score': 0.004439587239176035, 'wm_score': 0.56686735, 'final': 0.17316791606742324}, {'fro': 'hand', 'to': 'weakness', 'type': 'AtLocation', 'score': 0.004429217893630266, 'wm_score': 0.33951706, 'final': 0.10495557052554119}, {'fro': 'risk', 'to': 'weakness', 'type': 'AtLocation', 'score': 0.0043932050466537476, 'wm_score': 0.52354443, 'final': 0.16013857253265762}, {'fro': 'chip', 'to': 'weakness', 'type': 'AtLocation', 'score': 0.003942983224987984, 'wm_score': 0.40006536, 'final': 0.1227796962574916}, {'fro': 'weakness', 'to': 'air', 'type': 'AtLocation', 'score': 0.08841590583324432, 'wm_score': 0.22759381, 'final': 0.13016927708327103}, {'fro': 'weakness', 'to': 'making', 'type': 'AtLocation', 'score': 0.02960892580449581, 'wm_score': 0.35456055, 'final': 0.1270944130631471}, {'fro': 'weakness', 'to': 'balance', 'type': 'AtLocation', 'score': 0.029095612466335297, 'wm_score': 0.46546876, 'final': 0.1600075567264347}, {'fro': 'weakness', 'to': 'eurozone', 'type': 'AtLocation', 'score': 0.01675332710146904, 'wm_score': 0.40478712, 'final': 0.13316346497102835}, {'fro': 'weakness', 'to': 'future', 'type': 'AtLocation', 'score': 0.009790915995836258, 'wm_score': 0.36608467, 'final': 0.1166790421970854}, {'fro': 'weakness', 'to': 'forecast', 'type': 'AtLocation', 'score': 0.009760896675288677, 'wm_score': 0.43366855, 'final': 0.13693319267270207}, {'fro': 'weakness', 'to': 'ground', 'type': 'AtLocation', 'score': 0.009200372733175755, 'wm_score': 0.338216, 'final': 0.10790506091322305}, {'fro': 'weakness', 'to': 'market', 'type': 'AtLocation', 'score': 0.007328939624130726, 'wm_score': 0.6127379, 'final': 0.18895162773689153}, {'fro': 'weakness', 'to': 'supply', 'type': 'AtLocation', 'score': 0.006173145957291126, 'wm_score': 0.45877945, 'final': 0.1419550371701038}, {'fro': 'weakness', 'to': 'bank', 'type': 'AtLocation', 'score': 0.0058448901399970055, 'wm_score': 0.34379816, 'final': 0.10723087109799792}, {'fro': 'indication', 'to': 'weakness', 'type': 'HasA', 'score': 0.004302166868001223, 'wm_score': 0.5336974, 'final': 0.1631207368076009}, {'fro': 'hand', 'to': 'weakness', 'type': 'HasA', 'score': 0.008516631089150906, 'wm_score': 0.33951706, 'final': 0.10781675976240564}, {'fro': 'key', 'to': 'weakness', 'type': 'HasA', 'score': 0.006192547734826803, 'wm_score': 0.4305128, 'final': 0.13348862341437878}, {'fro': 'advantage', 'to': 'weakness', 'type': 'HasA', 'score': 0.013178424909710884, 'wm_score': 0.476855, 'final': 0.1522813974367976}, {'fro': 'lack', 'to': 'weakness', 'type': 'HasA', 'score': 0.007596284616738558, 'wm_score': 0.581144, 'final': 0.179660599231717}, {'fro': 'weakness', 'to': 'lack', 'type': 'AtLocation', 'score': 0.007783654611557722, 'wm_score': 0.581144, 'final': 0.17979175822809043}, {'fro': 'foot', 'to': 'weakness', 'type': 'HasA', 'score': 0.014138634316623211, 'wm_score': 0.3139413, 'final': 0.10407943402163625}, {'fro': 'quarter', 'to': 'weakness', 'type': 'HasA', 'score': 0.005107374861836433, 'wm_score': 0.44632703, 'final': 0.13747327140328552}, {'fro': 'muscle', 'to': 'weakness', 'type': 'HasA', 'score': 0.02776063047349453, 'wm_score': 0.5163473, 'final': 0.17433663133144617}, {'fro': 'weakness', 'to': 'muscle', 'type': 'AtLocation', 'score': 0.008822314441204071, 'wm_score': 0.5163473, 'final': 0.16107981010884284}, {'fro': 'strength', 'to': 'weakness', 'type': 'HasA', 'score': 0.091021329164505, 'wm_score': 0.6427081, 'final': 0.25652736041515356}, {'fro': 'weakness', 'to': 'strength', 'type': 'AtLocation', 'score': 0.04286223277449608, 'wm_score': 0.6427081, 'final': 0.2228159929421473}, {'fro': 'shoulder', 'to': 'weakness', 'type': 'HasA', 'score': 0.014865311793982983, 'wm_score': 0.4065418, 'final': 0.1323682582557881}, {'fro': 'chip', 'to': 'weakness', 'type': 'HasA', 'score': 0.006042274180799723, 'wm_score': 0.40006536, 'final': 0.12424919992655982}, {'fro': 'knee', 'to': 'weakness', 'type': 'HasA', 'score': 0.013996015302836895, 'wm_score': 0.35385972, 'final': 0.11595512671198585}, {'fro': 'nerve', 'to': 'weakness', 'type': 'HasA', 'score': 0.0077301496639847755, 'wm_score': 0.3985433, 'final': 0.12497409476478935}, {'fro': 'it', 'to': 'weakness', 'type': 'HasA', 'score': 0.003507670946419239, 'wm_score': 0.335836, 'final': 0.10320616966249348}, {'fro': 'might', 'to': 'weakness', 'type': 'HasA', 'score': 0.003574509872123599, 'wm_score': 0.43410453, 'final': 0.13273351591048654}, {'fro': 'common', 'to': 'weakness', 'type': 'HasA', 'score': 0.003537748707458377, 'wm_score': 0.39551216, 'final': 0.12113007209522088}, {'fro': 'physical', 'to': 'weakness', 'type': 'HasA', 'score': 0.004816729575395584, 'wm_score': 0.41850677, 'final': 0.12892374170277693}, {'fro': 'weakness', 'to': 'physical', 'type': 'AtLocation', 'score': 0.0072583165019750595, 'wm_score': 0.41850677, 'final': 0.13063285255138254}, {'fro': 'solid', 'to': 'weakness', 'type': 'HasA', 'score': 0.00822550430893898, 'wm_score': 0.40475267, 'final': 0.1271836540162573}, {'fro': 'resolve', 'to': 'weakness', 'type': 'HasA', 'score': 0.0075811464339494705, 'wm_score': 0.34935164, 'final': 0.11011229450376465}, {'fro': 'grip', 'to': 'weakness', 'type': 'HasA', 'score': 0.013320271857082844, 'wm_score': 0.4126078, 'final': 0.13310653029995803}, {'fro': 'sensitivity', 'to': 'weakness', 'type': 'HasA', 'score': 0.005816026125103235, 'wm_score': 0.38702112, 'final': 0.12017755428757228}, {'fro': 'flaw', 'to': 'weakness', 'type': 'HasA', 'score': 0.011058803647756577, 'wm_score': 0.34479782, 'final': 0.11118050855342962}, {'fro': 'weakness', 'to': 'flaw', 'type': 'AtLocation', 'score': 0.016361530870199203, 'wm_score': 0.34479782, 'final': 0.11489241760913946}, {'fro': 'vulnerability', 'to': 'weakness', 'type': 'HasA', 'score': 0.009837979450821877, 'wm_score': 0.5711303, 'final': 0.17822567561557534}, {'fro': 'weakness', 'to': 'vulnerability', 'type': 'AtLocation', 'score': 0.008811724372208118, 'wm_score': 0.5711303, 'final': 0.17750729706054572}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

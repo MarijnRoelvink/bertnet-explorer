@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">shooter</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "shooter"
+    let relations = [{'fro': 'shooter', 'to': 'camera', 'type': 'AtLocation', 'score': 0.005347268655896187, 'wm_score': 0.39174122, 'final': 0.12126545405912735}, {'fro': 'shooter', 'to': 'vehicle', 'type': 'HasA', 'score': 0.004174749832600355, 'wm_score': 0.32808843, 'final': 0.10134885388282026}, {'fro': 'shooter', 'to': 'field', 'type': 'AtLocation', 'score': 0.01657980866730213, 'wm_score': 0.30460036, 'final': 0.1029859740671115}, {'fro': 'shooter', 'to': 'shot', 'type': 'HasA', 'score': 0.004042502958327532, 'wm_score': 0.51071864, 'final': 0.1560453440708293}, {'fro': 'shooter', 'to': 'shot', 'type': 'AtLocation', 'score': 0.0047438363544642925, 'wm_score': 0.51071864, 'final': 0.156536277448125}, {'fro': 'shooter', 'to': 'knife', 'type': 'HasA', 'score': 0.008928799070417881, 'wm_score': 0.42103437, 'final': 0.13256047034929253}, {'fro': 'shooter', 'to': 'glove', 'type': 'HasA', 'score': 0.0031762237194925547, 'wm_score': 0.3698982, 'final': 0.1131928166036448}, {'fro': 'shooter', 'to': 'shoot', 'type': 'HasA', 'score': 0.0033022435382008553, 'wm_score': 0.430739, 'final': 0.13153327047674063}, {'fro': 'shooter', 'to': 'suspect', 'type': 'HasA', 'score': 0.0030284954700618982, 'wm_score': 0.3990382, 'final': 0.12183140682904335}, {'fro': 'shooter', 'to': 'weapon', 'type': 'HasA', 'score': 0.010937349870800972, 'wm_score': 0.43511084, 'final': 0.1381893969095607}, {'fro': 'shooter', 'to': 'bullet', 'type': 'HasA', 'score': 0.013593035750091076, 'wm_score': 0.35022196, 'final': 0.11458171302506377}, {'fro': 'shooter', 'to': 'unknown', 'type': 'HasA', 'score': 0.0085750762373209, 'wm_score': 0.3145321, 'final': 0.10036218336612464}, {'fro': 'shooter', 'to': 'motive', 'type': 'HasA', 'score': 0.061288703233003616, 'wm_score': 0.36950788, 'final': 0.15375445626310255}, {'fro': 'shooter', 'to': 'motive', 'type': 'AtLocation', 'score': 0.0030845412984490395, 'wm_score': 0.36950788, 'final': 0.11301154290891435}, {'fro': 'shooter', 'to': 'victim', 'type': 'HasA', 'score': 0.02734643779695034, 'wm_score': 0.4155893, 'final': 0.14381929645786526}, {'fro': 'fbi', 'to': 'shooter', 'type': 'HasA', 'score': 0.06265520304441452, 'wm_score': 0.19147748, 'final': 0.10130188613109017}, {'fro': 'suspect', 'to': 'shooter', 'type': 'HasA', 'score': 0.01463492400944233, 'wm_score': 0.3990382, 'final': 0.12995590680660965}, {'fro': 'gunman', 'to': 'shooter', 'type': 'HasA', 'score': 0.009489917196333408, 'wm_score': 0.5190805, 'final': 0.16236709203743338}, {'fro': 'nba', 'to': 'shooter', 'type': 'HasA', 'score': 0.005462286062538624, 'wm_score': 0.33762297, 'final': 0.10511049124377705}, {'fro': 'shooter', 'to': 'gun', 'type': 'HasA', 'score': 0.19384661316871643, 'wm_score': 0.41006592, 'final': 0.2587124052181015}, {'fro': 'shooter', 'to': 'girlfriend', 'type': 'HasA', 'score': 0.05149868130683899, 'wm_score': 0.2581667, 'final': 0.1134990869147873}, {'fro': 'shooter', 'to': 'rifle', 'type': 'HasA', 'score': 0.025050031021237373, 'wm_score': 0.47831428, 'final': 0.16102930571486618}, {'fro': 'shooter', 'to': 'handgun', 'type': 'HasA', 'score': 0.022907672449946404, 'wm_score': 0.31186634, 'final': 0.1095952727149625}, {'fro': 'shooter', 'to': 'firearm', 'type': 'HasA', 'score': 0.013340828940272331, 'wm_score': 0.3110724, 'final': 0.10266030025819066}, {'fro': 'shooter', 'to': 'pistol', 'type': 'HasA', 'score': 0.003899096045643091, 'wm_score': 0.58414644, 'final': 0.1779732992319502}, {'fro': 'shooter', 'to': 'wheelchair', 'type': 'HasA', 'score': 0.0030697074253112078, 'wm_score': 0.35677224, 'final': 0.10918046719771787}, {'fro': 'suspect', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.18141776323318481, 'wm_score': 0.3990382, 'final': 0.2467038942632294}, {'fro': 'knife', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.07729528844356537, 'wm_score': 0.42103437, 'final': 0.18041701291049578}, {'fro': 'bullet', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.06955830007791519, 'wm_score': 0.35022196, 'final': 0.15375739805454064}, {'fro': 'gun', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.047983985394239426, 'wm_score': 0.41006592, 'final': 0.1566085657759676}, {'fro': 'gunman', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.03988557681441307, 'wm_score': 0.5190805, 'final': 0.18364405377008916}, {'fro': 'sniper', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.03129735216498375, 'wm_score': 0.5353086, 'final': 0.18250072651548865}, {'fro': 'rifle', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.02827887423336506, 'wm_score': 0.47831428, 'final': 0.16328949596335557}, {'fro': 'woman', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.022556034848093987, 'wm_score': 0.3643729, 'final': 0.12510109439366582}, {'fro': 'man', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.021522359922528267, 'wm_score': 0.45006603, 'final': 0.1500854609457698}, {'fro': 'handgun', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.020784389227628708, 'wm_score': 0.31186634, 'final': 0.1081089744593401}, {'fro': 'weapon', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.020523739978671074, 'wm_score': 0.43511084, 'final': 0.14489986998506976}, {'fro': 'firearm', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.012730578891932964, 'wm_score': 0.3110724, 'final': 0.1022331252243531}, {'fro': 'girl', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.01195914763957262, 'wm_score': 0.39740652, 'final': 0.12759335934770086}, {'fro': 'cop', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.01109239924699068, 'wm_score': 0.3475048, 'final': 0.11201611947289349}, {'fro': 'grenade', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.009906845167279243, 'wm_score': 0.3674085, 'final': 0.1171573416170955}, {'fro': 'soldier', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.009661151096224785, 'wm_score': 0.3860501, 'final': 0.12257783576735737}, {'fro': 'pistol', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.00890415720641613, 'wm_score': 0.58414644, 'final': 0.18147684204449133}, {'fro': 'boy', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.005318802315741777, 'wm_score': 0.41385823, 'final': 0.12788063062101926}, {'fro': 'person', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.005314953625202179, 'wm_score': 0.38212624, 'final': 0.11835833953764154}, {'fro': 'policeman', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.005153695121407509, 'wm_score': 0.37845865, 'final': 0.11714518158498527}, {'fro': 'shotgun', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.0041562519036233425, 'wm_score': 0.34802955, 'final': 0.10731824133253635}, {'fro': 'detective', 'to': 'shooter', 'type': 'AtLocation', 'score': 0.004007784649729729, 'wm_score': 0.32816827, 'final': 0.10125593025481082}, {'fro': 'shooter', 'to': 'background', 'type': 'AtLocation', 'score': 0.07460439950227737, 'wm_score': 0.17044339, 'final': 0.10335609665159418}, {'fro': 'shooter', 'to': 'woods', 'type': 'AtLocation', 'score': 0.07276549190282822, 'wm_score': 0.22804722, 'final': 0.11935001033197976}, {'fro': 'shooter', 'to': 'car', 'type': 'AtLocation', 'score': 0.02856614626944065, 'wm_score': 0.34081578, 'final': 0.12224103638860848}, {'fro': 'shooter', 'to': 'vehicle', 'type': 'AtLocation', 'score': 0.008679408580064774, 'wm_score': 0.32808843, 'final': 0.10450211500604535}, {'fro': 'shooter', 'to': 'video', 'type': 'AtLocation', 'score': 0.0047103785909712315, 'wm_score': 0.39295733, 'final': 0.12118446401367987}, {'fro': 'shooter', 'to': 'gunman', 'type': 'HasA', 'score': 0.01396939717233181, 'wm_score': 0.5190805, 'final': 0.16550272802063226}, {'fro': 'shooter', 'to': 'gunman', 'type': 'AtLocation', 'score': 0.004055174067616463, 'wm_score': 0.5190805, 'final': 0.15856277184733153}, {'fro': 'shooter', 'to': 'gun', 'type': 'AtLocation', 'score': 0.002316790632903576, 'wm_score': 0.41006592, 'final': 0.12464152944303251}, {'fro': 'shooter', 'to': 'teenager', 'type': 'HasA', 'score': 0.003893453860655427, 'wm_score': 0.44142973, 'final': 0.13515433670245883}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

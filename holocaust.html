@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">holocaust</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "holocaust"
+    let relations = [{'fro': 'holocaust', 'to': 'history', 'type': 'HasA', 'score': 0.010322052985429764, 'wm_score': 0.4451808, 'final': 0.14077967708980085}, {'fro': 'holocaust', 'to': 'truth', 'type': 'HasA', 'score': 0.011666715145111084, 'wm_score': 0.39811856, 'final': 0.12760226860157778}, {'fro': 'holocaust', 'to': 'context', 'type': 'HasA', 'score': 0.005194358993321657, 'wm_score': 0.35475945, 'final': 0.11006388629532517}, {'fro': 'holocaust', 'to': 'significance', 'type': 'HasA', 'score': 0.025862937793135643, 'wm_score': 0.33000714, 'final': 0.11710619845519495}, {'fro': 'holocaust', 'to': 'horror', 'type': 'HasA', 'score': 0.004108751192688942, 'wm_score': 0.41447467, 'final': 0.12721852683488227}, {'fro': 'us', 'to': 'holocaust', 'type': 'HasA', 'score': 0.23257102072238922, 'wm_score': 0.30262846, 'final': 0.25358825250567246}, {'fro': 'world', 'to': 'holocaust', 'type': 'HasA', 'score': 0.09568628668785095, 'wm_score': 0.37998068, 'final': 0.18097460468149568}, {'fro': 'ussr', 'to': 'holocaust', 'type': 'HasA', 'score': 0.06827833503484726, 'wm_score': 0.36211738, 'final': 0.15643004852439307}, {'fro': 'vatican', 'to': 'holocaust', 'type': 'HasA', 'score': 0.045266684144735336, 'wm_score': 0.35481355, 'final': 0.13813074390131475}, {'fro': 'netherlands', 'to': 'holocaust', 'type': 'HasA', 'score': 0.020601829513907433, 'wm_score': 0.3181261, 'final': 0.10985911065973522}, {'fro': 'bible', 'to': 'holocaust', 'type': 'HasA', 'score': 0.012095619924366474, 'wm_score': 0.31142473, 'final': 0.10189435294705654}, {'fro': 'church', 'to': 'holocaust', 'type': 'HasA', 'score': 0.002503219060599804, 'wm_score': 0.34254056, 'final': 0.10451442134241988}, {'fro': 'nazis', 'to': 'holocaust', 'type': 'HasA', 'score': 0.002435984555631876, 'wm_score': 0.6674504, 'final': 0.20194030918894232}, {'fro': 'reich', 'to': 'holocaust', 'type': 'HasA', 'score': 0.002105460735037923, 'wm_score': 0.42899683, 'final': 0.13017287151452656}, {'fro': 'holocaust', 'to': 'legacy', 'type': 'HasA', 'score': 0.073231540620327, 'wm_score': 0.45322168, 'final': 0.1872285824342289}, {'fro': 'holocaust', 'to': 'precedent', 'type': 'HasA', 'score': 0.054908812046051025, 'wm_score': 0.2716714, 'final': 0.11993758843223573}, {'fro': 'holocaust', 'to': 'cure', 'type': 'HasA', 'score': 0.048324912786483765, 'wm_score': 0.246375, 'final': 0.10773993895053866}, {'fro': 'holocaust', 'to': 'future', 'type': 'HasA', 'score': 0.038982100784778595, 'wm_score': 0.31673744, 'final': 0.12230870254934503}, {'fro': 'holocaust', 'to': 'secret', 'type': 'HasA', 'score': 0.01202921662479639, 'wm_score': 0.36823416, 'final': 0.11889069963735747}, {'fro': 'holocaust', 'to': 'victim', 'type': 'HasA', 'score': 0.00758734717965126, 'wm_score': 0.47686446, 'final': 0.1483704810257559}, {'fro': 'child', 'to': 'holocaust', 'type': 'AtLocation', 'score': 0.07138805836439133, 'wm_score': 0.3704641, 'final': 0.16111087085507395}, {'fro': 'jew', 'to': 'holocaust', 'type': 'AtLocation', 'score': 0.06981207430362701, 'wm_score': 0.48128176, 'final': 0.19325298001253893}, {'fro': 'survivor', 'to': 'holocaust', 'type': 'AtLocation', 'score': 0.035562653094530106, 'wm_score': 0.6116117, 'final': 0.20837736716617108}, {'fro': 'nazi', 'to': 'holocaust', 'type': 'AtLocation', 'score': 0.03217623010277748, 'wm_score': 0.6751169, 'final': 0.2250584310719443}, {'fro': 'participant', 'to': 'holocaust', 'type': 'AtLocation', 'score': 0.01093199010938406, 'wm_score': 0.32043564, 'final': 0.10378308507656886}, {'fro': 'refugee', 'to': 'holocaust', 'type': 'AtLocation', 'score': 0.009188266471028328, 'wm_score': 0.39413822, 'final': 0.12467325252971985}, {'fro': 'prisoner', 'to': 'holocaust', 'type': 'AtLocation', 'score': 0.007007123902440071, 'wm_score': 0.41111737, 'final': 0.12824019773170806}, {'fro': 'hero', 'to': 'holocaust', 'type': 'AtLocation', 'score': 0.006560160778462887, 'wm_score': 0.33036205, 'final': 0.10370072754492404}, {'fro': 'genocide', 'to': 'holocaust', 'type': 'AtLocation', 'score': 0.006431588903069496, 'wm_score': 0.60009456, 'final': 0.18453048023214869}, {'fro': 'god', 'to': 'holocaust', 'type': 'AtLocation', 'score': 0.006169057451188564, 'wm_score': 0.34426874, 'final': 0.10759896221583201}, {'fro': 'victim', 'to': 'holocaust', 'type': 'AtLocation', 'score': 0.005800396669656038, 'wm_score': 0.47686446, 'final': 0.14711961566875922}, {'fro': 'zionist', 'to': 'holocaust', 'type': 'AtLocation', 'score': 0.004896554164588451, 'wm_score': 0.4449332, 'final': 0.13690754791521192}, {'fro': 'hitler', 'to': 'holocaust', 'type': 'AtLocation', 'score': 0.004535033833235502, 'wm_score': 0.5018644, 'final': 0.15373384368326487}, {'fro': 'holocaust', 'to': 'cards', 'type': 'AtLocation', 'score': 0.37134066224098206, 'wm_score': 0.16122013, 'final': 0.30830450256868747}, {'fro': 'holocaust', 'to': 'works', 'type': 'AtLocation', 'score': 0.29095759987831116, 'wm_score': 0.3440539, 'final': 0.3068864899148178}, {'fro': 'holocaust', 'to': 'books', 'type': 'AtLocation', 'score': 0.0442579947412014, 'wm_score': 0.3033238, 'final': 0.12197773631884098}, {'fro': 'holocaust', 'to': 'future', 'type': 'AtLocation', 'score': 0.019730528816580772, 'wm_score': 0.31673744, 'final': 0.10883260217160655}, {'fro': 'holocaust', 'to': 'book', 'type': 'AtLocation', 'score': 0.0019675143994390965, 'wm_score': 0.3660018, 'final': 0.11117780007960738}, {'fro': 'holocaust', 'to': 'world', 'type': 'AtLocation', 'score': 0.0007988821598701179, 'wm_score': 0.37998068, 'final': 0.1145534215119091}, {'fro': 'holocaust', 'to': 'legend', 'type': 'HasA', 'score': 0.0070894923992455006, 'wm_score': 0.3312444, 'final': 0.10433596467947187}, {'fro': 'holocaust', 'to': 'tragedy', 'type': 'HasA', 'score': 0.003468390554189682, 'wm_score': 0.5082897, 'final': 0.15491478338793277}, {'fro': 'holocaust', 'to': 'museum', 'type': 'HasA', 'score': 0.011787896044552326, 'wm_score': 0.42604965, 'final': 0.13606642223118665}, {'fro': 'holocaust', 'to': 'memorial', 'type': 'HasA', 'score': 0.009146291762590408, 'wm_score': 0.47766966, 'final': 0.14970330223381328}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

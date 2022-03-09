@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">master</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "master"
+    let relations = [{'fro': 'master', 'to': 'art', 'type': 'AtLocation', 'score': 0.0041114105843007565, 'wm_score': 0.59569114, 'final': 0.18158532940901054}, {'fro': 'master', 'to': 'knowledge', 'type': 'AtLocation', 'score': 0.003538970835506916, 'wm_score': 0.47783887, 'final': 0.14582894058485485}, {'fro': 'master', 'to': 'ability', 'type': 'AtLocation', 'score': 0.0035419012419879436, 'wm_score': 0.3376099, 'final': 0.10376230086939157}, {'fro': 'master', 'to': 'economics', 'type': 'AtLocation', 'score': 0.005245735868811607, 'wm_score': 0.49539483, 'final': 0.15229046410816813}, {'fro': 'master', 'to': 'teaching', 'type': 'AtLocation', 'score': 0.007948867976665497, 'wm_score': 0.5984578, 'final': 0.1851015475836659}, {'fro': 'master', 'to': 'skill', 'type': 'AtLocation', 'score': 0.018360769376158714, 'wm_score': 0.46041584, 'final': 0.1509772905633111}, {'fro': 'master', 'to': 'psychology', 'type': 'AtLocation', 'score': 0.005849160719662905, 'wm_score': 0.41800883, 'final': 0.12949706150376403}, {'fro': 'master', 'to': 'engineering', 'type': 'AtLocation', 'score': 0.005411120131611824, 'wm_score': 0.57534117, 'final': 0.17639013509212828}, {'fro': 'master', 'to': 'profession', 'type': 'AtLocation', 'score': 0.006153694819658995, 'wm_score': 0.4797626, 'final': 0.1482363663737613}, {'fro': 'master', 'to': 'craft', 'type': 'AtLocation', 'score': 0.016201898455619812, 'wm_score': 0.41575536, 'final': 0.1360679369189339}, {'fro': 'master', 'to': 'task', 'type': 'AtLocation', 'score': 0.007216139230877161, 'wm_score': 0.34579855, 'final': 0.10879086246161401}, {'fro': 'devil', 'to': 'master', 'type': 'HasA', 'score': 0.08586385846138, 'wm_score': 0.2813594, 'final': 0.14451252092296601}, {'fro': 'emperor', 'to': 'master', 'type': 'HasA', 'score': 0.019124461337924004, 'wm_score': 0.3380137, 'final': 0.1147912329365468}, {'fro': 'dog', 'to': 'master', 'type': 'HasA', 'score': 0.010591205209493637, 'wm_score': 0.31569582, 'final': 0.10212258964664557}, {'fro': 'magician', 'to': 'master', 'type': 'HasA', 'score': 0.010553576052188873, 'wm_score': 0.47297275, 'final': 0.14927932823653223}, {'fro': 'horse', 'to': 'master', 'type': 'HasA', 'score': 0.010413835756480694, 'wm_score': 0.3661835, 'final': 0.1171447350295365}, {'fro': 'artist', 'to': 'master', 'type': 'HasA', 'score': 0.009947475977241993, 'wm_score': 0.5624723, 'final': 0.1757049231840694}, {'fro': 'cat', 'to': 'master', 'type': 'HasA', 'score': 0.008793607354164124, 'wm_score': 0.33114502, 'final': 0.1054990311479149}, {'fro': 'man', 'to': 'master', 'type': 'HasA', 'score': 0.005645706783980131, 'wm_score': 0.49187285, 'final': 0.15151384974878612}, {'fro': 'world', 'to': 'master', 'type': 'HasA', 'score': 0.005208554212003946, 'wm_score': 0.35362202, 'final': 0.10973259394840278}, {'fro': 'thief', 'to': 'master', 'type': 'HasA', 'score': 0.005148697644472122, 'wm_score': 0.39944094, 'final': 0.12343637035113052}, {'fro': 'philosopher', 'to': 'master', 'type': 'HasA', 'score': 0.004088299814611673, 'wm_score': 0.40459698, 'final': 0.1242409038702282}, {'fro': 'machine', 'to': 'master', 'type': 'HasA', 'score': 0.003975274972617626, 'wm_score': 0.4110492, 'final': 0.12609745248083237}, {'fro': 'chef', 'to': 'master', 'type': 'HasA', 'score': 0.0034460292663425207, 'wm_score': 0.508958, 'final': 0.1550996204864398}, {'fro': 'writer', 'to': 'master', 'type': 'HasA', 'score': 0.0032846538815647364, 'wm_score': 0.422184, 'final': 0.12895445771709535}, {'fro': 'king', 'to': 'master', 'type': 'HasA', 'score': 0.0031984071247279644, 'wm_score': 0.4430434, 'final': 0.13515190498730958}, {'fro': 'master', 'to': 'plan', 'type': 'HasA', 'score': 0.046548470854759216, 'wm_score': 0.27113077, 'final': 0.11392316059833146}, {'fro': 'master', 'to': 'choice', 'type': 'HasA', 'score': 0.02024528943002224, 'wm_score': 0.34224725, 'final': 0.11684587760101559}, {'fro': 'master', 'to': 'mistress', 'type': 'HasA', 'score': 0.019674688577651978, 'wm_score': 0.37224096, 'final': 0.1254445700043564}, {'fro': 'master', 'to': 'secret', 'type': 'HasA', 'score': 0.01822342723608017, 'wm_score': 0.39639053, 'final': 0.13167355806525613}, {'fro': 'master', 'to': 'weapon', 'type': 'HasA', 'score': 0.013020033948123455, 'wm_score': 0.3568244, 'final': 0.11616134376368643}, {'fro': 'master', 'to': 'dream', 'type': 'HasA', 'score': 0.010402357205748558, 'wm_score': 0.44185376, 'final': 0.139837778044024}, {'fro': 'master', 'to': 'gift', 'type': 'HasA', 'score': 0.010005957446992397, 'wm_score': 0.39698946, 'final': 0.1261010082128947}, {'fro': 'master', 'to': 'destiny', 'type': 'HasA', 'score': 0.0099740419536829, 'wm_score': 0.3134747, 'final': 0.10102423936757804}, {'fro': 'master', 'to': 'sword', 'type': 'HasA', 'score': 0.009131082333624363, 'wm_score': 0.4452777, 'final': 0.13997506763353706}, {'fro': 'master', 'to': 'genius', 'type': 'HasA', 'score': 0.008511397056281567, 'wm_score': 0.5252613, 'final': 0.16353636793939713}, {'fro': 'master', 'to': 'chance', 'type': 'HasA', 'score': 0.008088046684861183, 'wm_score': 0.3212901, 'final': 0.10204866267940285}, {'fro': 'master', 'to': 'future', 'type': 'HasA', 'score': 0.007327527739107609, 'wm_score': 0.36294347, 'final': 0.11401231041737533}, {'fro': 'master', 'to': 'charm', 'type': 'HasA', 'score': 0.007072243373841047, 'wm_score': 0.3499471, 'final': 0.10993470036168876}, {'fro': 'master', 'to': 'soul', 'type': 'HasA', 'score': 0.006868086755275726, 'wm_score': 0.4009292, 'final': 0.12508642072869303}, {'fro': 'master', 'to': 'vision', 'type': 'HasA', 'score': 0.006702190265059471, 'wm_score': 0.3391797, 'final': 0.10644544318554164}, {'fro': 'master', 'to': 'voice', 'type': 'HasA', 'score': 0.005980354268103838, 'wm_score': 0.34678763, 'final': 0.1082225369876727}, {'fro': 'master', 'to': 'purpose', 'type': 'HasA', 'score': 0.0046711028553545475, 'wm_score': 0.36741364, 'final': 0.1134938639987482}, {'fro': 'master', 'to': 'hand', 'type': 'HasA', 'score': 0.004504450596868992, 'wm_score': 0.44587982, 'final': 0.13691706141780832}, {'fro': 'master', 'to': 'castle', 'type': 'HasA', 'score': 0.004492172505706549, 'wm_score': 0.3555244, 'final': 0.10980184075399461}, {'fro': 'master', 'to': 'lesson', 'type': 'HasA', 'score': 0.004266591276973486, 'wm_score': 0.4090318, 'final': 0.12569615389388145}, {'fro': 'master', 'to': 'job', 'type': 'HasA', 'score': 0.003807222004979849, 'wm_score': 0.4152508, 'final': 0.12724029540348591}, {'fro': 'lesson', 'to': 'master', 'type': 'AtLocation', 'score': 0.08374565839767456, 'wm_score': 0.4090318, 'final': 0.18133150087837221}, {'fro': 'genius', 'to': 'master', 'type': 'AtLocation', 'score': 0.026509582996368408, 'wm_score': 0.5252613, 'final': 0.17613509809745792}, {'fro': 'thief', 'to': 'master', 'type': 'AtLocation', 'score': 0.01413119025528431, 'wm_score': 0.39944094, 'final': 0.12972411517869903}, {'fro': 'horse', 'to': 'master', 'type': 'AtLocation', 'score': 0.013818514533340931, 'wm_score': 0.3661835, 'final': 0.11952801017333867}, {'fro': 'knight', 'to': 'master', 'type': 'AtLocation', 'score': 0.013209986500442028, 'wm_score': 0.47206622, 'final': 0.15086685655030943}, {'fro': 'pupil', 'to': 'master', 'type': 'AtLocation', 'score': 0.009407281875610352, 'wm_score': 0.39550224, 'final': 0.12523576931292726}, {'fro': 'trust', 'to': 'master', 'type': 'AtLocation', 'score': 0.008845409378409386, 'wm_score': 0.3245911, 'final': 0.1035691165648866}, {'fro': 'hand', 'to': 'master', 'type': 'AtLocation', 'score': 0.008440590463578701, 'wm_score': 0.44587982, 'final': 0.1396723593245051}, {'fro': 'trick', 'to': 'master', 'type': 'AtLocation', 'score': 0.008339494466781616, 'wm_score': 0.35998887, 'final': 0.11383430712674715}, {'fro': 'sword', 'to': 'master', 'type': 'AtLocation', 'score': 0.008261001668870449, 'wm_score': 0.4452777, 'final': 0.13936601116820932}, {'fro': 'skill', 'to': 'master', 'type': 'AtLocation', 'score': 0.008029265329241753, 'wm_score': 0.46041584, 'final': 0.14374523773046924}, {'fro': 'soul', 'to': 'master', 'type': 'AtLocation', 'score': 0.007395375519990921, 'wm_score': 0.4009292, 'final': 0.12545552286399367}, {'fro': 'word', 'to': 'master', 'type': 'AtLocation', 'score': 0.007359858602285385, 'wm_score': 0.42160326, 'final': 0.13163287902159979}, {'fro': 'gift', 'to': 'master', 'type': 'AtLocation', 'score': 0.00701714213937521, 'wm_score': 0.39698946, 'final': 0.12400883749756267}, {'fro': 'teacher', 'to': 'master', 'type': 'AtLocation', 'score': 0.005090101156383753, 'wm_score': 0.628616, 'final': 0.19214787080946866}, {'fro': 'weapon', 'to': 'master', 'type': 'AtLocation', 'score': 0.005089514423161745, 'wm_score': 0.3568244, 'final': 0.11060998009621324}, {'fro': 'masterpiece', 'to': 'master', 'type': 'AtLocation', 'score': 0.005027035251259804, 'wm_score': 0.37573647, 'final': 0.11623986567588188}, {'fro': 'fire', 'to': 'master', 'type': 'AtLocation', 'score': 0.004648671019822359, 'wm_score': 0.35821277, 'final': 0.11071790071387567}, {'fro': 'power', 'to': 'master', 'type': 'AtLocation', 'score': 0.004488243255764246, 'wm_score': 0.40026277, 'final': 0.12322060127903499}, {'fro': 'star', 'to': 'master', 'type': 'AtLocation', 'score': 0.004345829598605633, 'wm_score': 0.3416966, 'final': 0.10555106071902395}, {'fro': 'king', 'to': 'master', 'type': 'AtLocation', 'score': 0.004326856229454279, 'wm_score': 0.4430434, 'final': 0.13594181936061803}, {'fro': 'cat', 'to': 'master', 'type': 'AtLocation', 'score': 0.0042711771093308926, 'wm_score': 0.33114502, 'final': 0.10233332997653163}, {'fro': 'prize', 'to': 'master', 'type': 'AtLocation', 'score': 0.0042603472247719765, 'wm_score': 0.41938668, 'final': 0.1287982470573404}, {'fro': 'master', 'to': 'making', 'type': 'AtLocation', 'score': 0.23485586047172546, 'wm_score': 0.4156721, 'final': 0.28910073233020783}, {'fro': 'master', 'to': 'saddle', 'type': 'AtLocation', 'score': 0.10698763281106949, 'wm_score': 0.19553405, 'final': 0.13355155796774865}, {'fro': 'master', 'to': 'works', 'type': 'AtLocation', 'score': 0.08864149451255798, 'wm_score': 0.56051016, 'final': 0.23020209415879062}, {'fro': 'master', 'to': 'game', 'type': 'AtLocation', 'score': 0.015295755118131638, 'wm_score': 0.32416704, 'final': 0.10795714058269215}, {'fro': 'master', 'to': 'ring', 'type': 'AtLocation', 'score': 0.011933107860386372, 'wm_score': 0.36273068, 'final': 0.1171723795022705}, {'fro': 'master', 'to': 'kitchen', 'type': 'AtLocation', 'score': 0.010822921060025692, 'wm_score': 0.40604225, 'final': 0.129388719742018}, {'fro': 'master', 'to': 'room', 'type': 'AtLocation', 'score': 0.00990970153361559, 'wm_score': 0.41975236, 'final': 0.13286249907353093}, {'fro': 'master', 'to': 'mix', 'type': 'AtLocation', 'score': 0.00903878454118967, 'wm_score': 0.3256874, 'final': 0.1040333691788328}, {'fro': 'master', 'to': 'field', 'type': 'AtLocation', 'score': 0.008144645020365715, 'wm_score': 0.33007598, 'final': 0.10472404551425601}, {'fro': 'master', 'to': 'hunt', 'type': 'AtLocation', 'score': 0.0079536447301507, 'wm_score': 0.3457527, 'final': 0.10929336131110552}, {'fro': 'master', 'to': 'classroom', 'type': 'AtLocation', 'score': 0.007403657305985689, 'wm_score': 0.37616897, 'final': 0.11803325111419}, {'fro': 'master', 'to': 'process', 'type': 'AtLocation', 'score': 0.005303775426000357, 'wm_score': 0.32137424, 'final': 0.10012491479820025}, {'fro': 'master', 'to': 'academy', 'type': 'AtLocation', 'score': 0.005241429433226585, 'wm_score': 0.5656267, 'final': 0.17335701060325864}, {'fro': 'master', 'to': 'building', 'type': 'AtLocation', 'score': 0.004899070598185062, 'wm_score': 0.40878546, 'final': 0.12606498741872957}, {'fro': 'master', 'to': 'dungeon', 'type': 'AtLocation', 'score': 0.0046765850856900215, 'wm_score': 0.39446765, 'final': 0.12161390455998303}, {'fro': 'master', 'to': 'arts', 'type': 'AtLocation', 'score': 0.0042436677031219006, 'wm_score': 0.6281544, 'final': 0.19141688739218535}, {'fro': 'master', 'to': 'future', 'type': 'AtLocation', 'score': 0.0040671625174582005, 'wm_score': 0.36294347, 'final': 0.11173005476222075}, {'fro': 'master', 'to': 'garden', 'type': 'AtLocation', 'score': 0.0037029143422842026, 'wm_score': 0.40783408, 'final': 0.12494226403959896}, {'fro': 'master', 'to': 'studio', 'type': 'AtLocation', 'score': 0.0033550490625202656, 'wm_score': 0.5005237, 'final': 0.15250564434376424}, {'fro': 'master', 'to': 'way', 'type': 'AtLocation', 'score': 0.002859690925106406, 'wm_score': 0.38163766, 'final': 0.1164930816475745}, {'fro': 'master', 'to': 'middle', 'type': 'AtLocation', 'score': 0.0028034383431077003, 'wm_score': 0.33352578, 'final': 0.1020201408401754}, {'fro': 'master', 'to': 'picture', 'type': 'AtLocation', 'score': 0.00272669387049973, 'wm_score': 0.33527988, 'final': 0.10249264970934982}, {'fro': 'master', 'to': 'degree', 'type': 'AtLocation', 'score': 0.02024056948721409, 'wm_score': 0.63660955, 'final': 0.20515126364104988}, {'fro': 'master', 'to': 'creative', 'type': 'AtLocation', 'score': 0.006003477610647678, 'wm_score': 0.5363196, 'final': 0.1650983143274534}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

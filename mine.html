@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">mine</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "mine"
+    let relations = [{'fro': 'light', 'to': 'mine', 'type': 'AtLocation', 'score': 0.002977475756779313, 'wm_score': 0.36222953, 'final': 0.11075309202974554}, {'fro': 'land', 'to': 'mine', 'type': 'AtLocation', 'score': 0.005458165891468525, 'wm_score': 0.46689928, 'final': 0.143890500124028}, {'fro': 'gold', 'to': 'mine', 'type': 'AtLocation', 'score': 0.009248042479157448, 'wm_score': 0.44290346, 'final': 0.13934466773541024}, {'fro': 'mine', 'to': 'border', 'type': 'AtLocation', 'score': 0.007834160700440407, 'wm_score': 0.46197462, 'final': 0.14407629849030829}, {'fro': 'hell', 'to': 'mine', 'type': 'AtLocation', 'score': 0.003986461088061333, 'wm_score': 0.34006268, 'final': 0.10480932676164295}, {'fro': 'world', 'to': 'mine', 'type': 'HasA', 'score': 0.01993328519165516, 'wm_score': 0.31911612, 'final': 0.10968813563415863}, {'fro': 'planet', 'to': 'mine', 'type': 'HasA', 'score': 0.009451181627810001, 'wm_score': 0.31962845, 'final': 0.10250436213946701}, {'fro': 'earth', 'to': 'mine', 'type': 'HasA', 'score': 0.008312868885695934, 'wm_score': 0.406681, 'final': 0.12782330821998716}, {'fro': 'arctic', 'to': 'mine', 'type': 'HasA', 'score': 0.00802411325275898, 'wm_score': 0.32636446, 'final': 0.10352621727693131}, {'fro': 'river', 'to': 'mine', 'type': 'HasA', 'score': 0.007131739053875208, 'wm_score': 0.4365042, 'final': 0.13594347733771267}, {'fro': 'company', 'to': 'mine', 'type': 'HasA', 'score': 0.005907217040657997, 'wm_score': 0.41437083, 'final': 0.12844630092846063}, {'fro': 'ocean', 'to': 'mine', 'type': 'HasA', 'score': 0.0049231527373194695, 'wm_score': 0.41455024, 'final': 0.12781127891612365}, {'fro': 'site', 'to': 'mine', 'type': 'HasA', 'score': 0.004282838199287653, 'wm_score': 0.5178758, 'final': 0.15836072673950138}, {'fro': 'us', 'to': 'mine', 'type': 'HasA', 'score': 0.0036932979710400105, 'wm_score': 0.3439287, 'final': 0.10576391857972801}, {'fro': 'miner', 'to': 'mine', 'type': 'HasA', 'score': 0.00337079050950706, 'wm_score': 0.59619117, 'final': 0.18121690435665497}, {'fro': 'philippines', 'to': 'mine', 'type': 'HasA', 'score': 0.0031749513000249863, 'wm_score': 0.38945752, 'final': 0.1190597219100175}, {'fro': 'boy', 'to': 'mine', 'type': 'HasA', 'score': 0.0031682909466326237, 'wm_score': 0.32638848, 'final': 0.10013434766264284}, {'fro': 'land', 'to': 'mine', 'type': 'HasA', 'score': 0.003023688681423664, 'wm_score': 0.46689928, 'final': 0.14218636607699658}, {'fro': 'mine', 'to': 'tunnel', 'type': 'HasA', 'score': 0.02603057399392128, 'wm_score': 0.50944734, 'final': 0.17105560379574491}, {'fro': 'mine', 'to': 'shaft', 'type': 'HasA', 'score': 0.018865739926695824, 'wm_score': 0.6078231, 'final': 0.1955529479486871}, {'fro': 'mine', 'to': 'leak', 'type': 'HasA', 'score': 0.015867119655013084, 'wm_score': 0.4587769, 'final': 0.14874005375850918}, {'fro': 'mine', 'to': 'pond', 'type': 'HasA', 'score': 0.014188187196850777, 'wm_score': 0.32933962, 'final': 0.10873361703779556}, {'fro': 'mine', 'to': 'reservoir', 'type': 'HasA', 'score': 0.012636757455766201, 'wm_score': 0.4557553, 'final': 0.14557232021903635}, {'fro': 'mine', 'to': 'basement', 'type': 'HasA', 'score': 0.011842334643006325, 'wm_score': 0.31962633, 'final': 0.10417753325010444}, {'fro': 'mine', 'to': 'landfill', 'type': 'HasA', 'score': 0.01078320574015379, 'wm_score': 0.421651, 'final': 0.13404354401810767}, {'fro': 'mine', 'to': 'warehouse', 'type': 'HasA', 'score': 0.007004443556070328, 'wm_score': 0.40050256, 'final': 0.12505387848924926}, {'fro': 'mine', 'to': 'quarry', 'type': 'HasA', 'score': 0.006863988935947418, 'wm_score': 0.52880836, 'final': 0.1634473002551632}, {'fro': 'mine', 'to': 'cemetery', 'type': 'HasA', 'score': 0.00665205717086792, 'wm_score': 0.3469885, 'final': 0.10875299001960756}, {'fro': 'mine', 'to': 'bunker', 'type': 'HasA', 'score': 0.006646635942161083, 'wm_score': 0.36688077, 'final': 0.11471687615951279}, {'fro': 'mine', 'to': 'dam', 'type': 'HasA', 'score': 0.006513778120279312, 'wm_score': 0.50549144, 'final': 0.15620707668419553}, {'fro': 'mine', 'to': 'creek', 'type': 'HasA', 'score': 0.006400559563189745, 'wm_score': 0.4058553, 'final': 0.12623698169423284}, {'fro': 'mine', 'to': 'roof', 'type': 'HasA', 'score': 0.006007123272866011, 'wm_score': 0.39192483, 'final': 0.12178243529100623}, {'fro': 'mine', 'to': 'gate', 'type': 'HasA', 'score': 0.0058943238109350204, 'wm_score': 0.39892235, 'final': 0.12380273166765453}, {'fro': 'mine', 'to': 'dump', 'type': 'HasA', 'score': 0.005218442063778639, 'wm_score': 0.48790956, 'final': 0.15002577744464507}, {'fro': 'mine', 'to': 'shovel', 'type': 'HasA', 'score': 0.005187638103961945, 'wm_score': 0.3360973, 'final': 0.10446053667277337}, {'fro': 'mine', 'to': 'crane', 'type': 'HasA', 'score': 0.004948729183524847, 'wm_score': 0.34997362, 'final': 0.1084561964284674}, {'fro': 'mine', 'to': 'hole', 'type': 'HasA', 'score': 0.004577236250042915, 'wm_score': 0.35038057, 'final': 0.10831823637503006}, {'fro': 'mine', 'to': 'lake', 'type': 'HasA', 'score': 0.004537140019237995, 'wm_score': 0.40279302, 'final': 0.12401390401346662}, {'fro': 'mine', 'to': 'problem', 'type': 'HasA', 'score': 0.004261211957782507, 'wm_score': 0.34173745, 'final': 0.10550408337044777}, {'fro': 'mine', 'to': 'fence', 'type': 'HasA', 'score': 0.004128159023821354, 'wm_score': 0.35038978, 'final': 0.10800664531667496}, {'fro': 'mine', 'to': 'furnace', 'type': 'HasA', 'score': 0.00403757905587554, 'wm_score': 0.4642568, 'final': 0.1421033453391129}, {'fro': 'shovel', 'to': 'mine', 'type': 'AtLocation', 'score': 0.06186884641647339, 'wm_score': 0.3360973, 'final': 0.14413738249153138}, {'fro': 'hole', 'to': 'mine', 'type': 'AtLocation', 'score': 0.058890026062726974, 'wm_score': 0.35038057, 'final': 0.1463371892439089}, {'fro': 'diamond', 'to': 'mine', 'type': 'AtLocation', 'score': 0.03331375867128372, 'wm_score': 0.47066832, 'final': 0.1645201270698986}, {'fro': 'rock', 'to': 'mine', 'type': 'AtLocation', 'score': 0.02188258431851864, 'wm_score': 0.37876916, 'final': 0.12894855702296307}, {'fro': 'miner', 'to': 'mine', 'type': 'AtLocation', 'score': 0.021642189472913742, 'wm_score': 0.59619117, 'final': 0.19400688363103966}, {'fro': 'shaft', 'to': 'mine', 'type': 'AtLocation', 'score': 0.020093748345971107, 'wm_score': 0.6078231, 'final': 0.1964125538421798}, {'fro': 'boulder', 'to': 'mine', 'type': 'AtLocation', 'score': 0.01741752214729786, 'wm_score': 0.32014257, 'final': 0.1082350365031085}, {'fro': 'pipe', 'to': 'mine', 'type': 'AtLocation', 'score': 0.011021853424608707, 'wm_score': 0.41284233, 'final': 0.1315679963972261}, {'fro': 'fire', 'to': 'mine', 'type': 'AtLocation', 'score': 0.008522252552211285, 'wm_score': 0.5722633, 'final': 0.17764456678654794}, {'fro': 'bullet', 'to': 'mine', 'type': 'AtLocation', 'score': 0.008288158103823662, 'wm_score': 0.36830163, 'final': 0.11629219967267658}, {'fro': 'coal', 'to': 'mine', 'type': 'AtLocation', 'score': 0.008284862153232098, 'wm_score': 0.77254575, 'final': 0.2375631285072625}, {'fro': 'leak', 'to': 'mine', 'type': 'AtLocation', 'score': 0.008231466636061668, 'wm_score': 0.4587769, 'final': 0.1433950966452432}, {'fro': 'bomb', 'to': 'mine', 'type': 'AtLocation', 'score': 0.008154270239174366, 'wm_score': 0.490617, 'final': 0.15289308916742209}, {'fro': 'man', 'to': 'mine', 'type': 'AtLocation', 'score': 0.005552065558731556, 'wm_score': 0.39220366, 'final': 0.12154754389111211}, {'fro': 'worker', 'to': 'mine', 'type': 'AtLocation', 'score': 0.005187625531107187, 'wm_score': 0.4742046, 'final': 0.14589271787177505}, {'fro': 'boy', 'to': 'mine', 'type': 'AtLocation', 'score': 0.004802008159458637, 'wm_score': 0.32638848, 'final': 0.10127794971162106}, {'fro': 'river', 'to': 'mine', 'type': 'AtLocation', 'score': 0.004665922839194536, 'wm_score': 0.4365042, 'final': 0.1342174059874362}, {'fro': 'pit', 'to': 'mine', 'type': 'AtLocation', 'score': 0.00448872335255146, 'wm_score': 0.5905459, 'final': 0.18030587634678605}, {'fro': 'cave', 'to': 'mine', 'type': 'AtLocation', 'score': 0.004378662444651127, 'wm_score': 0.5368656, 'final': 0.16412474371125582}, {'fro': 'snake', 'to': 'mine', 'type': 'AtLocation', 'score': 0.004345577675849199, 'wm_score': 0.34295446, 'final': 0.10592824237309446}, {'fro': 'skeleton', 'to': 'mine', 'type': 'AtLocation', 'score': 0.004297182895243168, 'wm_score': 0.33835515, 'final': 0.10451457302667023}, {'fro': 'horse', 'to': 'mine', 'type': 'AtLocation', 'score': 0.004230912309139967, 'wm_score': 0.3376304, 'final': 0.10425075861639799}, {'fro': 'dam', 'to': 'mine', 'type': 'AtLocation', 'score': 0.004042231012135744, 'wm_score': 0.50549144, 'final': 0.15447699370849505}, {'fro': 'mine', 'to': 'works', 'type': 'AtLocation', 'score': 0.16480016708374023, 'wm_score': 0.31829435, 'final': 0.21084842195861817}, {'fro': 'mine', 'to': 'ground', 'type': 'AtLocation', 'score': 0.07566812634468079, 'wm_score': 0.43113887, 'final': 0.18230934944127658}, {'fro': 'mine', 'to': 'open', 'type': 'AtLocation', 'score': 0.036276236176490784, 'wm_score': 0.34718585, 'final': 0.12954912032354357}, {'fro': 'mine', 'to': 'air', 'type': 'AtLocation', 'score': 0.025427650660276413, 'wm_score': 0.40303773, 'final': 0.1387106744621935}, {'fro': 'mine', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.021676242351531982, 'wm_score': 0.5659628, 'final': 0.1849622096460724}, {'fro': 'mine', 'to': 'water', 'type': 'AtLocation', 'score': 0.014331097714602947, 'wm_score': 0.49771795, 'final': 0.1593471534002221}, {'fro': 'mine', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.01408747024834156, 'wm_score': 0.46063894, 'final': 0.1480529111738391}, {'fro': 'mine', 'to': 'mountains', 'type': 'AtLocation', 'score': 0.012843373231589794, 'wm_score': 0.3966415, 'final': 0.12798281126211286}, {'fro': 'mine', 'to': 'desert', 'type': 'AtLocation', 'score': 0.010848705656826496, 'wm_score': 0.3673098, 'final': 0.11778703395977856}, {'fro': 'mine', 'to': 'area', 'type': 'AtLocation', 'score': 0.007424297276884317, 'wm_score': 0.4771315, 'final': 0.14833645809381904}, {'fro': 'mine', 'to': 'basement', 'type': 'AtLocation', 'score': 0.007303167134523392, 'wm_score': 0.31962633, 'final': 0.10100011599416639}, {'fro': 'mine', 'to': 'rocks', 'type': 'AtLocation', 'score': 0.007062855176627636, 'wm_score': 0.39965808, 'final': 0.12484142262363937}, {'fro': 'mine', 'to': 'region', 'type': 'AtLocation', 'score': 0.007012892514467239, 'wm_score': 0.40946388, 'final': 0.12774818876012708}, {'fro': 'mine', 'to': 'ocean', 'type': 'AtLocation', 'score': 0.006507209036499262, 'wm_score': 0.41455024, 'final': 0.1289201183255495}, {'fro': 'mine', 'to': 'forest', 'type': 'AtLocation', 'score': 0.0064198775216937065, 'wm_score': 0.44960302, 'final': 0.1393748202651856}, {'fro': 'mine', 'to': 'ruins', 'type': 'AtLocation', 'score': 0.005884797777980566, 'wm_score': 0.3592658, 'final': 0.11189909844458643}, {'fro': 'mine', 'to': 'sea', 'type': 'AtLocation', 'score': 0.005577856209129095, 'wm_score': 0.44592857, 'final': 0.1376830703463904}, {'fro': 'mine', 'to': 'way', 'type': 'AtLocation', 'score': 0.005473106633871794, 'wm_score': 0.36201444, 'final': 0.11243550664371027}, {'fro': 'mine', 'to': 'mines', 'type': 'AtLocation', 'score': 0.005396019201725721, 'wm_score': 0.755303, 'final': 0.23036811344120803}, {'fro': 'mine', 'to': 'field', 'type': 'AtLocation', 'score': 0.005024747923016548, 'wm_score': 0.38008028, 'final': 0.1175414075461116}, {'fro': 'mine', 'to': 'south', 'type': 'AtLocation', 'score': 0.004899010527879, 'wm_score': 0.3985371, 'final': 0.12299043736951532}, {'fro': 'mine', 'to': 'east', 'type': 'AtLocation', 'score': 0.004226853605359793, 'wm_score': 0.33635595, 'final': 0.10386558252375187}, {'fro': 'mine', 'to': 'northeast', 'type': 'AtLocation', 'score': 0.00416603172197938, 'wm_score': 0.4181841, 'final': 0.1283714522053856}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

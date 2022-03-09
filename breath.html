@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">breath</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "breath"
+    let relations = [{'fro': 'cat', 'to': 'breath', 'type': 'HasA', 'score': 0.031090473756194115, 'wm_score': 0.3924824, 'final': 0.1395080516293359}, {'fro': 'bird', 'to': 'breath', 'type': 'HasA', 'score': 0.016356833279132843, 'wm_score': 0.29612955, 'final': 0.10028864829539301}, {'fro': 'dog', 'to': 'breath', 'type': 'HasA', 'score': 0.013754052110016346, 'wm_score': 0.42012596, 'final': 0.13566562447701144}, {'fro': 'man', 'to': 'breath', 'type': 'HasA', 'score': 0.010527379810810089, 'wm_score': 0.35163558, 'final': 0.11285983986756708}, {'fro': 'wind', 'to': 'breath', 'type': 'HasA', 'score': 0.008525429293513298, 'wm_score': 0.35493243, 'final': 0.11244752950545933}, {'fro': 'doctor', 'to': 'breath', 'type': 'HasA', 'score': 0.006730201654136181, 'wm_score': 0.4082862, 'final': 0.12719700115789534}, {'fro': 'baby', 'to': 'breath', 'type': 'HasA', 'score': 0.006413300521671772, 'wm_score': 0.4312083, 'final': 0.13385180036517028}, {'fro': 'air', 'to': 'breath', 'type': 'HasA', 'score': 0.006122188176959753, 'wm_score': 0.33706588, 'final': 0.10540529572387185}, {'fro': 'patient', 'to': 'breath', 'type': 'HasA', 'score': 0.005028622690588236, 'wm_score': 0.4647118, 'final': 0.1429335758834118}, {'fro': 'breath', 'to': 'smell', 'type': 'HasA', 'score': 0.04418172687292099, 'wm_score': 0.6373995, 'final': 0.2221470588110447}, {'fro': 'breath', 'to': 'scent', 'type': 'HasA', 'score': 0.02125149592757225, 'wm_score': 0.53293884, 'final': 0.17475769914930062}, {'fro': 'breath', 'to': 'taste', 'type': 'HasA', 'score': 0.01873144507408142, 'wm_score': 0.46225882, 'final': 0.151789657551857}, {'fro': 'breath', 'to': 'pulse', 'type': 'HasA', 'score': 0.017702657729387283, 'wm_score': 0.42855054, 'final': 0.14095702241057112}, {'fro': 'breath', 'to': 'meaning', 'type': 'HasA', 'score': 0.01184471882879734, 'wm_score': 0.3340889, 'final': 0.10851797318015816}, {'fro': 'breath', 'to': 'rhythm', 'type': 'HasA', 'score': 0.011699904687702656, 'wm_score': 0.38660988, 'final': 0.12417289728139189}, {'fro': 'breath', 'to': 'catch', 'type': 'HasA', 'score': 0.010616079904139042, 'wm_score': 0.3898388, 'final': 0.12438289593289734}, {'fro': 'breath', 'to': 'sound', 'type': 'HasA', 'score': 0.009753928519785404, 'wm_score': 0.3511926, 'final': 0.11218552996384981}, {'fro': 'breath', 'to': 'chill', 'type': 'HasA', 'score': 0.009184245020151138, 'wm_score': 0.46776536, 'final': 0.1467585795141058}, {'fro': 'breath', 'to': 'chance', 'type': 'HasA', 'score': 0.00828331895172596, 'wm_score': 0.42045444, 'final': 0.13193465526620818}, {'fro': 'breath', 'to': 'problem', 'type': 'HasA', 'score': 0.005708928685635328, 'wm_score': 0.32203454, 'final': 0.10060661207994473}, {'fro': 'breath', 'to': 'bite', 'type': 'HasA', 'score': 0.005410958547145128, 'wm_score': 0.50643265, 'final': 0.15571746598300162}, {'fro': 'breath', 'to': 'life', 'type': 'HasA', 'score': 0.004894159268587828, 'wm_score': 0.37057972, 'final': 0.1145998274880115}, {'fro': 'breath', 'to': 'voice', 'type': 'HasA', 'score': 0.004574204329401255, 'wm_score': 0.43666673, 'final': 0.1342019620305809}, {'fro': 'smell', 'to': 'breath', 'type': 'AtLocation', 'score': 0.023898933082818985, 'wm_score': 0.6373995, 'final': 0.20794910315797333}, {'fro': 'needle', 'to': 'breath', 'type': 'AtLocation', 'score': 0.019870417192578316, 'wm_score': 0.35369232, 'final': 0.12001698803480483}, {'fro': 'cat', 'to': 'breath', 'type': 'AtLocation', 'score': 0.018654000014066696, 'wm_score': 0.3924824, 'final': 0.1308025200098467}, {'fro': 'chill', 'to': 'breath', 'type': 'AtLocation', 'score': 0.01684003323316574, 'wm_score': 0.46776536, 'final': 0.15211763126321604}, {'fro': 'bullet', 'to': 'breath', 'type': 'AtLocation', 'score': 0.014577782712876797, 'wm_score': 0.3136564, 'final': 0.10430136789901377}, {'fro': 'knife', 'to': 'breath', 'type': 'AtLocation', 'score': 0.010364668443799019, 'wm_score': 0.30952433, 'final': 0.10011256691065933}, {'fro': 'scent', 'to': 'breath', 'type': 'AtLocation', 'score': 0.009235923178493977, 'wm_score': 0.53293884, 'final': 0.16634679822494583}, {'fro': 'tear', 'to': 'breath', 'type': 'AtLocation', 'score': 0.008758001029491425, 'wm_score': 0.325909, 'final': 0.10390330072064402}, {'fro': 'cloud', 'to': 'breath', 'type': 'AtLocation', 'score': 0.0077300285920500755, 'wm_score': 0.33545244, 'final': 0.10604675201443507}, {'fro': 'shadow', 'to': 'breath', 'type': 'AtLocation', 'score': 0.007024464197456837, 'wm_score': 0.3493049, 'final': 0.1097085949382198}, {'fro': 'snake', 'to': 'breath', 'type': 'AtLocation', 'score': 0.007002345751971006, 'wm_score': 0.3478443, 'final': 0.10925493202637972}, {'fro': 'cough', 'to': 'breath', 'type': 'AtLocation', 'score': 0.0068338834680616856, 'wm_score': 0.544686, 'final': 0.1681895184276432}, {'fro': 'danger', 'to': 'breath', 'type': 'AtLocation', 'score': 0.0064118970185518265, 'wm_score': 0.35761517, 'final': 0.11177287891298629}, {'fro': 'sound', 'to': 'breath', 'type': 'AtLocation', 'score': 0.006160571705549955, 'wm_score': 0.3511926, 'final': 0.109670180193885}, {'fro': 'dog', 'to': 'breath', 'type': 'AtLocation', 'score': 0.006140857003629208, 'wm_score': 0.42012596, 'final': 0.13033638790254046}, {'fro': 'candle', 'to': 'breath', 'type': 'AtLocation', 'score': 0.005624739918857813, 'wm_score': 0.409735, 'final': 0.1268578179432005}, {'fro': 'whisper', 'to': 'breath', 'type': 'AtLocation', 'score': 0.005492048803716898, 'wm_score': 0.4782286, 'final': 0.14731301416260184}, {'fro': 'breath', 'to': 'air', 'type': 'AtLocation', 'score': 0.9607489109039307, 'wm_score': 0.33706588, 'final': 0.7736440016327514}, {'fro': 'breath', 'to': 'lungs', 'type': 'AtLocation', 'score': 0.0028163602109998465, 'wm_score': 0.49215186, 'final': 0.1496170101476999}, {'fro': 'breath', 'to': 'wind', 'type': 'AtLocation', 'score': 0.0021247733384370804, 'wm_score': 0.35493243, 'final': 0.10796707033690597}, {'fro': 'breath', 'to': 'water', 'type': 'AtLocation', 'score': 0.0013589939335361123, 'wm_score': 0.40222502, 'final': 0.12161880175347528}, {'fro': 'breath', 'to': 'mouth', 'type': 'AtLocation', 'score': 0.0007529997965320945, 'wm_score': 0.5314585, 'final': 0.15996464985757247}, {'fro': 'breath', 'to': 'throat', 'type': 'AtLocation', 'score': 0.000677382864523679, 'wm_score': 0.49014723, 'final': 0.14751833700516662}, {'fro': 'breath', 'to': 'toilet', 'type': 'AtLocation', 'score': 0.0006404384039342403, 'wm_score': 0.3977046, 'final': 0.11975968688275399}, {'fro': 'breath', 'to': 'atmosphere', 'type': 'AtLocation', 'score': 0.0005059115355834365, 'wm_score': 0.3368867, 'final': 0.10142014807490841}, {'fro': 'breath', 'to': 'bottle', 'type': 'AtLocation', 'score': 0.0004703379236161709, 'wm_score': 0.52017343, 'final': 0.15638126554653137}, {'fro': 'breath', 'to': 'bag', 'type': 'AtLocation', 'score': 0.00043666359852068126, 'wm_score': 0.4454481, 'final': 0.1339400945189645}, {'fro': 'breath', 'to': 'breeze', 'type': 'AtLocation', 'score': 0.00043311589979566634, 'wm_score': 0.36227256, 'final': 0.108984949129857}, {'fro': 'breath', 'to': 'chest', 'type': 'AtLocation', 'score': 0.0003815118398051709, 'wm_score': 0.54317063, 'final': 0.16321824728786363}, {'fro': 'breath', 'to': 'room', 'type': 'AtLocation', 'score': 0.00037712857010774314, 'wm_score': 0.43658653, 'final': 0.13123994899907543}, {'fro': 'breath', 'to': 'blood', 'type': 'AtLocation', 'score': 0.0003096420259680599, 'wm_score': 0.48339456, 'final': 0.14523511741817766}, {'fro': 'breath', 'to': 'nose', 'type': 'AtLocation', 'score': 0.0002872018958441913, 'wm_score': 0.48454034, 'final': 0.14556314332709094}, {'fro': 'breath', 'to': 'cloud', 'type': 'AtLocation', 'score': 0.00022327217448037118, 'wm_score': 0.33545244, 'final': 0.10079202252213627}, {'fro': 'breath', 'to': 'freezer', 'type': 'AtLocation', 'score': 0.0002047184680122882, 'wm_score': 0.38453695, 'final': 0.11550438792760861}, {'fro': 'breath', 'to': 'fridge', 'type': 'AtLocation', 'score': 0.00018020381685346365, 'wm_score': 0.3937906, 'final': 0.11826332267179743}, {'fro': 'breath', 'to': 'shower', 'type': 'AtLocation', 'score': 0.00015102697943802923, 'wm_score': 0.50189763, 'final': 0.15067500788560664}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

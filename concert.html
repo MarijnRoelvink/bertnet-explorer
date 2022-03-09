@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">concert</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "concert"
+    let relations = [{'fro': 'concert', 'to': 'reception', 'type': 'HasA', 'score': 0.005097485147416592, 'wm_score': 0.5375979, 'final': 0.1648476096031916}, {'fro': 'queen', 'to': 'concert', 'type': 'HasA', 'score': 0.09400146454572678, 'wm_score': 0.43832988, 'final': 0.19729998918200875}, {'fro': 'band', 'to': 'concert', 'type': 'HasA', 'score': 0.03655639663338661, 'wm_score': 0.65237284, 'final': 0.22130132964337065}, {'fro': 'beatles', 'to': 'concert', 'type': 'HasA', 'score': 0.03032010793685913, 'wm_score': 0.5708592, 'final': 0.19248183555580142}, {'fro': 'clash', 'to': 'concert', 'type': 'HasA', 'score': 0.02744216099381447, 'wm_score': 0.27759933, 'final': 0.10248931169567013}, {'fro': 'pope', 'to': 'concert', 'type': 'HasA', 'score': 0.02478507161140442, 'wm_score': 0.30641514, 'final': 0.1092740921279831}, {'fro': 'bbc', 'to': 'concert', 'type': 'HasA', 'score': 0.01955411396920681, 'wm_score': 0.4295913, 'final': 0.14256526977844478}, {'fro': 'orchestra', 'to': 'concert', 'type': 'HasA', 'score': 0.013770653866231441, 'wm_score': 0.7334461, 'final': 0.22967328770636206}, {'fro': 'met', 'to': 'concert', 'type': 'HasA', 'score': 0.011937981471419334, 'wm_score': 0.4225727, 'final': 0.13512839702999355}, {'fro': 'future', 'to': 'concert', 'type': 'HasA', 'score': 0.010494058951735497, 'wm_score': 0.31559685, 'final': 0.10202489626621486}, {'fro': 'singer', 'to': 'concert', 'type': 'HasA', 'score': 0.010371750220656395, 'wm_score': 0.5581155, 'final': 0.1746948751544595}, {'fro': 'rock', 'to': 'concert', 'type': 'HasA', 'score': 0.006822391878813505, 'wm_score': 0.5843352, 'final': 0.1800762343151695}, {'fro': 'choir', 'to': 'concert', 'type': 'HasA', 'score': 0.006342748645693064, 'wm_score': 0.62906253, 'final': 0.1931586830519852}, {'fro': 'group', 'to': 'concert', 'type': 'HasA', 'score': 0.00454458873718977, 'wm_score': 0.4338169, 'final': 0.13332628211603287}, {'fro': 'academy', 'to': 'concert', 'type': 'HasA', 'score': 0.004497845191508532, 'wm_score': 0.42800096, 'final': 0.13154877963405598}, {'fro': 'prince', 'to': 'concert', 'type': 'HasA', 'score': 0.004434696864336729, 'wm_score': 0.3555268, 'final': 0.10976232780503573}, {'fro': 'uk', 'to': 'concert', 'type': 'HasA', 'score': 0.0042608994990587234, 'wm_score': 0.44219804, 'final': 0.13564204164934113}, {'fro': 'circus', 'to': 'concert', 'type': 'HasA', 'score': 0.004198706708848476, 'wm_score': 0.5037388, 'final': 0.15406073469619397}, {'fro': 'voice', 'to': 'concert', 'type': 'HasA', 'score': 0.004197161179035902, 'wm_score': 0.3741557, 'final': 0.11518472282532514}, {'fro': 'king', 'to': 'concert', 'type': 'HasA', 'score': 0.003451769473031163, 'wm_score': 0.3649013, 'final': 0.11188662863112182}, {'fro': 'show', 'to': 'concert', 'type': 'HasA', 'score': 0.0030044240411370993, 'wm_score': 0.6198647, 'final': 0.18806250682879602}, {'fro': 'underground', 'to': 'concert', 'type': 'HasA', 'score': 0.002798645058646798, 'wm_score': 0.37155688, 'final': 0.11342611554105277}, {'fro': 'concert', 'to': 'sponsor', 'type': 'HasA', 'score': 0.02865011803805828, 'wm_score': 0.35286474, 'final': 0.12591450462664083}, {'fro': 'concert', 'to': 'soundtrack', 'type': 'HasA', 'score': 0.026005277410149574, 'wm_score': 0.62837464, 'final': 0.20671608618710474}, {'fro': 'concert', 'to': 'marquee', 'type': 'HasA', 'score': 0.02486664429306984, 'wm_score': 0.42983657, 'final': 0.14635762200514887}, {'fro': 'concert', 'to': 'website', 'type': 'HasA', 'score': 0.02431645430624485, 'wm_score': 0.3549192, 'final': 0.12349727801437141}, {'fro': 'concert', 'to': 'theme', 'type': 'HasA', 'score': 0.019209224730730057, 'wm_score': 0.5925889, 'final': 0.19122312731151106}, {'fro': 'concert', 'to': 'playlist', 'type': 'HasA', 'score': 0.01690796948969364, 'wm_score': 0.32687923, 'final': 0.10989934764278557}, {'fro': 'concert', 'to': 'winner', 'type': 'HasA', 'score': 0.013860952109098434, 'wm_score': 0.33120525, 'final': 0.10906424147636892}, {'fro': 'concert', 'to': 'cancellation', 'type': 'HasA', 'score': 0.013390352949500084, 'wm_score': 0.35599846, 'final': 0.11617278506465009}, {'fro': 'concert', 'to': 'stage', 'type': 'HasA', 'score': 0.011577780358493328, 'wm_score': 0.60598963, 'final': 0.18990133525094535}, {'fro': 'concert', 'to': 'sound', 'type': 'HasA', 'score': 0.011453386396169662, 'wm_score': 0.46159014, 'final': 0.1464944124773188}, {'fro': 'concert', 'to': 'crowd', 'type': 'HasA', 'score': 0.009710856713354588, 'wm_score': 0.4922397, 'final': 0.15446950969934822}, {'fro': 'concert', 'to': 'video', 'type': 'HasA', 'score': 0.009642585180699825, 'wm_score': 0.5436646, 'final': 0.16984918962648993}, {'fro': 'concert', 'to': 'venue', 'type': 'HasA', 'score': 0.009489189833402634, 'wm_score': 0.66503304, 'final': 0.20615234488338186}, {'fro': 'concert', 'to': 'singer', 'type': 'HasA', 'score': 0.009213804267346859, 'wm_score': 0.5581155, 'final': 0.17388431298714283}, {'fro': 'concert', 'to': 'date', 'type': 'HasA', 'score': 0.009014144539833069, 'wm_score': 0.44318396, 'final': 0.1392650891778832}, {'fro': 'concert', 'to': 'preview', 'type': 'HasA', 'score': 0.006840069312602282, 'wm_score': 0.43148065, 'final': 0.1342322435188216}, {'fro': 'concert', 'to': 'closing', 'type': 'HasA', 'score': 0.00667495047673583, 'wm_score': 0.401726, 'final': 0.1251902653337151}, {'fro': 'concert', 'to': 'dj', 'type': 'HasA', 'score': 0.00653031375259161, 'wm_score': 0.36658815, 'final': 0.11454766462681415}, {'fro': 'concert', 'to': 'finale', 'type': 'HasA', 'score': 0.006182039622217417, 'wm_score': 0.57429403, 'final': 0.17661563673555222}, {'fro': 'concert', 'to': 'break', 'type': 'HasA', 'score': 0.004628076683729887, 'wm_score': 0.38613316, 'final': 0.11907960167861094}, {'fro': 'woman', 'to': 'concert', 'type': 'AtLocation', 'score': 0.06263463944196701, 'wm_score': 0.20353797, 'final': 0.10490563860937692}, {'fro': 'lion', 'to': 'concert', 'type': 'AtLocation', 'score': 0.05249405652284622, 'wm_score': 0.26039875, 'final': 0.11486546456599236}, {'fro': 'singer', 'to': 'concert', 'type': 'AtLocation', 'score': 0.029069315642118454, 'wm_score': 0.5581155, 'final': 0.18778317094948294}, {'fro': 'girl', 'to': 'concert', 'type': 'AtLocation', 'score': 0.029002884402871132, 'wm_score': 0.2739733, 'final': 0.1024940090820098}, {'fro': 'dancer', 'to': 'concert', 'type': 'AtLocation', 'score': 0.026417728513479233, 'wm_score': 0.42691195, 'final': 0.14656599495943548}, {'fro': 'man', 'to': 'concert', 'type': 'AtLocation', 'score': 0.021888036280870438, 'wm_score': 0.29502437, 'final': 0.10382893639660931}, {'fro': 'musician', 'to': 'concert', 'type': 'AtLocation', 'score': 0.020324699580669403, 'wm_score': 0.51591706, 'final': 0.16900240770646863}, {'fro': 'choir', 'to': 'concert', 'type': 'AtLocation', 'score': 0.018812786787748337, 'wm_score': 0.62906253, 'final': 0.20188770975142387}, {'fro': 'guest', 'to': 'concert', 'type': 'AtLocation', 'score': 0.017548860982060432, 'wm_score': 0.60953426, 'final': 0.1951444806874423}, {'fro': 'drummer', 'to': 'concert', 'type': 'AtLocation', 'score': 0.017414454370737076, 'wm_score': 0.41808462, 'final': 0.13761550405951598}, {'fro': 'performer', 'to': 'concert', 'type': 'AtLocation', 'score': 0.016326356679201126, 'wm_score': 0.5352655, 'final': 0.1720080996754408}, {'fro': 'child', 'to': 'concert', 'type': 'AtLocation', 'score': 0.014976334758102894, 'wm_score': 0.30144098, 'final': 0.10091572833067206}, {'fro': 'band', 'to': 'concert', 'type': 'AtLocation', 'score': 0.01377931796014309, 'wm_score': 0.65237284, 'final': 0.20535737457210018}, {'fro': 'piano', 'to': 'concert', 'type': 'AtLocation', 'score': 0.012435927987098694, 'wm_score': 0.56971973, 'final': 0.1796210685909691}, {'fro': 'boy', 'to': 'concert', 'type': 'AtLocation', 'score': 0.012018030509352684, 'wm_score': 0.30673897, 'final': 0.1004343123565469}, {'fro': 'fan', 'to': 'concert', 'type': 'AtLocation', 'score': 0.011804996058344841, 'wm_score': 0.4374147, 'final': 0.1394879072408414}, {'fro': 'guitar', 'to': 'concert', 'type': 'AtLocation', 'score': 0.00899076834321022, 'wm_score': 0.5278467, 'final': 0.16464754784024718}, {'fro': 'violin', 'to': 'concert', 'type': 'AtLocation', 'score': 0.0073292250744998455, 'wm_score': 0.44056547, 'final': 0.13730009855214992}, {'fro': 'guitarist', 'to': 'concert', 'type': 'AtLocation', 'score': 0.0067482516169548035, 'wm_score': 0.43939155, 'final': 0.13654124113186838}, {'fro': 'dj', 'to': 'concert', 'type': 'AtLocation', 'score': 0.006432230118662119, 'wm_score': 0.36658815, 'final': 0.11447900608306351}, {'fro': 'rapper', 'to': 'concert', 'type': 'AtLocation', 'score': 0.0045830970630049706, 'wm_score': 0.32510597, 'final': 0.1007399589441035}, {'fro': 'crowd', 'to': 'concert', 'type': 'AtLocation', 'score': 0.0045717512257397175, 'wm_score': 0.4922397, 'final': 0.15087213585801781}, {'fro': 'friend', 'to': 'concert', 'type': 'AtLocation', 'score': 0.004569266922771931, 'wm_score': 0.32349032, 'final': 0.10024558284594036}, {'fro': 'concert', 'to': 'works', 'type': 'AtLocation', 'score': 0.7413894534111023, 'wm_score': 0.4906197, 'final': 0.6661585273877716}, {'fro': 'concert', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.12181754410266876, 'wm_score': 0.10319023, 'final': 0.11622934987186813}, {'fro': 'concert', 'to': 'background', 'type': 'AtLocation', 'score': 0.028242576867341995, 'wm_score': 0.2833211, 'final': 0.10476613380713941}, {'fro': 'concert', 'to': 'making', 'type': 'AtLocation', 'score': 0.007559679914265871, 'wm_score': 0.38418856, 'final': 0.12054834393998613}, {'fro': 'concert', 'to': 'air', 'type': 'AtLocation', 'score': 0.004617619793862104, 'wm_score': 0.3267001, 'final': 0.10124236385570348}, {'fro': 'concert', 'to': 'schedule', 'type': 'AtLocation', 'score': 0.001792500028386712, 'wm_score': 0.43130064, 'final': 0.1306449420198707}, {'fro': 'concert', 'to': 'theatre', 'type': 'AtLocation', 'score': 0.0016319326823577285, 'wm_score': 0.6470627, 'final': 0.19526116287765044}, {'fro': 'concert', 'to': 'city', 'type': 'AtLocation', 'score': 0.0015966151840984821, 'wm_score': 0.37972572, 'final': 0.11503534662886895}, {'fro': 'concert', 'to': 'studio', 'type': 'AtLocation', 'score': 0.001501737511716783, 'wm_score': 0.630766, 'final': 0.1902810162582018}, {'fro': 'concert', 'to': 'lineup', 'type': 'AtLocation', 'score': 0.001410793513059616, 'wm_score': 0.43181688, 'final': 0.13053261945914174}, {'fro': 'concert', 'to': 'stadium', 'type': 'AtLocation', 'score': 0.0012384249130263925, 'wm_score': 0.48099664, 'final': 0.14516588943911848}, {'fro': 'concert', 'to': 'building', 'type': 'AtLocation', 'score': 0.0011927649611607194, 'wm_score': 0.34859598, 'final': 0.10541372947281254}, {'fro': 'concert', 'to': 'previews', 'type': 'AtLocation', 'score': 0.0010256529785692692, 'wm_score': 0.3577441, 'final': 0.1080411870849985}, {'fro': 'concert', 'to': 'way', 'type': 'AtLocation', 'score': 0.0009544385829940438, 'wm_score': 0.35749432, 'final': 0.10791640300809584}, {'fro': 'concert', 'to': 'mix', 'type': 'AtLocation', 'score': 0.0009108497761189938, 'wm_score': 0.33759645, 'final': 0.10191652984328331}, {'fro': 'concert', 'to': 'streets', 'type': 'AtLocation', 'score': 0.0009006605832837522, 'wm_score': 0.36369067, 'final': 0.10973766340829864}, {'fro': 'concert', 'to': 'arena', 'type': 'AtLocation', 'score': 0.0008082659915089607, 'wm_score': 0.57850593, 'final': 0.1741175651940563}, {'fro': 'concert', 'to': 'hall', 'type': 'AtLocation', 'score': 0.0007564428960904479, 'wm_score': 0.6271588, 'final': 0.18867715002726335}, {'fro': 'concert', 'to': 'library', 'type': 'AtLocation', 'score': 0.0007147337892092764, 'wm_score': 0.385962, 'final': 0.11628891365244651}, {'fro': 'concert', 'to': 'venue', 'type': 'AtLocation', 'score': 0.0007009938126429915, 'wm_score': 0.66503304, 'final': 0.2000006076688501}, {'fro': 'concert', 'to': 'theater', 'type': 'AtLocation', 'score': 0.0006889586802572012, 'wm_score': 0.6491271, 'final': 0.19522040107618005}, {'fro': 'concert', 'to': 'open', 'type': 'AtLocation', 'score': 0.0006813789368607104, 'wm_score': 0.40458208, 'final': 0.12185158925580251}, {'fro': 'concert', 'to': 'theaters', 'type': 'AtLocation', 'score': 0.00065782037563622, 'wm_score': 0.516068, 'final': 0.15528087426294537}, {'fro': 'concert', 'to': 'fall', 'type': 'AtLocation', 'score': 0.000653193739708513, 'wm_score': 0.34637558, 'final': 0.10436990961779598}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

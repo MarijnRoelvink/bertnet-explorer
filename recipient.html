@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">recipient</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "recipient"
+    let relations = [{'fro': 'recipient', 'to': 'child', 'type': 'HasA', 'score': 0.005150575190782547, 'wm_score': 0.35621506, 'final': 0.11046992063354778}, {'fro': 'recipient', 'to': 'payment', 'type': 'HasA', 'score': 0.01998980902135372, 'wm_score': 0.38120276, 'final': 0.12835369431494761}, {'fro': 'payment', 'to': 'recipient', 'type': 'HasA', 'score': 0.008022935129702091, 'wm_score': 0.38120276, 'final': 0.11997688259079148}, {'fro': 'recipient', 'to': 'cancer', 'type': 'HasA', 'score': 0.012012817896902561, 'wm_score': 0.37853724, 'final': 0.12197014452783181}, {'fro': 'recipient', 'to': 'card', 'type': 'HasA', 'score': 0.008476992137730122, 'wm_score': 0.39310315, 'final': 0.12386483949641111}, {'fro': 'recipient', 'to': 'name', 'type': 'HasA', 'score': 0.003937807399779558, 'wm_score': 0.3888691, 'final': 0.11941719517984571}, {'fro': 'recipient', 'to': 'program', 'type': 'AtLocation', 'score': 0.007391349878162146, 'wm_score': 0.3990622, 'final': 0.1248926049147135}, {'fro': 'recipient', 'to': 'birth', 'type': 'HasA', 'score': 0.0034050950780510902, 'wm_score': 0.3325986, 'final': 0.10216314655463578}, {'fro': 'recipient', 'to': 'gift', 'type': 'HasA', 'score': 0.011900977231562138, 'wm_score': 0.4545563, 'final': 0.14469757406209352}, {'fro': 'gift', 'to': 'recipient', 'type': 'HasA', 'score': 0.006661019288003445, 'wm_score': 0.4545563, 'final': 0.14102960350160243}, {'fro': 'letter', 'to': 'recipient', 'type': 'HasA', 'score': 0.0036728859413415194, 'wm_score': 0.36022508, 'final': 0.11063854415893908}, {'fro': 'recipient', 'to': 'degree', 'type': 'HasA', 'score': 0.003409489057958126, 'wm_score': 0.3669108, 'final': 0.11245988234057071}, {'fro': 'recipient', 'to': 'breast', 'type': 'HasA', 'score': 0.023696478456258774, 'wm_score': 0.29842222, 'final': 0.10611420091938116}, {'fro': 'mail', 'to': 'recipient', 'type': 'HasA', 'score': 0.013142195530235767, 'wm_score': 0.32775232, 'final': 0.10752523287116504}, {'fro': 'recipient', 'to': 'reward', 'type': 'HasA', 'score': 0.012564762495458126, 'wm_score': 0.47415072, 'final': 0.1510405497468207}, {'fro': 'recipient', 'to': 'pension', 'type': 'HasA', 'score': 0.01698875054717064, 'wm_score': 0.30281687, 'final': 0.10273718638301946}, {'fro': 'award', 'to': 'recipient', 'type': 'HasA', 'score': 0.004862211178988218, 'wm_score': 0.6790136, 'final': 0.2071076278252918}, {'fro': 'recipient', 'to': 'award', 'type': 'AtLocation', 'score': 0.0037268141750246286, 'wm_score': 0.6790136, 'final': 0.20631284992251728}, {'fro': 'recipient', 'to': 'prize', 'type': 'HasA', 'score': 0.002278050873428583, 'wm_score': 0.61496013, 'final': 0.18608267461140005}, {'fro': 'recipient', 'to': 'deceased', 'type': 'HasA', 'score': 0.007109654136002064, 'wm_score': 0.34592262, 'final': 0.10875354389520146}, {'fro': 'winner', 'to': 'recipient', 'type': 'HasA', 'score': 0.023512952029705048, 'wm_score': 0.4516206, 'final': 0.15194524642079354}, {'fro': 'prize', 'to': 'recipient', 'type': 'HasA', 'score': 0.0064572496339678764, 'wm_score': 0.61496013, 'final': 0.18900811374377757}, {'fro': 'writer', 'to': 'recipient', 'type': 'HasA', 'score': 0.006132258102297783, 'wm_score': 0.33713442, 'final': 0.10543290667160847}, {'fro': 'donor', 'to': 'recipient', 'type': 'HasA', 'score': 0.005726718343794346, 'wm_score': 0.55066705, 'final': 0.16920881784065608}, {'fro': 'event', 'to': 'recipient', 'type': 'HasA', 'score': 0.005433324724435806, 'wm_score': 0.35194796, 'final': 0.10938771530710507}, {'fro': 'grant', 'to': 'recipient', 'type': 'HasA', 'score': 0.005374271888285875, 'wm_score': 0.44059098, 'final': 0.13593928432180014}, {'fro': 'list', 'to': 'recipient', 'type': 'HasA', 'score': 0.005294691771268845, 'wm_score': 0.48328462, 'final': 0.14869167023988822}, {'fro': 'fellowship', 'to': 'recipient', 'type': 'HasA', 'score': 0.005177108570933342, 'wm_score': 0.5039044, 'final': 0.15479529599965336}, {'fro': 'charity', 'to': 'recipient', 'type': 'HasA', 'score': 0.0047567072324454784, 'wm_score': 0.40834987, 'final': 0.12583465606271185}, {'fro': 'service', 'to': 'recipient', 'type': 'HasA', 'score': 0.004475229885429144, 'wm_score': 0.38238776, 'final': 0.11784898891980042}, {'fro': 'register', 'to': 'recipient', 'type': 'HasA', 'score': 0.004365782253444195, 'wm_score': 0.36026776, 'final': 0.11113637557741095}, {'fro': 'book', 'to': 'recipient', 'type': 'HasA', 'score': 0.0038178120739758015, 'wm_score': 0.35189858, 'final': 0.1082420424517831}, {'fro': 'recipient', 'to': 'disability', 'type': 'HasA', 'score': 0.08574000000953674, 'wm_score': 0.36034098, 'final': 0.16812029400667572}, {'fro': 'recipient', 'to': 'visa', 'type': 'HasA', 'score': 0.060307733714580536, 'wm_score': 0.2993886, 'final': 0.1320319936002064}, {'fro': 'recipient', 'to': 'passport', 'type': 'HasA', 'score': 0.045630112290382385, 'wm_score': 0.287001, 'final': 0.11804137860326769}, {'fro': 'recipient', 'to': 'choice', 'type': 'HasA', 'score': 0.03483503684401512, 'wm_score': 0.30859587, 'final': 0.1169632867908106}, {'fro': 'recipient', 'to': 'receipt', 'type': 'HasA', 'score': 0.029689332470297813, 'wm_score': 0.3756387, 'final': 0.1334741427292085}, {'fro': 'recipient', 'to': 'certificate', 'type': 'HasA', 'score': 0.016005612909793854, 'wm_score': 0.46163428, 'final': 0.1496942130368557}, {'fro': 'recipient', 'to': 'copy', 'type': 'HasA', 'score': 0.00919054914265871, 'wm_score': 0.34502897, 'final': 0.10994207539986112}, {'fro': 'recipient', 'to': 'wish', 'type': 'HasA', 'score': 0.0083149503916502, 'wm_score': 0.33521706, 'final': 0.10638558327415516}, {'fro': 'recipient', 'to': 'letter', 'type': 'HasA', 'score': 0.004916710313409567, 'wm_score': 0.36022508, 'final': 0.11150922121938671}, {'fro': 'prize', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.09941218048334122, 'wm_score': 0.61496013, 'final': 0.2540765653383389}, {'fro': 'gift', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.052672985941171646, 'wm_score': 0.4545563, 'final': 0.17323798015882017}, {'fro': 'winner', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.027975665405392647, 'wm_score': 0.4516206, 'final': 0.15506914578377487}, {'fro': 'letter', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.019881829619407654, 'wm_score': 0.36022508, 'final': 0.12198480473358536}, {'fro': 'friend', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.018654996529221535, 'wm_score': 0.34482753, 'final': 0.11650675657045509}, {'fro': 'donation', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.01654759980738163, 'wm_score': 0.54117715, 'final': 0.17393646486516717}, {'fro': 'name', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.015007677488029003, 'wm_score': 0.3888691, 'final': 0.1271661042416203}, {'fro': 'child', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.0064789834432303905, 'wm_score': 0.35621506, 'final': 0.11139980641026127}, {'fro': 'donor', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.005794523283839226, 'wm_score': 0.55066705, 'final': 0.1692562812986875}, {'fro': 'medal', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.005566233769059181, 'wm_score': 0.49846673, 'final': 0.15343638263834145}, {'fro': 'star', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.005216809455305338, 'wm_score': 0.34905222, 'final': 0.10836743261871376}, {'fro': 'reader', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.0049959393218159676, 'wm_score': 0.34747693, 'final': 0.10774023652527119}, {'fro': 'reward', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.004605666734278202, 'wm_score': 0.47415072, 'final': 0.14546918271399478}, {'fro': 'heart', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.0035618559923022985, 'wm_score': 0.35333657, 'final': 0.10849427019461164}, {'fro': 'student', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.003559177042916417, 'wm_score': 0.40741163, 'final': 0.12471491293004153}, {'fro': 'card', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.0034689290914684534, 'wm_score': 0.39310315, 'final': 0.12035919536402793}, {'fro': 'recipient', 'to': 'hospital', 'type': 'AtLocation', 'score': 0.053004417568445206, 'wm_score': 0.22837326, 'final': 0.10561507029791166}, {'fro': 'recipient', 'to': 'audience', 'type': 'AtLocation', 'score': 0.03089606948196888, 'wm_score': 0.2614289, 'final': 0.10005591863737823}, {'fro': 'recipient', 'to': 'picture', 'type': 'AtLocation', 'score': 0.028850369155406952, 'wm_score': 0.28091532, 'final': 0.10446985440878488}, {'fro': 'recipient', 'to': 'mail', 'type': 'AtLocation', 'score': 0.011427568271756172, 'wm_score': 0.32775232, 'final': 0.10632499379022932}, {'fro': 'recipient', 'to': 'fellowship', 'type': 'AtLocation', 'score': 0.01140519417822361, 'wm_score': 0.5039044, 'final': 0.15915495592475656}, {'fro': 'recipient', 'to': 'registry', 'type': 'AtLocation', 'score': 0.007466011680662632, 'wm_score': 0.37141186, 'final': 0.11664976617646385}, {'fro': 'recipient', 'to': 'category', 'type': 'AtLocation', 'score': 0.007345209829509258, 'wm_score': 0.36937785, 'final': 0.1159550018806565}, {'fro': 'recipient', 'to': 'winner', 'type': 'AtLocation', 'score': 0.005821676459163427, 'wm_score': 0.4516206, 'final': 0.1395613535214144}, {'fro': 'recipient', 'to': 'event', 'type': 'AtLocation', 'score': 0.004617154598236084, 'wm_score': 0.35194796, 'final': 0.10881639621876528}, {'fro': 'recipient', 'to': 'donor', 'type': 'HasA', 'score': 0.0069939494132995605, 'wm_score': 0.55066705, 'final': 0.17009587958930972}, {'fro': 'recipient', 'to': 'donor', 'type': 'AtLocation', 'score': 0.006056047976016998, 'wm_score': 0.55066705, 'final': 0.16943934858321194}, {'fro': 'recipient', 'to': 'password', 'type': 'HasA', 'score': 0.08382653445005417, 'wm_score': 0.24626166, 'final': 0.13255707211503792}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">cigarette</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "cigarette"
+    let relations = [{'fro': 'man', 'to': 'cigarette', 'type': 'HasA', 'score': 0.02500377967953682, 'wm_score': 0.29439503, 'final': 0.10582115477567579}, {'fro': 'woman', 'to': 'cigarette', 'type': 'HasA', 'score': 0.01458319928497076, 'wm_score': 0.3088606, 'final': 0.10286641949947954}, {'fro': 'smoker', 'to': 'cigarette', 'type': 'HasA', 'score': 0.013962643221020699, 'wm_score': 0.5761355, 'final': 0.18261450025471454}, {'fro': 'victim', 'to': 'cigarette', 'type': 'HasA', 'score': 0.01291901245713234, 'wm_score': 0.3233577, 'final': 0.10605061871999266}, {'fro': 'defendant', 'to': 'cigarette', 'type': 'HasA', 'score': 0.004771204199641943, 'wm_score': 0.32669783, 'final': 0.10134919193974938}, {'fro': 'cigarette', 'to': 'smell', 'type': 'HasA', 'score': 0.026404496282339096, 'wm_score': 0.31900117, 'final': 0.11418349839763739}, {'fro': 'cigarette', 'to': 'filter', 'type': 'HasA', 'score': 0.008881825953722, 'wm_score': 0.35518378, 'final': 0.11277241216760542}, {'fro': 'cigarette', 'to': 'lighter', 'type': 'HasA', 'score': 0.008447653613984585, 'wm_score': 0.35610616, 'final': 0.11274520552978923}, {'fro': 'cigarette', 'to': 'light', 'type': 'HasA', 'score': 0.006253682076931, 'wm_score': 0.4091639, 'final': 0.12712674745385172}, {'fro': 'cigarette', 'to': 'mouth', 'type': 'HasA', 'score': 0.005049864761531353, 'wm_score': 0.34105298, 'final': 0.10585079933307197}, {'fro': 'cigarette', 'to': 'patent', 'type': 'HasA', 'score': 0.004023377783596516, 'wm_score': 0.43324432, 'final': 0.1327896604485176}, {'fro': 'needle', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.054711975157260895, 'wm_score': 0.35888988, 'final': 0.14596534661008265}, {'fro': 'bullet', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.029091276228427887, 'wm_score': 0.3131891, 'final': 0.11432062335989954}, {'fro': 'cigar', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.02714034542441368, 'wm_score': 0.6490829, 'final': 0.21372311179708958}, {'fro': 'smoke', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.025187280029058456, 'wm_score': 0.5826052, 'final': 0.19241265602034094}, {'fro': 'condom', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.012802157551050186, 'wm_score': 0.47019064, 'final': 0.15001870228573516}, {'fro': 'banana', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.00965780857950449, 'wm_score': 0.40880555, 'final': 0.12940213100565318}, {'fro': 'chemical', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.009323499165475368, 'wm_score': 0.33299693, 'final': 0.10642552841583278}, {'fro': 'smell', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.006913152057677507, 'wm_score': 0.31900117, 'final': 0.10053955744037427}, {'fro': 'crack', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.0056106168776750565, 'wm_score': 0.48207763, 'final': 0.14855072081437257}, {'fro': 'packet', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.004277403000742197, 'wm_score': 0.3300628, 'final': 0.10201302210051955}, {'fro': 'lighter', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.004007918760180473, 'wm_score': 0.35610616, 'final': 0.10963739113212635}, {'fro': 'nail', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.0038923807442188263, 'wm_score': 0.4014812, 'final': 0.1231690265209532}, {'fro': 'nicotine', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.0035333381965756416, 'wm_score': 0.613622, 'final': 0.18655993673760296}, {'fro': 'light', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.0032669154461473227, 'wm_score': 0.4091639, 'final': 0.12503601081230314}, {'fro': 'drop', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.0032046320848166943, 'wm_score': 0.47743893, 'final': 0.14547492145937171}, {'fro': 'puff', 'to': 'cigarette', 'type': 'AtLocation', 'score': 0.0031205578707158566, 'wm_score': 0.40263247, 'final': 0.12297413150950112}, {'fro': 'cigarette', 'to': 'air', 'type': 'AtLocation', 'score': 0.3943144381046295, 'wm_score': 0.28219074, 'final': 0.36067732867324065}, {'fro': 'cigarette', 'to': 'bag', 'type': 'AtLocation', 'score': 0.047723766416311264, 'wm_score': 0.45037752, 'final': 0.1685198924914179}, {'fro': 'cigarette', 'to': 'trash', 'type': 'AtLocation', 'score': 0.023008110001683235, 'wm_score': 0.33414984, 'final': 0.11635062900117828}, {'fro': 'cigarette', 'to': 'bottle', 'type': 'AtLocation', 'score': 0.016896026208996773, 'wm_score': 0.5125602, 'final': 0.16559527834629778}, {'fro': 'cigarette', 'to': 'box', 'type': 'AtLocation', 'score': 0.013268357142806053, 'wm_score': 0.38226974, 'final': 0.12396877199996426}, {'fro': 'cigarette', 'to': 'smoker', 'type': 'AtLocation', 'score': 0.008388656191527843, 'wm_score': 0.5761355, 'final': 0.17871270933406952}, {'fro': 'cigarette', 'to': 'smoke', 'type': 'AtLocation', 'score': 0.007144995499402285, 'wm_score': 0.5826052, 'final': 0.17978305684958162}, {'fro': 'cigarette', 'to': 'pipe', 'type': 'AtLocation', 'score': 0.005623670760542154, 'wm_score': 0.41030622, 'final': 0.12702843553237952}, {'fro': 'cigarette', 'to': 'mouth', 'type': 'AtLocation', 'score': 0.004081494640558958, 'wm_score': 0.34105298, 'final': 0.10517294024839129}, {'fro': 'cigarette', 'to': 'packet', 'type': 'AtLocation', 'score': 0.003166499314829707, 'wm_score': 0.3300628, 'final': 0.1012353895203808}, {'fro': 'cigarette', 'to': 'alcohol', 'type': 'AtLocation', 'score': 0.006186081562191248, 'wm_score': 0.5862798, 'final': 0.18021419709353392}, {'fro': 'cigarette', 'to': 'possession', 'type': 'AtLocation', 'score': 0.006912333890795708, 'wm_score': 0.33309257, 'final': 0.10476640472355701}, {'fro': 'cigarette', 'to': 'hair', 'type': 'AtLocation', 'score': 0.007231899071484804, 'wm_score': 0.33816504, 'final': 0.10651184135003937}, {'fro': 'cigarette', 'to': 'shirt', 'type': 'AtLocation', 'score': 0.005639153532683849, 'wm_score': 0.39564016, 'final': 0.12263945547287872}, {'fro': 'cigarette', 'to': 'throat', 'type': 'AtLocation', 'score': 0.01023560855537653, 'wm_score': 0.31844276, 'final': 0.10269775398876359}, {'fro': 'cigarette', 'to': 'hand', 'type': 'AtLocation', 'score': 0.007218513172119856, 'wm_score': 0.37975168, 'final': 0.11897846322048392}, {'fro': 'cigarette', 'to': 'car', 'type': 'AtLocation', 'score': 0.003922834526747465, 'wm_score': 0.36690342, 'final': 0.11281701016872324}, {'fro': 'cigarette', 'to': 'plastic', 'type': 'AtLocation', 'score': 0.0063663930632174015, 'wm_score': 0.43172464, 'final': 0.1339738671442522}, {'fro': 'cigarette', 'to': 'shop', 'type': 'AtLocation', 'score': 0.004991034511476755, 'wm_score': 0.38399145, 'final': 0.11869115915803374}, {'fro': 'cigarette', 'to': 'dust', 'type': 'AtLocation', 'score': 0.006270106416195631, 'wm_score': 0.3445781, 'final': 0.10776250449133695}, {'fro': 'cigarette', 'to': 'bar', 'type': 'AtLocation', 'score': 0.006368589121848345, 'wm_score': 0.46485752, 'final': 0.14391526838529387}, {'fro': 'cigarette', 'to': 'spray', 'type': 'AtLocation', 'score': 0.005096176639199257, 'wm_score': 0.3863084, 'final': 0.11945984364743949}, {'fro': 'cigarette', 'to': 'candle', 'type': 'AtLocation', 'score': 0.0030398876406252384, 'wm_score': 0.38614267, 'final': 0.1179707223484377}, {'fro': 'cigarette', 'to': 'leather', 'type': 'AtLocation', 'score': 0.005247788038104773, 'wm_score': 0.36689228, 'final': 0.11374113562667337}, {'fro': 'cigarette', 'to': 'crack', 'type': 'AtLocation', 'score': 0.0036927664186805487, 'wm_score': 0.48207763, 'final': 0.1472082254930764}, {'fro': 'cigarette', 'to': 'truck', 'type': 'AtLocation', 'score': 0.005881697405129671, 'wm_score': 0.36820993, 'final': 0.11458016718359079}, {'fro': 'cigarette', 'to': 'burn', 'type': 'AtLocation', 'score': 0.017243754118680954, 'wm_score': 0.3744262, 'final': 0.12439848788307668}, {'fro': 'cigarette', 'to': 'drink', 'type': 'AtLocation', 'score': 0.004281298723071814, 'wm_score': 0.5477253, 'final': 0.1673144991061503}, {'fro': 'cigarette', 'to': 'soft', 'type': 'AtLocation', 'score': 0.004178850445896387, 'wm_score': 0.44279867, 'final': 0.1357647963121275}, {'fro': 'cigarette', 'to': 'smell', 'type': 'AtLocation', 'score': 0.0454130694270134, 'wm_score': 0.31900117, 'final': 0.1274894995989094}, {'fro': 'cigarette', 'to': 'illegal', 'type': 'AtLocation', 'score': 0.006524825002998114, 'wm_score': 0.38757205, 'final': 0.1208389925020987}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

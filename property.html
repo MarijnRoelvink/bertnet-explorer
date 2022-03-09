@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">property</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "property"
+    let relations = [{'fro': 'property', 'to': 'area', 'type': 'HasA', 'score': 0.003230054397135973, 'wm_score': 0.563315, 'final': 0.1712555380779952}, {'fro': 'owner', 'to': 'property', 'type': 'HasA', 'score': 0.09821739047765732, 'wm_score': 0.5357672, 'final': 0.22948233333436013}, {'fro': 'author', 'to': 'property', 'type': 'HasA', 'score': 0.03732749819755554, 'wm_score': 0.26859963, 'final': 0.10670913773828888}, {'fro': 'developer', 'to': 'property', 'type': 'HasA', 'score': 0.030351469293236732, 'wm_score': 0.574123, 'final': 0.19348292850526577}, {'fro': 'family', 'to': 'property', 'type': 'HasA', 'score': 0.020531877875328064, 'wm_score': 0.55198747, 'final': 0.17996855551272967}, {'fro': 'landlord', 'to': 'property', 'type': 'HasA', 'score': 0.018006453290581703, 'wm_score': 0.5358297, 'final': 0.17335342730340722}, {'fro': 'seller', 'to': 'property', 'type': 'HasA', 'score': 0.01396180223673582, 'wm_score': 0.35059032, 'final': 0.1149503575657151}, {'fro': 'publisher', 'to': 'property', 'type': 'HasA', 'score': 0.012135638855397701, 'wm_score': 0.36157048, 'final': 0.1169660911987784}, {'fro': 'company', 'to': 'property', 'type': 'HasA', 'score': 0.01200211513787508, 'wm_score': 0.5424608, 'final': 0.17113972059651256}, {'fro': 'couple', 'to': 'property', 'type': 'HasA', 'score': 0.011619189754128456, 'wm_score': 0.42866555, 'final': 0.13673309782788995}, {'fro': 'homeowner', 'to': 'property', 'type': 'HasA', 'score': 0.00920354388654232, 'wm_score': 0.44891083, 'final': 0.14111572972057965}, {'fro': 'buyer', 'to': 'property', 'type': 'HasA', 'score': 0.006603849120438099, 'wm_score': 0.48169744, 'final': 0.1491319263843067}, {'fro': 'firm', 'to': 'property', 'type': 'HasA', 'score': 0.005958381574600935, 'wm_score': 0.51188755, 'final': 0.15773713210222065}, {'fro': 'defendant', 'to': 'property', 'type': 'HasA', 'score': 0.005511585157364607, 'wm_score': 0.36133683, 'final': 0.11225915861015524}, {'fro': 'operator', 'to': 'property', 'type': 'HasA', 'score': 0.005432618781924248, 'wm_score': 0.35312808, 'final': 0.10974125714734699}, {'fro': 'tenant', 'to': 'property', 'type': 'HasA', 'score': 0.005326952785253525, 'wm_score': 0.5086732, 'final': 0.1563308269496775}, {'fro': 'school', 'to': 'property', 'type': 'HasA', 'score': 0.005018388852477074, 'wm_score': 0.37594748, 'final': 0.11629711619673397}, {'fro': 'plaintiff', 'to': 'property', 'type': 'HasA', 'score': 0.004813634790480137, 'wm_score': 0.33983916, 'final': 0.10532129235333611}, {'fro': 'group', 'to': 'property', 'type': 'HasA', 'score': 0.004578922409564257, 'wm_score': 0.38609797, 'final': 0.11903463668669499}, {'fro': 'user', 'to': 'property', 'type': 'HasA', 'score': 0.004529177211225033, 'wm_score': 0.33826077, 'final': 0.10464865504785754}, {'fro': 'victim', 'to': 'property', 'type': 'HasA', 'score': 0.004459916148334742, 'wm_score': 0.39535335, 'final': 0.12172794630383434}, {'fro': 'contractor', 'to': 'property', 'type': 'HasA', 'score': 0.0043171122670173645, 'wm_score': 0.3966396, 'final': 0.12201385858691216}, {'fro': 'person', 'to': 'property', 'type': 'HasA', 'score': 0.003907624166458845, 'wm_score': 0.46599025, 'final': 0.14253241191652122}, {'fro': 'property', 'to': 'garage', 'type': 'HasA', 'score': 0.03710426762700081, 'wm_score': 0.3330469, 'final': 0.12588705733890057}, {'fro': 'property', 'to': 'basement', 'type': 'HasA', 'score': 0.030027929693460464, 'wm_score': 0.27932882, 'final': 0.10481819678542233}, {'fro': 'property', 'to': 'permit', 'type': 'HasA', 'score': 0.023698903620243073, 'wm_score': 0.51079476, 'final': 0.1698276605341702}, {'fro': 'property', 'to': 'fence', 'type': 'HasA', 'score': 0.023240171372890472, 'wm_score': 0.3459754, 'final': 0.12006073996102334}, {'fro': 'property', 'to': 'cemetery', 'type': 'HasA', 'score': 0.022066203877329826, 'wm_score': 0.38829434, 'final': 0.13193464471413088}, {'fro': 'property', 'to': 'garden', 'type': 'HasA', 'score': 0.014397777616977692, 'wm_score': 0.4403492, 'final': 0.1421832043318844}, {'fro': 'property', 'to': 'mortgage', 'type': 'HasA', 'score': 0.013545067980885506, 'wm_score': 0.57308984, 'final': 0.18140849958661986}, {'fro': 'property', 'to': 'history', 'type': 'HasA', 'score': 0.012992294505238533, 'wm_score': 0.41380382, 'final': 0.133235752153667}, {'fro': 'property', 'to': 'museum', 'type': 'HasA', 'score': 0.011522000655531883, 'wm_score': 0.4195624, 'final': 0.13393412045887235}, {'fro': 'property', 'to': 'tenant', 'type': 'HasA', 'score': 0.008580219000577927, 'wm_score': 0.5086732, 'final': 0.15860811330040459}, {'fro': 'property', 'to': 'lot', 'type': 'HasA', 'score': 0.008058994077146053, 'wm_score': 0.42327523, 'final': 0.13262386485400227}, {'fro': 'property', 'to': 'pool', 'type': 'HasA', 'score': 0.007833910174667835, 'wm_score': 0.3365281, 'final': 0.1064421671222675}, {'fro': 'property', 'to': 'barn', 'type': 'HasA', 'score': 0.00782843679189682, 'wm_score': 0.34521118, 'final': 0.1090432597543278}, {'fro': 'property', 'to': 'licence', 'type': 'HasA', 'score': 0.007408245466649532, 'wm_score': 0.38382584, 'final': 0.12033352382665467}, {'fro': 'property', 'to': 'gate', 'type': 'HasA', 'score': 0.0071999975480139256, 'wm_score': 0.3798834, 'final': 0.11900501828360976}, {'fro': 'property', 'to': 'lobby', 'type': 'HasA', 'score': 0.00685584731400013, 'wm_score': 0.3759738, 'final': 0.11759123311980012}, {'fro': 'property', 'to': 'lawyer', 'type': 'HasA', 'score': 0.006333485245704651, 'wm_score': 0.35262948, 'final': 0.11022228367199327}, {'fro': 'property', 'to': 'gallery', 'type': 'HasA', 'score': 0.0058101811446249485, 'wm_score': 0.3451743, 'final': 0.10761941680123749}, {'fro': 'property', 'to': 'developer', 'type': 'HasA', 'score': 0.005751500837504864, 'wm_score': 0.574123, 'final': 0.17626295058625346}, {'fro': 'property', 'to': 'lease', 'type': 'HasA', 'score': 0.005457332357764244, 'wm_score': 0.5343408, 'final': 0.16412237265043497}, {'fro': 'tree', 'to': 'property', 'type': 'AtLocation', 'score': 0.05564626678824425, 'wm_score': 0.36186033, 'final': 0.147510485751771}, {'fro': 'firearm', 'to': 'property', 'type': 'AtLocation', 'score': 0.029601488262414932, 'wm_score': 0.35233462, 'final': 0.12642142778369045}, {'fro': 'fire', 'to': 'property', 'type': 'AtLocation', 'score': 0.022685429081320763, 'wm_score': 0.42735314, 'final': 0.14408574235692456}, {'fro': 'fence', 'to': 'property', 'type': 'AtLocation', 'score': 0.018544113263487816, 'wm_score': 0.3459754, 'final': 0.11677349928444149}, {'fro': 'gun', 'to': 'property', 'type': 'AtLocation', 'score': 0.015358837321400642, 'wm_score': 0.39324123, 'final': 0.12872355512498046}, {'fro': 'house', 'to': 'property', 'type': 'AtLocation', 'score': 0.01526463683694601, 'wm_score': 0.5311128, 'final': 0.17001908578586225}, {'fro': 'horse', 'to': 'property', 'type': 'AtLocation', 'score': 0.013907414861023426, 'wm_score': 0.32307258, 'final': 0.10665696440271641}, {'fro': 'barn', 'to': 'property', 'type': 'AtLocation', 'score': 0.011416669003665447, 'wm_score': 0.34521118, 'final': 0.11155502230256584}, {'fro': 'tenant', 'to': 'property', 'type': 'AtLocation', 'score': 0.009653525426983833, 'wm_score': 0.5086732, 'final': 0.15935942779888873}, {'fro': 'vehicle', 'to': 'property', 'type': 'AtLocation', 'score': 0.006748907268047333, 'wm_score': 0.4064083, 'final': 0.12664672508763317}, {'fro': 'car', 'to': 'property', 'type': 'AtLocation', 'score': 0.006650608032941818, 'wm_score': 0.41611066, 'final': 0.1294886236230593}, {'fro': 'building', 'to': 'property', 'type': 'AtLocation', 'score': 0.005734992679208517, 'wm_score': 0.6099372, 'final': 0.18699565487544598}, {'fro': 'child', 'to': 'property', 'type': 'AtLocation', 'score': 0.005494698416441679, 'wm_score': 0.42260042, 'final': 0.1306264148915092}, {'fro': 'resident', 'to': 'property', 'type': 'AtLocation', 'score': 0.005491754040122032, 'wm_score': 0.3515483, 'final': 0.10930871782808543}, {'fro': 'warrant', 'to': 'property', 'type': 'AtLocation', 'score': 0.005127202719449997, 'wm_score': 0.3365106, 'final': 0.10454222190361502}, {'fro': 'dwelling', 'to': 'property', 'type': 'AtLocation', 'score': 0.004865855909883976, 'wm_score': 0.44829968, 'final': 0.1378960031369188}, {'fro': 'garage', 'to': 'property', 'type': 'AtLocation', 'score': 0.004860110115259886, 'wm_score': 0.3330469, 'final': 0.10331614708068193}, {'fro': 'home', 'to': 'property', 'type': 'AtLocation', 'score': 0.004739880096167326, 'wm_score': 0.5431134, 'final': 0.16625193606731714}, {'fro': 'property', 'to': 'works', 'type': 'AtLocation', 'score': 0.1729527860879898, 'wm_score': 0.4347446, 'final': 0.25149033026159284}, {'fro': 'property', 'to': 'neighbourhood', 'type': 'AtLocation', 'score': 0.05091814696788788, 'wm_score': 0.33913177, 'final': 0.13738223387752152}, {'fro': 'property', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.033618077635765076, 'wm_score': 0.37994048, 'final': 0.13751479834503558}, {'fro': 'property', 'to': 'neighborhood', 'type': 'AtLocation', 'score': 0.026385897770524025, 'wm_score': 0.45610195, 'final': 0.15530071343936683}, {'fro': 'property', 'to': 'sale', 'type': 'AtLocation', 'score': 0.022665081545710564, 'wm_score': 0.60470104, 'final': 0.19727586908199743}, {'fro': 'property', 'to': 'area', 'type': 'AtLocation', 'score': 0.020099211484193802, 'wm_score': 0.563315, 'final': 0.1830639480389357}, {'fro': 'property', 'to': 'process', 'type': 'AtLocation', 'score': 0.01583446003496647, 'wm_score': 0.36502868, 'final': 0.12059272602447654}, {'fro': 'property', 'to': 'open', 'type': 'AtLocation', 'score': 0.01504341047257185, 'wm_score': 0.42181838, 'final': 0.13707590133080033}, {'fro': 'property', 'to': 'possession', 'type': 'AtLocation', 'score': 0.013740630820393562, 'wm_score': 0.46893126, 'final': 0.15029781957427552}, {'fro': 'property', 'to': 'development', 'type': 'AtLocation', 'score': 0.010688567534089088, 'wm_score': 0.5120733, 'final': 0.16110398727386238}, {'fro': 'property', 'to': 'lease', 'type': 'AtLocation', 'score': 0.009204722940921783, 'wm_score': 0.5343408, 'final': 0.16674554605864525}, {'fro': 'property', 'to': 'market', 'type': 'AtLocation', 'score': 0.008997981436550617, 'wm_score': 0.5573957, 'final': 0.1735172970055855}, {'fro': 'property', 'to': 'county', 'type': 'AtLocation', 'score': 0.008912348188459873, 'wm_score': 0.41059056, 'final': 0.12941581173192193}, {'fro': 'property', 'to': 'park', 'type': 'AtLocation', 'score': 0.007580399047583342, 'wm_score': 0.48307002, 'final': 0.15022728533330837}, {'fro': 'property', 'to': 'building', 'type': 'AtLocation', 'score': 0.0073202685452997684, 'wm_score': 0.6099372, 'final': 0.18810534798170983}, {'fro': 'property', 'to': 'registry', 'type': 'AtLocation', 'score': 0.0069951084442436695, 'wm_score': 0.39054835, 'final': 0.12206108091097058}, {'fro': 'property', 'to': 'garden', 'type': 'AtLocation', 'score': 0.0065038311295211315, 'wm_score': 0.4403492, 'final': 0.1366574417906648}, {'fro': 'property', 'to': 'city', 'type': 'AtLocation', 'score': 0.006115339230746031, 'wm_score': 0.492128, 'final': 0.15191913746152225}, {'fro': 'property', 'to': 'region', 'type': 'AtLocation', 'score': 0.005995839834213257, 'wm_score': 0.3761694, 'final': 0.1170479078839493}, {'fro': 'property', 'to': 'district', 'type': 'AtLocation', 'score': 0.005465332884341478, 'wm_score': 0.40672046, 'final': 0.12584187101903907}, {'fro': 'property', 'to': 'breach', 'type': 'AtLocation', 'score': 0.0052948384545743465, 'wm_score': 0.40462625, 'final': 0.12509426191820205}, {'fro': 'property', 'to': 'future', 'type': 'AtLocation', 'score': 0.004644577857106924, 'wm_score': 0.5118555, 'final': 0.15680785449997486}, {'fro': 'property', 'to': 'auction', 'type': 'AtLocation', 'score': 0.004481572192162275, 'wm_score': 0.48260364, 'final': 0.14791819253451363}, {'fro': 'property', 'to': 'ground', 'type': 'AtLocation', 'score': 0.004440687131136656, 'wm_score': 0.41228986, 'final': 0.12679543899179568}, {'fro': 'property', 'to': 'water', 'type': 'AtLocation', 'score': 0.003921303898096085, 'wm_score': 0.36256006, 'final': 0.11151293072866728}, {'fro': 'property', 'to': 'owner', 'type': 'HasA', 'score': 0.00797575805336237, 'wm_score': 0.5357672, 'final': 0.16631319063735367}, {'fro': 'property', 'to': 'construction', 'type': 'HasA', 'score': 0.005477068945765495, 'wm_score': 0.6056115, 'final': 0.18551739826203587}, {'fro': 'property', 'to': 'maintenance', 'type': 'HasA', 'score': 0.0054569123312830925, 'wm_score': 0.45912778, 'final': 0.14155817263189818}, {'fro': 'property', 'to': 'buyer', 'type': 'HasA', 'score': 0.007400754373520613, 'wm_score': 0.48169744, 'final': 0.14968976006146445}, {'fro': 'property', 'to': 'rent', 'type': 'HasA', 'score': 0.005609449930489063, 'wm_score': 0.57786775, 'final': 0.17728693995134237}, {'fro': 'property', 'to': 'sale', 'type': 'HasA', 'score': 0.00736662931740284, 'wm_score': 0.60470104, 'final': 0.18656695252218203}, {'fro': 'property', 'to': 'parking', 'type': 'HasA', 'score': 0.005147441755980253, 'wm_score': 0.46944866, 'final': 0.1444378072291862}, {'fro': 'property', 'to': 'resident', 'type': 'HasA', 'score': 0.011430182494223118, 'wm_score': 0.3515483, 'final': 0.11346561774595619}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

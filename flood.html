@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">flood</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "flood"
+    let relations = [{'fro': 'flood', 'to': 'way', 'type': 'AtLocation', 'score': 0.004014028236269951, 'wm_score': 0.36070395, 'final': 0.11102100476538898}, {'fro': 'flood', 'to': 'region', 'type': 'AtLocation', 'score': 0.004136682953685522, 'wm_score': 0.4202028, 'final': 0.12895651806757988}, {'fro': 'river', 'to': 'flood', 'type': 'HasA', 'score': 0.004476131871342659, 'wm_score': 0.53656626, 'final': 0.16410317030993987}, {'fro': 'flood', 'to': 'summer', 'type': 'AtLocation', 'score': 0.004786001518368721, 'wm_score': 0.42815375, 'final': 0.13179632606285813}, {'fro': 'flood', 'to': 'peak', 'type': 'AtLocation', 'score': 0.004681529942899942, 'wm_score': 0.3927489, 'final': 0.12110174096002999}, {'fro': 'flood', 'to': 'being', 'type': 'AtLocation', 'score': 0.004221401177346706, 'wm_score': 0.32679573, 'final': 0.1009936998241427}, {'fro': 'flood', 'to': 'affect', 'type': 'AtLocation', 'score': 0.005159897264093161, 'wm_score': 0.35886723, 'final': 0.11127209708486523}, {'fro': 'flood', 'to': 'spring', 'type': 'AtLocation', 'score': 0.0064888689666986465, 'wm_score': 0.4035842, 'final': 0.12561746827668907}, {'fro': 'flood', 'to': 'making', 'type': 'AtLocation', 'score': 0.002951518166810274, 'wm_score': 0.34880286, 'final': 0.10670692071676721}, {'fro': 'flood', 'to': 'flash', 'type': 'AtLocation', 'score': 0.004407241474837065, 'wm_score': 0.5012985, 'final': 0.15347461903238596}, {'fro': 'dam', 'to': 'flood', 'type': 'HasA', 'score': 0.0846814215183258, 'wm_score': 0.5549507, 'final': 0.22576220506282807}, {'fro': 'city', 'to': 'flood', 'type': 'HasA', 'score': 0.05576411634683609, 'wm_score': 0.45057994, 'final': 0.1742088634427853}, {'fro': 'lake', 'to': 'flood', 'type': 'HasA', 'score': 0.03484122455120087, 'wm_score': 0.43063852, 'final': 0.15358041318584062}, {'fro': 'creek', 'to': 'flood', 'type': 'HasA', 'score': 0.02187648043036461, 'wm_score': 0.35886788, 'final': 0.12297390030125524}, {'fro': 'canal', 'to': 'flood', 'type': 'HasA', 'score': 0.016132690012454987, 'wm_score': 0.36313635, 'final': 0.1202337880087185}, {'fro': 'town', 'to': 'flood', 'type': 'HasA', 'score': 0.01278735976666212, 'wm_score': 0.36643142, 'final': 0.1188805778366635}, {'fro': 'reservoir', 'to': 'flood', 'type': 'HasA', 'score': 0.012181994505226612, 'wm_score': 0.54146695, 'final': 0.17096748115365865}, {'fro': 'valley', 'to': 'flood', 'type': 'HasA', 'score': 0.01184956356883049, 'wm_score': 0.38466647, 'final': 0.12369463549818135}, {'fro': 'sea', 'to': 'flood', 'type': 'HasA', 'score': 0.010788985528051853, 'wm_score': 0.42925033, 'final': 0.13632738886963633}, {'fro': 'ocean', 'to': 'flood', 'type': 'HasA', 'score': 0.010701616294682026, 'wm_score': 0.48550022, 'final': 0.15314119740627744}, {'fro': 'region', 'to': 'flood', 'type': 'HasA', 'score': 0.01044539175927639, 'wm_score': 0.4202028, 'final': 0.1333726142314935}, {'fro': 'nile', 'to': 'flood', 'type': 'HasA', 'score': 0.010431056842207909, 'wm_score': 0.4335863, 'final': 0.13737762978954554}, {'fro': 'water', 'to': 'flood', 'type': 'HasA', 'score': 0.010393739677965641, 'wm_score': 0.6238882, 'final': 0.19444207777457598}, {'fro': 'area', 'to': 'flood', 'type': 'HasA', 'score': 0.009607982821762562, 'wm_score': 0.48833126, 'final': 0.1532249659752338}, {'fro': 'island', 'to': 'flood', 'type': 'HasA', 'score': 0.006778361275792122, 'wm_score': 0.3433186, 'final': 0.10774043289305449}, {'fro': 'country', 'to': 'flood', 'type': 'HasA', 'score': 0.006686319597065449, 'wm_score': 0.4198649, 'final': 0.13063989371794582}, {'fro': 'bridge', 'to': 'flood', 'type': 'HasA', 'score': 0.00628250977024436, 'wm_score': 0.4533895, 'final': 0.14041460683917106}, {'fro': 'park', 'to': 'flood', 'type': 'HasA', 'score': 0.005515926983207464, 'wm_score': 0.34319583, 'final': 0.10681989788824522}, {'fro': 'swamp', 'to': 'flood', 'type': 'HasA', 'score': 0.0048367939889431, 'wm_score': 0.35908055, 'final': 0.11110992079226018}, {'fro': 'coast', 'to': 'flood', 'type': 'HasA', 'score': 0.004688311833888292, 'wm_score': 0.45106903, 'final': 0.13860252728372183}, {'fro': 'delta', 'to': 'flood', 'type': 'HasA', 'score': 0.004428322892636061, 'wm_score': 0.33501536, 'final': 0.10360443402484525}, {'fro': 'capital', 'to': 'flood', 'type': 'HasA', 'score': 0.004080044571310282, 'wm_score': 0.36135322, 'final': 0.11126199719991721}, {'fro': 'forest', 'to': 'flood', 'type': 'HasA', 'score': 0.004075794015079737, 'wm_score': 0.4200299, 'final': 0.12886202581055584}, {'fro': 'village', 'to': 'flood', 'type': 'HasA', 'score': 0.0037746084854006767, 'wm_score': 0.34247229, 'final': 0.10538391293978049}, {'fro': 'flood', 'to': 'toll', 'type': 'HasA', 'score': 0.14190246164798737, 'wm_score': 0.600706, 'final': 0.27954352315359116}, {'fro': 'flood', 'to': 'consequence', 'type': 'HasA', 'score': 0.047004543244838715, 'wm_score': 0.3027837, 'final': 0.12373829027138711}, {'fro': 'flood', 'to': 'link', 'type': 'HasA', 'score': 0.03141985461115837, 'wm_score': 0.29143628, 'final': 0.10942478222781088}, {'fro': 'flood', 'to': 'cause', 'type': 'HasA', 'score': 0.01362999714910984, 'wm_score': 0.4650947, 'final': 0.1490694080043769}, {'fro': 'flood', 'to': 'future', 'type': 'HasA', 'score': 0.013214287348091602, 'wm_score': 0.3556236, 'final': 0.11593708114366413}, {'fro': 'flood', 'to': 'cost', 'type': 'HasA', 'score': 0.012652610428631306, 'wm_score': 0.36350513, 'final': 0.11790836630004192}, {'fro': 'flood', 'to': 'potential', 'type': 'HasA', 'score': 0.010859829373657703, 'wm_score': 0.38689432, 'final': 0.1236701765615604}, {'fro': 'flood', 'to': 'history', 'type': 'HasA', 'score': 0.010072140023112297, 'wm_score': 0.33848315, 'final': 0.10859544301617861}, {'fro': 'flood', 'to': 'warning', 'type': 'HasA', 'score': 0.009377297013998032, 'wm_score': 0.51181495, 'final': 0.16010859290979862}, {'fro': 'flood', 'to': 'problem', 'type': 'HasA', 'score': 0.0077585577964782715, 'wm_score': 0.35295802, 'final': 0.1113183964575348}, {'fro': 'flood', 'to': 'response', 'type': 'HasA', 'score': 0.005465093534439802, 'wm_score': 0.49641335, 'final': 0.1527495704741079}, {'fro': 'flood', 'to': 'beginning', 'type': 'HasA', 'score': 0.004942110273987055, 'wm_score': 0.36808842, 'final': 0.11388600319179096}, {'fro': 'flood', 'to': 'plan', 'type': 'HasA', 'score': 0.004672340117394924, 'wm_score': 0.37049413, 'final': 0.11441887708217646}, {'fro': 'flood', 'to': 'start', 'type': 'HasA', 'score': 0.004289703443646431, 'wm_score': 0.3546577, 'final': 0.10940010241055252}, {'fro': 'baby', 'to': 'flood', 'type': 'AtLocation', 'score': 0.04089348018169403, 'wm_score': 0.23831564, 'final': 0.10012012812718583}, {'fro': 'dam', 'to': 'flood', 'type': 'AtLocation', 'score': 0.04057493433356285, 'wm_score': 0.5549507, 'final': 0.194887664033494}, {'fro': 'boat', 'to': 'flood', 'type': 'AtLocation', 'score': 0.0352386012673378, 'wm_score': 0.33999106, 'final': 0.12666433888713646}, {'fro': 'child', 'to': 'flood', 'type': 'AtLocation', 'score': 0.023203564807772636, 'wm_score': 0.29652154, 'final': 0.10519895736544084}, {'fro': 'bridge', 'to': 'flood', 'type': 'AtLocation', 'score': 0.014805071987211704, 'wm_score': 0.4533895, 'final': 0.14638040039104822}, {'fro': 'fish', 'to': 'flood', 'type': 'AtLocation', 'score': 0.01282169483602047, 'wm_score': 0.30732563, 'final': 0.10117287538521434}, {'fro': 'river', 'to': 'flood', 'type': 'AtLocation', 'score': 0.010989874601364136, 'wm_score': 0.53656626, 'final': 0.1686627902209549}, {'fro': 'bird', 'to': 'flood', 'type': 'AtLocation', 'score': 0.007286238484084606, 'wm_score': 0.40849417, 'final': 0.12764861793885923}, {'fro': 'village', 'to': 'flood', 'type': 'AtLocation', 'score': 0.005581951700150967, 'wm_score': 0.34247229, 'final': 0.10664905319010569}, {'fro': 'flood', 'to': 'forecast', 'type': 'AtLocation', 'score': 0.2020898312330246, 'wm_score': 0.3548233, 'final': 0.24790987186311722}, {'fro': 'flood', 'to': 'works', 'type': 'AtLocation', 'score': 0.19796307384967804, 'wm_score': 0.27300823, 'final': 0.22047662069477464}, {'fro': 'flood', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.09635729342699051, 'wm_score': 0.28574085, 'final': 0.15317236039889337}, {'fro': 'flood', 'to': 'air', 'type': 'AtLocation', 'score': 0.07292794436216354, 'wm_score': 0.3649464, 'final': 0.1605334810535145}, {'fro': 'flood', 'to': 'water', 'type': 'AtLocation', 'score': 0.048461008816957474, 'wm_score': 0.6238882, 'final': 0.22108916617187027}, {'fro': 'flood', 'to': 'area', 'type': 'AtLocation', 'score': 0.010125761851668358, 'wm_score': 0.48833126, 'final': 0.15358741129616788}, {'fro': 'flood', 'to': 'waters', 'type': 'AtLocation', 'score': 0.005612749606370926, 'wm_score': 0.49435273, 'final': 0.1522347437244597}, {'fro': 'flood', 'to': 'clouds', 'type': 'AtLocation', 'score': 0.0036194908898323774, 'wm_score': 0.3802373, 'final': 0.11660483362288268}, {'fro': 'flood', 'to': 'streets', 'type': 'AtLocation', 'score': 0.0029997536912560463, 'wm_score': 0.3993936, 'final': 0.12191790758387926}, {'fro': 'flood', 'to': 'north', 'type': 'AtLocation', 'score': 0.0027728795539587736, 'wm_score': 0.36250612, 'final': 0.11069285168777115}, {'fro': 'flood', 'to': 'east', 'type': 'AtLocation', 'score': 0.0027374427299946547, 'wm_score': 0.40083733, 'final': 0.12216740891099627}, {'fro': 'flood', 'to': 'south', 'type': 'AtLocation', 'score': 0.0026727141812443733, 'wm_score': 0.36761153, 'final': 0.11215435892687109}, {'fro': 'flood', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.0023020226508378983, 'wm_score': 0.34988335, 'final': 0.10657642085558654}, {'fro': 'flood', 'to': 'ground', 'type': 'AtLocation', 'score': 0.0021025564055889845, 'wm_score': 0.34196535, 'final': 0.1040613944839123}, {'fro': 'flood', 'to': 'northeast', 'type': 'AtLocation', 'score': 0.001997896935790777, 'wm_score': 0.39846048, 'final': 0.12093667185505355}, {'fro': 'flood', 'to': 'thousands', 'type': 'AtLocation', 'score': 0.011899400502443314, 'wm_score': 0.53812265, 'final': 0.16976637535171035}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

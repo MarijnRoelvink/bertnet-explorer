@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">cabinet</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "cabinet"
+    let relations = [{'fro': 'cabinet', 'to': 'secretary', 'type': 'HasA', 'score': 0.030831461772322655, 'wm_score': 0.6140054, 'final': 0.2057836432406259}, {'fro': 'secretary', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.03831489011645317, 'wm_score': 0.6140054, 'final': 0.21102204308151726}, {'fro': 'ndp', 'to': 'cabinet', 'type': 'HasA', 'score': 0.09304168820381165, 'wm_score': 0.3793525, 'final': 0.17893493174266817}, {'fro': 'uk', 'to': 'cabinet', 'type': 'HasA', 'score': 0.04110168665647507, 'wm_score': 0.27945635, 'final': 0.11260808565953256}, {'fro': 'coalition', 'to': 'cabinet', 'type': 'HasA', 'score': 0.039390578866004944, 'wm_score': 0.6329457, 'final': 0.2174571152062035}, {'fro': 'government', 'to': 'cabinet', 'type': 'HasA', 'score': 0.03663952648639679, 'wm_score': 0.65670145, 'final': 0.2226581035404778}, {'fro': 'senate', 'to': 'cabinet', 'type': 'HasA', 'score': 0.027708789333701134, 'wm_score': 0.5766178, 'final': 0.1923814925335908}, {'fro': 'bjp', 'to': 'cabinet', 'type': 'HasA', 'score': 0.025387978181242943, 'wm_score': 0.44229013, 'final': 0.15045862372687008}, {'fro': 'party', 'to': 'cabinet', 'type': 'HasA', 'score': 0.02111279033124447, 'wm_score': 0.6686434, 'final': 0.21537197323187116}, {'fro': 'queen', 'to': 'cabinet', 'type': 'HasA', 'score': 0.019504830241203308, 'wm_score': 0.28921863, 'final': 0.10041897016884233}, {'fro': 'us', 'to': 'cabinet', 'type': 'HasA', 'score': 0.01636764034628868, 'wm_score': 0.34780198, 'final': 0.1157979422424021}, {'fro': 'country', 'to': 'cabinet', 'type': 'HasA', 'score': 0.016352832317352295, 'wm_score': 0.43960923, 'final': 0.14332975162214664}, {'fro': 'eu', 'to': 'cabinet', 'type': 'HasA', 'score': 0.01605488732457161, 'wm_score': 0.49511707, 'final': 0.15977354212720016}, {'fro': 'pm', 'to': 'cabinet', 'type': 'HasA', 'score': 0.01589016430079937, 'wm_score': 0.43569192, 'final': 0.1418306910105596}, {'fro': 'president', 'to': 'cabinet', 'type': 'HasA', 'score': 0.011517665348947048, 'wm_score': 0.5547295, 'final': 0.17448121574426295}, {'fro': 'un', 'to': 'cabinet', 'type': 'HasA', 'score': 0.011024286039173603, 'wm_score': 0.42113814, 'final': 0.13405844222742155}, {'fro': 'opposition', 'to': 'cabinet', 'type': 'HasA', 'score': 0.010796107351779938, 'wm_score': 0.5828731, 'final': 0.182419205146246}, {'fro': 'house', 'to': 'cabinet', 'type': 'HasA', 'score': 0.010578682646155357, 'wm_score': 0.591694, 'final': 0.1849132778523088}, {'fro': 'gop', 'to': 'cabinet', 'type': 'HasA', 'score': 0.008037306368350983, 'wm_score': 0.39217106, 'final': 0.12327743245784571}, {'fro': 'anc', 'to': 'cabinet', 'type': 'HasA', 'score': 0.007683153264224529, 'wm_score': 0.38058823, 'final': 0.1195546762849572}, {'fro': 'vatican', 'to': 'cabinet', 'type': 'HasA', 'score': 0.00751981046050787, 'wm_score': 0.3277902, 'final': 0.10360092732235551}, {'fro': 'nation', 'to': 'cabinet', 'type': 'HasA', 'score': 0.0064399829134345055, 'wm_score': 0.43243772, 'final': 0.13423930403940418}, {'fro': 'kremlin', 'to': 'cabinet', 'type': 'HasA', 'score': 0.00595605606213212, 'wm_score': 0.36560032, 'final': 0.11384933524349249}, {'fro': 'chancellor', 'to': 'cabinet', 'type': 'HasA', 'score': 0.005247225984930992, 'wm_score': 0.5820955, 'final': 0.1783017081894517}, {'fro': 'parliament', 'to': 'cabinet', 'type': 'HasA', 'score': 0.005229541100561619, 'wm_score': 0.7197318, 'final': 0.2195802187703932}, {'fro': 'speaker', 'to': 'cabinet', 'type': 'HasA', 'score': 0.00522755179554224, 'wm_score': 0.55482024, 'final': 0.17010535825687956}, {'fro': 'legislature', 'to': 'cabinet', 'type': 'HasA', 'score': 0.004453521687537432, 'wm_score': 0.6051824, 'final': 0.18467218518127623}, {'fro': 'governor', 'to': 'cabinet', 'type': 'HasA', 'score': 0.004036804661154747, 'wm_score': 0.4930641, 'final': 0.15074499326280832}, {'fro': 'military', 'to': 'cabinet', 'type': 'HasA', 'score': 0.003967948257923126, 'wm_score': 0.49279615, 'final': 0.15061640878054622}, {'fro': 'cabinet', 'to': 'dilemma', 'type': 'HasA', 'score': 0.1375909149646759, 'wm_score': 0.23450378, 'final': 0.16666477447527314}, {'fro': 'cabinet', 'to': 'vacancy', 'type': 'HasA', 'score': 0.05861113965511322, 'wm_score': 0.36626887, 'final': 0.15090845875857928}, {'fro': 'cabinet', 'to': 'budget', 'type': 'HasA', 'score': 0.04023730754852295, 'wm_score': 0.525759, 'final': 0.1858938152839661}, {'fro': 'cabinet', 'to': 'choice', 'type': 'HasA', 'score': 0.035558365285396576, 'wm_score': 0.47616366, 'final': 0.16773995369977762}, {'fro': 'cabinet', 'to': 'mandate', 'type': 'HasA', 'score': 0.0304686538875103, 'wm_score': 0.4422912, 'final': 0.15401541772125724}, {'fro': 'cabinet', 'to': 'majority', 'type': 'HasA', 'score': 0.02975543960928917, 'wm_score': 0.4864345, 'final': 0.16675915772650243}, {'fro': 'cabinet', 'to': 'surplus', 'type': 'HasA', 'score': 0.025081049650907516, 'wm_score': 0.28281593, 'final': 0.10240151375563528}, {'fro': 'cabinet', 'to': 'plan', 'type': 'HasA', 'score': 0.023576369509100914, 'wm_score': 0.5288203, 'final': 0.17514954865637067}, {'fro': 'cabinet', 'to': 'veto', 'type': 'HasA', 'score': 0.022859415039420128, 'wm_score': 0.4798286, 'final': 0.1599501705275941}, {'fro': 'cabinet', 'to': 'priority', 'type': 'HasA', 'score': 0.018780091777443886, 'wm_score': 0.42437315, 'final': 0.14045800924421073}, {'fro': 'cabinet', 'to': 'problem', 'type': 'HasA', 'score': 0.01754392869770527, 'wm_score': 0.31214273, 'final': 0.10592356908839369}, {'fro': 'cabinet', 'to': 'spokesman', 'type': 'HasA', 'score': 0.00960277859121561, 'wm_score': 0.36863548, 'final': 0.11731258901385094}, {'fro': 'cabinet', 'to': 'minister', 'type': 'HasA', 'score': 0.008600128814578056, 'wm_score': 0.7450806, 'final': 0.22954427017020465}, {'fro': 'cabinet', 'to': 'split', 'type': 'HasA', 'score': 0.007970258593559265, 'wm_score': 0.39626378, 'final': 0.12445831501549151}, {'fro': 'cabinet', 'to': 'committee', 'type': 'HasA', 'score': 0.007516920566558838, 'wm_score': 0.5757908, 'final': 0.17799908439659123}, {'fro': 'cabinet', 'to': 'bill', 'type': 'HasA', 'score': 0.007223162800073624, 'wm_score': 0.45336378, 'final': 0.14106534796005157}, {'fro': 'cabinet', 'to': 'review', 'type': 'HasA', 'score': 0.005866154562681913, 'wm_score': 0.4420459, 'final': 0.13672007819387735}, {'fro': 'cabinet', 'to': 'role', 'type': 'HasA', 'score': 0.004989653825759888, 'wm_score': 0.40387923, 'final': 0.12465652667803193}, {'fro': 'cabinet', 'to': 'spokesperson', 'type': 'HasA', 'score': 0.004880766849964857, 'wm_score': 0.33682016, 'final': 0.10446258479497542}, {'fro': 'cabinet', 'to': 'nominee', 'type': 'HasA', 'score': 0.0045589604414999485, 'wm_score': 0.44416523, 'final': 0.13644084130905001}, {'fro': 'cabinet', 'to': 'recess', 'type': 'HasA', 'score': 0.00453652860596776, 'wm_score': 0.39230865, 'final': 0.12086816502417744}, {'fro': 'cabinet', 'to': 'strategy', 'type': 'HasA', 'score': 0.0044246879406273365, 'wm_score': 0.37947658, 'final': 0.11694025555843915}, {'fro': 'cabinet', 'to': 'crisis', 'type': 'HasA', 'score': 0.004237071610987186, 'wm_score': 0.4542418, 'final': 0.13923849012769104}, {'fro': 'cabinet', 'to': 'responsibility', 'type': 'HasA', 'score': 0.004109782632440329, 'wm_score': 0.46309516, 'final': 0.14180539584270824}, {'fro': 'cabinet', 'to': 'portfolio', 'type': 'HasA', 'score': 0.003962393384426832, 'wm_score': 0.43027973, 'final': 0.1318575943690988}, {'fro': 'cabinet', 'to': 'proposal', 'type': 'HasA', 'score': 0.003781226696446538, 'wm_score': 0.5539905, 'final': 0.16884400868751262}, {'fro': 'cabinet', 'to': 'position', 'type': 'HasA', 'score': 0.00355062005110085, 'wm_score': 0.5101409, 'final': 0.15552770403577063}, {'fro': 'cabinet', 'to': 'minority', 'type': 'HasA', 'score': 0.0034636661875993013, 'wm_score': 0.35837442, 'final': 0.10993689233131954}, {'fro': 'cabinet', 'to': 'list', 'type': 'HasA', 'score': 0.003444107249379158, 'wm_score': 0.47680283, 'final': 0.14545172407456544}, {'fro': 'cabinet', 'to': 'secret', 'type': 'HasA', 'score': 0.0034320412669330835, 'wm_score': 0.36741138, 'final': 0.11262584288685318}, {'fro': 'minister', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.076100192964077, 'wm_score': 0.7450806, 'final': 0.2767943150748539}, {'fro': 'woman', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.05555780977010727, 'wm_score': 0.2844728, 'final': 0.1242323068390751}, {'fro': 'tory', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.04640696570277214, 'wm_score': 0.4406726, 'final': 0.16468665599194052}, {'fro': 'conservative', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.0323617085814476, 'wm_score': 0.47820616, 'final': 0.16611504400701335}, {'fro': 'democrat', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.03117206320166588, 'wm_score': 0.43378565, 'final': 0.15195613924116613}, {'fro': 'liberal', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.029643181711435318, 'wm_score': 0.49866012, 'final': 0.17034826319800472}, {'fro': 'doctor', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.018570691347122192, 'wm_score': 0.29030517, 'final': 0.10009103494298555}, {'fro': 'speaker', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.009993546642363071, 'wm_score': 0.55482024, 'final': 0.17344155464965416}, {'fro': 'deputy', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.009799065999686718, 'wm_score': 0.63195336, 'final': 0.19644535419978074}, {'fro': 'bill', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.00916791707277298, 'wm_score': 0.45336378, 'final': 0.1424266759509411}, {'fro': 'minority', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.007937198504805565, 'wm_score': 0.35837442, 'final': 0.11306836495336392}, {'fro': 'republican', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.007725986652076244, 'wm_score': 0.44640374, 'final': 0.1393293126564534}, {'fro': 'senator', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.006872198544442654, 'wm_score': 0.3944354, 'final': 0.12314115898110987}, {'fro': 'change', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.00678445678204298, 'wm_score': 0.4681831, 'final': 0.14520404974743012}, {'fro': 'majority', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.006563973147422075, 'wm_score': 0.4864345, 'final': 0.15052513120319547}, {'fro': 'whip', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.0064241113141179085, 'wm_score': 0.36532152, 'final': 0.11409333391988256}, {'fro': 'lawmaker', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.006264193449169397, 'wm_score': 0.56923616, 'final': 0.17515578341441862}, {'fro': 'politician', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.006048382259905338, 'wm_score': 0.38945287, 'final': 0.12106972858193375}, {'fro': 'replacement', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.0059546735137701035, 'wm_score': 0.43261886, 'final': 0.1339539294596391}, {'fro': 'colleague', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.0058741578832268715, 'wm_score': 0.36648655, 'final': 0.11405787551825883}, {'fro': 'candidate', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.0046930559910833836, 'wm_score': 0.51565313, 'final': 0.1579810781937584}, {'fro': 'third', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.004271987825632095, 'wm_score': 0.40112704, 'final': 0.12332850347794248}, {'fro': 'deal', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.0036796226631850004, 'wm_score': 0.42916808, 'final': 0.13132615986422952}, {'fro': 'cabinet', 'to': 'works', 'type': 'AtLocation', 'score': 0.6369985938072205, 'wm_score': 0.26170537, 'final': 0.5244106266650543}, {'fro': 'cabinet', 'to': 'making', 'type': 'AtLocation', 'score': 0.04376688972115517, 'wm_score': 0.3846782, 'final': 0.14604028280480863}, {'fro': 'cabinet', 'to': 'balance', 'type': 'AtLocation', 'score': 0.017309488728642464, 'wm_score': 0.29710048, 'final': 0.10124678611004972}, {'fro': 'cabinet', 'to': 'running', 'type': 'AtLocation', 'score': 0.014137282967567444, 'wm_score': 0.32695988, 'final': 0.10798406207729722}, {'fro': 'cabinet', 'to': 'process', 'type': 'AtLocation', 'score': 0.0074611445888876915, 'wm_score': 0.43548834, 'final': 0.13586930321222138}, {'fro': 'cabinet', 'to': 'middle', 'type': 'AtLocation', 'score': 0.003791696857661009, 'wm_score': 0.38145173, 'final': 0.11708970680036272}, {'fro': 'cabinet', 'to': 'commons', 'type': 'AtLocation', 'score': 0.0036577342543751, 'wm_score': 0.53751445, 'final': 0.16381474897806259}, {'fro': 'cabinet', 'to': 'minority', 'type': 'AtLocation', 'score': 0.0029371301643550396, 'wm_score': 0.35837442, 'final': 0.10956831711504855}, {'fro': 'cabinet', 'to': 'news', 'type': 'AtLocation', 'score': 0.0028833167161792517, 'wm_score': 0.3985699, 'final': 0.12158929170132549}, {'fro': 'cabinet', 'to': 'way', 'type': 'AtLocation', 'score': 0.002213200554251671, 'wm_score': 0.33306122, 'final': 0.10146760638797618}, {'fro': 'cabinet', 'to': 'interim', 'type': 'AtLocation', 'score': 0.0021444817539304495, 'wm_score': 0.59919035, 'final': 0.18125824222775133}, {'fro': 'cabinet', 'to': 'building', 'type': 'AtLocation', 'score': 0.002105672610923648, 'wm_score': 0.39916718, 'final': 0.12122412482764658}, {'fro': 'cabinet', 'to': 'recess', 'type': 'AtLocation', 'score': 0.0018016304820775986, 'wm_score': 0.39230865, 'final': 0.11895373633745433}, {'fro': 'cabinet', 'to': 'planning', 'type': 'AtLocation', 'score': 0.0014806091785430908, 'wm_score': 0.49856055, 'final': 0.1506045914249802}, {'fro': 'matter', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.0034095649607479572, 'wm_score': 0.41515008, 'final': 0.12693171947252357}, {'fro': 'cabinet', 'to': 'table', 'type': 'HasA', 'score': 0.0038443366065621376, 'wm_score': 0.39121246, 'final': 0.1200547736245935}, {'fro': 'cabinet', 'to': 'meeting', 'type': 'HasA', 'score': 0.010361259803175926, 'wm_score': 0.6532762, 'final': 0.20323574186222315}, {'fro': 'cabinet', 'to': 'row', 'type': 'HasA', 'score': 0.005548366345465183, 'wm_score': 0.3620767, 'final': 0.11250686644182563}, {'fro': 'senior', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.010218288749456406, 'wm_score': 0.5659193, 'final': 0.17692859212461953}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

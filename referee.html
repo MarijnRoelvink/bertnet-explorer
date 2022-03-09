@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">referee</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "referee"
+    let relations = [{'fro': 'referee', 'to': 'goal', 'type': 'HasA', 'score': 0.008218171074986458, 'wm_score': 0.34564394, 'final': 0.10944590175249053}, {'fro': 'competition', 'to': 'referee', 'type': 'HasA', 'score': 0.008175479248166084, 'wm_score': 0.38489127, 'final': 0.12119021647371628}, {'fro': 'complaint', 'to': 'referee', 'type': 'HasA', 'score': 0.0039221663028001785, 'wm_score': 0.3778733, 'final': 0.11610750641196015}, {'fro': 'referee', 'to': 'football', 'type': 'HasA', 'score': 0.0037048859521746635, 'wm_score': 0.48705474, 'final': 0.14870984216652228}, {'fro': 'football', 'to': 'referee', 'type': 'HasA', 'score': 0.008389447815716267, 'wm_score': 0.48705474, 'final': 0.1519890354710014}, {'fro': 'referee', 'to': 'football', 'type': 'AtLocation', 'score': 0.0051759155467152596, 'wm_score': 0.48705474, 'final': 0.1497395628827007}, {'fro': 'referee', 'to': 'injury', 'type': 'HasA', 'score': 0.012797600589692593, 'wm_score': 0.39632395, 'final': 0.12785550541278484}, {'fro': 'referee', 'to': 'penalty', 'type': 'HasA', 'score': 0.02452678047120571, 'wm_score': 0.54050785, 'final': 0.17932110132984402}, {'fro': 'referee', 'to': 'penalty', 'type': 'AtLocation', 'score': 0.0076475078240036964, 'wm_score': 0.54050785, 'final': 0.16750561047680262}, {'fro': 'referee', 'to': 'game', 'type': 'AtLocation', 'score': 0.004084082320332527, 'wm_score': 0.4336202, 'final': 0.1329449176242328}, {'fro': 'field', 'to': 'referee', 'type': 'HasA', 'score': 0.022136352956295013, 'wm_score': 0.3138456, 'final': 0.10964912706940652}, {'fro': 'referee', 'to': 'field', 'type': 'AtLocation', 'score': 0.03040412999689579, 'wm_score': 0.3138456, 'final': 0.11543657099782707}, {'fro': 'referee', 'to': 'hand', 'type': 'HasA', 'score': 0.006165646016597748, 'wm_score': 0.33526397, 'final': 0.10489514321161846}, {'fro': 'referee', 'to': 'practice', 'type': 'AtLocation', 'score': 0.0030905830208212137, 'wm_score': 0.32728806, 'final': 0.10034982611457487}, {'fro': 'action', 'to': 'referee', 'type': 'HasA', 'score': 0.004562254063785076, 'wm_score': 0.35581058, 'final': 0.10993675184464956}, {'fro': 'referee', 'to': 'ball', 'type': 'HasA', 'score': 0.04305969178676605, 'wm_score': 0.5209286, 'final': 0.18642036425073624}, {'fro': 'ball', 'to': 'referee', 'type': 'HasA', 'score': 0.005032416898757219, 'wm_score': 0.5209286, 'final': 0.15980127182913006}, {'fro': 'referee', 'to': 'ball', 'type': 'AtLocation', 'score': 0.004525360185652971, 'wm_score': 0.5209286, 'final': 0.15944633212995707}, {'fro': 'referee', 'to': 'club', 'type': 'AtLocation', 'score': 0.004710881505161524, 'wm_score': 0.3423337, 'final': 0.10599772705361309}, {'fro': 'referee', 'to': 'bench', 'type': 'AtLocation', 'score': 0.011638695374131203, 'wm_score': 0.42527395, 'final': 0.13572927176189187}, {'fro': 'referee', 'to': 'match', 'type': 'HasA', 'score': 0.043539419770240784, 'wm_score': 0.5866407, 'final': 0.20646980383916858}, {'fro': 'match', 'to': 'referee', 'type': 'HasA', 'score': 0.20783279836177826, 'wm_score': 0.5866407, 'final': 0.3214751688532448}, {'fro': 'referee', 'to': 'match', 'type': 'AtLocation', 'score': 0.2063387930393219, 'wm_score': 0.5866407, 'final': 0.32042936512752535}, {'fro': 'referee', 'to': 'score', 'type': 'HasA', 'score': 0.011789808049798012, 'wm_score': 0.37205762, 'final': 0.11987015163485862}, {'fro': 'contest', 'to': 'referee', 'type': 'HasA', 'score': 0.003304427722468972, 'wm_score': 0.37229913, 'final': 0.1140028384057283}, {'fro': 'fight', 'to': 'referee', 'type': 'HasA', 'score': 0.019368505105376244, 'wm_score': 0.31743988, 'final': 0.10878991757376338}, {'fro': 'league', 'to': 'referee', 'type': 'HasA', 'score': 0.006319426000118256, 'wm_score': 0.38448483, 'final': 0.1197690472000828}, {'fro': 'referee', 'to': 'league', 'type': 'AtLocation', 'score': 0.007190823554992676, 'wm_score': 0.38448483, 'final': 0.12037902548849488}, {'fro': 'referee', 'to': 'tackle', 'type': 'HasA', 'score': 0.008175468072295189, 'wm_score': 0.34211504, 'final': 0.10835733965060665}, {'fro': 'row', 'to': 'referee', 'type': 'HasA', 'score': 0.007804454769939184, 'wm_score': 0.324077, 'final': 0.10268621833895746}, {'fro': 'referee', 'to': 'play', 'type': 'HasA', 'score': 0.0037221203092485666, 'wm_score': 0.41733086, 'final': 0.12780474221647403}, {'fro': 'play', 'to': 'referee', 'type': 'HasA', 'score': 0.008352628909051418, 'wm_score': 0.41733086, 'final': 0.13104609823633603}, {'fro': 'referee', 'to': 'play', 'type': 'AtLocation', 'score': 0.015193210914731026, 'wm_score': 0.41733086, 'final': 0.13583450564031174}, {'fro': 'call', 'to': 'referee', 'type': 'HasA', 'score': 0.004633360076695681, 'wm_score': 0.3390087, 'final': 0.10494596205368699}, {'fro': 'final', 'to': 'referee', 'type': 'HasA', 'score': 0.006100734695792198, 'wm_score': 0.3893709, 'final': 0.12108178428705456}, {'fro': 'referee', 'to': 'final', 'type': 'AtLocation', 'score': 0.0031128928530961275, 'wm_score': 0.3893709, 'final': 0.11899029499716732}, {'fro': 'referee', 'to': 'kick', 'type': 'HasA', 'score': 0.01377298403531313, 'wm_score': 0.52032065, 'final': 0.16573728382471925}, {'fro': 'referee', 'to': 'kick', 'type': 'AtLocation', 'score': 0.004510695580393076, 'wm_score': 0.52032065, 'final': 0.1592536819062752}, {'fro': 'referee', 'to': 'pitch', 'type': 'HasA', 'score': 0.0036472550127655268, 'wm_score': 0.42040843, 'final': 0.1286756075089359}, {'fro': 'pitch', 'to': 'referee', 'type': 'HasA', 'score': 0.018811175599694252, 'wm_score': 0.42040843, 'final': 0.13929035191978598}, {'fro': 'referee', 'to': 'pitch', 'type': 'AtLocation', 'score': 0.010638619773089886, 'wm_score': 0.42040843, 'final': 0.13356956284116292}, {'fro': 'draw', 'to': 'referee', 'type': 'HasA', 'score': 0.006037923973053694, 'wm_score': 0.39661625, 'final': 0.1232114217811376}, {'fro': 'round', 'to': 'referee', 'type': 'HasA', 'score': 0.01410235371440649, 'wm_score': 0.37031174, 'final': 0.12096516960008455}, {'fro': 'tie', 'to': 'referee', 'type': 'HasA', 'score': 0.004940085578709841, 'wm_score': 0.40272936, 'final': 0.1242768679050969}, {'fro': 'referee', 'to': 'strike', 'type': 'AtLocation', 'score': 0.007546810898929834, 'wm_score': 0.32827273, 'final': 0.1037645866292509}, {'fro': 'dispute', 'to': 'referee', 'type': 'HasA', 'score': 0.006343576591461897, 'wm_score': 0.35343215, 'final': 0.11047014861402335}, {'fro': 'referee', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.012657449580729008, 'wm_score': 0.35343215, 'final': 0.11488985970651032}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

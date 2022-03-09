@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">knee</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "knee"
+    let relations = [{'fro': 'knee', 'to': 'injury', 'type': 'AtLocation', 'score': 0.00394763657823205, 'wm_score': 0.8409536, 'final': 0.25504942560476246}, {'fro': 'knee', 'to': 'belt', 'type': 'AtLocation', 'score': 0.00425485847517848, 'wm_score': 0.35480464, 'final': 0.10941979293262497}, {'fro': 'knee', 'to': 'pain', 'type': 'HasA', 'score': 0.0060745528899133205, 'wm_score': 0.5639145, 'final': 0.17342653702293936}, {'fro': 'knee', 'to': 'shoulder', 'type': 'AtLocation', 'score': 0.0035878524649888277, 'wm_score': 0.8576955, 'final': 0.2598201467254922}, {'fro': 'knee', 'to': 'blow', 'type': 'AtLocation', 'score': 0.007097184658050537, 'wm_score': 0.34668624, 'final': 0.10897390126063539}, {'fro': 'knee', 'to': 'tackle', 'type': 'AtLocation', 'score': 0.004520993214100599, 'wm_score': 0.44674006, 'final': 0.13718671324987045}, {'fro': 'knee', 'to': 'bend', 'type': 'HasA', 'score': 0.015867626294493675, 'wm_score': 0.31573787, 'final': 0.10582869940614557}, {'fro': 'player', 'to': 'knee', 'type': 'HasA', 'score': 0.04208873584866524, 'wm_score': 0.45996645, 'final': 0.1674520500940657}, {'fro': 'boy', 'to': 'knee', 'type': 'HasA', 'score': 0.034138984978199005, 'wm_score': 0.31930232, 'final': 0.11968798548473931}, {'fro': 'man', 'to': 'knee', 'type': 'HasA', 'score': 0.029075797647237778, 'wm_score': 0.331576, 'final': 0.11982585835306646}, {'fro': 'youngster', 'to': 'knee', 'type': 'HasA', 'score': 0.023716110736131668, 'wm_score': 0.32904944, 'final': 0.11531610951529218}, {'fro': 'athlete', 'to': 'knee', 'type': 'HasA', 'score': 0.01755773276090622, 'wm_score': 0.3197766, 'final': 0.10822339293263436}, {'fro': 'midfielder', 'to': 'knee', 'type': 'HasA', 'score': 0.013885282911360264, 'wm_score': 0.45460472, 'final': 0.14610111403795223}, {'fro': 'striker', 'to': 'knee', 'type': 'HasA', 'score': 0.012952125631272793, 'wm_score': 0.4181207, 'final': 0.134502697941891}, {'fro': 'star', 'to': 'knee', 'type': 'HasA', 'score': 0.00967421568930149, 'wm_score': 0.3189023, 'final': 0.10244264098251106}, {'fro': 'goalkeeper', 'to': 'knee', 'type': 'HasA', 'score': 0.007930315099656582, 'wm_score': 0.35639462, 'final': 0.11246960656975963}, {'fro': 'captain', 'to': 'knee', 'type': 'HasA', 'score': 0.007772442884743214, 'wm_score': 0.34557784, 'final': 0.10911406201932028}, {'fro': 'doctor', 'to': 'knee', 'type': 'HasA', 'score': 0.007716643624007702, 'wm_score': 0.3466859, 'final': 0.1094074205368054}, {'fro': 'guy', 'to': 'knee', 'type': 'HasA', 'score': 0.00752113526687026, 'wm_score': 0.33035415, 'final': 0.1043710396868092}, {'fro': 'patient', 'to': 'knee', 'type': 'HasA', 'score': 0.0069243814796209335, 'wm_score': 0.39833128, 'final': 0.12434645103573466}, {'fro': 'quarterback', 'to': 'knee', 'type': 'HasA', 'score': 0.005182152613997459, 'wm_score': 0.3949592, 'final': 0.12211526682979824}, {'fro': 'defender', 'to': 'knee', 'type': 'HasA', 'score': 0.004754031542688608, 'wm_score': 0.44465464, 'final': 0.13672421407988206}, {'fro': 'winger', 'to': 'knee', 'type': 'HasA', 'score': 0.004746937192976475, 'wm_score': 0.4404575, 'final': 0.13546010603508354}, {'fro': 'knee', 'to': 'problem', 'type': 'HasA', 'score': 0.1838533878326416, 'wm_score': 0.37857217, 'final': 0.24226902248284915}, {'fro': 'knee', 'to': 'limp', 'type': 'HasA', 'score': 0.0300571508705616, 'wm_score': 0.35298687, 'final': 0.12693606660939313}, {'fro': 'knee', 'to': 'scar', 'type': 'HasA', 'score': 0.025601906701922417, 'wm_score': 0.48008016, 'final': 0.1619453826913457}, {'fro': 'knee', 'to': 'tear', 'type': 'HasA', 'score': 0.024421613663434982, 'wm_score': 0.42262292, 'final': 0.1438820055644045}, {'fro': 'knee', 'to': 'chance', 'type': 'HasA', 'score': 0.015288004651665688, 'wm_score': 0.3547398, 'final': 0.117123543256166}, {'fro': 'knee', 'to': 'weakness', 'type': 'HasA', 'score': 0.013996015302836895, 'wm_score': 0.35385972, 'final': 0.11595512671198585}, {'fro': 'knee', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.010146141983568668, 'wm_score': 0.33769858, 'final': 0.1084118733884981}, {'fro': 'knee', 'to': 'fracture', 'type': 'HasA', 'score': 0.010127658024430275, 'wm_score': 0.6474606, 'final': 0.20132754061710123}, {'fro': 'knee', 'to': 'comeback', 'type': 'HasA', 'score': 0.009269964881241322, 'wm_score': 0.48103797, 'final': 0.15080036641686895}, {'fro': 'knee', 'to': 'brace', 'type': 'HasA', 'score': 0.0087862154468894, 'wm_score': 0.52136004, 'final': 0.16255836281282263}, {'fro': 'knee', 'to': 'shot', 'type': 'HasA', 'score': 0.0063033923506736755, 'wm_score': 0.36576727, 'final': 0.11414255564547159}, {'fro': 'knee', 'to': 'bone', 'type': 'HasA', 'score': 0.004201920703053474, 'wm_score': 0.5618824, 'final': 0.17150606449213746}, {'fro': 'knee', 'to': 'concussion', 'type': 'HasA', 'score': 0.00388466683216393, 'wm_score': 0.6855668, 'final': 0.20838930678251477}, {'fro': 'bullet', 'to': 'knee', 'type': 'AtLocation', 'score': 0.1246202364563942, 'wm_score': 0.39769483, 'final': 0.20654261451947595}, {'fro': 'tendon', 'to': 'knee', 'type': 'AtLocation', 'score': 0.10824024677276611, 'wm_score': 0.79893464, 'final': 0.3154485647409363}, {'fro': 'tear', 'to': 'knee', 'type': 'AtLocation', 'score': 0.08441334962844849, 'wm_score': 0.42262292, 'final': 0.18587622073991394}, {'fro': 'bone', 'to': 'knee', 'type': 'AtLocation', 'score': 0.04776769503951073, 'wm_score': 0.5618824, 'final': 0.20200210652765754}, {'fro': 'hole', 'to': 'knee', 'type': 'AtLocation', 'score': 0.038296058773994446, 'wm_score': 0.4079432, 'final': 0.14919020114179615}, {'fro': 'fracture', 'to': 'knee', 'type': 'AtLocation', 'score': 0.017541274428367615, 'wm_score': 0.6474606, 'final': 0.20651707209985737}, {'fro': 'pain', 'to': 'knee', 'type': 'AtLocation', 'score': 0.015972014516592026, 'wm_score': 0.5639145, 'final': 0.18035476016161445}, {'fro': 'shot', 'to': 'knee', 'type': 'AtLocation', 'score': 0.01339480746537447, 'wm_score': 0.36576727, 'final': 0.11910654622576214}, {'fro': 'calf', 'to': 'knee', 'type': 'AtLocation', 'score': 0.011163021437823772, 'wm_score': 0.6946587, 'final': 0.21621172500647665}, {'fro': 'man', 'to': 'knee', 'type': 'AtLocation', 'score': 0.010427460074424744, 'wm_score': 0.331576, 'final': 0.10677202205209733}, {'fro': 'finger', 'to': 'knee', 'type': 'AtLocation', 'score': 0.009715976193547249, 'wm_score': 0.52788967, 'final': 0.16516808433548308}, {'fro': 'muscle', 'to': 'knee', 'type': 'AtLocation', 'score': 0.008968464098870754, 'wm_score': 0.592251, 'final': 0.18395322486920954}, {'fro': 'nerve', 'to': 'knee', 'type': 'AtLocation', 'score': 0.008696463890373707, 'wm_score': 0.34933156, 'final': 0.11088699272326161}, {'fro': 'boy', 'to': 'knee', 'type': 'AtLocation', 'score': 0.00703126285225153, 'wm_score': 0.31930232, 'final': 0.10071257999657608}, {'fro': 'ball', 'to': 'knee', 'type': 'AtLocation', 'score': 0.006742176134139299, 'wm_score': 0.50966626, 'final': 0.15761940129389757}, {'fro': 'specialist', 'to': 'knee', 'type': 'AtLocation', 'score': 0.006721311714500189, 'wm_score': 0.3284193, 'final': 0.10323070820015015}, {'fro': 'tumor', 'to': 'knee', 'type': 'AtLocation', 'score': 0.006015202030539513, 'wm_score': 0.37177467, 'final': 0.11574304242137766}, {'fro': 'scar', 'to': 'knee', 'type': 'AtLocation', 'score': 0.005803417880088091, 'wm_score': 0.48008016, 'final': 0.14808644051606168}, {'fro': 'thumb', 'to': 'knee', 'type': 'AtLocation', 'score': 0.00557607552036643, 'wm_score': 0.64044285, 'final': 0.19603610786425651}, {'fro': 'foot', 'to': 'knee', 'type': 'AtLocation', 'score': 0.00442780926823616, 'wm_score': 0.6260166, 'final': 0.19090444648776536}, {'fro': 'brace', 'to': 'knee', 'type': 'AtLocation', 'score': 0.003163911635056138, 'wm_score': 0.52136004, 'final': 0.15862275014453933}, {'fro': 'knee', 'to': 'works', 'type': 'AtLocation', 'score': 0.09408943355083466, 'wm_score': 0.17113203, 'final': 0.11720221248558427}, {'fro': 'knee', 'to': 'air', 'type': 'AtLocation', 'score': 0.08050213754177094, 'wm_score': 0.19491324, 'final': 0.11482546827923966}, {'fro': 'knee', 'to': 'way', 'type': 'AtLocation', 'score': 0.026742419227957726, 'wm_score': 0.34073782, 'final': 0.12094103945957042}, {'fro': 'knee', 'to': 'bag', 'type': 'AtLocation', 'score': 0.02654499001801014, 'wm_score': 0.34002188, 'final': 0.12058805701260711}, {'fro': 'knee', 'to': 'sling', 'type': 'AtLocation', 'score': 0.016683127731084824, 'wm_score': 0.3462836, 'final': 0.1155632694117594}, {'fro': 'knee', 'to': 'back', 'type': 'AtLocation', 'score': 0.014155896380543709, 'wm_score': 0.55219877, 'final': 0.1755687584663806}, {'fro': 'knee', 'to': 'making', 'type': 'AtLocation', 'score': 0.013157827779650688, 'wm_score': 0.3552382, 'final': 0.1157819394457555}, {'fro': 'knee', 'to': 'boot', 'type': 'AtLocation', 'score': 0.01184907741844654, 'wm_score': 0.4295451, 'final': 0.1371578841929126}, {'fro': 'knee', 'to': 'hospital', 'type': 'AtLocation', 'score': 0.011736467480659485, 'wm_score': 0.4156296, 'final': 0.13290440723646166}, {'fro': 'knee', 'to': 'thigh', 'type': 'AtLocation', 'score': 0.011389768682420254, 'wm_score': 0.82784855, 'final': 0.25632740307769425}, {'fro': 'knee', 'to': 'running', 'type': 'AtLocation', 'score': 0.009796090424060822, 'wm_score': 0.39291674, 'final': 0.12473228529684259}, {'fro': 'knee', 'to': 'groin', 'type': 'AtLocation', 'score': 0.009604886174201965, 'wm_score': 0.86729777, 'final': 0.2669127513219414}, {'fro': 'knee', 'to': 'ribs', 'type': 'AtLocation', 'score': 0.008367684669792652, 'wm_score': 0.57665205, 'final': 0.17885299426885487}, {'fro': 'knee', 'to': 'socket', 'type': 'AtLocation', 'score': 0.006758139003068209, 'wm_score': 0.34348032, 'final': 0.10777479330214776}, {'fro': 'knee', 'to': 'calf', 'type': 'AtLocation', 'score': 0.0064935944974422455, 'wm_score': 0.6946587, 'final': 0.2129431261482096}, {'fro': 'knee', 'to': 'ground', 'type': 'AtLocation', 'score': 0.0054144780151546, 'wm_score': 0.36099604, 'final': 0.11208894661060824}, {'fro': 'knee', 'to': 'blood', 'type': 'AtLocation', 'score': 0.005363204516470432, 'wm_score': 0.36644477, 'final': 0.11368767416152932}, {'fro': 'knee', 'to': 'past', 'type': 'AtLocation', 'score': 0.005158131942152977, 'wm_score': 0.3488053, 'final': 0.1082522823595071}, {'fro': 'knee', 'to': 'leg', 'type': 'AtLocation', 'score': 0.012957481667399406, 'wm_score': 0.742278, 'final': 0.23175363716717962}, {'fro': 'knee', 'to': 'kick', 'type': 'AtLocation', 'score': 0.009546864777803421, 'wm_score': 0.45868456, 'final': 0.14428817334446242}, {'fro': 'knee', 'to': 'pass', 'type': 'AtLocation', 'score': 0.002998042618855834, 'wm_score': 0.35241413, 'final': 0.1078228688331991}, {'fro': 'knee', 'to': 'strain', 'type': 'HasA', 'score': 0.0045499675907194614, 'wm_score': 0.4837467, 'final': 0.14830898731350364}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

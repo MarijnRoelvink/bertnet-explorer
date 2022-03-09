@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">motor</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "motor"
+    let relations = [{'fro': 'engine', 'to': 'motor', 'type': 'HasA', 'score': 0.004411136731505394, 'wm_score': 0.6129637, 'final': 0.1869769057120538}, {'fro': 'motor', 'to': 'engine', 'type': 'AtLocation', 'score': 0.003180768107995391, 'wm_score': 0.6129637, 'final': 0.1861156476755968}, {'fro': 'boat', 'to': 'motor', 'type': 'HasA', 'score': 0.01301385834813118, 'wm_score': 0.36889282, 'final': 0.11977754684369184}, {'fro': 'bike', 'to': 'motor', 'type': 'HasA', 'score': 0.013750230893492699, 'wm_score': 0.5325154, 'final': 0.1693797816254449}, {'fro': 'bicycle', 'to': 'motor', 'type': 'HasA', 'score': 0.01551483478397131, 'wm_score': 0.57305425, 'final': 0.18277665934877996}, {'fro': 'car', 'to': 'motor', 'type': 'HasA', 'score': 0.0671369731426239, 'wm_score': 0.6157554, 'final': 0.23172250119983673}, {'fro': 'vehicle', 'to': 'motor', 'type': 'HasA', 'score': 0.026062147691845894, 'wm_score': 0.6402022, 'final': 0.21030416338429217}, {'fro': 'bus', 'to': 'motor', 'type': 'HasA', 'score': 0.017051581293344498, 'wm_score': 0.44411525, 'final': 0.14517068190534116}, {'fro': 'jeep', 'to': 'motor', 'type': 'HasA', 'score': 0.013604083098471165, 'wm_score': 0.47497457, 'final': 0.15201522916892982}, {'fro': 'truck', 'to': 'motor', 'type': 'HasA', 'score': 0.013128225691616535, 'wm_score': 0.54267114, 'final': 0.17199109998413162}, {'fro': 'horse', 'to': 'motor', 'type': 'HasA', 'score': 0.013069113716483116, 'wm_score': 0.43573, 'final': 0.13986737960153822}, {'fro': 'motorcycle', 'to': 'motor', 'type': 'HasA', 'score': 0.011494964361190796, 'wm_score': 0.6292028, 'final': 0.19680731505283358}, {'fro': 'yacht', 'to': 'motor', 'type': 'HasA', 'score': 0.010781427845358849, 'wm_score': 0.35729304, 'final': 0.11473491149175122}, {'fro': 'tractor', 'to': 'motor', 'type': 'HasA', 'score': 0.00907681230455637, 'wm_score': 0.54858184, 'final': 0.17092832061318947}, {'fro': 'bmw', 'to': 'motor', 'type': 'HasA', 'score': 0.008227868936955929, 'wm_score': 0.58720833, 'final': 0.18192200725586916}, {'fro': 'model', 'to': 'motor', 'type': 'HasA', 'score': 0.007855123840272427, 'wm_score': 0.4643719, 'final': 0.14481015668819072}, {'fro': 'driver', 'to': 'motor', 'type': 'HasA', 'score': 0.007248359266668558, 'wm_score': 0.52455807, 'final': 0.162441272486668}, {'fro': 'machine', 'to': 'motor', 'type': 'HasA', 'score': 0.007125436328351498, 'wm_score': 0.41299364, 'final': 0.12888589742984607}, {'fro': 'trailer', 'to': 'motor', 'type': 'HasA', 'score': 0.0061298757791519165, 'wm_score': 0.41953287, 'final': 0.13015077404540637}, {'fro': 'mini', 'to': 'motor', 'type': 'HasA', 'score': 0.0060134693048894405, 'wm_score': 0.3744213, 'final': 0.11653581851342264}, {'fro': 'train', 'to': 'motor', 'type': 'HasA', 'score': 0.006002313457429409, 'wm_score': 0.46454474, 'final': 0.1435650414202006}, {'fro': 'ferrari', 'to': 'motor', 'type': 'HasA', 'score': 0.005790690891444683, 'wm_score': 0.42950153, 'final': 0.1329039426240113}, {'fro': 'robot', 'to': 'motor', 'type': 'HasA', 'score': 0.005654936656355858, 'wm_score': 0.3883593, 'final': 0.12046624565944913}, {'fro': 'plane', 'to': 'motor', 'type': 'HasA', 'score': 0.005392742343246937, 'wm_score': 0.34741768, 'final': 0.10800022364027287}, {'fro': 'wheelchair', 'to': 'motor', 'type': 'HasA', 'score': 0.005189979448914528, 'wm_score': 0.34902543, 'final': 0.10834061461424019}, {'fro': 'suv', 'to': 'motor', 'type': 'HasA', 'score': 0.004983349237591028, 'wm_score': 0.4641431, 'final': 0.14273127446631373}, {'fro': 'honda', 'to': 'motor', 'type': 'HasA', 'score': 0.0049003008753061295, 'wm_score': 0.69771326, 'final': 0.21274418861271432}, {'fro': 'device', 'to': 'motor', 'type': 'HasA', 'score': 0.003989994525909424, 'wm_score': 0.38714674, 'final': 0.11893701816813661}, {'fro': 'rover', 'to': 'motor', 'type': 'HasA', 'score': 0.003926367498934269, 'wm_score': 0.46167082, 'final': 0.141249703249254}, {'fro': 'wheel', 'to': 'motor', 'type': 'HasA', 'score': 0.003770272247493267, 'wm_score': 0.57863927, 'final': 0.17623097157324533}, {'fro': 'prototype', 'to': 'motor', 'type': 'HasA', 'score': 0.0034234269987791777, 'wm_score': 0.47574902, 'final': 0.14512110489914545}, {'fro': 'motor', 'to': 'battery', 'type': 'HasA', 'score': 0.014280137605965137, 'wm_score': 0.51832265, 'final': 0.1654928913241756}, {'fro': 'motor', 'to': 'distributor', 'type': 'HasA', 'score': 0.009734001941978931, 'wm_score': 0.41048068, 'final': 0.1299580053593853}, {'fro': 'motor', 'to': 'generator', 'type': 'HasA', 'score': 0.006054167170077562, 'wm_score': 0.4319523, 'final': 0.13382360701905432}, {'fro': 'motor', 'to': 'lock', 'type': 'HasA', 'score': 0.005656088702380657, 'wm_score': 0.32251152, 'final': 0.10071271809166647}, {'fro': 'motor', 'to': 'charger', 'type': 'HasA', 'score': 0.005494374316185713, 'wm_score': 0.35238558, 'final': 0.10956173602133001}, {'fro': 'motor', 'to': 'rotor', 'type': 'HasA', 'score': 0.005105291493237019, 'wm_score': 0.33319396, 'final': 0.10353189204526593}, {'fro': 'cog', 'to': 'motor', 'type': 'AtLocation', 'score': 0.032359298318624496, 'wm_score': 0.26362863, 'final': 0.10174009782303714}, {'fro': 'spark', 'to': 'motor', 'type': 'AtLocation', 'score': 0.03144780918955803, 'wm_score': 0.27272463, 'final': 0.10383085543269063}, {'fro': 'piston', 'to': 'motor', 'type': 'AtLocation', 'score': 0.02140316739678383, 'wm_score': 0.38142478, 'final': 0.1294096511777487}, {'fro': 'tyre', 'to': 'motor', 'type': 'AtLocation', 'score': 0.017757289111614227, 'wm_score': 0.30826116, 'final': 0.10490845037812996}, {'fro': 'horse', 'to': 'motor', 'type': 'AtLocation', 'score': 0.015791838988661766, 'wm_score': 0.43573, 'final': 0.14177328729206326}, {'fro': 'rider', 'to': 'motor', 'type': 'AtLocation', 'score': 0.015096164308488369, 'wm_score': 0.4202195, 'final': 0.1366331650159419}, {'fro': 'turbine', 'to': 'motor', 'type': 'AtLocation', 'score': 0.011856134980916977, 'wm_score': 0.48773742, 'final': 0.1546205204866419}, {'fro': 'wheel', 'to': 'motor', 'type': 'AtLocation', 'score': 0.00931761134415865, 'wm_score': 0.57863927, 'final': 0.1801141089409111}, {'fro': 'passenger', 'to': 'motor', 'type': 'AtLocation', 'score': 0.007919776253402233, 'wm_score': 0.49656424, 'final': 0.15451311537738158}, {'fro': 'car', 'to': 'motor', 'type': 'AtLocation', 'score': 0.006937447004020214, 'wm_score': 0.6157554, 'final': 0.18958283290281416}, {'fro': 'battery', 'to': 'motor', 'type': 'AtLocation', 'score': 0.005593171343207359, 'wm_score': 0.51832265, 'final': 0.15941201494024518}, {'fro': 'motorcycle', 'to': 'motor', 'type': 'AtLocation', 'score': 0.005553483963012695, 'wm_score': 0.6292028, 'final': 0.1926482787741089}, {'fro': 'pedal', 'to': 'motor', 'type': 'AtLocation', 'score': 0.005307987332344055, 'wm_score': 0.46384615, 'final': 0.14286943613264086}, {'fro': 'ferrari', 'to': 'motor', 'type': 'AtLocation', 'score': 0.005127490032464266, 'wm_score': 0.42950153, 'final': 0.132439702022725}, {'fro': 'brake', 'to': 'motor', 'type': 'AtLocation', 'score': 0.004273128695785999, 'wm_score': 0.48840788, 'final': 0.14951355408705022}, {'fro': 'tire', 'to': 'motor', 'type': 'AtLocation', 'score': 0.004209721460938454, 'wm_score': 0.62004894, 'final': 0.18896148702265694}, {'fro': 'valve', 'to': 'motor', 'type': 'AtLocation', 'score': 0.004118242766708136, 'wm_score': 0.36825436, 'final': 0.11335907793669572}, {'fro': 'driver', 'to': 'motor', 'type': 'AtLocation', 'score': 0.0040625156834721565, 'wm_score': 0.52455807, 'final': 0.1602111819784305}, {'fro': 'change', 'to': 'motor', 'type': 'AtLocation', 'score': 0.0035417743492871523, 'wm_score': 0.3382651, 'final': 0.10395877204450102}, {'fro': 'tractor', 'to': 'motor', 'type': 'AtLocation', 'score': 0.0034264144487679005, 'wm_score': 0.54858184, 'final': 0.16697304211413755}, {'fro': 'chip', 'to': 'motor', 'type': 'AtLocation', 'score': 0.0033702445216476917, 'wm_score': 0.3640513, 'final': 0.11157456116515341}, {'fro': 'compressor', 'to': 'motor', 'type': 'AtLocation', 'score': 0.003357678186148405, 'wm_score': 0.3268555, 'final': 0.10040702473030391}, {'fro': 'motor', 'to': 'air', 'type': 'AtLocation', 'score': 0.11169349402189255, 'wm_score': 0.38061947, 'final': 0.19237128681532478}, {'fro': 'motor', 'to': 'works', 'type': 'AtLocation', 'score': 0.06486963480710983, 'wm_score': 0.28103602, 'final': 0.1297195503649769}, {'fro': 'motor', 'to': 'ignition', 'type': 'AtLocation', 'score': 0.05573195964097977, 'wm_score': 0.3769518, 'final': 0.15209791174868584}, {'fro': 'motor', 'to': 'garage', 'type': 'AtLocation', 'score': 0.027018075808882713, 'wm_score': 0.35233974, 'final': 0.12461457506621791}, {'fro': 'motor', 'to': 'car', 'type': 'AtLocation', 'score': 0.01586843654513359, 'wm_score': 0.6157554, 'final': 0.19583452558159353}, {'fro': 'motor', 'to': 'road', 'type': 'AtLocation', 'score': 0.014355500228703022, 'wm_score': 0.368662, 'final': 0.12064745016009214}, {'fro': 'motor', 'to': 'trunk', 'type': 'AtLocation', 'score': 0.010539582930505276, 'wm_score': 0.32121596, 'final': 0.10374249605135372}, {'fro': 'motor', 'to': 'vehicle', 'type': 'AtLocation', 'score': 0.008229821920394897, 'wm_score': 0.6402022, 'final': 0.1978215353442765}, {'fro': 'motor', 'to': 'tank', 'type': 'AtLocation', 'score': 0.00755759933963418, 'wm_score': 0.35952896, 'final': 0.11314900753774394}, {'fro': 'motor', 'to': 'rear', 'type': 'AtLocation', 'score': 0.0075386748649179935, 'wm_score': 0.40896565, 'final': 0.12796676740544263}, {'fro': 'motor', 'to': 'wind', 'type': 'AtLocation', 'score': 0.005707768257707357, 'wm_score': 0.33405864, 'final': 0.10421302978039518}, {'fro': 'motor', 'to': 'exhaust', 'type': 'AtLocation', 'score': 0.005273484159260988, 'wm_score': 0.32147682, 'final': 0.1001344849114827}, {'fro': 'motor', 'to': 'distance', 'type': 'AtLocation', 'score': 0.004969860892742872, 'wm_score': 0.33333346, 'final': 0.10347894062492004}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

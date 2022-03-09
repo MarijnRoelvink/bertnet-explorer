@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">collar</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "collar"
+    let relations = [{'fro': 'clothes', 'to': 'collar', 'type': 'HasA', 'score': 0.006460782140493393, 'wm_score': 0.36190444, 'final': 0.1130938794983454}, {'fro': 'hat', 'to': 'collar', 'type': 'HasA', 'score': 0.009978695772588253, 'wm_score': 0.45429993, 'final': 0.1432750660408118}, {'fro': 'shirt', 'to': 'collar', 'type': 'HasA', 'score': 0.026213396340608597, 'wm_score': 0.5816039, 'final': 0.19283054743842604}, {'fro': 'head', 'to': 'collar', 'type': 'HasA', 'score': 0.016897445544600487, 'wm_score': 0.30838522, 'final': 0.10434377788122036}, {'fro': 'dog', 'to': 'collar', 'type': 'HasA', 'score': 0.06373637914657593, 'wm_score': 0.3695405, 'final': 0.15547761540260316}, {'fro': 'black', 'to': 'collar', 'type': 'HasA', 'score': 0.0042136781848967075, 'wm_score': 0.6534601, 'final': 0.19898760472942773}, {'fro': 'animal', 'to': 'collar', 'type': 'HasA', 'score': 0.0725877583026886, 'wm_score': 0.2532318, 'final': 0.12678097081188203}, {'fro': 'red', 'to': 'collar', 'type': 'HasA', 'score': 0.0038168674800544977, 'wm_score': 0.46734422, 'final': 0.14287507323603818}, {'fro': 'gear', 'to': 'collar', 'type': 'HasA', 'score': 0.007060951087623835, 'wm_score': 0.34587985, 'final': 0.1087066207613367}, {'fro': 'belt', 'to': 'collar', 'type': 'HasA', 'score': 0.002843233058229089, 'wm_score': 0.43515813, 'final': 0.13253770214076038}, {'fro': 'blue', 'to': 'collar', 'type': 'HasA', 'score': 0.004664475563913584, 'wm_score': 0.55691457, 'final': 0.17033950389473954}, {'fro': 'bone', 'to': 'collar', 'type': 'HasA', 'score': 0.007533953990787268, 'wm_score': 0.32766777, 'final': 0.1035740987935511}, {'fro': 'coat', 'to': 'collar', 'type': 'HasA', 'score': 0.042403873056173325, 'wm_score': 0.509838, 'final': 0.18263411113932135}, {'fro': 'bag', 'to': 'collar', 'type': 'HasA', 'score': 0.0035306736826896667, 'wm_score': 0.34818017, 'final': 0.10692552257788279}, {'fro': 'dress', 'to': 'collar', 'type': 'HasA', 'score': 0.028236860409379005, 'wm_score': 0.54127514, 'final': 0.18214834428656532}, {'fro': 'horse', 'to': 'collar', 'type': 'HasA', 'score': 0.013673719950020313, 'wm_score': 0.34866887, 'final': 0.11417226496501424}, {'fro': 'shoe', 'to': 'collar', 'type': 'HasA', 'score': 0.004742804914712906, 'wm_score': 0.4596606, 'final': 0.14121814344029904}, {'fro': 'cat', 'to': 'collar', 'type': 'HasA', 'score': 0.025630813091993332, 'wm_score': 0.31382656, 'final': 0.11208953716439535}, {'fro': 'boy', 'to': 'collar', 'type': 'HasA', 'score': 0.007522829342633486, 'wm_score': 0.32251734, 'final': 0.10202118253984345}, {'fro': 'jacket', 'to': 'collar', 'type': 'HasA', 'score': 0.007358991540968418, 'wm_score': 0.52033186, 'final': 0.16125085207867793}, {'fro': 'man', 'to': 'collar', 'type': 'HasA', 'score': 0.006443202029913664, 'wm_score': 0.37200597, 'final': 0.11611203242093958}, {'fro': 'woman', 'to': 'collar', 'type': 'HasA', 'score': 0.004185947123914957, 'wm_score': 0.34305415, 'final': 0.10584640798674048}, {'fro': 'helmet', 'to': 'collar', 'type': 'HasA', 'score': 0.0036874297074973583, 'wm_score': 0.4165349, 'final': 0.12754167079524817}, {'fro': 'collar', 'to': 'zipper', 'type': 'HasA', 'score': 0.06441662460565567, 'wm_score': 0.24678639, 'final': 0.11912755422395897}, {'fro': 'collar', 'to': 'slit', 'type': 'HasA', 'score': 0.037136029452085495, 'wm_score': 0.3027647, 'final': 0.11682463061645985}, {'fro': 'collar', 'to': 'button', 'type': 'HasA', 'score': 0.01027386263012886, 'wm_score': 0.3384065, 'final': 0.10871365384109022}, {'fro': 'collar', 'to': 'badge', 'type': 'HasA', 'score': 0.00990432407706976, 'wm_score': 0.44828963, 'final': 0.14141991585394886}, {'fro': 'collar', 'to': 'pattern', 'type': 'HasA', 'score': 0.009751330129802227, 'wm_score': 0.40980428, 'final': 0.1297672150908616}, {'fro': 'collar', 'to': 'handle', 'type': 'HasA', 'score': 0.00819468591362238, 'wm_score': 0.33043617, 'final': 0.10486713113953568}, {'fro': 'collar', 'to': 'tag', 'type': 'HasA', 'score': 0.006631545722484589, 'wm_score': 0.35657185, 'final': 0.11161363700573923}, {'fro': 'collar', 'to': 'cord', 'type': 'HasA', 'score': 0.006594513077288866, 'wm_score': 0.3449543, 'final': 0.10810244915410222}, {'fro': 'collar', 'to': 'strap', 'type': 'HasA', 'score': 0.006325204391032457, 'wm_score': 0.4131021, 'final': 0.12835827307372275}, {'fro': 'collar', 'to': 'tie', 'type': 'HasA', 'score': 0.005539183970540762, 'wm_score': 0.40362227, 'final': 0.12496410977937855}, {'fro': 'collar', 'to': 'ring', 'type': 'HasA', 'score': 0.005024252459406853, 'wm_score': 0.43940395, 'final': 0.1353381617215848}, {'fro': 'collar', 'to': 'cut', 'type': 'HasA', 'score': 0.004331494681537151, 'wm_score': 0.40216607, 'final': 0.12368186727707603}, {'fro': 'collar', 'to': 'tip', 'type': 'HasA', 'score': 0.004092276096343994, 'wm_score': 0.43937355, 'final': 0.13467665826744082}, {'fro': 'collar', 'to': 'gap', 'type': 'HasA', 'score': 0.003951076418161392, 'wm_score': 0.32877254, 'final': 0.10139751549271299}, {'fro': 'collar', 'to': 'spine', 'type': 'HasA', 'score': 0.0037610181607306004, 'wm_score': 0.3351506, 'final': 0.10317789271251145}, {'fro': 'collar', 'to': 'stripe', 'type': 'HasA', 'score': 0.0037334226071834564, 'wm_score': 0.4650678, 'final': 0.14213373582502845}, {'fro': 'bullet', 'to': 'collar', 'type': 'AtLocation', 'score': 0.1401645392179489, 'wm_score': 0.29461047, 'final': 0.18649831845256426}, {'fro': 'needle', 'to': 'collar', 'type': 'AtLocation', 'score': 0.027669057250022888, 'wm_score': 0.33227146, 'final': 0.11904977807501604}, {'fro': 'cat', 'to': 'collar', 'type': 'AtLocation', 'score': 0.019938701763749123, 'wm_score': 0.31382656, 'final': 0.10810505923462439}, {'fro': 'dog', 'to': 'collar', 'type': 'AtLocation', 'score': 0.01719525270164013, 'wm_score': 0.3695405, 'final': 0.12289882689114812}, {'fro': 'knife', 'to': 'collar', 'type': 'AtLocation', 'score': 0.015124653466045856, 'wm_score': 0.39753047, 'final': 0.12984639842623213}, {'fro': 'sock', 'to': 'collar', 'type': 'AtLocation', 'score': 0.009585040621459484, 'wm_score': 0.38058737, 'final': 0.12088573943502165}, {'fro': 'badge', 'to': 'collar', 'type': 'AtLocation', 'score': 0.008331743068993092, 'wm_score': 0.44828963, 'final': 0.14031910914829518}, {'fro': 'nail', 'to': 'collar', 'type': 'AtLocation', 'score': 0.008178075775504112, 'wm_score': 0.46357667, 'final': 0.1447976540428529}, {'fro': 'shirt', 'to': 'collar', 'type': 'AtLocation', 'score': 0.007932513020932674, 'wm_score': 0.5816039, 'final': 0.18003392911465288}, {'fro': 'bone', 'to': 'collar', 'type': 'AtLocation', 'score': 0.0053892056457698345, 'wm_score': 0.32766777, 'final': 0.1020727749520389}, {'fro': 'patch', 'to': 'collar', 'type': 'AtLocation', 'score': 0.004449970088899136, 'wm_score': 0.4422413, 'final': 0.13578736906222943}, {'fro': 'lump', 'to': 'collar', 'type': 'AtLocation', 'score': 0.004365718457847834, 'wm_score': 0.3424822, 'final': 0.1058006629204935}, {'fro': 'collar', 'to': 'foreground', 'type': 'AtLocation', 'score': 0.07991766184568405, 'wm_score': 0.19932164, 'final': 0.11573885529197883}, {'fro': 'collar', 'to': 'background', 'type': 'AtLocation', 'score': 0.05108397826552391, 'wm_score': 0.42097032, 'final': 0.16204988078586674}, {'fro': 'collar', 'to': 'bag', 'type': 'AtLocation', 'score': 0.049530379474163055, 'wm_score': 0.34818017, 'final': 0.13912531663191416}, {'fro': 'collar', 'to': 'middle', 'type': 'AtLocation', 'score': 0.00874040462076664, 'wm_score': 0.31502718, 'final': 0.10062643723453667}, {'fro': 'collar', 'to': 'boot', 'type': 'AtLocation', 'score': 0.007019189186394215, 'wm_score': 0.42552063, 'final': 0.132569621430476}, {'fro': 'collar', 'to': 'closet', 'type': 'AtLocation', 'score': 0.00513170100748539, 'wm_score': 0.3790043, 'final': 0.1172934807052398}, {'fro': 'collar', 'to': 'dark', 'type': 'AtLocation', 'score': 0.004362975247204304, 'wm_score': 0.44607037, 'final': 0.13687519367304304}, {'fro': 'collar', 'to': 'wool', 'type': 'AtLocation', 'score': 0.0039489902555942535, 'wm_score': 0.47658098, 'final': 0.145738587178916}, {'fro': 'leather', 'to': 'collar', 'type': 'HasA', 'score': 0.008770381100475788, 'wm_score': 0.5327586, 'final': 0.16596684677033308}, {'fro': 'neck', 'to': 'collar', 'type': 'HasA', 'score': 0.012665113434195518, 'wm_score': 0.506495, 'final': 0.1608140794039369}, {'fro': 'skirt', 'to': 'collar', 'type': 'HasA', 'score': 0.01961076445877552, 'wm_score': 0.49586558, 'final': 0.16248720912114287}, {'fro': 'rope', 'to': 'collar', 'type': 'HasA', 'score': 0.003755403682589531, 'wm_score': 0.3776182, 'final': 0.11591424257781269}, {'fro': 'sock', 'to': 'collar', 'type': 'HasA', 'score': 0.005667426623404026, 'wm_score': 0.38058737, 'final': 0.11814340963638283}, {'fro': 'white', 'to': 'collar', 'type': 'HasA', 'score': 0.005892551504075527, 'wm_score': 0.5372336, 'final': 0.1652948660528529}, {'fro': 'wear', 'to': 'collar', 'type': 'HasA', 'score': 0.006769340485334396, 'wm_score': 0.5291805, 'final': 0.16349268833973413}, {'fro': 'yellow', 'to': 'collar', 'type': 'HasA', 'score': 0.004047736991196871, 'wm_score': 0.43757504, 'final': 0.13410592789383785}, {'fro': 'pony', 'to': 'collar', 'type': 'HasA', 'score': 0.005658214911818504, 'wm_score': 0.33748442, 'final': 0.10520607643827297}, {'fro': 'penis', 'to': 'collar', 'type': 'HasA', 'score': 0.004787764046341181, 'wm_score': 0.32660225, 'final': 0.10133210983243883}, {'fro': 'pig', 'to': 'collar', 'type': 'HasA', 'score': 0.014629073441028595, 'wm_score': 0.31609124, 'final': 0.10506772340872002}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

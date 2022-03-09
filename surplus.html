@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">surplus</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "surplus"
+    let relations = [{'fro': 'government', 'to': 'surplus', 'type': 'HasA', 'score': 0.028643634170293808, 'wm_score': 0.4344851, 'final': 0.15039607391920568}, {'fro': 'industry', 'to': 'surplus', 'type': 'HasA', 'score': 0.006903782486915588, 'wm_score': 0.37672526, 'final': 0.11785022574084093}, {'fro': 'country', 'to': 'surplus', 'type': 'HasA', 'score': 0.010021534748375416, 'wm_score': 0.37148553, 'final': 0.11846073332386281}, {'fro': 'department', 'to': 'surplus', 'type': 'HasA', 'score': 0.00830033328384161, 'wm_score': 0.33604807, 'final': 0.10662465429868913}, {'fro': 'surplus', 'to': 'income', 'type': 'AtLocation', 'score': 0.012492001987993717, 'wm_score': 0.60975695, 'final': 0.19167148639159562}, {'fro': 'nation', 'to': 'surplus', 'type': 'HasA', 'score': 0.007286371197551489, 'wm_score': 0.38875327, 'final': 0.12172644083828606}, {'fro': 'surplus', 'to': 'distribution', 'type': 'AtLocation', 'score': 0.006551713217049837, 'wm_score': 0.37676, 'final': 0.1176141992519349}, {'fro': 'office', 'to': 'surplus', 'type': 'HasA', 'score': 0.004362054634839296, 'wm_score': 0.33302823, 'final': 0.10296190724438752}, {'fro': 'population', 'to': 'surplus', 'type': 'HasA', 'score': 0.030572356656193733, 'wm_score': 0.41791078, 'final': 0.1467738836593356}, {'fro': 'unit', 'to': 'surplus', 'type': 'HasA', 'score': 0.004883863031864166, 'wm_score': 0.32273456, 'final': 0.10023907212230493}, {'fro': 'administration', 'to': 'surplus', 'type': 'HasA', 'score': 0.013799293898046017, 'wm_score': 0.3569288, 'final': 0.11673814572863223}, {'fro': 'surplus', 'to': 'revenue', 'type': 'AtLocation', 'score': 0.005632996559143066, 'wm_score': 0.6845875, 'final': 0.2093193475914002}, {'fro': 'cabinet', 'to': 'surplus', 'type': 'HasA', 'score': 0.025081049650907516, 'wm_score': 0.28281593, 'final': 0.10240151375563528}, {'fro': 'ratio', 'to': 'surplus', 'type': 'HasA', 'score': 0.006177815608680248, 'wm_score': 0.40552834, 'final': 0.1259829729260762}, {'fro': 'surplus', 'to': 'ratio', 'type': 'AtLocation', 'score': 0.015411552041769028, 'wm_score': 0.40552834, 'final': 0.13244658842923834}, {'fro': 'sector', 'to': 'surplus', 'type': 'HasA', 'score': 0.011135878041386604, 'wm_score': 0.47634488, 'final': 0.15069857862897065}, {'fro': 'surplus', 'to': 'quantity', 'type': 'AtLocation', 'score': 0.009870994836091995, 'wm_score': 0.41394567, 'final': 0.1310933973852644}, {'fro': 'economy', 'to': 'surplus', 'type': 'HasA', 'score': 0.01103691104799509, 'wm_score': 0.6091312, 'final': 0.19046519773359658}, {'fro': 'market', 'to': 'surplus', 'type': 'HasA', 'score': 0.004749422427266836, 'wm_score': 0.47601318, 'final': 0.14612854969908678}, {'fro': 'state', 'to': 'surplus', 'type': 'HasA', 'score': 0.06443634629249573, 'wm_score': 0.36299157, 'final': 0.15400291340474703}, {'fro': 'force', 'to': 'surplus', 'type': 'HasA', 'score': 0.013082199729979038, 'wm_score': 0.331364, 'final': 0.10856673981098534}, {'fro': 'surplus', 'to': 'demand', 'type': 'AtLocation', 'score': 0.00463911471888423, 'wm_score': 0.5567031, 'final': 0.170258310303219}, {'fro': 'surplus', 'to': 'period', 'type': 'AtLocation', 'score': 0.002813693368807435, 'wm_score': 0.4261884, 'final': 0.12982610535816524}, {'fro': 'program', 'to': 'surplus', 'type': 'HasA', 'score': 0.003977389074862003, 'wm_score': 0.3523003, 'final': 0.10847426235240341}, {'fro': 'surplus', 'to': 'profit', 'type': 'AtLocation', 'score': 0.005161692854017019, 'wm_score': 0.5712277, 'final': 0.17498149499781193}, {'fro': 'bank', 'to': 'surplus', 'type': 'HasA', 'score': 0.007621783763170242, 'wm_score': 0.37668282, 'final': 0.11834009463421917}, {'fro': 'surplus', 'to': 'advantage', 'type': 'AtLocation', 'score': 0.0036702032666653395, 'wm_score': 0.39112994, 'final': 0.11990812428666577}, {'fro': 'surplus', 'to': 'benefit', 'type': 'AtLocation', 'score': 0.005533363204449415, 'wm_score': 0.44165415, 'final': 0.13636959924311462}, {'fro': 'average', 'to': 'surplus', 'type': 'HasA', 'score': 0.005764614325016737, 'wm_score': 0.5146661, 'final': 0.15843506002751173}, {'fro': 'budget', 'to': 'surplus', 'type': 'HasA', 'score': 0.06158154085278511, 'wm_score': 0.6107682, 'final': 0.22633753859694958}, {'fro': 'surplus', 'to': 'budget', 'type': 'AtLocation', 'score': 0.1326063871383667, 'wm_score': 0.6107682, 'final': 0.2760549309968567}, {'fro': 'surplus', 'to': 'quarter', 'type': 'AtLocation', 'score': 0.03102741576731205, 'wm_score': 0.5422373, 'final': 0.18439038103711847}, {'fro': 'surplus', 'to': 'minimum', 'type': 'AtLocation', 'score': 0.004824926611036062, 'wm_score': 0.389899, 'final': 0.12034714862772525}, {'fro': 'stable', 'to': 'surplus', 'type': 'HasA', 'score': 0.005090407561510801, 'wm_score': 0.36848795, 'final': 0.11410967029305759}, {'fro': 'surplus', 'to': 'loan', 'type': 'AtLocation', 'score': 0.00313295004889369, 'wm_score': 0.40781686, 'final': 0.12453812303422561}, {'fro': 'pound', 'to': 'surplus', 'type': 'HasA', 'score': 0.013004505075514317, 'wm_score': 0.355133, 'final': 0.11564305355286003}, {'fro': 'surplus', 'to': 'salary', 'type': 'AtLocation', 'score': 0.021297484636306763, 'wm_score': 0.43789524, 'final': 0.14627681124541475}, {'fro': 'pension', 'to': 'surplus', 'type': 'HasA', 'score': 0.016996372491121292, 'wm_score': 0.42334196, 'final': 0.13890004874378492}, {'fro': 'surplus', 'to': 'high', 'type': 'AtLocation', 'score': 0.005382005125284195, 'wm_score': 0.3241928, 'final': 0.10102524358769895}, {'fro': 'major', 'to': 'surplus', 'type': 'HasA', 'score': 0.006787313614040613, 'wm_score': 0.32290053, 'final': 0.10162127852982845}, {'fro': 'surplus', 'to': 'pay', 'type': 'AtLocation', 'score': 0.0036296863108873367, 'wm_score': 0.42986262, 'final': 0.13149956641762114}, {'fro': 'surplus', 'to': 'increase', 'type': 'AtLocation', 'score': 0.005610765423625708, 'wm_score': 0.62290025, 'final': 0.19079761079653804}, {'fro': 'surplus', 'to': 'low', 'type': 'AtLocation', 'score': 0.017683155834674835, 'wm_score': 0.45600656, 'final': 0.14918017708427242}, {'fro': 'reserve', 'to': 'surplus', 'type': 'HasA', 'score': 0.018540089949965477, 'wm_score': 0.41930324, 'final': 0.13876903496497586}, {'fro': 'total', 'to': 'surplus', 'type': 'HasA', 'score': 0.00555399339646101, 'wm_score': 0.5671785, 'final': 0.17404134537752275}, {'fro': 'dollar', 'to': 'surplus', 'type': 'HasA', 'score': 0.005546643398702145, 'wm_score': 0.56699336, 'final': 0.17398065837909152}, {'fro': 'uk', 'to': 'surplus', 'type': 'HasA', 'score': 0.05073578283190727, 'wm_score': 0.25433207, 'final': 0.11181466898233511}, {'fro': 'eu', 'to': 'surplus', 'type': 'HasA', 'score': 0.04555878788232803, 'wm_score': 0.37991685, 'final': 0.14586620651762963}, {'fro': 'treasury', 'to': 'surplus', 'type': 'HasA', 'score': 0.02981470711529255, 'wm_score': 0.47520256, 'final': 0.1634310629807048}, {'fro': 'fed', 'to': 'surplus', 'type': 'HasA', 'score': 0.028577661141753197, 'wm_score': 0.40937322, 'final': 0.14281632879922723}, {'fro': 'imf', 'to': 'surplus', 'type': 'HasA', 'score': 0.025895169004797935, 'wm_score': 0.41532385, 'final': 0.14272377330335856}, {'fro': 'us', 'to': 'surplus', 'type': 'HasA', 'score': 0.022958043962717056, 'wm_score': 0.44473147, 'final': 0.14949007177390197}, {'fro': 'military', 'to': 'surplus', 'type': 'HasA', 'score': 0.01836153119802475, 'wm_score': 0.31145248, 'final': 0.10628881583861732}, {'fro': 'pentagon', 'to': 'surplus', 'type': 'HasA', 'score': 0.008785383775830269, 'wm_score': 0.33055937, 'final': 0.10531757964308121}, {'fro': 'company', 'to': 'surplus', 'type': 'HasA', 'score': 0.004683514125645161, 'wm_score': 0.33698177, 'final': 0.10437299088795163}, {'fro': 'surplus', 'to': 'problem', 'type': 'HasA', 'score': 0.059893835335969925, 'wm_score': 0.2907159, 'final': 0.12914045473517896}, {'fro': 'surplus', 'to': 'ceiling', 'type': 'HasA', 'score': 0.042949724942445755, 'wm_score': 0.3716243, 'final': 0.14155209745971203}, {'fro': 'surplus', 'to': 'limit', 'type': 'HasA', 'score': 0.03098953142762184, 'wm_score': 0.44650006, 'final': 0.15564268999933528}, {'fro': 'surplus', 'to': 'future', 'type': 'HasA', 'score': 0.02255220338702202, 'wm_score': 0.3323351, 'final': 0.11548707237091542}, {'fro': 'surplus', 'to': 'price', 'type': 'HasA', 'score': 0.012215375900268555, 'wm_score': 0.51182437, 'final': 0.162098074130188}, {'fro': 'surplus', 'to': 'backlog', 'type': 'HasA', 'score': 0.009936410933732986, 'wm_score': 0.33550817, 'final': 0.10760793865361311}, {'fro': 'surplus', 'to': 'budget', 'type': 'HasA', 'score': 0.009021470323204994, 'wm_score': 0.6107682, 'final': 0.1895454892262435}, {'fro': 'surplus', 'to': 'deficit', 'type': 'HasA', 'score': 0.00729593588039279, 'wm_score': 0.7629836, 'final': 0.234002235116275}, {'fro': 'surplus', 'to': 'target', 'type': 'HasA', 'score': 0.007059638388454914, 'wm_score': 0.40750778, 'final': 0.12719408087191847}, {'fro': 'surplus', 'to': 'crisis', 'type': 'HasA', 'score': 0.006386987864971161, 'wm_score': 0.37355804, 'final': 0.11653830350547982}, {'fro': 'surplus', 'to': 'dividend', 'type': 'HasA', 'score': 0.005780104082077742, 'wm_score': 0.34140378, 'final': 0.10646720685745444}, {'fro': 'surplus', 'to': 'hit', 'type': 'HasA', 'score': 0.00573133397847414, 'wm_score': 0.32337824, 'final': 0.1010254057849319}, {'fro': 'surplus', 'to': 'cost', 'type': 'HasA', 'score': 0.005424889735877514, 'wm_score': 0.55621207, 'final': 0.17066104381511427}, {'fro': 'surplus', 'to': 'glut', 'type': 'HasA', 'score': 0.005271549802273512, 'wm_score': 0.35156104, 'final': 0.10915839686159147}, {'fro': 'surplus', 'to': 'shortfall', 'type': 'HasA', 'score': 0.004888217430561781, 'wm_score': 0.7372894, 'final': 0.22460857220139327}, {'fro': 'surplus', 'to': 'value', 'type': 'HasA', 'score': 0.004881285596638918, 'wm_score': 0.5319831, 'final': 0.16301182991764726}, {'fro': 'surplus', 'to': 'potential', 'type': 'HasA', 'score': 0.004713383037596941, 'wm_score': 0.35296685, 'final': 0.10918942312631787}, {'fro': 'surplus', 'to': 'record', 'type': 'HasA', 'score': 0.003890212159603834, 'wm_score': 0.43778992, 'final': 0.1340601245117227}, {'fro': 'surplus', 'to': 'return', 'type': 'HasA', 'score': 0.003538826946169138, 'wm_score': 0.33577216, 'final': 0.1032088268623184}, {'fro': 'dollar', 'to': 'surplus', 'type': 'AtLocation', 'score': 0.025814669206738472, 'wm_score': 0.56699336, 'final': 0.18816827644471695}, {'fro': 'penny', 'to': 'surplus', 'type': 'AtLocation', 'score': 0.0172345619648695, 'wm_score': 0.32521117, 'final': 0.10962754437540866}, {'fro': 'pound', 'to': 'surplus', 'type': 'AtLocation', 'score': 0.013649716041982174, 'wm_score': 0.355133, 'final': 0.11609470122938753}, {'fro': 'barrel', 'to': 'surplus', 'type': 'AtLocation', 'score': 0.009251921437680721, 'wm_score': 0.356355, 'final': 0.11338284500637652}, {'fro': 'farm', 'to': 'surplus', 'type': 'AtLocation', 'score': 0.005143982358276844, 'wm_score': 0.37573963, 'final': 0.11632267665079381}, {'fro': 'budget', 'to': 'surplus', 'type': 'AtLocation', 'score': 0.0044828844256699085, 'wm_score': 0.6107682, 'final': 0.18636847909796894}, {'fro': 'deficit', 'to': 'surplus', 'type': 'AtLocation', 'score': 0.003948510624468327, 'wm_score': 0.7629836, 'final': 0.23165903743712785}, {'fro': 'loan', 'to': 'surplus', 'type': 'AtLocation', 'score': 0.003932643681764603, 'wm_score': 0.40781686, 'final': 0.12509790857723524}, {'fro': 'subsidy', 'to': 'surplus', 'type': 'AtLocation', 'score': 0.0026543624699115753, 'wm_score': 0.5085632, 'final': 0.15442701372893813}, {'fro': 'ton', 'to': 'surplus', 'type': 'AtLocation', 'score': 0.002624989952892065, 'wm_score': 0.40419137, 'final': 0.12309490396702445}, {'fro': 'pension', 'to': 'surplus', 'type': 'AtLocation', 'score': 0.0024740661028772593, 'wm_score': 0.42334196, 'final': 0.12873443427201411}, {'fro': 'reserve', 'to': 'surplus', 'type': 'AtLocation', 'score': 0.002458325820043683, 'wm_score': 0.41930324, 'final': 0.1275118000740306}, {'fro': 'surplus', 'to': 'cards', 'type': 'AtLocation', 'score': 0.19391408562660217, 'wm_score': 0.33494514, 'final': 0.2362234019386215}, {'fro': 'surplus', 'to': 'works', 'type': 'AtLocation', 'score': 0.162701815366745, 'wm_score': 0.18396685, 'final': 0.1690813257567215}, {'fro': 'surplus', 'to': 'bag', 'type': 'AtLocation', 'score': 0.0991431251168251, 'wm_score': 0.2808607, 'final': 0.15365839758177757}, {'fro': 'surplus', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.08266080170869827, 'wm_score': 0.21922892, 'final': 0.12363123719608879}, {'fro': 'surplus', 'to': 'books', 'type': 'AtLocation', 'score': 0.06025354564189911, 'wm_score': 0.21056783, 'final': 0.1053478309493294}, {'fro': 'surplus', 'to': 'balance', 'type': 'AtLocation', 'score': 0.048571910709142685, 'wm_score': 0.53084314, 'final': 0.1932532794963999}, {'fro': 'surplus', 'to': 'forecast', 'type': 'AtLocation', 'score': 0.031846337020397186, 'wm_score': 0.5775821, 'final': 0.19556706591427803}, {'fro': 'surplus', 'to': 'bank', 'type': 'AtLocation', 'score': 0.012677761726081371, 'wm_score': 0.37668282, 'final': 0.12187927920825696}, {'fro': 'surplus', 'to': 'supply', 'type': 'AtLocation', 'score': 0.008863275870680809, 'wm_score': 0.57213175, 'final': 0.1778438181094766}, {'fro': 'surplus', 'to': 'making', 'type': 'AtLocation', 'score': 0.007819978520274162, 'wm_score': 0.40702626, 'final': 0.12758186296419194}, {'fro': 'surplus', 'to': 'market', 'type': 'AtLocation', 'score': 0.002773032523691654, 'wm_score': 0.47601318, 'final': 0.14474507676658416}, {'fro': 'surplus', 'to': 'future', 'type': 'AtLocation', 'score': 0.0026642088778316975, 'wm_score': 0.3323351, 'final': 0.1015654762144822}, {'fro': 'surplus', 'to': 'system', 'type': 'AtLocation', 'score': 0.0017724183853715658, 'wm_score': 0.35828263, 'final': 0.10872548186976011}, {'fro': 'surplus', 'to': 'plan', 'type': 'AtLocation', 'score': 0.0015149905811995268, 'wm_score': 0.39588976, 'final': 0.11982742140683968}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

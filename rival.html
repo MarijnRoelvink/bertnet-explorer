@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">rival</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "rival"
+    let relations = [{'fro': 'idea', 'to': 'rival', 'type': 'HasA', 'score': 0.006071142386645079, 'wm_score': 0.39657685, 'final': 0.12322285467065157}, {'fro': 'industry', 'to': 'rival', 'type': 'HasA', 'score': 0.0036113171372562647, 'wm_score': 0.39741635, 'final': 0.1217528269960794}, {'fro': 'technology', 'to': 'rival', 'type': 'HasA', 'score': 0.005395068321377039, 'wm_score': 0.34390557, 'final': 0.10694821882496394}, {'fro': 'energy', 'to': 'rival', 'type': 'HasA', 'score': 0.004717844072729349, 'wm_score': 0.35256433, 'final': 0.10907178985091055}, {'fro': 'attention', 'to': 'rival', 'type': 'HasA', 'score': 0.009428614750504494, 'wm_score': 0.3270396, 'final': 0.10471191032535315}, {'fro': 'competition', 'to': 'rival', 'type': 'HasA', 'score': 0.003186771646142006, 'wm_score': 0.44881284, 'final': 0.1368745921522994}, {'fro': 'rival', 'to': 'competition', 'type': 'AtLocation', 'score': 0.0032146861776709557, 'wm_score': 0.44881284, 'final': 0.13689413232436967}, {'fro': 'relationship', 'to': 'rival', 'type': 'HasA', 'score': 0.003641101298853755, 'wm_score': 0.37280375, 'final': 0.11438989590919764}, {'fro': 'effort', 'to': 'rival', 'type': 'HasA', 'score': 0.004790320061147213, 'wm_score': 0.4278787, 'final': 0.13171683404280307}, {'fro': 'argument', 'to': 'rival', 'type': 'HasA', 'score': 0.005361673887819052, 'wm_score': 0.33439115, 'final': 0.10407051672147336}, {'fro': 'union', 'to': 'rival', 'type': 'HasA', 'score': 0.004359210841357708, 'wm_score': 0.45549035, 'final': 0.13969855258895042}, {'fro': 'region', 'to': 'rival', 'type': 'HasA', 'score': 0.005400379654020071, 'wm_score': 0.3362883, 'final': 0.10466675575781406}, {'fro': 'republic', 'to': 'rival', 'type': 'HasA', 'score': 0.006883395370095968, 'wm_score': 0.38427123, 'final': 0.1200997457590672}, {'fro': 'rival', 'to': 'election', 'type': 'AtLocation', 'score': 0.004238160327076912, 'wm_score': 0.45440352, 'final': 0.13928776822895386}, {'fro': 'candidate', 'to': 'rival', 'type': 'HasA', 'score': 0.026247305795550346, 'wm_score': 0.5195782, 'final': 0.17424657405688526}, {'fro': 'operation', 'to': 'rival', 'type': 'HasA', 'score': 0.007384063675999641, 'wm_score': 0.31680465, 'final': 0.10021023957319976}, {'fro': 'leader', 'to': 'rival', 'type': 'HasA', 'score': 0.007484284229576588, 'wm_score': 0.58703595, 'final': 0.18134978396070364}, {'fro': 'revolution', 'to': 'rival', 'type': 'HasA', 'score': 0.004341995809227228, 'wm_score': 0.3317753, 'final': 0.10257198706645908}, {'fro': 'independence', 'to': 'rival', 'type': 'HasA', 'score': 0.008072753436863422, 'wm_score': 0.3830413, 'final': 0.1205633174058044}, {'fro': 'championship', 'to': 'rival', 'type': 'HasA', 'score': 0.004415756091475487, 'wm_score': 0.3790735, 'final': 0.11681307926403287}, {'fro': 'business', 'to': 'rival', 'type': 'HasA', 'score': 0.008028305135667324, 'wm_score': 0.44673786, 'final': 0.13964117159496714}, {'fro': 'group', 'to': 'rival', 'type': 'HasA', 'score': 0.004391657654196024, 'wm_score': 0.5692438, 'final': 0.17384730035793725}, {'fro': 'force', 'to': 'rival', 'type': 'HasA', 'score': 0.004167817998677492, 'wm_score': 0.33984035, 'final': 0.10486957759907425}, {'fro': 'cash', 'to': 'rival', 'type': 'HasA', 'score': 0.005454171448945999, 'wm_score': 0.34979424, 'final': 0.10875619201426222}, {'fro': 'side', 'to': 'rival', 'type': 'HasA', 'score': 0.007955321110785007, 'wm_score': 0.4314992, 'final': 0.13501848477754952}, {'fro': 'war', 'to': 'rival', 'type': 'HasA', 'score': 0.0054532671347260475, 'wm_score': 0.38201708, 'final': 0.11842241099430825}, {'fro': 'hope', 'to': 'rival', 'type': 'HasA', 'score': 0.004939182195812464, 'wm_score': 0.36593148, 'final': 0.11323687153706873}, {'fro': 'network', 'to': 'rival', 'type': 'HasA', 'score': 0.008559951558709145, 'wm_score': 0.4377489, 'final': 0.13731663609109643}, {'fro': 'north', 'to': 'rival', 'type': 'HasA', 'score': 0.004399176687002182, 'wm_score': 0.4083951, 'final': 0.12559795368090154}, {'fro': 'challenge', 'to': 'rival', 'type': 'HasA', 'score': 0.006352100055664778, 'wm_score': 0.5361482, 'final': 0.16529093003896536}, {'fro': 'campaign', 'to': 'rival', 'type': 'HasA', 'score': 0.005170235875993967, 'wm_score': 0.5099641, 'final': 0.1566083951131958}, {'fro': 'rival', 'to': 'campaign', 'type': 'AtLocation', 'score': 0.009110689163208008, 'wm_score': 0.5099641, 'final': 0.15936671241424563}, {'fro': 'party', 'to': 'rival', 'type': 'HasA', 'score': 0.018886202946305275, 'wm_score': 0.5586916, 'final': 0.18082782206241368}, {'fro': 'rival', 'to': 'party', 'type': 'AtLocation', 'score': 0.006194485351443291, 'wm_score': 0.5586916, 'final': 0.1719436197460103}, {'fro': 'south', 'to': 'rival', 'type': 'HasA', 'score': 0.004102068953216076, 'wm_score': 0.45120326, 'final': 0.13823242626725127}, {'fro': 'peace', 'to': 'rival', 'type': 'HasA', 'score': 0.006449515465646982, 'wm_score': 0.37942347, 'final': 0.11834170182595291}, {'fro': 'chain', 'to': 'rival', 'type': 'HasA', 'score': 0.005520051345229149, 'wm_score': 0.38583192, 'final': 0.11961361194166042}, {'fro': 'fight', 'to': 'rival', 'type': 'HasA', 'score': 0.0051094782538712025, 'wm_score': 0.5074913, 'final': 0.15582402477770985}, {'fro': 'race', 'to': 'rival', 'type': 'HasA', 'score': 0.010458678007125854, 'wm_score': 0.47104678, 'final': 0.14863510860498813}, {'fro': 'rival', 'to': 'race', 'type': 'AtLocation', 'score': 0.006262119859457016, 'wm_score': 0.47104678, 'final': 0.14569751790161994}, {'fro': 'west', 'to': 'rival', 'type': 'HasA', 'score': 0.0038141056429594755, 'wm_score': 0.40092948, 'final': 0.12294871795007166}, {'fro': 'row', 'to': 'rival', 'type': 'HasA', 'score': 0.003754541277885437, 'wm_score': 0.34194732, 'final': 0.10521237489451982}, {'fro': 'bid', 'to': 'rival', 'type': 'HasA', 'score': 0.02750156819820404, 'wm_score': 0.6536045, 'final': 0.21533244773874288}, {'fro': 'rival', 'to': 'bid', 'type': 'AtLocation', 'score': 0.008432351052761078, 'wm_score': 0.6536045, 'final': 0.2019839957369328}, {'fro': 'bitter', 'to': 'rival', 'type': 'HasA', 'score': 0.00606507109478116, 'wm_score': 0.47095102, 'final': 0.14553085576634683}, {'fro': 'champion', 'to': 'rival', 'type': 'HasA', 'score': 0.004332553129643202, 'wm_score': 0.4533181, 'final': 0.13902821719075026}, {'fro': 'other', 'to': 'rival', 'type': 'HasA', 'score': 0.0036338164936751127, 'wm_score': 0.5251817, 'final': 0.1600981815455726}, {'fro': 'might', 'to': 'rival', 'type': 'HasA', 'score': 0.005534445401281118, 'wm_score': 0.38172162, 'final': 0.11839059778089679}, {'fro': 'big', 'to': 'rival', 'type': 'HasA', 'score': 0.004889748524874449, 'wm_score': 0.47700503, 'final': 0.14652433296741213}, {'fro': 'major', 'to': 'rival', 'type': 'HasA', 'score': 0.027526896446943283, 'wm_score': 0.5319066, 'final': 0.17884080751286033}, {'fro': 'offer', 'to': 'rival', 'type': 'HasA', 'score': 0.005146713461726904, 'wm_score': 0.45575842, 'final': 0.14033022542320886}, {'fro': 'international', 'to': 'rival', 'type': 'HasA', 'score': 0.005848657339811325, 'wm_score': 0.39765543, 'final': 0.12339068913786794}, {'fro': 'alternative', 'to': 'rival', 'type': 'HasA', 'score': 0.010046791285276413, 'wm_score': 0.35100538, 'final': 0.1123343678996935}, {'fro': 'primary', 'to': 'rival', 'type': 'HasA', 'score': 0.0032363366335630417, 'wm_score': 0.44457358, 'final': 0.13563750964349416}, {'fro': 'run', 'to': 'rival', 'type': 'HasA', 'score': 0.00498506473377347, 'wm_score': 0.46287575, 'final': 0.14235227031364145}, {'fro': 'western', 'to': 'rival', 'type': 'HasA', 'score': 0.006109003443270922, 'wm_score': 0.47847787, 'final': 0.14781966341028968}, {'fro': 'lead', 'to': 'rival', 'type': 'HasA', 'score': 0.0041171349585056305, 'wm_score': 0.4545277, 'final': 0.13924030447095395}, {'fro': 'rival', 'to': 'lead', 'type': 'AtLocation', 'score': 0.003397834487259388, 'wm_score': 0.4545277, 'final': 0.1387367941410816}, {'fro': 'push', 'to': 'rival', 'type': 'HasA', 'score': 0.004621645901352167, 'wm_score': 0.48769364, 'final': 0.14954324413094655}, {'fro': 'conflict', 'to': 'rival', 'type': 'HasA', 'score': 0.007276339456439018, 'wm_score': 0.4115383, 'final': 0.12855492761950732}, {'fro': 'claim', 'to': 'rival', 'type': 'HasA', 'score': 0.004010614473372698, 'wm_score': 0.4612773, 'final': 0.1411906201313609}, {'fro': 'divide', 'to': 'rival', 'type': 'HasA', 'score': 0.004362206906080246, 'wm_score': 0.34870753, 'final': 0.10766580383425618}, {'fro': 'struggle', 'to': 'rival', 'type': 'HasA', 'score': 0.006340512074530125, 'wm_score': 0.5225549, 'final': 0.16120482845217113}, {'fro': 'resolve', 'to': 'rival', 'type': 'HasA', 'score': 0.005690098740160465, 'wm_score': 0.32818538, 'final': 0.10243868311811236}, {'fro': 'grand', 'to': 'rival', 'type': 'HasA', 'score': 0.002779195085167885, 'wm_score': 0.3368941, 'final': 0.10301366655961752}, {'fro': 'quit', 'to': 'rival', 'type': 'HasA', 'score': 0.0038576829247176647, 'wm_score': 0.36861962, 'final': 0.11328626404730237}, {'fro': 'stake', 'to': 'rival', 'type': 'HasA', 'score': 0.003157347673550248, 'wm_score': 0.48602933, 'final': 0.1480189423714852}, {'fro': 'monopoly', 'to': 'rival', 'type': 'HasA', 'score': 0.005799897480756044, 'wm_score': 0.37422758, 'final': 0.11632820223652925}, {'fro': 'kremlin', 'to': 'rival', 'type': 'HasA', 'score': 0.004444384481757879, 'wm_score': 0.41119152, 'final': 0.12646852513723053}, {'fro': 'taliban', 'to': 'rival', 'type': 'HasA', 'score': 0.0072619374841451645, 'wm_score': 0.3626565, 'final': 0.11388030623890164}, {'fro': 'rival', 'to': 'coup', 'type': 'AtLocation', 'score': 0.004770467057824135, 'wm_score': 0.33976215, 'final': 0.1052679719404769}, {'fro': 'dispute', 'to': 'rival', 'type': 'HasA', 'score': 0.008051039651036263, 'wm_score': 0.47123078, 'final': 0.14700496175572542}, {'fro': 'coalition', 'to': 'rival', 'type': 'HasA', 'score': 0.014883978292346, 'wm_score': 0.49912834, 'final': 0.16015728680464222}, {'fro': 'opposition', 'to': 'rival', 'type': 'HasA', 'score': 0.01413918100297451, 'wm_score': 0.6041058, 'final': 0.1911291667020822}, {'fro': 'scandal', 'to': 'rival', 'type': 'HasA', 'score': 0.005155082326382399, 'wm_score': 0.33151498, 'final': 0.1030630516284677}, {'fro': 'republican', 'to': 'rival', 'type': 'HasA', 'score': 0.007383046671748161, 'wm_score': 0.5218915, 'final': 0.1617355826702237}, {'fro': 'politician', 'to': 'rival', 'type': 'HasA', 'score': 0.00662486394867301, 'wm_score': 0.34478754, 'final': 0.10807366676407112}, {'fro': 'rift', 'to': 'rival', 'type': 'HasA', 'score': 0.0046158889308571815, 'wm_score': 0.32564312, 'final': 0.10092405825160004}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

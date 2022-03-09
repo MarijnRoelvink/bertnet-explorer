@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">bronx</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "bronx"
+    let relations = [{'fro': 'bronx', 'to': 'library', 'type': 'HasA', 'score': 0.006494743749499321, 'wm_score': 0.37704554, 'final': 0.11765998262464954}, {'fro': 'bronx', 'to': 'community', 'type': 'HasA', 'score': 0.006229720544070005, 'wm_score': 0.42939952, 'final': 0.13318066038084903}, {'fro': 'bronx', 'to': 'university', 'type': 'HasA', 'score': 0.006652652285993099, 'wm_score': 0.36633295, 'final': 0.11455674160019519}, {'fro': 'bronx', 'to': 'department', 'type': 'HasA', 'score': 0.004781733267009258, 'wm_score': 0.34416336, 'final': 0.10659622128690649}, {'fro': 'bronx', 'to': 'apartment', 'type': 'HasA', 'score': 0.0039979638531804085, 'wm_score': 0.4995571, 'final': 0.1526657046972263}, {'fro': 'apartment', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.012506261467933655, 'wm_score': 0.4995571, 'final': 0.15862151302755356}, {'fro': 'office', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.013854773715138435, 'wm_score': 0.3743217, 'final': 0.12199485160059692}, {'fro': 'bronx', 'to': 'housing', 'type': 'HasA', 'score': 0.007848099805414677, 'wm_score': 0.36098582, 'final': 0.1137894158637903}, {'fro': 'bronx', 'to': 'city', 'type': 'HasA', 'score': 0.025968551635742188, 'wm_score': 0.5135215, 'final': 0.17223443614501954}, {'fro': 'bronx', 'to': 'college', 'type': 'HasA', 'score': 0.007178955711424351, 'wm_score': 0.41701552, 'final': 0.13012992499799705}, {'fro': 'bronx', 'to': 'highway', 'type': 'HasA', 'score': 0.015275987796485424, 'wm_score': 0.34310386, 'final': 0.1136243494575398}, {'fro': 'bronx', 'to': 'hotel', 'type': 'HasA', 'score': 0.00650235079228878, 'wm_score': 0.32635665, 'final': 0.10245864055460217}, {'fro': 'hotel', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.008265995420515537, 'wm_score': 0.32635665, 'final': 0.1036931917943609}, {'fro': 'bronx', 'to': 'mall', 'type': 'HasA', 'score': 0.04778672009706497, 'wm_score': 0.44314462, 'final': 0.1663940900679455}, {'fro': 'mall', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.008196843788027763, 'wm_score': 0.44314462, 'final': 0.13868117665161947}, {'fro': 'bronx', 'to': 'police', 'type': 'HasA', 'score': 0.012237954884767532, 'wm_score': 0.36119342, 'final': 0.11692459441933728}, {'fro': 'bronx', 'to': 'restaurant', 'type': 'HasA', 'score': 0.017999818548560143, 'wm_score': 0.29459932, 'final': 0.1009796689839921}, {'fro': 'bronx', 'to': 'town', 'type': 'HasA', 'score': 0.011072298511862755, 'wm_score': 0.43635142, 'final': 0.13865603495830395}, {'fro': 'bronx', 'to': 'airport', 'type': 'HasA', 'score': 0.010943479835987091, 'wm_score': 0.34667578, 'final': 0.11166316988519098}, {'fro': 'bronx', 'to': 'baseball', 'type': 'HasA', 'score': 0.013711821287870407, 'wm_score': 0.35515964, 'final': 0.1161461669015093}, {'fro': 'baseball', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.011691989377140999, 'wm_score': 0.35515964, 'final': 0.11473228456399871}, {'fro': 'bronx', 'to': 'hospital', 'type': 'HasA', 'score': 0.01446203701198101, 'wm_score': 0.40137413, 'final': 0.13053566490838672}, {'fro': 'hospital', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.0034757188986986876, 'wm_score': 0.40137413, 'final': 0.1228452422290891}, {'fro': 'bronx', 'to': 'youth', 'type': 'HasA', 'score': 0.006385161075741053, 'wm_score': 0.42415434, 'final': 0.13171591475301878}, {'fro': 'bronx', 'to': 'school', 'type': 'HasA', 'score': 0.03828606382012367, 'wm_score': 0.51159585, 'final': 0.1802789996740866}, {'fro': 'school', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.0061625647358596325, 'wm_score': 0.51159585, 'final': 0.15779255031510175}, {'fro': 'bronx', 'to': 'man', 'type': 'HasA', 'score': 0.007554339244961739, 'wm_score': 0.33181894, 'final': 0.10483371947147323}, {'fro': 'bronx', 'to': 'bus', 'type': 'HasA', 'score': 0.022350730374455452, 'wm_score': 0.333155, 'final': 0.11559201126211882}, {'fro': 'bus', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.009355698712170124, 'wm_score': 0.333155, 'final': 0.1064954890985191}, {'fro': 'bronx', 'to': 'bridge', 'type': 'HasA', 'score': 0.03657005354762077, 'wm_score': 0.35785386, 'final': 0.13295519548333457}, {'fro': 'bronx', 'to': 'park', 'type': 'HasA', 'score': 0.027813920751214027, 'wm_score': 0.47360876, 'final': 0.16155237252584984}, {'fro': 'bronx', 'to': 'street', 'type': 'HasA', 'score': 0.01083451323211193, 'wm_score': 0.45880157, 'final': 0.14522463026247837}, {'fro': 'street', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.004948359914124012, 'wm_score': 0.45880157, 'final': 0.1411043229398868}, {'fro': 'bronx', 'to': 'beach', 'type': 'HasA', 'score': 0.008055147714912891, 'wm_score': 0.34771758, 'final': 0.10995387740043905}, {'fro': 'bronx', 'to': 'kid', 'type': 'HasA', 'score': 0.006160091608762741, 'wm_score': 0.34961367, 'final': 0.10919616512613392}, {'fro': 'bronx', 'to': 'corner', 'type': 'HasA', 'score': 0.005395936779677868, 'wm_score': 0.3420824, 'final': 0.10640187574577452}, {'fro': 'bronx', 'to': 'district', 'type': 'HasA', 'score': 0.003287950763478875, 'wm_score': 0.5292156, 'final': 0.16106624553443524}, {'fro': 'bronx', 'to': 'native', 'type': 'HasA', 'score': 0.009229592978954315, 'wm_score': 0.3658817, 'final': 0.11622522508526803}, {'fro': 'native', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.011516563594341278, 'wm_score': 0.3658817, 'final': 0.11782610451603891}, {'fro': 'bronx', 'to': 'shelter', 'type': 'HasA', 'score': 0.09895166009664536, 'wm_score': 0.31751406, 'final': 0.16452038006765174}, {'fro': 'shelter', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.04626891016960144, 'wm_score': 0.31751406, 'final': 0.12764245511872102}, {'fro': 'resident', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.0030708820559084415, 'wm_score': 0.4627186, 'final': 0.14096519743913594}, {'fro': 'bronx', 'to': 'train', 'type': 'HasA', 'score': 0.015855606645345688, 'wm_score': 0.34821647, 'final': 0.115563865651742}, {'fro': 'bronx', 'to': 'streets', 'type': 'HasA', 'score': 0.007593134418129921, 'wm_score': 0.39320976, 'final': 0.12327812209269097}, {'fro': 'bronx', 'to': 'museum', 'type': 'HasA', 'score': 0.03295590355992317, 'wm_score': 0.43258417, 'final': 0.15284438349194623}, {'fro': 'museum', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.003573847934603691, 'wm_score': 0.43258417, 'final': 0.1322769445542226}, {'fro': 'bronx', 'to': 'theatre', 'type': 'HasA', 'score': 0.027061939239501953, 'wm_score': 0.32128945, 'final': 0.11533019246765137}, {'fro': 'bronx', 'to': 'zoo', 'type': 'HasA', 'score': 0.11755679547786713, 'wm_score': 0.29790488, 'final': 0.171661220834507}, {'fro': 'zoo', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.017202934250235558, 'wm_score': 0.29790488, 'final': 0.1014135179751649}, {'fro': 'bronx', 'to': 'center', 'type': 'HasA', 'score': 0.02718304470181465, 'wm_score': 0.45938197, 'final': 0.15684272229127028}, {'fro': 'center', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.011600829660892487, 'wm_score': 0.45938197, 'final': 0.14593517176262474}, {'fro': 'bronx', 'to': 'mayor', 'type': 'HasA', 'score': 0.07296188175678253, 'wm_score': 0.45535558, 'final': 0.18767999122974777}, {'fro': 'bronx', 'to': 'memorial', 'type': 'HasA', 'score': 0.016363224014639854, 'wm_score': 0.42620218, 'final': 0.1393149108102479}, {'fro': 'bronx', 'to': 'firefighter', 'type': 'HasA', 'score': 0.038700349628925323, 'wm_score': 0.35363397, 'final': 0.13318043574024774}, {'fro': 'bronx', 'to': 'neighbourhood', 'type': 'HasA', 'score': 0.018405506387352943, 'wm_score': 0.46563783, 'final': 0.1525752034711471}, {'fro': 'neighbourhood', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.0038853948935866356, 'wm_score': 0.46563783, 'final': 0.14241112542551065}, {'fro': 'bronx', 'to': 'neighborhood', 'type': 'HasA', 'score': 0.014791073277592659, 'wm_score': 0.6507096, 'final': 0.2055666312943149}, {'fro': 'neighborhood', 'to': 'bronx', 'type': 'AtLocation', 'score': 0.01053142361342907, 'wm_score': 0.6507096, 'final': 0.20258487652940038}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

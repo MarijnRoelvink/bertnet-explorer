@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">mosque</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "mosque"
+    let relations = [{'fro': 'area', 'to': 'mosque', 'type': 'HasA', 'score': 0.006763255689293146, 'wm_score': 0.45919865, 'final': 0.1424938739825052}, {'fro': 'mosque', 'to': 'area', 'type': 'AtLocation', 'score': 0.04329812899231911, 'wm_score': 0.45919865, 'final': 0.1680682852946234}, {'fro': 'mosque', 'to': 'city', 'type': 'AtLocation', 'score': 0.05502770468592644, 'wm_score': 0.5073572, 'final': 0.1907265532801485}, {'fro': 'mosque', 'to': 'construction', 'type': 'HasA', 'score': 0.004622442647814751, 'wm_score': 0.36489445, 'final': 0.11270404485347034}, {'fro': 'town', 'to': 'mosque', 'type': 'HasA', 'score': 0.0060350471176207066, 'wm_score': 0.48803136, 'final': 0.1506339409823345}, {'fro': 'mosque', 'to': 'town', 'type': 'AtLocation', 'score': 0.020602772012352943, 'wm_score': 0.48803136, 'final': 0.16083134840864707}, {'fro': 'mosque', 'to': 'hall', 'type': 'HasA', 'score': 0.0056222290731966496, 'wm_score': 0.40307713, 'final': 0.12485869935123767}, {'fro': 'village', 'to': 'mosque', 'type': 'HasA', 'score': 0.04541802406311035, 'wm_score': 0.5122446, 'final': 0.18546599684417728}, {'fro': 'mosque', 'to': 'village', 'type': 'AtLocation', 'score': 0.02333046868443489, 'wm_score': 0.5122446, 'final': 0.17000470807910445}, {'fro': 'mosque', 'to': 'square', 'type': 'HasA', 'score': 0.00518785510212183, 'wm_score': 0.47391954, 'final': 0.1458073605714853}, {'fro': 'mosque', 'to': 'square', 'type': 'AtLocation', 'score': 0.0043668258003890514, 'wm_score': 0.47391954, 'final': 0.14523264006027234}, {'fro': 'capital', 'to': 'mosque', 'type': 'HasA', 'score': 0.006439142394810915, 'wm_score': 0.3488142, 'final': 0.10915165967636765}, {'fro': 'mosque', 'to': 'capital', 'type': 'AtLocation', 'score': 0.04021371901035309, 'wm_score': 0.3488142, 'final': 0.13279386330724718}, {'fro': 'mosque', 'to': 'district', 'type': 'AtLocation', 'score': 0.11691365391016006, 'wm_score': 0.3822502, 'final': 0.19651461773711204}, {'fro': 'mosque', 'to': 'east', 'type': 'AtLocation', 'score': 0.010018608532845974, 'wm_score': 0.35023382, 'final': 0.11208317197299218}, {'fro': 'mosque', 'to': 'west', 'type': 'AtLocation', 'score': 0.004170735366642475, 'wm_score': 0.35876215, 'final': 0.11054815975664975}, {'fro': 'mosque', 'to': 'entrance', 'type': 'HasA', 'score': 0.00905066728591919, 'wm_score': 0.5688268, 'final': 0.17698350710014346}, {'fro': 'mosque', 'to': 'priest', 'type': 'HasA', 'score': 0.0022494513541460037, 'wm_score': 0.38644314, 'final': 0.11750755794790223}, {'fro': 'mosque', 'to': 'roof', 'type': 'HasA', 'score': 0.00474152248352766, 'wm_score': 0.41308504, 'final': 0.1272445777384694}, {'fro': 'mosque', 'to': 'tower', 'type': 'HasA', 'score': 0.00590129429474473, 'wm_score': 0.4729119, 'final': 0.14600447600632135}, {'fro': 'mosque', 'to': 'ruins', 'type': 'AtLocation', 'score': 0.008554552681744099, 'wm_score': 0.54022765, 'final': 0.16805648187722086}, {'fro': 'mosque', 'to': 'memorial', 'type': 'HasA', 'score': 0.00840702373534441, 'wm_score': 0.4192046, 'final': 0.1316462966147411}, {'fro': 'neighbourhood', 'to': 'mosque', 'type': 'HasA', 'score': 0.0062695755623281, 'wm_score': 0.52391136, 'final': 0.1615621108936297}, {'fro': 'mosque', 'to': 'neighbourhood', 'type': 'AtLocation', 'score': 0.015746193006634712, 'wm_score': 0.52391136, 'final': 0.16819574310464433}, {'fro': 'neighborhood', 'to': 'mosque', 'type': 'HasA', 'score': 0.004021654836833477, 'wm_score': 0.59259015, 'final': 0.1805922033857835}, {'fro': 'mosque', 'to': 'neighborhood', 'type': 'AtLocation', 'score': 0.015391926281154156, 'wm_score': 0.59259015, 'final': 0.18855139339680796}, {'fro': 'vicinity', 'to': 'mosque', 'type': 'HasA', 'score': 0.005924925673753023, 'wm_score': 0.4458616, 'final': 0.13790592797162715}, {'fro': 'mosque', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.016576012596488, 'wm_score': 0.4458616, 'final': 0.14536168881754163}, {'fro': 'mosque', 'to': 'province', 'type': 'AtLocation', 'score': 0.037099581211805344, 'wm_score': 0.33859035, 'final': 0.12754681184826375}, {'fro': 'mosque', 'to': 'sikh', 'type': 'HasA', 'score': 0.02242201566696167, 'wm_score': 0.48322213, 'final': 0.1606620499668732}, {'fro': 'mosque', 'to': 'sikh', 'type': 'AtLocation', 'score': 0.0065771606750786304, 'wm_score': 0.48322213, 'final': 0.14957065147255508}, {'fro': 'sikh', 'to': 'mosque', 'type': 'AtLocation', 'score': 0.06207006052136421, 'wm_score': 0.48322213, 'final': 0.18841568136495498}, {'fro': 'mosque', 'to': 'citadel', 'type': 'AtLocation', 'score': 0.008788719773292542, 'wm_score': 0.39159757, 'final': 0.1236313748413048}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

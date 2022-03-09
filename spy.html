@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">spy</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "spy"
+    let relations = [{'fro': 'spy', 'to': 'government', 'type': 'AtLocation', 'score': 0.00896310992538929, 'wm_score': 0.3321362, 'final': 0.10591503694777252}, {'fro': 'spy', 'to': 'camera', 'type': 'AtLocation', 'score': 0.004361704457551241, 'wm_score': 0.3894328, 'final': 0.11988303312028589}, {'fro': 'spy', 'to': 'secret', 'type': 'AtLocation', 'score': 0.012822899036109447, 'wm_score': 0.66836476, 'final': 0.20948545732527662}, {'fro': 'spy', 'to': 'shoot', 'type': 'AtLocation', 'score': 0.004698732402175665, 'wm_score': 0.35989064, 'final': 0.11125630468152298}, {'fro': 'spy', 'to': 'mafia', 'type': 'AtLocation', 'score': 0.009227960370481014, 'wm_score': 0.40653682, 'final': 0.12842061825933673}, {'fro': 'spy', 'to': 'kremlin', 'type': 'AtLocation', 'score': 0.004473850596696138, 'wm_score': 0.3350726, 'final': 0.10365347541768731}, {'fro': 'spy', 'to': 'coup', 'type': 'AtLocation', 'score': 0.004597524181008339, 'wm_score': 0.36713538, 'final': 0.11335888092670586}, {'fro': 'spy', 'to': 'intercept', 'type': 'AtLocation', 'score': 0.005579241085797548, 'wm_score': 0.4004139, 'final': 0.1240296387600583}, {'fro': 'cia', 'to': 'spy', 'type': 'HasA', 'score': 0.20312580466270447, 'wm_score': 0.62698275, 'final': 0.3302828882638932}, {'fro': 'nsa', 'to': 'spy', 'type': 'HasA', 'score': 0.08407122641801834, 'wm_score': 0.46937093, 'final': 0.19966113749261288}, {'fro': 'vatican', 'to': 'spy', 'type': 'HasA', 'score': 0.06860790401697159, 'wm_score': 0.23697521, 'final': 0.11911809581188013}, {'fro': 'uk', 'to': 'spy', 'type': 'HasA', 'score': 0.06212452054023743, 'wm_score': 0.27850777, 'final': 0.1270394953781662}, {'fro': 'kremlin', 'to': 'spy', 'type': 'HasA', 'score': 0.06166311353445053, 'wm_score': 0.3350726, 'final': 0.1436859594741154}, {'fro': 'us', 'to': 'spy', 'type': 'HasA', 'score': 0.05028809607028961, 'wm_score': 0.45473492, 'final': 0.17162214324920275}, {'fro': 'fbi', 'to': 'spy', 'type': 'HasA', 'score': 0.038903385400772095, 'wm_score': 0.54328126, 'final': 0.19021674778054048}, {'fro': 'bbc', 'to': 'spy', 'type': 'HasA', 'score': 0.03281458839774132, 'wm_score': 0.36473256, 'final': 0.13238997987841894}, {'fro': 'pentagon', 'to': 'spy', 'type': 'HasA', 'score': 0.024322884157299995, 'wm_score': 0.48671684, 'final': 0.16304107091011}, {'fro': 'kgb', 'to': 'spy', 'type': 'HasA', 'score': 0.010747465305030346, 'wm_score': 0.5908971, 'final': 0.18479235571352126}, {'fro': 'world', 'to': 'spy', 'type': 'HasA', 'score': 0.009462876245379448, 'wm_score': 0.31663954, 'final': 0.10161587537176563}, {'fro': 'nypd', 'to': 'spy', 'type': 'HasA', 'score': 0.009018979035317898, 'wm_score': 0.3470225, 'final': 0.11042003532472255}, {'fro': 'navy', 'to': 'spy', 'type': 'HasA', 'score': 0.006160712335258722, 'wm_score': 0.4436329, 'final': 0.13740236863468114}, {'fro': 'government', 'to': 'spy', 'type': 'HasA', 'score': 0.005945205222815275, 'wm_score': 0.3321362, 'final': 0.1038025036559707}, {'fro': 'army', 'to': 'spy', 'type': 'HasA', 'score': 0.005767425522208214, 'wm_score': 0.3692941, 'final': 0.11482542786554577}, {'fro': 'mafia', 'to': 'spy', 'type': 'HasA', 'score': 0.0051245056092739105, 'wm_score': 0.40653682, 'final': 0.12554819992649177}, {'fro': 'military', 'to': 'spy', 'type': 'HasA', 'score': 0.00443406542763114, 'wm_score': 0.4888186, 'final': 0.14974942579934183}, {'fro': 'moon', 'to': 'spy', 'type': 'HasA', 'score': 0.0037769307382404804, 'wm_score': 0.32623842, 'final': 0.10051537751676834}, {'fro': 'internet', 'to': 'spy', 'type': 'HasA', 'score': 0.003590924898162484, 'wm_score': 0.37960383, 'final': 0.11639479642871375}, {'fro': 'agency', 'to': 'spy', 'type': 'HasA', 'score': 0.0027500037103891373, 'wm_score': 0.41953933, 'final': 0.12778680159727243}, {'fro': 'spy', 'to': 'lawyer', 'type': 'HasA', 'score': 0.0404546856880188, 'wm_score': 0.3016623, 'final': 0.11881696998161316}, {'fro': 'spy', 'to': 'future', 'type': 'HasA', 'score': 0.028156083077192307, 'wm_score': 0.28276098, 'final': 0.10453755215403462}, {'fro': 'spy', 'to': 'mission', 'type': 'HasA', 'score': 0.0190938301384449, 'wm_score': 0.3692159, 'final': 0.12413045109691144}, {'fro': 'spy', 'to': 'role', 'type': 'HasA', 'score': 0.016718685626983643, 'wm_score': 0.40051353, 'final': 0.13185713893888856}, {'fro': 'spy', 'to': 'secret', 'type': 'HasA', 'score': 0.016627876088023186, 'wm_score': 0.66836476, 'final': 0.21214894126161624}, {'fro': 'spy', 'to': 'girlfriend', 'type': 'HasA', 'score': 0.01648564264178276, 'wm_score': 0.3455461, 'final': 0.11520377984924796}, {'fro': 'spy', 'to': 'link', 'type': 'HasA', 'score': 0.009404915384948254, 'wm_score': 0.38336262, 'final': 0.1215922267694638}, {'fro': 'spy', 'to': 'handler', 'type': 'HasA', 'score': 0.007619079202413559, 'wm_score': 0.3451351, 'final': 0.1088738854416895}, {'fro': 'spy', 'to': 'story', 'type': 'HasA', 'score': 0.007524958811700344, 'wm_score': 0.38157868, 'final': 0.11974107516819026}, {'fro': 'spy', 'to': 'weapon', 'type': 'HasA', 'score': 0.007360175717622042, 'wm_score': 0.40642038, 'final': 0.12707823700233545}, {'fro': 'spy', 'to': 'boyfriend', 'type': 'HasA', 'score': 0.005242812447249889, 'wm_score': 0.3533886, 'final': 0.10968654871307494}, {'fro': 'spy', 'to': 'past', 'type': 'HasA', 'score': 0.005062464624643326, 'wm_score': 0.33172947, 'final': 0.10306256623725035}, {'fro': 'man', 'to': 'spy', 'type': 'AtLocation', 'score': 0.01758529618382454, 'wm_score': 0.42630202, 'final': 0.1402003133286772}, {'fro': 'mole', 'to': 'spy', 'type': 'AtLocation', 'score': 0.01671493798494339, 'wm_score': 0.3762471, 'final': 0.12457458658946038}, {'fro': 'sniper', 'to': 'spy', 'type': 'AtLocation', 'score': 0.011626463383436203, 'wm_score': 0.32110184, 'final': 0.10446907636840537}, {'fro': 'dog', 'to': 'spy', 'type': 'AtLocation', 'score': 0.011582162231206894, 'wm_score': 0.33222708, 'final': 0.10777563756184484}, {'fro': 'fox', 'to': 'spy', 'type': 'AtLocation', 'score': 0.011340317316353321, 'wm_score': 0.33473253, 'final': 0.10835798112144733}, {'fro': 'traitor', 'to': 'spy', 'type': 'AtLocation', 'score': 0.010966158472001553, 'wm_score': 0.33277676, 'final': 0.1075093389304011}, {'fro': 'suspect', 'to': 'spy', 'type': 'AtLocation', 'score': 0.008577289059758186, 'wm_score': 0.5201521, 'final': 0.16204973234183076}, {'fro': 'soldier', 'to': 'spy', 'type': 'AtLocation', 'score': 0.007963022217154503, 'wm_score': 0.373088, 'final': 0.11750051555200816}, {'fro': 'thief', 'to': 'spy', 'type': 'AtLocation', 'score': 0.007269689813256264, 'wm_score': 0.3397568, 'final': 0.10701582286927941}, {'fro': 'hacker', 'to': 'spy', 'type': 'AtLocation', 'score': 0.006996174342930317, 'wm_score': 0.45809466, 'final': 0.14232572004005123}, {'fro': 'bomb', 'to': 'spy', 'type': 'AtLocation', 'score': 0.006972807925194502, 'wm_score': 0.3959829, 'final': 0.12367583554763617}, {'fro': 'predator', 'to': 'spy', 'type': 'AtLocation', 'score': 0.006968021858483553, 'wm_score': 0.5057989, 'final': 0.15661728530093855}, {'fro': 'pirate', 'to': 'spy', 'type': 'AtLocation', 'score': 0.005577102769166231, 'wm_score': 0.4652956, 'final': 0.14349265193841637}, {'fro': 'hero', 'to': 'spy', 'type': 'AtLocation', 'score': 0.0046431999653577805, 'wm_score': 0.36034244, 'final': 0.11135297197575045}, {'fro': 'girl', 'to': 'spy', 'type': 'AtLocation', 'score': 0.004627259448170662, 'wm_score': 0.32791466, 'final': 0.10161347961371948}, {'fro': 'boy', 'to': 'spy', 'type': 'AtLocation', 'score': 0.003910521976649761, 'wm_score': 0.36507773, 'final': 0.11226068438365484}, {'fro': 'spy', 'to': 'making', 'type': 'AtLocation', 'score': 0.09527131170034409, 'wm_score': 0.30975133, 'final': 0.15961531719024086}, {'fro': 'spy', 'to': 'shadows', 'type': 'AtLocation', 'score': 0.07303409278392792, 'wm_score': 0.22614941, 'final': 0.11896868794874955}, {'fro': 'spy', 'to': 'works', 'type': 'AtLocation', 'score': 0.06966336816549301, 'wm_score': 0.22635807, 'final': 0.11667177871584511}, {'fro': 'spy', 'to': 'news', 'type': 'AtLocation', 'score': 0.04441818967461586, 'wm_score': 0.3599853, 'final': 0.13908832277223113}, {'fro': 'spy', 'to': 'dark', 'type': 'AtLocation', 'score': 0.03241316229104996, 'wm_score': 0.28444093, 'final': 0.10802149260373498}, {'fro': 'spy', 'to': 'air', 'type': 'AtLocation', 'score': 0.0204915814101696, 'wm_score': 0.42002434, 'final': 0.14035140898711873}, {'fro': 'spy', 'to': 'hunt', 'type': 'AtLocation', 'score': 0.01754097267985344, 'wm_score': 0.38209212, 'final': 0.1269063168758974}, {'fro': 'spy', 'to': 'us', 'type': 'AtLocation', 'score': 0.004331984557211399, 'wm_score': 0.45473492, 'final': 0.139452865190048}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

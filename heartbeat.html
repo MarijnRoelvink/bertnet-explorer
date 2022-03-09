@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">heartbeat</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "heartbeat"
+    let relations = [{'fro': 'blood', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.005190955009311438, 'wm_score': 0.4266129, 'final': 0.13161753850651803}, {'fro': 'heart', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.03497997671365738, 'wm_score': 0.48555535, 'final': 0.17015258869956018}, {'fro': 'heartbeat', 'to': 'procedure', 'type': 'AtLocation', 'score': 0.004547536838799715, 'wm_score': 0.35793585, 'final': 0.11056403078715982}, {'fro': 'throat', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.0036597170401364565, 'wm_score': 0.35353416, 'final': 0.10862204992809553}, {'fro': 'body', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.0681212916970253, 'wm_score': 0.2565088, 'final': 0.12463754418791771}, {'fro': 'heartbeat', 'to': 'sound', 'type': 'AtLocation', 'score': 0.014028364792466164, 'wm_score': 0.30437976, 'final': 0.10113378335472634}, {'fro': 'voice', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.027931835502386093, 'wm_score': 0.31648913, 'final': 0.11449902385167028}, {'fro': 'heartbeat', 'to': 'voice', 'type': 'AtLocation', 'score': 0.013081115670502186, 'wm_score': 0.31648913, 'final': 0.10410351996935155}, {'fro': 'brain', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.01430774386972189, 'wm_score': 0.46644157, 'final': 0.14994789170880535}, {'fro': 'skin', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.006511718034744263, 'wm_score': 0.33559853, 'final': 0.105237761624321}, {'fro': 'baby', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.14255337417125702, 'wm_score': 0.27016953, 'final': 0.18083822091987992}, {'fro': 'muscle', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.01765148714184761, 'wm_score': 0.3808948, 'final': 0.12662448099929335}, {'fro': 'patient', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.019186578691005707, 'wm_score': 0.43683314, 'final': 0.14448054708370403}, {'fro': 'heartbeat', 'to': 'patient', 'type': 'AtLocation', 'score': 0.014552752487361431, 'wm_score': 0.43683314, 'final': 0.14123686874115304}, {'fro': 'stomach', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.009174428880214691, 'wm_score': 0.41823062, 'final': 0.1318912862161503}, {'fro': 'breast', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.03295642510056496, 'wm_score': 0.3073391, 'final': 0.11527122757039548}, {'fro': 'knee', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.010146141983568668, 'wm_score': 0.33769858, 'final': 0.1084118733884981}, {'fro': 'neck', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.0048891035839915276, 'wm_score': 0.350223, 'final': 0.10848927250879409}, {'fro': 'heartbeat', 'to': 'clock', 'type': 'AtLocation', 'score': 0.005136492662131786, 'wm_score': 0.32163012, 'final': 0.10008458086349227}, {'fro': 'heartbeat', 'to': 'normal', 'type': 'AtLocation', 'score': 0.011369801126420498, 'wm_score': 0.44775075, 'final': 0.14228408578849436}, {'fro': 'heartbeat', 'to': 'constant', 'type': 'AtLocation', 'score': 0.004306899383664131, 'wm_score': 0.36140287, 'final': 0.1114356905685649}, {'fro': 'pulse', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.004094525706022978, 'wm_score': 0.58708763, 'final': 0.1789924569942161}, {'fro': 'heartbeat', 'to': 'pulse', 'type': 'AtLocation', 'score': 0.010683943517506123, 'wm_score': 0.58708763, 'final': 0.1836050494622543}, {'fro': 'heartbeat', 'to': 'resonance', 'type': 'AtLocation', 'score': 0.006775154732167721, 'wm_score': 0.35042745, 'final': 0.10987084331251742}, {'fro': 'newborn', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.09239110350608826, 'wm_score': 0.3127492, 'final': 0.1584985324542618}, {'fro': 'heartbeat', 'to': 'newborn', 'type': 'AtLocation', 'score': 0.010974911041557789, 'wm_score': 0.3127492, 'final': 0.10150719772909048}, {'fro': 'fetus', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.4344148337841034, 'wm_score': 0.29556727, 'final': 0.3927605646488724}, {'fro': 'heartbeat', 'to': 'fetus', 'type': 'AtLocation', 'score': 0.0719829872250557, 'wm_score': 0.29556727, 'final': 0.139058272057539}, {'fro': 'calf', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.017725763842463493, 'wm_score': 0.32410824, 'final': 0.10964050668972446}, {'fro': 'heartbeat', 'to': 'pulse', 'type': 'HasA', 'score': 0.25745537877082825, 'wm_score': 0.58708763, 'final': 0.3563450541395798}, {'fro': 'heartbeat', 'to': 'rhythm', 'type': 'HasA', 'score': 0.08018701523542404, 'wm_score': 0.5794028, 'final': 0.22995175066479687}, {'fro': 'heartbeat', 'to': 'sound', 'type': 'HasA', 'score': 0.013505876995623112, 'wm_score': 0.30437976, 'final': 0.1007680418969362}, {'fro': 'heartbeat', 'to': 'pattern', 'type': 'HasA', 'score': 0.013204078190028667, 'wm_score': 0.3144391, 'final': 0.10357458473302009}, {'fro': 'heartbeat', 'to': 'bounce', 'type': 'HasA', 'score': 0.0023018671199679375, 'wm_score': 0.3338058, 'final': 0.10175304698397757}, {'fro': 'heartbeat', 'to': 'resonance', 'type': 'HasA', 'score': 0.0018984635826200247, 'wm_score': 0.35042745, 'final': 0.10645715950783403}, {'fro': 'heartbeat', 'to': 'vibration', 'type': 'HasA', 'score': 0.0017750795232132077, 'wm_score': 0.37273514, 'final': 0.11306309766624927}, {'fro': 'fetus', 'to': 'heartbeat', 'type': 'AtLocation', 'score': 0.08644459396600723, 'wm_score': 0.29556727, 'final': 0.14918139677620507}, {'fro': 'baby', 'to': 'heartbeat', 'type': 'AtLocation', 'score': 0.05359451845288277, 'wm_score': 0.27016953, 'final': 0.11856702191701793}, {'fro': 'pulse', 'to': 'heartbeat', 'type': 'AtLocation', 'score': 0.0201210156083107, 'wm_score': 0.58708763, 'final': 0.1902109999258175}, {'fro': 'heart', 'to': 'heartbeat', 'type': 'AtLocation', 'score': 0.008541438728570938, 'wm_score': 0.48555535, 'final': 0.1516456121099997}, {'fro': 'rhythm', 'to': 'heartbeat', 'type': 'AtLocation', 'score': 0.0021987855434417725, 'wm_score': 0.5794028, 'final': 0.17535998988040927}, {'fro': 'heartbeat', 'to': 'air', 'type': 'AtLocation', 'score': 0.20386579632759094, 'wm_score': 0.10377975, 'final': 0.17383998242931364}, {'fro': 'heartbeat', 'to': 'background', 'type': 'AtLocation', 'score': 0.13789278268814087, 'wm_score': 0.13167189, 'final': 0.13602651488169862}, {'fro': 'heartbeat', 'to': 'blood', 'type': 'AtLocation', 'score': 0.06762319803237915, 'wm_score': 0.4266129, 'final': 0.17532010862266542}, {'fro': 'heartbeat', 'to': 'womb', 'type': 'AtLocation', 'score': 0.017436908558011055, 'wm_score': 0.31471896, 'final': 0.10662152399060774}, {'fro': 'heartbeat', 'to': 'brain', 'type': 'AtLocation', 'score': 0.007740725763142109, 'wm_score': 0.46644157, 'final': 0.1453509790341995}, {'fro': 'heartbeat', 'to': 'chest', 'type': 'AtLocation', 'score': 0.006048315670341253, 'wm_score': 0.41348252, 'final': 0.1282785769692389}, {'fro': 'heartbeat', 'to': 'lungs', 'type': 'AtLocation', 'score': 0.005141810979694128, 'wm_score': 0.45254236, 'final': 0.1393619756857859}, {'fro': 'heartbeat', 'to': 'heart', 'type': 'AtLocation', 'score': 0.004299414809793234, 'wm_score': 0.48555535, 'final': 0.1486761953668553}, {'fro': 'heartbeat', 'to': 'bloodstream', 'type': 'AtLocation', 'score': 0.00363784097135067, 'wm_score': 0.3605583, 'final': 0.1107139786799455}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

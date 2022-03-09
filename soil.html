@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">soil</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "soil"
+    let relations = [{'fro': 'knowledge', 'to': 'soil', 'type': 'AtLocation', 'score': 0.004065140150487423, 'wm_score': 0.3929979, 'final': 0.12074496810534122}, {'fro': 'disease', 'to': 'soil', 'type': 'AtLocation', 'score': 0.007656819652765989, 'wm_score': 0.37243167, 'final': 0.1170892747569362}, {'fro': 'dirt', 'to': 'soil', 'type': 'AtLocation', 'score': 0.006567999254912138, 'wm_score': 0.47437754, 'final': 0.14691086147843851}, {'fro': 'plant', 'to': 'soil', 'type': 'HasA', 'score': 0.01814231649041176, 'wm_score': 0.5065824, 'final': 0.16467434154328825}, {'fro': 'site', 'to': 'soil', 'type': 'HasA', 'score': 0.01299955416470766, 'wm_score': 0.38983607, 'final': 0.12605050891529537}, {'fro': 'ground', 'to': 'soil', 'type': 'HasA', 'score': 0.01098440121859312, 'wm_score': 0.5726266, 'final': 0.1794770608530152}, {'fro': 'tree', 'to': 'soil', 'type': 'HasA', 'score': 0.010465607047080994, 'wm_score': 0.47492835, 'final': 0.14980442993295673}, {'fro': 'pond', 'to': 'soil', 'type': 'HasA', 'score': 0.009365951642394066, 'wm_score': 0.3396109, 'final': 0.10843943614967586}, {'fro': 'area', 'to': 'soil', 'type': 'HasA', 'score': 0.009120789356529713, 'wm_score': 0.44879016, 'final': 0.1410216005495708}, {'fro': 'farm', 'to': 'soil', 'type': 'HasA', 'score': 0.008625134825706482, 'wm_score': 0.35057378, 'final': 0.11120972837799455}, {'fro': 'lake', 'to': 'soil', 'type': 'HasA', 'score': 0.008297797292470932, 'wm_score': 0.32056382, 'final': 0.10197760410472967}, {'fro': 'river', 'to': 'soil', 'type': 'HasA', 'score': 0.007368369959294796, 'wm_score': 0.32834464, 'final': 0.10366125097150639}, {'fro': 'garden', 'to': 'soil', 'type': 'HasA', 'score': 0.006428541615605354, 'wm_score': 0.4071796, 'final': 0.12665385913092375}, {'fro': 'earth', 'to': 'soil', 'type': 'HasA', 'score': 0.006340499501675367, 'wm_score': 0.5043663, 'final': 0.1557482396511728}, {'fro': 'cave', 'to': 'soil', 'type': 'HasA', 'score': 0.005266875959932804, 'wm_score': 0.40642732, 'final': 0.12561500917195298}, {'fro': 'mountain', 'to': 'soil', 'type': 'HasA', 'score': 0.004499929025769234, 'wm_score': 0.34343624, 'final': 0.10618082231803848}, {'fro': 'forest', 'to': 'soil', 'type': 'HasA', 'score': 0.004462898708879948, 'wm_score': 0.51606035, 'final': 0.15794213409621596}, {'fro': 'planet', 'to': 'soil', 'type': 'HasA', 'score': 0.003949106205254793, 'wm_score': 0.3473603, 'final': 0.10697246434367837}, {'fro': 'field', 'to': 'soil', 'type': 'HasA', 'score': 0.003741469467058778, 'wm_score': 0.45396072, 'final': 0.13880724462694116}, {'fro': 'roof', 'to': 'soil', 'type': 'HasA', 'score': 0.003604438155889511, 'wm_score': 0.3474037, 'final': 0.10674421670912267}, {'fro': 'compound', 'to': 'soil', 'type': 'HasA', 'score': 0.00345817394554615, 'wm_score': 0.37745315, 'final': 0.11565666676188233}, {'fro': 'soil', 'to': 'purpose', 'type': 'HasA', 'score': 0.0278082937002182, 'wm_score': 0.32866538, 'final': 0.11806541959015275}, {'fro': 'soil', 'to': 'smell', 'type': 'HasA', 'score': 0.01908915303647518, 'wm_score': 0.34980989, 'final': 0.11830537412553266}, {'fro': 'soil', 'to': 'chance', 'type': 'HasA', 'score': 0.0182101521641016, 'wm_score': 0.29927978, 'final': 0.10253104051487114}, {'fro': 'soil', 'to': 'problem', 'type': 'HasA', 'score': 0.018047258257865906, 'wm_score': 0.37745124, 'final': 0.12586845278050615}, {'fro': 'soil', 'to': 'gradient', 'type': 'HasA', 'score': 0.013433868065476418, 'wm_score': 0.3555916, 'final': 0.11608118764583351}, {'fro': 'soil', 'to': 'history', 'type': 'HasA', 'score': 0.013014283031225204, 'wm_score': 0.33965486, 'final': 0.11100645612185765}, {'fro': 'soil', 'to': 'pattern', 'type': 'HasA', 'score': 0.011035528965294361, 'wm_score': 0.34469157, 'final': 0.11113234127570606}, {'fro': 'soil', 'to': 'ph', 'type': 'HasA', 'score': 0.0104749770835042, 'wm_score': 0.4070347, 'final': 0.12944289395845296}, {'fro': 'soil', 'to': 'solution', 'type': 'HasA', 'score': 0.009404522366821766, 'wm_score': 0.40183225, 'final': 0.12713284065677527}, {'fro': 'soil', 'to': 'fungus', 'type': 'HasA', 'score': 0.009066521190106869, 'wm_score': 0.45716658, 'final': 0.1434965388330748}, {'fro': 'soil', 'to': 'crust', 'type': 'HasA', 'score': 0.007233957760035992, 'wm_score': 0.35172367, 'final': 0.1105808714320252}, {'fro': 'soil', 'to': 'hole', 'type': 'HasA', 'score': 0.005704544950276613, 'wm_score': 0.38045758, 'final': 0.11813045546519366}, {'fro': 'soil', 'to': 'potential', 'type': 'HasA', 'score': 0.005601442418992519, 'wm_score': 0.3529961, 'final': 0.10981983969329477}, {'fro': 'soil', 'to': 'texture', 'type': 'HasA', 'score': 0.005434828344732523, 'wm_score': 0.44603163, 'final': 0.1376138688413128}, {'fro': 'soil', 'to': 'cover', 'type': 'HasA', 'score': 0.004959504120051861, 'wm_score': 0.40239424, 'final': 0.12418992488403632}, {'fro': 'soil', 'to': 'place', 'type': 'HasA', 'score': 0.004207338206470013, 'wm_score': 0.40112066, 'final': 0.12328133474452903}, {'fro': 'soil', 'to': 'taste', 'type': 'HasA', 'score': 0.003939434885978699, 'wm_score': 0.3879613, 'final': 0.11914599442018511}, {'fro': 'hole', 'to': 'soil', 'type': 'AtLocation', 'score': 0.03931724280118942, 'wm_score': 0.38045758, 'final': 0.14165934396083263}, {'fro': 'fungus', 'to': 'soil', 'type': 'AtLocation', 'score': 0.0344817079603672, 'wm_score': 0.45716658, 'final': 0.16128716957225706}, {'fro': 'plant', 'to': 'soil', 'type': 'AtLocation', 'score': 0.01901250332593918, 'wm_score': 0.5065824, 'final': 0.16528347232815743}, {'fro': 'chemical', 'to': 'soil', 'type': 'AtLocation', 'score': 0.015162788331508636, 'wm_score': 0.4479611, 'final': 0.14500228183205607}, {'fro': 'seed', 'to': 'soil', 'type': 'AtLocation', 'score': 0.014768607914447784, 'wm_score': 0.36712646, 'final': 0.12047596354011347}, {'fro': 'weed', 'to': 'soil', 'type': 'AtLocation', 'score': 0.013310628943145275, 'wm_score': 0.42055437, 'final': 0.13548375126020173}, {'fro': 'rock', 'to': 'soil', 'type': 'AtLocation', 'score': 0.012957527302205563, 'wm_score': 0.34418264, 'final': 0.1123250611115439}, {'fro': 'pesticide', 'to': 'soil', 'type': 'AtLocation', 'score': 0.010653551667928696, 'wm_score': 0.3895139, 'final': 0.1243116561675501}, {'fro': 'tree', 'to': 'soil', 'type': 'AtLocation', 'score': 0.010052776895463467, 'wm_score': 0.47492835, 'final': 0.14951544882682447}, {'fro': 'nutrient', 'to': 'soil', 'type': 'AtLocation', 'score': 0.010040846653282642, 'wm_score': 0.52812994, 'final': 0.1654675746572979}, {'fro': 'bacteria', 'to': 'soil', 'type': 'AtLocation', 'score': 0.009540805593132973, 'wm_score': 0.4923349, 'final': 0.15437903391519311}, {'fro': 'fish', 'to': 'soil', 'type': 'AtLocation', 'score': 0.009191768243908882, 'wm_score': 0.43873805, 'final': 0.13805565277073623}, {'fro': 'substance', 'to': 'soil', 'type': 'AtLocation', 'score': 0.005818633362650871, 'wm_score': 0.4219321, 'final': 0.1306526733538556}, {'fro': 'fertilizer', 'to': 'soil', 'type': 'AtLocation', 'score': 0.005473314318805933, 'wm_score': 0.46864572, 'final': 0.14442503602316417}, {'fro': 'soil', 'to': 'ground', 'type': 'AtLocation', 'score': 0.12670119106769562, 'wm_score': 0.5726266, 'final': 0.26047881374738696}, {'fro': 'soil', 'to': 'air', 'type': 'AtLocation', 'score': 0.10214882344007492, 'wm_score': 0.40186945, 'final': 0.19206501140805246}, {'fro': 'soil', 'to': 'water', 'type': 'AtLocation', 'score': 0.07310216128826141, 'wm_score': 0.602375, 'final': 0.231884012901783}, {'fro': 'soil', 'to': 'middle', 'type': 'AtLocation', 'score': 0.01893187128007412, 'wm_score': 0.30683315, 'final': 0.10530225489605188}, {'fro': 'soil', 'to': 'sand', 'type': 'AtLocation', 'score': 0.01758987084031105, 'wm_score': 0.6527371, 'final': 0.20813403958821775}, {'fro': 'soil', 'to': 'mix', 'type': 'AtLocation', 'score': 0.014976812526583672, 'wm_score': 0.36171886, 'final': 0.11899942676860858}, {'fro': 'soil', 'to': 'dirt', 'type': 'AtLocation', 'score': 0.011196444742381573, 'wm_score': 0.47437754, 'final': 0.1501507733196671}, {'fro': 'soil', 'to': 'ocean', 'type': 'AtLocation', 'score': 0.011148019693791866, 'wm_score': 0.46949732, 'final': 0.14865280978565432}, {'fro': 'soil', 'to': 'garden', 'type': 'AtLocation', 'score': 0.01052727922797203, 'wm_score': 0.4071796, 'final': 0.12952297545958041}, {'fro': 'soil', 'to': 'pot', 'type': 'AtLocation', 'score': 0.008984721265733242, 'wm_score': 0.38754258, 'final': 0.1225520788860133}, {'fro': 'soil', 'to': 'compost', 'type': 'AtLocation', 'score': 0.007352694869041443, 'wm_score': 0.5354061, 'final': 0.16576871640832902}, {'fro': 'soil', 'to': 'rocks', 'type': 'AtLocation', 'score': 0.007340644486248493, 'wm_score': 0.44226873, 'final': 0.13781907014037398}, {'fro': 'soil', 'to': 'atmosphere', 'type': 'AtLocation', 'score': 0.006250097416341305, 'wm_score': 0.4812026, 'final': 0.14873584819143892}, {'fro': 'soil', 'to': 'wind', 'type': 'AtLocation', 'score': 0.0061063505709171295, 'wm_score': 0.42551965, 'final': 0.13193034039964202}, {'fro': 'soil', 'to': 'way', 'type': 'AtLocation', 'score': 0.005601920653134584, 'wm_score': 0.38458169, 'final': 0.11929585145719422}, {'fro': 'soil', 'to': 'sea', 'type': 'AtLocation', 'score': 0.005546449217945337, 'wm_score': 0.48569018, 'final': 0.14958956845256177}, {'fro': 'soil', 'to': 'background', 'type': 'AtLocation', 'score': 0.005015130620449781, 'wm_score': 0.3401423, 'final': 0.10555328143431486}, {'fro': 'soil', 'to': 'shade', 'type': 'AtLocation', 'score': 0.004607632290571928, 'wm_score': 0.44511566, 'final': 0.13676004060340038}, {'fro': 'soil', 'to': 'crust', 'type': 'AtLocation', 'score': 0.004494895227253437, 'wm_score': 0.35172367, 'final': 0.10866352765907743}, {'fro': 'soil', 'to': 'mud', 'type': 'AtLocation', 'score': 0.004474852699786425, 'wm_score': 0.5220791, 'final': 0.15975612688985052}, {'fro': 'soil', 'to': 'clouds', 'type': 'AtLocation', 'score': 0.0041745868511497974, 'wm_score': 0.38744706, 'final': 0.11915632879580489}, {'fro': 'soil', 'to': 'hole', 'type': 'AtLocation', 'score': 0.003843683050945401, 'wm_score': 0.38045758, 'final': 0.11682785213566181}, {'fro': 'soil', 'to': 'process', 'type': 'AtLocation', 'score': 0.003839759388938546, 'wm_score': 0.45154813, 'final': 0.138152270572257}, {'fro': 'soil', 'to': 'system', 'type': 'AtLocation', 'score': 0.0036158545408397913, 'wm_score': 0.35441732, 'final': 0.10885629417858786}, {'fro': 'salt', 'to': 'soil', 'type': 'AtLocation', 'score': 0.006579155568033457, 'wm_score': 0.48620635, 'final': 0.15046731389762344}, {'fro': 'gas', 'to': 'soil', 'type': 'AtLocation', 'score': 0.0018271896988153458, 'wm_score': 0.36070058, 'final': 0.10948920678917076}, {'fro': 'sugar', 'to': 'soil', 'type': 'AtLocation', 'score': 0.0031364106107503176, 'wm_score': 0.39875355, 'final': 0.12182155242752524}, {'fro': 'fruit', 'to': 'soil', 'type': 'AtLocation', 'score': 0.02609875053167343, 'wm_score': 0.41295463, 'final': 0.14215551437217142}, {'fro': 'vegetable', 'to': 'soil', 'type': 'AtLocation', 'score': 0.006407241802662611, 'wm_score': 0.40527427, 'final': 0.12606735026186383}, {'fro': 'layer', 'to': 'soil', 'type': 'AtLocation', 'score': 0.005904803052544594, 'wm_score': 0.56921643, 'final': 0.17489829113678126}, {'fro': 'rice', 'to': 'soil', 'type': 'AtLocation', 'score': 0.005389497149735689, 'wm_score': 0.40500176, 'final': 0.125273176004815}, {'fro': 'sand', 'to': 'soil', 'type': 'AtLocation', 'score': 0.006791216321289539, 'wm_score': 0.6527371, 'final': 0.20057498142490268}, {'fro': 'dust', 'to': 'soil', 'type': 'AtLocation', 'score': 0.001302693854086101, 'wm_score': 0.5481043, 'final': 0.16534317569786028}, {'fro': 'grass', 'to': 'soil', 'type': 'AtLocation', 'score': 0.003645278513431549, 'wm_score': 0.5885725, 'final': 0.17912344495940213}, {'fro': 'soil', 'to': 'natural', 'type': 'HasA', 'score': 0.004239759407937527, 'wm_score': 0.5514567, 'final': 0.1684048415855563}, {'fro': 'natural', 'to': 'soil', 'type': 'AtLocation', 'score': 0.005648367572575808, 'wm_score': 0.5514567, 'final': 0.16939086730080308}, {'fro': 'spring', 'to': 'soil', 'type': 'AtLocation', 'score': 0.0047283899039030075, 'wm_score': 0.46384084, 'final': 0.1424621249327321}, {'fro': 'deep', 'to': 'soil', 'type': 'AtLocation', 'score': 0.01761891506612301, 'wm_score': 0.50268376, 'final': 0.16313836854628613}, {'fro': 'dig', 'to': 'soil', 'type': 'AtLocation', 'score': 0.0025197546929121017, 'wm_score': 0.358813, 'final': 0.10940772828503849}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

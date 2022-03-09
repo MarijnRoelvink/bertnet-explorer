@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">sort</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "sort"
+    let relations = [{'fro': 'internet', 'to': 'sort', 'type': 'HasA', 'score': 0.013339578174054623, 'wm_score': 0.48219445, 'final': 0.15399603972183826}, {'fro': 'universe', 'to': 'sort', 'type': 'HasA', 'score': 0.007828397676348686, 'wm_score': 0.42651445, 'final': 0.13343421337344408}, {'fro': 'devil', 'to': 'sort', 'type': 'HasA', 'score': 0.0065707373432815075, 'wm_score': 0.35470092, 'final': 0.11100979214029706}, {'fro': 'sky', 'to': 'sort', 'type': 'HasA', 'score': 0.005516600329428911, 'wm_score': 0.33013654, 'final': 0.10290258223060025}, {'fro': 'cat', 'to': 'sort', 'type': 'HasA', 'score': 0.00461564352735877, 'wm_score': 0.39696485, 'final': 0.12232040546915116}, {'fro': 'future', 'to': 'sort', 'type': 'HasA', 'score': 0.004389235749840736, 'wm_score': 0.60644466, 'final': 0.18500586302488853}, {'fro': 'world', 'to': 'sort', 'type': 'HasA', 'score': 0.004274961072951555, 'wm_score': 0.49765205, 'final': 0.15228808775106611}, {'fro': 'truth', 'to': 'sort', 'type': 'HasA', 'score': 0.00376022607088089, 'wm_score': 0.6479085, 'final': 0.19700470824961666}, {'fro': 'book', 'to': 'sort', 'type': 'HasA', 'score': 0.003427903400734067, 'wm_score': 0.5269488, 'final': 0.16048417238051388}, {'fro': 'word', 'to': 'sort', 'type': 'HasA', 'score': 0.0030539855360984802, 'wm_score': 0.6478079, 'final': 0.19648015987526896}, {'fro': 'web', 'to': 'sort', 'type': 'HasA', 'score': 0.0030484057497233152, 'wm_score': 0.46904016, 'final': 0.14284593202480633}, {'fro': 'story', 'to': 'sort', 'type': 'HasA', 'score': 0.0030412161722779274, 'wm_score': 0.58960795, 'final': 0.17901123632059457}, {'fro': 'clock', 'to': 'sort', 'type': 'HasA', 'score': 0.0029643618036061525, 'wm_score': 0.36828744, 'final': 0.11256128526252432}, {'fro': 'author', 'to': 'sort', 'type': 'HasA', 'score': 0.0028042150661349297, 'wm_score': 0.37204498, 'final': 0.11357644454629447}, {'fro': 'article', 'to': 'sort', 'type': 'HasA', 'score': 0.002508560661226511, 'wm_score': 0.340948, 'final': 0.10404039246285857}, {'fro': 'problem', 'to': 'sort', 'type': 'HasA', 'score': 0.0024985913187265396, 'wm_score': 0.64599216, 'final': 0.19554666192310863}, {'fro': 'answer', 'to': 'sort', 'type': 'HasA', 'score': 0.002367484150454402, 'wm_score': 0.68786883, 'final': 0.2080178879053181}, {'fro': 'beast', 'to': 'sort', 'type': 'HasA', 'score': 0.002334696240723133, 'wm_score': 0.34044743, 'final': 0.1037685163685062}, {'fro': 'jury', 'to': 'sort', 'type': 'HasA', 'score': 0.0022131362929940224, 'wm_score': 0.35355395, 'final': 0.10761538040509584}, {'fro': 'sort', 'to': 'purpose', 'type': 'HasA', 'score': 0.030718132853507996, 'wm_score': 0.5689126, 'final': 0.1921764729974556}, {'fro': 'sort', 'to': 'charm', 'type': 'HasA', 'score': 0.026199620217084885, 'wm_score': 0.44596314, 'final': 0.15212867615195944}, {'fro': 'sort', 'to': 'voice', 'type': 'HasA', 'score': 0.017924752086400986, 'wm_score': 0.514958, 'final': 0.1670347264604807}, {'fro': 'sort', 'to': 'chance', 'type': 'HasA', 'score': 0.01540012750774622, 'wm_score': 0.6317737, 'final': 0.20031219925542237}, {'fro': 'sort', 'to': 'place', 'type': 'HasA', 'score': 0.014970565214753151, 'wm_score': 0.5824285, 'final': 0.18520794565032725}, {'fro': 'sort', 'to': 'soul', 'type': 'HasA', 'score': 0.013707872480154037, 'wm_score': 0.4801195, 'final': 0.15363136073610784}, {'fro': 'sort', 'to': 'future', 'type': 'HasA', 'score': 0.013397852890193462, 'wm_score': 0.60644466, 'final': 0.19131189502313545}, {'fro': 'sort', 'to': 'problem', 'type': 'HasA', 'score': 0.010678430087864399, 'wm_score': 0.64599216, 'final': 0.20127254906150513}, {'fro': 'sort', 'to': 'conscience', 'type': 'HasA', 'score': 0.01002137828618288, 'wm_score': 0.38070133, 'final': 0.12122536380032803}, {'fro': 'sort', 'to': 'reputation', 'type': 'HasA', 'score': 0.009210984222590923, 'wm_score': 0.48099622, 'final': 0.15074655495581368}, {'fro': 'sort', 'to': 'choice', 'type': 'HasA', 'score': 0.009070136584341526, 'wm_score': 0.6117399, 'final': 0.1898710656090391}, {'fro': 'sort', 'to': 'point', 'type': 'HasA', 'score': 0.00845853891223669, 'wm_score': 0.517631, 'final': 0.1612102772385657}, {'fro': 'sort', 'to': 'price', 'type': 'HasA', 'score': 0.008319257758557796, 'wm_score': 0.40647143, 'final': 0.1277649094309905}, {'fro': 'sort', 'to': 'name', 'type': 'HasA', 'score': 0.007840413600206375, 'wm_score': 0.50151396, 'final': 0.1559424775201445}, {'fro': 'sort', 'to': 'way', 'type': 'HasA', 'score': 0.00754628935828805, 'wm_score': 0.7858332, 'final': 0.24103236255080168}, {'fro': 'sort', 'to': 'virtue', 'type': 'HasA', 'score': 0.007226241752505302, 'wm_score': 0.39104092, 'final': 0.12237064522675373}, {'fro': 'sort', 'to': 'reason', 'type': 'HasA', 'score': 0.006707137916237116, 'wm_score': 0.7510249, 'final': 0.23000246654136602}, {'fro': 'sort', 'to': 'say', 'type': 'HasA', 'score': 0.0066089872270822525, 'wm_score': 0.68951535, 'final': 0.2114808960589576}, {'fro': 'sort', 'to': 'history', 'type': 'HasA', 'score': 0.006535329855978489, 'wm_score': 0.56445956, 'final': 0.17391259889918498}, {'fro': 'sort', 'to': 'clue', 'type': 'HasA', 'score': 0.006518597714602947, 'wm_score': 0.50930494, 'final': 0.15735450040022209}, {'fro': 'sort', 'to': 'motive', 'type': 'HasA', 'score': 0.005751764867454767, 'wm_score': 0.39385766, 'final': 0.12218353340721835}, {'fro': 'sort', 'to': 'plan', 'type': 'HasA', 'score': 0.005649538245052099, 'wm_score': 0.5294386, 'final': 0.1627862567715365}, {'fro': 'sort', 'to': 'brain', 'type': 'HasA', 'score': 0.00563443498685956, 'wm_score': 0.40923333, 'final': 0.1267141034908017}, {'fro': 'sort', 'to': 'tendency', 'type': 'HasA', 'score': 0.004959764424711466, 'wm_score': 0.55254084, 'final': 0.16923408709729806}, {'fro': 'sort', 'to': 'mission', 'type': 'HasA', 'score': 0.004560920875519514, 'wm_score': 0.39247078, 'final': 0.12093387861286369}, {'fro': 'sort', 'to': 'secret', 'type': 'HasA', 'score': 0.004261536058038473, 'wm_score': 0.51514924, 'final': 0.15752784724062693}, {'fro': 'sort', 'to': 'twist', 'type': 'HasA', 'score': 0.004258573986589909, 'wm_score': 0.5951536, 'final': 0.18152708179061297}, {'fro': 'sort', 'to': 'role', 'type': 'HasA', 'score': 0.004174676723778248, 'wm_score': 0.5539885, 'final': 0.1691188237066448}, {'fro': 'sort', 'to': 'past', 'type': 'HasA', 'score': 0.004134544171392918, 'wm_score': 0.49469614, 'final': 0.15130302291997505}, {'fro': 'sort', 'to': 'cure', 'type': 'HasA', 'score': 0.004027328919619322, 'wm_score': 0.42491853, 'final': 0.13029468924373355}, {'fro': 'sort', 'to': 'story', 'type': 'HasA', 'score': 0.003939141985028982, 'wm_score': 0.58960795, 'final': 0.17963978438952033}, {'fro': 'miracle', 'to': 'sort', 'type': 'AtLocation', 'score': 0.027599655091762543, 'wm_score': 0.46263045, 'final': 0.1581088935642338}, {'fro': 'cure', 'to': 'sort', 'type': 'AtLocation', 'score': 0.009131734259426594, 'wm_score': 0.42491853, 'final': 0.13386777298159863}, {'fro': 'bargain', 'to': 'sort', 'type': 'AtLocation', 'score': 0.007181638386100531, 'wm_score': 0.38140762, 'final': 0.11944943287027038}, {'fro': 'revolution', 'to': 'sort', 'type': 'AtLocation', 'score': 0.006344879046082497, 'wm_score': 0.36804765, 'final': 0.11485571033225778}, {'fro': 'gift', 'to': 'sort', 'type': 'AtLocation', 'score': 0.00399161409586668, 'wm_score': 0.4952389, 'final': 0.1513657998671067}, {'fro': 'dream', 'to': 'sort', 'type': 'AtLocation', 'score': 0.0038931998424232006, 'wm_score': 0.6082474, 'final': 0.18519945988969627}, {'fro': 'joke', 'to': 'sort', 'type': 'AtLocation', 'score': 0.0037574602756649256, 'wm_score': 0.64354694, 'final': 0.19569430419296546}, {'fro': 'comeback', 'to': 'sort', 'type': 'AtLocation', 'score': 0.003667288925498724, 'wm_score': 0.3866399, 'final': 0.11855907224784912}, {'fro': 'sequel', 'to': 'sort', 'type': 'AtLocation', 'score': 0.0035479979123920202, 'wm_score': 0.45708418, 'final': 0.13960885253867444}, {'fro': 'lot', 'to': 'sort', 'type': 'AtLocation', 'score': 0.0033990121446549892, 'wm_score': 0.75295293, 'final': 0.22826518750125852}, {'fro': 'monster', 'to': 'sort', 'type': 'AtLocation', 'score': 0.0033804099075496197, 'wm_score': 0.4409064, 'final': 0.13463820693528475}, {'fro': 'horse', 'to': 'sort', 'type': 'AtLocation', 'score': 0.003075264859944582, 'wm_score': 0.35808855, 'final': 0.10957925040196122}, {'fro': 'reward', 'to': 'sort', 'type': 'AtLocation', 'score': 0.002848045900464058, 'wm_score': 0.40623683, 'final': 0.12386468113032485}, {'fro': 'bang', 'to': 'sort', 'type': 'AtLocation', 'score': 0.0026237217243760824, 'wm_score': 0.33566934, 'final': 0.10253740720706327}, {'fro': 'disaster', 'to': 'sort', 'type': 'AtLocation', 'score': 0.0025814673863351345, 'wm_score': 0.42842993, 'final': 0.13033600617043462}, {'fro': 'baby', 'to': 'sort', 'type': 'AtLocation', 'score': 0.0025336311664432287, 'wm_score': 0.454625, 'final': 0.1381610418165103}, {'fro': 'divorce', 'to': 'sort', 'type': 'AtLocation', 'score': 0.0023078215308487415, 'wm_score': 0.36082274, 'final': 0.10986229707159413}, {'fro': 'pity', 'to': 'sort', 'type': 'AtLocation', 'score': 0.0022542050573974848, 'wm_score': 0.42780784, 'final': 0.12992029554017825}, {'fro': 'cat', 'to': 'sort', 'type': 'AtLocation', 'score': 0.0022236297372728586, 'wm_score': 0.39696485, 'final': 0.120645995816091}, {'fro': 'bomb', 'to': 'sort', 'type': 'AtLocation', 'score': 0.0021349580492824316, 'wm_score': 0.34822458, 'final': 0.10596184463449772}, {'fro': 'revival', 'to': 'sort', 'type': 'AtLocation', 'score': 0.002095912816002965, 'wm_score': 0.35909227, 'final': 0.10919481997120209}, {'fro': 'headache', 'to': 'sort', 'type': 'AtLocation', 'score': 0.0020649500656872988, 'wm_score': 0.34239584, 'final': 0.10416421704598113}, {'fro': 'sort', 'to': 'air', 'type': 'AtLocation', 'score': 0.25058799982070923, 'wm_score': 0.37171584, 'final': 0.28692635187449644}, {'fro': 'sort', 'to': 'sky', 'type': 'AtLocation', 'score': 0.0586031898856163, 'wm_score': 0.33013654, 'final': 0.1400631949199314}, {'fro': 'sort', 'to': 'works', 'type': 'AtLocation', 'score': 0.033155228942632675, 'wm_score': 0.47830677, 'final': 0.16670069125984288}, {'fro': 'sort', 'to': 'distance', 'type': 'AtLocation', 'score': 0.028334517031908035, 'wm_score': 0.3854505, 'final': 0.13546931192233563}, {'fro': 'sort', 'to': 'background', 'type': 'AtLocation', 'score': 0.01524033211171627, 'wm_score': 0.5360473, 'final': 0.17148242247820142}, {'fro': 'sort', 'to': 'making', 'type': 'AtLocation', 'score': 0.01469713170081377, 'wm_score': 0.68774754, 'final': 0.21661225419056968}, {'fro': 'sort', 'to': 'shadows', 'type': 'AtLocation', 'score': 0.012113142758607864, 'wm_score': 0.38169184, 'final': 0.12298675193102551}, {'fro': 'sort', 'to': 'water', 'type': 'AtLocation', 'score': 0.01008517388254404, 'wm_score': 0.3762017, 'final': 0.11992013171778085}, {'fro': 'sort', 'to': 'woods', 'type': 'AtLocation', 'score': 0.009419899433851242, 'wm_score': 0.3772252, 'final': 0.11976148960369588}, {'fro': 'sort', 'to': 'mix', 'type': 'AtLocation', 'score': 0.009138249792158604, 'wm_score': 0.5602851, 'final': 0.17448230485451102}, {'fro': 'sort', 'to': 'way', 'type': 'AtLocation', 'score': 0.008919269777834415, 'wm_score': 0.7858332, 'final': 0.24199344884448412}, {'fro': 'sort', 'to': 'middle', 'type': 'AtLocation', 'score': 0.007605511695146561, 'wm_score': 0.48102456, 'final': 0.1496312261866026}, {'fro': 'sort', 'to': 'news', 'type': 'AtLocation', 'score': 0.0073382677510380745, 'wm_score': 0.36466503, 'final': 0.11453629642572667}, {'fro': 'sort', 'to': 'wild', 'type': 'AtLocation', 'score': 0.00618597399443388, 'wm_score': 0.41087675, 'final': 0.12759320679610375}, {'fro': 'sort', 'to': 'balance', 'type': 'AtLocation', 'score': 0.005764785222709179, 'wm_score': 0.5356854, 'final': 0.16474096965589644}, {'fro': 'sort', 'to': 'mail', 'type': 'AtLocation', 'score': 0.00563836982473731, 'wm_score': 0.36223167, 'final': 0.11261635987731614}, {'fro': 'sort', 'to': 'wind', 'type': 'AtLocation', 'score': 0.005287199281156063, 'wm_score': 0.41084048, 'final': 0.12695318349680926}, {'fro': 'sort', 'to': 'garden', 'type': 'AtLocation', 'score': 0.005145597271621227, 'wm_score': 0.36261362, 'final': 0.11238600409013488}, {'fro': 'sort', 'to': 'dark', 'type': 'AtLocation', 'score': 0.005009850487112999, 'wm_score': 0.54958105, 'final': 0.1683812103409791}, {'fro': 'sort', 'to': 'future', 'type': 'AtLocation', 'score': 0.004918656777590513, 'wm_score': 0.60644466, 'final': 0.18537645774431338}, {'fro': 'sort', 'to': 'closet', 'type': 'AtLocation', 'score': 0.004707095678895712, 'wm_score': 0.37677068, 'final': 0.11632617097522702}, {'fro': 'sort', 'to': 'bag', 'type': 'AtLocation', 'score': 0.004388332366943359, 'wm_score': 0.38917077, 'final': 0.11982306365686037}, {'fro': 'sort', 'to': 'picture', 'type': 'AtLocation', 'score': 0.004267835523933172, 'wm_score': 0.55703485, 'final': 0.17009793986675323}, {'fro': 'sort', 'to': 'open', 'type': 'AtLocation', 'score': 0.0034097908064723015, 'wm_score': 0.46497256, 'final': 0.14187862156453063}, {'fro': 'sort', 'to': 'ground', 'type': 'AtLocation', 'score': 0.0033994819968938828, 'wm_score': 0.470058, 'final': 0.14339703739782572}, {'fro': 'sort', 'to': 'room', 'type': 'AtLocation', 'score': 0.003029054030776024, 'wm_score': 0.55125016, 'final': 0.16749538582154325}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">buy</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "buy"
+    let relations = [{'fro': 'market', 'to': 'buy', 'type': 'HasA', 'score': 0.014781195670366287, 'wm_score': 0.60589814, 'final': 0.19211627896925643}, {'fro': 'stock', 'to': 'buy', 'type': 'HasA', 'score': 0.01366217341274023, 'wm_score': 0.65360886, 'final': 0.2056461793889182}, {'fro': 'dollar', 'to': 'buy', 'type': 'HasA', 'score': 0.012269547209143639, 'wm_score': 0.5157925, 'final': 0.16332643304640054}, {'fro': 'site', 'to': 'buy', 'type': 'HasA', 'score': 0.011431504040956497, 'wm_score': 0.38795203, 'final': 0.12438766182866956}, {'fro': 'deal', 'to': 'buy', 'type': 'HasA', 'score': 0.009165747091174126, 'wm_score': 0.6088774, 'final': 0.18907924296382192}, {'fro': 'company', 'to': 'buy', 'type': 'HasA', 'score': 0.00751555385068059, 'wm_score': 0.68623865, 'final': 0.21113248269547644}, {'fro': 'sale', 'to': 'buy', 'type': 'HasA', 'score': 0.006434453651309013, 'wm_score': 0.73853576, 'final': 0.22606484555591635}, {'fro': 'idea', 'to': 'buy', 'type': 'HasA', 'score': 0.005990596488118172, 'wm_score': 0.52759665, 'final': 0.16247241254168276}, {'fro': 'independent', 'to': 'buy', 'type': 'HasA', 'score': 0.005577931180596352, 'wm_score': 0.3792802, 'final': 0.11768861182641746}, {'fro': 'bank', 'to': 'buy', 'type': 'HasA', 'score': 0.005165608134120703, 'wm_score': 0.51932454, 'final': 0.1594132876938845}, {'fro': 'news', 'to': 'buy', 'type': 'HasA', 'score': 0.005129091441631317, 'wm_score': 0.4130688, 'final': 0.12751100400914195}, {'fro': 'story', 'to': 'buy', 'type': 'HasA', 'score': 0.0049920519813895226, 'wm_score': 0.34980384, 'final': 0.10843558838697268}, {'fro': 'book', 'to': 'buy', 'type': 'HasA', 'score': 0.004793795756995678, 'wm_score': 0.40206772, 'final': 0.12397597302989699}, {'fro': 'move', 'to': 'buy', 'type': 'HasA', 'score': 0.004649328999221325, 'wm_score': 0.5772009, 'final': 0.17641480029945497}, {'fro': 'euro', 'to': 'buy', 'type': 'HasA', 'score': 0.004623429849743843, 'wm_score': 0.36857957, 'final': 0.11381027189482071}, {'fro': 'acquisition', 'to': 'buy', 'type': 'HasA', 'score': 0.0046104253269732, 'wm_score': 0.6146103, 'final': 0.1876103877288813}, {'fro': 'ad', 'to': 'buy', 'type': 'HasA', 'score': 0.004241091199219227, 'wm_score': 0.3547445, 'final': 0.10939211383945349}, {'fro': 'movie', 'to': 'buy', 'type': 'HasA', 'score': 0.004199497401714325, 'wm_score': 0.4147694, 'final': 0.12737046818120004}, {'fro': 'buyer', 'to': 'buy', 'type': 'HasA', 'score': 0.00419757142663002, 'wm_score': 0.615105, 'final': 0.18746979999864105}, {'fro': 'post', 'to': 'buy', 'type': 'HasA', 'score': 0.0038468516431748867, 'wm_score': 0.39560366, 'final': 0.12137389415022244}, {'fro': 'paper', 'to': 'buy', 'type': 'HasA', 'score': 0.0036151905078440905, 'wm_score': 0.5169827, 'final': 0.1576254433554909}, {'fro': 'show', 'to': 'buy', 'type': 'HasA', 'score': 0.0035622732248157263, 'wm_score': 0.3943021, 'final': 0.12078422125737101}, {'fro': 'firm', 'to': 'buy', 'type': 'HasA', 'score': 0.003346678800880909, 'wm_score': 0.57851017, 'final': 0.1758957261606167}, {'fro': 'video', 'to': 'buy', 'type': 'HasA', 'score': 0.0032882688101381063, 'wm_score': 0.35587126, 'final': 0.10906316616709669}, {'fro': 'buy', 'to': 'downside', 'type': 'HasA', 'score': 0.45777860283851624, 'wm_score': 0.20393169, 'final': 0.38162452898696136}, {'fro': 'buy', 'to': 'price', 'type': 'HasA', 'score': 0.034781135618686676, 'wm_score': 0.64561725, 'final': 0.21803196993308072}, {'fro': 'buy', 'to': 'chance', 'type': 'HasA', 'score': 0.026860147714614868, 'wm_score': 0.47935468, 'final': 0.16260850740023042}, {'fro': 'buy', 'to': 'future', 'type': 'HasA', 'score': 0.018223445862531662, 'wm_score': 0.48374727, 'final': 0.15788059310377217}, {'fro': 'buy', 'to': 'buyer', 'type': 'HasA', 'score': 0.013992082327604294, 'wm_score': 0.615105, 'final': 0.19432595762932306}, {'fro': 'buy', 'to': 'problem', 'type': 'HasA', 'score': 0.00960988737642765, 'wm_score': 0.3367916, 'final': 0.10776440116349938}, {'fro': 'buy', 'to': 'value', 'type': 'HasA', 'score': 0.007455209735780954, 'wm_score': 0.5723232, 'final': 0.1769156068150467}, {'fro': 'buy', 'to': 'potential', 'type': 'HasA', 'score': 0.006800537928938866, 'wm_score': 0.40451866, 'final': 0.12611597455025722}, {'fro': 'buy', 'to': 'return', 'type': 'HasA', 'score': 0.006203456316143274, 'wm_score': 0.52699727, 'final': 0.1624416004213003}, {'fro': 'buy', 'to': 'premium', 'type': 'HasA', 'score': 0.005872238893061876, 'wm_score': 0.62833494, 'final': 0.19261104922514333}, {'fro': 'buy', 'to': 'cost', 'type': 'HasA', 'score': 0.005621989257633686, 'wm_score': 0.61815125, 'final': 0.18938076748034363}, {'fro': 'buy', 'to': 'risk', 'type': 'HasA', 'score': 0.005299543496221304, 'wm_score': 0.46083426, 'final': 0.14195995844735496}, {'fro': 'buy', 'to': 'purpose', 'type': 'HasA', 'score': 0.004321052692830563, 'wm_score': 0.41178888, 'final': 0.1265614008849814}, {'fro': 'buy', 'to': 'story', 'type': 'HasA', 'score': 0.0034068659879267216, 'wm_score': 0.34980384, 'final': 0.10732595819154872}, {'fro': 'buy', 'to': 'valuation', 'type': 'HasA', 'score': 0.002683926373720169, 'wm_score': 0.3310501, 'final': 0.10119377846160413}, {'fro': 'buy', 'to': 'difference', 'type': 'HasA', 'score': 0.0025315508246421814, 'wm_score': 0.35192692, 'final': 0.10735016157724954}, {'fro': 'buy', 'to': 'possibility', 'type': 'HasA', 'score': 0.0022961983922868967, 'wm_score': 0.3895474, 'final': 0.11847155887460084}, {'fro': 'buy', 'to': 'place', 'type': 'HasA', 'score': 0.0021519975271075964, 'wm_score': 0.4473448, 'final': 0.1357098382689753}, {'fro': 'buyer', 'to': 'buy', 'type': 'AtLocation', 'score': 0.09140428900718689, 'wm_score': 0.615105, 'final': 0.24851450230503086}, {'fro': 'horse', 'to': 'buy', 'type': 'AtLocation', 'score': 0.025891954079270363, 'wm_score': 0.2962544, 'final': 0.10700068785548926}, {'fro': 'deal', 'to': 'buy', 'type': 'AtLocation', 'score': 0.01655803807079792, 'wm_score': 0.6088774, 'final': 0.19425384664955858}, {'fro': 'competitor', 'to': 'buy', 'type': 'AtLocation', 'score': 0.014968900941312313, 'wm_score': 0.45614344, 'final': 0.14732126265891865}, {'fro': 'third', 'to': 'buy', 'type': 'AtLocation', 'score': 0.014126311056315899, 'wm_score': 0.41400775, 'final': 0.13409074273942115}, {'fro': 'stock', 'to': 'buy', 'type': 'AtLocation', 'score': 0.012989898212254047, 'wm_score': 0.65360886, 'final': 0.20517558674857786}, {'fro': 'lot', 'to': 'buy', 'type': 'AtLocation', 'score': 0.009115980006754398, 'wm_score': 0.53434396, 'final': 0.1666843740047281}, {'fro': 'bid', 'to': 'buy', 'type': 'AtLocation', 'score': 0.007740763947367668, 'wm_score': 0.57398915, 'final': 0.17761527976315739}, {'fro': 'loan', 'to': 'buy', 'type': 'AtLocation', 'score': 0.00748577481135726, 'wm_score': 0.4787193, 'final': 0.1488558323679501}, {'fro': 'bargain', 'to': 'buy', 'type': 'AtLocation', 'score': 0.0069679804146289825, 'wm_score': 0.48505855, 'final': 0.1503951512902403}, {'fro': 'dollar', 'to': 'buy', 'type': 'AtLocation', 'score': 0.0064270575530827045, 'wm_score': 0.5157925, 'final': 0.1592366902871579}, {'fro': 'lock', 'to': 'buy', 'type': 'AtLocation', 'score': 0.006305710878223181, 'wm_score': 0.34403247, 'final': 0.10762373861475623}, {'fro': 'penny', 'to': 'buy', 'type': 'AtLocation', 'score': 0.005705390591174364, 'wm_score': 0.35512495, 'final': 0.11053125841382207}, {'fro': 'share', 'to': 'buy', 'type': 'AtLocation', 'score': 0.005275345873087645, 'wm_score': 0.65107787, 'final': 0.19901610311116136}, {'fro': 'hold', 'to': 'buy', 'type': 'AtLocation', 'score': 0.005202898755669594, 'wm_score': 0.5985715, 'final': 0.18321347912896876}, {'fro': 'gun', 'to': 'buy', 'type': 'AtLocation', 'score': 0.004764523357152939, 'wm_score': 0.34286445, 'final': 0.10619450135000706}, {'fro': 'second', 'to': 'buy', 'type': 'AtLocation', 'score': 0.004484274424612522, 'wm_score': 0.3855123, 'final': 0.11879268209722876}, {'fro': 'stake', 'to': 'buy', 'type': 'AtLocation', 'score': 0.003554516937583685, 'wm_score': 0.6615404, 'final': 0.20095028185630862}, {'fro': 'chip', 'to': 'buy', 'type': 'AtLocation', 'score': 0.0033459498081356287, 'wm_score': 0.43511713, 'final': 0.13287730386569496}, {'fro': 'fourth', 'to': 'buy', 'type': 'AtLocation', 'score': 0.0030976333655416965, 'wm_score': 0.33928007, 'final': 0.1039523643558792}, {'fro': 'price', 'to': 'buy', 'type': 'AtLocation', 'score': 0.0030255678575485945, 'wm_score': 0.64561725, 'final': 0.19580307250028406}, {'fro': 'buy', 'to': 'cards', 'type': 'AtLocation', 'score': 0.37911438941955566, 'wm_score': 0.5333077, 'final': 0.425372382593689}, {'fro': 'buy', 'to': 'works', 'type': 'AtLocation', 'score': 0.1610165387392044, 'wm_score': 0.38989392, 'final': 0.2296797531174431}, {'fro': 'buy', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.15296949446201324, 'wm_score': 0.29307753, 'final': 0.19500190512340926}, {'fro': 'buy', 'to': 'bag', 'type': 'AtLocation', 'score': 0.07716108113527298, 'wm_score': 0.4103946, 'final': 0.1771311367946911}, {'fro': 'buy', 'to': 'air', 'type': 'AtLocation', 'score': 0.0574018657207489, 'wm_score': 0.39148468, 'final': 0.15762671000452422}, {'fro': 'buy', 'to': 'making', 'type': 'AtLocation', 'score': 0.015390225686132908, 'wm_score': 0.5832554, 'final': 0.18574977798029307}, {'fro': 'buy', 'to': 'books', 'type': 'AtLocation', 'score': 0.01299390196800232, 'wm_score': 0.48652488, 'final': 0.15505319537760162}, {'fro': 'buy', 'to': 'market', 'type': 'AtLocation', 'score': 0.011486232280731201, 'wm_score': 0.60589814, 'final': 0.18980980459651187}, {'fro': 'buy', 'to': 'window', 'type': 'AtLocation', 'score': 0.009518226608633995, 'wm_score': 0.33243454, 'final': 0.10639312062604381}, {'fro': 'buy', 'to': 'bank', 'type': 'AtLocation', 'score': 0.0056292824447155, 'wm_score': 0.51932454, 'final': 0.15973785971130083}, {'fro': 'buy', 'to': 'mix', 'type': 'AtLocation', 'score': 0.005230945069342852, 'wm_score': 0.42605975, 'final': 0.13147958654854003}, {'fro': 'buy', 'to': 'news', 'type': 'AtLocation', 'score': 0.003938685636967421, 'wm_score': 0.4130688, 'final': 0.12667771994587723}, {'fro': 'buy', 'to': 'balance', 'type': 'AtLocation', 'score': 0.003777829697355628, 'wm_score': 0.41221088, 'final': 0.12630774478814896}, {'fro': 'buy', 'to': 'running', 'type': 'AtLocation', 'score': 0.0034596333280205727, 'wm_score': 0.40743163, 'final': 0.1246512323296144}, {'fro': 'buy', 'to': 'door', 'type': 'AtLocation', 'score': 0.0023930883035063744, 'wm_score': 0.34466404, 'final': 0.10507437381245448}, {'fro': 'buy', 'to': 'mail', 'type': 'AtLocation', 'score': 0.0019223155686631799, 'wm_score': 0.42749062, 'final': 0.12959280689806424}, {'fro': 'buy', 'to': 'supply', 'type': 'AtLocation', 'score': 0.0018024725141003728, 'wm_score': 0.5218815, 'final': 0.1578261807598703}, {'fro': 'buy', 'to': 'water', 'type': 'AtLocation', 'score': 0.0017067372100427747, 'wm_score': 0.4017191, 'final': 0.12171044604702996}, {'fro': 'buy', 'to': 'hundreds', 'type': 'AtLocation', 'score': 0.0012726807035505772, 'wm_score': 0.41341892, 'final': 0.12491655249248543}, {'fro': 'buy', 'to': 'way', 'type': 'AtLocation', 'score': 0.0011936328373849392, 'wm_score': 0.5278215, 'final': 0.15918199298616947}, {'fro': 'buy', 'to': 'thousands', 'type': 'AtLocation', 'score': 0.0011286342050880194, 'wm_score': 0.40393633, 'final': 0.12197094294356163}, {'fro': 'buy', 'to': 'book', 'type': 'AtLocation', 'score': 0.001105551258660853, 'wm_score': 0.40206772, 'final': 0.12139420188106262}, {'fro': 'buy', 'to': 'future', 'type': 'AtLocation', 'score': 0.0010316080879420042, 'wm_score': 0.48374727, 'final': 0.14584630666155943}, {'fro': 'buy', 'to': 'sky', 'type': 'AtLocation', 'score': 0.0009672041051089764, 'wm_score': 0.33661613, 'final': 0.1016618818735763}, {'fro': 'buy', 'to': 'black', 'type': 'AtLocation', 'score': 0.0009550209506414831, 'wm_score': 0.3509569, 'final': 0.10595558466544906}, {'fro': 'buy', 'to': 'bottle', 'type': 'AtLocation', 'score': 0.0009481158922426403, 'wm_score': 0.39183384, 'final': 0.11821383312456987}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

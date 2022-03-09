@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">research</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "research"
+    let relations = [{'fro': 'research', 'to': 'conclusion', 'type': 'HasA', 'score': 0.003532228758558631, 'wm_score': 0.3805567, 'final': 0.11663957013099106}, {'fro': 'bbc', 'to': 'research', 'type': 'HasA', 'score': 0.21236522495746613, 'wm_score': 0.2974072, 'final': 0.2378778174702263}, {'fro': 'guardian', 'to': 'research', 'type': 'HasA', 'score': 0.14533144235610962, 'wm_score': 0.26660496, 'final': 0.18171349764927675}, {'fro': 'telegraph', 'to': 'research', 'type': 'HasA', 'score': 0.13474035263061523, 'wm_score': 0.22539377, 'final': 0.16193637784143067}, {'fro': 'conversation', 'to': 'research', 'type': 'HasA', 'score': 0.05506037175655365, 'wm_score': 0.24078031, 'final': 0.11077635322958757}, {'fro': 'independent', 'to': 'research', 'type': 'HasA', 'score': 0.04289655759930611, 'wm_score': 0.49124122, 'final': 0.17739995631951427}, {'fro': 'register', 'to': 'research', 'type': 'HasA', 'score': 0.03156912699341774, 'wm_score': 0.26912832, 'final': 0.10283688489539242}, {'fro': 'author', 'to': 'research', 'type': 'HasA', 'score': 0.016966912895441055, 'wm_score': 0.4784732, 'final': 0.15541879902680877}, {'fro': 'post', 'to': 'research', 'type': 'HasA', 'score': 0.013867907226085663, 'wm_score': 0.40437797, 'final': 0.13102092605825996}, {'fro': 'observer', 'to': 'research', 'type': 'HasA', 'score': 0.013049889355897903, 'wm_score': 0.33626932, 'final': 0.11001571854912853}, {'fro': 'paper', 'to': 'research', 'type': 'HasA', 'score': 0.009517720900475979, 'wm_score': 0.4673189, 'final': 0.1468580746303332}, {'fro': 'times', 'to': 'research', 'type': 'HasA', 'score': 0.008786424994468689, 'wm_score': 0.3794483, 'final': 0.11998498749612811}, {'fro': 'economist', 'to': 'research', 'type': 'HasA', 'score': 0.007282097823917866, 'wm_score': 0.5018319, 'final': 0.15564703847674252}, {'fro': 'globe', 'to': 'research', 'type': 'HasA', 'score': 0.006695754360407591, 'wm_score': 0.35526663, 'final': 0.11126701705228534}, {'fro': 'ap', 'to': 'research', 'type': 'HasA', 'score': 0.006012577097862959, 'wm_score': 0.31946486, 'final': 0.10004826196850408}, {'fro': 'journal', 'to': 'research', 'type': 'HasA', 'score': 0.005603611469268799, 'wm_score': 0.60112834, 'final': 0.1842610300284882}, {'fro': 'scientist', 'to': 'research', 'type': 'HasA', 'score': 0.003826965345069766, 'wm_score': 0.64475167, 'final': 0.19610437674154887}, {'fro': 'nation', 'to': 'research', 'type': 'HasA', 'score': 0.0035030804574489594, 'wm_score': 0.3547806, 'final': 0.10888633632021429}, {'fro': 'who', 'to': 'research', 'type': 'HasA', 'score': 0.0034334873780608177, 'wm_score': 0.37069267, 'final': 0.11361124216464259}, {'fro': 'monitor', 'to': 'research', 'type': 'HasA', 'score': 0.003010794520378113, 'wm_score': 0.42771465, 'final': 0.13042195116426467}, {'fro': 'future', 'to': 'research', 'type': 'HasA', 'score': 0.0026640756987035275, 'wm_score': 0.49545592, 'final': 0.1505016289890925}, {'fro': 'research', 'to': 'link', 'type': 'HasA', 'score': 0.149673730134964, 'wm_score': 0.44494334, 'final': 0.23825461309447482}, {'fro': 'research', 'to': 'downside', 'type': 'HasA', 'score': 0.10221599787473679, 'wm_score': 0.24801205, 'final': 0.14595481351231576}, {'fro': 'research', 'to': 'bias', 'type': 'HasA', 'score': 0.06973829865455627, 'wm_score': 0.23562568, 'final': 0.1195045130581894}, {'fro': 'research', 'to': 'significance', 'type': 'HasA', 'score': 0.036771975457668304, 'wm_score': 0.39728433, 'final': 0.14492568182036783}, {'fro': 'research', 'to': 'parallel', 'type': 'HasA', 'score': 0.027256907895207405, 'wm_score': 0.3085193, 'final': 0.11163562552664519}, {'fro': 'research', 'to': 'correlation', 'type': 'HasA', 'score': 0.015929274260997772, 'wm_score': 0.29903507, 'final': 0.10086101298269845}, {'fro': 'research', 'to': 'future', 'type': 'HasA', 'score': 0.012803840450942516, 'wm_score': 0.49545592, 'final': 0.1575994643156598}, {'fro': 'research', 'to': 'relevance', 'type': 'HasA', 'score': 0.011918728239834309, 'wm_score': 0.34497595, 'final': 0.11183589476788403}, {'fro': 'research', 'to': 'role', 'type': 'HasA', 'score': 0.009066788479685783, 'wm_score': 0.43438235, 'final': 0.13666145693578005}, {'fro': 'research', 'to': 'purpose', 'type': 'HasA', 'score': 0.0083824023604393, 'wm_score': 0.44309562, 'final': 0.13879636765230752}, {'fro': 'research', 'to': 'value', 'type': 'HasA', 'score': 0.007508299313485622, 'wm_score': 0.4214738, 'final': 0.13169794951943994}, {'fro': 'research', 'to': 'benefit', 'type': 'HasA', 'score': 0.007248126436024904, 'wm_score': 0.4868892, 'final': 0.15114044850521746}, {'fro': 'research', 'to': 'limit', 'type': 'HasA', 'score': 0.007032813969999552, 'wm_score': 0.3173895, 'final': 0.10013981977899969}, {'fro': 'research', 'to': 'cost', 'type': 'HasA', 'score': 0.006910474970936775, 'wm_score': 0.45281056, 'final': 0.14068050047965575}, {'fro': 'research', 'to': 'problem', 'type': 'HasA', 'score': 0.005150466691702604, 'wm_score': 0.4385498, 'final': 0.13517026668419185}, {'fro': 'research', 'to': 'hypothesis', 'type': 'HasA', 'score': 0.0043420568108558655, 'wm_score': 0.3894728, 'final': 0.11988127976759912}, {'fro': 'research', 'to': 'review', 'type': 'HasA', 'score': 0.003879886819049716, 'wm_score': 0.5570606, 'final': 0.16983410077333483}, {'fro': 'research', 'to': 'potential', 'type': 'HasA', 'score': 0.0037885098718106747, 'wm_score': 0.49177152, 'final': 0.15018341291026752}, {'fro': 'research', 'to': 'impact', 'type': 'HasA', 'score': 0.003658122383058071, 'wm_score': 0.50734, 'final': 0.1547626856681407}, {'fro': 'research', 'to': 'negative', 'type': 'HasA', 'score': 0.0036101187579333782, 'wm_score': 0.3997047, 'final': 0.12243849313055338}, {'fro': 'research', 'to': 'publication', 'type': 'HasA', 'score': 0.003143392037600279, 'wm_score': 0.480088, 'final': 0.14622677442632023}, {'fro': 'research', 'to': 'challenge', 'type': 'HasA', 'score': 0.0029182930011302233, 'wm_score': 0.3804929, 'final': 0.11619067510079119}, {'fro': 'research', 'to': 'sound', 'type': 'HasA', 'score': 0.0028514545410871506, 'wm_score': 0.36433196, 'final': 0.11129560617876103}, {'fro': 'participant', 'to': 'research', 'type': 'AtLocation', 'score': 0.05346442759037018, 'wm_score': 0.33698598, 'final': 0.13852089331325915}, {'fro': 'phd', 'to': 'research', 'type': 'AtLocation', 'score': 0.034881591796875, 'wm_score': 0.5004993, 'final': 0.17456690425781252}, {'fro': 'researcher', 'to': 'research', 'type': 'AtLocation', 'score': 0.03231220319867134, 'wm_score': 0.71362436, 'final': 0.23670585023906998}, {'fro': 'role', 'to': 'research', 'type': 'AtLocation', 'score': 0.029357368126511574, 'wm_score': 0.43438235, 'final': 0.1508648626885581}, {'fro': 'breakthrough', 'to': 'research', 'type': 'AtLocation', 'score': 0.02133011259138584, 'wm_score': 0.3804199, 'final': 0.1290570488139701}, {'fro': 'team', 'to': 'research', 'type': 'AtLocation', 'score': 0.01749933324754238, 'wm_score': 0.3675491, 'final': 0.12251426327327969}, {'fro': 'partner', 'to': 'research', 'type': 'AtLocation', 'score': 0.01657351851463318, 'wm_score': 0.42937908, 'final': 0.14041518696024324}, {'fro': 'link', 'to': 'research', 'type': 'AtLocation', 'score': 0.01065380871295929, 'wm_score': 0.44494334, 'final': 0.14094066809907152}, {'fro': 'third', 'to': 'research', 'type': 'AtLocation', 'score': 0.01039997860789299, 'wm_score': 0.34759572, 'final': 0.11155870102552512}, {'fro': 'grant', 'to': 'research', 'type': 'AtLocation', 'score': 0.009834030643105507, 'wm_score': 0.34073752, 'final': 0.10910507745017388}, {'fro': 'student', 'to': 'research', 'type': 'AtLocation', 'score': 0.009639703668653965, 'wm_score': 0.5052535, 'final': 0.1583238425680578}, {'fro': 'key', 'to': 'research', 'type': 'AtLocation', 'score': 0.008244827389717102, 'wm_score': 0.46614623, 'final': 0.14561524817280197}, {'fro': 'study', 'to': 'research', 'type': 'AtLocation', 'score': 0.008145454339683056, 'wm_score': 0.828859, 'final': 0.2543595180377782}, {'fro': 'scientist', 'to': 'research', 'type': 'AtLocation', 'score': 0.008081256411969662, 'wm_score': 0.64475167, 'final': 0.19908238048837879}, {'fro': 'difference', 'to': 'research', 'type': 'AtLocation', 'score': 0.0061770156025886536, 'wm_score': 0.35960102, 'final': 0.11220421692181207}, {'fro': 'lead', 'to': 'research', 'type': 'AtLocation', 'score': 0.006112765055149794, 'wm_score': 0.4258045, 'final': 0.13202028553860487}, {'fro': 'gap', 'to': 'research', 'type': 'AtLocation', 'score': 0.005743534304201603, 'wm_score': 0.3842064, 'final': 0.11928239401294113}, {'fro': 'reference', 'to': 'research', 'type': 'AtLocation', 'score': 0.0057140374556183815, 'wm_score': 0.40793008, 'final': 0.1263788502189329}, {'fro': 'hypothesis', 'to': 'research', 'type': 'AtLocation', 'score': 0.005082427058368921, 'wm_score': 0.3894728, 'final': 0.12039953894085827}, {'fro': 'second', 'to': 'research', 'type': 'AtLocation', 'score': 0.005020882468670607, 'wm_score': 0.3503522, 'final': 0.10862027772806944}, {'fro': 'sample', 'to': 'research', 'type': 'AtLocation', 'score': 0.004958437290042639, 'wm_score': 0.37253624, 'final': 0.11523177810302987}, {'fro': 'biologist', 'to': 'research', 'type': 'AtLocation', 'score': 0.004952265415340662, 'wm_score': 0.5136903, 'final': 0.1575736757907385}, {'fro': 'collaboration', 'to': 'research', 'type': 'AtLocation', 'score': 0.004674049094319344, 'wm_score': 0.5596907, 'final': 0.17117904436602357}, {'fro': 'chemist', 'to': 'research', 'type': 'AtLocation', 'score': 0.004620559513568878, 'wm_score': 0.34534672, 'final': 0.10683840765949823}, {'fro': 'virus', 'to': 'research', 'type': 'AtLocation', 'score': 0.004559126682579517, 'wm_score': 0.3322564, 'final': 0.10286830867780568}, {'fro': 'contribution', 'to': 'research', 'type': 'AtLocation', 'score': 0.0043466826900839806, 'wm_score': 0.4654773, 'final': 0.14268586788305881}, {'fro': 'research', 'to': 'works', 'type': 'AtLocation', 'score': 0.8596037030220032, 'wm_score': 0.55894375, 'final': 0.7694057171154022}, {'fro': 'research', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.10891656577587128, 'wm_score': 0.26757628, 'final': 0.15651448004310992}, {'fro': 'research', 'to': 'literature', 'type': 'AtLocation', 'score': 0.0017591934883967042, 'wm_score': 0.5218164, 'final': 0.1577763554418777}, {'fro': 'research', 'to': 'open', 'type': 'AtLocation', 'score': 0.0013918488984927535, 'wm_score': 0.36562574, 'final': 0.11066201622894495}, {'fro': 'research', 'to': 'background', 'type': 'AtLocation', 'score': 0.0012181312777101994, 'wm_score': 0.3594616, 'final': 0.10869117189439716}, {'fro': 'research', 'to': 'future', 'type': 'AtLocation', 'score': 0.0011629321379587054, 'wm_score': 0.49545592, 'final': 0.14945082849657113}, {'fro': 'research', 'to': 'making', 'type': 'AtLocation', 'score': 0.00092273426707834, 'wm_score': 0.47041634, 'final': 0.14177081598695487}, {'fro': 'research', 'to': 'field', 'type': 'AtLocation', 'score': 0.0007503293454647064, 'wm_score': 0.5488672, 'final': 0.16518539054182532}, {'fro': 'research', 'to': 'papers', 'type': 'AtLocation', 'score': 0.0006482013850472867, 'wm_score': 0.47953203, 'final': 0.14431334996953313}, {'fro': 'research', 'to': 'work', 'type': 'AtLocation', 'score': 0.0005849336157552898, 'wm_score': 0.6091416, 'final': 0.1831519335310287}, {'fro': 'research', 'to': 'development', 'type': 'AtLocation', 'score': 0.0005703307106159627, 'wm_score': 0.7261345, 'final': 0.21823958149743122}, {'fro': 'research', 'to': 'progress', 'type': 'AtLocation', 'score': 0.0005199724109843373, 'wm_score': 0.47700924, 'final': 0.14346675268768905}, {'fro': 'research', 'to': 'lab', 'type': 'AtLocation', 'score': 0.00044834514847025275, 'wm_score': 0.640136, 'final': 0.1923546416039292}, {'fro': 'research', 'to': 'news', 'type': 'AtLocation', 'score': 0.00040218193316832185, 'wm_score': 0.41133624, 'final': 0.12368239935321784}, {'fro': 'research', 'to': 'paper', 'type': 'AtLocation', 'score': 0.00036217490560375154, 'wm_score': 0.4673189, 'final': 0.14044919243392265}, {'fro': 'research', 'to': 'air', 'type': 'AtLocation', 'score': 0.00031813420355319977, 'wm_score': 0.341526, 'final': 0.10268049394248725}, {'fro': 'research', 'to': 'process', 'type': 'AtLocation', 'score': 0.0003155230078846216, 'wm_score': 0.48894912, 'final': 0.14690560210551928}, {'fro': 'research', 'to': 'books', 'type': 'AtLocation', 'score': 0.00026255048578605056, 'wm_score': 0.43860266, 'final': 0.13176458334005026}, {'fro': 'research', 'to': 'clinic', 'type': 'AtLocation', 'score': 0.0002491298073437065, 'wm_score': 0.48910832, 'final': 0.1469068868651406}, {'fro': 'research', 'to': 'press', 'type': 'AtLocation', 'score': 0.0002192624524468556, 'wm_score': 0.41796666, 'final': 0.1255434817167128}, {'fro': 'research', 'to': 'balance', 'type': 'AtLocation', 'score': 0.0002091951755573973, 'wm_score': 0.3651532, 'final': 0.10969239662289021}, {'fro': 'research', 'to': 'way', 'type': 'AtLocation', 'score': 0.0002057448000414297, 'wm_score': 0.44058514, 'final': 0.132319563360029}, {'fro': 'research', 'to': 'archives', 'type': 'AtLocation', 'score': 0.00020413803576957434, 'wm_score': 0.44725162, 'final': 0.13431838262503873}, {'fro': 'research', 'to': 'library', 'type': 'AtLocation', 'score': 0.00016492328722961247, 'wm_score': 0.5030023, 'final': 0.15101613630106075}, {'fro': 'research', 'to': 'ground', 'type': 'AtLocation', 'score': 0.0001537721836939454, 'wm_score': 0.34806654, 'final': 0.10452760252858577}, {'fro': 'research', 'to': 'report', 'type': 'AtLocation', 'score': 0.00014099090185482055, 'wm_score': 0.5712023, 'final': 0.17145938363129842}, {'fro': 'research', 'to': 'area', 'type': 'AtLocation', 'score': 0.00013313953240867704, 'wm_score': 0.40010297, 'final': 0.12012408867268609}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

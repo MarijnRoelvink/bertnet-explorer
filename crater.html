@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">crater</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "crater"
+    let relations = [{'fro': 'crater', 'to': 'map', 'type': 'AtLocation', 'score': 0.06590384244918823, 'wm_score': 0.29859066, 'final': 0.13570988771443177}, {'fro': 'lake', 'to': 'crater', 'type': 'HasA', 'score': 0.00879992637783289, 'wm_score': 0.4641392, 'final': 0.14540170846448305}, {'fro': 'crater', 'to': 'earth', 'type': 'AtLocation', 'score': 0.005739706102758646, 'wm_score': 0.47514096, 'final': 0.14656008227193107}, {'fro': 'bottom', 'to': 'crater', 'type': 'AtLocation', 'score': 0.004108400549739599, 'wm_score': 0.3422498, 'final': 0.10555082038481772}, {'fro': 'crater', 'to': 'damage', 'type': 'AtLocation', 'score': 0.009104511700570583, 'wm_score': 0.337644, 'final': 0.10766635819039942}, {'fro': 'hole', 'to': 'crater', 'type': 'HasA', 'score': 0.006393142510205507, 'wm_score': 0.42576373, 'final': 0.1322043187571439}, {'fro': 'mountain', 'to': 'crater', 'type': 'HasA', 'score': 0.015386580489575863, 'wm_score': 0.41657495, 'final': 0.13574309134270313}, {'fro': 'crater', 'to': 'mountain', 'type': 'AtLocation', 'score': 0.026106424629688263, 'wm_score': 0.41657495, 'final': 0.1432469822407818}, {'fro': 'crater', 'to': 'sand', 'type': 'HasA', 'score': 0.003033683868125081, 'wm_score': 0.44938985, 'final': 0.13694053370768758}, {'fro': 'upper', 'to': 'crater', 'type': 'HasA', 'score': 0.0032844869419932365, 'wm_score': 0.41448045, 'final': 0.12664327585939528}, {'fro': 'crater', 'to': 'upper', 'type': 'AtLocation', 'score': 0.012207821011543274, 'wm_score': 0.41448045, 'final': 0.1328896097080803}, {'fro': 'moon', 'to': 'crater', 'type': 'HasA', 'score': 0.017904559150338173, 'wm_score': 0.44464427, 'final': 0.14592647240523676}, {'fro': 'crater', 'to': 'moon', 'type': 'AtLocation', 'score': 0.05046262964606285, 'wm_score': 0.44464427, 'final': 0.16871712175224401}, {'fro': 'crater', 'to': 'rocks', 'type': 'HasA', 'score': 0.003921641502529383, 'wm_score': 0.49366206, 'final': 0.15084376705177058}, {'fro': 'rocks', 'to': 'crater', 'type': 'HasA', 'score': 0.006565586663782597, 'wm_score': 0.49366206, 'final': 0.15269452866464783}, {'fro': 'crater', 'to': 'rocks', 'type': 'AtLocation', 'score': 0.03222300484776497, 'wm_score': 0.49366206, 'final': 0.1706547213934355}, {'fro': 'volcano', 'to': 'crater', 'type': 'HasA', 'score': 0.04109559953212738, 'wm_score': 0.5335063, 'final': 0.1888188096724892}, {'fro': 'crater', 'to': 'volcano', 'type': 'AtLocation', 'score': 0.27190837264060974, 'wm_score': 0.5335063, 'final': 0.3503877508484268}, {'fro': 'volcano', 'to': 'crater', 'type': 'AtLocation', 'score': 0.0037042670883238316, 'wm_score': 0.5335063, 'final': 0.16264487696182672}, {'fro': 'crater', 'to': 'ruins', 'type': 'AtLocation', 'score': 0.009343699552118778, 'wm_score': 0.37328124, 'final': 0.11852496168648317}, {'fro': 'hill', 'to': 'crater', 'type': 'HasA', 'score': 0.012494843453168869, 'wm_score': 0.31072232, 'final': 0.10196308641721823}, {'fro': 'crater', 'to': 'hill', 'type': 'AtLocation', 'score': 0.012759160250425339, 'wm_score': 0.31072232, 'final': 0.10214810817529775}, {'fro': 'crater', 'to': 'observatory', 'type': 'AtLocation', 'score': 0.016337018460035324, 'wm_score': 0.33984515, 'final': 0.11338945792202473}, {'fro': 'asteroid', 'to': 'crater', 'type': 'HasA', 'score': 0.03229304403066635, 'wm_score': 0.5108992, 'final': 0.17587489082146648}, {'fro': 'rover', 'to': 'crater', 'type': 'HasA', 'score': 0.0314866378903389, 'wm_score': 0.34518722, 'final': 0.12559681252323723}, {'fro': 'comet', 'to': 'crater', 'type': 'HasA', 'score': 0.010740911588072777, 'wm_score': 0.5205585, 'final': 0.16368618811165098}, {'fro': 'dome', 'to': 'crater', 'type': 'HasA', 'score': 0.008092100732028484, 'wm_score': 0.449307, 'final': 0.14045657051241997}, {'fro': 'site', 'to': 'crater', 'type': 'HasA', 'score': 0.00759416539222002, 'wm_score': 0.37866002, 'final': 0.11891392177455402}, {'fro': 'glacier', 'to': 'crater', 'type': 'HasA', 'score': 0.007457756903022528, 'wm_score': 0.54784656, 'final': 0.16957439783211578}, {'fro': 'earth', 'to': 'crater', 'type': 'HasA', 'score': 0.00647462485358119, 'wm_score': 0.47514096, 'final': 0.14707452539750684}, {'fro': 'planet', 'to': 'crater', 'type': 'HasA', 'score': 0.006273865699768066, 'wm_score': 0.4348347, 'final': 0.13484211598983767}, {'fro': 'monument', 'to': 'crater', 'type': 'HasA', 'score': 0.0061818137764930725, 'wm_score': 0.3504634, 'final': 0.10946628964354517}, {'fro': 'cave', 'to': 'crater', 'type': 'HasA', 'score': 0.005688168574124575, 'wm_score': 0.44350356, 'final': 0.13703278600188723}, {'fro': 'river', 'to': 'crater', 'type': 'HasA', 'score': 0.004072348587214947, 'wm_score': 0.33357352, 'final': 0.10292270001105049}, {'fro': 'dam', 'to': 'crater', 'type': 'HasA', 'score': 0.003074377542361617, 'wm_score': 0.43512875, 'final': 0.13269068927965316}, {'fro': 'statue', 'to': 'crater', 'type': 'HasA', 'score': 0.0027073028031736612, 'wm_score': 0.37421542, 'final': 0.11415973796222158}, {'fro': 'ocean', 'to': 'crater', 'type': 'HasA', 'score': 0.002640603808686137, 'wm_score': 0.4531559, 'final': 0.1377951926660803}, {'fro': 'boulder', 'to': 'crater', 'type': 'HasA', 'score': 0.002561876317486167, 'wm_score': 0.41901016, 'final': 0.12749636142224033}, {'fro': 'crater', 'to': 'rim', 'type': 'HasA', 'score': 0.026243578642606735, 'wm_score': 0.5818224, 'final': 0.19291722504982473}, {'fro': 'crater', 'to': 'dome', 'type': 'HasA', 'score': 0.02529258467257023, 'wm_score': 0.449307, 'final': 0.15249690927079917}, {'fro': 'crater', 'to': 'slope', 'type': 'HasA', 'score': 0.015658730641007423, 'wm_score': 0.5203784, 'final': 0.16707463144870524}, {'fro': 'crater', 'to': 'roof', 'type': 'HasA', 'score': 0.015471401624381542, 'wm_score': 0.39301726, 'final': 0.1287351591370671}, {'fro': 'crater', 'to': 'vent', 'type': 'HasA', 'score': 0.011750506237149239, 'wm_score': 0.39336544, 'final': 0.1262349863660045}, {'fro': 'crater', 'to': 'fracture', 'type': 'HasA', 'score': 0.010583249852061272, 'wm_score': 0.34910172, 'final': 0.11213879089644291}, {'fro': 'crater', 'to': 'diameter', 'type': 'HasA', 'score': 0.01012360118329525, 'wm_score': 0.5932773, 'final': 0.18506971082830673}, {'fro': 'crater', 'to': 'footprint', 'type': 'HasA', 'score': 0.0098299914970994, 'wm_score': 0.38722885, 'final': 0.1230496490479696}, {'fro': 'crater', 'to': 'hole', 'type': 'HasA', 'score': 0.009572984650731087, 'wm_score': 0.42576373, 'final': 0.1344302082555118}, {'fro': 'crater', 'to': 'scar', 'type': 'HasA', 'score': 0.008858487010002136, 'wm_score': 0.40271473, 'final': 0.12701535990700152}, {'fro': 'crater', 'to': 'staircase', 'type': 'HasA', 'score': 0.007674018852412701, 'wm_score': 0.3527456, 'final': 0.11119549319668891}, {'fro': 'crater', 'to': 'cone', 'type': 'HasA', 'score': 0.006123217288404703, 'wm_score': 0.34964716, 'final': 0.10918040010188332}, {'fro': 'crater', 'to': 'cavity', 'type': 'HasA', 'score': 0.005742199718952179, 'wm_score': 0.33995634, 'final': 0.10600644180326654}, {'fro': 'crater', 'to': 'structure', 'type': 'HasA', 'score': 0.0056430380791425705, 'wm_score': 0.32324937, 'final': 0.10092493765539981}, {'fro': 'crater', 'to': 'lake', 'type': 'HasA', 'score': 0.005325354170054197, 'wm_score': 0.4641392, 'final': 0.14296950791903795}, {'fro': 'crater', 'to': 'perimeter', 'type': 'HasA', 'score': 0.004392112139612436, 'wm_score': 0.3436309, 'final': 0.10616374849772874}, {'fro': 'crater', 'to': 'mouth', 'type': 'HasA', 'score': 0.004292124882340431, 'wm_score': 0.32609326, 'final': 0.10083246541763831}, {'fro': 'crater', 'to': 'ridge', 'type': 'HasA', 'score': 0.004247576929628849, 'wm_score': 0.43619794, 'final': 0.1338326858507402}, {'fro': 'crater', 'to': 'waterfall', 'type': 'HasA', 'score': 0.00355143821798265, 'wm_score': 0.51885176, 'final': 0.15814153475258788}, {'fro': 'crater', 'to': 'plaque', 'type': 'HasA', 'score': 0.003430701559409499, 'wm_score': 0.35793698, 'final': 0.10978258509158667}, {'fro': 'crater', 'to': 'wall', 'type': 'HasA', 'score': 0.0033530420623719692, 'wm_score': 0.36199528, 'final': 0.11094571344366039}, {'fro': 'crater', 'to': 'portal', 'type': 'HasA', 'score': 0.0033043683506548405, 'wm_score': 0.33285177, 'final': 0.1021685888454584}, {'fro': 'crater', 'to': 'crest', 'type': 'HasA', 'score': 0.0030769447330385447, 'wm_score': 0.42005786, 'final': 0.128171219313127}, {'fro': 'hole', 'to': 'crater', 'type': 'AtLocation', 'score': 0.06121812015771866, 'wm_score': 0.42576373, 'final': 0.17058180311040308}, {'fro': 'boulder', 'to': 'crater', 'type': 'AtLocation', 'score': 0.05878038331866264, 'wm_score': 0.41901016, 'final': 0.16684931632306385}, {'fro': 'cave', 'to': 'crater', 'type': 'AtLocation', 'score': 0.006990085821598768, 'wm_score': 0.44350356, 'final': 0.13794412807511916}, {'fro': 'rover', 'to': 'crater', 'type': 'AtLocation', 'score': 0.006931119132786989, 'wm_score': 0.34518722, 'final': 0.10840794939295091}, {'fro': 'plaque', 'to': 'crater', 'type': 'AtLocation', 'score': 0.004948272369801998, 'wm_score': 0.35793698, 'final': 0.11084488465886143}, {'fro': 'fireball', 'to': 'crater', 'type': 'AtLocation', 'score': 0.00485818088054657, 'wm_score': 0.44237903, 'final': 0.13611443561638262}, {'fro': 'skull', 'to': 'crater', 'type': 'AtLocation', 'score': 0.004737840965390205, 'wm_score': 0.4099949, 'final': 0.12631495867577316}, {'fro': 'telescope', 'to': 'crater', 'type': 'AtLocation', 'score': 0.0037855799309909344, 'wm_score': 0.39285436, 'final': 0.12050621395169367}, {'fro': 'meteor', 'to': 'crater', 'type': 'AtLocation', 'score': 0.0035860398784279823, 'wm_score': 0.47634423, 'final': 0.1454134969148996}, {'fro': 'pillar', 'to': 'crater', 'type': 'AtLocation', 'score': 0.00323671568185091, 'wm_score': 0.3375374, 'final': 0.10352692097729566}, {'fro': 'vent', 'to': 'crater', 'type': 'AtLocation', 'score': 0.0026744049973785877, 'wm_score': 0.39336544, 'final': 0.11988171549816502}, {'fro': 'crater', 'to': 'foreground', 'type': 'AtLocation', 'score': 0.462934285402298, 'wm_score': 0.24728037, 'final': 0.39823811078160853}, {'fro': 'crater', 'to': 'ground', 'type': 'AtLocation', 'score': 0.07130444049835205, 'wm_score': 0.240423, 'final': 0.12204000834884644}, {'fro': 'crater', 'to': 'sky', 'type': 'AtLocation', 'score': 0.04285087808966637, 'wm_score': 0.33259684, 'final': 0.12977466666276646}, {'fro': 'crater', 'to': 'distance', 'type': 'AtLocation', 'score': 0.024591729044914246, 'wm_score': 0.283053, 'final': 0.10213011033143998}, {'fro': 'crater', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.008258749730885029, 'wm_score': 0.43342328, 'final': 0.13580810881161953}, {'fro': 'crater', 'to': 'clouds', 'type': 'AtLocation', 'score': 0.006434417795389891, 'wm_score': 0.42570156, 'final': 0.13221456045677293}, {'fro': 'crater', 'to': 'sand', 'type': 'AtLocation', 'score': 0.006204713601619005, 'wm_score': 0.44938985, 'final': 0.13916025452113331}, {'fro': 'crater', 'to': 'horizon', 'type': 'AtLocation', 'score': 0.005851981230080128, 'wm_score': 0.44856706, 'final': 0.1386665048610561}, {'fro': 'crater', 'to': 'northeast', 'type': 'AtLocation', 'score': 0.005010384600609541, 'wm_score': 0.35438454, 'final': 0.10982263122042671}, {'fro': 'crater', 'to': 'area', 'type': 'AtLocation', 'score': 0.004362631123512983, 'wm_score': 0.38983214, 'final': 0.12000348378645911}, {'fro': 'crater', 'to': 'atmosphere', 'type': 'AtLocation', 'score': 0.004287227522581816, 'wm_score': 0.3252895, 'final': 0.10058790926580728}, {'fro': 'crater', 'to': 'ocean', 'type': 'AtLocation', 'score': 0.0038959893863648176, 'wm_score': 0.4531559, 'final': 0.1386739625704554}, {'fro': 'crater', 'to': 'northwest', 'type': 'AtLocation', 'score': 0.003440041560679674, 'wm_score': 0.3345436, 'final': 0.10277110909247578}, {'fro': 'crater', 'to': 'lake', 'type': 'AtLocation', 'score': 0.0033369034063071012, 'wm_score': 0.4641392, 'final': 0.141577592384415}, {'fro': 'crater', 'to': 'southwest', 'type': 'AtLocation', 'score': 0.0032695732079446316, 'wm_score': 0.3746159, 'final': 0.11467347124556126}, {'fro': 'crater', 'to': 'sea', 'type': 'AtLocation', 'score': 0.0026388419792056084, 'wm_score': 0.35127681, 'final': 0.10723023238544394}, {'fro': 'crater', 'to': 'dust', 'type': 'AtLocation', 'score': 0.001847150269895792, 'wm_score': 0.40363654, 'final': 0.12238396718892706}, {'fro': 'crater', 'to': 'mud', 'type': 'AtLocation', 'score': 0.001782662933692336, 'wm_score': 0.40944064, 'final': 0.12408005605358466}, {'fro': 'crater', 'to': 'rubble', 'type': 'AtLocation', 'score': 0.001470556017011404, 'wm_score': 0.34355244, 'final': 0.104095121211908}, {'fro': 'crater', 'to': 'comet', 'type': 'AtLocation', 'score': 0.03465462476015091, 'wm_score': 0.5205585, 'final': 0.18042578733210568}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

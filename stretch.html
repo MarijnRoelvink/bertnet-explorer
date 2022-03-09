@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">stretch</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "stretch"
+    let relations = [{'fro': 'highway', 'to': 'stretch', 'type': 'HasA', 'score': 0.00632811663672328, 'wm_score': 0.52153814, 'final': 0.1608911236457063}, {'fro': 'clock', 'to': 'stretch', 'type': 'HasA', 'score': 0.03216404840350151, 'wm_score': 0.30766606, 'final': 0.11481465188245107}, {'fro': 'bridge', 'to': 'stretch', 'type': 'HasA', 'score': 0.00973321683704853, 'wm_score': 0.50035644, 'final': 0.156920183785934}, {'fro': 'line', 'to': 'stretch', 'type': 'HasA', 'score': 0.008377444930374622, 'wm_score': 0.56331795, 'final': 0.17485959645126226}, {'fro': 'future', 'to': 'stretch', 'type': 'HasA', 'score': 0.006947338115423918, 'wm_score': 0.31737694, 'final': 0.10007621868079676}, {'fro': 'market', 'to': 'stretch', 'type': 'HasA', 'score': 0.0059248311445117, 'wm_score': 0.34438634, 'final': 0.1074632838011582}, {'fro': 'bullpen', 'to': 'stretch', 'type': 'HasA', 'score': 0.0056418743915855885, 'wm_score': 0.32622492, 'final': 0.10181678807410992}, {'fro': 'road', 'to': 'stretch', 'type': 'HasA', 'score': 0.005287539679557085, 'wm_score': 0.62339836, 'final': 0.19072078577569}, {'fro': 'pitch', 'to': 'stretch', 'type': 'HasA', 'score': 0.00503801554441452, 'wm_score': 0.49040592, 'final': 0.15064838688109017}, {'fro': 'rule', 'to': 'stretch', 'type': 'HasA', 'score': 0.0044884830713272095, 'wm_score': 0.3633471, 'final': 0.11214606814992906}, {'fro': 'game', 'to': 'stretch', 'type': 'HasA', 'score': 0.004381977953016758, 'wm_score': 0.47979435, 'final': 0.14700568956711174}, {'fro': 'streak', 'to': 'stretch', 'type': 'HasA', 'score': 0.004230534192174673, 'wm_score': 0.57652164, 'final': 0.1759178659345223}, {'fro': 'economy', 'to': 'stretch', 'type': 'HasA', 'score': 0.004223707132041454, 'wm_score': 0.33074576, 'final': 0.10218032299242903}, {'fro': 'term', 'to': 'stretch', 'type': 'HasA', 'score': 0.004018669947981834, 'wm_score': 0.34538975, 'final': 0.1064299939635873}, {'fro': 'deal', 'to': 'stretch', 'type': 'HasA', 'score': 0.003972104750573635, 'wm_score': 0.34907794, 'final': 0.10750385532540155}, {'fro': 'limit', 'to': 'stretch', 'type': 'HasA', 'score': 0.0038793343119323254, 'wm_score': 0.43142235, 'final': 0.13214223901835265}, {'fro': 'marathon', 'to': 'stretch', 'type': 'HasA', 'score': 0.0037773679941892624, 'wm_score': 0.39084262, 'final': 0.11989694359593249}, {'fro': 'window', 'to': 'stretch', 'type': 'HasA', 'score': 0.0035766982473433018, 'wm_score': 0.34661156, 'final': 0.10648715677314032}, {'fro': 'runway', 'to': 'stretch', 'type': 'HasA', 'score': 0.0034515345469117165, 'wm_score': 0.4605939, 'final': 0.14059424418283822}, {'fro': 'plan', 'to': 'stretch', 'type': 'HasA', 'score': 0.003276391187682748, 'wm_score': 0.36929387, 'final': 0.11308163483137795}, {'fro': 'field', 'to': 'stretch', 'type': 'HasA', 'score': 0.0031681761611253023, 'wm_score': 0.46554044, 'final': 0.14187985531278774}, {'fro': 'stretch', 'to': 'ceiling', 'type': 'HasA', 'score': 0.04117383435368538, 'wm_score': 0.24932605, 'final': 0.10361949904757976}, {'fro': 'stretch', 'to': 'problem', 'type': 'HasA', 'score': 0.028555581346154213, 'wm_score': 0.34373784, 'final': 0.12311025894230795}, {'fro': 'stretch', 'to': 'winner', 'type': 'HasA', 'score': 0.028332332149147987, 'wm_score': 0.31142747, 'final': 0.1132608735044036}, {'fro': 'stretch', 'to': 'chance', 'type': 'HasA', 'score': 0.02582216076552868, 'wm_score': 0.4820068, 'final': 0.16267755253587007}, {'fro': 'stretch', 'to': 'limit', 'type': 'HasA', 'score': 0.02569204568862915, 'wm_score': 0.43142235, 'final': 0.14741113698204045}, {'fro': 'stretch', 'to': 'hitch', 'type': 'HasA', 'score': 0.019709806889295578, 'wm_score': 0.29631382, 'final': 0.10269101082250692}, {'fro': 'stretch', 'to': 'twist', 'type': 'HasA', 'score': 0.016094207763671875, 'wm_score': 0.35781196, 'final': 0.11860953343457033}, {'fro': 'stretch', 'to': 'future', 'type': 'HasA', 'score': 0.016055209562182426, 'wm_score': 0.31737694, 'final': 0.10645172869352772}, {'fro': 'stretch', 'to': 'charm', 'type': 'HasA', 'score': 0.007978053763508797, 'wm_score': 0.33462453, 'final': 0.10597199663445617}, {'fro': 'stretch', 'to': 'difference', 'type': 'HasA', 'score': 0.0065117646008729935, 'wm_score': 0.4080226, 'final': 0.12696501522061113}, {'fro': 'stretch', 'to': 'bump', 'type': 'HasA', 'score': 0.0064469389617443085, 'wm_score': 0.3702507, 'final': 0.11558806727322102}, {'fro': 'stretch', 'to': 'comeback', 'type': 'HasA', 'score': 0.005163855850696564, 'wm_score': 0.444533, 'final': 0.13697459909548762}, {'fro': 'stretch', 'to': 'catch', 'type': 'HasA', 'score': 0.004983604419976473, 'wm_score': 0.5050531, 'final': 0.15500445309398356}, {'fro': 'stretch', 'to': 'challenge', 'type': 'HasA', 'score': 0.004892445169389248, 'wm_score': 0.34061766, 'final': 0.10561000961857248}, {'fro': 'stretch', 'to': 'point', 'type': 'HasA', 'score': 0.0045987628400325775, 'wm_score': 0.55440164, 'final': 0.16953962598802286}, {'fro': 'stretch', 'to': 'leg', 'type': 'HasA', 'score': 0.00456890556961298, 'wm_score': 0.51214945, 'final': 0.15684306889872912}, {'fro': 'stretch', 'to': 'hole', 'type': 'HasA', 'score': 0.0039403485134243965, 'wm_score': 0.566603, 'final': 0.1727391439593971}, {'fro': 'stretch', 'to': 'history', 'type': 'HasA', 'score': 0.003875908674672246, 'wm_score': 0.4184919, 'final': 0.12826070607227058}, {'fro': 'stretch', 'to': 'promise', 'type': 'HasA', 'score': 0.00314050423912704, 'wm_score': 0.33773172, 'final': 0.10351786896738895}, {'fro': 'comeback', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.029229847714304924, 'wm_score': 0.444533, 'final': 0.15382079340001348}, {'fro': 'winner', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.01828201487660408, 'wm_score': 0.31142747, 'final': 0.10622565141362286}, {'fro': 'horse', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.013469157740473747, 'wm_score': 0.35353094, 'final': 0.11548769241833164}, {'fro': 'deal', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.009321239776909351, 'wm_score': 0.34907794, 'final': 0.11124824984383655}, {'fro': 'recovery', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.00798359140753746, 'wm_score': 0.32539427, 'final': 0.10320679498527624}, {'fro': 'bridge', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.007394918706268072, 'wm_score': 0.50035644, 'final': 0.15528337509438767}, {'fro': 'lot', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.005759854800999165, 'wm_score': 0.5153177, 'final': 0.15862720836069943}, {'fro': 'marathon', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.005553644150495529, 'wm_score': 0.39084262, 'final': 0.12114033690534688}, {'fro': 'fight', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.004548852797597647, 'wm_score': 0.37521684, 'final': 0.11574924895831837}, {'fro': 'dream', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.0043875412084162235, 'wm_score': 0.3660229, 'final': 0.11287814884589137}, {'fro': 'race', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.004320676438510418, 'wm_score': 0.50412273, 'final': 0.1542612925069573}, {'fro': 'shot', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.004262290894985199, 'wm_score': 0.43681175, 'final': 0.13402712862648966}, {'fro': 'runner', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.004076274111866951, 'wm_score': 0.37205553, 'final': 0.11447005087830689}, {'fro': 'run', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.0039903814904391766, 'wm_score': 0.60652876, 'final': 0.18475189504330747}, {'fro': 'playoff', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.0038902945816516876, 'wm_score': 0.50598425, 'final': 0.15451848120715622}, {'fro': 'turnaround', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.0038000019267201424, 'wm_score': 0.37428552, 'final': 0.11494565734870411}, {'fro': 'mile', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.003727743634954095, 'wm_score': 0.6118573, 'final': 0.1861666105444679}, {'fro': 'sign', 'to': 'stretch', 'type': 'AtLocation', 'score': 0.003421412780880928, 'wm_score': 0.33557275, 'final': 0.10306681394661665}, {'fro': 'stretch', 'to': 'works', 'type': 'AtLocation', 'score': 0.5964755415916443, 'wm_score': 0.27831984, 'final': 0.501028831114151}, {'fro': 'stretch', 'to': 'air', 'type': 'AtLocation', 'score': 0.06806402653455734, 'wm_score': 0.32491428, 'final': 0.14511910257419014}, {'fro': 'stretch', 'to': 'distance', 'type': 'AtLocation', 'score': 0.03281751275062561, 'wm_score': 0.5629536, 'final': 0.19185833892543797}, {'fro': 'stretch', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.03190203011035919, 'wm_score': 0.3712436, 'final': 0.13370450107725146}, {'fro': 'stretch', 'to': 'way', 'type': 'AtLocation', 'score': 0.022384807467460632, 'wm_score': 0.58338195, 'final': 0.19068395022722248}, {'fro': 'stretch', 'to': 'making', 'type': 'AtLocation', 'score': 0.01689816452562809, 'wm_score': 0.466427, 'final': 0.15175681516793968}, {'fro': 'stretch', 'to': 'future', 'type': 'AtLocation', 'score': 0.007723274175077677, 'wm_score': 0.31737694, 'final': 0.10061937392255439}, {'fro': 'stretch', 'to': 'wings', 'type': 'AtLocation', 'score': 0.0057653323747217655, 'wm_score': 0.36802113, 'final': 0.11444207166230524}, {'fro': 'stretch', 'to': 'balance', 'type': 'AtLocation', 'score': 0.005328634288161993, 'wm_score': 0.42826623, 'final': 0.13220991300171342}, {'fro': 'stretch', 'to': 'window', 'type': 'AtLocation', 'score': 0.0032775148283690214, 'wm_score': 0.34661156, 'final': 0.10627772837985833}, {'fro': 'stretch', 'to': 'running', 'type': 'AtLocation', 'score': 0.0032427399419248104, 'wm_score': 0.60306245, 'final': 0.1831886529593474}, {'fro': 'stretch', 'to': 'road', 'type': 'AtLocation', 'score': 0.002855222439393401, 'wm_score': 0.62339836, 'final': 0.1890181637075754}, {'fro': 'stretch', 'to': 'water', 'type': 'AtLocation', 'score': 0.0028204838745296, 'wm_score': 0.40618217, 'final': 0.12382898971217074}, {'fro': 'stretch', 'to': 'open', 'type': 'AtLocation', 'score': 0.0021926811896264553, 'wm_score': 0.5027323, 'final': 0.15235456683273854}, {'fro': 'stretch', 'to': 'door', 'type': 'AtLocation', 'score': 0.0019086278043687344, 'wm_score': 0.3533349, 'final': 0.10733650946305813}, {'fro': 'stretch', 'to': 'game', 'type': 'AtLocation', 'score': 0.0018572290427982807, 'wm_score': 0.47979435, 'final': 0.14523836532995882}, {'fro': 'stretch', 'to': 'middle', 'type': 'AtLocation', 'score': 0.0018077556742355227, 'wm_score': 0.51431686, 'final': 0.15556048697196487}, {'fro': 'stretch', 'to': 'work', 'type': 'AtLocation', 'score': 0.0017419104697182775, 'wm_score': 0.38432452, 'final': 0.11651669332880281}, {'fro': 'stretch', 'to': 'woods', 'type': 'AtLocation', 'score': 0.0015828286996111274, 'wm_score': 0.48377198, 'final': 0.14623957408972782}, {'fro': 'stretch', 'to': 'past', 'type': 'AtLocation', 'score': 0.001209935755468905, 'wm_score': 0.56349117, 'final': 0.16989430602882827}, {'fro': 'stretch', 'to': 'wild', 'type': 'AtLocation', 'score': 0.001098737004213035, 'wm_score': 0.3844363, 'final': 0.11610000590294914}, {'fro': 'stretch', 'to': 'saddle', 'type': 'AtLocation', 'score': 0.0009398497059009969, 'wm_score': 0.34535646, 'final': 0.10426483279413071}, {'fro': 'stretch', 'to': 'plan', 'type': 'AtLocation', 'score': 0.0009056281414814293, 'wm_score': 0.36929387, 'final': 0.11142210069903702}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

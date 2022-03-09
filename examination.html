@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">examination</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "examination"
+    let relations = [{'fro': 'committee', 'to': 'examination', 'type': 'HasA', 'score': 0.021595299243927002, 'wm_score': 0.44758406, 'final': 0.14939192747074892}, {'fro': 'paper', 'to': 'examination', 'type': 'HasA', 'score': 0.01409298088401556, 'wm_score': 0.35256106, 'final': 0.1156334046188109}, {'fro': 'inquiry', 'to': 'examination', 'type': 'HasA', 'score': 0.012766160070896149, 'wm_score': 0.60311985, 'final': 0.18987226704962734}, {'fro': 'report', 'to': 'examination', 'type': 'HasA', 'score': 0.011717390269041061, 'wm_score': 0.44519368, 'final': 0.14176027718832876}, {'fro': 'independent', 'to': 'examination', 'type': 'HasA', 'score': 0.011445367708802223, 'wm_score': 0.34107292, 'final': 0.11033363339616158}, {'fro': 'commission', 'to': 'examination', 'type': 'HasA', 'score': 0.00823273416608572, 'wm_score': 0.45682165, 'final': 0.14280940891626}, {'fro': 'coroner', 'to': 'examination', 'type': 'HasA', 'score': 0.0076110875234007835, 'wm_score': 0.39178962, 'final': 0.12286464726638056}, {'fro': 'investigation', 'to': 'examination', 'type': 'HasA', 'score': 0.0072707138024270535, 'wm_score': 0.5863136, 'final': 0.18098357966169898}, {'fro': 'inquest', 'to': 'examination', 'type': 'HasA', 'score': 0.0072348159737885, 'wm_score': 0.4147202, 'final': 0.12948043118165195}, {'fro': 'site', 'to': 'examination', 'type': 'HasA', 'score': 0.00718842726200819, 'wm_score': 0.34974092, 'final': 0.10995417508340576}, {'fro': 'university', 'to': 'examination', 'type': 'HasA', 'score': 0.0067663430236279964, 'wm_score': 0.43826118, 'final': 0.1362147941165396}, {'fro': 'case', 'to': 'examination', 'type': 'HasA', 'score': 0.005959085654467344, 'wm_score': 0.4645996, 'final': 0.14355123995812716}, {'fro': 'ministry', 'to': 'examination', 'type': 'HasA', 'score': 0.00594097888097167, 'wm_score': 0.37261826, 'final': 0.11594416321668018}, {'fro': 'board', 'to': 'examination', 'type': 'HasA', 'score': 0.005629909224808216, 'wm_score': 0.46841502, 'final': 0.14446544245736578}, {'fro': 'council', 'to': 'examination', 'type': 'HasA', 'score': 0.0054340483620762825, 'wm_score': 0.38031596, 'final': 0.11789862185345341}, {'fro': 'institute', 'to': 'examination', 'type': 'HasA', 'score': 0.004928425420075655, 'wm_score': 0.46369535, 'final': 0.142558502794053}, {'fro': 'article', 'to': 'examination', 'type': 'HasA', 'score': 0.0047637419775128365, 'wm_score': 0.33985138, 'final': 0.10529003338425899}, {'fro': 'register', 'to': 'examination', 'type': 'HasA', 'score': 0.004401717334985733, 'wm_score': 0.34598964, 'final': 0.10687809413449002}, {'fro': 'department', 'to': 'examination', 'type': 'HasA', 'score': 0.004090342205017805, 'wm_score': 0.4521045, 'final': 0.13849458954351251}, {'fro': 'agency', 'to': 'examination', 'type': 'HasA', 'score': 0.0040844702161848545, 'wm_score': 0.3813312, 'final': 0.1172584891513294}, {'fro': 'post', 'to': 'examination', 'type': 'HasA', 'score': 0.0039362856186926365, 'wm_score': 0.42711636, 'final': 0.13089030793308487}, {'fro': 'school', 'to': 'examination', 'type': 'HasA', 'score': 0.0038467743434011936, 'wm_score': 0.42734388, 'final': 0.13089590604038084}, {'fro': 'issue', 'to': 'examination', 'type': 'HasA', 'score': 0.003733363701030612, 'wm_score': 0.37744144, 'final': 0.11584578659072145}, {'fro': 'matter', 'to': 'examination', 'type': 'HasA', 'score': 0.0036780640948563814, 'wm_score': 0.449945, 'final': 0.13755814486639947}, {'fro': 'examination', 'to': 'transcript', 'type': 'HasA', 'score': 0.2213555872440338, 'wm_score': 0.37736475, 'final': 0.2681583360708237}, {'fro': 'examination', 'to': 'delay', 'type': 'HasA', 'score': 0.04429936781525612, 'wm_score': 0.24650572, 'final': 0.1049612734706793}, {'fro': 'examination', 'to': 'conclusion', 'type': 'HasA', 'score': 0.011835520155727863, 'wm_score': 0.4712785, 'final': 0.14966841410900952}, {'fro': 'examination', 'to': 'verdict', 'type': 'HasA', 'score': 0.007042176555842161, 'wm_score': 0.39437118, 'final': 0.12324087758908953}, {'fro': 'examination', 'to': 'date', 'type': 'HasA', 'score': 0.006782251410186291, 'wm_score': 0.38240921, 'final': 0.11947033898713043}, {'fro': 'examination', 'to': 'review', 'type': 'HasA', 'score': 0.005354636814445257, 'wm_score': 0.5741158, 'final': 0.1759829857701117}, {'fro': 'examination', 'to': 'correction', 'type': 'HasA', 'score': 0.005300456658005714, 'wm_score': 0.33874726, 'final': 0.10533449766060402}, {'fro': 'examination', 'to': 'recommendation', 'type': 'HasA', 'score': 0.004934824071824551, 'wm_score': 0.47751606, 'final': 0.14670919485027722}, {'fro': 'examination', 'to': 'purpose', 'type': 'HasA', 'score': 0.004507169127464294, 'wm_score': 0.34743792, 'final': 0.10738639438922502}, {'fro': 'examination', 'to': 'result', 'type': 'HasA', 'score': 0.004095066804438829, 'wm_score': 0.4193988, 'final': 0.1286861867631072}, {'fro': 'examination', 'to': 'copy', 'type': 'HasA', 'score': 0.0035519737284630537, 'wm_score': 0.35540158, 'final': 0.10910685560992416}, {'fro': 'examination', 'to': 'focus', 'type': 'HasA', 'score': 0.003335936926305294, 'wm_score': 0.35208797, 'final': 0.10796154684841372}, {'fro': 'examination', 'to': 'committee', 'type': 'HasA', 'score': 0.003306073835119605, 'wm_score': 0.44758406, 'final': 0.13658946968458374}, {'fro': 'student', 'to': 'examination', 'type': 'AtLocation', 'score': 0.12352678179740906, 'wm_score': 0.43384522, 'final': 0.21662231325818632}, {'fro': 'girl', 'to': 'examination', 'type': 'AtLocation', 'score': 0.09517113119363785, 'wm_score': 0.24029726, 'final': 0.1387089698355465}, {'fro': 'woman', 'to': 'examination', 'type': 'AtLocation', 'score': 0.03838600218296051, 'wm_score': 0.3134442, 'final': 0.12090346152807238}, {'fro': 'child', 'to': 'examination', 'type': 'AtLocation', 'score': 0.026394696906208992, 'wm_score': 0.38074428, 'final': 0.1326995718343463}, {'fro': 'male', 'to': 'examination', 'type': 'AtLocation', 'score': 0.022202961146831512, 'wm_score': 0.2972587, 'final': 0.10471968280278206}, {'fro': 'doctor', 'to': 'examination', 'type': 'AtLocation', 'score': 0.014766063541173935, 'wm_score': 0.4779567, 'final': 0.1537232544788218}, {'fro': 'pupil', 'to': 'examination', 'type': 'AtLocation', 'score': 0.014404350891709328, 'wm_score': 0.36795166, 'final': 0.12046854362419655}, {'fro': 'patient', 'to': 'examination', 'type': 'AtLocation', 'score': 0.008332990109920502, 'wm_score': 0.51975924, 'final': 0.16176086507694437}, {'fro': 'transcript', 'to': 'examination', 'type': 'AtLocation', 'score': 0.008210052736103535, 'wm_score': 0.37736475, 'final': 0.11895646191527251}, {'fro': 'psychiatrist', 'to': 'examination', 'type': 'AtLocation', 'score': 0.007199562154710293, 'wm_score': 0.38608092, 'final': 0.12086396950829723}, {'fro': 'teacher', 'to': 'examination', 'type': 'AtLocation', 'score': 0.006807729601860046, 'wm_score': 0.3975718, 'final': 0.12403695072130204}, {'fro': 'specialist', 'to': 'examination', 'type': 'AtLocation', 'score': 0.006025932729244232, 'wm_score': 0.45747584, 'final': 0.14146090491047097}, {'fro': 'nurse', 'to': 'examination', 'type': 'AtLocation', 'score': 0.005745687521994114, 'wm_score': 0.3626101, 'final': 0.1128050112653959}, {'fro': 'result', 'to': 'examination', 'type': 'AtLocation', 'score': 0.005635480396449566, 'wm_score': 0.4193988, 'final': 0.1297644762775147}, {'fro': 'psychologist', 'to': 'examination', 'type': 'AtLocation', 'score': 0.005403445102274418, 'wm_score': 0.335581, 'final': 0.10445671157159211}, {'fro': 'certificate', 'to': 'examination', 'type': 'AtLocation', 'score': 0.005085593089461327, 'wm_score': 0.5787498, 'final': 0.17718485516262297}, {'fro': 'person', 'to': 'examination', 'type': 'AtLocation', 'score': 0.004417235031723976, 'wm_score': 0.3696633, 'final': 0.11399105452220679}, {'fro': 'subject', 'to': 'examination', 'type': 'AtLocation', 'score': 0.004271241370588541, 'wm_score': 0.5495173, 'final': 0.16784505895941199}, {'fro': 'report', 'to': 'examination', 'type': 'AtLocation', 'score': 0.00297026289626956, 'wm_score': 0.44519368, 'final': 0.1356372880273887}, {'fro': 'letter', 'to': 'examination', 'type': 'AtLocation', 'score': 0.002857706742361188, 'wm_score': 0.35685408, 'final': 0.10905661871965285}, {'fro': 'examination', 'to': 'works', 'type': 'AtLocation', 'score': 0.6305859088897705, 'wm_score': 0.31316322, 'final': 0.5353591022228393}, {'fro': 'examination', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.19416382908821106, 'wm_score': -0.009174623, 'final': 0.13316229346174774}, {'fro': 'examination', 'to': 'background', 'type': 'AtLocation', 'score': 0.004030548967421055, 'wm_score': 0.39927024, 'final': 0.12260245627719475}, {'fro': 'examination', 'to': 'process', 'type': 'AtLocation', 'score': 0.0036589254159480333, 'wm_score': 0.42816472, 'final': 0.13101066379116363}, {'fro': 'examination', 'to': 'progress', 'type': 'AtLocation', 'score': 0.0025798736605793238, 'wm_score': 0.34476984, 'final': 0.10523686356240555}, {'fro': 'examination', 'to': 'papers', 'type': 'AtLocation', 'score': 0.002192059298977256, 'wm_score': 0.4829903, 'final': 0.1464315315092841}, {'fro': 'examination', 'to': 'session', 'type': 'AtLocation', 'score': 0.001848197658546269, 'wm_score': 0.37010616, 'final': 0.1123255863609824}, {'fro': 'examination', 'to': 'curriculum', 'type': 'AtLocation', 'score': 0.001393111888319254, 'wm_score': 0.46749818, 'final': 0.1412246323218235}, {'fro': 'examination', 'to': 'room', 'type': 'AtLocation', 'score': 0.0012385713635012507, 'wm_score': 0.3471183, 'final': 0.10500248995445088}, {'fro': 'examination', 'to': 'file', 'type': 'AtLocation', 'score': 0.0011325476225465536, 'wm_score': 0.35107315, 'final': 0.1061147283357826}, {'fro': 'examination', 'to': 'case', 'type': 'AtLocation', 'score': 0.0011299453908577561, 'wm_score': 0.4645996, 'final': 0.14017084177360045}, {'fro': 'examination', 'to': 'report', 'type': 'AtLocation', 'score': 0.0010452091228216887, 'wm_score': 0.44519368, 'final': 0.13428975038597518}, {'fro': 'examination', 'to': 'lab', 'type': 'AtLocation', 'score': 0.0010134640615433455, 'wm_score': 0.48425555, 'final': 0.14598608984308037}, {'fro': 'examination', 'to': 'library', 'type': 'AtLocation', 'score': 0.0009344939608126879, 'wm_score': 0.36322567, 'final': 0.10962184677256889}, {'fro': 'examination', 'to': 'order', 'type': 'AtLocation', 'score': 0.0009336645598523319, 'wm_score': 0.34016973, 'final': 0.10270448419189665}, {'fro': 'examination', 'to': 'literature', 'type': 'AtLocation', 'score': 0.0008761862409301102, 'wm_score': 0.36326164, 'final': 0.10959182236865109}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

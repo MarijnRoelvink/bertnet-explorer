@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">attic</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "attic"
+    let relations = [{'fro': 'library', 'to': 'attic', 'type': 'AtLocation', 'score': 0.011251219548285007, 'wm_score': 0.3978067, 'final': 0.12721786368379953}, {'fro': 'oven', 'to': 'attic', 'type': 'AtLocation', 'score': 0.002669577021151781, 'wm_score': 0.36191994, 'final': 0.11044468591480626}, {'fro': 'apartment', 'to': 'attic', 'type': 'AtLocation', 'score': 0.0077619305811822414, 'wm_score': 0.5415672, 'final': 0.1679035114068276}, {'fro': 'grandmother', 'to': 'attic', 'type': 'AtLocation', 'score': 0.007532900664955378, 'wm_score': 0.33038676, 'final': 0.10438905846546877}, {'fro': 'storage', 'to': 'attic', 'type': 'AtLocation', 'score': 0.022555993869900703, 'wm_score': 0.3987304, 'final': 0.1354083157089305}, {'fro': 'classroom', 'to': 'attic', 'type': 'AtLocation', 'score': 0.0034735025838017464, 'wm_score': 0.38673994, 'final': 0.11845343380866125}, {'fro': 'bath', 'to': 'attic', 'type': 'AtLocation', 'score': 0.0031162374652922153, 'wm_score': 0.34319925, 'final': 0.10514114122570457}, {'fro': 'elevator', 'to': 'attic', 'type': 'AtLocation', 'score': 0.0085705341771245, 'wm_score': 0.49921155, 'final': 0.15576283892398715}, {'fro': 'refrigerator', 'to': 'attic', 'type': 'AtLocation', 'score': 0.022620996460318565, 'wm_score': 0.48400283, 'final': 0.16103554652222302}, {'fro': 'attic', 'to': 'drawer', 'type': 'HasA', 'score': 0.003054362954571843, 'wm_score': 0.5164825, 'final': 0.1570828040682003}, {'fro': 'drawer', 'to': 'attic', 'type': 'AtLocation', 'score': 0.04431596025824547, 'wm_score': 0.5164825, 'final': 0.18596592218077185}, {'fro': 'bathroom', 'to': 'attic', 'type': 'AtLocation', 'score': 0.013961274176836014, 'wm_score': 0.61505806, 'final': 0.19429030992378524}, {'fro': 'bedroom', 'to': 'attic', 'type': 'AtLocation', 'score': 0.04615763947367668, 'wm_score': 0.6294953, 'final': 0.22115893763157368}, {'fro': 'house', 'to': 'attic', 'type': 'AtLocation', 'score': 0.008333414793014526, 'wm_score': 0.37383395, 'final': 0.1179835753551102}, {'fro': 'box', 'to': 'attic', 'type': 'AtLocation', 'score': 0.023779964074492455, 'wm_score': 0.36419114, 'final': 0.12590331685214473}, {'fro': 'room', 'to': 'attic', 'type': 'AtLocation', 'score': 0.018792707473039627, 'wm_score': 0.5239215, 'final': 0.17033134523112775}, {'fro': 'bottom', 'to': 'attic', 'type': 'AtLocation', 'score': 0.0046023051254451275, 'wm_score': 0.37569255, 'final': 0.1159293785878116}, {'fro': 'kitchen', 'to': 'attic', 'type': 'AtLocation', 'score': 0.006314244121313095, 'wm_score': 0.585526, 'final': 0.1800777708849192}, {'fro': 'stuff', 'to': 'attic', 'type': 'AtLocation', 'score': 0.0018668004777282476, 'wm_score': 0.33345127, 'final': 0.10134214133440979}, {'fro': 'pipe', 'to': 'attic', 'type': 'AtLocation', 'score': 0.006021963898092508, 'wm_score': 0.33361053, 'final': 0.10429853372866478}, {'fro': 'window', 'to': 'attic', 'type': 'AtLocation', 'score': 0.004098823759704828, 'wm_score': 0.5153828, 'final': 0.1574840166317934}, {'fro': 'door', 'to': 'attic', 'type': 'AtLocation', 'score': 0.00876394659280777, 'wm_score': 0.4445718, 'final': 0.13950630261496547}, {'fro': 'garage', 'to': 'attic', 'type': 'AtLocation', 'score': 0.006473213899880648, 'wm_score': 0.56738555, 'final': 0.1747469147299165}, {'fro': 'bed', 'to': 'attic', 'type': 'AtLocation', 'score': 0.02802257426083088, 'wm_score': 0.42543, 'final': 0.14724480198258164}, {'fro': 'smoke', 'to': 'attic', 'type': 'AtLocation', 'score': 0.0012172831920906901, 'wm_score': 0.3335175, 'final': 0.10090734823446351}, {'fro': 'floor', 'to': 'attic', 'type': 'AtLocation', 'score': 0.039056532084941864, 'wm_score': 0.52638155, 'final': 0.18525403745945931}, {'fro': 'closet', 'to': 'attic', 'type': 'AtLocation', 'score': 0.11432712525129318, 'wm_score': 0.6351611, 'final': 0.27057731767590526}, {'fro': 'candle', 'to': 'attic', 'type': 'AtLocation', 'score': 0.00390867842361331, 'wm_score': 0.372486, 'final': 0.11448187489652932}, {'fro': 'trash', 'to': 'attic', 'type': 'AtLocation', 'score': 0.02020430564880371, 'wm_score': 0.3183476, 'final': 0.1096472939541626}, {'fro': 'roof', 'to': 'attic', 'type': 'AtLocation', 'score': 0.01976163499057293, 'wm_score': 0.5353103, 'final': 0.17442623449340108}, {'fro': 'somewhere', 'to': 'attic', 'type': 'AtLocation', 'score': 0.003678128821775317, 'wm_score': 0.33122632, 'final': 0.10194258617524275}, {'fro': 'sink', 'to': 'attic', 'type': 'AtLocation', 'score': 0.004915445111691952, 'wm_score': 0.38003045, 'final': 0.11744994657818439}, {'fro': 'upstairs', 'to': 'attic', 'type': 'AtLocation', 'score': 0.006198164541274309, 'wm_score': 0.60922, 'final': 0.18710471517889202}, {'fro': 'attic', 'to': 'ceiling', 'type': 'HasA', 'score': 0.013700147159397602, 'wm_score': 0.5102051, 'final': 0.1626516330115783}, {'fro': 'ceiling', 'to': 'attic', 'type': 'AtLocation', 'score': 0.03398771956562996, 'wm_score': 0.5102051, 'final': 0.17685293369594096}, {'fro': 'toilet', 'to': 'attic', 'type': 'AtLocation', 'score': 0.005790072493255138, 'wm_score': 0.44333482, 'final': 0.1370534967452786}, {'fro': 'folder', 'to': 'attic', 'type': 'AtLocation', 'score': 0.004321593325585127, 'wm_score': 0.40309846, 'final': 0.1239546533279096}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

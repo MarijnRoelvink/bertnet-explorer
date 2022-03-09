@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">fuel</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "fuel"
+    let relations = [{'fro': 'car', 'to': 'fuel', 'type': 'HasA', 'score': 0.03493505343794823, 'wm_score': 0.5629946, 'final': 0.1933529174065638}, {'fro': 'plane', 'to': 'fuel', 'type': 'HasA', 'score': 0.015338629484176636, 'wm_score': 0.46389642, 'final': 0.14990596663892367}, {'fro': 'bus', 'to': 'fuel', 'type': 'HasA', 'score': 0.014165742322802544, 'wm_score': 0.44034022, 'final': 0.1420180856259618}, {'fro': 'truck', 'to': 'fuel', 'type': 'HasA', 'score': 0.010011943988502026, 'wm_score': 0.5870666, 'final': 0.18312834079195145}, {'fro': 'boat', 'to': 'fuel', 'type': 'HasA', 'score': 0.008190805092453957, 'wm_score': 0.39696497, 'final': 0.12482305456471778}, {'fro': 'toilet', 'to': 'fuel', 'type': 'HasA', 'score': 0.007675222586840391, 'wm_score': 0.34250888, 'final': 0.1081253198107883}, {'fro': 'machine', 'to': 'fuel', 'type': 'HasA', 'score': 0.006753938272595406, 'wm_score': 0.3632096, 'final': 0.11369063679081681}, {'fro': 'ship', 'to': 'fuel', 'type': 'HasA', 'score': 0.006685073487460613, 'wm_score': 0.48784193, 'final': 0.15103213044122243}, {'fro': 'tanker', 'to': 'fuel', 'type': 'HasA', 'score': 0.006475290283560753, 'wm_score': 0.58901453, 'final': 0.18123706219849256}, {'fro': 'vehicle', 'to': 'fuel', 'type': 'HasA', 'score': 0.0060377586632966995, 'wm_score': 0.620128, 'final': 0.19026483106430772}, {'fro': 'train', 'to': 'fuel', 'type': 'HasA', 'score': 0.005811034236103296, 'wm_score': 0.5090321, 'final': 0.15677735396527231}, {'fro': 'tank', 'to': 'fuel', 'type': 'HasA', 'score': 0.005774093791842461, 'wm_score': 0.5628134, 'final': 0.17288588565428975}, {'fro': 'engine', 'to': 'fuel', 'type': 'HasA', 'score': 0.005375878885388374, 'wm_score': 0.6062149, 'final': 0.18562758521977188}, {'fro': 'airline', 'to': 'fuel', 'type': 'HasA', 'score': 0.003881237469613552, 'wm_score': 0.40981472, 'final': 0.12566128222872952}, {'fro': 'driver', 'to': 'fuel', 'type': 'HasA', 'score': 0.003706117160618305, 'wm_score': 0.39480177, 'final': 0.12103481301243282}, {'fro': 'aircraft', 'to': 'fuel', 'type': 'HasA', 'score': 0.0036608041264116764, 'wm_score': 0.532661, 'final': 0.1623608628884882}, {'fro': 'trailer', 'to': 'fuel', 'type': 'HasA', 'score': 0.003414209233596921, 'wm_score': 0.35559392, 'final': 0.10906812246351785}, {'fro': 'fire', 'to': 'fuel', 'type': 'HasA', 'score': 0.0033000335097312927, 'wm_score': 0.4962209, 'final': 0.15117629345681194}, {'fro': 'company', 'to': 'fuel', 'type': 'HasA', 'score': 0.003150737378746271, 'wm_score': 0.4373207, 'final': 0.1334017261651224}, {'fro': 'jet', 'to': 'fuel', 'type': 'HasA', 'score': 0.0031223983969539404, 'wm_score': 0.5864762, 'final': 0.17812853887786778}, {'fro': 'suv', 'to': 'fuel', 'type': 'HasA', 'score': 0.0031140774954110384, 'wm_score': 0.4319495, 'final': 0.13176470424678774}, {'fro': 'rocket', 'to': 'fuel', 'type': 'HasA', 'score': 0.003109351731836796, 'wm_score': 0.5274049, 'final': 0.16039801621228575}, {'fro': 'submarine', 'to': 'fuel', 'type': 'HasA', 'score': 0.0029944207053631544, 'wm_score': 0.33535254, 'final': 0.10270185649375421}, {'fro': 'plant', 'to': 'fuel', 'type': 'HasA', 'score': 0.002881305292248726, 'wm_score': 0.5696409, 'final': 0.17290918370457414}, {'fro': 'tube', 'to': 'fuel', 'type': 'HasA', 'score': 0.002790180966258049, 'wm_score': 0.35932595, 'final': 0.10975091167638065}, {'fro': 'fuel', 'to': 'leak', 'type': 'HasA', 'score': 0.04507068544626236, 'wm_score': 0.4929105, 'final': 0.17942262981238366}, {'fro': 'fuel', 'to': 'limit', 'type': 'HasA', 'score': 0.03386811539530754, 'wm_score': 0.49173123, 'final': 0.17122704977671532}, {'fro': 'fuel', 'to': 'smell', 'type': 'HasA', 'score': 0.029376117512583733, 'wm_score': 0.3129978, 'final': 0.11446262225880863}, {'fro': 'fuel', 'to': 'problem', 'type': 'HasA', 'score': 0.01955009624361992, 'wm_score': 0.4800604, 'final': 0.15770318737053396}, {'fro': 'fuel', 'to': 'difference', 'type': 'HasA', 'score': 0.019065283238887787, 'wm_score': 0.29030222, 'final': 0.10043636426722147}, {'fro': 'fuel', 'to': 'price', 'type': 'HasA', 'score': 0.018797218799591064, 'wm_score': 0.55609536, 'final': 0.1799866611597138}, {'fro': 'fuel', 'to': 'premium', 'type': 'HasA', 'score': 0.017426596954464912, 'wm_score': 0.4506637, 'final': 0.14739772786812544}, {'fro': 'fuel', 'to': 'catch', 'type': 'HasA', 'score': 0.01672782562673092, 'wm_score': 0.3467157, 'final': 0.11572418793871167}, {'fro': 'fuel', 'to': 'choice', 'type': 'HasA', 'score': 0.01377499382942915, 'wm_score': 0.36331686, 'final': 0.11863755368060042}, {'fro': 'fuel', 'to': 'purpose', 'type': 'HasA', 'score': 0.013037338852882385, 'wm_score': 0.3703507, 'final': 0.12023134719701768}, {'fro': 'fuel', 'to': 'chance', 'type': 'HasA', 'score': 0.010734260082244873, 'wm_score': 0.3112202, 'final': 0.10088004205757142}, {'fro': 'fuel', 'to': 'nozzle', 'type': 'HasA', 'score': 0.009831802919507027, 'wm_score': 0.3140661, 'final': 0.10110209204365493}, {'fro': 'fuel', 'to': 'cost', 'type': 'HasA', 'score': 0.009151854552328587, 'wm_score': 0.62265515, 'final': 0.19320284318663006}, {'fro': 'fuel', 'to': 'tank', 'type': 'HasA', 'score': 0.008906238712370396, 'wm_score': 0.5628134, 'final': 0.1750783870986593}, {'fro': 'fuel', 'to': 'pulse', 'type': 'HasA', 'score': 0.00890197604894638, 'wm_score': 0.32378215, 'final': 0.10336602823426247}, {'fro': 'fuel', 'to': 'value', 'type': 'HasA', 'score': 0.0065252031199634075, 'wm_score': 0.40762126, 'final': 0.1268540201839744}, {'fro': 'fuel', 'to': 'plug', 'type': 'HasA', 'score': 0.005890854634344578, 'wm_score': 0.4806327, 'final': 0.14831340824404124}, {'fro': 'fuel', 'to': 'fuse', 'type': 'HasA', 'score': 0.005818631965667009, 'wm_score': 0.34452528, 'final': 0.10743062637596693}, {'fro': 'fuel', 'to': 'capacity', 'type': 'HasA', 'score': 0.005023030564188957, 'wm_score': 0.57451344, 'final': 0.1758701533949323}, {'fro': 'fuel', 'to': 'monopoly', 'type': 'HasA', 'score': 0.004675714299082756, 'wm_score': 0.35058683, 'final': 0.10844904900935795}, {'fro': 'fuel', 'to': 'guarantee', 'type': 'HasA', 'score': 0.004630588926374912, 'wm_score': 0.3837149, 'final': 0.11835588224846247}, {'fro': 'fuel', 'to': 'potential', 'type': 'HasA', 'score': 0.004617826547473669, 'wm_score': 0.46704173, 'final': 0.14334499758323158}, {'fro': 'fuel', 'to': 'future', 'type': 'HasA', 'score': 0.004614115692675114, 'wm_score': 0.43111748, 'final': 0.1325651249848726}, {'fro': 'fuel', 'to': 'lead', 'type': 'HasA', 'score': 0.0045793564058840275, 'wm_score': 0.41349816, 'final': 0.12725499748411884}, {'fro': 'bullet', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.04846629872918129, 'wm_score': 0.30236787, 'final': 0.1246367701104269}, {'fro': 'spark', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.03818761184811592, 'wm_score': 0.50156766, 'final': 0.17720162629368114}, {'fro': 'chemical', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.0228524561971426, 'wm_score': 0.49429968, 'final': 0.16428662333799984}, {'fro': 'bomb', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.014734702184796333, 'wm_score': 0.5124934, 'final': 0.16406231152935744}, {'fro': 'diesel', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.01459887158125639, 'wm_score': 0.7630967, 'final': 0.2391482201068795}, {'fro': 'tank', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.011311696842312813, 'wm_score': 0.5628134, 'final': 0.176762207789619}, {'fro': 'drop', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.009611774235963821, 'wm_score': 0.5402082, 'final': 0.1687907019651747}, {'fro': 'leak', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.008639363572001457, 'wm_score': 0.4929105, 'final': 0.15392070450040102}, {'fro': 'nickel', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.008467989973723888, 'wm_score': 0.37713146, 'final': 0.11906703098160673}, {'fro': 'fire', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.007261889521032572, 'wm_score': 0.4962209, 'final': 0.15394959266472283}, {'fro': 'tanker', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.006696981377899647, 'wm_score': 0.58901453, 'final': 0.1813922459645298}, {'fro': 'hydrogen', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.006624945905059576, 'wm_score': 0.6018231, 'final': 0.18518439213354176}, {'fro': 'gap', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.005611414089798927, 'wm_score': 0.3511584, 'final': 0.10927550986285926}, {'fro': 'rocket', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.004725505132228136, 'wm_score': 0.5274049, 'final': 0.1615293235925597}, {'fro': 'tear', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.004266468342393637, 'wm_score': 0.3258599, 'final': 0.10074449783967555}, {'fro': 'fuel', 'to': 'air', 'type': 'AtLocation', 'score': 0.2747800052165985, 'wm_score': 0.5626557, 'final': 0.361142713651619}, {'fro': 'fuel', 'to': 'tank', 'type': 'AtLocation', 'score': 0.20415884256362915, 'wm_score': 0.5628134, 'final': 0.3117552097945404}, {'fro': 'fuel', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.04113345593214035, 'wm_score': 0.58467233, 'final': 0.20419511815249827}, {'fro': 'fuel', 'to': 'bag', 'type': 'AtLocation', 'score': 0.0266039427369833, 'wm_score': 0.33739036, 'final': 0.11983986791588833}, {'fro': 'fuel', 'to': 'bottle', 'type': 'AtLocation', 'score': 0.020437538623809814, 'wm_score': 0.3613373, 'final': 0.12270746703666688}, {'fro': 'fuel', 'to': 'mix', 'type': 'AtLocation', 'score': 0.017268018797039986, 'wm_score': 0.40495723, 'final': 0.133574782157928}, {'fro': 'fuel', 'to': 'ignition', 'type': 'AtLocation', 'score': 0.011917222291231155, 'wm_score': 0.46200997, 'final': 0.14694504660386182}, {'fro': 'fuel', 'to': 'water', 'type': 'AtLocation', 'score': 0.010135653428733349, 'wm_score': 0.61985326, 'final': 0.19305093540011337}, {'fro': 'fuel', 'to': 'toilet', 'type': 'AtLocation', 'score': 0.009347282350063324, 'wm_score': 0.34250888, 'final': 0.10929576164504434}, {'fro': 'fuel', 'to': 'fire', 'type': 'AtLocation', 'score': 0.007997358217835426, 'wm_score': 0.4962209, 'final': 0.15446442075248482}, {'fro': 'fuel', 'to': 'tanks', 'type': 'AtLocation', 'score': 0.007757317740470171, 'wm_score': 0.5303448, 'final': 0.16453356241832914}, {'fro': 'fuel', 'to': 'car', 'type': 'AtLocation', 'score': 0.007635150570422411, 'wm_score': 0.5629946, 'final': 0.17424298539929572}, {'fro': 'fuel', 'to': 'pipe', 'type': 'AtLocation', 'score': 0.0069955987855792046, 'wm_score': 0.46877295, 'final': 0.1455288041499055}, {'fro': 'fuel', 'to': 'atmosphere', 'type': 'AtLocation', 'score': 0.006890433374792337, 'wm_score': 0.39020258, 'final': 0.12188407736235465}, {'fro': 'fuel', 'to': 'balance', 'type': 'AtLocation', 'score': 0.0061269705183804035, 'wm_score': 0.45142022, 'final': 0.1397149453628663}, {'fro': 'fuel', 'to': 'ground', 'type': 'AtLocation', 'score': 0.0059028747491538525, 'wm_score': 0.43547127, 'final': 0.13477339332440771}, {'fro': 'fuel', 'to': 'system', 'type': 'AtLocation', 'score': 0.005419086664915085, 'wm_score': 0.48714063, 'final': 0.1499355496654406}, {'fro': 'fuel', 'to': 'supply', 'type': 'AtLocation', 'score': 0.004530736245214939, 'wm_score': 0.7619712, 'final': 0.23176287537165047}, {'fro': 'fuel', 'to': 'tube', 'type': 'AtLocation', 'score': 0.0030461440328508615, 'wm_score': 0.35932595, 'final': 0.10993008582299563}, {'fro': 'fuel', 'to': 'process', 'type': 'AtLocation', 'score': 0.0029140699189156294, 'wm_score': 0.45881116, 'final': 0.13968319694324097}, {'fro': 'fuel', 'to': 'machine', 'type': 'AtLocation', 'score': 0.002597466576844454, 'wm_score': 0.3632096, 'final': 0.11078110660379115}, {'fro': 'fuel', 'to': 'way', 'type': 'AtLocation', 'score': 0.0024585684295743704, 'wm_score': 0.39017615, 'final': 0.11877384290070207}, {'fro': 'fuel', 'to': 'barrel', 'type': 'AtLocation', 'score': 0.002321569249033928, 'wm_score': 0.44950846, 'final': 0.13647763647432376}, {'fro': 'fuel', 'to': 'road', 'type': 'AtLocation', 'score': 0.0022477165330201387, 'wm_score': 0.3475721, 'final': 0.10584503157311412}, {'fro': 'fuel', 'to': 'furnace', 'type': 'AtLocation', 'score': 0.002188469283282757, 'wm_score': 0.4062037, 'final': 0.12339303849829796}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

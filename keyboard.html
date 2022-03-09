@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">keyboard</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "keyboard"
+    let relations = [{'fro': 'computer', 'to': 'keyboard', 'type': 'HasA', 'score': 0.06612763553857803, 'wm_score': 0.541819, 'final': 0.20883504487700466}, {'fro': 'keyboard', 'to': 'computer', 'type': 'AtLocation', 'score': 0.007046015001833439, 'wm_score': 0.541819, 'final': 0.16747791050128344}, {'fro': 'phone', 'to': 'keyboard', 'type': 'HasA', 'score': 0.023044094443321228, 'wm_score': 0.42866516, 'final': 0.14473041411032486}, {'fro': 'device', 'to': 'keyboard', 'type': 'HasA', 'score': 0.04873320087790489, 'wm_score': 0.5137533, 'final': 0.18823923061453343}, {'fro': 'keyboard', 'to': 'device', 'type': 'AtLocation', 'score': 0.004287149291485548, 'wm_score': 0.5137533, 'final': 0.1571269945040399}, {'fro': 'guitar', 'to': 'keyboard', 'type': 'HasA', 'score': 0.012387972325086594, 'wm_score': 0.7104101, 'final': 0.22179461062756067}, {'fro': 'mode', 'to': 'keyboard', 'type': 'HasA', 'score': 0.007423078641295433, 'wm_score': 0.4908887, 'final': 0.15246276504890682}, {'fro': 'desk', 'to': 'keyboard', 'type': 'HasA', 'score': 0.0214566458016634, 'wm_score': 0.36663806, 'final': 0.12501107006116438}, {'fro': 'keyboard', 'to': 'desk', 'type': 'AtLocation', 'score': 0.006938929669559002, 'wm_score': 0.36663806, 'final': 0.1148486687686913}, {'fro': 'drawer', 'to': 'keyboard', 'type': 'HasA', 'score': 0.0029087241273373365, 'wm_score': 0.3342902, 'final': 0.10232316688913615}, {'fro': 'menu', 'to': 'keyboard', 'type': 'HasA', 'score': 0.0051086582243442535, 'wm_score': 0.40602028, 'final': 0.125382144757041}, {'fro': 'piano', 'to': 'keyboard', 'type': 'HasA', 'score': 0.03224758803844452, 'wm_score': 0.6436726, 'final': 0.21567509162691118}, {'fro': 'keyboard', 'to': 'piano', 'type': 'AtLocation', 'score': 0.004258413799107075, 'wm_score': 0.6436726, 'final': 0.196082669659375}, {'fro': 'speaker', 'to': 'keyboard', 'type': 'HasA', 'score': 0.006026097107678652, 'wm_score': 0.3195302, 'final': 0.10007732797537507}, {'fro': 'keyboard', 'to': 'sound', 'type': 'HasA', 'score': 0.006431499030441046, 'wm_score': 0.5108479, 'final': 0.15775641932130877}, {'fro': 'keyboard', 'to': 'mouse', 'type': 'HasA', 'score': 0.008135577663779259, 'wm_score': 0.5406952, 'final': 0.1679034643646455}, {'fro': 'mouse', 'to': 'keyboard', 'type': 'HasA', 'score': 0.06805203855037689, 'wm_score': 0.5406952, 'final': 0.20984498698526385}, {'fro': 'keyboard', 'to': 'mouse', 'type': 'AtLocation', 'score': 0.0028385347686707973, 'wm_score': 0.5406952, 'final': 0.16419553433806958}, {'fro': 'model', 'to': 'keyboard', 'type': 'HasA', 'score': 0.00464752409607172, 'wm_score': 0.34882927, 'final': 0.10790204786725023}, {'fro': 'box', 'to': 'keyboard', 'type': 'HasA', 'score': 0.004798106383532286, 'wm_score': 0.37736848, 'final': 0.11656921846847262}, {'fro': 'screen', 'to': 'keyboard', 'type': 'HasA', 'score': 0.013824141584336758, 'wm_score': 0.5422783, 'final': 0.17236038910903576}, {'fro': 'machine', 'to': 'keyboard', 'type': 'HasA', 'score': 0.016041163355112076, 'wm_score': 0.4038517, 'final': 0.13238432434857847}, {'fro': 'keyboard', 'to': 'function', 'type': 'HasA', 'score': 0.0047195227816700935, 'wm_score': 0.41783547, 'final': 0.1286543069471691}, {'fro': 'gear', 'to': 'keyboard', 'type': 'HasA', 'score': 0.003654735628515482, 'wm_score': 0.41146916, 'final': 0.12599906293996085}, {'fro': 'kitchen', 'to': 'keyboard', 'type': 'HasA', 'score': 0.0038181764539331198, 'wm_score': 0.34038588, 'final': 0.1047884875177532}, {'fro': 'keyboard', 'to': 'screw', 'type': 'HasA', 'score': 0.009857854805886745, 'wm_score': 0.3812304, 'final': 0.12126961836412074}, {'fro': 'keyboard', 'to': 'chip', 'type': 'HasA', 'score': 0.003871768480166793, 'wm_score': 0.4358791, 'final': 0.13347396793611677}, {'fro': 'chip', 'to': 'keyboard', 'type': 'HasA', 'score': 0.0077382237650454044, 'wm_score': 0.4358791, 'final': 0.1361804866355318}, {'fro': 'monitor', 'to': 'keyboard', 'type': 'HasA', 'score': 0.026640962809324265, 'wm_score': 0.32479405, 'final': 0.116086888966527}, {'fro': 'keyboard', 'to': 'monitor', 'type': 'AtLocation', 'score': 0.005331383086740971, 'wm_score': 0.32479405, 'final': 0.10117018316071869}, {'fro': 'keyboard', 'to': 'switch', 'type': 'HasA', 'score': 0.0032082218676805496, 'wm_score': 0.40583035, 'final': 0.12399486030737641}, {'fro': 'keyboard', 'to': 'boot', 'type': 'HasA', 'score': 0.005790342576801777, 'wm_score': 0.37294742, 'final': 0.11593746580376124}, {'fro': 'boot', 'to': 'keyboard', 'type': 'HasA', 'score': 0.004835984669625759, 'wm_score': 0.37294742, 'final': 0.11526941526873803}, {'fro': 'pen', 'to': 'keyboard', 'type': 'HasA', 'score': 0.0049413759261369705, 'wm_score': 0.35692075, 'final': 0.11053518814829591}, {'fro': 'keyboard', 'to': 'handle', 'type': 'HasA', 'score': 0.0038131459150463343, 'wm_score': 0.34374967, 'final': 0.10579410314053245}, {'fro': 'keyboard', 'to': 'display', 'type': 'HasA', 'score': 0.004675771109759808, 'wm_score': 0.39574158, 'final': 0.12199551377683188}, {'fro': 'display', 'to': 'keyboard', 'type': 'HasA', 'score': 0.019266152754426003, 'wm_score': 0.39574158, 'final': 0.1322087809280982}, {'fro': 'keyboard', 'to': 'touch', 'type': 'HasA', 'score': 0.003121357411146164, 'wm_score': 0.49459046, 'final': 0.15056208818780234}, {'fro': 'mobile', 'to': 'keyboard', 'type': 'HasA', 'score': 0.005549930967390537, 'wm_score': 0.35245007, 'final': 0.10961997267717338}, {'fro': 'keyboard', 'to': 'shortcut', 'type': 'HasA', 'score': 0.03611242026090622, 'wm_score': 0.4097299, 'final': 0.14819766418263436}, {'fro': 'robot', 'to': 'keyboard', 'type': 'HasA', 'score': 0.011058893986046314, 'wm_score': 0.3125294, 'final': 0.10150004579023245}, {'fro': 'keyboard', 'to': 'flaw', 'type': 'HasA', 'score': 0.003992490004748106, 'wm_score': 0.3739884, 'final': 0.1149912630033237}, {'fro': 'keyboard', 'to': 'slider', 'type': 'HasA', 'score': 0.01197761483490467, 'wm_score': 0.34575564, 'final': 0.11211102238443328}, {'fro': 'slider', 'to': 'keyboard', 'type': 'HasA', 'score': 0.005562293343245983, 'wm_score': 0.34575564, 'final': 0.1076202973402722}, {'fro': 'iphone', 'to': 'keyboard', 'type': 'HasA', 'score': 0.03930290788412094, 'wm_score': 0.40438437, 'final': 0.14882734651888466}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

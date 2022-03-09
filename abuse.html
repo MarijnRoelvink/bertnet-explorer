@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">abuse</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "abuse"
+    let relations = [{'fro': 'bbc', 'to': 'abuse', 'type': 'HasA', 'score': 0.08002578467130661, 'wm_score': 0.17700157, 'final': 0.10911852026991464}, {'fro': 'guardian', 'to': 'abuse', 'type': 'HasA', 'score': 0.060417573899030685, 'wm_score': 0.28499252, 'final': 0.1277900577293215}, {'fro': 'video', 'to': 'abuse', 'type': 'HasA', 'score': 0.01743083819746971, 'wm_score': 0.3103218, 'final': 0.1052981267382288}, {'fro': 'article', 'to': 'abuse', 'type': 'HasA', 'score': 0.010563206858932972, 'wm_score': 0.3555, 'final': 0.1140442448012531}, {'fro': 'post', 'to': 'abuse', 'type': 'HasA', 'score': 0.008332200348377228, 'wm_score': 0.38729626, 'final': 0.12202141824386409}, {'fro': 'site', 'to': 'abuse', 'type': 'HasA', 'score': 0.008021990768611431, 'wm_score': 0.31603724, 'final': 0.10042656553802802}, {'fro': 'report', 'to': 'abuse', 'type': 'HasA', 'score': 0.007456509862095118, 'wm_score': 0.4894272, 'final': 0.1520477169034666}, {'fro': 'times', 'to': 'abuse', 'type': 'HasA', 'score': 0.005553402006626129, 'wm_score': 0.37219658, 'final': 0.11554635540463831}, {'fro': 'vatican', 'to': 'abuse', 'type': 'HasA', 'score': 0.0034034918062388897, 'wm_score': 0.39035904, 'final': 0.11949015626436724}, {'fro': 'us', 'to': 'abuse', 'type': 'HasA', 'score': 0.002841502195224166, 'wm_score': 0.3663308, 'final': 0.11188829153665694}, {'fro': 'abuse', 'to': 'consequence', 'type': 'HasA', 'score': 0.07781966030597687, 'wm_score': 0.37181163, 'final': 0.16601725121418381}, {'fro': 'abuse', 'to': 'future', 'type': 'HasA', 'score': 0.052081331610679626, 'wm_score': 0.3541941, 'final': 0.14271516212747576}, {'fro': 'abuse', 'to': 'link', 'type': 'HasA', 'score': 0.0520545169711113, 'wm_score': 0.3267408, 'final': 0.13446040187977792}, {'fro': 'abuse', 'to': 'history', 'type': 'HasA', 'score': 0.04412786290049553, 'wm_score': 0.41725016, 'final': 0.1560645520303469}, {'fro': 'abuse', 'to': 'toll', 'type': 'HasA', 'score': 0.043306224048137665, 'wm_score': 0.27810776, 'final': 0.11374668483369636}, {'fro': 'abuse', 'to': 'motive', 'type': 'HasA', 'score': 0.019422639161348343, 'wm_score': 0.31969905, 'final': 0.10950556241294385}, {'fro': 'abuse', 'to': 'problem', 'type': 'HasA', 'score': 0.012967778369784355, 'wm_score': 0.52425027, 'final': 0.16635252585884908}, {'fro': 'abuse', 'to': 'stigma', 'type': 'HasA', 'score': 0.012747108936309814, 'wm_score': 0.46420583, 'final': 0.1481847252554169}, {'fro': 'abuse', 'to': 'response', 'type': 'HasA', 'score': 0.011494108475744724, 'wm_score': 0.468953, 'final': 0.14873177593302134}, {'fro': 'abuse', 'to': 'victim', 'type': 'HasA', 'score': 0.010438213124871254, 'wm_score': 0.59717786, 'final': 0.18646010718740988}, {'fro': 'abuse', 'to': 'following', 'type': 'HasA', 'score': 0.010165449231863022, 'wm_score': 0.43393552, 'final': 0.13729647046230414}, {'fro': 'abuse', 'to': 'purpose', 'type': 'HasA', 'score': 0.008111786097288132, 'wm_score': 0.33241075, 'final': 0.1054014752681017}, {'fro': 'abuse', 'to': 'pattern', 'type': 'HasA', 'score': 0.007953888736665249, 'wm_score': 0.3305359, 'final': 0.10472849211566568}, {'fro': 'abuse', 'to': 'cost', 'type': 'HasA', 'score': 0.007222964894026518, 'wm_score': 0.32591802, 'final': 0.10283148142581858}, {'fro': 'abuse', 'to': 'sting', 'type': 'HasA', 'score': 0.006592559162527323, 'wm_score': 0.38120002, 'final': 0.11897479741376914}, {'fro': 'abuse', 'to': 'potential', 'type': 'HasA', 'score': 0.006313219666481018, 'wm_score': 0.4185711, 'final': 0.12999058376653672}, {'fro': 'abuse', 'to': 'impact', 'type': 'HasA', 'score': 0.0060770814307034016, 'wm_score': 0.36953098, 'final': 0.1151132510014924}, {'fro': 'abuse', 'to': 'backlash', 'type': 'HasA', 'score': 0.0058219702914357185, 'wm_score': 0.35766158, 'final': 0.111373853204005}, {'fro': 'abuse', 'to': 'fallout', 'type': 'HasA', 'score': 0.005332115571945906, 'wm_score': 0.44463813, 'final': 0.13712391990036216}, {'fro': 'abuse', 'to': 'remedy', 'type': 'HasA', 'score': 0.0051916372030973434, 'wm_score': 0.4236659, 'final': 0.13073391604216814}, {'fro': 'abuse', 'to': 'past', 'type': 'HasA', 'score': 0.005018752068281174, 'wm_score': 0.48296547, 'final': 0.14840276744779685}, {'fro': 'abuse', 'to': 'role', 'type': 'HasA', 'score': 0.004750847816467285, 'wm_score': 0.42282137, 'final': 0.13017200447152713}, {'fro': 'child', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.14877678453922272, 'wm_score': 0.67682195, 'final': 0.3071903341774559}, {'fro': 'woman', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.03096783347427845, 'wm_score': 0.41417313, 'final': 0.14592942243199494}, {'fro': 'suspect', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.025304343551397324, 'wm_score': 0.41558444, 'final': 0.14238837248597813}, {'fro': 'victim', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.024900944903492928, 'wm_score': 0.59717786, 'final': 0.19658401943244505}, {'fro': 'man', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.024370528757572174, 'wm_score': 0.38346887, 'final': 0.13210003113030053}, {'fro': 'boy', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.01834540069103241, 'wm_score': 0.4051758, 'final': 0.1343945204837227}, {'fro': 'girl', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.018216773867607117, 'wm_score': 0.38566214, 'final': 0.128450383707325}, {'fro': 'baby', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.011659345589578152, 'wm_score': 0.34893247, 'final': 0.11284128291270473}, {'fro': 'priest', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.010214854031801224, 'wm_score': 0.5249916, 'final': 0.16464787782226087}, {'fro': 'witness', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.006122594233602285, 'wm_score': 0.4740283, 'final': 0.14649430596352161}, {'fro': 'condom', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.0060377405025064945, 'wm_score': 0.37229586, 'final': 0.11591517635175456}, {'fro': 'teacher', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.00484269205480814, 'wm_score': 0.33476737, 'final': 0.10382009543836572}, {'fro': 'perpetrator', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.0045046135783195496, 'wm_score': 0.34282935, 'final': 0.10600203450482369}, {'fro': 'teenager', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.004301887936890125, 'wm_score': 0.3239226, 'final': 0.10018810155582311}, {'fro': 'confession', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.003379789413884282, 'wm_score': 0.46728644, 'final': 0.14255178458971904}, {'fro': 'mother', 'to': 'abuse', 'type': 'AtLocation', 'score': 0.003378790570423007, 'wm_score': 0.39151186, 'final': 0.11981871139929612}, {'fro': 'abuse', 'to': 'works', 'type': 'AtLocation', 'score': 0.5304271578788757, 'wm_score': 0.25276482, 'final': 0.447128456515213}, {'fro': 'abuse', 'to': 'air', 'type': 'AtLocation', 'score': 0.05436595529317856, 'wm_score': 0.21433273, 'final': 0.102355987705225}, {'fro': 'abuse', 'to': 'making', 'type': 'AtLocation', 'score': 0.03185201436281204, 'wm_score': 0.37513083, 'final': 0.13483565905396844}, {'fro': 'abuse', 'to': 'news', 'type': 'AtLocation', 'score': 0.022308848798274994, 'wm_score': 0.32420003, 'final': 0.1128762031587925}, {'fro': 'abuse', 'to': 'background', 'type': 'AtLocation', 'score': 0.0065037342719733715, 'wm_score': 0.3314668, 'final': 0.10399265399038138}, {'fro': 'abuse', 'to': 'way', 'type': 'AtLocation', 'score': 0.005960346665233374, 'wm_score': 0.36402828, 'final': 0.11338072666566337}, {'fro': 'abuse', 'to': 'process', 'type': 'AtLocation', 'score': 0.002688014879822731, 'wm_score': 0.3415597, 'final': 0.10434952041587593}, {'fro': 'abuse', 'to': 'spotlight', 'type': 'AtLocation', 'score': 0.0023726511280983686, 'wm_score': 0.3500371, 'final': 0.10667198578966887}, {'fro': 'abuse', 'to': 'future', 'type': 'AtLocation', 'score': 0.002226135926321149, 'wm_score': 0.3541941, 'final': 0.10781652514842482}, {'fro': 'abuse', 'to': 'comments', 'type': 'AtLocation', 'score': 0.0019873117562383413, 'wm_score': 0.41037214, 'final': 0.12450276022936686}, {'fro': 'abuse', 'to': 'papers', 'type': 'AtLocation', 'score': 0.001555111724883318, 'wm_score': 0.33103564, 'final': 0.10039927020741835}, {'fro': 'abuse', 'to': 'courts', 'type': 'AtLocation', 'score': 0.0014182685408741236, 'wm_score': 0.41645616, 'final': 0.12592963597861193}, {'fro': 'abuse', 'to': 'system', 'type': 'AtLocation', 'score': 0.0013075699098408222, 'wm_score': 0.38158938, 'final': 0.11539211293688859}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

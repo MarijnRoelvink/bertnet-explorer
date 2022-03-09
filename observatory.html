@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">observatory</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "observatory"
+    let relations = [{'fro': 'observatory', 'to': 'space', 'type': 'HasA', 'score': 0.004148250911384821, 'wm_score': 0.38097012, 'final': 0.1171948116379694}, {'fro': 'observatory', 'to': 'mission', 'type': 'HasA', 'score': 0.006208179518580437, 'wm_score': 0.32471538, 'final': 0.10176033966300632}, {'fro': 'observatory', 'to': 'tower', 'type': 'HasA', 'score': 0.004638437181711197, 'wm_score': 0.47273618, 'final': 0.14506776002719787}, {'fro': 'vatican', 'to': 'observatory', 'type': 'HasA', 'score': 0.10526614636182785, 'wm_score': 0.28261316, 'final': 0.1584702504532795}, {'fro': 'moon', 'to': 'observatory', 'type': 'HasA', 'score': 0.06004288047552109, 'wm_score': 0.29820344, 'final': 0.13149104833286476}, {'fro': 'smithsonian', 'to': 'observatory', 'type': 'HasA', 'score': 0.032371003180742264, 'wm_score': 0.45265144, 'final': 0.1584551342265196}, {'fro': 'iss', 'to': 'observatory', 'type': 'HasA', 'score': 0.020448345690965652, 'wm_score': 0.30335823, 'final': 0.10532131098367598}, {'fro': 'zoo', 'to': 'observatory', 'type': 'HasA', 'score': 0.020015448331832886, 'wm_score': 0.35283786, 'final': 0.11986217183228304}, {'fro': 'volcano', 'to': 'observatory', 'type': 'HasA', 'score': 0.01827777735888958, 'wm_score': 0.47580397, 'final': 0.15553563515122273}, {'fro': 'telescope', 'to': 'observatory', 'type': 'HasA', 'score': 0.017729779705405235, 'wm_score': 0.7058762, 'final': 0.22417370579378368}, {'fro': 'museum', 'to': 'observatory', 'type': 'HasA', 'score': 0.017433494329452515, 'wm_score': 0.46162075, 'final': 0.15068967103061678}, {'fro': 'university', 'to': 'observatory', 'type': 'HasA', 'score': 0.016166983172297478, 'wm_score': 0.4459884, 'final': 0.14511340822060825}, {'fro': 'earth', 'to': 'observatory', 'type': 'HasA', 'score': 0.011013679206371307, 'wm_score': 0.378169, 'final': 0.12116027544445993}, {'fro': 'planet', 'to': 'observatory', 'type': 'HasA', 'score': 0.008720501326024532, 'wm_score': 0.34936255, 'final': 0.11091311592821719}, {'fro': 'comet', 'to': 'observatory', 'type': 'HasA', 'score': 0.0085071986541152, 'wm_score': 0.3758341, 'final': 0.11870526905788066}, {'fro': 'institute', 'to': 'observatory', 'type': 'HasA', 'score': 0.008042103610932827, 'wm_score': 0.53710157, 'final': 0.166759943527653}, {'fro': 'site', 'to': 'observatory', 'type': 'HasA', 'score': 0.007636697962880135, 'wm_score': 0.35429758, 'final': 0.11163496257401612}, {'fro': 'island', 'to': 'observatory', 'type': 'HasA', 'score': 0.007288711611181498, 'wm_score': 0.40207815, 'final': 0.12572554312782708}, {'fro': 'asteroid', 'to': 'observatory', 'type': 'HasA', 'score': 0.005943667609244585, 'wm_score': 0.4481844, 'final': 0.13861588732647123}, {'fro': 'park', 'to': 'observatory', 'type': 'HasA', 'score': 0.0057560657151043415, 'wm_score': 0.35691917, 'final': 0.11110499700057307}, {'fro': 'station', 'to': 'observatory', 'type': 'HasA', 'score': 0.0055656530894339085, 'wm_score': 0.4009145, 'final': 0.12417030716260376}, {'fro': 'temple', 'to': 'observatory', 'type': 'HasA', 'score': 0.004950402304530144, 'wm_score': 0.329565, 'final': 0.10233478161317111}, {'fro': 'cape', 'to': 'observatory', 'type': 'HasA', 'score': 0.003920185845345259, 'wm_score': 0.34382063, 'final': 0.10589031909174171}, {'fro': 'aquarium', 'to': 'observatory', 'type': 'HasA', 'score': 0.0031458449084311724, 'wm_score': 0.36196375, 'final': 0.11079121643590183}, {'fro': 'observatory', 'to': 'telescope', 'type': 'HasA', 'score': 0.08398748934268951, 'wm_score': 0.7058762, 'final': 0.27055410253988266}, {'fro': 'observatory', 'to': 'webcam', 'type': 'HasA', 'score': 0.07930631190538406, 'wm_score': 0.23695777, 'final': 0.12660174933376886}, {'fro': 'observatory', 'to': 'dome', 'type': 'HasA', 'score': 0.06255894899368286, 'wm_score': 0.37150007, 'final': 0.155241285295578}, {'fro': 'observatory', 'to': 'museum', 'type': 'HasA', 'score': 0.015324210748076439, 'wm_score': 0.46162075, 'final': 0.14921317252365351}, {'fro': 'observatory', 'to': 'gallery', 'type': 'HasA', 'score': 0.00859811995178461, 'wm_score': 0.34124488, 'final': 0.10839214796624924}, {'fro': 'observatory', 'to': 'library', 'type': 'HasA', 'score': 0.006343557499349117, 'wm_score': 0.3477291, 'final': 0.1087592202495444}, {'fro': 'observatory', 'to': 'chapel', 'type': 'HasA', 'score': 0.004799619782716036, 'wm_score': 0.35256875, 'final': 0.10913035884790123}, {'fro': 'observatory', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.004357755649834871, 'wm_score': 0.5684722, 'final': 0.17359208895488443}, {'fro': 'observatory', 'to': 'transmitter', 'type': 'HasA', 'score': 0.0036107224877923727, 'wm_score': 0.39953524, 'final': 0.12238807774145469}, {'fro': 'observatory', 'to': 'location', 'type': 'HasA', 'score': 0.0033956982661038637, 'wm_score': 0.34709382, 'final': 0.10650513478627273}, {'fro': 'observatory', 'to': 'zoo', 'type': 'HasA', 'score': 0.003316097427159548, 'wm_score': 0.35283786, 'final': 0.1081726261990117}, {'fro': 'telescope', 'to': 'observatory', 'type': 'AtLocation', 'score': 0.19723834097385406, 'wm_score': 0.7058762, 'final': 0.3498296986816979}, {'fro': 'comet', 'to': 'observatory', 'type': 'AtLocation', 'score': 0.03658793494105339, 'wm_score': 0.3758341, 'final': 0.1383617844587374}, {'fro': 'crater', 'to': 'observatory', 'type': 'AtLocation', 'score': 0.016337018460035324, 'wm_score': 0.33984515, 'final': 0.11338945792202473}, {'fro': 'bird', 'to': 'observatory', 'type': 'AtLocation', 'score': 0.0161539725959301, 'wm_score': 0.30900407, 'final': 0.10400900181715109}, {'fro': 'satellite', 'to': 'observatory', 'type': 'AtLocation', 'score': 0.011847014538943768, 'wm_score': 0.40719098, 'final': 0.13045020417726066}, {'fro': 'ufo', 'to': 'observatory', 'type': 'AtLocation', 'score': 0.007657430600374937, 'wm_score': 0.3794754, 'final': 0.11920282142026248}, {'fro': 'boulder', 'to': 'observatory', 'type': 'AtLocation', 'score': 0.004671514965593815, 'wm_score': 0.4539436, 'final': 0.13945314047591567}, {'fro': 'volcano', 'to': 'observatory', 'type': 'AtLocation', 'score': 0.004271914716809988, 'wm_score': 0.47580397, 'final': 0.145731531301767}, {'fro': 'spacecraft', 'to': 'observatory', 'type': 'AtLocation', 'score': 0.004258422646671534, 'wm_score': 0.38905245, 'final': 0.11969663085267009}, {'fro': 'observatory', 'to': 'foreground', 'type': 'AtLocation', 'score': 0.37773948907852173, 'wm_score': 0.007800006, 'final': 0.26675764415496517}, {'fro': 'observatory', 'to': 'works', 'type': 'AtLocation', 'score': 0.15009355545043945, 'wm_score': 0.13122597, 'final': 0.14443327981530762}, {'fro': 'observatory', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.08494078367948532, 'wm_score': 0.30137274, 'final': 0.14987037057563973}, {'fro': 'observatory', 'to': 'sky', 'type': 'AtLocation', 'score': 0.016774937510490417, 'wm_score': 0.35876602, 'final': 0.11937226225734332}, {'fro': 'observatory', 'to': 'area', 'type': 'AtLocation', 'score': 0.014930740930140018, 'wm_score': 0.31325012, 'final': 0.10442655465109804}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

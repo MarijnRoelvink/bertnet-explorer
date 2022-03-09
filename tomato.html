@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">tomato</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "tomato"
+    let relations = [{'fro': 'tomato', 'to': 'food', 'type': 'AtLocation', 'score': 0.015234311111271381, 'wm_score': 0.36906022, 'final': 0.12138208377788998}, {'fro': 'tomato', 'to': 'oven', 'type': 'AtLocation', 'score': 0.05045560747385025, 'wm_score': 0.44231445, 'final': 0.1680132602316952}, {'fro': 'tomato', 'to': 'variety', 'type': 'AtLocation', 'score': 0.005795976612716913, 'wm_score': 0.34915903, 'final': 0.10880489262890185}, {'fro': 'soup', 'to': 'tomato', 'type': 'HasA', 'score': 0.0034913632553070784, 'wm_score': 0.7355336, 'final': 0.223104034278715}, {'fro': 'tomato', 'to': 'soup', 'type': 'AtLocation', 'score': 0.08794178068637848, 'wm_score': 0.7355336, 'final': 0.282219326480465}, {'fro': 'tomato', 'to': 'recipe', 'type': 'AtLocation', 'score': 0.04429103434085846, 'wm_score': 0.5900705, 'final': 0.20802487403860095}, {'fro': 'tomato', 'to': 'steak', 'type': 'AtLocation', 'score': 0.018414141610264778, 'wm_score': 0.54226583, 'final': 0.17556964812718537}, {'fro': 'tomato', 'to': 'mixture', 'type': 'AtLocation', 'score': 0.013841120526194572, 'wm_score': 0.55171436, 'final': 0.1752030923683362}, {'fro': 'tomato', 'to': 'bread', 'type': 'AtLocation', 'score': 0.007823843508958817, 'wm_score': 0.6315082, 'final': 0.19492915045627118}, {'fro': 'tomato', 'to': 'refrigerator', 'type': 'AtLocation', 'score': 0.007379064802080393, 'wm_score': 0.35982305, 'final': 0.11311226036145627}, {'fro': 'tomato', 'to': 'coffee', 'type': 'AtLocation', 'score': 0.0048192222602665424, 'wm_score': 0.5106245, 'final': 0.1565608055821866}, {'fro': 'tomato', 'to': 'orange', 'type': 'AtLocation', 'score': 0.007681611459702253, 'wm_score': 0.5158633, 'final': 0.16013611802179162}, {'fro': 'tomato', 'to': 'restaurant', 'type': 'AtLocation', 'score': 0.006930969189852476, 'wm_score': 0.35190332, 'final': 0.11042267443289676}, {'fro': 'tomato', 'to': 'meal', 'type': 'AtLocation', 'score': 0.02503659389913082, 'wm_score': 0.48553583, 'final': 0.1631863647293916}, {'fro': 'tomato', 'to': 'pie', 'type': 'AtLocation', 'score': 0.004739832598716021, 'wm_score': 0.61765635, 'final': 0.18861478781910124}, {'fro': 'tomato', 'to': 'grocery', 'type': 'AtLocation', 'score': 0.0374637246131897, 'wm_score': 0.27446774, 'final': 0.1085649292292328}, {'fro': 'tomato', 'to': 'menu', 'type': 'AtLocation', 'score': 0.012126090005040169, 'wm_score': 0.4323557, 'final': 0.13819497300352815}, {'fro': 'tomato', 'to': 'potato', 'type': 'AtLocation', 'score': 0.03730877861380577, 'wm_score': 0.74537766, 'final': 0.24972944302966407}, {'fro': 'salad', 'to': 'tomato', 'type': 'HasA', 'score': 0.00916115753352642, 'wm_score': 0.72984993, 'final': 0.2253677892734685}, {'fro': 'tomato', 'to': 'salad', 'type': 'AtLocation', 'score': 0.1395607441663742, 'wm_score': 0.72984993, 'final': 0.31664749991646196}, {'fro': 'tomato', 'to': 'apple', 'type': 'AtLocation', 'score': 0.006808985956013203, 'wm_score': 0.5068741, 'final': 0.15682852016920926}, {'fro': 'tomato', 'to': 'beer', 'type': 'AtLocation', 'score': 0.008142630569636822, 'wm_score': 0.47304794, 'final': 0.1476142233987458}, {'fro': 'tomato', 'to': 'pizza', 'type': 'AtLocation', 'score': 0.03330761939287186, 'wm_score': 0.5711473, 'final': 0.19465952357501032}, {'fro': 'tomato', 'to': 'garden', 'type': 'AtLocation', 'score': 0.03596486523747444, 'wm_score': 0.31225324, 'final': 0.11885137766623212}, {'fro': 'tomato', 'to': 'chicken', 'type': 'AtLocation', 'score': 0.007113263942301273, 'wm_score': 0.7117782, 'final': 0.21851274475961094}, {'fro': 'tomato', 'to': 'salt', 'type': 'AtLocation', 'score': 0.005302298814058304, 'wm_score': 0.4899151, 'final': 0.15068613916984083}, {'fro': 'tomato', 'to': 'pot', 'type': 'AtLocation', 'score': 0.006349820178002119, 'wm_score': 0.5586514, 'final': 0.1720402941246015}, {'fro': 'tomato', 'to': 'plant', 'type': 'AtLocation', 'score': 0.026904266327619553, 'wm_score': 0.3304919, 'final': 0.11798055642933371}, {'fro': 'tomato', 'to': 'taste', 'type': 'AtLocation', 'score': 0.008223614655435085, 'wm_score': 0.5590894, 'final': 0.17348335025880457}, {'fro': 'tomato', 'to': 'bowl', 'type': 'AtLocation', 'score': 0.015236741863191128, 'wm_score': 0.37555477, 'final': 0.1233321503042338}, {'fro': 'tomato', 'to': 'dish', 'type': 'AtLocation', 'score': 0.06326188147068024, 'wm_score': 0.5884186, 'final': 0.2208088970294762}, {'fro': 'tomato', 'to': 'fruit', 'type': 'HasA', 'score': 0.007257104851305485, 'wm_score': 0.6476915, 'final': 0.19938742339591387}, {'fro': 'tomato', 'to': 'fruit', 'type': 'AtLocation', 'score': 0.012184418737888336, 'wm_score': 0.6476915, 'final': 0.20283654311652186}, {'fro': 'tomato', 'to': 'red', 'type': 'AtLocation', 'score': 0.00522299949079752, 'wm_score': 0.38999787, 'final': 0.12065546064355828}, {'fro': 'tomato', 'to': 'vegetable', 'type': 'HasA', 'score': 0.004633317701518536, 'wm_score': 0.6755444, 'final': 0.20590664239106302}, {'fro': 'tomato', 'to': 'vegetable', 'type': 'AtLocation', 'score': 0.08698426187038422, 'wm_score': 0.6755444, 'final': 0.263552303309269}, {'fro': 'tomato', 'to': 'juice', 'type': 'HasA', 'score': 0.004997080657631159, 'wm_score': 0.6936569, 'final': 0.21159502646034187}, {'fro': 'tomato', 'to': 'juice', 'type': 'AtLocation', 'score': 0.027487486600875854, 'wm_score': 0.6936569, 'final': 0.22733831062061316}, {'fro': 'tomato', 'to': 'milk', 'type': 'AtLocation', 'score': 0.006702156737446785, 'wm_score': 0.5126384, 'final': 0.15848302971621278}, {'fro': 'tomato', 'to': 'cream', 'type': 'AtLocation', 'score': 0.010367881506681442, 'wm_score': 0.6412488, 'final': 0.19963215705467702}, {'fro': 'tomato', 'to': 'rice', 'type': 'AtLocation', 'score': 0.013821967877447605, 'wm_score': 0.43799812, 'final': 0.14107481351421333}, {'fro': 'tomato', 'to': 'wine', 'type': 'AtLocation', 'score': 0.004988010041415691, 'wm_score': 0.5196633, 'final': 0.15939059702899103}, {'fro': 'tomato', 'to': 'bake', 'type': 'AtLocation', 'score': 0.006151097360998392, 'wm_score': 0.43689436, 'final': 0.1353740761526989}, {'fro': 'tomato', 'to': 'diet', 'type': 'AtLocation', 'score': 0.019054898992180824, 'wm_score': 0.32136568, 'final': 0.1097481332945266}, {'fro': 'sandwich', 'to': 'tomato', 'type': 'HasA', 'score': 0.008724053390324116, 'wm_score': 0.592234, 'final': 0.1837770373732269}, {'fro': 'tomato', 'to': 'sandwich', 'type': 'AtLocation', 'score': 0.08813276141881943, 'wm_score': 0.592234, 'final': 0.23936313299317363}, {'fro': 'tomato', 'to': 'flower', 'type': 'AtLocation', 'score': 0.006597729399800301, 'wm_score': 0.3809477, 'final': 0.11890272057986022}, {'fro': 'tomato', 'to': 'slice', 'type': 'HasA', 'score': 0.0038296158891171217, 'wm_score': 0.58468807, 'final': 0.17808715212238202}, {'fro': 'slice', 'to': 'tomato', 'type': 'HasA', 'score': 0.005133484024554491, 'wm_score': 0.58468807, 'final': 0.1789998598171882}, {'fro': 'tomato', 'to': 'slice', 'type': 'AtLocation', 'score': 0.07010698318481445, 'wm_score': 0.58468807, 'final': 0.22448130922937015}, {'fro': 'tomato', 'to': 'grass', 'type': 'AtLocation', 'score': 0.017979249358177185, 'wm_score': 0.360375, 'final': 0.12069797455072404}, {'fro': 'tomato', 'to': 'can', 'type': 'AtLocation', 'score': 0.05012952908873558, 'wm_score': 0.21657412, 'final': 0.10006290636211493}, {'fro': 'tomato', 'to': 'cook', 'type': 'AtLocation', 'score': 0.020974811166524887, 'wm_score': 0.44206, 'final': 0.14730036781656744}, {'fro': 'tomato', 'to': 'produce', 'type': 'AtLocation', 'score': 0.0215915534645319, 'wm_score': 0.31187892, 'final': 0.10867776342517234}, {'fro': 'tomato', 'to': 'green', 'type': 'AtLocation', 'score': 0.010426650755107403, 'wm_score': 0.38929832, 'final': 0.12408815152857519}, {'fro': 'tomato', 'to': 'eat', 'type': 'AtLocation', 'score': 0.005101221147924662, 'wm_score': 0.424623, 'final': 0.13095775480354727}, {'fro': 'tomato', 'to': 'drink', 'type': 'AtLocation', 'score': 0.007238247897475958, 'wm_score': 0.4087656, 'final': 0.1276964535282332}, {'fro': 'tomato', 'to': 'raw', 'type': 'AtLocation', 'score': 0.009104928933084011, 'wm_score': 0.36714017, 'final': 0.11651550125315882}, {'fro': 'tomato', 'to': 'soft', 'type': 'AtLocation', 'score': 0.004712121095508337, 'wm_score': 0.35939074, 'final': 0.11111570676685585}, {'fro': 'tomato', 'to': 'smell', 'type': 'AtLocation', 'score': 0.013184234499931335, 'wm_score': 0.3581683, 'final': 0.11667945414995194}, {'fro': 'tomato', 'to': 'wash', 'type': 'AtLocation', 'score': 0.0043934183195233345, 'wm_score': 0.33126312, 'final': 0.10245432882366635}, {'fro': 'tomato', 'to': 'yellow', 'type': 'AtLocation', 'score': 0.005027114879339933, 'wm_score': 0.42733097, 'final': 0.13171827141553796}, {'fro': 'tomato', 'to': 'onion', 'type': 'AtLocation', 'score': 0.052593059837818146, 'wm_score': 0.76601887, 'final': 0.2666208028864727}, {'fro': 'tomato', 'to': 'flavour', 'type': 'AtLocation', 'score': 0.01585858315229416, 'wm_score': 0.37403244, 'final': 0.12331074020660593}, {'fro': 'tomato', 'to': 'shade', 'type': 'AtLocation', 'score': 0.011575375683605671, 'wm_score': 0.3615612, 'final': 0.116571122978524}, {'fro': 'tomato', 'to': 'taco', 'type': 'AtLocation', 'score': 0.014162179082632065, 'wm_score': 0.5192702, 'final': 0.16569458535784248}, {'fro': 'tomato', 'to': 'pan', 'type': 'AtLocation', 'score': 0.009428916499018669, 'wm_score': 0.36602062, 'final': 0.1164064275493131}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">dust</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "dust"
+    let relations = [{'fro': 'earth', 'to': 'dust', 'type': 'AtLocation', 'score': 0.004703122656792402, 'wm_score': 0.60905856, 'final': 0.1860097538597547}, {'fro': 'metal', 'to': 'dust', 'type': 'AtLocation', 'score': 0.003294937079772353, 'wm_score': 0.5476543, 'final': 0.16660274595584068}, {'fro': 'layer', 'to': 'dust', 'type': 'AtLocation', 'score': 0.003373358165845275, 'wm_score': 0.5598788, 'final': 0.17032499071609172}, {'fro': 'mountain', 'to': 'dust', 'type': 'AtLocation', 'score': 0.0022057839669287205, 'wm_score': 0.37540293, 'final': 0.11416492777685013}, {'fro': 'sand', 'to': 'dust', 'type': 'AtLocation', 'score': 0.0026792765129357576, 'wm_score': 0.63942057, 'final': 0.19370166455905505}, {'fro': 'sky', 'to': 'dust', 'type': 'HasA', 'score': 0.01708856225013733, 'wm_score': 0.51009774, 'final': 0.16499131557509616}, {'fro': 'moon', 'to': 'dust', 'type': 'HasA', 'score': 0.014818735420703888, 'wm_score': 0.46897927, 'final': 0.15106689579449273}, {'fro': 'toilet', 'to': 'dust', 'type': 'HasA', 'score': 0.010752949863672256, 'wm_score': 0.33405182, 'final': 0.1077426109045706}, {'fro': 'cloud', 'to': 'dust', 'type': 'HasA', 'score': 0.010461561381816864, 'wm_score': 0.66411567, 'final': 0.20655779396727184}, {'fro': 'sun', 'to': 'dust', 'type': 'HasA', 'score': 0.009600059129297733, 'wm_score': 0.4609322, 'final': 0.14499970139050844}, {'fro': 'air', 'to': 'dust', 'type': 'HasA', 'score': 0.00636714044958353, 'wm_score': 0.39086553, 'final': 0.12171665731470849}, {'fro': 'earth', 'to': 'dust', 'type': 'HasA', 'score': 0.006326653063297272, 'wm_score': 0.60905856, 'final': 0.18714622514430812}, {'fro': 'ceiling', 'to': 'dust', 'type': 'HasA', 'score': 0.006210079416632652, 'wm_score': 0.36549932, 'final': 0.11399685159164288}, {'fro': 'carpet', 'to': 'dust', 'type': 'HasA', 'score': 0.005954698659479618, 'wm_score': 0.44860873, 'final': 0.13875090806163576}, {'fro': 'ground', 'to': 'dust', 'type': 'HasA', 'score': 0.0057961586862802505, 'wm_score': 0.43510547, 'final': 0.13458895208039617}, {'fro': 'planet', 'to': 'dust', 'type': 'HasA', 'score': 0.005782063584774733, 'wm_score': 0.49701446, 'final': 0.15315178250934233}, {'fro': 'roof', 'to': 'dust', 'type': 'HasA', 'score': 0.005573595874011517, 'wm_score': 0.4353577, 'final': 0.1345088271118081}, {'fro': 'desert', 'to': 'dust', 'type': 'HasA', 'score': 0.005138899199664593, 'wm_score': 0.4190691, 'final': 0.12931795943976523}, {'fro': 'snow', 'to': 'dust', 'type': 'HasA', 'score': 0.004573598504066467, 'wm_score': 0.65322936, 'final': 0.19917032695284656}, {'fro': 'plane', 'to': 'dust', 'type': 'HasA', 'score': 0.00408942298963666, 'wm_score': 0.364773, 'final': 0.1122944960927457}, {'fro': 'cake', 'to': 'dust', 'type': 'HasA', 'score': 0.003946928307414055, 'wm_score': 0.43783566, 'final': 0.13411354781518986}, {'fro': 'sand', 'to': 'dust', 'type': 'HasA', 'score': 0.003779319580644369, 'wm_score': 0.63942057, 'final': 0.19447169470645106}, {'fro': 'rain', 'to': 'dust', 'type': 'HasA', 'score': 0.0033734505996108055, 'wm_score': 0.60816914, 'final': 0.1848121574197276}, {'fro': 'wind', 'to': 'dust', 'type': 'HasA', 'score': 0.003036466194316745, 'wm_score': 0.5478818, 'final': 0.16649006633602173}, {'fro': 'dust', 'to': 'bite', 'type': 'HasA', 'score': 0.11208995431661606, 'wm_score': 0.3785841, 'final': 0.19203819802163125}, {'fro': 'dust', 'to': 'vengeance', 'type': 'HasA', 'score': 0.0904671922326088, 'wm_score': 0.23023993, 'final': 0.13239901356282618}, {'fro': 'dust', 'to': 'place', 'type': 'HasA', 'score': 0.02985052950680256, 'wm_score': 0.3294868, 'final': 0.11974141065476182}, {'fro': 'dust', 'to': 'smell', 'type': 'HasA', 'score': 0.0281960628926754, 'wm_score': 0.53065324, 'final': 0.1789332160248728}, {'fro': 'dust', 'to': 'bearing', 'type': 'HasA', 'score': 0.01118976529687643, 'wm_score': 0.36342025, 'final': 0.11685891070781351}, {'fro': 'dust', 'to': 'way', 'type': 'HasA', 'score': 0.009127499535679817, 'wm_score': 0.35141575, 'final': 0.11181397467497589}, {'fro': 'dust', 'to': 'pattern', 'type': 'HasA', 'score': 0.008587971329689026, 'wm_score': 0.34204662, 'final': 0.10862556593078233}, {'fro': 'dust', 'to': 'scent', 'type': 'HasA', 'score': 0.008529447950422764, 'wm_score': 0.39658976, 'final': 0.12494754156529596}, {'fro': 'dust', 'to': 'ring', 'type': 'HasA', 'score': 0.006554471328854561, 'wm_score': 0.37780982, 'final': 0.11793107593019822}, {'fro': 'dust', 'to': 'past', 'type': 'HasA', 'score': 0.004970156121999025, 'wm_score': 0.32785156, 'final': 0.10183457728539934}, {'fro': 'dust', 'to': 'problem', 'type': 'HasA', 'score': 0.004319476895034313, 'wm_score': 0.34698635, 'final': 0.10711953882652403}, {'fro': 'cow', 'to': 'dust', 'type': 'AtLocation', 'score': 0.010816511698067188, 'wm_score': 0.32016486, 'final': 0.10362101618864705}, {'fro': 'feather', 'to': 'dust', 'type': 'AtLocation', 'score': 0.010622121393680573, 'wm_score': 0.34013075, 'final': 0.10947470997557641}, {'fro': 'comet', 'to': 'dust', 'type': 'AtLocation', 'score': 0.010475367307662964, 'wm_score': 0.466407, 'final': 0.1472548571153641}, {'fro': 'tree', 'to': 'dust', 'type': 'AtLocation', 'score': 0.008416222408413887, 'wm_score': 0.43143147, 'final': 0.13532079668588973}, {'fro': 'man', 'to': 'dust', 'type': 'AtLocation', 'score': 0.008262448012828827, 'wm_score': 0.33854622, 'final': 0.1073475796089802}, {'fro': 'meteor', 'to': 'dust', 'type': 'AtLocation', 'score': 0.007881887257099152, 'wm_score': 0.43002, 'final': 0.13452332107996942}, {'fro': 'shovel', 'to': 'dust', 'type': 'AtLocation', 'score': 0.007702190428972244, 'wm_score': 0.4114769, 'final': 0.1288346033002806}, {'fro': 'cat', 'to': 'dust', 'type': 'AtLocation', 'score': 0.0073913950473070145, 'wm_score': 0.34515923, 'final': 0.10872174553311492}, {'fro': 'spaceship', 'to': 'dust', 'type': 'AtLocation', 'score': 0.006497967056930065, 'wm_score': 0.3415383, 'final': 0.10701006693985106}, {'fro': 'cigarette', 'to': 'dust', 'type': 'AtLocation', 'score': 0.006270106416195631, 'wm_score': 0.3445781, 'final': 0.10776250449133695}, {'fro': 'corpse', 'to': 'dust', 'type': 'AtLocation', 'score': 0.005850119981914759, 'wm_score': 0.39761257, 'final': 0.12337885498734034}, {'fro': 'bird', 'to': 'dust', 'type': 'AtLocation', 'score': 0.0054546850733459, 'wm_score': 0.33059087, 'final': 0.10299554055134214}, {'fro': 'candle', 'to': 'dust', 'type': 'AtLocation', 'score': 0.004816112108528614, 'wm_score': 0.41726586, 'final': 0.12855103647597002}, {'fro': 'bullet', 'to': 'dust', 'type': 'AtLocation', 'score': 0.0047434172593057156, 'wm_score': 0.35741234, 'final': 0.11054409408151401}, {'fro': 'rock', 'to': 'dust', 'type': 'AtLocation', 'score': 0.004430125933140516, 'wm_score': 0.44242376, 'final': 0.1358282161531984}, {'fro': 'rat', 'to': 'dust', 'type': 'AtLocation', 'score': 0.004298967309296131, 'wm_score': 0.38442445, 'final': 0.1183366121165073}, {'fro': 'dust', 'to': 'air', 'type': 'AtLocation', 'score': 0.6943001747131348, 'wm_score': 0.39086553, 'final': 0.6032697812991943}, {'fro': 'dust', 'to': 'clouds', 'type': 'AtLocation', 'score': 0.0781494528055191, 'wm_score': 0.7231388, 'final': 0.2716462569638634}, {'fro': 'dust', 'to': 'sky', 'type': 'AtLocation', 'score': 0.032662030309438705, 'wm_score': 0.51009774, 'final': 0.1758927432166071}, {'fro': 'dust', 'to': 'atmosphere', 'type': 'AtLocation', 'score': 0.01985970512032509, 'wm_score': 0.5252463, 'final': 0.1714756835842276}, {'fro': 'dust', 'to': 'ground', 'type': 'AtLocation', 'score': 0.011915135197341442, 'wm_score': 0.43510547, 'final': 0.13887223563813902}, {'fro': 'dust', 'to': 'wind', 'type': 'AtLocation', 'score': 0.01174189057201147, 'wm_score': 0.5478818, 'final': 0.17258386340040804}, {'fro': 'dust', 'to': 'cloud', 'type': 'AtLocation', 'score': 0.006933347787708044, 'wm_score': 0.66411567, 'final': 0.20408804445139567}, {'fro': 'dust', 'to': 'horizon', 'type': 'AtLocation', 'score': 0.0060050636529922485, 'wm_score': 0.3626002, 'final': 0.11298360455709458}, {'fro': 'dust', 'to': 'water', 'type': 'AtLocation', 'score': 0.005167568102478981, 'wm_score': 0.5682565, 'final': 0.17409424767173534}, {'fro': 'dust', 'to': 'background', 'type': 'AtLocation', 'score': 0.004769338760524988, 'wm_score': 0.35841808, 'final': 0.1108639611323675}, {'fro': 'dust', 'to': 'mix', 'type': 'AtLocation', 'score': 0.004685783758759499, 'wm_score': 0.35985425, 'final': 0.11123632363113167}, {'fro': 'dust', 'to': 'breeze', 'type': 'AtLocation', 'score': 0.004120337311178446, 'wm_score': 0.33044094, 'final': 0.10201651811782493}, {'fro': 'dust', 'to': 'skies', 'type': 'AtLocation', 'score': 0.004002917557954788, 'wm_score': 0.45781726, 'final': 0.14014722029056836}, {'fro': 'dust', 'to': 'desert', 'type': 'AtLocation', 'score': 0.002929398790001869, 'wm_score': 0.4190691, 'final': 0.12777130915300133}, {'fro': 'dust', 'to': 'way', 'type': 'AtLocation', 'score': 0.0026825768873095512, 'wm_score': 0.35141575, 'final': 0.10730252882111671}, {'fro': 'dust', 'to': 'sand', 'type': 'AtLocation', 'score': 0.002563910325989127, 'wm_score': 0.63942057, 'final': 0.19362090822819242}, {'fro': 'dust', 'to': 'rain', 'type': 'AtLocation', 'score': 0.002041380852460861, 'wm_score': 0.60816914, 'final': 0.18387970859672262}, {'fro': 'dust', 'to': 'pipe', 'type': 'AtLocation', 'score': 0.0016113360179588199, 'wm_score': 0.4888451, 'final': 0.14778146521257118}, {'fro': 'dust', 'to': 'soil', 'type': 'AtLocation', 'score': 0.001302693854086101, 'wm_score': 0.5481043, 'final': 0.16534317569786028}, {'fro': 'dust', 'to': 'shower', 'type': 'AtLocation', 'score': 0.0011389517458155751, 'wm_score': 0.49858144, 'final': 0.15037169822207092}, {'fro': 'dust', 'to': 'ocean', 'type': 'AtLocation', 'score': 0.0010313957463949919, 'wm_score': 0.41056615, 'final': 0.12389182202247652}, {'fro': 'dust', 'to': 'heavens', 'type': 'AtLocation', 'score': 0.0009103319607675076, 'wm_score': 0.3798439, 'final': 0.11459040237253727}, {'fro': 'landscape', 'to': 'dust', 'type': 'AtLocation', 'score': 0.0037006863858550787, 'wm_score': 0.36057025, 'final': 0.11076155547009855}, {'fro': 'cloud', 'to': 'dust', 'type': 'AtLocation', 'score': 0.0012516174465417862, 'wm_score': 0.66411567, 'final': 0.2001108332125793}, {'fro': 'past', 'to': 'dust', 'type': 'AtLocation', 'score': 0.0027327677235007286, 'wm_score': 0.32785156, 'final': 0.10026840540645053}, {'fro': 'whole', 'to': 'dust', 'type': 'AtLocation', 'score': 0.007175196427851915, 'wm_score': 0.35841233, 'final': 0.11254633649949636}, {'fro': 'planet', 'to': 'dust', 'type': 'AtLocation', 'score': 0.010361447930335999, 'wm_score': 0.49701446, 'final': 0.15635735155123523}, {'fro': 'soul', 'to': 'dust', 'type': 'AtLocation', 'score': 0.006487629842013121, 'wm_score': 0.35755622, 'final': 0.1118082068894092}, {'fro': 'desert', 'to': 'dust', 'type': 'AtLocation', 'score': 0.004125597421079874, 'wm_score': 0.4190691, 'final': 0.12860864819475595}, {'fro': 'crater', 'to': 'dust', 'type': 'AtLocation', 'score': 0.001847150269895792, 'wm_score': 0.40363654, 'final': 0.12238396718892706}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

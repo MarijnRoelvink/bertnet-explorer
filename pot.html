@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">pot</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "pot"
+    let relations = [{'fro': 'food', 'to': 'pot', 'type': 'AtLocation', 'score': 0.002234766958281398, 'wm_score': 0.43231753, 'final': 0.131259595870797}, {'fro': 'soup', 'to': 'pot', 'type': 'AtLocation', 'score': 0.007437937427312136, 'wm_score': 0.6455271, 'final': 0.19886468619911854}, {'fro': 'mixture', 'to': 'pot', 'type': 'AtLocation', 'score': 0.00423755869269371, 'wm_score': 0.56039834, 'final': 0.17108579308488564}, {'fro': 'coffee', 'to': 'pot', 'type': 'AtLocation', 'score': 0.009122230112552643, 'wm_score': 0.4804109, 'final': 0.15050883107878688}, {'fro': 'pie', 'to': 'pot', 'type': 'AtLocation', 'score': 0.001655070809647441, 'wm_score': 0.5257913, 'final': 0.1588959395667532}, {'fro': 'tea', 'to': 'pot', 'type': 'AtLocation', 'score': 0.013582510873675346, 'wm_score': 0.48287725, 'final': 0.15437093261157275}, {'fro': 'honey', 'to': 'pot', 'type': 'AtLocation', 'score': 0.007952756248414516, 'wm_score': 0.47696465, 'final': 0.14865632437389018}, {'fro': 'potato', 'to': 'pot', 'type': 'AtLocation', 'score': 0.013765819370746613, 'wm_score': 0.5369038, 'final': 0.17070721355952265}, {'fro': 'beer', 'to': 'pot', 'type': 'AtLocation', 'score': 0.0022466592490673065, 'wm_score': 0.45236388, 'final': 0.13728182547434714}, {'fro': 'water', 'to': 'pot', 'type': 'AtLocation', 'score': 0.00822059903293848, 'wm_score': 0.46149528, 'final': 0.14420300332305694}, {'fro': 'money', 'to': 'pot', 'type': 'AtLocation', 'score': 0.005257966462522745, 'wm_score': 0.3656814, 'final': 0.11338499652376594}, {'fro': 'soil', 'to': 'pot', 'type': 'AtLocation', 'score': 0.008984721265733242, 'wm_score': 0.38754258, 'final': 0.1225520788860133}, {'fro': 'cash', 'to': 'pot', 'type': 'AtLocation', 'score': 0.0069348872639238834, 'wm_score': 0.3262176, 'final': 0.10271970108474673}, {'fro': 'pot', 'to': 'salt', 'type': 'HasA', 'score': 0.004193847067654133, 'wm_score': 0.5311277, 'final': 0.16227400294735791}, {'fro': 'salt', 'to': 'pot', 'type': 'AtLocation', 'score': 0.002904026536270976, 'wm_score': 0.5311277, 'final': 0.16137112857538968}, {'fro': 'kettle', 'to': 'pot', 'type': 'HasA', 'score': 0.016338564455509186, 'wm_score': 0.5874346, 'final': 0.18766737511885648}, {'fro': 'baby', 'to': 'pot', 'type': 'HasA', 'score': 0.0059448410756886005, 'wm_score': 0.3351724, 'final': 0.10471310875298204}, {'fro': 'onion', 'to': 'pot', 'type': 'HasA', 'score': 0.004572653211653233, 'wm_score': 0.4977717, 'final': 0.1525323672481573}, {'fro': 'fridge', 'to': 'pot', 'type': 'HasA', 'score': 0.00412162346765399, 'wm_score': 0.3874743, 'final': 0.11912742642735781}, {'fro': 'kitchen', 'to': 'pot', 'type': 'HasA', 'score': 0.0035765732172876596, 'wm_score': 0.4381201, 'final': 0.1339396312521014}, {'fro': 'pot', 'to': 'lid', 'type': 'HasA', 'score': 0.5281592011451721, 'wm_score': 0.39714468, 'final': 0.48885484480162045}, {'fro': 'pot', 'to': 'smell', 'type': 'HasA', 'score': 0.029939409345388412, 'wm_score': 0.30046925, 'final': 0.11109836154177191}, {'fro': 'pot', 'to': 'problem', 'type': 'HasA', 'score': 0.006079660262912512, 'wm_score': 0.32391167, 'final': 0.10142926318403876}, {'fro': 'pot', 'to': 'taste', 'type': 'HasA', 'score': 0.004106597509235144, 'wm_score': 0.4333233, 'final': 0.13287160825646463}, {'fro': 'pot', 'to': 'burner', 'type': 'HasA', 'score': 0.0033605440985411406, 'wm_score': 0.37266132, 'final': 0.11415077686897881}, {'fro': 'pot', 'to': 'fan', 'type': 'HasA', 'score': 0.0021586634684354067, 'wm_score': 0.36963296, 'final': 0.11240095242790481}, {'fro': 'pot', 'to': 'freezer', 'type': 'HasA', 'score': 0.001989583717659116, 'wm_score': 0.49347597, 'final': 0.14943549960236138}, {'fro': 'pot', 'to': 'crack', 'type': 'HasA', 'score': 0.0019547780975699425, 'wm_score': 0.47098178, 'final': 0.142662878668299}, {'fro': 'pot', 'to': 'belly', 'type': 'HasA', 'score': 0.0016654044156894088, 'wm_score': 0.41317958, 'final': 0.1251196570909826}, {'fro': 'frog', 'to': 'pot', 'type': 'AtLocation', 'score': 0.08206130564212799, 'wm_score': 0.19872452, 'final': 0.11706026994948959}, {'fro': 'fish', 'to': 'pot', 'type': 'AtLocation', 'score': 0.04673723876476288, 'wm_score': 0.4729563, 'final': 0.17460295713533402}, {'fro': 'carrot', 'to': 'pot', 'type': 'AtLocation', 'score': 0.041724495589733124, 'wm_score': 0.4101916, 'final': 0.1522646269128132}, {'fro': 'chicken', 'to': 'pot', 'type': 'AtLocation', 'score': 0.034760333597660065, 'wm_score': 0.6324383, 'final': 0.21406372351836206}, {'fro': 'horse', 'to': 'pot', 'type': 'AtLocation', 'score': 0.02695303037762642, 'wm_score': 0.28720936, 'final': 0.10502992926433852}, {'fro': 'seed', 'to': 'pot', 'type': 'AtLocation', 'score': 0.01642991043627262, 'wm_score': 0.31635585, 'final': 0.10640769230539085}, {'fro': 'kettle', 'to': 'pot', 'type': 'AtLocation', 'score': 0.015334601514041424, 'wm_score': 0.5874346, 'final': 0.18696460105982904}, {'fro': 'fork', 'to': 'pot', 'type': 'AtLocation', 'score': 0.015187229961156845, 'wm_score': 0.32490617, 'final': 0.1081029119728098}, {'fro': 'pumpkin', 'to': 'pot', 'type': 'AtLocation', 'score': 0.013947607018053532, 'wm_score': 0.45407948, 'final': 0.1459871689126375}, {'fro': 'leaf', 'to': 'pot', 'type': 'AtLocation', 'score': 0.013736228458583355, 'wm_score': 0.3736146, 'final': 0.12169973992100837}, {'fro': 'flower', 'to': 'pot', 'type': 'AtLocation', 'score': 0.013176358304917812, 'wm_score': 0.35773614, 'final': 0.11654429281344247}, {'fro': 'pig', 'to': 'pot', 'type': 'AtLocation', 'score': 0.012921430170536041, 'wm_score': 0.38735062, 'final': 0.12525018711937524}, {'fro': 'baby', 'to': 'pot', 'type': 'AtLocation', 'score': 0.010603992268443108, 'wm_score': 0.3351724, 'final': 0.10797451458791019}, {'fro': 'rock', 'to': 'pot', 'type': 'AtLocation', 'score': 0.00926249846816063, 'wm_score': 0.36782035, 'final': 0.11682985392771247}, {'fro': 'weed', 'to': 'pot', 'type': 'AtLocation', 'score': 0.009184809401631355, 'wm_score': 0.40509966, 'final': 0.12795926458114196}, {'fro': 'lemon', 'to': 'pot', 'type': 'AtLocation', 'score': 0.008101385086774826, 'wm_score': 0.47221828, 'final': 0.14733645356074238}, {'fro': 'snake', 'to': 'pot', 'type': 'AtLocation', 'score': 0.008044558577239513, 'wm_score': 0.32656735, 'final': 0.10360139600406766}, {'fro': 'peach', 'to': 'pot', 'type': 'AtLocation', 'score': 0.007476873695850372, 'wm_score': 0.32776785, 'final': 0.10356416658709529}, {'fro': 'tomato', 'to': 'pot', 'type': 'AtLocation', 'score': 0.006349820178002119, 'wm_score': 0.5586514, 'final': 0.1720402941246015}, {'fro': 'roast', 'to': 'pot', 'type': 'AtLocation', 'score': 0.006018015090376139, 'wm_score': 0.5256563, 'final': 0.1619095005632633}, {'fro': 'bean', 'to': 'pot', 'type': 'AtLocation', 'score': 0.005834713112562895, 'wm_score': 0.49058008, 'final': 0.15125832317879404}, {'fro': 'lid', 'to': 'pot', 'type': 'AtLocation', 'score': 0.00445127859711647, 'wm_score': 0.39714468, 'final': 0.12225929901798155}, {'fro': 'vegetable', 'to': 'pot', 'type': 'AtLocation', 'score': 0.0041532800532877445, 'wm_score': 0.539839, 'final': 0.16485899603730142}, {'fro': 'pot', 'to': 'freezer', 'type': 'AtLocation', 'score': 0.12330133467912674, 'wm_score': 0.49347597, 'final': 0.23435372527538872}, {'fro': 'pot', 'to': 'fridge', 'type': 'AtLocation', 'score': 0.04345700889825821, 'wm_score': 0.3874743, 'final': 0.14666219622878077}, {'fro': 'pot', 'to': 'oven', 'type': 'AtLocation', 'score': 0.040714554488658905, 'wm_score': 0.5181348, 'final': 0.18394062814206125}, {'fro': 'pot', 'to': 'garden', 'type': 'AtLocation', 'score': 0.025859687477350235, 'wm_score': 0.3712402, 'final': 0.12947384123414518}, {'fro': 'pot', 'to': 'bag', 'type': 'AtLocation', 'score': 0.018508566543459892, 'wm_score': 0.4442713, 'final': 0.14623738658042196}, {'fro': 'pot', 'to': 'water', 'type': 'AtLocation', 'score': 0.01789303496479988, 'wm_score': 0.46149528, 'final': 0.15097370847535993}, {'fro': 'pot', 'to': 'tank', 'type': 'AtLocation', 'score': 0.016980739310383797, 'wm_score': 0.33697203, 'final': 0.11297812651726867}, {'fro': 'pot', 'to': 'cellar', 'type': 'AtLocation', 'score': 0.01518405880779028, 'wm_score': 0.43616927, 'final': 0.14147962216545323}, {'fro': 'pot', 'to': 'barn', 'type': 'AtLocation', 'score': 0.014306376688182354, 'wm_score': 0.36960983, 'final': 0.12089741268172766}, {'fro': 'pot', 'to': 'toilet', 'type': 'AtLocation', 'score': 0.012013674713671207, 'wm_score': 0.339985, 'final': 0.11040507229956985}, {'fro': 'pot', 'to': 'bowl', 'type': 'AtLocation', 'score': 0.011947760358452797, 'wm_score': 0.41528606, 'final': 0.13294925025091697}, {'fro': 'pot', 'to': 'backyard', 'type': 'AtLocation', 'score': 0.010283919982612133, 'wm_score': 0.35832685, 'final': 0.1146967989878285}, {'fro': 'pot', 'to': 'kitchen', 'type': 'AtLocation', 'score': 0.010086318477988243, 'wm_score': 0.4381201, 'final': 0.1384964529345918}, {'fro': 'pot', 'to': 'jar', 'type': 'AtLocation', 'score': 0.009943202137947083, 'wm_score': 0.54566455, 'final': 0.170659606496563}, {'fro': 'pot', 'to': 'trash', 'type': 'AtLocation', 'score': 0.008193762972950935, 'wm_score': 0.38260067, 'final': 0.12051583508106567}, {'fro': 'pot', 'to': 'refrigerator', 'type': 'AtLocation', 'score': 0.00703626312315464, 'wm_score': 0.4669243, 'final': 0.14500267418620827}, {'fro': 'pot', 'to': 'basement', 'type': 'AtLocation', 'score': 0.006516037508845329, 'wm_score': 0.3205164, 'final': 0.10071614625619174}, {'fro': 'pot', 'to': 'mix', 'type': 'AtLocation', 'score': 0.006213271524757147, 'wm_score': 0.45868272, 'final': 0.14195410606733003}, {'fro': 'pot', 'to': 'kettle', 'type': 'AtLocation', 'score': 0.006010983604937792, 'wm_score': 0.5874346, 'final': 0.1804380685234565}, {'fro': 'pot', 'to': 'box', 'type': 'AtLocation', 'score': 0.005044552031904459, 'wm_score': 0.39401835, 'final': 0.12173669142233313}, {'fro': 'pot', 'to': 'soup', 'type': 'AtLocation', 'score': 0.004922701511532068, 'wm_score': 0.6455271, 'final': 0.19710402105807248}, {'fro': 'pot', 'to': 'stove', 'type': 'AtLocation', 'score': 0.004653618671000004, 'wm_score': 0.5371107, 'final': 0.16439074306970003}, {'fro': 'pot', 'to': 'shade', 'type': 'AtLocation', 'score': 0.004642731510102749, 'wm_score': 0.32340342, 'final': 0.10027093805707193}, {'fro': 'juice', 'to': 'pot', 'type': 'AtLocation', 'score': 0.004927497357130051, 'wm_score': 0.47850323, 'final': 0.14700021714999106}, {'fro': 'milk', 'to': 'pot', 'type': 'AtLocation', 'score': 0.0026869638822972775, 'wm_score': 0.4677764, 'final': 0.14221379471760812}, {'fro': 'rice', 'to': 'pot', 'type': 'AtLocation', 'score': 0.006848994176834822, 'wm_score': 0.4131316, 'final': 0.1287337759237844}, {'fro': 'wine', 'to': 'pot', 'type': 'AtLocation', 'score': 0.002315839985385537, 'wm_score': 0.4619282, 'final': 0.14019954798976988}, {'fro': 'iron', 'to': 'pot', 'type': 'AtLocation', 'score': 0.00551641546189785, 'wm_score': 0.3980167, 'final': 0.12326650082332852}, {'fro': 'pound', 'to': 'pot', 'type': 'AtLocation', 'score': 0.004365461878478527, 'wm_score': 0.34308574, 'final': 0.10598154531493498}, {'fro': 'crack', 'to': 'pot', 'type': 'AtLocation', 'score': 0.009991384111344814, 'wm_score': 0.47098178, 'final': 0.1482885028779414}, {'fro': 'put', 'to': 'pot', 'type': 'AtLocation', 'score': 0.008224395103752613, 'wm_score': 0.3701106, 'final': 0.11679025657262686}, {'fro': 'mix', 'to': 'pot', 'type': 'AtLocation', 'score': 0.002571413991972804, 'wm_score': 0.45868272, 'final': 0.13940480579438097}, {'fro': 'onion', 'to': 'pot', 'type': 'AtLocation', 'score': 0.0073458426631987095, 'wm_score': 0.4977717, 'final': 0.15447359986423911}, {'fro': 'pot', 'to': 'pan', 'type': 'HasA', 'score': 0.003696071682497859, 'wm_score': 0.5286732, 'final': 0.1611892101777485}, {'fro': 'pan', 'to': 'pot', 'type': 'AtLocation', 'score': 0.0034861278254538774, 'wm_score': 0.5286732, 'final': 0.16104224947781773}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

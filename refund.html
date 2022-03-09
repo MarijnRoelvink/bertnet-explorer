@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">refund</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "refund"
+    let relations = [{'fro': 'customer', 'to': 'refund', 'type': 'HasA', 'score': 0.1763271540403366, 'wm_score': 0.49928415, 'final': 0.27321425282823564}, {'fro': 'refund', 'to': 'customer', 'type': 'AtLocation', 'score': 0.004056999925523996, 'wm_score': 0.49928415, 'final': 0.1526251449478668}, {'fro': 'insurance', 'to': 'refund', 'type': 'HasA', 'score': 0.01005689986050129, 'wm_score': 0.49656367, 'final': 0.15600893090235093}, {'fro': 'payment', 'to': 'refund', 'type': 'HasA', 'score': 0.013134300708770752, 'wm_score': 0.71082705, 'final': 0.22244212549613956}, {'fro': 'refund', 'to': 'payment', 'type': 'AtLocation', 'score': 0.0207320936024189, 'wm_score': 0.71082705, 'final': 0.22776058052169326}, {'fro': 'refund', 'to': 'preference', 'type': 'AtLocation', 'score': 0.003000781172886491, 'wm_score': 0.3710605, 'final': 0.11341869682102056}, {'fro': 'employee', 'to': 'refund', 'type': 'HasA', 'score': 0.011927257291972637, 'wm_score': 0.39154658, 'final': 0.12581305410438087}, {'fro': 'employer', 'to': 'refund', 'type': 'HasA', 'score': 0.014936553314328194, 'wm_score': 0.44287866, 'final': 0.14331918532002977}, {'fro': 'buyer', 'to': 'refund', 'type': 'HasA', 'score': 0.028210358694195747, 'wm_score': 0.45524588, 'final': 0.15632101508593704}, {'fro': 'refund', 'to': 'requirement', 'type': 'AtLocation', 'score': 0.015417387709021568, 'wm_score': 0.45090654, 'final': 0.14606413339631513}, {'fro': 'client', 'to': 'refund', 'type': 'HasA', 'score': 0.0372408851981163, 'wm_score': 0.30700448, 'final': 0.11816996363868143}, {'fro': 'refund', 'to': 'interest', 'type': 'AtLocation', 'score': 0.009329338558018208, 'wm_score': 0.32574266, 'final': 0.10425333499061276}, {'fro': 'refund', 'to': 'card', 'type': 'AtLocation', 'score': 0.005506141111254692, 'wm_score': 0.43548325, 'final': 0.13449927377787832}, {'fro': 'amount', 'to': 'refund', 'type': 'HasA', 'score': 0.010072917677462101, 'wm_score': 0.54694796, 'final': 0.1711354303742235}, {'fro': 'refund', 'to': 'amount', 'type': 'AtLocation', 'score': 0.009642592631280422, 'wm_score': 0.54694796, 'final': 0.17083420284189632}, {'fro': 'item', 'to': 'refund', 'type': 'HasA', 'score': 0.004229990299791098, 'wm_score': 0.38015175, 'final': 0.11700651820985379}, {'fro': 'refund', 'to': 'notice', 'type': 'AtLocation', 'score': 0.003789381356909871, 'wm_score': 0.4608127, 'final': 0.14089637694983692}, {'fro': 'refund', 'to': 'discount', 'type': 'AtLocation', 'score': 0.009017365984618664, 'wm_score': 0.4795755, 'final': 0.15018480618923308}, {'fro': 'refund', 'to': 'option', 'type': 'AtLocation', 'score': 0.08638903498649597, 'wm_score': 0.43315938, 'final': 0.1904201384905472}, {'fro': 'refund', 'to': 'minimum', 'type': 'AtLocation', 'score': 0.0057187690399587154, 'wm_score': 0.46605176, 'final': 0.14381866632797113}, {'fro': 'ticket', 'to': 'refund', 'type': 'HasA', 'score': 0.12269408255815506, 'wm_score': 0.52641535, 'final': 0.24381046279070853}, {'fro': 'fee', 'to': 'refund', 'type': 'HasA', 'score': 0.009032889269292355, 'wm_score': 0.60370207, 'final': 0.18743364348850466}, {'fro': 'refund', 'to': 'fee', 'type': 'AtLocation', 'score': 0.014421172440052032, 'wm_score': 0.60370207, 'final': 0.19120544170803644}, {'fro': 'refund', 'to': 'consideration', 'type': 'AtLocation', 'score': 0.006971629802137613, 'wm_score': 0.33503383, 'final': 0.10539028986149633}, {'fro': 'refund', 'to': 'guarantee', 'type': 'AtLocation', 'score': 0.00972930621355772, 'wm_score': 0.46806222, 'final': 0.14722918034949042}, {'fro': 'airline', 'to': 'refund', 'type': 'HasA', 'score': 0.009180592373013496, 'wm_score': 0.34003422, 'final': 0.10843668066110947}, {'fro': 'refund', 'to': 'package', 'type': 'AtLocation', 'score': 0.013410170562565327, 'wm_score': 0.4377516, 'final': 0.14071259939379574}, {'fro': 'refund', 'to': 'mail', 'type': 'AtLocation', 'score': 0.007716758642345667, 'wm_score': 0.41016957, 'final': 0.12845260204964198}, {'fro': 'check', 'to': 'refund', 'type': 'HasA', 'score': 0.009935611858963966, 'wm_score': 0.60317516, 'final': 0.18790747630127483}, {'fro': 'refund', 'to': 'check', 'type': 'AtLocation', 'score': 0.0041261394508183, 'wm_score': 0.60317516, 'final': 0.18384084561557285}, {'fro': 'refund', 'to': 'offer', 'type': 'AtLocation', 'score': 0.013536191545426846, 'wm_score': 0.42839715, 'final': 0.13799447908179882}, {'fro': 'purchase', 'to': 'refund', 'type': 'HasA', 'score': 0.00997702032327652, 'wm_score': 0.5495151, 'final': 0.1718384442262936}, {'fro': 'refund', 'to': 'purchase', 'type': 'AtLocation', 'score': 0.02692006528377533, 'wm_score': 0.5495151, 'final': 0.18369857569864276}, {'fro': 'deposit', 'to': 'refund', 'type': 'HasA', 'score': 0.01474752463400364, 'wm_score': 0.5513901, 'final': 0.17574029724380258}, {'fro': 'refund', 'to': 'deposit', 'type': 'AtLocation', 'score': 0.0045271157287061214, 'wm_score': 0.5513901, 'final': 0.1685860110100943}, {'fro': 'refund', 'to': 'deadline', 'type': 'AtLocation', 'score': 0.005778092425316572, 'wm_score': 0.34137145, 'final': 0.10645609969772163}, {'fro': 'refund', 'to': 'backlog', 'type': 'AtLocation', 'score': 0.007154280319809914, 'wm_score': 0.38160422, 'final': 0.11948926222386695}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

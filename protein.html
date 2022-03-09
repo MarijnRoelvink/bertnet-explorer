@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">protein</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "protein"
+    let relations = [{'fro': 'protein', 'to': 'meat', 'type': 'AtLocation', 'score': 0.01081985142081976, 'wm_score': 0.38297874, 'final': 0.12246751799457385}, {'fro': 'protein', 'to': 'chemistry', 'type': 'AtLocation', 'score': 0.012232627719640732, 'wm_score': 0.36896098, 'final': 0.11925113340374853}, {'fro': 'protein', 'to': 'disease', 'type': 'AtLocation', 'score': 0.016269288957118988, 'wm_score': 0.33927053, 'final': 0.11316966126998332}, {'fro': 'protein', 'to': 'cell', 'type': 'AtLocation', 'score': 0.03084453195333481, 'wm_score': 0.48024052, 'final': 0.16566332836733438}, {'fro': 'protein', 'to': 'cancer', 'type': 'AtLocation', 'score': 0.026503173634409904, 'wm_score': 0.3392891, 'final': 0.12033895154408696}, {'fro': 'protein', 'to': 'mixture', 'type': 'AtLocation', 'score': 0.005581693723797798, 'wm_score': 0.3715022, 'final': 0.11535784560665847}, {'fro': 'protein', 'to': 'virus', 'type': 'AtLocation', 'score': 0.021104173734784126, 'wm_score': 0.4122342, 'final': 0.1384431816143489}, {'fro': 'protein', 'to': 'insect', 'type': 'AtLocation', 'score': 0.015987932682037354, 'wm_score': 0.40112692, 'final': 0.13152962887742617}, {'fro': 'protein', 'to': 'gene', 'type': 'HasA', 'score': 0.01032476406544447, 'wm_score': 0.6094612, 'final': 0.19006569484581115}, {'fro': 'protein', 'to': 'gene', 'type': 'AtLocation', 'score': 0.1647569239139557, 'wm_score': 0.6094612, 'final': 0.298168206739769}, {'fro': 'gene', 'to': 'protein', 'type': 'AtLocation', 'score': 0.010042451322078705, 'wm_score': 0.6094612, 'final': 0.18986807592545513}, {'fro': 'protein', 'to': 'fish', 'type': 'AtLocation', 'score': 0.0067931911908090115, 'wm_score': 0.32431376, 'final': 0.10204936183356633}, {'fro': 'protein', 'to': 'body', 'type': 'AtLocation', 'score': 0.014199363067746162, 'wm_score': 0.40310994, 'final': 0.13087253614742234}, {'fro': 'protein', 'to': 'fat', 'type': 'AtLocation', 'score': 0.018338272348046303, 'wm_score': 0.66986257, 'final': 0.21379556164363245}, {'fro': 'protein', 'to': 'chicken', 'type': 'AtLocation', 'score': 0.008801384828984737, 'wm_score': 0.34069902, 'final': 0.10837067538028934}, {'fro': 'protein', 'to': 'egg', 'type': 'AtLocation', 'score': 0.021255211904644966, 'wm_score': 0.39891416, 'final': 0.1345528963332515}, {'fro': 'protein', 'to': 'brain', 'type': 'AtLocation', 'score': 0.02335873804986477, 'wm_score': 0.46994528, 'final': 0.15733470063490537}, {'fro': 'protein', 'to': 'sugar', 'type': 'AtLocation', 'score': 0.009061851538717747, 'wm_score': 0.40992507, 'final': 0.12932081707710244}, {'fro': 'protein', 'to': 'animal', 'type': 'AtLocation', 'score': 0.01406226959079504, 'wm_score': 0.37729132, 'final': 0.12303098471355653}, {'fro': 'protein', 'to': 'skin', 'type': 'AtLocation', 'score': 0.006452762056142092, 'wm_score': 0.3594753, 'final': 0.11235952343929947}, {'fro': 'protein', 'to': 'dish', 'type': 'AtLocation', 'score': 0.006609614938497543, 'wm_score': 0.34852278, 'final': 0.1091835644569483}, {'fro': 'protein', 'to': 'muscle', 'type': 'AtLocation', 'score': 0.14591699838638306, 'wm_score': 0.42841965, 'final': 0.23066779387046815}, {'fro': 'protein', 'to': 'vegetable', 'type': 'AtLocation', 'score': 0.00664718821644783, 'wm_score': 0.43320635, 'final': 0.1346149367515135}, {'fro': 'protein', 'to': 'juice', 'type': 'AtLocation', 'score': 0.004931408446282148, 'wm_score': 0.35771346, 'final': 0.11076602391239752}, {'fro': 'protein', 'to': 'milk', 'type': 'AtLocation', 'score': 0.020637936890125275, 'wm_score': 0.47065723, 'final': 0.1556437248230877}, {'fro': 'protein', 'to': 'substance', 'type': 'AtLocation', 'score': 0.027003012597560883, 'wm_score': 0.43537825, 'final': 0.14951558381829266}, {'fro': 'protein', 'to': 'bone', 'type': 'AtLocation', 'score': 0.008649405092000961, 'wm_score': 0.42120886, 'final': 0.13241724156440068}, {'fro': 'protein', 'to': 'diet', 'type': 'AtLocation', 'score': 0.014054583385586739, 'wm_score': 0.466207, 'final': 0.14970030836991075}, {'fro': 'protein', 'to': 'nerve', 'type': 'AtLocation', 'score': 0.12180379778146744, 'wm_score': 0.374784, 'final': 0.1976978584470272}, {'fro': 'protein', 'to': 'human', 'type': 'AtLocation', 'score': 0.011028354056179523, 'wm_score': 0.3349192, 'final': 0.10819560783932568}, {'fro': 'protein', 'to': 'chemical', 'type': 'AtLocation', 'score': 0.018552446737885475, 'wm_score': 0.43839228, 'final': 0.14450439671651985}, {'fro': 'protein', 'to': 'parasite', 'type': 'AtLocation', 'score': 0.033617712557315826, 'wm_score': 0.3888505, 'final': 0.14018754879012107}, {'fro': 'protein', 'to': 'genes', 'type': 'AtLocation', 'score': 0.04826707765460014, 'wm_score': 0.66877127, 'final': 0.23441833535822013}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

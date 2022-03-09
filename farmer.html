@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">farmer</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "farmer"
+    let relations = [{'fro': 'farmer', 'to': 'country', 'type': 'AtLocation', 'score': 0.005635087378323078, 'wm_score': 0.35550046, 'final': 0.11059469916482617}, {'fro': 'farmer', 'to': 'association', 'type': 'AtLocation', 'score': 0.0044822171330451965, 'wm_score': 0.35176146, 'final': 0.10866598999313166}, {'fro': 'farmer', 'to': 'county', 'type': 'AtLocation', 'score': 0.005835896823555231, 'wm_score': 0.43104875, 'final': 0.1333997527764887}, {'fro': 'farm', 'to': 'farmer', 'type': 'HasA', 'score': 0.01858728751540184, 'wm_score': 0.68165326, 'final': 0.21750707926078133}, {'fro': 'state', 'to': 'farmer', 'type': 'HasA', 'score': 0.017180826514959335, 'wm_score': 0.34661347, 'final': 0.11601061956047154}, {'fro': 'village', 'to': 'farmer', 'type': 'HasA', 'score': 0.01618272438645363, 'wm_score': 0.47517082, 'final': 0.15387915307051755}, {'fro': 'county', 'to': 'farmer', 'type': 'HasA', 'score': 0.011044428683817387, 'wm_score': 0.43104875, 'final': 0.1370457250786722}, {'fro': 'country', 'to': 'farmer', 'type': 'HasA', 'score': 0.01075783558189869, 'wm_score': 0.35550046, 'final': 0.1141806229073291}, {'fro': 'province', 'to': 'farmer', 'type': 'HasA', 'score': 0.009803063236176968, 'wm_score': 0.32770574, 'final': 0.10517386626532389}, {'fro': 'town', 'to': 'farmer', 'type': 'HasA', 'score': 0.00926019623875618, 'wm_score': 0.41225374, 'final': 0.13015825936712933}, {'fro': 'company', 'to': 'farmer', 'type': 'HasA', 'score': 0.008351940661668777, 'wm_score': 0.3319229, 'final': 0.10542322846316816}, {'fro': 'family', 'to': 'farmer', 'type': 'HasA', 'score': 0.007858674973249435, 'wm_score': 0.5050483, 'final': 0.15701556248127463}, {'fro': 'district', 'to': 'farmer', 'type': 'HasA', 'score': 0.003973693586885929, 'wm_score': 0.33956456, 'final': 0.10465095351082017}, {'fro': 'township', 'to': 'farmer', 'type': 'HasA', 'score': 0.003971336875110865, 'wm_score': 0.37108886, 'final': 0.11410659381257762}, {'fro': 'land', 'to': 'farmer', 'type': 'HasA', 'score': 0.003749237162992358, 'wm_score': 0.38931972, 'final': 0.11942038201409466}, {'fro': 'farmer', 'to': 'tractor', 'type': 'HasA', 'score': 0.025993825867772102, 'wm_score': 0.39513022, 'final': 0.1367347441074405}, {'fro': 'farmer', 'to': 'lawyer', 'type': 'HasA', 'score': 0.021828416734933853, 'wm_score': 0.45088676, 'final': 0.15054591971445372}, {'fro': 'farmer', 'to': 'son', 'type': 'HasA', 'score': 0.021115364506840706, 'wm_score': 0.5382172, 'final': 0.1762459151547885}, {'fro': 'farmer', 'to': 'daughter', 'type': 'HasA', 'score': 0.01563420332968235, 'wm_score': 0.46982694, 'final': 0.15189202433077767}, {'fro': 'farmer', 'to': 'dog', 'type': 'HasA', 'score': 0.01194098312407732, 'wm_score': 0.4570266, 'final': 0.14546666818685414}, {'fro': 'farmer', 'to': 'farm', 'type': 'HasA', 'score': 0.010847056284546852, 'wm_score': 0.68165326, 'final': 0.21208891739918284}, {'fro': 'farmer', 'to': 'goat', 'type': 'HasA', 'score': 0.010256064124405384, 'wm_score': 0.48185337, 'final': 0.15173525588708378}, {'fro': 'farmer', 'to': 'baby', 'type': 'HasA', 'score': 0.009929300285875797, 'wm_score': 0.40893534, 'final': 0.12963111220011306}, {'fro': 'farmer', 'to': 'child', 'type': 'HasA', 'score': 0.008932804688811302, 'wm_score': 0.4201228, 'final': 0.1322898032821679}, {'fro': 'farmer', 'to': 'job', 'type': 'HasA', 'score': 0.008446616120636463, 'wm_score': 0.31391725, 'final': 0.10008780628444554}, {'fro': 'farmer', 'to': 'cat', 'type': 'HasA', 'score': 0.004441365133970976, 'wm_score': 0.3954743, 'final': 0.1217512455937797}, {'fro': 'farmer', 'to': 'horse', 'type': 'HasA', 'score': 0.004358150064945221, 'wm_score': 0.40882438, 'final': 0.12569801904546168}, {'fro': 'farmer', 'to': 'garden', 'type': 'HasA', 'score': 0.00415781419724226, 'wm_score': 0.3276224, 'final': 0.10119718993806959}, {'fro': 'farmer', 'to': 'friend', 'type': 'HasA', 'score': 0.003951859660446644, 'wm_score': 0.5249636, 'final': 0.16025538176231266}, {'fro': 'fork', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.056222666054964066, 'wm_score': 0.22513439, 'final': 0.10689618323847484}, {'fro': 'sheep', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.012063231319189072, 'wm_score': 0.5192278, 'final': 0.16421260192343237}, {'fro': 'cow', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.011911234818398952, 'wm_score': 0.42145923, 'final': 0.1347756333728793}, {'fro': 'rabbit', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.010492858476936817, 'wm_score': 0.3469683, 'final': 0.1114354909338558}, {'fro': 'deer', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.009824122302234173, 'wm_score': 0.32247192, 'final': 0.10361846161156395}, {'fro': 'horse', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.007924572564661503, 'wm_score': 0.40882438, 'final': 0.12819451479526306}, {'fro': 'pig', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.007226665038615465, 'wm_score': 0.54833853, 'final': 0.16956022452703085}, {'fro': 'dog', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.006812490057200193, 'wm_score': 0.4570266, 'final': 0.14187672304004015}, {'fro': 'tractor', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.006691207177937031, 'wm_score': 0.39513022, 'final': 0.12322291102455593}, {'fro': 'wolf', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.006298108026385307, 'wm_score': 0.36476797, 'final': 0.11383906661846974}, {'fro': 'hand', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.006018719170242548, 'wm_score': 0.32828444, 'final': 0.1026984354191698}, {'fro': 'seed', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.005984743125736713, 'wm_score': 0.33104533, 'final': 0.10350291918801571}, {'fro': 'chip', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.005964760202914476, 'wm_score': 0.31966794, 'final': 0.10007571414204014}, {'fro': 'penny', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.004441587254405022, 'wm_score': 0.33475688, 'final': 0.10353617507808352}, {'fro': 'thief', 'to': 'farmer', 'type': 'AtLocation', 'score': 0.004263069946318865, 'wm_score': 0.32994318, 'final': 0.10196710296242321}, {'fro': 'farmer', 'to': 'woods', 'type': 'AtLocation', 'score': 0.06621579080820084, 'wm_score': 0.28047273, 'final': 0.1304928725657406}, {'fro': 'farmer', 'to': 'field', 'type': 'AtLocation', 'score': 0.026309724897146225, 'wm_score': 0.28828514, 'final': 0.10490234942800236}, {'fro': 'farmer', 'to': 'hunt', 'type': 'AtLocation', 'score': 0.02179911360144615, 'wm_score': 0.36809754, 'final': 0.1256886415210123}, {'fro': 'farmer', 'to': 'barn', 'type': 'AtLocation', 'score': 0.01424068957567215, 'wm_score': 0.35824952, 'final': 0.11744333870297051}, {'fro': 'farmer', 'to': 'works', 'type': 'AtLocation', 'score': 0.012679625302553177, 'wm_score': 0.333177, 'final': 0.10882883771178724}, {'fro': 'farmer', 'to': 'wild', 'type': 'AtLocation', 'score': 0.011999950744211674, 'wm_score': 0.39441282, 'final': 0.1267238115209482}, {'fro': 'farmer', 'to': 'garden', 'type': 'AtLocation', 'score': 0.011166787706315517, 'wm_score': 0.3276224, 'final': 0.10610347139442088}, {'fro': 'farmer', 'to': 'fields', 'type': 'AtLocation', 'score': 0.007951424457132816, 'wm_score': 0.3886142, 'final': 0.122150257119993}, {'fro': 'farmer', 'to': 'countryside', 'type': 'AtLocation', 'score': 0.004853919148445129, 'wm_score': 0.3586651, 'final': 0.11099727340391162}, {'fro': 'farmer', 'to': 'tea', 'type': 'HasA', 'score': 0.004379396792501211, 'wm_score': 0.38826895, 'final': 0.11954626275475086}, {'fro': 'farmer', 'to': 'village', 'type': 'AtLocation', 'score': 0.014393429271876812, 'wm_score': 0.47517082, 'final': 0.1526266464903138}, {'fro': 'farmer', 'to': 'grocery', 'type': 'HasA', 'score': 0.004735545255243778, 'wm_score': 0.40843633, 'final': 0.12584578067867067}, {'fro': 'farmer', 'to': 'honey', 'type': 'HasA', 'score': 0.0036475155502557755, 'wm_score': 0.3610839, 'final': 0.11087843088517907}, {'fro': 'farmer', 'to': 'potato', 'type': 'HasA', 'score': 0.00570862740278244, 'wm_score': 0.47614366, 'final': 0.14683913718194774}, {'fro': 'farmer', 'to': 'state', 'type': 'AtLocation', 'score': 0.003731432370841503, 'wm_score': 0.34661347, 'final': 0.10659604365958907}, {'fro': 'farmer', 'to': 'house', 'type': 'HasA', 'score': 0.0037630205042660236, 'wm_score': 0.34505573, 'final': 0.10615083335298624}, {'fro': 'farmer', 'to': 'chicken', 'type': 'HasA', 'score': 0.004910655785351992, 'wm_score': 0.4038317, 'final': 0.12458696904974641}, {'fro': 'farmer', 'to': 'plant', 'type': 'HasA', 'score': 0.0032464119140058756, 'wm_score': 0.4349373, 'final': 0.13275367833980414}, {'fro': 'farmer', 'to': 'vegetable', 'type': 'HasA', 'score': 0.0070739793591201305, 'wm_score': 0.48932424, 'final': 0.15174905755138413}, {'fro': 'farmer', 'to': 'land', 'type': 'HasA', 'score': 0.006551139988005161, 'wm_score': 0.38931972, 'final': 0.12138171399160362}, {'fro': 'farmer', 'to': 'land', 'type': 'AtLocation', 'score': 0.003998705185949802, 'wm_score': 0.38931972, 'final': 0.11959500963016488}, {'fro': 'farmer', 'to': 'milk', 'type': 'HasA', 'score': 0.0035076907370239496, 'wm_score': 0.4111841, 'final': 0.1258106135159168}, {'fro': 'farmer', 'to': 'district', 'type': 'AtLocation', 'score': 0.006845397409051657, 'wm_score': 0.33956456, 'final': 0.10666114618633618}, {'fro': 'farmer', 'to': 'rice', 'type': 'HasA', 'score': 0.010535567998886108, 'wm_score': 0.44573516, 'final': 0.1410954455992203}, {'fro': 'farmer', 'to': 'farm', 'type': 'AtLocation', 'score': 0.012312456965446472, 'wm_score': 0.68165326, 'final': 0.21311469787581258}, {'fro': 'farmer', 'to': 'grandfather', 'type': 'HasA', 'score': 0.003978073131293058, 'wm_score': 0.54820824, 'final': 0.16724712319190516}, {'fro': 'farmer', 'to': 'cow', 'type': 'HasA', 'score': 0.00701897731050849, 'wm_score': 0.42145923, 'final': 0.13135105311735598}, {'fro': 'farmer', 'to': 'sick', 'type': 'AtLocation', 'score': 0.003981397487223148, 'wm_score': 0.35402134, 'final': 0.10899338024105622}, {'fro': 'farmer', 'to': 'granddaughter', 'type': 'HasA', 'score': 0.004736564587801695, 'wm_score': 0.33745414, 'final': 0.1045518372114612}, {'fro': 'farmer', 'to': 'grandson', 'type': 'HasA', 'score': 0.007983310148119926, 'wm_score': 0.4477812, 'final': 0.13992267710368397}, {'fro': 'farmer', 'to': 'province', 'type': 'AtLocation', 'score': 0.007904999889433384, 'wm_score': 0.32770574, 'final': 0.10384522192260338}, {'fro': 'farmer', 'to': 'pig', 'type': 'HasA', 'score': 0.00394631689414382, 'wm_score': 0.54833853, 'final': 0.1672639808259007}, {'fro': 'farmer', 'to': 'sheep', 'type': 'HasA', 'score': 0.021593015640974045, 'wm_score': 0.5192278, 'final': 0.17088345094868188}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

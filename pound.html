@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">pound</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "pound"
+    let relations = [{'fro': 'pound', 'to': 'currency', 'type': 'HasA', 'score': 0.01682545430958271, 'wm_score': 0.45371348, 'final': 0.14789186201670793}, {'fro': 'pound', 'to': 'currency', 'type': 'AtLocation', 'score': 0.006643382366746664, 'wm_score': 0.45371348, 'final': 0.14076441165672268}, {'fro': 'currency', 'to': 'pound', 'type': 'AtLocation', 'score': 0.006021727342158556, 'wm_score': 0.45371348, 'final': 0.140329253139511}, {'fro': 'pound', 'to': 'value', 'type': 'HasA', 'score': 0.004572893027216196, 'wm_score': 0.39395073, 'final': 0.12138624411905136}, {'fro': 'pound', 'to': 'market', 'type': 'HasA', 'score': 0.0041634500958025455, 'wm_score': 0.3670355, 'final': 0.1130250650670618}, {'fro': 'pound', 'to': 'price', 'type': 'HasA', 'score': 0.002580810571089387, 'wm_score': 0.533736, 'final': 0.16192736739976257}, {'fro': 'pound', 'to': 'price', 'type': 'AtLocation', 'score': 0.003557944903150201, 'wm_score': 0.533736, 'final': 0.16261136143220514}, {'fro': 'pound', 'to': 'fat', 'type': 'AtLocation', 'score': 0.0066168298944830894, 'wm_score': 0.40031764, 'final': 0.12472707292613817}, {'fro': 'pound', 'to': 'amount', 'type': 'AtLocation', 'score': 0.010434305295348167, 'wm_score': 0.33974344, 'final': 0.10922704570674373}, {'fro': 'pound', 'to': 'rate', 'type': 'HasA', 'score': 0.005344642326235771, 'wm_score': 0.36120194, 'final': 0.11210183162836505}, {'fro': 'pound', 'to': 'average', 'type': 'AtLocation', 'score': 0.005663729272782803, 'wm_score': 0.3590064, 'final': 0.11166653049094798}, {'fro': 'pound', 'to': 'quarter', 'type': 'HasA', 'score': 0.0050018844194710255, 'wm_score': 0.3697458, 'final': 0.11442505909362974}, {'fro': 'pound', 'to': 'weight', 'type': 'AtLocation', 'score': 0.00855958554893732, 'wm_score': 0.32656306, 'final': 0.10396062788425614}, {'fro': 'pound', 'to': 'drop', 'type': 'HasA', 'score': 0.007846792228519917, 'wm_score': 0.46461016, 'final': 0.14487580255996396}, {'fro': 'dollar', 'to': 'pound', 'type': 'HasA', 'score': 0.10193584859371185, 'wm_score': 0.6291547, 'final': 0.2601015040155983}, {'fro': 'euro', 'to': 'pound', 'type': 'HasA', 'score': 0.02402310073375702, 'wm_score': 0.6108867, 'final': 0.20008218051362994}, {'fro': 'currency', 'to': 'pound', 'type': 'HasA', 'score': 0.01601208560168743, 'wm_score': 0.45371348, 'final': 0.1473225039211812}, {'fro': 'market', 'to': 'pound', 'type': 'HasA', 'score': 0.011459484696388245, 'wm_score': 0.3670355, 'final': 0.11813228928747178}, {'fro': 'penny', 'to': 'pound', 'type': 'HasA', 'score': 0.006249771919101477, 'wm_score': 0.39840177, 'final': 0.12389537134337104}, {'fro': 'fed', 'to': 'pound', 'type': 'HasA', 'score': 0.004517919383943081, 'wm_score': 0.33923203, 'final': 0.10493215256876018}, {'fro': 'onion', 'to': 'pound', 'type': 'HasA', 'score': 0.004335043951869011, 'wm_score': 0.33767173, 'final': 0.10433604976630832}, {'fro': 'treasury', 'to': 'pound', 'type': 'HasA', 'score': 0.0032480244990438223, 'wm_score': 0.4048661, 'final': 0.1237334471493307}, {'fro': 'rand', 'to': 'pound', 'type': 'HasA', 'score': 0.0027049246709793806, 'wm_score': 0.49044973, 'final': 0.14902836626968557}, {'fro': 'yuan', 'to': 'pound', 'type': 'HasA', 'score': 0.0026269385125488043, 'wm_score': 0.34171915, 'final': 0.10435460195878418}, {'fro': 'stock', 'to': 'pound', 'type': 'HasA', 'score': 0.002581460867077112, 'wm_score': 0.44808716, 'final': 0.136233170606954}, {'fro': 'ecb', 'to': 'pound', 'type': 'HasA', 'score': 0.0024486833717674017, 'wm_score': 0.37204075, 'final': 0.11332630336023719}, {'fro': 'us', 'to': 'pound', 'type': 'HasA', 'score': 0.002356118056923151, 'wm_score': 0.46881163, 'final': 0.14229277163984622}, {'fro': 'yen', 'to': 'pound', 'type': 'HasA', 'score': 0.002104430692270398, 'wm_score': 0.44359297, 'final': 0.1345509924845893}, {'fro': 'pound', 'to': 'surplus', 'type': 'HasA', 'score': 0.013004505075514317, 'wm_score': 0.355133, 'final': 0.11564305355286003}, {'fro': 'pound', 'to': 'premium', 'type': 'HasA', 'score': 0.011620423756539822, 'wm_score': 0.35389304, 'final': 0.11430220862957789}, {'fro': 'pound', 'to': 'rise', 'type': 'HasA', 'score': 0.007336461450904608, 'wm_score': 0.3669626, 'final': 0.11522430301563324}, {'fro': 'pound', 'to': 'dividend', 'type': 'HasA', 'score': 0.006680611986666918, 'wm_score': 0.34172374, 'final': 0.10719355039066686}, {'fro': 'pound', 'to': 'float', 'type': 'HasA', 'score': 0.0062985848635435104, 'wm_score': 0.32498825, 'final': 0.10190548440448047}, {'fro': 'penny', 'to': 'pound', 'type': 'AtLocation', 'score': 0.17205877602100372, 'wm_score': 0.39840177, 'final': 0.2399616742147026}, {'fro': 'dollar', 'to': 'pound', 'type': 'AtLocation', 'score': 0.12187618017196655, 'wm_score': 0.6291547, 'final': 0.2740597361203766}, {'fro': 'euro', 'to': 'pound', 'type': 'AtLocation', 'score': 0.016045941039919853, 'wm_score': 0.6108867, 'final': 0.19449816872794393}, {'fro': 'chip', 'to': 'pound', 'type': 'AtLocation', 'score': 0.008471210487186909, 'wm_score': 0.3330344, 'final': 0.10584016734103084}, {'fro': 'drop', 'to': 'pound', 'type': 'AtLocation', 'score': 0.007794716861099005, 'wm_score': 0.46461016, 'final': 0.1448393498027693}, {'fro': 'coin', 'to': 'pound', 'type': 'AtLocation', 'score': 0.0070536015555262566, 'wm_score': 0.3893603, 'final': 0.1217456110888684}, {'fro': 'price', 'to': 'pound', 'type': 'AtLocation', 'score': 0.006607207469642162, 'wm_score': 0.533736, 'final': 0.16474584522874952}, {'fro': 'rise', 'to': 'pound', 'type': 'AtLocation', 'score': 0.00415610009804368, 'wm_score': 0.3669626, 'final': 0.1129980500686306}, {'fro': 'barrel', 'to': 'pound', 'type': 'AtLocation', 'score': 0.0039810910820961, 'wm_score': 0.57760686, 'final': 0.17606882175746733}, {'fro': 'dip', 'to': 'pound', 'type': 'AtLocation', 'score': 0.003342885058373213, 'wm_score': 0.40737295, 'final': 0.12455190454086126}, {'fro': 'premium', 'to': 'pound', 'type': 'AtLocation', 'score': 0.0028467101510614157, 'wm_score': 0.35389304, 'final': 0.108160609105743}, {'fro': 'dog', 'to': 'pound', 'type': 'AtLocation', 'score': 0.0026402617804706097, 'wm_score': 0.33932728, 'final': 0.10364636724632945}, {'fro': 'pound', 'to': 'bag', 'type': 'AtLocation', 'score': 0.12031864374876022, 'wm_score': 0.3408151, 'final': 0.18646758062413216}, {'fro': 'pound', 'to': 'air', 'type': 'AtLocation', 'score': 0.06930086016654968, 'wm_score': 0.23154633, 'final': 0.11797450111658478}, {'fro': 'pound', 'to': 'balance', 'type': 'AtLocation', 'score': 0.048432838171720505, 'wm_score': 0.2548232, 'final': 0.11034994672020437}, {'fro': 'pound', 'to': 'bank', 'type': 'AtLocation', 'score': 0.043780967593193054, 'wm_score': 0.31917664, 'final': 0.12639966931523516}, {'fro': 'pound', 'to': 'market', 'type': 'AtLocation', 'score': 0.027792515233159065, 'wm_score': 0.3670355, 'final': 0.12956541066321137}, {'fro': 'pound', 'to': 'red', 'type': 'AtLocation', 'score': 0.016014330089092255, 'wm_score': 0.32058573, 'final': 0.1073857500623646}, {'fro': 'pound', 'to': 'forecast', 'type': 'AtLocation', 'score': 0.011313410475850105, 'wm_score': 0.3567899, 'final': 0.11495635733309509}, {'fro': 'pound', 'to': 'ground', 'type': 'AtLocation', 'score': 0.011006990447640419, 'wm_score': 0.45470828, 'final': 0.1441173773133483}, {'fro': 'pound', 'to': 'water', 'type': 'AtLocation', 'score': 0.00693576829507947, 'wm_score': 0.33021188, 'final': 0.10391860180655565}, {'fro': 'pound', 'to': 'pot', 'type': 'AtLocation', 'score': 0.004365461878478527, 'wm_score': 0.34308574, 'final': 0.10598154531493498}, {'fro': 'pound', 'to': 'supply', 'type': 'AtLocation', 'score': 0.003882370190694928, 'wm_score': 0.33278477, 'final': 0.10255309013348647}, {'fro': 'pound', 'to': 'bottle', 'type': 'AtLocation', 'score': 0.0036359946243464947, 'wm_score': 0.39289218, 'final': 0.12041285023704257}, {'fro': 'pound', 'to': 'increase', 'type': 'HasA', 'score': 0.007389200385659933, 'wm_score': 0.33944756, 'final': 0.10700670826996196}, {'fro': 'pound', 'to': 'low', 'type': 'HasA', 'score': 0.01973710022866726, 'wm_score': 0.41667634, 'final': 0.13881887216006708}, {'fro': 'pound', 'to': 'low', 'type': 'AtLocation', 'score': 0.011173045262694359, 'wm_score': 0.41667634, 'final': 0.13282403368388604}, {'fro': 'pound', 'to': 'gain', 'type': 'HasA', 'score': 0.003629246959462762, 'wm_score': 0.35147947, 'final': 0.10798431387162395}, {'fro': 'pound', 'to': 'sell', 'type': 'HasA', 'score': 0.005327035207301378, 'wm_score': 0.40834367, 'final': 0.126232025645111}, {'fro': 'pound', 'to': 'raise', 'type': 'HasA', 'score': 0.007217371836304665, 'wm_score': 0.38721234, 'final': 0.12121586228541327}, {'fro': 'pound', 'to': 'dollar', 'type': 'HasA', 'score': 0.05591561645269394, 'wm_score': 0.6291547, 'final': 0.22788734151688575}, {'fro': 'pound', 'to': 'dollar', 'type': 'AtLocation', 'score': 0.01703117974102497, 'wm_score': 0.6291547, 'final': 0.20066823581871748}, {'fro': 'pound', 'to': 'surplus', 'type': 'AtLocation', 'score': 0.013649716041982174, 'wm_score': 0.355133, 'final': 0.11609470122938753}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">bjp</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "bjp"
+    let relations = [{'fro': 'bjp', 'to': 'government', 'type': 'HasA', 'score': 0.026095757260918617, 'wm_score': 0.4235537, 'final': 0.14533314008264303}, {'fro': 'bjp', 'to': 'government', 'type': 'AtLocation', 'score': 0.007634312845766544, 'wm_score': 0.4235537, 'final': 0.13241012899203658}, {'fro': 'bjp', 'to': 'election', 'type': 'HasA', 'score': 0.026869310066103935, 'wm_score': 0.4988793, 'final': 0.16847230704627278}, {'fro': 'bjp', 'to': 'candidate', 'type': 'HasA', 'score': 0.02586573362350464, 'wm_score': 0.44970155, 'final': 0.15301647853645328}, {'fro': 'bjp', 'to': 'leadership', 'type': 'HasA', 'score': 0.05077485740184784, 'wm_score': 0.42500228, 'final': 0.1630430841812935}, {'fro': 'bjp', 'to': 'leader', 'type': 'HasA', 'score': 0.05772555246949196, 'wm_score': 0.4859141, 'final': 0.1861821167286444}, {'fro': 'bjp', 'to': 'cabinet', 'type': 'HasA', 'score': 0.025387978181242943, 'wm_score': 0.44229013, 'final': 0.15045862372687008}, {'fro': 'bjp', 'to': 'independence', 'type': 'HasA', 'score': 0.007543980609625578, 'wm_score': 0.3332376, 'final': 0.10525206642673793}, {'fro': 'bjp', 'to': 'campaign', 'type': 'HasA', 'score': 0.0296147670596838, 'wm_score': 0.33559054, 'final': 0.12140749894177867}, {'fro': 'bjp', 'to': 'party', 'type': 'HasA', 'score': 0.04407438635826111, 'wm_score': 0.6920799, 'final': 0.2384760404507828}, {'fro': 'bjp', 'to': 'minority', 'type': 'HasA', 'score': 0.017414594069123268, 'wm_score': 0.38770437, 'final': 0.1285015268483863}, {'fro': 'bjp', 'to': 'buddha', 'type': 'HasA', 'score': 0.11195479333400726, 'wm_score': 0.1425898, 'final': 0.12114529533380508}, {'fro': 'bjp', 'to': 'works', 'type': 'AtLocation', 'score': 0.38772711157798767, 'wm_score': -0.066787116, 'final': 0.25137284330459136}, {'fro': 'bjp', 'to': 'minority', 'type': 'AtLocation', 'score': 0.0021051065996289253, 'wm_score': 0.38770437, 'final': 0.11778488561974028}, {'fro': 'bjp', 'to': 'coalition', 'type': 'HasA', 'score': 0.02212199941277504, 'wm_score': 0.5542805, 'final': 0.18176954958894254}, {'fro': 'bjp', 'to': 'opposition', 'type': 'HasA', 'score': 0.0677500069141388, 'wm_score': 0.5874838, 'final': 0.22367014483989717}, {'fro': 'bjp', 'to': 'majority', 'type': 'HasA', 'score': 0.026226405054330826, 'wm_score': 0.46551734, 'final': 0.1580136855380316}, {'fro': 'bjp', 'to': 'minister', 'type': 'HasA', 'score': 0.04153705760836601, 'wm_score': 0.3832567, 'final': 0.14405295032585622}, {'fro': 'bjp', 'to': 'socialist', 'type': 'HasA', 'score': 0.0038682285230606794, 'wm_score': 0.46733016, 'final': 0.1429068079661425}, {'fro': 'bjp', 'to': 'sikh', 'type': 'HasA', 'score': 0.005507667548954487, 'wm_score': 0.42912304, 'final': 0.13259227928426814}, {'fro': 'bjp', 'to': 'democrat', 'type': 'HasA', 'score': 0.008613001555204391, 'wm_score': 0.42223722, 'final': 0.1327002670886431}, {'fro': 'bjp', 'to': 'republican', 'type': 'HasA', 'score': 0.006551393773406744, 'wm_score': 0.41758558, 'final': 0.12986164964138475}, {'fro': 'bjp', 'to': 'politician', 'type': 'HasA', 'score': 0.017535710707306862, 'wm_score': 0.38011384, 'final': 0.12630914949511482}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

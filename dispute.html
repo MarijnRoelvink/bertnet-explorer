@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">dispute</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "dispute"
+    let relations = [{'fro': 'family', 'to': 'dispute', 'type': 'HasA', 'score': 0.0033086047042161226, 'wm_score': 0.41379574, 'final': 0.1264547452929513}, {'fro': 'association', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.0023101698607206345, 'wm_score': 0.38524225, 'final': 0.11718979390250446}, {'fro': 'dispute', 'to': 'tension', 'type': 'HasA', 'score': 0.0032569931354373693, 'wm_score': 0.5691621, 'final': 0.1730285251948062}, {'fro': 'dispute', 'to': 'conclusion', 'type': 'HasA', 'score': 0.00356966070830822, 'wm_score': 0.46846014, 'final': 0.1430368044958158}, {'fro': 'dispute', 'to': 'cause', 'type': 'HasA', 'score': 0.002634249860420823, 'wm_score': 0.41593045, 'final': 0.1266231099022946}, {'fro': 'dispute', 'to': 'result', 'type': 'HasA', 'score': 0.0034966568928211927, 'wm_score': 0.53189063, 'final': 0.16201484882497486}, {'fro': 'lawyer', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.003134313505142927, 'wm_score': 0.40645957, 'final': 0.12413189045360007}, {'fro': 'dispute', 'to': 'current', 'type': 'AtLocation', 'score': 0.0027836263179779053, 'wm_score': 0.5320707, 'final': 0.16156974842258454}, {'fro': 'dispute', 'to': 'private', 'type': 'AtLocation', 'score': 0.004020403604954481, 'wm_score': 0.3979563, 'final': 0.12220117252346814}, {'fro': 'stake', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.0033421386033296585, 'wm_score': 0.36529005, 'final': 0.11192651202233077}, {'fro': 'dispute', 'to': 'grievance', 'type': 'AtLocation', 'score': 0.0032313631381839514, 'wm_score': 0.40920419, 'final': 0.1250232111967288}, {'fro': 'copyright', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.0010989069705829024, 'wm_score': 0.3643001, 'final': 0.11005926487940805}, {'fro': 'airline', 'to': 'dispute', 'type': 'HasA', 'score': 0.02182130701839924, 'wm_score': 0.3845523, 'final': 0.1306406049128795}, {'fro': 'union', 'to': 'dispute', 'type': 'HasA', 'score': 0.020877571776509285, 'wm_score': 0.54367906, 'final': 0.1777180182435565}, {'fro': 'company', 'to': 'dispute', 'type': 'HasA', 'score': 0.013445999473333359, 'wm_score': 0.43164837, 'final': 0.13890671063133336}, {'fro': 'court', 'to': 'dispute', 'type': 'HasA', 'score': 0.008778388611972332, 'wm_score': 0.5203501, 'final': 0.16224990202838066}, {'fro': 'eu', 'to': 'dispute', 'type': 'HasA', 'score': 0.008158102631568909, 'wm_score': 0.51478434, 'final': 0.16014597384209822}, {'fro': 'government', 'to': 'dispute', 'type': 'HasA', 'score': 0.007761816959828138, 'wm_score': 0.50678736, 'final': 0.15746947987187973}, {'fro': 'council', 'to': 'dispute', 'type': 'HasA', 'score': 0.007204699330031872, 'wm_score': 0.46548492, 'final': 0.14468876553102233}, {'fro': 'couple', 'to': 'dispute', 'type': 'HasA', 'score': 0.007036346942186356, 'wm_score': 0.406833, 'final': 0.12697534285953047}, {'fro': 'un', 'to': 'dispute', 'type': 'HasA', 'score': 0.006450648885220289, 'wm_score': 0.35741, 'final': 0.11173845421965421}, {'fro': 'wto', 'to': 'dispute', 'type': 'HasA', 'score': 0.00538122933357954, 'wm_score': 0.5010443, 'final': 0.15408015053350568}, {'fro': 'lawsuit', 'to': 'dispute', 'type': 'HasA', 'score': 0.005150911398231983, 'wm_score': 0.5835297, 'final': 0.17866454797876244}, {'fro': 'firm', 'to': 'dispute', 'type': 'HasA', 'score': 0.004926827736198902, 'wm_score': 0.39880222, 'final': 0.12308944541533924}, {'fro': 'tribunal', 'to': 'dispute', 'type': 'HasA', 'score': 0.004778388421982527, 'wm_score': 0.36616206, 'final': 0.11319348989538779}, {'fro': 'department', 'to': 'dispute', 'type': 'HasA', 'score': 0.004699655808508396, 'wm_score': 0.36954513, 'final': 0.1141532980659559}, {'fro': 'alliance', 'to': 'dispute', 'type': 'HasA', 'score': 0.004384268540889025, 'wm_score': 0.44230866, 'final': 0.13576158597862234}, {'fro': 'judge', 'to': 'dispute', 'type': 'HasA', 'score': 0.004282813053578138, 'wm_score': 0.39136606, 'final': 0.12040778713750472}, {'fro': 'party', 'to': 'dispute', 'type': 'HasA', 'score': 0.004229172132909298, 'wm_score': 0.37823343, 'final': 0.11643044949303652}, {'fro': 'group', 'to': 'dispute', 'type': 'HasA', 'score': 0.004188244696706533, 'wm_score': 0.37861824, 'final': 0.1165172432876946}, {'fro': 'organisation', 'to': 'dispute', 'type': 'HasA', 'score': 0.004067007452249527, 'wm_score': 0.36606577, 'final': 0.11266663621657469}, {'fro': 'commission', 'to': 'dispute', 'type': 'HasA', 'score': 0.003995795268565416, 'wm_score': 0.5108794, 'final': 0.15606087668799581}, {'fro': 'state', 'to': 'dispute', 'type': 'HasA', 'score': 0.0037863156758248806, 'wm_score': 0.43071318, 'final': 0.13186437497307743}, {'fro': 'dispute', 'to': 'resolution', 'type': 'HasA', 'score': 0.12488218396902084, 'wm_score': 0.4636914, 'final': 0.22652494877831458}, {'fro': 'dispute', 'to': 'precedent', 'type': 'HasA', 'score': 0.04162558540701866, 'wm_score': 0.50698924, 'final': 0.1812346817849131}, {'fro': 'dispute', 'to': 'twist', 'type': 'HasA', 'score': 0.026024045422673225, 'wm_score': 0.3989474, 'final': 0.13790105179587128}, {'fro': 'dispute', 'to': 'consequence', 'type': 'HasA', 'score': 0.022183125838637352, 'wm_score': 0.39642555, 'final': 0.13445585308704616}, {'fro': 'dispute', 'to': 'solution', 'type': 'HasA', 'score': 0.01922818459570408, 'wm_score': 0.5014564, 'final': 0.16389664921699287}, {'fro': 'dispute', 'to': 'history', 'type': 'HasA', 'score': 0.01695609837770462, 'wm_score': 0.42125624, 'final': 0.13824614086439327}, {'fro': 'dispute', 'to': 'future', 'type': 'HasA', 'score': 0.012253782711923122, 'wm_score': 0.52436703, 'final': 0.1658877568983462}, {'fro': 'dispute', 'to': 'cost', 'type': 'HasA', 'score': 0.009604566730558872, 'wm_score': 0.44323415, 'final': 0.13969344171139123}, {'fro': 'dispute', 'to': 'scope', 'type': 'HasA', 'score': 0.008671244606375694, 'wm_score': 0.35725784, 'final': 0.113247223224463}, {'fro': 'dispute', 'to': 'rival', 'type': 'HasA', 'score': 0.008051039651036263, 'wm_score': 0.47123078, 'final': 0.14700496175572542}, {'fro': 'dispute', 'to': 'split', 'type': 'HasA', 'score': 0.007920477539300919, 'wm_score': 0.60310745, 'final': 0.18647656927751066}, {'fro': 'dispute', 'to': 'court', 'type': 'HasA', 'score': 0.00762708717957139, 'wm_score': 0.5203501, 'final': 0.1614439910257}, {'fro': 'dispute', 'to': 'lawyer', 'type': 'HasA', 'score': 0.007389367092400789, 'wm_score': 0.40645957, 'final': 0.12711042796468058}, {'fro': 'dispute', 'to': 'priority', 'type': 'HasA', 'score': 0.00734500540420413, 'wm_score': 0.369105, 'final': 0.11587300378294292}, {'fro': 'dispute', 'to': 'settlement', 'type': 'HasA', 'score': 0.006715716328471899, 'wm_score': 0.61820656, 'final': 0.19016296942993033}, {'fro': 'dispute', 'to': 'referee', 'type': 'HasA', 'score': 0.006343576591461897, 'wm_score': 0.35343215, 'final': 0.11047014861402335}, {'fro': 'dispute', 'to': 'link', 'type': 'HasA', 'score': 0.005801750812679529, 'wm_score': 0.44029948, 'final': 0.1361510695688757}, {'fro': 'dispute', 'to': 'name', 'type': 'HasA', 'score': 0.005438574124127626, 'wm_score': 0.3511607, 'final': 0.10915521188688936}, {'fro': 'dispute', 'to': 'head', 'type': 'HasA', 'score': 0.005213333759456873, 'wm_score': 0.35008064, 'final': 0.10867352563161983}, {'fro': 'dispute', 'to': 'fallout', 'type': 'HasA', 'score': 0.0050263963639736176, 'wm_score': 0.41553897, 'final': 0.12818016845478156}, {'fro': 'dispute', 'to': 'snag', 'type': 'HasA', 'score': 0.004134774208068848, 'wm_score': 0.3933562, 'final': 0.12090120194564821}, {'fro': 'dispute', 'to': 'focus', 'type': 'HasA', 'score': 0.00412896228954196, 'wm_score': 0.4406739, 'final': 0.1350924436026794}, {'fro': 'dispute', 'to': 'response', 'type': 'HasA', 'score': 0.0038538717199116945, 'wm_score': 0.41283086, 'final': 0.1265469682039382}, {'fro': 'judge', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.2608201503753662, 'wm_score': 0.39136606, 'final': 0.29998392326275636}, {'fro': 'jury', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.03678295761346817, 'wm_score': 0.35027933, 'final': 0.13083186932942775}, {'fro': 'court', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.032346658408641815, 'wm_score': 0.5203501, 'final': 0.1787476908860493}, {'fro': 'settlement', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.019450029358267784, 'wm_score': 0.61820656, 'final': 0.19907698855078745}, {'fro': 'referee', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.012657449580729008, 'wm_score': 0.35343215, 'final': 0.11488985970651032}, {'fro': 'man', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.010151485912501812, 'wm_score': 0.3118887, 'final': 0.10067265013875129}, {'fro': 'party', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.007849975489079952, 'wm_score': 0.37823343, 'final': 0.11896501184235599}, {'fro': 'prosecutor', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.006202419754117727, 'wm_score': 0.34506476, 'final': 0.10786112182788243}, {'fro': 'tribunal', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.005302423611283302, 'wm_score': 0.36616206, 'final': 0.11356031452789833}, {'fro': 'witness', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.005267752334475517, 'wm_score': 0.33222777, 'final': 0.10335575763413288}, {'fro': 'neighbour', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.004986013751477003, 'wm_score': 0.3357168, 'final': 0.1042052496260339}, {'fro': 'canadian', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.004560611676424742, 'wm_score': 0.33756867, 'final': 0.10446302917349734}, {'fro': 'child', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.0040161218494176865, 'wm_score': 0.3265323, 'final': 0.10077097529459239}, {'fro': 'third', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.0037711570039391518, 'wm_score': 0.38596812, 'final': 0.11843024590275743}, {'fro': 'negotiator', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.003498520003631711, 'wm_score': 0.3655083, 'final': 0.11210145400254222}, {'fro': 'family', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.002824940253049135, 'wm_score': 0.41379574, 'final': 0.1261161801771344}, {'fro': 'truce', 'to': 'dispute', 'type': 'AtLocation', 'score': 0.0026198707055300474, 'wm_score': 0.46595207, 'final': 0.14161953049387105}, {'fro': 'dispute', 'to': 'works', 'type': 'AtLocation', 'score': 0.5798120498657227, 'wm_score': 0.2828384, 'final': 0.49071995490600584}, {'fro': 'dispute', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.0868864580988884, 'wm_score': 0.43683487, 'final': 0.1918709816692219}, {'fro': 'dispute', 'to': 'air', 'type': 'AtLocation', 'score': 0.04584598168730736, 'wm_score': 0.2925742, 'final': 0.11986444718111516}, {'fro': 'dispute', 'to': 'courts', 'type': 'AtLocation', 'score': 0.044681616127491, 'wm_score': 0.43806392, 'final': 0.16269630728924372}, {'fro': 'dispute', 'to': 'making', 'type': 'AtLocation', 'score': 0.02564251981675625, 'wm_score': 0.41728285, 'final': 0.14313461887172937}, {'fro': 'dispute', 'to': 'balance', 'type': 'AtLocation', 'score': 0.013808085583150387, 'wm_score': 0.39795208, 'final': 0.12905128390820528}, {'fro': 'dispute', 'to': 'open', 'type': 'AtLocation', 'score': 0.011631389148533344, 'wm_score': 0.36035907, 'final': 0.11624969340397336}, {'fro': 'dispute', 'to': 'news', 'type': 'AtLocation', 'score': 0.008202527649700642, 'wm_score': 0.37192708, 'final': 0.11731989335479048}, {'fro': 'dispute', 'to': 'spotlight', 'type': 'AtLocation', 'score': 0.005453415215015411, 'wm_score': 0.34063798, 'final': 0.1060087846505108}, {'fro': 'dispute', 'to': 'papers', 'type': 'AtLocation', 'score': 0.005069470964372158, 'wm_score': 0.3499816, 'final': 0.10854310967506052}, {'fro': 'dispute', 'to': 'way', 'type': 'AtLocation', 'score': 0.0046468996442854404, 'wm_score': 0.44407868, 'final': 0.13647643375099983}, {'fro': 'dispute', 'to': 'running', 'type': 'AtLocation', 'score': 0.0020479231607168913, 'wm_score': 0.35876268, 'final': 0.10906235021250185}, {'fro': 'dispute', 'to': 'middle', 'type': 'AtLocation', 'score': 0.0019352491945028305, 'wm_score': 0.46014288, 'final': 0.139397538436152}, {'fro': 'dispute', 'to': 'process', 'type': 'AtLocation', 'score': 0.0015326171414926648, 'wm_score': 0.5726253, 'final': 0.1728604219990449}, {'fro': 'dispute', 'to': 'details', 'type': 'AtLocation', 'score': 0.0011432886822149158, 'wm_score': 0.49308252, 'final': 0.14872505807755046}, {'fro': 'dispute', 'to': 'court', 'type': 'AtLocation', 'score': 0.0010882776696234941, 'wm_score': 0.5203501, 'final': 0.15686682436873647}, {'fro': 'dispute', 'to': 'past', 'type': 'AtLocation', 'score': 0.0010236564557999372, 'wm_score': 0.45622683, 'final': 0.13758460851906}, {'fro': 'dispute', 'to': 'ground', 'type': 'AtLocation', 'score': 0.0008754403097555041, 'wm_score': 0.42752463, 'final': 0.12887019721682888}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

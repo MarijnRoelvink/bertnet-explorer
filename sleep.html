@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">sleep</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "sleep"
+    let relations = [{'fro': 'baby', 'to': 'sleep', 'type': 'HasA', 'score': 0.015992825850844383, 'wm_score': 0.4641866, 'final': 0.1504509580955911}, {'fro': 'dog', 'to': 'sleep', 'type': 'HasA', 'score': 0.014059467241168022, 'wm_score': 0.36388046, 'final': 0.11900576506881763}, {'fro': 'cat', 'to': 'sleep', 'type': 'HasA', 'score': 0.013246373273432255, 'wm_score': 0.35818642, 'final': 0.1167283872914026}, {'fro': 'man', 'to': 'sleep', 'type': 'HasA', 'score': 0.009406746365129948, 'wm_score': 0.34727716, 'final': 0.11076787045559097}, {'fro': 'girl', 'to': 'sleep', 'type': 'HasA', 'score': 0.008252453990280628, 'wm_score': 0.33683395, 'final': 0.10682690279319645}, {'fro': 'clock', 'to': 'sleep', 'type': 'HasA', 'score': 0.006851122248917818, 'wm_score': 0.38576266, 'final': 0.12052458357424248}, {'fro': 'boy', 'to': 'sleep', 'type': 'HasA', 'score': 0.005244933534413576, 'wm_score': 0.36696702, 'final': 0.11376155947408952}, {'fro': 'doctor', 'to': 'sleep', 'type': 'HasA', 'score': 0.004284854047000408, 'wm_score': 0.49657553, 'final': 0.1519720568329003}, {'fro': 'sleep', 'to': 'place', 'type': 'HasA', 'score': 0.06578468531370163, 'wm_score': 0.36510172, 'final': 0.15557979571959116}, {'fro': 'sleep', 'to': 'purpose', 'type': 'HasA', 'score': 0.05651859939098358, 'wm_score': 0.2386215, 'final': 0.11114946957368851}, {'fro': 'sleep', 'to': 'limit', 'type': 'HasA', 'score': 0.03961307182908058, 'wm_score': 0.26320252, 'final': 0.1066899062803564}, {'fro': 'sleep', 'to': 'problem', 'type': 'HasA', 'score': 0.02345835603773594, 'wm_score': 0.41895753, 'final': 0.14210810822641518}, {'fro': 'sleep', 'to': 'voice', 'type': 'HasA', 'score': 0.014711467549204826, 'wm_score': 0.33306295, 'final': 0.1102169122844434}, {'fro': 'sleep', 'to': 'chance', 'type': 'HasA', 'score': 0.013283492997288704, 'wm_score': 0.37018102, 'final': 0.12035275109810212}, {'fro': 'sleep', 'to': 'rhythm', 'type': 'HasA', 'score': 0.010576030239462852, 'wm_score': 0.47581384, 'final': 0.150147373167624}, {'fro': 'sleep', 'to': 'sound', 'type': 'HasA', 'score': 0.009010382927954197, 'wm_score': 0.3891918, 'final': 0.12306480804956794}, {'fro': 'sleep', 'to': 'pulse', 'type': 'HasA', 'score': 0.008229970000684261, 'wm_score': 0.33992448, 'final': 0.10773832300047899}, {'fro': 'sleep', 'to': 'lie', 'type': 'HasA', 'score': 0.006906215101480484, 'wm_score': 0.35942674, 'final': 0.11266237257103637}, {'fro': 'sleep', 'to': 'reason', 'type': 'HasA', 'score': 0.006584842223674059, 'wm_score': 0.40558422, 'final': 0.12628465555657187}, {'fro': 'sleep', 'to': 'say', 'type': 'HasA', 'score': 0.004892356693744659, 'wm_score': 0.3788669, 'final': 0.11708471968562127}, {'fro': 'sleep', 'to': 'difference', 'type': 'HasA', 'score': 0.004871550016105175, 'wm_score': 0.33254924, 'final': 0.10317485701127364}, {'fro': 'sleep', 'to': 'way', 'type': 'HasA', 'score': 0.004665675573050976, 'wm_score': 0.4086492, 'final': 0.1258607329011357}, {'fro': 'baby', 'to': 'sleep', 'type': 'AtLocation', 'score': 0.040940530598163605, 'wm_score': 0.4641866, 'final': 0.16791435141871455}, {'fro': 'cat', 'to': 'sleep', 'type': 'AtLocation', 'score': 0.0399414487183094, 'wm_score': 0.35818642, 'final': 0.1354149401028166}, {'fro': 'dog', 'to': 'sleep', 'type': 'AtLocation', 'score': 0.017511073499917984, 'wm_score': 0.36388046, 'final': 0.12142188944994262}, {'fro': 'man', 'to': 'sleep', 'type': 'AtLocation', 'score': 0.016284894198179245, 'wm_score': 0.34727716, 'final': 0.11558257393872548}, {'fro': 'child', 'to': 'sleep', 'type': 'AtLocation', 'score': 0.014665024355053902, 'wm_score': 0.479387, 'final': 0.15408161704853776}, {'fro': 'snake', 'to': 'sleep', 'type': 'AtLocation', 'score': 0.013667089864611626, 'wm_score': 0.3078484, 'final': 0.10192148290522816}, {'fro': 'rat', 'to': 'sleep', 'type': 'AtLocation', 'score': 0.012750674970448017, 'wm_score': 0.35886264, 'final': 0.11658426447931362}, {'fro': 'woman', 'to': 'sleep', 'type': 'AtLocation', 'score': 0.010128622874617577, 'wm_score': 0.3402605, 'final': 0.10916818601223233}, {'fro': 'dream', 'to': 'sleep', 'type': 'AtLocation', 'score': 0.0063684373162686825, 'wm_score': 0.4042772, 'final': 0.12574106612138808}, {'fro': 'newborn', 'to': 'sleep', 'type': 'AtLocation', 'score': 0.005539134610444307, 'wm_score': 0.41126993, 'final': 0.12725837322731104}, {'fro': 'sleep', 'to': 'making', 'type': 'AtLocation', 'score': 0.2649497389793396, 'wm_score': 0.30662027, 'final': 0.2774508982855377}, {'fro': 'sleep', 'to': 'works', 'type': 'AtLocation', 'score': 0.10854192823171616, 'wm_score': 0.24812153, 'final': 0.15041580876220131}, {'fro': 'sleep', 'to': 'air', 'type': 'AtLocation', 'score': 0.09580107778310776, 'wm_score': 0.30768344, 'final': 0.15936578644817545}, {'fro': 'sleep', 'to': 'night', 'type': 'AtLocation', 'score': 0.03800751641392708, 'wm_score': 0.5307541, 'final': 0.18583149148974898}, {'fro': 'sleep', 'to': 'bag', 'type': 'AtLocation', 'score': 0.03259100764989853, 'wm_score': 0.33505005, 'final': 0.12332872035492898}, {'fro': 'sleep', 'to': 'morning', 'type': 'AtLocation', 'score': 0.025480246171355247, 'wm_score': 0.46780455, 'final': 0.15817753731994869}, {'fro': 'sleep', 'to': 'window', 'type': 'AtLocation', 'score': 0.012110360898077488, 'wm_score': 0.32985225, 'final': 0.10743292762865427}, {'fro': 'sleep', 'to': 'way', 'type': 'AtLocation', 'score': 0.008125209249556065, 'wm_score': 0.4086492, 'final': 0.12828240647468925}, {'fro': 'sleep', 'to': 'door', 'type': 'AtLocation', 'score': 0.007636415772140026, 'wm_score': 0.37705162, 'final': 0.11846097704049803}, {'fro': 'sleep', 'to': 'bedroom', 'type': 'AtLocation', 'score': 0.006428373046219349, 'wm_score': 0.45936358, 'final': 0.14230893513235357}, {'fro': 'sleep', 'to': 'woods', 'type': 'AtLocation', 'score': 0.005403623450547457, 'wm_score': 0.35965228, 'final': 0.11167822041538324}, {'fro': 'sleep', 'to': 'dark', 'type': 'AtLocation', 'score': 0.00537263834849, 'wm_score': 0.37217182, 'final': 0.11541239284394302}, {'fro': 'sleep', 'to': 'room', 'type': 'AtLocation', 'score': 0.004544414114207029, 'wm_score': 0.58869064, 'final': 0.17978828187994497}, {'fro': 'sleep', 'to': 'darkness', 'type': 'AtLocation', 'score': 0.004291328135877848, 'wm_score': 0.49984306, 'final': 0.1529568476951145}, {'fro': 'sleep', 'to': 'wind', 'type': 'AtLocation', 'score': 0.004147023428231478, 'wm_score': 0.421548, 'final': 0.12936731639976204}, {'fro': 'sleep', 'to': 'toilet', 'type': 'AtLocation', 'score': 0.004026538226753473, 'wm_score': 0.41920772, 'final': 0.12858089275872744}, {'fro': 'sleep', 'to': 'present', 'type': 'AtLocation', 'score': 0.0038700837176293135, 'wm_score': 0.32529643, 'final': 0.10029798760234054}, {'fro': 'sleep', 'to': 'womb', 'type': 'AtLocation', 'score': 0.002774907508864999, 'wm_score': 0.3751698, 'final': 0.11449337525620551}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">row</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "row"
+    let relations = [{'fro': 'row', 'to': 'length', 'type': 'AtLocation', 'score': 0.00700186425819993, 'wm_score': 0.3639484, 'final': 0.11408582498073998}, {'fro': 'row', 'to': 'number', 'type': 'AtLocation', 'score': 0.0039809285663068295, 'wm_score': 0.45726043, 'final': 0.1399647789964148}, {'fro': 'row', 'to': 'top', 'type': 'AtLocation', 'score': 0.007692937273532152, 'wm_score': 0.5438814, 'final': 0.1685494760914725}, {'fro': 'row', 'to': 'bottom', 'type': 'AtLocation', 'score': 0.0032338695600628853, 'wm_score': 0.5914199, 'final': 0.17968967869204402}, {'fro': 'table', 'to': 'row', 'type': 'HasA', 'score': 0.011748344637453556, 'wm_score': 0.55013067, 'final': 0.17326304224621752}, {'fro': 'row', 'to': 'table', 'type': 'AtLocation', 'score': 0.017468983307480812, 'wm_score': 0.55013067, 'final': 0.1772674893152366}, {'fro': 'seat', 'to': 'row', 'type': 'HasA', 'score': 0.003964642994105816, 'wm_score': 0.44808412, 'final': 0.13720048609587407}, {'fro': 'seat', 'to': 'row', 'type': 'AtLocation', 'score': 0.00454259617254138, 'wm_score': 0.44808412, 'final': 0.13760505332077896}, {'fro': 'row', 'to': 'string', 'type': 'AtLocation', 'score': 0.003154819132760167, 'wm_score': 0.5029224, 'final': 0.15308509339293214}, {'fro': 'toilet', 'to': 'row', 'type': 'HasA', 'score': 0.013110789470374584, 'wm_score': 0.32970372, 'final': 0.10808866862926221}, {'fro': 'queen', 'to': 'row', 'type': 'HasA', 'score': 0.009168662130832672, 'wm_score': 0.3197939, 'final': 0.10235623349158289}, {'fro': 'jury', 'to': 'row', 'type': 'HasA', 'score': 0.008481519296765327, 'wm_score': 0.3200431, 'final': 0.10194999350773576}, {'fro': 'cabinet', 'to': 'row', 'type': 'HasA', 'score': 0.005548366345465183, 'wm_score': 0.3620767, 'final': 0.11250686644182563}, {'fro': 'senate', 'to': 'row', 'type': 'HasA', 'score': 0.004723626188933849, 'wm_score': 0.35465127, 'final': 0.10970191933225372}, {'fro': 'boat', 'to': 'row', 'type': 'HasA', 'score': 0.0043176161125302315, 'wm_score': 0.36451682, 'final': 0.11237737727877119}, {'fro': 'nfl', 'to': 'row', 'type': 'HasA', 'score': 0.004264429677277803, 'wm_score': 0.32865015, 'final': 0.10158014577409447}, {'fro': 'issue', 'to': 'row', 'type': 'HasA', 'score': 0.003809447167441249, 'wm_score': 0.48398292, 'final': 0.1478614890172089}, {'fro': 'family', 'to': 'row', 'type': 'HasA', 'score': 0.003735083620995283, 'wm_score': 0.3585279, 'final': 0.1101729285346967}, {'fro': 'house', 'to': 'row', 'type': 'HasA', 'score': 0.003721284680068493, 'wm_score': 0.4868532, 'final': 0.14866085927604797}, {'fro': 'union', 'to': 'row', 'type': 'HasA', 'score': 0.0036752764135599136, 'wm_score': 0.34168577, 'final': 0.10507842448949195}, {'fro': 'election', 'to': 'row', 'type': 'HasA', 'score': 0.0034104865044355392, 'wm_score': 0.36405087, 'final': 0.1116026015531049}, {'fro': 'eu', 'to': 'row', 'type': 'HasA', 'score': 0.003382957074791193, 'wm_score': 0.3373524, 'final': 0.10357378995235385}, {'fro': 'press', 'to': 'row', 'type': 'HasA', 'score': 0.003343552350997925, 'wm_score': 0.35900173, 'final': 0.11004100564569858}, {'fro': 'verdict', 'to': 'row', 'type': 'HasA', 'score': 0.0032007298432290554, 'wm_score': 0.3407936, 'final': 0.10447859089026035}, {'fro': 'row', 'to': 'twist', 'type': 'HasA', 'score': 0.08514945209026337, 'wm_score': 0.37787372, 'final': 0.1729667324631844}, {'fro': 'row', 'to': 'split', 'type': 'HasA', 'score': 0.035833071917295456, 'wm_score': 0.47096822, 'final': 0.16637361634210684}, {'fro': 'row', 'to': 'link', 'type': 'HasA', 'score': 0.031703077256679535, 'wm_score': 0.2827878, 'final': 0.10702849407967568}, {'fro': 'row', 'to': 'resolution', 'type': 'HasA', 'score': 0.025826508179306984, 'wm_score': 0.30250907, 'final': 0.1088312767255149}, {'fro': 'row', 'to': 'winner', 'type': 'HasA', 'score': 0.021897654980421066, 'wm_score': 0.3581829, 'final': 0.12278322848629476}, {'fro': 'row', 'to': 'referee', 'type': 'HasA', 'score': 0.007804454769939184, 'wm_score': 0.324077, 'final': 0.10268621833895746}, {'fro': 'row', 'to': 'break', 'type': 'HasA', 'score': 0.005913756787776947, 'wm_score': 0.52761555, 'final': 0.1624242947514439}, {'fro': 'row', 'to': 'history', 'type': 'HasA', 'score': 0.0053366865031421185, 'wm_score': 0.42178345, 'final': 0.1302707155521995}, {'fro': 'row', 'to': 'reason', 'type': 'HasA', 'score': 0.0040008146315813065, 'wm_score': 0.36614034, 'final': 0.11264267224210694}, {'fro': 'row', 'to': 'verdict', 'type': 'HasA', 'score': 0.003786923596635461, 'wm_score': 0.3407936, 'final': 0.10488892651764484}, {'fro': 'row', 'to': 'rival', 'type': 'HasA', 'score': 0.003754541277885437, 'wm_score': 0.34194732, 'final': 0.10521237489451982}, {'fro': 'row', 'to': 'point', 'type': 'HasA', 'score': 0.0036516806576400995, 'wm_score': 0.49936485, 'final': 0.1523656314603481}, {'fro': 'row', 'to': 'difference', 'type': 'HasA', 'score': 0.0031118730548769236, 'wm_score': 0.36530128, 'final': 0.11176869513841386}, {'fro': 'woman', 'to': 'row', 'type': 'AtLocation', 'score': 0.04097503796219826, 'wm_score': 0.3526389, 'final': 0.1344741965735388}, {'fro': 'horse', 'to': 'row', 'type': 'AtLocation', 'score': 0.03641251474618912, 'wm_score': 0.31720227, 'final': 0.12064944132233239}, {'fro': 'man', 'to': 'row', 'type': 'AtLocation', 'score': 0.01994217559695244, 'wm_score': 0.45282483, 'final': 0.14980697191786674}, {'fro': 'baby', 'to': 'row', 'type': 'AtLocation', 'score': 0.018893644213676453, 'wm_score': 0.29942447, 'final': 0.10305289194957354}, {'fro': 'girl', 'to': 'row', 'type': 'AtLocation', 'score': 0.010190868750214577, 'wm_score': 0.31231597, 'final': 0.10082839912515022}, {'fro': 'passenger', 'to': 'row', 'type': 'AtLocation', 'score': 0.009314391762018204, 'wm_score': 0.33306193, 'final': 0.10643865323341277}, {'fro': 'person', 'to': 'row', 'type': 'AtLocation', 'score': 0.00888753216713667, 'wm_score': 0.3257218, 'final': 0.10393781251699569}, {'fro': 'chair', 'to': 'row', 'type': 'AtLocation', 'score': 0.008030938915908337, 'wm_score': 0.37921682, 'final': 0.11938670324113586}, {'fro': 'child', 'to': 'row', 'type': 'AtLocation', 'score': 0.00798538327217102, 'wm_score': 0.35298252, 'final': 0.11148452429051973}, {'fro': 'third', 'to': 'row', 'type': 'AtLocation', 'score': 0.007945305667817593, 'wm_score': 0.6157902, 'final': 0.19029877396747233}, {'fro': 'picture', 'to': 'row', 'type': 'AtLocation', 'score': 0.005673885345458984, 'wm_score': 0.3472411, 'final': 0.1081440497418213}, {'fro': 'player', 'to': 'row', 'type': 'AtLocation', 'score': 0.00501204002648592, 'wm_score': 0.43269414, 'final': 0.13331667001854017}, {'fro': 'fourth', 'to': 'row', 'type': 'AtLocation', 'score': 0.004678654950112104, 'wm_score': 0.6235564, 'final': 0.1903419784650785}, {'fro': 'guy', 'to': 'row', 'type': 'AtLocation', 'score': 0.004303968045860529, 'wm_score': 0.33947337, 'final': 0.10485478863210237}, {'fro': 'row', 'to': 'background', 'type': 'AtLocation', 'score': 0.14945732057094574, 'wm_score': 0.2549205, 'final': 0.18109627439966203}, {'fro': 'row', 'to': 'middle', 'type': 'AtLocation', 'score': 0.11265793442726135, 'wm_score': 0.4909785, 'final': 0.22615410409908296}, {'fro': 'row', 'to': 'gallery', 'type': 'AtLocation', 'score': 0.066973976790905, 'wm_score': 0.3204446, 'final': 0.14301516375363352}, {'fro': 'row', 'to': 'toilet', 'type': 'AtLocation', 'score': 0.0559496209025383, 'wm_score': 0.32970372, 'final': 0.1380758506317768}, {'fro': 'row', 'to': 'balance', 'type': 'AtLocation', 'score': 0.0335097499191761, 'wm_score': 0.33082283, 'final': 0.12270367394342328}, {'fro': 'row', 'to': 'centre', 'type': 'AtLocation', 'score': 0.03199618309736252, 'wm_score': 0.31761497, 'final': 0.11768181916815378}, {'fro': 'row', 'to': 'dock', 'type': 'AtLocation', 'score': 0.015842553228139877, 'wm_score': 0.38172323, 'final': 0.12560675625969794}, {'fro': 'row', 'to': 'wings', 'type': 'AtLocation', 'score': 0.014424051158130169, 'wm_score': 0.31407005, 'final': 0.10431785081069112}, {'fro': 'row', 'to': 'center', 'type': 'AtLocation', 'score': 0.013143572956323624, 'wm_score': 0.30815142, 'final': 0.10164592706942654}, {'fro': 'row', 'to': 'rear', 'type': 'AtLocation', 'score': 0.005883385427296162, 'wm_score': 0.3887437, 'final': 0.12074147979910735}, {'fro': 'row', 'to': 'corner', 'type': 'AtLocation', 'score': 0.005182506982237101, 'wm_score': 0.45518577, 'final': 0.140183485887566}, {'fro': 'row', 'to': 'picture', 'type': 'AtLocation', 'score': 0.004977541510015726, 'wm_score': 0.3472411, 'final': 0.10765660905701104}, {'fro': 'row', 'to': 'closet', 'type': 'AtLocation', 'score': 0.004167439416050911, 'wm_score': 0.34588644, 'final': 0.10668313959123565}, {'fro': 'row', 'to': 'park', 'type': 'AtLocation', 'score': 0.0034432352986186743, 'wm_score': 0.35291713, 'final': 0.1082854037090331}, {'fro': 'row', 'to': 'spotlight', 'type': 'AtLocation', 'score': 0.0029802839271724224, 'wm_score': 0.34213665, 'final': 0.1047271937490207}, {'fro': 'row', 'to': 'open', 'type': 'AtLocation', 'score': 0.0027044026646763086, 'wm_score': 0.4800999, 'final': 0.14592305186527346}, {'fro': 'row', 'to': 'back', 'type': 'AtLocation', 'score': 0.0026783307548612356, 'wm_score': 0.5644003, 'final': 0.17119492152840288}, {'fro': 'row', 'to': 'cards', 'type': 'AtLocation', 'score': 0.0026761090848594904, 'wm_score': 0.33599338, 'final': 0.10267129035940166}, {'fro': 'row', 'to': 'box', 'type': 'AtLocation', 'score': 0.0024279868230223656, 'wm_score': 0.42166188, 'final': 0.12819815477611565}, {'fro': 'row', 'to': 'book', 'type': 'AtLocation', 'score': 0.0023841271176934242, 'wm_score': 0.33159557, 'final': 0.10114755998238542}, {'fro': 'row', 'to': 'second', 'type': 'AtLocation', 'score': 0.006265060510486364, 'wm_score': 0.588986, 'final': 0.1810813423573405}, {'fro': 'row', 'to': 'junior', 'type': 'AtLocation', 'score': 0.00323858461342752, 'wm_score': 0.3698041, 'final': 0.1132082392293993}, {'fro': 'row', 'to': 'total', 'type': 'AtLocation', 'score': 0.006795523222535849, 'wm_score': 0.36651587, 'final': 0.11471162725577512}, {'fro': 'row', 'to': 'third', 'type': 'AtLocation', 'score': 0.006375355180352926, 'wm_score': 0.6157902, 'final': 0.18919980862624705}, {'fro': 'row', 'to': 'fourth', 'type': 'AtLocation', 'score': 0.004636801313608885, 'wm_score': 0.6235564, 'final': 0.19031268091952624}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

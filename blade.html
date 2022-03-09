@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">blade</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "blade"
+    let relations = [{'fro': 'blade', 'to': 'hair', 'type': 'AtLocation', 'score': 0.005215965211391449, 'wm_score': 0.3593768, 'final': 0.11146421564797403}, {'fro': 'tooth', 'to': 'blade', 'type': 'HasA', 'score': 0.005108227953314781, 'wm_score': 0.44616067, 'final': 0.13742396056732037}, {'fro': 'blade', 'to': 'throat', 'type': 'AtLocation', 'score': 0.004306022543460131, 'wm_score': 0.43090644, 'final': 0.1322861477804221}, {'fro': 'blade', 'to': 'metal', 'type': 'HasA', 'score': 0.0026123838033527136, 'wm_score': 0.50980943, 'final': 0.15477149766234694}, {'fro': 'blade', 'to': 'metal', 'type': 'AtLocation', 'score': 0.0063529605977237225, 'wm_score': 0.50980943, 'final': 0.15738990141840664}, {'fro': 'blade', 'to': 'ice', 'type': 'AtLocation', 'score': 0.005562715698033571, 'wm_score': 0.37064117, 'final': 0.11508625198862352}, {'fro': 'brush', 'to': 'blade', 'type': 'HasA', 'score': 0.008437443524599075, 'wm_score': 0.37846124, 'final': 0.11944458246721937}, {'fro': 'foot', 'to': 'blade', 'type': 'HasA', 'score': 0.005108114331960678, 'wm_score': 0.37337536, 'final': 0.11558828803237249}, {'fro': 'stick', 'to': 'blade', 'type': 'HasA', 'score': 0.007616073824465275, 'wm_score': 0.56339705, 'final': 0.17435036667712572}, {'fro': 'blade', 'to': 'edge', 'type': 'AtLocation', 'score': 0.008108239620923996, 'wm_score': 0.43963778, 'final': 0.1375671017346468}, {'fro': 'screw', 'to': 'blade', 'type': 'HasA', 'score': 0.004818519577383995, 'wm_score': 0.5205229, 'final': 0.15952983370416882}, {'fro': 'blade', 'to': 'screw', 'type': 'AtLocation', 'score': 0.004167026374489069, 'wm_score': 0.5205229, 'final': 0.15907378846214237}, {'fro': 'arm', 'to': 'blade', 'type': 'HasA', 'score': 0.004356421995908022, 'wm_score': 0.45725083, 'final': 0.14022474439713564}, {'fro': 'blade', 'to': 'iron', 'type': 'AtLocation', 'score': 0.00511569669470191, 'wm_score': 0.45920324, 'final': 0.14134195968629137}, {'fro': 'knife', 'to': 'blade', 'type': 'HasA', 'score': 0.08035848289728165, 'wm_score': 0.68537945, 'final': 0.2618647730280972}, {'fro': 'blade', 'to': 'knife', 'type': 'AtLocation', 'score': 0.0546601302921772, 'wm_score': 0.68537945, 'final': 0.24387592620452406}, {'fro': 'blade', 'to': 'bend', 'type': 'HasA', 'score': 0.00699232704937458, 'wm_score': 0.3964596, 'final': 0.12383250893456223}, {'fro': 'blade', 'to': 'neck', 'type': 'AtLocation', 'score': 0.0039316583424806595, 'wm_score': 0.5294132, 'final': 0.1615761208397365}, {'fro': 'weapon', 'to': 'blade', 'type': 'HasA', 'score': 0.007841071113944054, 'wm_score': 0.3651364, 'final': 0.11502966977976087}, {'fro': 'blade', 'to': 'weapon', 'type': 'AtLocation', 'score': 0.0059911333955824375, 'wm_score': 0.3651364, 'final': 0.11373471337690773}, {'fro': 'blade', 'to': 'grip', 'type': 'HasA', 'score': 0.0049605299718678, 'wm_score': 0.38390958, 'final': 0.11864524498030747}, {'fro': 'saddle', 'to': 'blade', 'type': 'HasA', 'score': 0.005066961515694857, 'wm_score': 0.38959825, 'final': 0.12042634806098641}, {'fro': 'dagger', 'to': 'blade', 'type': 'HasA', 'score': 0.03641046956181526, 'wm_score': 0.48031282, 'final': 0.16958117469327072}, {'fro': 'blade', 'to': 'dagger', 'type': 'AtLocation', 'score': 0.018056603148579597, 'wm_score': 0.48031282, 'final': 0.15673346820400574}, {'fro': 'sword', 'to': 'blade', 'type': 'HasA', 'score': 0.04806045815348625, 'wm_score': 0.60986084, 'final': 0.21660057270744038}, {'fro': 'blade', 'to': 'sword', 'type': 'AtLocation', 'score': 0.08458693325519562, 'wm_score': 0.60986084, 'final': 0.24216910527863694}, {'fro': 'needle', 'to': 'blade', 'type': 'HasA', 'score': 0.019469216465950012, 'wm_score': 0.53885543, 'final': 0.17528508052616504}, {'fro': 'blade', 'to': 'needle', 'type': 'AtLocation', 'score': 0.0013231654884293675, 'wm_score': 0.53885543, 'final': 0.16258284484190058}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

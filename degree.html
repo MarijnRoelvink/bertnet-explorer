@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">degree</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "degree"
+    let relations = [{'fro': 'degree', 'to': 'university', 'type': 'AtLocation', 'score': 0.003252376103773713, 'wm_score': 0.66475356, 'final': 0.2017027312726416}, {'fro': 'difference', 'to': 'degree', 'type': 'HasA', 'score': 0.0034831371158361435, 'wm_score': 0.45972162, 'final': 0.14035468198108533}, {'fro': 'degree', 'to': 'college', 'type': 'AtLocation', 'score': 0.006556882988661528, 'wm_score': 0.611114, 'final': 0.1879240180920631}, {'fro': 'degree', 'to': 'psychology', 'type': 'AtLocation', 'score': 0.004664718173444271, 'wm_score': 0.6066395, 'final': 0.18525715272141102}, {'fro': 'professor', 'to': 'degree', 'type': 'HasA', 'score': 0.004270229022949934, 'wm_score': 0.6137672, 'final': 0.18711932031606496}, {'fro': 'author', 'to': 'degree', 'type': 'HasA', 'score': 0.4105829894542694, 'wm_score': 0.3254645, 'final': 0.38504744261798857}, {'fro': 'writer', 'to': 'degree', 'type': 'HasA', 'score': 0.32089266180992126, 'wm_score': 0.27772248, 'final': 0.30794160726694486}, {'fro': 'student', 'to': 'degree', 'type': 'HasA', 'score': 0.008297057822346687, 'wm_score': 0.5977539, 'final': 0.18513411047564268}, {'fro': 'researcher', 'to': 'degree', 'type': 'HasA', 'score': 0.006950078997761011, 'wm_score': 0.34203416, 'final': 0.1074753032984327}, {'fro': 'recipient', 'to': 'degree', 'type': 'HasA', 'score': 0.003409489057958126, 'wm_score': 0.3669108, 'final': 0.11245988234057071}, {'fro': 'teacher', 'to': 'degree', 'type': 'HasA', 'score': 0.0020785059314221144, 'wm_score': 0.53977084, 'final': 0.1633862061519955}, {'fro': 'mathematician', 'to': 'degree', 'type': 'HasA', 'score': 0.0020078152883797884, 'wm_score': 0.36498487, 'final': 0.11090093170186587}, {'fro': 'scholar', 'to': 'degree', 'type': 'HasA', 'score': 0.0015417549293488264, 'wm_score': 0.42543942, 'final': 0.1287110544505442}, {'fro': 'lecturer', 'to': 'degree', 'type': 'HasA', 'score': 0.0014866275014355779, 'wm_score': 0.5170034, 'final': 0.15614165925100493}, {'fro': 'instructor', 'to': 'degree', 'type': 'HasA', 'score': 0.0014701711479574442, 'wm_score': 0.44679064, 'final': 0.13506631180357023}, {'fro': 'latter', 'to': 'degree', 'type': 'HasA', 'score': 0.001345173455774784, 'wm_score': 0.4065596, 'final': 0.12290950141904237}, {'fro': 'degree', 'to': 'history', 'type': 'HasA', 'score': 0.015394695103168488, 'wm_score': 0.4808306, 'final': 0.15502546657221797}, {'fro': 'degree', 'to': 'cost', 'type': 'HasA', 'score': 0.014240562915802002, 'wm_score': 0.32970476, 'final': 0.1088798220410614}, {'fro': 'degree', 'to': 'limit', 'type': 'HasA', 'score': 0.013627709820866585, 'wm_score': 0.32514846, 'final': 0.1070839348746066}, {'fro': 'degree', 'to': 'requirement', 'type': 'HasA', 'score': 0.0123931635171175, 'wm_score': 0.37873897, 'final': 0.12229690546198227}, {'fro': 'degree', 'to': 'problem', 'type': 'HasA', 'score': 0.01154351606965065, 'wm_score': 0.3384193, 'final': 0.10960625124875546}, {'fro': 'degree', 'to': 'choice', 'type': 'HasA', 'score': 0.009868317283689976, 'wm_score': 0.33510548, 'final': 0.107439466098583}, {'fro': 'degree', 'to': 'purpose', 'type': 'HasA', 'score': 0.009348313324153423, 'wm_score': 0.38240927, 'final': 0.12126660032690742}, {'fro': 'degree', 'to': 'chance', 'type': 'HasA', 'score': 0.00927084218710661, 'wm_score': 0.35702255, 'final': 0.11359635453097465}, {'fro': 'degree', 'to': 'difference', 'type': 'HasA', 'score': 0.00898111891001463, 'wm_score': 0.45972162, 'final': 0.14420326923701027}, {'fro': 'degree', 'to': 'reputation', 'type': 'HasA', 'score': 0.008907752111554146, 'wm_score': 0.36298084, 'final': 0.11512967847808793}, {'fro': 'degree', 'to': 'diploma', 'type': 'HasA', 'score': 0.008632511831820011, 'wm_score': 0.6726668, 'final': 0.20784279828227406}, {'fro': 'degree', 'to': 'disability', 'type': 'HasA', 'score': 0.008307840675115585, 'wm_score': 0.33313084, 'final': 0.10575474047258092}, {'fro': 'degree', 'to': 'certificate', 'type': 'HasA', 'score': 0.008289377205073833, 'wm_score': 0.49274972, 'final': 0.1536274800435517}, {'fro': 'degree', 'to': 'phd', 'type': 'HasA', 'score': 0.0053208982571959496, 'wm_score': 0.69176376, 'final': 0.21125375678003716}, {'fro': 'degree', 'to': 'prerequisite', 'type': 'HasA', 'score': 0.005182073917239904, 'wm_score': 0.37472403, 'final': 0.11604466074206796}, {'fro': 'diploma', 'to': 'degree', 'type': 'AtLocation', 'score': 0.06753422319889069, 'wm_score': 0.6726668, 'final': 0.24907399623922352}, {'fro': 'bachelor', 'to': 'degree', 'type': 'AtLocation', 'score': 0.06631243228912354, 'wm_score': 0.7963448, 'final': 0.2853221426023865}, {'fro': 'ba', 'to': 'degree', 'type': 'AtLocation', 'score': 0.06419514864683151, 'wm_score': 0.44418287, 'final': 0.17819146505278208}, {'fro': 'phd', 'to': 'degree', 'type': 'AtLocation', 'score': 0.06406329572200775, 'wm_score': 0.69176376, 'final': 0.25237343500540543}, {'fro': 'prerequisite', 'to': 'degree', 'type': 'AtLocation', 'score': 0.048672452569007874, 'wm_score': 0.37472403, 'final': 0.14648792579830552}, {'fro': 'distinction', 'to': 'degree', 'type': 'AtLocation', 'score': 0.04001976549625397, 'wm_score': 0.5859946, 'final': 0.2038122158473778}, {'fro': 'minor', 'to': 'degree', 'type': 'AtLocation', 'score': 0.03814501315355301, 'wm_score': 0.39405805, 'final': 0.14491892420748712}, {'fro': 'certificate', 'to': 'degree', 'type': 'AtLocation', 'score': 0.027442220598459244, 'wm_score': 0.49274972, 'final': 0.1670344704189215}, {'fro': 'major', 'to': 'degree', 'type': 'AtLocation', 'score': 0.025487307459115982, 'wm_score': 0.34191734, 'final': 0.1204163172213812}, {'fro': 'master', 'to': 'degree', 'type': 'AtLocation', 'score': 0.02024056948721409, 'wm_score': 0.63660955, 'final': 0.20515126364104988}, {'fro': 'masters', 'to': 'degree', 'type': 'AtLocation', 'score': 0.019032813608646393, 'wm_score': 0.41515714, 'final': 0.1378701115260525}, {'fro': 'preference', 'to': 'degree', 'type': 'AtLocation', 'score': 0.01338021457195282, 'wm_score': 0.32000256, 'final': 0.10536691820036699}, {'fro': 'student', 'to': 'degree', 'type': 'AtLocation', 'score': 0.013061950914561749, 'wm_score': 0.5977539, 'final': 0.18846953564019323}, {'fro': 'senior', 'to': 'degree', 'type': 'AtLocation', 'score': 0.011460399255156517, 'wm_score': 0.35193482, 'final': 0.11360272547860957}, {'fro': 'specialization', 'to': 'degree', 'type': 'AtLocation', 'score': 0.008746327832341194, 'wm_score': 0.50344074, 'final': 0.15715465148263888}, {'fro': 'qualification', 'to': 'degree', 'type': 'AtLocation', 'score': 0.006947769783437252, 'wm_score': 0.33917916, 'final': 0.10661718684840608}, {'fro': 'class', 'to': 'degree', 'type': 'AtLocation', 'score': 0.005552769172936678, 'wm_score': 0.47499335, 'final': 0.14638494342105568}, {'fro': 'thesis', 'to': 'degree', 'type': 'AtLocation', 'score': 0.0044345795176923275, 'wm_score': 0.5280418, 'final': 0.16151674566238464}, {'fro': 'scholarship', 'to': 'degree', 'type': 'AtLocation', 'score': 0.004215301480144262, 'wm_score': 0.567799, 'final': 0.17329041103610102}, {'fro': 'requirement', 'to': 'degree', 'type': 'AtLocation', 'score': 0.003979159519076347, 'wm_score': 0.37873897, 'final': 0.11640710266335347}, {'fro': 'semester', 'to': 'degree', 'type': 'AtLocation', 'score': 0.003768103662878275, 'wm_score': 0.46061963, 'final': 0.14082356156401482}, {'fro': 'term', 'to': 'degree', 'type': 'AtLocation', 'score': 0.0035841972567141056, 'wm_score': 0.42952985, 'final': 0.1313678930796999}, {'fro': 'ma', 'to': 'degree', 'type': 'AtLocation', 'score': 0.003378563327714801, 'wm_score': 0.38098544, 'final': 0.11666062632940039}, {'fro': 'grade', 'to': 'degree', 'type': 'AtLocation', 'score': 0.0032742004841566086, 'wm_score': 0.45288175, 'final': 0.13815646533890966}, {'fro': 'junior', 'to': 'degree', 'type': 'AtLocation', 'score': 0.0031619418878108263, 'wm_score': 0.35059258, 'final': 0.10739113332146759}, {'fro': 'course', 'to': 'degree', 'type': 'AtLocation', 'score': 0.0029925620183348656, 'wm_score': 0.5180461, 'final': 0.15750862341283442}, {'fro': 'bs', 'to': 'degree', 'type': 'AtLocation', 'score': 0.0025674605276435614, 'wm_score': 0.44085875, 'final': 0.1340548473693505}, {'fro': 'doctor', 'to': 'degree', 'type': 'AtLocation', 'score': 0.0024057584814727306, 'wm_score': 0.4411802, 'final': 0.13403809093703092}, {'fro': 'graduate', 'to': 'degree', 'type': 'AtLocation', 'score': 0.00236212438903749, 'wm_score': 0.7330265, 'final': 0.22156143707232628}, {'fro': 'degree', 'to': 'humanities', 'type': 'AtLocation', 'score': 0.2932804524898529, 'wm_score': 0.5240464, 'final': 0.36251023674289706}, {'fro': 'degree', 'to': 'arts', 'type': 'AtLocation', 'score': 0.1497517228126526, 'wm_score': 0.5478209, 'final': 0.26917247596885685}, {'fro': 'degree', 'to': 'sciences', 'type': 'AtLocation', 'score': 0.10645563155412674, 'wm_score': 0.5451343, 'final': 0.2380592320878887}, {'fro': 'degree', 'to': 'library', 'type': 'AtLocation', 'score': 0.026670923456549644, 'wm_score': 0.34440434, 'final': 0.12199094841958476}, {'fro': 'degree', 'to': 'curriculum', 'type': 'AtLocation', 'score': 0.01941733807325363, 'wm_score': 0.44592443, 'final': 0.14736946565127756}, {'fro': 'degree', 'to': 'classroom', 'type': 'AtLocation', 'score': 0.014084524475038052, 'wm_score': 0.38795865, 'final': 0.12624676213252667}, {'fro': 'degree', 'to': 'program', 'type': 'AtLocation', 'score': 0.0099479453638196, 'wm_score': 0.40237564, 'final': 0.12767625375467373}, {'fro': 'degree', 'to': 'discipline', 'type': 'AtLocation', 'score': 0.009554581716656685, 'wm_score': 0.41159633, 'final': 0.1301671062016597}, {'fro': 'degree', 'to': 'literature', 'type': 'AtLocation', 'score': 0.009492839686572552, 'wm_score': 0.5027977, 'final': 0.15748429778060083}, {'fro': 'degree', 'to': 'works', 'type': 'AtLocation', 'score': 0.008834175765514374, 'wm_score': 0.33695006, 'final': 0.10726894103586007}, {'fro': 'degree', 'to': 'subject', 'type': 'AtLocation', 'score': 0.007417373824864626, 'wm_score': 0.48747653, 'final': 0.15143512067740528}, {'fro': 'degree', 'to': 'business', 'type': 'AtLocation', 'score': 0.006574632134288549, 'wm_score': 0.41584247, 'final': 0.129354983494002}, {'fro': 'degree', 'to': 'academy', 'type': 'AtLocation', 'score': 0.006216519977897406, 'wm_score': 0.50497955, 'final': 0.15584542898452822}, {'fro': 'degree', 'to': 'field', 'type': 'AtLocation', 'score': 0.0059580556116998196, 'wm_score': 0.34395474, 'final': 0.10735706092818989}, {'fro': 'degree', 'to': 'mba', 'type': 'AtLocation', 'score': 0.005772862117737532, 'wm_score': 0.55902755, 'final': 0.17174926848241628}, {'fro': 'degree', 'to': 'law', 'type': 'AtLocation', 'score': 0.0057637630961835384, 'wm_score': 0.5472003, 'final': 0.16819472416732847}, {'fro': 'degree', 'to': 'pharmacy', 'type': 'AtLocation', 'score': 0.0046446360647678375, 'wm_score': 0.40595204, 'final': 0.1250368572453375}, {'fro': 'degree', 'to': 'masters', 'type': 'AtLocation', 'score': 0.0027074413374066353, 'wm_score': 0.41515714, 'final': 0.12644235093618467}, {'fro': 'degree', 'to': 'department', 'type': 'AtLocation', 'score': 0.002617353806272149, 'wm_score': 0.4340365, 'final': 0.1320430976643905}, {'fro': 'degree', 'to': 'ba', 'type': 'AtLocation', 'score': 0.0024893165100365877, 'wm_score': 0.44418287, 'final': 0.13499738255702565}, {'fro': 'degree', 'to': 'education', 'type': 'AtLocation', 'score': 0.0023351646959781647, 'wm_score': 0.55523616, 'final': 0.16820546328718475}, {'fro': 'degree', 'to': 'military', 'type': 'AtLocation', 'score': 0.0022038689348846674, 'wm_score': 0.33174247, 'final': 0.10106544925441928}, {'fro': 'degree', 'to': 'school', 'type': 'AtLocation', 'score': 0.002115463837981224, 'wm_score': 0.5783634, 'final': 0.17498984468658688}, {'fro': 'degree', 'to': 'majors', 'type': 'AtLocation', 'score': 0.002093397779390216, 'wm_score': 0.41545346, 'final': 0.12610141644557316}, {'fro': 'degree', 'to': 'mathematics', 'type': 'AtLocation', 'score': 0.0020013421308249235, 'wm_score': 0.67511535, 'final': 0.20393554449157747}, {'fro': 'degree', 'to': 'making', 'type': 'AtLocation', 'score': 0.0018845441518351436, 'wm_score': 0.3644221, 'final': 0.11064581090628463}, {'fro': 'degree', 'to': 'nursing', 'type': 'AtLocation', 'score': 0.0017898643855005503, 'wm_score': 0.45301357, 'final': 0.1371569760698504}, {'fro': 'degree', 'to': 'administration', 'type': 'AtLocation', 'score': 0.0017518955282866955, 'wm_score': 0.35294315, 'final': 0.1071092718698007}, {'fro': 'degree', 'to': 'bar', 'type': 'AtLocation', 'score': 0.001728868461214006, 'wm_score': 0.32980436, 'final': 0.10015151592284982}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

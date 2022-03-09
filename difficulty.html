@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">difficulty</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "difficulty"
+    let relations = [{'fro': 'game', 'to': 'difficulty', 'type': 'HasA', 'score': 0.015041489154100418, 'wm_score': 0.3195621, 'final': 0.10639767240787032}, {'fro': 'user', 'to': 'difficulty', 'type': 'HasA', 'score': 0.011866568587720394, 'wm_score': 0.3735171, 'final': 0.1203617280114043}, {'fro': 'system', 'to': 'difficulty', 'type': 'HasA', 'score': 0.007507276255637407, 'wm_score': 0.39985493, 'final': 0.1252115723789462}, {'fro': 'device', 'to': 'difficulty', 'type': 'HasA', 'score': 0.004385347478091717, 'wm_score': 0.33011496, 'final': 0.10210423123466422}, {'fro': 'computer', 'to': 'difficulty', 'type': 'HasA', 'score': 0.004308758303523064, 'wm_score': 0.32767615, 'final': 0.10131897581246616}, {'fro': 'problem', 'to': 'difficulty', 'type': 'HasA', 'score': 0.0031450369860976934, 'wm_score': 0.6628148, 'final': 0.20104596589026844}, {'fro': 'difficulty', 'to': 'solution', 'type': 'HasA', 'score': 0.07946251332759857, 'wm_score': 0.39747277, 'final': 0.174865590329319}, {'fro': 'difficulty', 'to': 'downside', 'type': 'HasA', 'score': 0.07556875795125961, 'wm_score': 0.37052405, 'final': 0.16405534556588175}, {'fro': 'difficulty', 'to': 'limit', 'type': 'HasA', 'score': 0.0498240627348423, 'wm_score': 0.3965292, 'final': 0.15383560391438963}, {'fro': 'difficulty', 'to': 'twist', 'type': 'HasA', 'score': 0.03607802838087082, 'wm_score': 0.27336484, 'final': 0.10726407186660958}, {'fro': 'difficulty', 'to': 'fix', 'type': 'HasA', 'score': 0.020194675773382187, 'wm_score': 0.3023296, 'final': 0.10483515304136753}, {'fro': 'difficulty', 'to': 'drawback', 'type': 'HasA', 'score': 0.01848462037742138, 'wm_score': 0.37419653, 'final': 0.12519819326419498}, {'fro': 'difficulty', 'to': 'cure', 'type': 'HasA', 'score': 0.015015555545687675, 'wm_score': 0.32727766, 'final': 0.10869418688198139}, {'fro': 'difficulty', 'to': 'consequence', 'type': 'HasA', 'score': 0.014514502137899399, 'wm_score': 0.5204184, 'final': 0.1662856714965296}, {'fro': 'difficulty', 'to': 'remedy', 'type': 'HasA', 'score': 0.012931718491017818, 'wm_score': 0.38317442, 'final': 0.1240045289437125}, {'fro': 'difficulty', 'to': 'problem', 'type': 'HasA', 'score': 0.012895953841507435, 'wm_score': 0.6628148, 'final': 0.20787160768905524}, {'fro': 'difficulty', 'to': 'cost', 'type': 'HasA', 'score': 0.006556470412760973, 'wm_score': 0.4785968, 'final': 0.1481685692889327}, {'fro': 'difficulty', 'to': 'flaw', 'type': 'HasA', 'score': 0.006339198909699917, 'wm_score': 0.3553177, 'final': 0.11103274923678996}, {'fro': 'difficulty', 'to': 'dilemma', 'type': 'HasA', 'score': 0.006005170755088329, 'wm_score': 0.49375463, 'final': 0.15233000852856185}, {'fro': 'difficulty', 'to': 'disadvantage', 'type': 'HasA', 'score': 0.00531141459941864, 'wm_score': 0.5296392, 'final': 0.16260975021959306}, {'fro': 'difficulty', 'to': 'weakness', 'type': 'HasA', 'score': 0.005031178239732981, 'wm_score': 0.48332128, 'final': 0.14851820876781313}, {'fro': 'difficulty', 'to': 'clue', 'type': 'HasA', 'score': 0.004509828984737396, 'wm_score': 0.38677344, 'final': 0.1191889122893162}, {'fro': 'difficulty', 'to': 'chance', 'type': 'HasA', 'score': 0.004505512770265341, 'wm_score': 0.47868943, 'final': 0.14676068793918576}, {'fro': 'difficulty', 'to': 'challenge', 'type': 'HasA', 'score': 0.004422634840011597, 'wm_score': 0.43019012, 'final': 0.13215288038800813}, {'fro': 'difficulty', 'to': 'reason', 'type': 'HasA', 'score': 0.004405556246638298, 'wm_score': 0.56624603, 'final': 0.17295769837264682}, {'fro': 'difficulty', 'to': 'difference', 'type': 'HasA', 'score': 0.0039320760406553745, 'wm_score': 0.56976396, 'final': 0.17368164122845878}, {'fro': 'difficulty', 'to': 'complication', 'type': 'HasA', 'score': 0.003290270222350955, 'wm_score': 0.39645565, 'final': 0.12123988415564568}, {'fro': 'difficulty', 'to': 'definition', 'type': 'HasA', 'score': 0.0031785336323082447, 'wm_score': 0.37415418, 'final': 0.1144712275426158}, {'fro': 'difficulty', 'to': 'priority', 'type': 'HasA', 'score': 0.003138151951134205, 'wm_score': 0.46916184, 'final': 0.14294525836579397}, {'fro': 'solution', 'to': 'difficulty', 'type': 'AtLocation', 'score': 0.00633224006742239, 'wm_score': 0.39747277, 'final': 0.12367439904719568}, {'fro': 'clue', 'to': 'difficulty', 'type': 'AtLocation', 'score': 0.005516042932868004, 'wm_score': 0.38677344, 'final': 0.11989326205300763}, {'fro': 'puzzle', 'to': 'difficulty', 'type': 'AtLocation', 'score': 0.005054220091551542, 'wm_score': 0.3543947, 'final': 0.1098563640640861}, {'fro': 'mistake', 'to': 'difficulty', 'type': 'AtLocation', 'score': 0.004706385545432568, 'wm_score': 0.4500746, 'final': 0.13831684988180282}, {'fro': 'balance', 'to': 'difficulty', 'type': 'AtLocation', 'score': 0.004062319174408913, 'wm_score': 0.52214533, 'final': 0.15948722242208627}, {'fro': 'result', 'to': 'difficulty', 'type': 'AtLocation', 'score': 0.004038448911160231, 'wm_score': 0.5011033, 'final': 0.1531579042378122}, {'fro': 'word', 'to': 'difficulty', 'type': 'AtLocation', 'score': 0.003673593746498227, 'wm_score': 0.37162027, 'final': 0.11405759662254877}, {'fro': 'problem', 'to': 'difficulty', 'type': 'AtLocation', 'score': 0.0032576248049736023, 'wm_score': 0.6628148, 'final': 0.20112477736348155}, {'fro': 'spell', 'to': 'difficulty', 'type': 'AtLocation', 'score': 0.0029717697761952877, 'wm_score': 0.36012664, 'final': 0.11011823084333672}, {'fro': 'difficulty', 'to': 'balance', 'type': 'AtLocation', 'score': 0.13252024352550507, 'wm_score': 0.52214533, 'final': 0.24940776946785356}, {'fro': 'difficulty', 'to': 'works', 'type': 'AtLocation', 'score': 0.11407236754894257, 'wm_score': 0.290514, 'final': 0.1670048572842598}, {'fro': 'difficulty', 'to': 'air', 'type': 'AtLocation', 'score': 0.0481509305536747, 'wm_score': 0.24701594, 'final': 0.10781043338757229}, {'fro': 'difficulty', 'to': 'mix', 'type': 'AtLocation', 'score': 0.03417458385229111, 'wm_score': 0.27550918, 'final': 0.1065749626966038}, {'fro': 'difficulty', 'to': 'background', 'type': 'AtLocation', 'score': 0.026867665350437164, 'wm_score': 0.36818448, 'final': 0.12926270974530601}, {'fro': 'difficulty', 'to': 'unknown', 'type': 'AtLocation', 'score': 0.015503420494496822, 'wm_score': 0.3712759, 'final': 0.1222351643461478}, {'fro': 'difficulty', 'to': 'making', 'type': 'AtLocation', 'score': 0.014452707022428513, 'wm_score': 0.53523695, 'final': 0.17068797991569998}, {'fro': 'difficulty', 'to': 'present', 'type': 'AtLocation', 'score': 0.012230483815073967, 'wm_score': 0.40765005, 'final': 0.1308563536705518}, {'fro': 'difficulty', 'to': 'game', 'type': 'AtLocation', 'score': 0.010994704440236092, 'wm_score': 0.3195621, 'final': 0.10356492310816529}, {'fro': 'difficulty', 'to': 'future', 'type': 'AtLocation', 'score': 0.009163214825093746, 'wm_score': 0.39330512, 'final': 0.12440578637756565}, {'fro': 'difficulty', 'to': 'distance', 'type': 'AtLocation', 'score': 0.0074441153556108475, 'wm_score': 0.45494112, 'final': 0.1416932167489276}, {'fro': 'difficulty', 'to': 'middle', 'type': 'AtLocation', 'score': 0.007143325172364712, 'wm_score': 0.35059246, 'final': 0.11017806562065532}, {'fro': 'difficulty', 'to': 'way', 'type': 'AtLocation', 'score': 0.006948134861886501, 'wm_score': 0.44589254, 'final': 0.13863145640332056}, {'fro': 'difficulty', 'to': 'details', 'type': 'AtLocation', 'score': 0.0063816849142313, 'wm_score': 0.37554395, 'final': 0.11713036443996194}, {'fro': 'difficulty', 'to': 'water', 'type': 'AtLocation', 'score': 0.004834655672311783, 'wm_score': 0.32819182, 'final': 0.10184180497061827}, {'fro': 'difficulty', 'to': 'ground', 'type': 'AtLocation', 'score': 0.004743298050016165, 'wm_score': 0.3570347, 'final': 0.11043071863501133}, {'fro': 'difficulty', 'to': 'calculation', 'type': 'AtLocation', 'score': 0.004701885394752026, 'wm_score': 0.38129973, 'final': 0.11768123877632644}, {'fro': 'difficulty', 'to': 'system', 'type': 'AtLocation', 'score': 0.0032689995132386684, 'wm_score': 0.39985493, 'final': 0.12224477865926708}, {'fro': 'difficulty', 'to': 'solution', 'type': 'AtLocation', 'score': 0.002842030953615904, 'wm_score': 0.39747277, 'final': 0.12123125266753114}, {'fro': 'difficulty', 'to': 'level', 'type': 'HasA', 'score': 0.0030724629759788513, 'wm_score': 0.47579104, 'final': 0.14488803608318523}, {'fro': 'level', 'to': 'difficulty', 'type': 'HasA', 'score': 0.00322515657171607, 'wm_score': 0.47579104, 'final': 0.14499492160020128}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

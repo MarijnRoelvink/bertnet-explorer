@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">donation</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "donation"
+    let relations = [{'fro': 'donation', 'to': 'thanks', 'type': 'AtLocation', 'score': 0.01755993440747261, 'wm_score': 0.33148655, 'final': 0.11173791908523084}, {'fro': 'organization', 'to': 'donation', 'type': 'HasA', 'score': 0.0048352135345339775, 'wm_score': 0.3920881, 'final': 0.1210110794741738}, {'fro': 'donation', 'to': 'organization', 'type': 'AtLocation', 'score': 0.009943712502717972, 'wm_score': 0.3920881, 'final': 0.1245870287519026}, {'fro': 'donation', 'to': 'effort', 'type': 'AtLocation', 'score': 0.048734795302152634, 'wm_score': 0.42063487, 'final': 0.16030481771150684}, {'fro': 'foundation', 'to': 'donation', 'type': 'HasA', 'score': 0.016689248383045197, 'wm_score': 0.55725443, 'final': 0.17885880286813166}, {'fro': 'donation', 'to': 'foundation', 'type': 'AtLocation', 'score': 0.06363619863986969, 'wm_score': 0.55725443, 'final': 0.2117216680479088}, {'fro': 'donation', 'to': 'membership', 'type': 'AtLocation', 'score': 0.011045827530324459, 'wm_score': 0.35855156, 'final': 0.11529754727122714}, {'fro': 'charity', 'to': 'donation', 'type': 'HasA', 'score': 0.006495611742138863, 'wm_score': 0.6374972, 'final': 0.19579608821949723}, {'fro': 'donation', 'to': 'charity', 'type': 'AtLocation', 'score': 0.04984290897846222, 'wm_score': 0.6374972, 'final': 0.22613919628492357}, {'fro': 'donation', 'to': 'initiative', 'type': 'AtLocation', 'score': 0.016322337090969086, 'wm_score': 0.43302175, 'final': 0.14133216096367837}, {'fro': 'contribution', 'to': 'donation', 'type': 'HasA', 'score': 0.009275960735976696, 'wm_score': 0.5910313, 'final': 0.18380256251518373}, {'fro': 'donation', 'to': 'contribution', 'type': 'AtLocation', 'score': 0.11156812310218811, 'wm_score': 0.5910313, 'final': 0.2554070761715317}, {'fro': 'donation', 'to': 'purpose', 'type': 'AtLocation', 'score': 0.004030575975775719, 'wm_score': 0.39605302, 'final': 0.12163730918304301}, {'fro': 'donation', 'to': 'benefit', 'type': 'AtLocation', 'score': 0.004098380915820599, 'wm_score': 0.5295043, 'final': 0.16172015664107445}, {'fro': 'donation', 'to': 'gift', 'type': 'AtLocation', 'score': 0.0045850384049117565, 'wm_score': 0.6645694, 'final': 0.20258034688343826}, {'fro': 'donation', 'to': 'address', 'type': 'AtLocation', 'score': 0.005103663075715303, 'wm_score': 0.33268476, 'final': 0.10337799215300073}, {'fro': 'donation', 'to': 'campaign', 'type': 'AtLocation', 'score': 0.00810417253524065, 'wm_score': 0.37941936, 'final': 0.11949872877466847}, {'fro': 'donation', 'to': 'mail', 'type': 'AtLocation', 'score': 0.008863267488777637, 'wm_score': 0.36494118, 'final': 0.11568664124214435}, {'fro': 'donation', 'to': 'trust', 'type': 'AtLocation', 'score': 0.003998538013547659, 'wm_score': 0.37574697, 'final': 0.11552306760948339}, {'fro': 'donation', 'to': 'welcome', 'type': 'AtLocation', 'score': 0.015126844868063927, 'wm_score': 0.37123817, 'final': 0.12196024240764476}, {'fro': 'donation', 'to': 'help', 'type': 'AtLocation', 'score': 0.017389731481671333, 'wm_score': 0.3947512, 'final': 0.13059817203716995}, {'fro': 'donation', 'to': 'personal', 'type': 'AtLocation', 'score': 0.004569028504192829, 'wm_score': 0.36224622, 'final': 0.11187218595293501}, {'fro': 'donation', 'to': 'support', 'type': 'AtLocation', 'score': 0.13342417776584625, 'wm_score': 0.41076878, 'final': 0.21662755843609238}, {'fro': 'donation', 'to': 'visit', 'type': 'AtLocation', 'score': 0.00527340080589056, 'wm_score': 0.35131785, 'final': 0.1090867355641234}, {'fro': 'museum', 'to': 'donation', 'type': 'HasA', 'score': 0.0044932179152965546, 'wm_score': 0.3506861, 'final': 0.1083510825407076}, {'fro': 'sponsor', 'to': 'donation', 'type': 'HasA', 'score': 0.005278655327856541, 'wm_score': 0.39229435, 'final': 0.1213833637294996}, {'fro': 'donation', 'to': 'sponsor', 'type': 'AtLocation', 'score': 0.013768873177468777, 'wm_score': 0.39229435, 'final': 0.12732651622422816}, {'fro': 'donation', 'to': 'recipient', 'type': 'AtLocation', 'score': 0.01654759980738163, 'wm_score': 0.54117715, 'final': 0.17393646486516717}, {'fro': 'donor', 'to': 'donation', 'type': 'HasA', 'score': 0.009026987478137016, 'wm_score': 0.6624551, 'final': 0.20505542123469594}, {'fro': 'donation', 'to': 'donor', 'type': 'AtLocation', 'score': 0.037003591656684875, 'wm_score': 0.6624551, 'final': 0.22463904415967945}, {'fro': 'fundraiser', 'to': 'donation', 'type': 'HasA', 'score': 0.006339489948004484, 'wm_score': 0.44310302, 'final': 0.13736854896360315}, {'fro': 'donation', 'to': 'fundraiser', 'type': 'AtLocation', 'score': 0.015276527963578701, 'wm_score': 0.44310302, 'final': 0.1436244755745051}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

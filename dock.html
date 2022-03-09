@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">dock</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "dock"
+    let relations = [{'fro': 'lake', 'to': 'dock', 'type': 'HasA', 'score': 0.018535591661930084, 'wm_score': 0.30973518, 'final': 0.10589546816335108}, {'fro': 'airport', 'to': 'dock', 'type': 'HasA', 'score': 0.004920021165162325, 'wm_score': 0.48363653, 'final': 0.14853497381561365}, {'fro': 'river', 'to': 'dock', 'type': 'HasA', 'score': 0.00624964851886034, 'wm_score': 0.37413007, 'final': 0.11661377496320224}, {'fro': 'garden', 'to': 'dock', 'type': 'HasA', 'score': 0.0047947196289896965, 'wm_score': 0.34717488, 'final': 0.10750876774029282}, {'fro': 'coast', 'to': 'dock', 'type': 'HasA', 'score': 0.006400063168257475, 'wm_score': 0.38184354, 'final': 0.11903310621778024}, {'fro': 'boat', 'to': 'dock', 'type': 'HasA', 'score': 0.03348320722579956, 'wm_score': 0.5661143, 'final': 0.19327253505805972}, {'fro': 'boat', 'to': 'dock', 'type': 'AtLocation', 'score': 0.016915179789066315, 'wm_score': 0.5661143, 'final': 0.18167491585234644}, {'fro': 'bridge', 'to': 'dock', 'type': 'HasA', 'score': 0.01081873755902052, 'wm_score': 0.48506954, 'final': 0.15309397829131438}, {'fro': 'duty', 'to': 'dock', 'type': 'AtLocation', 'score': 0.01510273665189743, 'wm_score': 0.30156067, 'final': 0.10104011665632821}, {'fro': 'beach', 'to': 'dock', 'type': 'HasA', 'score': 0.006187088787555695, 'wm_score': 0.45566338, 'final': 0.141029976151289}, {'fro': 'crew', 'to': 'dock', 'type': 'AtLocation', 'score': 0.007206352427601814, 'wm_score': 0.47162318, 'final': 0.1465314006993213}, {'fro': 'window', 'to': 'dock', 'type': 'HasA', 'score': 0.0034389831125736237, 'wm_score': 0.37845716, 'final': 0.11594443617880155}, {'fro': 'court', 'to': 'dock', 'type': 'AtLocation', 'score': 0.30410581827163696, 'wm_score': 0.31113094, 'final': 0.3062133547901459}, {'fro': 'sentence', 'to': 'dock', 'type': 'AtLocation', 'score': 0.07606393843889236, 'wm_score': 0.17953864, 'final': 0.10710634890722466}, {'fro': 'judge', 'to': 'dock', 'type': 'AtLocation', 'score': 0.764513373374939, 'wm_score': 0.21604279, 'final': 0.5999721983624573}, {'fro': 'row', 'to': 'dock', 'type': 'AtLocation', 'score': 0.015842553228139877, 'wm_score': 0.38172323, 'final': 0.12560675625969794}, {'fro': 'lawyer', 'to': 'dock', 'type': 'AtLocation', 'score': 0.22463594377040863, 'wm_score': 0.22003624, 'final': 0.22325603263928606}, {'fro': 'ship', 'to': 'dock', 'type': 'HasA', 'score': 0.017473129555583, 'wm_score': 0.6189002, 'final': 0.19790125068890813}, {'fro': 'ship', 'to': 'dock', 'type': 'AtLocation', 'score': 0.017821531742811203, 'wm_score': 0.6189002, 'final': 0.19814513221996788}, {'fro': 'island', 'to': 'dock', 'type': 'HasA', 'score': 0.005787148606032133, 'wm_score': 0.4090477, 'final': 0.1267653140242225}, {'fro': 'jury', 'to': 'dock', 'type': 'AtLocation', 'score': 0.6287781596183777, 'wm_score': 0.2441451, 'final': 0.5133882417328643}, {'fro': 'sail', 'to': 'dock', 'type': 'HasA', 'score': 0.0050506298430264, 'wm_score': 0.55618596, 'final': 0.17039122889011848}, {'fro': 'sail', 'to': 'dock', 'type': 'AtLocation', 'score': 0.0032529071904718876, 'wm_score': 0.55618596, 'final': 0.16913282303333033}, {'fro': 'tower', 'to': 'dock', 'type': 'HasA', 'score': 0.004263730254024267, 'wm_score': 0.4050172, 'final': 0.12448977117781701}, {'fro': 'witness', 'to': 'dock', 'type': 'AtLocation', 'score': 0.12755940854549408, 'wm_score': 0.16773736, 'final': 0.13961279398184584}, {'fro': 'charge', 'to': 'dock', 'type': 'AtLocation', 'score': 0.045610249042510986, 'wm_score': 0.2673615, 'final': 0.11213562432975768}, {'fro': 'stand', 'to': 'dock', 'type': 'AtLocation', 'score': 0.0014480405952781439, 'wm_score': 0.3960513, 'final': 0.11982901841669472}, {'fro': 'royal', 'to': 'dock', 'type': 'AtLocation', 'score': 0.0054649002850055695, 'wm_score': 0.34164447, 'final': 0.1063187711995039}, {'fro': 'ferry', 'to': 'dock', 'type': 'HasA', 'score': 0.05959535017609596, 'wm_score': 0.6360954, 'final': 0.2325453651232672}, {'fro': 'titanic', 'to': 'dock', 'type': 'HasA', 'score': 0.0535845085978508, 'wm_score': 0.30284667, 'final': 0.12836315701849554}, {'fro': 'yacht', 'to': 'dock', 'type': 'HasA', 'score': 0.022715305909514427, 'wm_score': 0.5018009, 'final': 0.16644098413666014}, {'fro': 'submarine', 'to': 'dock', 'type': 'HasA', 'score': 0.012201850302517414, 'wm_score': 0.4180259, 'final': 0.13394906521176222}, {'fro': 'pier', 'to': 'dock', 'type': 'HasA', 'score': 0.0100318668410182, 'wm_score': 0.64486766, 'final': 0.20048260478871274}, {'fro': 'iss', 'to': 'dock', 'type': 'HasA', 'score': 0.009381204843521118, 'wm_score': 0.4256215, 'final': 0.1342532933904648}, {'fro': 'train', 'to': 'dock', 'type': 'HasA', 'score': 0.008549850434064865, 'wm_score': 0.42106128, 'final': 0.13230327930384542}, {'fro': 'building', 'to': 'dock', 'type': 'HasA', 'score': 0.008483914658427238, 'wm_score': 0.378294, 'final': 0.11942694026089909}, {'fro': 'port', 'to': 'dock', 'type': 'HasA', 'score': 0.00844105239957571, 'wm_score': 0.6191175, 'final': 0.191643986679703}, {'fro': 'harbour', 'to': 'dock', 'type': 'HasA', 'score': 0.00796764250844717, 'wm_score': 0.6657432, 'final': 0.20530030975591304}, {'fro': 'thames', 'to': 'dock', 'type': 'HasA', 'score': 0.006886081770062447, 'wm_score': 0.461522, 'final': 0.14327685723904374}, {'fro': 'hotel', 'to': 'dock', 'type': 'HasA', 'score': 0.006665072403848171, 'wm_score': 0.39973557, 'final': 0.12458622168269373}, {'fro': 'lighthouse', 'to': 'dock', 'type': 'HasA', 'score': 0.005172164179384708, 'wm_score': 0.42484438, 'final': 0.13107382892556932}, {'fro': 'canal', 'to': 'dock', 'type': 'HasA', 'score': 0.005147751420736313, 'wm_score': 0.53072953, 'final': 0.16282228499451543}, {'fro': 'aquarium', 'to': 'dock', 'type': 'HasA', 'score': 0.00471633393317461, 'wm_score': 0.3288188, 'final': 0.10194707375322225}, {'fro': 'subway', 'to': 'dock', 'type': 'HasA', 'score': 0.003958928398787975, 'wm_score': 0.3555766, 'final': 0.10944422987915162}, {'fro': 'toilet', 'to': 'dock', 'type': 'HasA', 'score': 0.0038580072578042746, 'wm_score': 0.35157812, 'final': 0.10817404108046301}, {'fro': 'ocean', 'to': 'dock', 'type': 'HasA', 'score': 0.003817222313955426, 'wm_score': 0.4108939, 'final': 0.1259402256197688}, {'fro': 'sea', 'to': 'dock', 'type': 'HasA', 'score': 0.0036527924239635468, 'wm_score': 0.45541847, 'final': 0.1391824956967745}, {'fro': 'waterfront', 'to': 'dock', 'type': 'HasA', 'score': 0.00360721442848444, 'wm_score': 0.49536765, 'final': 0.15113534509993914}, {'fro': 'plane', 'to': 'dock', 'type': 'HasA', 'score': 0.0035131038166582584, 'wm_score': 0.36659777, 'final': 0.11243850367166079}, {'fro': 'bus', 'to': 'dock', 'type': 'HasA', 'score': 0.0032211930956691504, 'wm_score': 0.45545375, 'final': 0.13889096016696842}, {'fro': 'site', 'to': 'dock', 'type': 'HasA', 'score': 0.0031611649319529533, 'wm_score': 0.34177095, 'final': 0.10474410045236708}, {'fro': 'dock', 'to': 'staircase', 'type': 'HasA', 'score': 0.043170489370822906, 'wm_score': 0.28065577, 'final': 0.11441607355957606}, {'fro': 'dock', 'to': 'lock', 'type': 'HasA', 'score': 0.027584301307797432, 'wm_score': 0.44154972, 'final': 0.1517739269154582}, {'fro': 'dock', 'to': 'balcony', 'type': 'HasA', 'score': 0.02151607535779476, 'wm_score': 0.32532185, 'final': 0.11265780775045635}, {'fro': 'dock', 'to': 'bar', 'type': 'HasA', 'score': 0.01661641150712967, 'wm_score': 0.33379892, 'final': 0.11177116405499078}, {'fro': 'dock', 'to': 'roof', 'type': 'HasA', 'score': 0.013119890354573727, 'wm_score': 0.36824024, 'final': 0.11965599524820163}, {'fro': 'dock', 'to': 'pier', 'type': 'HasA', 'score': 0.01077622827142477, 'wm_score': 0.64486766, 'final': 0.20100365778999735}, {'fro': 'dock', 'to': 'toilet', 'type': 'HasA', 'score': 0.009999998845160007, 'wm_score': 0.35157812, 'final': 0.11247343519161203}, {'fro': 'dock', 'to': 'ramp', 'type': 'HasA', 'score': 0.0095662297680974, 'wm_score': 0.4586417, 'final': 0.1442888708376682}, {'fro': 'dock', 'to': 'crane', 'type': 'HasA', 'score': 0.007593239191919565, 'wm_score': 0.422661, 'final': 0.13211356743434371}, {'fro': 'dock', 'to': 'hangar', 'type': 'HasA', 'score': 0.006121685728430748, 'wm_score': 0.53735363, 'final': 0.16549126900990155}, {'fro': 'dock', 'to': 'gate', 'type': 'HasA', 'score': 0.00525873014703393, 'wm_score': 0.44356874, 'final': 0.13675173310292377}, {'fro': 'dock', 'to': 'tunnel', 'type': 'HasA', 'score': 0.005193361546844244, 'wm_score': 0.48058566, 'final': 0.147811051082791}, {'fro': 'dock', 'to': 'courtyard', 'type': 'HasA', 'score': 0.004583020694553852, 'wm_score': 0.32788786, 'final': 0.1015744724861877}, {'fro': 'dock', 'to': 'bridge', 'type': 'HasA', 'score': 0.004453230649232864, 'wm_score': 0.48506954, 'final': 0.14863812345446303}, {'fro': 'shark', 'to': 'dock', 'type': 'AtLocation', 'score': 0.0899401530623436, 'wm_score': 0.14606966, 'final': 0.10677900514364053}, {'fro': 'lobster', 'to': 'dock', 'type': 'AtLocation', 'score': 0.058639537543058395, 'wm_score': 0.20396617, 'final': 0.10223752728014088}, {'fro': 'yacht', 'to': 'dock', 'type': 'AtLocation', 'score': 0.03130834922194481, 'wm_score': 0.5018009, 'final': 0.1724561144553614}, {'fro': 'fish', 'to': 'dock', 'type': 'AtLocation', 'score': 0.027962300926446915, 'wm_score': 0.26864702, 'final': 0.10016771664851284}, {'fro': 'submarine', 'to': 'dock', 'type': 'AtLocation', 'score': 0.019554482772946358, 'wm_score': 0.4180259, 'final': 0.13909590794106247}, {'fro': 'crane', 'to': 'dock', 'type': 'AtLocation', 'score': 0.01671636290848255, 'wm_score': 0.422661, 'final': 0.1384997540359378}, {'fro': 'fisherman', 'to': 'dock', 'type': 'AtLocation', 'score': 0.014285028912127018, 'wm_score': 0.37852174, 'final': 0.12355604223848893}, {'fro': 'vessel', 'to': 'dock', 'type': 'AtLocation', 'score': 0.006640400271862745, 'wm_score': 0.5380629, 'final': 0.16606715019030394}, {'fro': 'torpedo', 'to': 'dock', 'type': 'AtLocation', 'score': 0.004423206672072411, 'wm_score': 0.33538777, 'final': 0.1037125756704507}, {'fro': 'tanker', 'to': 'dock', 'type': 'AtLocation', 'score': 0.0034542877692729235, 'wm_score': 0.44479406, 'final': 0.13585621943849108}, {'fro': 'container', 'to': 'dock', 'type': 'AtLocation', 'score': 0.003427148098126054, 'wm_score': 0.5721395, 'final': 0.17404085366868827}, {'fro': 'tug', 'to': 'dock', 'type': 'AtLocation', 'score': 0.003405865514650941, 'wm_score': 0.44308078, 'final': 0.1353083398602557}, {'fro': 'passenger', 'to': 'dock', 'type': 'AtLocation', 'score': 0.0031071475241333246, 'wm_score': 0.45245418, 'final': 0.13791125726689335}, {'fro': 'dock', 'to': 'harbour', 'type': 'AtLocation', 'score': 0.19128470122814178, 'wm_score': 0.6657432, 'final': 0.33362225085969927}, {'fro': 'dock', 'to': 'works', 'type': 'AtLocation', 'score': 0.08622798323631287, 'wm_score': 0.23517513, 'final': 0.130912127265419}, {'fro': 'dock', 'to': 'water', 'type': 'AtLocation', 'score': 0.08431465923786163, 'wm_score': 0.3613063, 'final': 0.16741215146650315}, {'fro': 'dock', 'to': 'bay', 'type': 'AtLocation', 'score': 0.047990214079618454, 'wm_score': 0.5247163, 'final': 0.19100803985573295}, {'fro': 'dock', 'to': 'harbor', 'type': 'AtLocation', 'score': 0.04189726710319519, 'wm_score': 0.58955646, 'final': 0.20619502497223663}, {'fro': 'dock', 'to': 'sea', 'type': 'AtLocation', 'score': 0.03321215882897377, 'wm_score': 0.45541847, 'final': 0.15987405218028167}, {'fro': 'dock', 'to': 'air', 'type': 'AtLocation', 'score': 0.022208455950021744, 'wm_score': 0.34904695, 'final': 0.12026000416501524}, {'fro': 'dock', 'to': 'ocean', 'type': 'AtLocation', 'score': 0.017825724557042122, 'wm_score': 0.4108939, 'final': 0.13574617718992948}, {'fro': 'dock', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.014785826206207275, 'wm_score': 0.37139335, 'final': 0.12176808334434511}, {'fro': 'dock', 'to': 'river', 'type': 'AtLocation', 'score': 0.010885055176913738, 'wm_score': 0.37413007, 'final': 0.11985855962383962}, {'fro': 'dock', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.009416799061000347, 'wm_score': 0.3407861, 'final': 0.10882758934270026}, {'fro': 'dock', 'to': 'sand', 'type': 'AtLocation', 'score': 0.008001511916518211, 'wm_score': 0.32126945, 'final': 0.10198189334156275}, {'fro': 'dock', 'to': 'yard', 'type': 'AtLocation', 'score': 0.007123781368136406, 'wm_score': 0.5126372, 'final': 0.15877780695769553}, {'fro': 'dock', 'to': 'open', 'type': 'AtLocation', 'score': 0.006214237306267023, 'wm_score': 0.3236334, 'final': 0.10143998611438693}, {'fro': 'dock', 'to': 'ground', 'type': 'AtLocation', 'score': 0.00610615499317646, 'wm_score': 0.38515586, 'final': 0.11982106649522355}, {'fro': 'dock', 'to': 'thames', 'type': 'AtLocation', 'score': 0.005626648664474487, 'wm_score': 0.461522, 'final': 0.14239525406513215}, {'fro': 'dock', 'to': 'canal', 'type': 'AtLocation', 'score': 0.005430367309600115, 'wm_score': 0.53072953, 'final': 0.1630201161167201}, {'fro': 'dock', 'to': 'garden', 'type': 'AtLocation', 'score': 0.004599704407155514, 'wm_score': 0.34717488, 'final': 0.10737225708500889}, {'fro': 'dock', 'to': 'centre', 'type': 'AtLocation', 'score': 0.004559115506708622, 'wm_score': 0.36085808, 'final': 0.11144880485469605}, {'fro': 'dock', 'to': 'waters', 'type': 'AtLocation', 'score': 0.003952530678361654, 'wm_score': 0.36532673, 'final': 0.11236479047485318}, {'fro': 'dock', 'to': 'park', 'type': 'AtLocation', 'score': 0.0038043460808694363, 'wm_score': 0.39308012, 'final': 0.12058707825660861}, {'fro': 'dock', 'to': 'port', 'type': 'AtLocation', 'score': 0.002969769760966301, 'wm_score': 0.6191175, 'final': 0.18781408883267642}, {'fro': 'dock', 'to': 'building', 'type': 'AtLocation', 'score': 0.002563218818977475, 'wm_score': 0.378294, 'final': 0.11528245317328426}, {'fro': 'solicitor', 'to': 'dock', 'type': 'AtLocation', 'score': 0.5624147653579712, 'wm_score': 0.16443273, 'final': 0.4430201547505798}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

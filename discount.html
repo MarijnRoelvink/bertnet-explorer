@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">discount</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "discount"
+    let relations = [{'fro': 'discount', 'to': 'distribution', 'type': 'AtLocation', 'score': 0.005057979375123978, 'wm_score': 0.34828615, 'final': 0.1080264305625868}, {'fro': 'dealer', 'to': 'discount', 'type': 'HasA', 'score': 0.004775297828018665, 'wm_score': 0.43438223, 'final': 0.1336573774796131}, {'fro': 'discount', 'to': 'recommendation', 'type': 'AtLocation', 'score': 0.004871963988989592, 'wm_score': 0.32597435, 'final': 0.10120267979229274}, {'fro': 'membership', 'to': 'discount', 'type': 'HasA', 'score': 0.015158277936279774, 'wm_score': 0.33502883, 'final': 0.11111944355539585}, {'fro': 'discount', 'to': 'membership', 'type': 'AtLocation', 'score': 0.004592389799654484, 'wm_score': 0.33502883, 'final': 0.10372332185975816}, {'fro': 'bonus', 'to': 'discount', 'type': 'HasA', 'score': 0.008419611491262913, 'wm_score': 0.38099808, 'final': 0.12019315204388406}, {'fro': 'discount', 'to': 'bonus', 'type': 'AtLocation', 'score': 0.0038243522867560387, 'wm_score': 0.38099808, 'final': 0.11697647060072926}, {'fro': 'buyer', 'to': 'discount', 'type': 'HasA', 'score': 0.00583091052249074, 'wm_score': 0.56128186, 'final': 0.17246619536574354}, {'fro': 'grocery', 'to': 'discount', 'type': 'HasA', 'score': 0.012632851488888264, 'wm_score': 0.6143857, 'final': 0.19315870604222182}, {'fro': 'supermarket', 'to': 'discount', 'type': 'HasA', 'score': 0.012701143510639668, 'wm_score': 0.57351524, 'final': 0.1809453724574478}, {'fro': 'discount', 'to': 'value', 'type': 'AtLocation', 'score': 0.004013031255453825, 'wm_score': 0.53977627, 'final': 0.16474200287881768}, {'fro': 'price', 'to': 'discount', 'type': 'HasA', 'score': 0.007182693108916283, 'wm_score': 0.62605447, 'final': 0.19284422617624142}, {'fro': 'amount', 'to': 'discount', 'type': 'HasA', 'score': 0.0068380874581635, 'wm_score': 0.45429313, 'final': 0.14107460022071447}, {'fro': 'discount', 'to': 'amount', 'type': 'AtLocation', 'score': 0.007838087156414986, 'wm_score': 0.45429313, 'final': 0.14177460000949052}, {'fro': 'store', 'to': 'discount', 'type': 'HasA', 'score': 0.006362025626003742, 'wm_score': 0.5909014, 'final': 0.18172383793820265}, {'fro': 'discount', 'to': 'stock', 'type': 'AtLocation', 'score': 0.0035370520781725645, 'wm_score': 0.52472335, 'final': 0.15989294145472083}, {'fro': 'retailer', 'to': 'discount', 'type': 'HasA', 'score': 0.024130482226610184, 'wm_score': 0.60210186, 'final': 0.19752189555862715}, {'fro': 'airline', 'to': 'discount', 'type': 'HasA', 'score': 0.011170923709869385, 'wm_score': 0.4741493, 'final': 0.15006443659690857}, {'fro': 'sale', 'to': 'discount', 'type': 'HasA', 'score': 0.0061265514232218266, 'wm_score': 0.5517304, 'final': 0.1698077059962553}, {'fro': 'company', 'to': 'discount', 'type': 'HasA', 'score': 0.005095444153994322, 'wm_score': 0.44142073, 'final': 0.13599302990779605}, {'fro': 'service', 'to': 'discount', 'type': 'HasA', 'score': 0.00446024164557457, 'wm_score': 0.41690415, 'final': 0.1281934141519022}, {'fro': 'deal', 'to': 'discount', 'type': 'HasA', 'score': 0.004194035194814205, 'wm_score': 0.3356774, 'final': 0.10363904463636997}, {'fro': 'shop', 'to': 'discount', 'type': 'HasA', 'score': 0.003966009244322777, 'wm_score': 0.45042, 'final': 0.13790220647102597}, {'fro': 'exchange', 'to': 'discount', 'type': 'HasA', 'score': 0.0033982363529503345, 'wm_score': 0.44173524, 'final': 0.13489933744706523}, {'fro': 'restaurant', 'to': 'discount', 'type': 'HasA', 'score': 0.0031510028056800365, 'wm_score': 0.42190197, 'final': 0.12877629296397602}, {'fro': 'discount', 'to': 'downside', 'type': 'HasA', 'score': 0.1557939052581787, 'wm_score': 0.2647602, 'final': 0.1884837936807251}, {'fro': 'discount', 'to': 'price', 'type': 'HasA', 'score': 0.0376332625746727, 'wm_score': 0.62605447, 'final': 0.2141596248022709}, {'fro': 'discount', 'to': 'cost', 'type': 'HasA', 'score': 0.02320462465286255, 'wm_score': 0.50613296, 'final': 0.16808312525700378}, {'fro': 'discount', 'to': 'difference', 'type': 'HasA', 'score': 0.019835611805319786, 'wm_score': 0.38690436, 'final': 0.12995623626372385}, {'fro': 'discount', 'to': 'limit', 'type': 'HasA', 'score': 0.018052108585834503, 'wm_score': 0.48353344, 'final': 0.15769650801008417}, {'fro': 'discount', 'to': 'premium', 'type': 'HasA', 'score': 0.017510106787085533, 'wm_score': 0.6697949, 'final': 0.2131955447509599}, {'fro': 'discount', 'to': 'bonus', 'type': 'HasA', 'score': 0.01415035780519247, 'wm_score': 0.38099808, 'final': 0.12420467446363476}, {'fro': 'discount', 'to': 'link', 'type': 'HasA', 'score': 0.009960141032934189, 'wm_score': 0.32318172, 'final': 0.10392661472305395}, {'fro': 'discount', 'to': 'coupon', 'type': 'HasA', 'score': 0.008786792866885662, 'wm_score': 0.63463295, 'final': 0.19654064000681998}, {'fro': 'discount', 'to': 'competitor', 'type': 'HasA', 'score': 0.00743278069421649, 'wm_score': 0.37102288, 'final': 0.11650981048595156}, {'fro': 'discount', 'to': 'guarantee', 'type': 'HasA', 'score': 0.006927901413291693, 'wm_score': 0.35842273, 'final': 0.11237634998930421}, {'fro': 'discount', 'to': 'cut', 'type': 'HasA', 'score': 0.006895780563354492, 'wm_score': 0.46294478, 'final': 0.14371048039434817}, {'fro': 'discount', 'to': 'benefit', 'type': 'HasA', 'score': 0.006762017495930195, 'wm_score': 0.40140957, 'final': 0.12515628324715114}, {'fro': 'discount', 'to': 'value', 'type': 'HasA', 'score': 0.006318619474768639, 'wm_score': 0.53977627, 'final': 0.16635591463233804}, {'fro': 'discount', 'to': 'reason', 'type': 'HasA', 'score': 0.00615195045247674, 'wm_score': 0.36903453, 'final': 0.11501672431673374}, {'fro': 'discount', 'to': 'fee', 'type': 'HasA', 'score': 0.005660517606884241, 'wm_score': 0.5018949, 'final': 0.154530832324819}, {'fro': 'coupon', 'to': 'discount', 'type': 'AtLocation', 'score': 0.0361853688955307, 'wm_score': 0.63463295, 'final': 0.21571964322687148}, {'fro': 'bargain', 'to': 'discount', 'type': 'AtLocation', 'score': 0.023602046072483063, 'wm_score': 0.52509975, 'final': 0.17405135725073817}, {'fro': 'bonus', 'to': 'discount', 'type': 'AtLocation', 'score': 0.013819028623402119, 'wm_score': 0.38099808, 'final': 0.1239727440363815}, {'fro': 'refund', 'to': 'discount', 'type': 'AtLocation', 'score': 0.009017365984618664, 'wm_score': 0.4795755, 'final': 0.15018480618923308}, {'fro': 'beer', 'to': 'discount', 'type': 'AtLocation', 'score': 0.007546603213995695, 'wm_score': 0.35112906, 'final': 0.110621340249797}, {'fro': 'rebate', 'to': 'discount', 'type': 'AtLocation', 'score': 0.0065065775997936726, 'wm_score': 0.4342628, 'final': 0.13483344431985558}, {'fro': 'penny', 'to': 'discount', 'type': 'AtLocation', 'score': 0.006463163066655397, 'wm_score': 0.35266554, 'final': 0.1103238761466588}, {'fro': 'dollar', 'to': 'discount', 'type': 'AtLocation', 'score': 0.00646218890324235, 'wm_score': 0.470263, 'final': 0.14560243223226965}, {'fro': 'gift', 'to': 'discount', 'type': 'AtLocation', 'score': 0.006380661390721798, 'wm_score': 0.5124419, 'final': 0.15819903297350527}, {'fro': 'price', 'to': 'discount', 'type': 'AtLocation', 'score': 0.005703824572265148, 'wm_score': 0.62605447, 'final': 0.19180901820058563}, {'fro': 'deal', 'to': 'discount', 'type': 'AtLocation', 'score': 0.005683776922523975, 'wm_score': 0.3356774, 'final': 0.1046818638457668}, {'fro': 'voucher', 'to': 'discount', 'type': 'AtLocation', 'score': 0.00567208044230938, 'wm_score': 0.33901036, 'final': 0.10567356430961658}, {'fro': 'competitor', 'to': 'discount', 'type': 'AtLocation', 'score': 0.005001632962375879, 'wm_score': 0.37102288, 'final': 0.11480800707366313}, {'fro': 'difference', 'to': 'discount', 'type': 'AtLocation', 'score': 0.004488709848374128, 'wm_score': 0.38690436, 'final': 0.1192134048938619}, {'fro': 'ticket', 'to': 'discount', 'type': 'AtLocation', 'score': 0.004380537196993828, 'wm_score': 0.52154475, 'final': 0.15952980103789569}, {'fro': 'car', 'to': 'discount', 'type': 'AtLocation', 'score': 0.00437374971807003, 'wm_score': 0.34302124, 'final': 0.10596799680264903}, {'fro': 'premium', 'to': 'discount', 'type': 'AtLocation', 'score': 0.004225742071866989, 'wm_score': 0.6697949, 'final': 0.2038964894503069}, {'fro': 'reward', 'to': 'discount', 'type': 'AtLocation', 'score': 0.004004674963653088, 'wm_score': 0.3273356, 'final': 0.10100395247455718}, {'fro': 'product', 'to': 'discount', 'type': 'AtLocation', 'score': 0.0038122334517538548, 'wm_score': 0.44658443, 'final': 0.1366438924162277}, {'fro': 'purchase', 'to': 'discount', 'type': 'AtLocation', 'score': 0.003651852486655116, 'wm_score': 0.5912566, 'final': 0.17993327674065862}, {'fro': 'drink', 'to': 'discount', 'type': 'AtLocation', 'score': 0.003611987689509988, 'wm_score': 0.3249781, 'final': 0.100021821382657}, {'fro': 'profit', 'to': 'discount', 'type': 'AtLocation', 'score': 0.003243253566324711, 'wm_score': 0.50643, 'final': 0.15419927749642734}, {'fro': 'buyer', 'to': 'discount', 'type': 'AtLocation', 'score': 0.003213037271052599, 'wm_score': 0.56128186, 'final': 0.17063368408973684}, {'fro': 'burger', 'to': 'discount', 'type': 'AtLocation', 'score': 0.0030820677056908607, 'wm_score': 0.3532765, 'final': 0.10814039739398362}, {'fro': 'discount', 'to': 'works', 'type': 'AtLocation', 'score': 0.5051479935646057, 'wm_score': 0.1596353, 'final': 0.401494185495224}, {'fro': 'discount', 'to': 'cards', 'type': 'AtLocation', 'score': 0.39302489161491394, 'wm_score': 0.5019768, 'final': 0.4257104641304397}, {'fro': 'discount', 'to': 'bag', 'type': 'AtLocation', 'score': 0.012934328056871891, 'wm_score': 0.39852855, 'final': 0.12861259463981034}, {'fro': 'discount', 'to': 'mail', 'type': 'AtLocation', 'score': 0.00447056395933032, 'wm_score': 0.3274447, 'final': 0.10136280477153123}, {'fro': 'discount', 'to': 'supply', 'type': 'AtLocation', 'score': 0.0038886817637830973, 'wm_score': 0.37264568, 'final': 0.11451578123464817}, {'fro': 'discount', 'to': 'making', 'type': 'AtLocation', 'score': 0.0018700995715335011, 'wm_score': 0.33007175, 'final': 0.10033059470007347}, {'fro': 'discount', 'to': 'bargain', 'type': 'AtLocation', 'score': 0.0014658155851066113, 'wm_score': 0.52509975, 'final': 0.15855599590957464}, {'fro': 'discount', 'to': 'deal', 'type': 'AtLocation', 'score': 0.0012275060871616006, 'wm_score': 0.3356774, 'final': 0.10156247426101314}, {'fro': 'discount', 'to': 'shop', 'type': 'AtLocation', 'score': 0.0009762248955667019, 'wm_score': 0.45042, 'final': 0.1358093574268967}, {'fro': 'discount', 'to': 'store', 'type': 'AtLocation', 'score': 0.0006945854402147233, 'wm_score': 0.5909014, 'final': 0.17775662980815035}, {'fro': 'discount', 'to': 'market', 'type': 'AtLocation', 'score': 0.0006900600274093449, 'wm_score': 0.49780324, 'final': 0.14982401401918655}, {'fro': 'discount', 'to': 'plan', 'type': 'AtLocation', 'score': 0.0006602595676667988, 'wm_score': 0.39073992, 'final': 0.11768415769736677}, {'fro': 'discount', 'to': 'shops', 'type': 'AtLocation', 'score': 0.0005986923933960497, 'wm_score': 0.44214427, 'final': 0.13306236567537727}, {'fro': 'discount', 'to': 'giveaway', 'type': 'AtLocation', 'score': 0.0005556746618822217, 'wm_score': 0.37420988, 'final': 0.11265193626331757}, {'fro': 'discount', 'to': 'sale', 'type': 'AtLocation', 'score': 0.000495301210321486, 'wm_score': 0.5517304, 'final': 0.16586583084722506}, {'fro': 'discount', 'to': 'menu', 'type': 'AtLocation', 'score': 0.00035808005486615, 'wm_score': 0.4614216, 'final': 0.1386771360384063}, {'fro': 'discount', 'to': 'package', 'type': 'AtLocation', 'score': 0.0003516018623486161, 'wm_score': 0.45960763, 'final': 0.13812841030364406}, {'fro': 'discount', 'to': 'option', 'type': 'AtLocation', 'score': 0.016388356685638428, 'wm_score': 0.47805017, 'final': 0.15488690067994693}, {'fro': 'ticket', 'to': 'discount', 'type': 'HasA', 'score': 0.0279534999281168, 'wm_score': 0.52154475, 'final': 0.17603087494968178}, {'fro': 'fee', 'to': 'discount', 'type': 'HasA', 'score': 0.007254939991980791, 'wm_score': 0.5018949, 'final': 0.1556469279943866}, {'fro': 'discount', 'to': 'fee', 'type': 'AtLocation', 'score': 0.006584949791431427, 'wm_score': 0.5018949, 'final': 0.15517793485400203}, {'fro': 'discount', 'to': 'salary', 'type': 'AtLocation', 'score': 0.004522882867604494, 'wm_score': 0.39267716, 'final': 0.12096916600732317}, {'fro': 'reward', 'to': 'discount', 'type': 'HasA', 'score': 0.02602844499051571, 'wm_score': 0.3273356, 'final': 0.11642059149336101}, {'fro': 'offer', 'to': 'discount', 'type': 'HasA', 'score': 0.007031483110040426, 'wm_score': 0.5488187, 'final': 0.16956764817702832}, {'fro': 'discount', 'to': 'offer', 'type': 'AtLocation', 'score': 0.029394149780273438, 'wm_score': 0.5488187, 'final': 0.18522151484619143}, {'fro': 'purchase', 'to': 'discount', 'type': 'HasA', 'score': 0.023897817358374596, 'wm_score': 0.5912566, 'final': 0.19410545215086225}, {'fro': 'discount', 'to': 'purchase', 'type': 'AtLocation', 'score': 0.17406919598579407, 'wm_score': 0.5912566, 'final': 0.2992254171900559}, {'fro': 'deposit', 'to': 'discount', 'type': 'HasA', 'score': 0.003952508792281151, 'wm_score': 0.49092966, 'final': 0.15004565415459684}, {'fro': 'premium', 'to': 'discount', 'type': 'HasA', 'score': 0.0036152461543679237, 'wm_score': 0.6697949, 'final': 0.20346914230805754}, {'fro': 'discount', 'to': 'premium', 'type': 'AtLocation', 'score': 0.00873185321688652, 'wm_score': 0.6697949, 'final': 0.20705076725182056}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

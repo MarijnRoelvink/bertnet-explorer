@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">chocolate</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "chocolate"
+    let relations = [{'fro': 'chocolate', 'to': 'mixture', 'type': 'HasA', 'score': 0.005879560019820929, 'wm_score': 0.5872493, 'final': 0.18029048201387468}, {'fro': 'cake', 'to': 'chocolate', 'type': 'HasA', 'score': 0.03133496642112732, 'wm_score': 0.78931135, 'final': 0.25872788149478915}, {'fro': 'fridge', 'to': 'chocolate', 'type': 'HasA', 'score': 0.019947713240981102, 'wm_score': 0.40633547, 'final': 0.1358640402686868}, {'fro': 'moon', 'to': 'chocolate', 'type': 'HasA', 'score': 0.019302446395158768, 'wm_score': 0.29056007, 'final': 0.10067973347661115}, {'fro': 'pudding', 'to': 'chocolate', 'type': 'HasA', 'score': 0.006274641957134008, 'wm_score': 0.64971626, 'final': 0.19930712736999384}, {'fro': 'cafe', 'to': 'chocolate', 'type': 'HasA', 'score': 0.006071838084608316, 'wm_score': 0.3914861, 'final': 0.12169611665922583}, {'fro': 'bunny', 'to': 'chocolate', 'type': 'HasA', 'score': 0.006011716090142727, 'wm_score': 0.33875003, 'final': 0.10583321026309991}, {'fro': 'dessert', 'to': 'chocolate', 'type': 'HasA', 'score': 0.005875880364328623, 'wm_score': 0.73867685, 'final': 0.22571617125503007}, {'fro': 'bakery', 'to': 'chocolate', 'type': 'HasA', 'score': 0.005835619755089283, 'wm_score': 0.47921807, 'final': 0.14785035482856254}, {'fro': 'recipe', 'to': 'chocolate', 'type': 'HasA', 'score': 0.005488504655659199, 'wm_score': 0.5769314, 'final': 0.17692137325896146}, {'fro': 'restaurant', 'to': 'chocolate', 'type': 'HasA', 'score': 0.004616269376128912, 'wm_score': 0.42177966, 'final': 0.12976528656329026}, {'fro': 'kitchen', 'to': 'chocolate', 'type': 'HasA', 'score': 0.004512079991400242, 'wm_score': 0.42725414, 'final': 0.1313346979939802}, {'fro': 'dog', 'to': 'chocolate', 'type': 'HasA', 'score': 0.004511161707341671, 'wm_score': 0.35680437, 'final': 0.11019912419513918}, {'fro': 'cat', 'to': 'chocolate', 'type': 'HasA', 'score': 0.004012505058199167, 'wm_score': 0.33221567, 'final': 0.10247345454073944}, {'fro': 'bar', 'to': 'chocolate', 'type': 'HasA', 'score': 0.0038817685563117266, 'wm_score': 0.43755707, 'final': 0.1339843589894182}, {'fro': 'burger', 'to': 'chocolate', 'type': 'HasA', 'score': 0.003787078894674778, 'wm_score': 0.39179164, 'final': 0.12018844722627237}, {'fro': 'menu', 'to': 'chocolate', 'type': 'HasA', 'score': 0.003540628356859088, 'wm_score': 0.38238895, 'final': 0.11719512484980138}, {'fro': 'milk', 'to': 'chocolate', 'type': 'HasA', 'score': 0.0034533331636339426, 'wm_score': 0.64722985, 'final': 0.1965862882145438}, {'fro': 'cup', 'to': 'chocolate', 'type': 'HasA', 'score': 0.003280303440988064, 'wm_score': 0.38130015, 'final': 0.11668625740869167}, {'fro': 'cereal', 'to': 'chocolate', 'type': 'HasA', 'score': 0.00327668571844697, 'wm_score': 0.5362631, 'final': 0.16317261000291292}, {'fro': 'refrigerator', 'to': 'chocolate', 'type': 'HasA', 'score': 0.0030356007628142834, 'wm_score': 0.4666196, 'final': 0.14211080053397004}, {'fro': 'oven', 'to': 'chocolate', 'type': 'HasA', 'score': 0.0029407574329525232, 'wm_score': 0.47050795, 'final': 0.14321091520306678}, {'fro': 'supermarket', 'to': 'chocolate', 'type': 'HasA', 'score': 0.002922570565715432, 'wm_score': 0.38731843, 'final': 0.11824132839600082}, {'fro': 'freezer', 'to': 'chocolate', 'type': 'HasA', 'score': 0.002858514431864023, 'wm_score': 0.4845458, 'final': 0.14736470010230485}, {'fro': 'chocolate', 'to': 'twist', 'type': 'HasA', 'score': 0.15224502980709076, 'wm_score': 0.3465214, 'final': 0.21052794086496351}, {'fro': 'chocolate', 'to': 'flavour', 'type': 'HasA', 'score': 0.0629369392991066, 'wm_score': 0.47621655, 'final': 0.18692082250937464}, {'fro': 'chocolate', 'to': 'taste', 'type': 'HasA', 'score': 0.0358894020318985, 'wm_score': 0.5986762, 'final': 0.20472544142232899}, {'fro': 'chocolate', 'to': 'smell', 'type': 'HasA', 'score': 0.0151438657194376, 'wm_score': 0.4136057, 'final': 0.13468241600360634}, {'fro': 'chocolate', 'to': 'bite', 'type': 'HasA', 'score': 0.012068700045347214, 'wm_score': 0.31981346, 'final': 0.10439212803174305}, {'fro': 'chocolate', 'to': 'flavor', 'type': 'HasA', 'score': 0.011721830815076828, 'wm_score': 0.6239178, 'final': 0.1953806215705538}, {'fro': 'chocolate', 'to': 'texture', 'type': 'HasA', 'score': 0.009156646206974983, 'wm_score': 0.49022987, 'final': 0.15347861334488253}, {'fro': 'chocolate', 'to': 'coating', 'type': 'HasA', 'score': 0.009090250357985497, 'wm_score': 0.4648769, 'final': 0.14582624525058988}, {'fro': 'chocolate', 'to': 'scent', 'type': 'HasA', 'score': 0.0074144573882222176, 'wm_score': 0.43882528, 'final': 0.13683770417175556}, {'fro': 'chocolate', 'to': 'glow', 'type': 'HasA', 'score': 0.005382210947573185, 'wm_score': 0.3563536, 'final': 0.11067362766330124}, {'fro': 'chocolate', 'to': 'hint', 'type': 'HasA', 'score': 0.004826382268220186, 'wm_score': 0.34883142, 'final': 0.10802789358775415}, {'fro': 'chocolate', 'to': 'candle', 'type': 'HasA', 'score': 0.0034787869080901146, 'wm_score': 0.3575055, 'final': 0.10968680083566308}, {'fro': 'chocolate', 'to': 'filling', 'type': 'HasA', 'score': 0.0033890902996063232, 'wm_score': 0.49665672, 'final': 0.15136937920972443}, {'fro': 'raspberry', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.03269016742706299, 'wm_score': 0.6030263, 'final': 0.20379100719894414}, {'fro': 'strawberry', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.029022490605711937, 'wm_score': 0.55282384, 'final': 0.18616289542399836}, {'fro': 'cherry', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.02725248783826828, 'wm_score': 0.5450659, 'final': 0.1825965114867878}, {'fro': 'banana', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.021382400766015053, 'wm_score': 0.55697316, 'final': 0.18205962853621055}, {'fro': 'chip', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.0181343425065279, 'wm_score': 0.29991785, 'final': 0.10266939475456954}, {'fro': 'rabbit', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.016356879845261574, 'wm_score': 0.3139133, 'final': 0.10562380589168312}, {'fro': 'pear', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.011121686547994614, 'wm_score': 0.48572433, 'final': 0.15350247958359625}, {'fro': 'fork', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.010099300183355808, 'wm_score': 0.3233486, 'final': 0.10407409012834908}, {'fro': 'taste', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.009039461612701416, 'wm_score': 0.5986762, 'final': 0.18593048312889102}, {'fro': 'bite', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.008678371086716652, 'wm_score': 0.31981346, 'final': 0.10201889776070167}, {'fro': 'cookie', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.00819399580359459, 'wm_score': 0.62685496, 'final': 0.19379228506251622}, {'fro': 'lemon', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.00785712618380785, 'wm_score': 0.64331234, 'final': 0.19849369032866554}, {'fro': 'flavour', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.007389820646494627, 'wm_score': 0.47621655, 'final': 0.14803783945254628}, {'fro': 'carrot', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.006877475883811712, 'wm_score': 0.43128872, 'final': 0.1342008491186682}, {'fro': 'nut', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.006451130844652653, 'wm_score': 0.5299738, 'final': 0.1635079315912569}, {'fro': 'pumpkin', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.0051080407574772835, 'wm_score': 0.6337961, 'final': 0.1937144585302341}, {'fro': 'fish', 'to': 'chocolate', 'type': 'AtLocation', 'score': 0.004560527857393026, 'wm_score': 0.35617012, 'final': 0.11004340550017513}, {'fro': 'chocolate', 'to': 'fridge', 'type': 'AtLocation', 'score': 0.11110256612300873, 'wm_score': 0.40633547, 'final': 0.19967243728610612}, {'fro': 'chocolate', 'to': 'air', 'type': 'AtLocation', 'score': 0.11016502231359482, 'wm_score': 0.18631606, 'final': 0.13301033361951636}, {'fro': 'chocolate', 'to': 'freezer', 'type': 'AtLocation', 'score': 0.08344004303216934, 'wm_score': 0.4845458, 'final': 0.20377177012251857}, {'fro': 'chocolate', 'to': 'pudding', 'type': 'AtLocation', 'score': 0.08141214400529861, 'wm_score': 0.64971626, 'final': 0.25190337880370905}, {'fro': 'chocolate', 'to': 'oven', 'type': 'AtLocation', 'score': 0.07037173211574554, 'wm_score': 0.47050795, 'final': 0.1904125974810219}, {'fro': 'chocolate', 'to': 'bag', 'type': 'AtLocation', 'score': 0.02485782839357853, 'wm_score': 0.40302825, 'final': 0.13830895487550499}, {'fro': 'chocolate', 'to': 'bottle', 'type': 'AtLocation', 'score': 0.02089991606771946, 'wm_score': 0.5270221, 'final': 0.17273657124740366}, {'fro': 'chocolate', 'to': 'mix', 'type': 'AtLocation', 'score': 0.011146822944283485, 'wm_score': 0.5400034, 'final': 0.16980379606099846}, {'fro': 'chocolate', 'to': 'kitchen', 'type': 'AtLocation', 'score': 0.010411068797111511, 'wm_score': 0.42725414, 'final': 0.13546399015797808}, {'fro': 'chocolate', 'to': 'dessert', 'type': 'AtLocation', 'score': 0.009573726914823055, 'wm_score': 0.73867685, 'final': 0.22830466384037618}, {'fro': 'chocolate', 'to': 'refrigerator', 'type': 'AtLocation', 'score': 0.009164869785308838, 'wm_score': 0.4666196, 'final': 0.14640128884971623}, {'fro': 'chocolate', 'to': 'milk', 'type': 'AtLocation', 'score': 0.008062769658863544, 'wm_score': 0.64722985, 'final': 0.1998128937612045}, {'fro': 'chocolate', 'to': 'cake', 'type': 'AtLocation', 'score': 0.007773962803184986, 'wm_score': 0.78931135, 'final': 0.2422351789622295}, {'fro': 'chocolate', 'to': 'dark', 'type': 'AtLocation', 'score': 0.005516888108104467, 'wm_score': 0.43971768, 'final': 0.13577712567567313}, {'fro': 'chocolate', 'to': 'dish', 'type': 'AtLocation', 'score': 0.005274719558656216, 'wm_score': 0.54979265, 'final': 0.16863009869105938}, {'fro': 'chocolate', 'to': 'box', 'type': 'AtLocation', 'score': 0.005206063389778137, 'wm_score': 0.42523268, 'final': 0.1312140483728447}, {'fro': 'chocolate', 'to': 'water', 'type': 'AtLocation', 'score': 0.004746037069708109, 'wm_score': 0.32485747, 'final': 0.10077946694879569}, {'fro': 'chocolate', 'to': 'microwave', 'type': 'AtLocation', 'score': 0.004646758083254099, 'wm_score': 0.42611212, 'final': 0.13108636665827786}, {'fro': 'chocolate', 'to': 'cup', 'type': 'AtLocation', 'score': 0.004565812647342682, 'wm_score': 0.38130015, 'final': 0.1175861138531399}, {'fro': 'chocolate', 'to': 'sauce', 'type': 'AtLocation', 'score': 0.004544226918369532, 'wm_score': 0.6435358, 'final': 0.19624169884285872}, {'fro': 'chocolate', 'to': 'bowl', 'type': 'AtLocation', 'score': 0.004307609982788563, 'wm_score': 0.35860577, 'final': 0.11059705798795201}, {'fro': 'chocolate', 'to': 'pan', 'type': 'AtLocation', 'score': 0.0031174225732684135, 'wm_score': 0.37022096, 'final': 0.11324848380128791}, {'fro': 'chocolate', 'to': 'sugar', 'type': 'HasA', 'score': 0.004207988735288382, 'wm_score': 0.63669544, 'final': 0.1939542241147019}, {'fro': 'chocolate', 'to': 'sweet', 'type': 'HasA', 'score': 0.0041985646821558475, 'wm_score': 0.6094905, 'final': 0.18578614527750914}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

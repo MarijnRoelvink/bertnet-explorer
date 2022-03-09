@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">robot</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "robot"
+    let relations = [{'fro': 'world', 'to': 'robot', 'type': 'HasA', 'score': 0.01428608875721693, 'wm_score': 0.30777493, 'final': 0.10233274113005186}, {'fro': 'robot', 'to': 'control', 'type': 'AtLocation', 'score': 0.019004521891474724, 'wm_score': 0.31136405, 'final': 0.10671238032403232}, {'fro': 'robot', 'to': 'ability', 'type': 'HasA', 'score': 0.008038017898797989, 'wm_score': 0.3426492, 'final': 0.10842137252915861}, {'fro': 'robot', 'to': 'camera', 'type': 'HasA', 'score': 0.005155164748430252, 'wm_score': 0.52617216, 'final': 0.16146026332390118}, {'fro': 'robot', 'to': 'unit', 'type': 'AtLocation', 'score': 0.009609903208911419, 'wm_score': 0.35693324, 'final': 0.113806904246238}, {'fro': 'robot', 'to': 'scene', 'type': 'AtLocation', 'score': 0.013075647875666618, 'wm_score': 0.30729395, 'final': 0.10134113851296664}, {'fro': 'robot', 'to': 'concept', 'type': 'HasA', 'score': 0.00725301168859005, 'wm_score': 0.39674032, 'final': 0.12409920418201305}, {'fro': 'robot', 'to': 'studio', 'type': 'AtLocation', 'score': 0.017375275492668152, 'wm_score': 0.33701858, 'final': 0.11326826684486772}, {'fro': 'robot', 'to': 'elevator', 'type': 'AtLocation', 'score': 0.005509193055331707, 'wm_score': 0.37567258, 'final': 0.1165582091387322}, {'fro': 'robot', 'to': 'operation', 'type': 'AtLocation', 'score': 0.07024317979812622, 'wm_score': 0.33552593, 'final': 0.14982800485868836}, {'fro': 'lab', 'to': 'robot', 'type': 'HasA', 'score': 0.022037694230675697, 'wm_score': 0.3970018, 'final': 0.134526925961473}, {'fro': 'robot', 'to': 'lab', 'type': 'AtLocation', 'score': 0.03287369757890701, 'wm_score': 0.3970018, 'final': 0.14211212830523492}, {'fro': 'robot', 'to': 'mode', 'type': 'AtLocation', 'score': 0.008611012250185013, 'wm_score': 0.4667612, 'final': 0.14605606857512954}, {'fro': 'robot', 'to': 'manufacturer', 'type': 'HasA', 'score': 0.004351804032921791, 'wm_score': 0.35305795, 'final': 0.10896364782304527}, {'fro': 'robot', 'to': 'mind', 'type': 'HasA', 'score': 0.006019378546625376, 'wm_score': 0.338166, 'final': 0.10566336498263779}, {'fro': 'robot', 'to': 'test', 'type': 'AtLocation', 'score': 0.025496698915958405, 'wm_score': 0.27805638, 'final': 0.1012646032411709}, {'fro': 'robot', 'to': 'exercise', 'type': 'AtLocation', 'score': 0.009338038973510265, 'wm_score': 0.34533307, 'final': 0.1101365482814572}, {'fro': 'robot', 'to': 'action', 'type': 'AtLocation', 'score': 0.013551507145166397, 'wm_score': 0.32636708, 'final': 0.10739617900161648}, {'fro': 'robot', 'to': 'mouse', 'type': 'HasA', 'score': 0.008252519182860851, 'wm_score': 0.59045655, 'final': 0.1829137284280026}, {'fro': 'robot', 'to': 'space', 'type': 'AtLocation', 'score': 0.010241564363241196, 'wm_score': 0.5137012, 'final': 0.16127945505426883}, {'fro': 'robot', 'to': 'model', 'type': 'AtLocation', 'score': 0.004065011162310839, 'wm_score': 0.43238753, 'final': 0.13256176681361762}, {'fro': 'robot', 'to': 'design', 'type': 'HasA', 'score': 0.005668597295880318, 'wm_score': 0.39625388, 'final': 0.12284418210711624}, {'fro': 'robot', 'to': 'design', 'type': 'AtLocation', 'score': 0.004692463204264641, 'wm_score': 0.39625388, 'final': 0.12216088824298527}, {'fro': 'robot', 'to': 'object', 'type': 'HasA', 'score': 0.005145585164427757, 'wm_score': 0.40151197, 'final': 0.12405550061509944}, {'fro': 'robot', 'to': 'speed', 'type': 'HasA', 'score': 0.004373549018055201, 'wm_score': 0.32887197, 'final': 0.10172307531263866}, {'fro': 'robot', 'to': 'machine', 'type': 'HasA', 'score': 0.005747275892645121, 'wm_score': 0.5042101, 'final': 0.1552861231248516}, {'fro': 'robot', 'to': 'machine', 'type': 'AtLocation', 'score': 0.004865448921918869, 'wm_score': 0.5042101, 'final': 0.15466884424534322}, {'fro': 'robot', 'to': 'task', 'type': 'HasA', 'score': 0.010659818537533283, 'wm_score': 0.31739503, 'final': 0.10268038197627331}, {'fro': 'robot', 'to': 'task', 'type': 'AtLocation', 'score': 0.00843340065330267, 'wm_score': 0.31739503, 'final': 0.10112188945731189}, {'fro': 'robot', 'to': 'brain', 'type': 'HasA', 'score': 0.01078238058835268, 'wm_score': 0.3891995, 'final': 0.12430751641184688}, {'fro': 'robot', 'to': 'character', 'type': 'HasA', 'score': 0.0031460775062441826, 'wm_score': 0.44975626, 'final': 0.13712913225437096}, {'fro': 'robot', 'to': 'kitchen', 'type': 'AtLocation', 'score': 0.005141804460436106, 'wm_score': 0.3508237, 'final': 0.10884637312230529}, {'fro': 'robot', 'to': 'project', 'type': 'AtLocation', 'score': 0.043541356921195984, 'wm_score': 0.32804754, 'final': 0.1288932118448372}, {'fro': 'robot', 'to': 'crew', 'type': 'AtLocation', 'score': 0.0046989647671580315, 'wm_score': 0.39765286, 'final': 0.12258513333701064}, {'fro': 'robot', 'to': 'mission', 'type': 'HasA', 'score': 0.008925178088247776, 'wm_score': 0.31636196, 'final': 0.10115621266177346}, {'fro': 'robot', 'to': 'mission', 'type': 'AtLocation', 'score': 0.06432324647903442, 'wm_score': 0.31636196, 'final': 0.1399348605353241}, {'fro': 'robot', 'to': 'wheel', 'type': 'HasA', 'score': 0.005611632950603962, 'wm_score': 0.38989455, 'final': 0.12089650806542279}, {'fro': 'robot', 'to': 'arm', 'type': 'HasA', 'score': 0.014878455549478531, 'wm_score': 0.40487146, 'final': 0.131876356884635}, {'fro': 'robot', 'to': 'ship', 'type': 'AtLocation', 'score': 0.0048911129124462605, 'wm_score': 0.41535264, 'final': 0.1280295710387124}, {'fro': 'robot', 'to': 'boot', 'type': 'HasA', 'score': 0.003136175684630871, 'wm_score': 0.33296677, 'final': 0.10208535397924162}, {'fro': 'robot', 'to': 'motor', 'type': 'HasA', 'score': 0.005654936656355858, 'wm_score': 0.3883593, 'final': 0.12046624565944913}, {'fro': 'robot', 'to': 'use', 'type': 'AtLocation', 'score': 0.004187523853033781, 'wm_score': 0.32857853, 'final': 0.10150482569712366}, {'fro': 'robot', 'to': 'human', 'type': 'HasA', 'score': 0.010614106431603432, 'wm_score': 0.34299636, 'final': 0.11032878250212241}, {'fro': 'robot', 'to': 'show', 'type': 'AtLocation', 'score': 0.015820495784282684, 'wm_score': 0.30205932, 'final': 0.10169214304899789}, {'fro': 'robot', 'to': 'search', 'type': 'AtLocation', 'score': 0.012872927822172642, 'wm_score': 0.36367595, 'final': 0.11811383447552087}, {'fro': 'robot', 'to': 'touch', 'type': 'AtLocation', 'score': 0.006733606103807688, 'wm_score': 0.3406884, 'final': 0.1069200442726654}, {'fro': 'robot', 'to': 'repair', 'type': 'HasA', 'score': 0.005311206448823214, 'wm_score': 0.3246078, 'final': 0.10110018451417627}, {'fro': 'robot', 'to': 'repair', 'type': 'AtLocation', 'score': 0.016975348815321922, 'wm_score': 0.3246078, 'final': 0.10926508417072536}, {'fro': 'robot', 'to': 'moon', 'type': 'AtLocation', 'score': 0.003915773704648018, 'wm_score': 0.39860135, 'final': 0.12232144659325364}, {'fro': 'robot', 'to': 'weapon', 'type': 'HasA', 'score': 0.0040465765632689, 'wm_score': 0.42242032, 'final': 0.12955869959428823}, {'fro': 'robot', 'to': 'prototype', 'type': 'HasA', 'score': 0.026379168033599854, 'wm_score': 0.5372003, 'final': 0.1796255076235199}, {'fro': 'robot', 'to': 'prototype', 'type': 'AtLocation', 'score': 0.007733670063316822, 'wm_score': 0.5372003, 'final': 0.16657365904432178}, {'fro': 'robot', 'to': 'terminator', 'type': 'HasA', 'score': 0.003984473645687103, 'wm_score': 0.3485595, 'final': 0.10735698155198099}, {'fro': 'robot', 'to': 'terminator', 'type': 'AtLocation', 'score': 0.008549640886485577, 'wm_score': 0.3485595, 'final': 0.11055259862053993}, {'fro': 'bbc', 'to': 'robot', 'type': 'HasA', 'score': 0.12498518824577332, 'wm_score': 0.15239668, 'final': 0.13320863577204134}, {'fro': 'guardian', 'to': 'robot', 'type': 'HasA', 'score': 0.0606217086315155, 'wm_score': 0.19941086, 'final': 0.10225845404206085}, {'fro': 'zoo', 'to': 'robot', 'type': 'HasA', 'score': 0.022587614133954048, 'wm_score': 0.2968495, 'final': 0.10486617989376784}, {'fro': 'moon', 'to': 'robot', 'type': 'HasA', 'score': 0.010345724411308765, 'wm_score': 0.39860135, 'final': 0.12682241208791617}, {'fro': 'terminator', 'to': 'robot', 'type': 'HasA', 'score': 0.005211343057453632, 'wm_score': 0.3485595, 'final': 0.10821579014021757}, {'fro': 'circus', 'to': 'robot', 'type': 'HasA', 'score': 0.0033834392670542, 'wm_score': 0.3703176, 'final': 0.11346368748693796}, {'fro': 'earth', 'to': 'robot', 'type': 'HasA', 'score': 0.0032045370899140835, 'wm_score': 0.4387883, 'final': 0.13387966596293988}, {'fro': 'robot', 'to': 'microphone', 'type': 'HasA', 'score': 0.02423611283302307, 'wm_score': 0.29453024, 'final': 0.10532435098311616}, {'fro': 'robot', 'to': 'tail', 'type': 'HasA', 'score': 0.016447385773062706, 'wm_score': 0.36426887, 'final': 0.12079383104114393}, {'fro': 'robot', 'to': 'touchscreen', 'type': 'HasA', 'score': 0.01486203633248806, 'wm_score': 0.30900568, 'final': 0.10310512943274165}, {'fro': 'robot', 'to': 'keyboard', 'type': 'HasA', 'score': 0.011058893986046314, 'wm_score': 0.3125294, 'final': 0.10150004579023245}, {'fro': 'robot', 'to': 'handle', 'type': 'HasA', 'score': 0.011018173769116402, 'wm_score': 0.33624637, 'final': 0.1085866326383815}, {'fro': 'robot', 'to': 'helmet', 'type': 'HasA', 'score': 0.007748831529170275, 'wm_score': 0.34172642, 'final': 0.10794210807041921}, {'fro': 'robot', 'to': 'nose', 'type': 'HasA', 'score': 0.00584105309098959, 'wm_score': 0.33969826, 'final': 0.10599821516369272}, {'fro': 'robot', 'to': 'gps', 'type': 'HasA', 'score': 0.00517617492005229, 'wm_score': 0.35516968, 'final': 0.11017422644403661}, {'fro': 'robot', 'to': 'skeleton', 'type': 'HasA', 'score': 0.004182035103440285, 'wm_score': 0.37148225, 'final': 0.11437209957240822}, {'fro': 'bug', 'to': 'robot', 'type': 'AtLocation', 'score': 0.024595599621534348, 'wm_score': 0.33414894, 'final': 0.11746160173507406}, {'fro': 'chip', 'to': 'robot', 'type': 'AtLocation', 'score': 0.015285903587937355, 'wm_score': 0.30301374, 'final': 0.10160425451155615}, {'fro': 'monkey', 'to': 'robot', 'type': 'AtLocation', 'score': 0.0142965791746974, 'wm_score': 0.52088517, 'final': 0.1662731564222882}, {'fro': 'rabbit', 'to': 'robot', 'type': 'AtLocation', 'score': 0.012772495858371258, 'wm_score': 0.4423049, 'final': 0.1416322171008599}, {'fro': 'predator', 'to': 'robot', 'type': 'AtLocation', 'score': 0.01120238471776247, 'wm_score': 0.48197666, 'final': 0.15243466730243377}, {'fro': 'rat', 'to': 'robot', 'type': 'AtLocation', 'score': 0.00873568281531334, 'wm_score': 0.41440612, 'final': 0.13043681397071935}, {'fro': 'dog', 'to': 'robot', 'type': 'AtLocation', 'score': 0.008498001843690872, 'wm_score': 0.5577338, 'final': 0.17326874129058362}, {'fro': 'spider', 'to': 'robot', 'type': 'AtLocation', 'score': 0.00803784653544426, 'wm_score': 0.48453337, 'final': 0.15098650357481103}, {'fro': 'cat', 'to': 'robot', 'type': 'AtLocation', 'score': 0.008011498488485813, 'wm_score': 0.5656308, 'final': 0.17529728894194008}, {'fro': 'baby', 'to': 'robot', 'type': 'AtLocation', 'score': 0.006567510776221752, 'wm_score': 0.38189512, 'final': 0.11916579354335524}, {'fro': 'shark', 'to': 'robot', 'type': 'AtLocation', 'score': 0.00588678102940321, 'wm_score': 0.36873072, 'final': 0.11473996272058226}, {'fro': 'squirrel', 'to': 'robot', 'type': 'AtLocation', 'score': 0.005703601986169815, 'wm_score': 0.40299773, 'final': 0.12489184039031889}, {'fro': 'snake', 'to': 'robot', 'type': 'AtLocation', 'score': 0.005693537183105946, 'wm_score': 0.39288646, 'final': 0.12185141402817418}, {'fro': 'ghost', 'to': 'robot', 'type': 'AtLocation', 'score': 0.004931712988764048, 'wm_score': 0.4800098, 'final': 0.14745513909213487}, {'fro': 'prototype', 'to': 'robot', 'type': 'AtLocation', 'score': 0.004840002860873938, 'wm_score': 0.5372003, 'final': 0.16454809200261175}, {'fro': 'man', 'to': 'robot', 'type': 'AtLocation', 'score': 0.0048073367215693, 'wm_score': 0.39503014, 'final': 0.12187417770509852}, {'fro': 'camera', 'to': 'robot', 'type': 'AtLocation', 'score': 0.004588640760630369, 'wm_score': 0.52617216, 'final': 0.16106369653244126}, {'fro': 'dinosaur', 'to': 'robot', 'type': 'AtLocation', 'score': 0.004198699723929167, 'wm_score': 0.42332786, 'final': 0.12993744780675043}, {'fro': 'mouse', 'to': 'robot', 'type': 'AtLocation', 'score': 0.003963128663599491, 'wm_score': 0.59045655, 'final': 0.17991115506451966}, {'fro': 'frog', 'to': 'robot', 'type': 'AtLocation', 'score': 0.003956350032240152, 'wm_score': 0.37930965, 'final': 0.11656234002256813}, {'fro': 'robot', 'to': 'air', 'type': 'AtLocation', 'score': 0.05861146003007889, 'wm_score': 0.22914077, 'final': 0.10977025302105523}, {'fro': 'robot', 'to': 'works', 'type': 'AtLocation', 'score': 0.05736877769231796, 'wm_score': 0.26468688, 'final': 0.11956420838462259}, {'fro': 'robot', 'to': 'wild', 'type': 'AtLocation', 'score': 0.024006199091672897, 'wm_score': 0.3057177, 'final': 0.10851964936417104}, {'fro': 'robot', 'to': 'tank', 'type': 'AtLocation', 'score': 0.008814281783998013, 'wm_score': 0.31685066, 'final': 0.10122519524879862}, {'fro': 'robot', 'to': 'rescue', 'type': 'AtLocation', 'score': 0.011462022550404072, 'wm_score': 0.38196474, 'final': 0.12261283778528287}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

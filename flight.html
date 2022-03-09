@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">flight</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "flight"
+    let relations = [{'fro': 'plane', 'to': 'flight', 'type': 'HasA', 'score': 0.12711374461650848, 'wm_score': 0.8215627, 'final': 0.335448431231556}, {'fro': 'airline', 'to': 'flight', 'type': 'HasA', 'score': 0.07937690615653992, 'wm_score': 0.6922939, 'final': 0.26325200430957796}, {'fro': 'pilot', 'to': 'flight', 'type': 'HasA', 'score': 0.04383166506886482, 'wm_score': 0.75081325, 'final': 0.2559261405482054}, {'fro': 'aircraft', 'to': 'flight', 'type': 'HasA', 'score': 0.018648486584424973, 'wm_score': 0.7004529, 'final': 0.22318981060909754}, {'fro': 'crew', 'to': 'flight', 'type': 'HasA', 'score': 0.008818596601486206, 'wm_score': 0.7012818, 'final': 0.21655755762104034}, {'fro': 'jet', 'to': 'flight', 'type': 'HasA', 'score': 0.008310877718031406, 'wm_score': 0.74627686, 'final': 0.22970067240262204}, {'fro': 'airport', 'to': 'flight', 'type': 'HasA', 'score': 0.008067579939961433, 'wm_score': 0.6398976, 'final': 0.19761658595797302}, {'fro': 'company', 'to': 'flight', 'type': 'HasA', 'score': 0.007518204394727945, 'wm_score': 0.37612244, 'final': 0.11809947507630958}, {'fro': 'carrier', 'to': 'flight', 'type': 'HasA', 'score': 0.006168055348098278, 'wm_score': 0.61724085, 'final': 0.1894898937436688}, {'fro': 'airplane', 'to': 'flight', 'type': 'HasA', 'score': 0.005933945067226887, 'wm_score': 0.73395014, 'final': 0.22433880354705887}, {'fro': 'airliner', 'to': 'flight', 'type': 'HasA', 'score': 0.005547479726374149, 'wm_score': 0.6529261, 'final': 0.1997610658084619}, {'fro': 'ferry', 'to': 'flight', 'type': 'HasA', 'score': 0.00539366714656353, 'wm_score': 0.51187724, 'final': 0.15733873900259449}, {'fro': 'helicopter', 'to': 'flight', 'type': 'HasA', 'score': 0.004994029179215431, 'wm_score': 0.6442163, 'final': 0.19676071042545082}, {'fro': 'bird', 'to': 'flight', 'type': 'HasA', 'score': 0.00474300654605031, 'wm_score': 0.32488057, 'final': 0.10078427558223522}, {'fro': 'faa', 'to': 'flight', 'type': 'HasA', 'score': 0.004536672029644251, 'wm_score': 0.51422876, 'final': 0.157444298420751}, {'fro': 'shuttle', 'to': 'flight', 'type': 'HasA', 'score': 0.004335471428930759, 'wm_score': 0.6495029, 'final': 0.19788570000025157}, {'fro': 'express', 'to': 'flight', 'type': 'HasA', 'score': 0.004237047862261534, 'wm_score': 0.49380082, 'final': 0.15110617950358307}, {'fro': 'star', 'to': 'flight', 'type': 'HasA', 'score': 0.004231866914778948, 'wm_score': 0.3353752, 'final': 0.10357486684034527}, {'fro': 'train', 'to': 'flight', 'type': 'HasA', 'score': 0.0037704980932176113, 'wm_score': 0.6397549, 'final': 0.19456581866525238}, {'fro': 'show', 'to': 'flight', 'type': 'HasA', 'score': 0.0036581812892109156, 'wm_score': 0.34061337, 'final': 0.10474473790244766}, {'fro': 'cia', 'to': 'flight', 'type': 'HasA', 'score': 0.003648248501121998, 'wm_score': 0.32505265, 'final': 0.10006956895078542}, {'fro': 'moon', 'to': 'flight', 'type': 'HasA', 'score': 0.0035380276385694742, 'wm_score': 0.37041628, 'final': 0.11360150334699864}, {'fro': 'atlantic', 'to': 'flight', 'type': 'HasA', 'score': 0.003448235336691141, 'wm_score': 0.4930143, 'final': 0.15031805473568383}, {'fro': 'us', 'to': 'flight', 'type': 'HasA', 'score': 0.0033296304754912853, 'wm_score': 0.43286657, 'final': 0.1321907123328439}, {'fro': 'bomber', 'to': 'flight', 'type': 'HasA', 'score': 0.0033121800515800714, 'wm_score': 0.48088557, 'final': 0.14658419703610606}, {'fro': 'team', 'to': 'flight', 'type': 'HasA', 'score': 0.00331125152297318, 'wm_score': 0.41335803, 'final': 0.12632528506608123}, {'fro': 'passenger', 'to': 'flight', 'type': 'HasA', 'score': 0.0031836493872106075, 'wm_score': 0.6651865, 'final': 0.20178450457104746}, {'fro': 'flight', 'to': 'delay', 'type': 'HasA', 'score': 0.07724720239639282, 'wm_score': 0.44569275, 'final': 0.187780866677475}, {'fro': 'flight', 'to': 'glitch', 'type': 'HasA', 'score': 0.02050858549773693, 'wm_score': 0.28926694, 'final': 0.10113609184841586}, {'fro': 'flight', 'to': 'history', 'type': 'HasA', 'score': 0.020187124609947205, 'wm_score': 0.35832208, 'final': 0.12162761122696306}, {'fro': 'flight', 'to': 'controller', 'type': 'HasA', 'score': 0.01636803150177002, 'wm_score': 0.410972, 'final': 0.13474922205123901}, {'fro': 'flight', 'to': 'runway', 'type': 'HasA', 'score': 0.013892216607928276, 'wm_score': 0.5290107, 'final': 0.16842776162554982}, {'fro': 'flight', 'to': 'backlog', 'type': 'HasA', 'score': 0.01317631360143423, 'wm_score': 0.31677485, 'final': 0.10425587452100397}, {'fro': 'flight', 'to': 'crew', 'type': 'HasA', 'score': 0.011021196842193604, 'wm_score': 0.7012818, 'final': 0.21809937778953553}, {'fro': 'flight', 'to': 'problem', 'type': 'HasA', 'score': 0.010962244123220444, 'wm_score': 0.38444853, 'final': 0.12300812988625433}, {'fro': 'flight', 'to': 'cancellation', 'type': 'HasA', 'score': 0.01048949547111988, 'wm_score': 0.45574382, 'final': 0.14406579282978393}, {'fro': 'flight', 'to': 'malfunction', 'type': 'HasA', 'score': 0.009700817056000233, 'wm_score': 0.36329633, 'final': 0.11577947093920017}, {'fro': 'flight', 'to': 'destination', 'type': 'HasA', 'score': 0.009426111355423927, 'wm_score': 0.45263827, 'final': 0.14238975894879677}, {'fro': 'flight', 'to': 'schedule', 'type': 'HasA', 'score': 0.009324043989181519, 'wm_score': 0.49557528, 'final': 0.15519941479242708}, {'fro': 'flight', 'to': 'recorder', 'type': 'HasA', 'score': 0.009152224287390709, 'wm_score': 0.4529285, 'final': 0.1422851070011735}, {'fro': 'flight', 'to': 'captain', 'type': 'HasA', 'score': 0.006896770093590021, 'wm_score': 0.40808576, 'final': 0.12725346706551305}, {'fro': 'flight', 'to': 'cabin', 'type': 'HasA', 'score': 0.006347709335386753, 'wm_score': 0.54247326, 'final': 0.16718537453477073}, {'fro': 'flight', 'to': 'message', 'type': 'HasA', 'score': 0.006087394431233406, 'wm_score': 0.35283965, 'final': 0.1101130711018634}, {'fro': 'flight', 'to': 'gate', 'type': 'HasA', 'score': 0.005742953158915043, 'wm_score': 0.34786797, 'final': 0.10838045821124055}, {'fro': 'flight', 'to': 'camera', 'type': 'HasA', 'score': 0.005705231800675392, 'wm_score': 0.36487064, 'final': 0.1134548542604728}, {'fro': 'flight', 'to': 'warning', 'type': 'HasA', 'score': 0.0051780142821371555, 'wm_score': 0.4608661, 'final': 0.14188443999749603}, {'fro': 'flight', 'to': 'stop', 'type': 'HasA', 'score': 0.004739271942526102, 'wm_score': 0.41769725, 'final': 0.1286266653597683}, {'fro': 'passenger', 'to': 'flight', 'type': 'AtLocation', 'score': 0.2281675934791565, 'wm_score': 0.6651865, 'final': 0.3592732654354096}, {'fro': 'pilot', 'to': 'flight', 'type': 'AtLocation', 'score': 0.05160028487443924, 'wm_score': 0.75081325, 'final': 0.2613641744121075}, {'fro': 'woman', 'to': 'flight', 'type': 'AtLocation', 'score': 0.04427070915699005, 'wm_score': 0.3250566, 'final': 0.12850647640989304}, {'fro': 'crew', 'to': 'flight', 'type': 'AtLocation', 'score': 0.02075684256851673, 'wm_score': 0.7012818, 'final': 0.22491432979796172}, {'fro': 'child', 'to': 'flight', 'type': 'AtLocation', 'score': 0.020675230771303177, 'wm_score': 0.305477, 'final': 0.10611576153991224}, {'fro': 'controller', 'to': 'flight', 'type': 'AtLocation', 'score': 0.01676851324737072, 'wm_score': 0.410972, 'final': 0.13502955927315952}, {'fro': 'drone', 'to': 'flight', 'type': 'AtLocation', 'score': 0.015252478420734406, 'wm_score': 0.37572002, 'final': 0.12339274089451409}, {'fro': 'nurse', 'to': 'flight', 'type': 'AtLocation', 'score': 0.010042180307209492, 'wm_score': 0.3692636, 'final': 0.11780860621504667}, {'fro': 'man', 'to': 'flight', 'type': 'AtLocation', 'score': 0.009673785418272018, 'wm_score': 0.38997126, 'final': 0.12376302779279041}, {'fro': 'doctor', 'to': 'flight', 'type': 'AtLocation', 'score': 0.008806317113339901, 'wm_score': 0.40749782, 'final': 0.12841376797933796}, {'fro': 'captain', 'to': 'flight', 'type': 'AtLocation', 'score': 0.008780053816735744, 'wm_score': 0.40808576, 'final': 0.12857176567171505}, {'fro': 'plane', 'to': 'flight', 'type': 'AtLocation', 'score': 0.008045665919780731, 'wm_score': 0.8215627, 'final': 0.25210077614384657}, {'fro': 'rocket', 'to': 'flight', 'type': 'AtLocation', 'score': 0.006897282786667347, 'wm_score': 0.42697453, 'final': 0.13292045695066715}, {'fro': 'student', 'to': 'flight', 'type': 'AtLocation', 'score': 0.006255420856177807, 'wm_score': 0.3229928, 'final': 0.1012766345993245}, {'fro': 'helicopter', 'to': 'flight', 'type': 'AtLocation', 'score': 0.0062332917004823685, 'wm_score': 0.6442163, 'final': 0.19762819419033767}, {'fro': 'camera', 'to': 'flight', 'type': 'AtLocation', 'score': 0.006171909626573324, 'wm_score': 0.36487064, 'final': 0.11378152873860135}, {'fro': 'bird', 'to': 'flight', 'type': 'AtLocation', 'score': 0.005943499505519867, 'wm_score': 0.32488057, 'final': 0.1016246206538639}, {'fro': 'fighter', 'to': 'flight', 'type': 'AtLocation', 'score': 0.005738944746553898, 'wm_score': 0.55497193, 'final': 0.17050884032258776}, {'fro': 'patient', 'to': 'flight', 'type': 'AtLocation', 'score': 0.004403425846248865, 'wm_score': 0.3274967, 'final': 0.10133140809237422}, {'fro': 'jet', 'to': 'flight', 'type': 'AtLocation', 'score': 0.004179848358035088, 'wm_score': 0.74627686, 'final': 0.2268089518506246}, {'fro': 'civilian', 'to': 'flight', 'type': 'AtLocation', 'score': 0.003919028211385012, 'wm_score': 0.42228886, 'final': 0.12942997774796952}, {'fro': 'customer', 'to': 'flight', 'type': 'AtLocation', 'score': 0.0038111344911158085, 'wm_score': 0.3380005, 'final': 0.10406794414378108}, {'fro': 'person', 'to': 'flight', 'type': 'AtLocation', 'score': 0.0035667510237544775, 'wm_score': 0.39717296, 'final': 0.12164861371662816}, {'fro': 'missile', 'to': 'flight', 'type': 'AtLocation', 'score': 0.003489697352051735, 'wm_score': 0.41897228, 'final': 0.12813447214643622}, {'fro': 'flight', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.3693079948425293, 'wm_score': 0.2539521, 'final': 0.3347012263897705}, {'fro': 'flight', 'to': 'works', 'type': 'AtLocation', 'score': 0.1640051305294037, 'wm_score': 0.25004596, 'final': 0.18981737937058257}, {'fro': 'flight', 'to': 'air', 'type': 'AtLocation', 'score': 0.1303497850894928, 'wm_score': 0.6886822, 'final': 0.297849509562645}, {'fro': 'flight', 'to': 'wings', 'type': 'AtLocation', 'score': 0.05622106418013573, 'wm_score': 0.4301159, 'final': 0.16838951492609502}, {'fro': 'flight', 'to': 'cards', 'type': 'AtLocation', 'score': 0.018156128004193306, 'wm_score': 0.30002975, 'final': 0.10271821460293531}, {'fro': 'flight', 'to': 'background', 'type': 'AtLocation', 'score': 0.016329510137438774, 'wm_score': 0.30580062, 'final': 0.10317084309620715}, {'fro': 'flight', 'to': 'manifest', 'type': 'AtLocation', 'score': 0.01044362224638462, 'wm_score': 0.368967, 'final': 0.11800063557246925}, {'fro': 'flight', 'to': 'skies', 'type': 'AtLocation', 'score': 0.009533696807920933, 'wm_score': 0.40885085, 'final': 0.12932884276554468}, {'fro': 'flight', 'to': 'making', 'type': 'AtLocation', 'score': 0.009256498888134956, 'wm_score': 0.43711844, 'final': 0.1376150812216945}, {'fro': 'flight', 'to': 'horizon', 'type': 'AtLocation', 'score': 0.007589069195091724, 'wm_score': 0.3312772, 'final': 0.10469550843656422}, {'fro': 'flight', 'to': 'sky', 'type': 'AtLocation', 'score': 0.007529529742896557, 'wm_score': 0.44675773, 'final': 0.1392979898200276}, {'fro': 'flight', 'to': 'news', 'type': 'AtLocation', 'score': 0.0072393654845654964, 'wm_score': 0.3501817, 'final': 0.11012206583919587}, {'fro': 'flight', 'to': 'future', 'type': 'AtLocation', 'score': 0.006846162024885416, 'wm_score': 0.3954596, 'final': 0.12343019341741981}, {'fro': 'flight', 'to': 'distance', 'type': 'AtLocation', 'score': 0.0065011316910386086, 'wm_score': 0.47673717, 'final': 0.14757194318372704}, {'fro': 'flight', 'to': 'schedule', 'type': 'AtLocation', 'score': 0.004291980527341366, 'wm_score': 0.49557528, 'final': 0.151676970369139}, {'fro': 'flight', 'to': 'way', 'type': 'AtLocation', 'score': 0.0034061558544635773, 'wm_score': 0.4338569, 'final': 0.13254137909812452}, {'fro': 'flight', 'to': 'plan', 'type': 'AtLocation', 'score': 0.003184936475008726, 'wm_score': 0.39316833, 'final': 0.12017995453250613}, {'fro': 'flight', 'to': 'planning', 'type': 'AtLocation', 'score': 0.00290007540024817, 'wm_score': 0.45055223, 'final': 0.13719572178017372}, {'fro': 'flight', 'to': 'plans', 'type': 'AtLocation', 'score': 0.0028036690782755613, 'wm_score': 0.45919856, 'final': 0.13972213635479291}, {'fro': 'flight', 'to': 'open', 'type': 'AtLocation', 'score': 0.0018367457669228315, 'wm_score': 0.33634526, 'final': 0.102189300036846}, {'fro': 'flight', 'to': 'area', 'type': 'AtLocation', 'score': 0.001732064294628799, 'wm_score': 0.37971145, 'final': 0.11512588000624017}, {'fro': 'flight', 'to': 'atlantic', 'type': 'AtLocation', 'score': 0.0017158895498141646, 'wm_score': 0.4930143, 'final': 0.14910541268486993}, {'fro': 'flight', 'to': 'bag', 'type': 'AtLocation', 'score': 0.0016970556462183595, 'wm_score': 0.38927937, 'final': 0.11797174995235286}, {'fro': 'flight', 'to': 'clear', 'type': 'AtLocation', 'score': 0.0011223583715036511, 'wm_score': 0.42926612, 'final': 0.12956548686005256}, {'fro': 'flight', 'to': 'airport', 'type': 'AtLocation', 'score': 0.006585621275007725, 'wm_score': 0.6398976, 'final': 0.19657921489250543}, {'fro': 'flight', 'to': 'passenger', 'type': 'HasA', 'score': 0.01915045641362667, 'wm_score': 0.6651865, 'final': 0.2129612694895387}, {'fro': 'flight', 'to': 'fall', 'type': 'AtLocation', 'score': 0.0050849588587880135, 'wm_score': 0.34617, 'final': 0.10741047120115162}, {'fro': 'flight', 'to': 'rush', 'type': 'AtLocation', 'score': 0.0042900629341602325, 'wm_score': 0.346852, 'final': 0.10705864405391217}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">county</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "county"
+    let relations = [{'fro': 'county', 'to': 'university', 'type': 'HasA', 'score': 0.003822523634880781, 'wm_score': 0.43734473, 'final': 0.13387918554441655}, {'fro': 'county', 'to': 'department', 'type': 'HasA', 'score': 0.008597971871495247, 'wm_score': 0.48838085, 'final': 0.1525328353100467}, {'fro': 'property', 'to': 'county', 'type': 'AtLocation', 'score': 0.008912348188459873, 'wm_score': 0.41059056, 'final': 0.12941581173192193}, {'fro': 'county', 'to': 'population', 'type': 'HasA', 'score': 0.008929924108088017, 'wm_score': 0.427504, 'final': 0.13450214687566162}, {'fro': 'county', 'to': 'city', 'type': 'HasA', 'score': 0.00557924248278141, 'wm_score': 0.600261, 'final': 0.18398376973794703}, {'fro': 'state', 'to': 'county', 'type': 'HasA', 'score': 0.06002366170287132, 'wm_score': 0.6219841, 'final': 0.22861179319200994}, {'fro': 'district', 'to': 'county', 'type': 'HasA', 'score': 0.030227767303586006, 'wm_score': 0.7392429, 'final': 0.24293230711251024}, {'fro': 'city', 'to': 'county', 'type': 'HasA', 'score': 0.02373718097805977, 'wm_score': 0.600261, 'final': 0.19669432668464187}, {'fro': 'township', 'to': 'county', 'type': 'HasA', 'score': 0.017948206514120102, 'wm_score': 0.73343176, 'final': 0.2325932725598841}, {'fro': 'register', 'to': 'county', 'type': 'HasA', 'score': 0.01537252776324749, 'wm_score': 0.48450726, 'final': 0.15611294743427326}, {'fro': 'legislature', 'to': 'county', 'type': 'HasA', 'score': 0.014743657782673836, 'wm_score': 0.46734148, 'final': 0.1505230044478717}, {'fro': 'municipality', 'to': 'county', 'type': 'HasA', 'score': 0.013937623240053654, 'wm_score': 0.46872815, 'final': 0.1503747812680376}, {'fro': 'sheriff', 'to': 'county', 'type': 'HasA', 'score': 0.013027708977460861, 'wm_score': 0.7018853, 'final': 0.21968498628422264}, {'fro': 'region', 'to': 'county', 'type': 'HasA', 'score': 0.010233340784907341, 'wm_score': 0.4716417, 'final': 0.14865584854943514}, {'fro': 'latter', 'to': 'county', 'type': 'HasA', 'score': 0.00955882016569376, 'wm_score': 0.33630392, 'final': 0.10758235011598564}, {'fro': 'province', 'to': 'county', 'type': 'HasA', 'score': 0.007772058714181185, 'wm_score': 0.51757073, 'final': 0.16071166009992685}, {'fro': 'governor', 'to': 'county', 'type': 'HasA', 'score': 0.0071523129008710384, 'wm_score': 0.46264797, 'final': 0.14380101003060974}, {'fro': 'board', 'to': 'county', 'type': 'HasA', 'score': 0.0063711488619446754, 'wm_score': 0.4445412, 'final': 0.13782216420336132}, {'fro': 'area', 'to': 'county', 'type': 'HasA', 'score': 0.006293897051364183, 'wm_score': 0.5756446, 'final': 0.17709910793595493}, {'fro': 'town', 'to': 'county', 'type': 'HasA', 'score': 0.006076181773096323, 'wm_score': 0.5957045, 'final': 0.18296467724116744}, {'fro': 'company', 'to': 'county', 'type': 'HasA', 'score': 0.005247510503977537, 'wm_score': 0.34554183, 'final': 0.1073358063527843}, {'fro': 'mayor', 'to': 'county', 'type': 'HasA', 'score': 0.00515167647972703, 'wm_score': 0.45295757, 'final': 0.13949344453580892}, {'fro': 'site', 'to': 'county', 'type': 'HasA', 'score': 0.005087177734822035, 'wm_score': 0.363095, 'final': 0.11248952441437543}, {'fro': 'school', 'to': 'county', 'type': 'HasA', 'score': 0.004987265449017286, 'wm_score': 0.49802202, 'final': 0.15289769181431212}, {'fro': 'department', 'to': 'county', 'type': 'HasA', 'score': 0.004799308255314827, 'wm_score': 0.48838085, 'final': 0.14987377077872038}, {'fro': 'republic', 'to': 'county', 'type': 'HasA', 'score': 0.004752242472022772, 'wm_score': 0.42186183, 'final': 0.12988511873041597}, {'fro': 'parish', 'to': 'county', 'type': 'HasA', 'score': 0.004727015737444162, 'wm_score': 0.6102977, 'final': 0.18639822101621095}, {'fro': 'university', 'to': 'county', 'type': 'HasA', 'score': 0.0045675854198634624, 'wm_score': 0.43734473, 'final': 0.13440072879390444}, {'fro': 'council', 'to': 'county', 'type': 'HasA', 'score': 0.004229703452438116, 'wm_score': 0.5102143, 'final': 0.1560250824167067}, {'fro': 'county', 'to': 'lobbyist', 'type': 'HasA', 'score': 0.04330595210194588, 'wm_score': 0.24481755, 'final': 0.10375943147136213}, {'fro': 'county', 'to': 'recount', 'type': 'HasA', 'score': 0.03281724080443382, 'wm_score': 0.35408646, 'final': 0.1291980065631037}, {'fro': 'county', 'to': 'lawsuit', 'type': 'HasA', 'score': 0.02781722880899906, 'wm_score': 0.36999002, 'final': 0.13046906616629936}, {'fro': 'county', 'to': 'lawyer', 'type': 'HasA', 'score': 0.02641122043132782, 'wm_score': 0.33612788, 'final': 0.1193262183019295}, {'fro': 'county', 'to': 'representative', 'type': 'HasA', 'score': 0.011180942878127098, 'wm_score': 0.40569997, 'final': 0.12953665101468897}, {'fro': 'county', 'to': 'complaint', 'type': 'HasA', 'score': 0.006952529773116112, 'wm_score': 0.33731622, 'final': 0.10606163684118129}, {'fro': 'county', 'to': 'prosecutor', 'type': 'HasA', 'score': 0.005794100929051638, 'wm_score': 0.42311954, 'final': 0.13099173265033615}, {'fro': 'county', 'to': 'commission', 'type': 'HasA', 'score': 0.005461310036480427, 'wm_score': 0.4609358, 'final': 0.14210365702553632}, {'fro': 'county', 'to': 'director', 'type': 'HasA', 'score': 0.005284733138978481, 'wm_score': 0.36098516, 'final': 0.11199486119728495}, {'fro': 'county', 'to': 'sheriff', 'type': 'HasA', 'score': 0.004637787584215403, 'wm_score': 0.7018853, 'final': 0.21381204130895085}, {'fro': 'tornado', 'to': 'county', 'type': 'AtLocation', 'score': 0.11287818104028702, 'wm_score': 0.2674423, 'final': 0.15924741672820092}, {'fro': 'sheriff', 'to': 'county', 'type': 'AtLocation', 'score': 0.03672265633940697, 'wm_score': 0.7018853, 'final': 0.23627144943758494}, {'fro': 'school', 'to': 'county', 'type': 'AtLocation', 'score': 0.027592351660132408, 'wm_score': 0.49802202, 'final': 0.16872125216209272}, {'fro': 'cemetery', 'to': 'county', 'type': 'AtLocation', 'score': 0.018772954121232033, 'wm_score': 0.40432286, 'final': 0.13443792588486245}, {'fro': 'creek', 'to': 'county', 'type': 'AtLocation', 'score': 0.016188068315386772, 'wm_score': 0.4860481, 'final': 0.15714607782077075}, {'fro': 'courthouse', 'to': 'county', 'type': 'AtLocation', 'score': 0.015823708847165108, 'wm_score': 0.5244858, 'final': 0.16842233619301558}, {'fro': 'jail', 'to': 'county', 'type': 'AtLocation', 'score': 0.014447110705077648, 'wm_score': 0.35152346, 'final': 0.11557001549355436}, {'fro': 'subdivision', 'to': 'county', 'type': 'AtLocation', 'score': 0.013695243746042252, 'wm_score': 0.43868792, 'final': 0.1411930466222296}, {'fro': 'farm', 'to': 'county', 'type': 'AtLocation', 'score': 0.010286995209753513, 'wm_score': 0.49554804, 'final': 0.1558653086468275}, {'fro': 'park', 'to': 'county', 'type': 'AtLocation', 'score': 0.009593811817467213, 'wm_score': 0.5827712, 'final': 0.1815470282722271}, {'fro': 'house', 'to': 'county', 'type': 'AtLocation', 'score': 0.009534160606563091, 'wm_score': 0.4728086, 'final': 0.1485164924245942}, {'fro': 'deputy', 'to': 'county', 'type': 'AtLocation', 'score': 0.009155483916401863, 'wm_score': 0.38246542, 'final': 0.12114846474148132}, {'fro': 'hospital', 'to': 'county', 'type': 'AtLocation', 'score': 0.008856425061821938, 'wm_score': 0.41040742, 'final': 0.1293217235432754}, {'fro': 'judge', 'to': 'county', 'type': 'AtLocation', 'score': 0.0061281234957277775, 'wm_score': 0.43959242, 'final': 0.13616741244700947}, {'fro': 'farmer', 'to': 'county', 'type': 'AtLocation', 'score': 0.005835896823555231, 'wm_score': 0.43104875, 'final': 0.1333997527764887}, {'fro': 'church', 'to': 'county', 'type': 'AtLocation', 'score': 0.005752892699092627, 'wm_score': 0.40281153, 'final': 0.12487048388936485}, {'fro': 'bridge', 'to': 'county', 'type': 'AtLocation', 'score': 0.005282520316541195, 'wm_score': 0.4356137, 'final': 0.13438187422157885}, {'fro': 'building', 'to': 'county', 'type': 'AtLocation', 'score': 0.004840966779738665, 'wm_score': 0.37237242, 'final': 0.11510040274581708}, {'fro': 'fire', 'to': 'county', 'type': 'AtLocation', 'score': 0.0047088987194001675, 'wm_score': 0.40581775, 'final': 0.12504155410358014}, {'fro': 'resident', 'to': 'county', 'type': 'AtLocation', 'score': 0.0045112790539860725, 'wm_score': 0.50065154, 'final': 0.1533533573377903}, {'fro': 'settlement', 'to': 'county', 'type': 'AtLocation', 'score': 0.004354637581855059, 'wm_score': 0.36254424, 'final': 0.11181151830729856}, {'fro': 'reservoir', 'to': 'county', 'type': 'AtLocation', 'score': 0.004351204726845026, 'wm_score': 0.3970045, 'final': 0.12214719330879152}, {'fro': 'prison', 'to': 'county', 'type': 'AtLocation', 'score': 0.004304972011595964, 'wm_score': 0.34219727, 'final': 0.1056726614081172}, {'fro': 'ranger', 'to': 'county', 'type': 'AtLocation', 'score': 0.004252225160598755, 'wm_score': 0.34310433, 'final': 0.10590785661241915}, {'fro': 'county', 'to': 'woods', 'type': 'AtLocation', 'score': 0.045953765511512756, 'wm_score': 0.293464, 'final': 0.12020683585805894}, {'fro': 'county', 'to': 'mix', 'type': 'AtLocation', 'score': 0.04556255042552948, 'wm_score': 0.23047882, 'final': 0.10103743129787066}, {'fro': 'county', 'to': 'middle', 'type': 'AtLocation', 'score': 0.03982086479663849, 'wm_score': 0.31884238, 'final': 0.12352731935764695}, {'fro': 'county', 'to': 'minority', 'type': 'AtLocation', 'score': 0.03142309561371803, 'wm_score': 0.27625582, 'final': 0.10487291292960263}, {'fro': 'county', 'to': 'works', 'type': 'AtLocation', 'score': 0.022940590977668762, 'wm_score': 0.32191947, 'final': 0.11263425468436813}, {'fro': 'county', 'to': 'running', 'type': 'AtLocation', 'score': 0.019450923427939415, 'wm_score': 0.38683072, 'final': 0.1296648623995576}, {'fro': 'county', 'to': 'black', 'type': 'AtLocation', 'score': 0.009513767436146736, 'wm_score': 0.31642008, 'final': 0.10158566120530273}, {'fro': 'county', 'to': 'water', 'type': 'AtLocation', 'score': 0.007706798613071442, 'wm_score': 0.32411402, 'final': 0.10262896502915003}, {'fro': 'county', 'to': 'region', 'type': 'AtLocation', 'score': 0.006941548082977533, 'wm_score': 0.4716417, 'final': 0.14635159365808428}, {'fro': 'county', 'to': 'hospital', 'type': 'AtLocation', 'score': 0.004326838534325361, 'wm_score': 0.41040742, 'final': 0.12615101297402778}, {'fro': 'county', 'to': 'northeast', 'type': 'AtLocation', 'score': 0.004292957950383425, 'wm_score': 0.48499483, 'final': 0.14850351956526842}, {'fro': 'county', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.004225208889693022, 'wm_score': 0.3811133, 'final': 0.11729163622278513}, {'fro': 'county', 'to': 'making', 'type': 'AtLocation', 'score': 0.004115693271160126, 'wm_score': 0.38464135, 'final': 0.11827339028981211}, {'fro': 'county', 'to': 'highway', 'type': 'HasA', 'score': 0.009283583611249924, 'wm_score': 0.47896847, 'final': 0.15018904952787496}, {'fro': 'county', 'to': 'church', 'type': 'HasA', 'score': 0.0030091439839452505, 'wm_score': 0.40281153, 'final': 0.12294985978876169}, {'fro': 'county', 'to': 'police', 'type': 'HasA', 'score': 0.005672867875546217, 'wm_score': 0.43703276, 'final': 0.13508083551288236}, {'fro': 'county', 'to': 'town', 'type': 'HasA', 'score': 0.009467784315347672, 'wm_score': 0.5957045, 'final': 0.18533879902074338}, {'fro': 'county', 'to': 'airport', 'type': 'HasA', 'score': 0.0025163786485791206, 'wm_score': 0.3670681, 'final': 0.1118818950540054}, {'fro': 'county', 'to': 'farmer', 'type': 'HasA', 'score': 0.011044428683817387, 'wm_score': 0.43104875, 'final': 0.1370457250786722}, {'fro': 'county', 'to': 'hospital', 'type': 'HasA', 'score': 0.005515748634934425, 'wm_score': 0.41040742, 'final': 0.12698325004445413}, {'fro': 'county', 'to': 'village', 'type': 'HasA', 'score': 0.006925074849277735, 'wm_score': 0.5930015, 'final': 0.18274800239449443}, {'fro': 'county', 'to': 'state', 'type': 'HasA', 'score': 0.0046041677705943584, 'wm_score': 0.6219841, 'final': 0.18981814743941608}, {'fro': 'county', 'to': 'school', 'type': 'HasA', 'score': 0.018077192828059196, 'wm_score': 0.49802202, 'final': 0.16206064097964146}, {'fro': 'county', 'to': 'park', 'type': 'HasA', 'score': 0.005381453316658735, 'wm_score': 0.5827712, 'final': 0.17859837732166117}, {'fro': 'county', 'to': 'district', 'type': 'HasA', 'score': 0.04002191498875618, 'wm_score': 0.7392429, 'final': 0.24978821049212935}, {'fro': 'emergency', 'to': 'county', 'type': 'AtLocation', 'score': 0.001352612511254847, 'wm_score': 0.33665967, 'final': 0.10194472975787841}, {'fro': 'county', 'to': 'farm', 'type': 'HasA', 'score': 0.0038736765272915363, 'wm_score': 0.49554804, 'final': 0.1513759855691041}, {'fro': 'county', 'to': 'native', 'type': 'HasA', 'score': 0.004125572741031647, 'wm_score': 0.42268133, 'final': 0.12969229991872216}, {'fro': 'county', 'to': 'clerk', 'type': 'HasA', 'score': 0.006172779947519302, 'wm_score': 0.47705898, 'final': 0.14743863996326353}, {'fro': 'county', 'to': 'tornado', 'type': 'HasA', 'score': 0.02886183001101017, 'wm_score': 0.2674423, 'final': 0.10043597100770714}, {'fro': 'county', 'to': 'center', 'type': 'HasA', 'score': 0.004013064317405224, 'wm_score': 0.39864588, 'final': 0.12240290902218368}, {'fro': 'county', 'to': 'mayor', 'type': 'HasA', 'score': 0.01766851730644703, 'wm_score': 0.45295757, 'final': 0.1482552331145129}, {'fro': 'county', 'to': 'memorial', 'type': 'HasA', 'score': 0.003984204493463039, 'wm_score': 0.3964452, 'final': 0.12172250314542415}, {'fro': 'county', 'to': 'senate', 'type': 'HasA', 'score': 0.0031807555351406336, 'wm_score': 0.34075373, 'final': 0.10445264787459844}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

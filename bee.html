@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">bee</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "bee"
+    let relations = [{'fro': 'bee', 'to': 'bird', 'type': 'AtLocation', 'score': 0.00970003753900528, 'wm_score': 0.36205727, 'final': 0.1154072072773037}, {'fro': 'bee', 'to': 'honey', 'type': 'HasA', 'score': 0.0507182851433754, 'wm_score': 0.5431849, 'final': 0.19845826960036278}, {'fro': 'bee', 'to': 'honey', 'type': 'AtLocation', 'score': 0.33204957842826843, 'wm_score': 0.5431849, 'final': 0.3953901748997879}, {'fro': 'bee', 'to': 'insect', 'type': 'HasA', 'score': 0.0039126151241362095, 'wm_score': 0.35433543, 'final': 0.10903945958689537}, {'fro': 'bee', 'to': 'insect', 'type': 'AtLocation', 'score': 0.0358017273247242, 'wm_score': 0.35433543, 'final': 0.13136183812730695}, {'fro': 'bee', 'to': 'apple', 'type': 'AtLocation', 'score': 0.028337949886918068, 'wm_score': 0.27084863, 'final': 0.10109115392084264}, {'fro': 'bee', 'to': 'eye', 'type': 'AtLocation', 'score': 0.008670039474964142, 'wm_score': 0.36184838, 'final': 0.11462354163247492}, {'fro': 'bee', 'to': 'tree', 'type': 'AtLocation', 'score': 0.006122064311057329, 'wm_score': 0.40700877, 'final': 0.12638807601774016}, {'fro': 'bee', 'to': 'bite', 'type': 'AtLocation', 'score': 0.01695428416132927, 'wm_score': 0.33050367, 'final': 0.1110190999129305}, {'fro': 'bee', 'to': 'flower', 'type': 'AtLocation', 'score': 0.0224616602063179, 'wm_score': 0.28792048, 'final': 0.10209930614442253}, {'fro': 'bee', 'to': 'grass', 'type': 'AtLocation', 'score': 0.028489941731095314, 'wm_score': 0.29834095, 'final': 0.10944524421176674}, {'fro': 'bee', 'to': 'pen', 'type': 'AtLocation', 'score': 0.006236884742975235, 'wm_score': 0.34964672, 'final': 0.10925983532008268}, {'fro': 'bee', 'to': 'sing', 'type': 'AtLocation', 'score': 0.003886594669893384, 'wm_score': 0.36015826, 'final': 0.11076809426892538}, {'fro': 'bee', 'to': 'deer', 'type': 'AtLocation', 'score': 0.00378094962798059, 'wm_score': 0.4101207, 'final': 0.12568287473958645}, {'fro': 'bee', 'to': 'frog', 'type': 'AtLocation', 'score': 0.004455153364688158, 'wm_score': 0.43437254, 'final': 0.1334303693552817}, {'fro': 'bee', 'to': 'rabbit', 'type': 'AtLocation', 'score': 0.002348147565498948, 'wm_score': 0.3916972, 'final': 0.11915286329584929}, {'fro': 'bee', 'to': 'feather', 'type': 'AtLocation', 'score': 0.0008674339624121785, 'wm_score': 0.34249485, 'final': 0.10335565877368855}, {'fro': 'bee', 'to': 'gut', 'type': 'AtLocation', 'score': 0.005281087476760149, 'wm_score': 0.3318295, 'final': 0.10324561123373212}, {'fro': 'bee', 'to': 'spider', 'type': 'AtLocation', 'score': 0.03515252098441124, 'wm_score': 0.37086016, 'final': 0.13586481268908787}, {'fro': 'bee', 'to': 'mosquito', 'type': 'AtLocation', 'score': 0.030072517693042755, 'wm_score': 0.40607473, 'final': 0.14287318138512994}, {'fro': 'bee', 'to': 'worm', 'type': 'AtLocation', 'score': 0.0034890512470155954, 'wm_score': 0.3329051, 'final': 0.10231386587291093}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

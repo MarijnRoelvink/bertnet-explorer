@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">charity</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "charity"
+    let relations = [{'fro': 'charity', 'to': 'effort', 'type': 'AtLocation', 'score': 0.0066640619188547134, 'wm_score': 0.42553326, 'final': 0.13232482134319834}, {'fro': 'charity', 'to': 'responsibility', 'type': 'AtLocation', 'score': 0.0035516517236828804, 'wm_score': 0.3611055, 'final': 0.11081780620657805}, {'fro': 'charity', 'to': 'foundation', 'type': 'HasA', 'score': 0.023519296199083328, 'wm_score': 0.6326844, 'final': 0.20626882733935836}, {'fro': 'charity', 'to': 'awareness', 'type': 'HasA', 'score': 0.003707383992150426, 'wm_score': 0.46374798, 'final': 0.14171956279450532}, {'fro': 'bbc', 'to': 'charity', 'type': 'HasA', 'score': 0.13371528685092926, 'wm_score': 0.31661284, 'final': 0.1885845527956505}, {'fro': 'guardian', 'to': 'charity', 'type': 'HasA', 'score': 0.0360676608979702, 'wm_score': 0.34347433, 'final': 0.12828966162857916}, {'fro': 'uk', 'to': 'charity', 'type': 'HasA', 'score': 0.022788433358073235, 'wm_score': 0.42275578, 'final': 0.1427786373506513}, {'fro': 'nhs', 'to': 'charity', 'type': 'HasA', 'score': 0.020587319508194923, 'wm_score': 0.39269018, 'final': 0.13221817765573646}, {'fro': 'queen', 'to': 'charity', 'type': 'HasA', 'score': 0.012311751954257488, 'wm_score': 0.3707459, 'final': 0.11984199636798026}, {'fro': 'company', 'to': 'charity', 'type': 'HasA', 'score': 0.01080509927123785, 'wm_score': 0.33960047, 'final': 0.10944371048986651}, {'fro': 'organisation', 'to': 'charity', 'type': 'HasA', 'score': 0.009932863526046276, 'wm_score': 0.5701848, 'final': 0.1780084444682324}, {'fro': 'us', 'to': 'charity', 'type': 'HasA', 'score': 0.004850725177675486, 'wm_score': 0.33221543, 'final': 0.10306013662437284}, {'fro': 'who', 'to': 'charity', 'type': 'HasA', 'score': 0.004697754979133606, 'wm_score': 0.3512209, 'final': 0.10865469848539354}, {'fro': 'site', 'to': 'charity', 'type': 'HasA', 'score': 0.00465201772749424, 'wm_score': 0.324024, 'final': 0.10046361240924598}, {'fro': 'council', 'to': 'charity', 'type': 'HasA', 'score': 0.004628276452422142, 'wm_score': 0.3295765, 'final': 0.10211274351669551}, {'fro': 'firm', 'to': 'charity', 'type': 'HasA', 'score': 0.004095735959708691, 'wm_score': 0.33417112, 'final': 0.10311835117179609}, {'fro': 'group', 'to': 'charity', 'type': 'HasA', 'score': 0.00398944690823555, 'wm_score': 0.47368193, 'final': 0.14489719183576488}, {'fro': 'independent', 'to': 'charity', 'type': 'HasA', 'score': 0.003917612135410309, 'wm_score': 0.37978187, 'final': 0.11667688949478723}, {'fro': 'school', 'to': 'charity', 'type': 'HasA', 'score': 0.003637639805674553, 'wm_score': 0.36938804, 'final': 0.11336275986397219}, {'fro': 'club', 'to': 'charity', 'type': 'HasA', 'score': 0.0031106090173125267, 'wm_score': 0.4495179, 'final': 0.1370327963121188}, {'fro': 'charity', 'to': 'website', 'type': 'HasA', 'score': 0.12465260922908783, 'wm_score': 0.4225039, 'final': 0.2140079964603615}, {'fro': 'charity', 'to': 'spokesman', 'type': 'HasA', 'score': 0.12140801548957825, 'wm_score': 0.22790301, 'final': 0.15335651384270477}, {'fro': 'charity', 'to': 'sponsor', 'type': 'HasA', 'score': 0.05814264342188835, 'wm_score': 0.4752889, 'final': 0.18328652039532187}, {'fro': 'charity', 'to': 'spokesperson', 'type': 'HasA', 'score': 0.04154542088508606, 'wm_score': 0.30735314, 'final': 0.12128773661956027}, {'fro': 'charity', 'to': 'director', 'type': 'HasA', 'score': 0.022716864943504333, 'wm_score': 0.3281026, 'final': 0.11433258546045305}, {'fro': 'charity', 'to': 'client', 'type': 'HasA', 'score': 0.014631081372499466, 'wm_score': 0.30067918, 'final': 0.10044551096074963}, {'fro': 'charity', 'to': 'partner', 'type': 'HasA', 'score': 0.012008050456643105, 'wm_score': 0.3765125, 'final': 0.1213593853196502}, {'fro': 'charity', 'to': 'fundraiser', 'type': 'HasA', 'score': 0.010493033565580845, 'wm_score': 0.5094913, 'final': 0.16019251349590663}, {'fro': 'charity', 'to': 'supporter', 'type': 'HasA', 'score': 0.006969744805246592, 'wm_score': 0.34146547, 'final': 0.10731846236367262}, {'fro': 'charity', 'to': 'donation', 'type': 'HasA', 'score': 0.006495611742138863, 'wm_score': 0.6374972, 'final': 0.19579608821949723}, {'fro': 'charity', 'to': 'consultant', 'type': 'HasA', 'score': 0.005275081377476454, 'wm_score': 0.36619776, 'final': 0.11355188496423352}, {'fro': 'charity', 'to': 'mission', 'type': 'HasA', 'score': 0.004579509608447552, 'wm_score': 0.36841834, 'final': 0.11373115872591331}, {'fro': 'charity', 'to': 'committee', 'type': 'HasA', 'score': 0.0035799588076770306, 'wm_score': 0.35928386, 'final': 0.11029112916537394}, {'fro': 'charity', 'to': 'donor', 'type': 'HasA', 'score': 0.003548033069819212, 'wm_score': 0.5436451, 'final': 0.16557715314887347}, {'fro': 'donation', 'to': 'charity', 'type': 'AtLocation', 'score': 0.04984290897846222, 'wm_score': 0.6374972, 'final': 0.22613919628492357}, {'fro': 'child', 'to': 'charity', 'type': 'AtLocation', 'score': 0.041477806866168976, 'wm_score': 0.46344376, 'final': 0.16806759280631828}, {'fro': 'baby', 'to': 'charity', 'type': 'AtLocation', 'score': 0.02355009689927101, 'wm_score': 0.34261078, 'final': 0.11926830182948972}, {'fro': 'woman', 'to': 'charity', 'type': 'AtLocation', 'score': 0.01958049274981022, 'wm_score': 0.36083862, 'final': 0.12195793092486716}, {'fro': 'donor', 'to': 'charity', 'type': 'AtLocation', 'score': 0.019262021407485008, 'wm_score': 0.5436451, 'final': 0.17657694498523951}, {'fro': 'boy', 'to': 'charity', 'type': 'AtLocation', 'score': 0.01552519015967846, 'wm_score': 0.3605502, 'final': 0.11903269311177493}, {'fro': 'man', 'to': 'charity', 'type': 'AtLocation', 'score': 0.013696894980967045, 'wm_score': 0.3554598, 'final': 0.11622576648667694}, {'fro': 'dog', 'to': 'charity', 'type': 'AtLocation', 'score': 0.012226557359099388, 'wm_score': 0.3382271, 'final': 0.11002672015136959}, {'fro': 'girl', 'to': 'charity', 'type': 'AtLocation', 'score': 0.011752761900424957, 'wm_score': 0.3474383, 'final': 0.11245842333029749}, {'fro': 'supporter', 'to': 'charity', 'type': 'AtLocation', 'score': 0.010435422882437706, 'wm_score': 0.34146547, 'final': 0.1097444370177064}, {'fro': 'volunteer', 'to': 'charity', 'type': 'AtLocation', 'score': 0.009775948710739613, 'wm_score': 0.5256677, 'final': 0.16454347409751774}, {'fro': 'participant', 'to': 'charity', 'type': 'AtLocation', 'score': 0.007766916416585445, 'wm_score': 0.33683354, 'final': 0.10648690349160982}, {'fro': 'family', 'to': 'charity', 'type': 'AtLocation', 'score': 0.007704055868089199, 'wm_score': 0.44738045, 'final': 0.13960697410766246}, {'fro': 'student', 'to': 'charity', 'type': 'AtLocation', 'score': 0.007348941173404455, 'wm_score': 0.38721883, 'final': 0.12130990782138314}, {'fro': 'friend', 'to': 'charity', 'type': 'AtLocation', 'score': 0.006345879752188921, 'wm_score': 0.34788185, 'final': 0.10880667082653225}, {'fro': 'patron', 'to': 'charity', 'type': 'AtLocation', 'score': 0.004979860503226519, 'wm_score': 0.49508965, 'final': 0.1520127973522586}, {'fro': 'beneficiary', 'to': 'charity', 'type': 'AtLocation', 'score': 0.004958856385201216, 'wm_score': 0.33641604, 'final': 0.10439601146964086}, {'fro': 'parent', 'to': 'charity', 'type': 'AtLocation', 'score': 0.004958000499755144, 'wm_score': 0.36146396, 'final': 0.1119097883498286}, {'fro': 'partner', 'to': 'charity', 'type': 'AtLocation', 'score': 0.004679703153669834, 'wm_score': 0.3765125, 'final': 0.1162295422075689}, {'fro': 'specialist', 'to': 'charity', 'type': 'AtLocation', 'score': 0.004165502265095711, 'wm_score': 0.35135904, 'final': 0.10832356358556701}, {'fro': 'nurse', 'to': 'charity', 'type': 'AtLocation', 'score': 0.0038709917571395636, 'wm_score': 0.3853174, 'final': 0.11830491422999771}, {'fro': 'charity', 'to': 'works', 'type': 'AtLocation', 'score': 0.6077650189399719, 'wm_score': 0.38265055, 'final': 0.5402306782579803}, {'fro': 'charity', 'to': 'running', 'type': 'AtLocation', 'score': 0.06218630447983742, 'wm_score': 0.29361337, 'final': 0.1316144241358862}, {'fro': 'charity', 'to': 'making', 'type': 'AtLocation', 'score': 0.02785337343811989, 'wm_score': 0.36691457, 'final': 0.12957173240668393}, {'fro': 'charity', 'to': 'hunt', 'type': 'AtLocation', 'score': 0.008279070258140564, 'wm_score': 0.3163236, 'final': 0.1006924291806984}, {'fro': 'charity', 'to': 'run', 'type': 'AtLocation', 'score': 0.005014886148273945, 'wm_score': 0.41262686, 'final': 0.1272984783037918}, {'fro': 'charity', 'to': 'rescue', 'type': 'AtLocation', 'score': 0.003518631448969245, 'wm_score': 0.3729432, 'final': 0.11434600201427847}, {'fro': 'charity', 'to': 'way', 'type': 'AtLocation', 'score': 0.003048643236979842, 'wm_score': 0.34875858, 'final': 0.10676162426588591}, {'fro': 'charity', 'to': 'hospital', 'type': 'AtLocation', 'score': 0.0016694341320544481, 'wm_score': 0.44637373, 'final': 0.13508072289243814}, {'fro': 'charity', 'to': 'uk', 'type': 'AtLocation', 'score': 0.0015206302050501108, 'wm_score': 0.42275578, 'final': 0.1278911751435351}, {'fro': 'charity', 'to': 'work', 'type': 'AtLocation', 'score': 0.0014011760940775275, 'wm_score': 0.4168663, 'final': 0.1260407132658543}, {'fro': 'charity', 'to': 'working', 'type': 'AtLocation', 'score': 0.0013992025051265955, 'wm_score': 0.41288075, 'final': 0.12484366675358864}, {'fro': 'charity', 'to': 'promotion', 'type': 'HasA', 'score': 0.0031042424961924553, 'wm_score': 0.40779963, 'final': 0.12451285874733474}, {'fro': 'charity', 'to': 'initiative', 'type': 'HasA', 'score': 0.003892955370247364, 'wm_score': 0.40264925, 'final': 0.12351984375917317}, {'fro': 'charity', 'to': 'initiative', 'type': 'AtLocation', 'score': 0.00390131794847548, 'wm_score': 0.40264925, 'final': 0.12352569756393286}, {'fro': 'charity', 'to': 'profit', 'type': 'HasA', 'score': 0.007781250402331352, 'wm_score': 0.3389783, 'final': 0.10714036528163196}, {'fro': 'charity', 'to': 'fee', 'type': 'HasA', 'score': 0.007199347484856844, 'wm_score': 0.36454165, 'final': 0.1144020382393998}, {'fro': 'charity', 'to': 'loan', 'type': 'HasA', 'score': 0.006180244497954845, 'wm_score': 0.33488077, 'final': 0.10479040214856841}, {'fro': 'charity', 'to': 'patient', 'type': 'HasA', 'score': 0.004975656047463417, 'wm_score': 0.35372913, 'final': 0.10960169823322441}, {'fro': 'charity', 'to': 'specialist', 'type': 'HasA', 'score': 0.0038444246165454388, 'wm_score': 0.35135904, 'final': 0.10809880923158183}, {'fro': 'charity', 'to': 'bid', 'type': 'HasA', 'score': 0.006600687280297279, 'wm_score': 0.34330902, 'final': 0.10761318709620811}, {'fro': 'charity', 'to': 'bid', 'type': 'AtLocation', 'score': 0.0052156816236674786, 'wm_score': 0.34330902, 'final': 0.10664368313656725}, {'fro': 'charity', 'to': 'prize', 'type': 'HasA', 'score': 0.0021891947835683823, 'wm_score': 0.36609197, 'final': 0.11136002734849788}, {'fro': 'charity', 'to': 'help', 'type': 'AtLocation', 'score': 0.018204931169748306, 'wm_score': 0.4622919, 'final': 0.1514310218188238}, {'fro': 'charity', 'to': 'support', 'type': 'AtLocation', 'score': 0.0028339712880551815, 'wm_score': 0.41682088, 'final': 0.12703004390163863}, {'fro': 'charity', 'to': 'raise', 'type': 'HasA', 'score': 0.004948140121996403, 'wm_score': 0.45548812, 'final': 0.1401101340853975}, {'fro': 'charity', 'to': 'recipient', 'type': 'HasA', 'score': 0.0047567072324454784, 'wm_score': 0.40834987, 'final': 0.12583465606271185}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">atlantic</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "atlantic"
+    let relations = [{'fro': 'atlantic', 'to': 'music', 'type': 'HasA', 'score': 0.0054756165482103825, 'wm_score': 0.33844343, 'final': 0.10536596058374728}, {'fro': 'atlantic', 'to': 'internet', 'type': 'HasA', 'score': 0.004383357707411051, 'wm_score': 0.33235773, 'final': 0.10277566939518776}, {'fro': 'atlantic', 'to': 'industry', 'type': 'HasA', 'score': 0.004065738525241613, 'wm_score': 0.35246527, 'final': 0.10858559796766915}, {'fro': 'atlantic', 'to': 'media', 'type': 'HasA', 'score': 0.002796526299789548, 'wm_score': 0.34908834, 'final': 0.1066840704098527}, {'fro': 'atlantic', 'to': 'organization', 'type': 'HasA', 'score': 0.007366379722952843, 'wm_score': 0.41203812, 'final': 0.128767901806067}, {'fro': 'atlantic', 'to': 'series', 'type': 'HasA', 'score': 0.009474290534853935, 'wm_score': 0.3251009, 'final': 0.10416227337439778}, {'fro': 'atlantic', 'to': 'road', 'type': 'HasA', 'score': 0.0038118360098451376, 'wm_score': 0.37392253, 'final': 0.11484504420689161}, {'fro': 'atlantic', 'to': 'flight', 'type': 'HasA', 'score': 0.003448235336691141, 'wm_score': 0.4930143, 'final': 0.15031805473568383}, {'fro': 'flight', 'to': 'atlantic', 'type': 'AtLocation', 'score': 0.0017158895498141646, 'wm_score': 0.4930143, 'final': 0.14910541268486993}, {'fro': 'atlantic', 'to': 'city', 'type': 'HasA', 'score': 0.005690797232091427, 'wm_score': 0.38556343, 'final': 0.11965258706246401}, {'fro': 'atlantic', 'to': 'region', 'type': 'HasA', 'score': 0.005581394769251347, 'wm_score': 0.51681674, 'final': 0.15895199833847598}, {'fro': 'atlantic', 'to': 'climate', 'type': 'HasA', 'score': 0.006482423283159733, 'wm_score': 0.42777795, 'final': 0.13287108129821185}, {'fro': 'atlantic', 'to': 'transportation', 'type': 'HasA', 'score': 0.0036394749768078327, 'wm_score': 0.34517586, 'final': 0.1061003904837655}, {'fro': 'atlantic', 'to': 'air', 'type': 'HasA', 'score': 0.0034927644301205873, 'wm_score': 0.55069584, 'final': 0.16765368710108444}, {'fro': 'atlantic', 'to': 'fish', 'type': 'HasA', 'score': 0.0065160789526999, 'wm_score': 0.3957656, 'final': 0.12329093526688994}, {'fro': 'atlantic', 'to': 'company', 'type': 'HasA', 'score': 0.004953616764396429, 'wm_score': 0.4224676, 'final': 0.1302078117350775}, {'fro': 'atlantic', 'to': 'line', 'type': 'HasA', 'score': 0.0059544844552874565, 'wm_score': 0.4637039, 'final': 0.14327930911870126}, {'fro': 'atlantic', 'to': 'group', 'type': 'HasA', 'score': 0.0036902769934386015, 'wm_score': 0.4418442, 'final': 0.13513645389540704}, {'fro': 'atlantic', 'to': 'top', 'type': 'HasA', 'score': 0.0038543581031262875, 'wm_score': 0.3950256, 'final': 0.1212057306721884}, {'fro': 'atlantic', 'to': 'oil', 'type': 'HasA', 'score': 0.003675885498523712, 'wm_score': 0.38250688, 'final': 0.11732518384896662}, {'fro': 'atlantic', 'to': 'site', 'type': 'HasA', 'score': 0.0026306461077183485, 'wm_score': 0.32979053, 'final': 0.10077861127540287}, {'fro': 'atlantic', 'to': 'coast', 'type': 'HasA', 'score': 0.023453664034605026, 'wm_score': 0.745764, 'final': 0.24014676482422354}, {'fro': 'coast', 'to': 'atlantic', 'type': 'AtLocation', 'score': 0.006391380913555622, 'wm_score': 0.745764, 'final': 0.22820316663948895}, {'fro': 'boat', 'to': 'atlantic', 'type': 'AtLocation', 'score': 0.002455923706293106, 'wm_score': 0.48302165, 'final': 0.1466256415944052}, {'fro': 'atlantic', 'to': 'side', 'type': 'HasA', 'score': 0.0026843592058867216, 'wm_score': 0.4249798, 'final': 0.12937299144412073}, {'fro': 'atlantic', 'to': 'weather', 'type': 'HasA', 'score': 0.00813225843012333, 'wm_score': 0.5022573, 'final': 0.15636977090108634}, {'fro': 'atlantic', 'to': 'outside', 'type': 'HasA', 'score': 0.00369949359446764, 'wm_score': 0.3553744, 'final': 0.10920196551612736}, {'fro': 'atlantic', 'to': 'review', 'type': 'HasA', 'score': 0.007345639634877443, 'wm_score': 0.32782653, 'final': 0.10348990674441422}, {'fro': 'atlantic', 'to': 'wind', 'type': 'HasA', 'score': 0.015958288684487343, 'wm_score': 0.434541, 'final': 0.14153310207914116}, {'fro': 'atlantic', 'to': 'ice', 'type': 'HasA', 'score': 0.0032564238645136356, 'wm_score': 0.4633695, 'final': 0.14129034670515955}, {'fro': 'atlantic', 'to': 'north', 'type': 'HasA', 'score': 0.006549172103404999, 'wm_score': 0.5716272, 'final': 0.17607258047238353}, {'fro': 'atlantic', 'to': 'link', 'type': 'HasA', 'score': 0.0059410519897937775, 'wm_score': 0.36492914, 'final': 0.11363747839285566}, {'fro': 'atlantic', 'to': 'post', 'type': 'HasA', 'score': 0.0015209203120321035, 'wm_score': 0.3330073, 'final': 0.1009668342184225}, {'fro': 'atlantic', 'to': 'front', 'type': 'HasA', 'score': 0.0027234188746660948, 'wm_score': 0.33222455, 'final': 0.10157375821226629}, {'fro': 'atlantic', 'to': 'summer', 'type': 'HasA', 'score': 0.00428171968087554, 'wm_score': 0.46664327, 'final': 0.1429901847766129}, {'fro': 'atlantic', 'to': 'track', 'type': 'HasA', 'score': 0.0047743855975568295, 'wm_score': 0.39520693, 'final': 0.1219041489182898}, {'fro': 'atlantic', 'to': 'rain', 'type': 'HasA', 'score': 0.008163653314113617, 'wm_score': 0.38909733, 'final': 0.12244375631987955}, {'fro': 'atlantic', 'to': 'sky', 'type': 'HasA', 'score': 0.004881193861365318, 'wm_score': 0.42738026, 'final': 0.13163091370295574}, {'fro': 'atlantic', 'to': 'wave', 'type': 'HasA', 'score': 0.008342443034052849, 'wm_score': 0.35266638, 'final': 0.11163962412383702}, {'fro': 'wave', 'to': 'atlantic', 'type': 'AtLocation', 'score': 0.0037185305263847113, 'wm_score': 0.35266638, 'final': 0.10840288536846931}, {'fro': 'atlantic', 'to': 'sea', 'type': 'HasA', 'score': 0.01795138418674469, 'wm_score': 0.69095325, 'final': 0.2198519439307213}, {'fro': 'atlantic', 'to': 'south', 'type': 'HasA', 'score': 0.005697853397578001, 'wm_score': 0.50895077, 'final': 0.15667372837830462}, {'fro': 'atlantic', 'to': 'storm', 'type': 'HasA', 'score': 0.05190827697515488, 'wm_score': 0.53042734, 'final': 0.19546399588260843}, {'fro': 'atlantic', 'to': 'beach', 'type': 'HasA', 'score': 0.004119871649891138, 'wm_score': 0.5002081, 'final': 0.1529463401549238}, {'fro': 'atlantic', 'to': 'crew', 'type': 'HasA', 'score': 0.004065966233611107, 'wm_score': 0.44080734, 'final': 0.1350883783635278}, {'fro': 'atlantic', 'to': 'band', 'type': 'HasA', 'score': 0.0046399300917983055, 'wm_score': 0.35198614, 'final': 0.10884379306425884}, {'fro': 'atlantic', 'to': 'east', 'type': 'HasA', 'score': 0.0036218788009136915, 'wm_score': 0.5891875, 'final': 0.17929156516063963}, {'fro': 'atlantic', 'to': 'tip', 'type': 'HasA', 'score': 0.0054256245493888855, 'wm_score': 0.39800322, 'final': 0.12319890318457223}, {'fro': 'atlantic', 'to': 'winter', 'type': 'HasA', 'score': 0.0038113247137516737, 'wm_score': 0.4192658, 'final': 0.1284476672996262}, {'fro': 'atlantic', 'to': 'airline', 'type': 'HasA', 'score': 0.0060122255235910416, 'wm_score': 0.49039948, 'final': 0.15132840186651375}, {'fro': 'atlantic', 'to': 'host', 'type': 'HasA', 'score': 0.007470158394426107, 'wm_score': 0.32055426, 'final': 0.10139538887609828}, {'fro': 'atlantic', 'to': 'race', 'type': 'HasA', 'score': 0.0067336042411625385, 'wm_score': 0.33714393, 'final': 0.10585670196881379}, {'fro': 'atlantic', 'to': 'west', 'type': 'HasA', 'score': 0.009044654667377472, 'wm_score': 0.5549638, 'final': 0.17282039826716428}, {'fro': 'plane', 'to': 'atlantic', 'type': 'AtLocation', 'score': 0.004167869221419096, 'wm_score': 0.40451166, 'final': 0.12427100645499338}, {'fro': 'atlantic', 'to': 'weekend', 'type': 'HasA', 'score': 0.003869286272674799, 'wm_score': 0.42088535, 'final': 0.12897410539087237}, {'fro': 'atlantic', 'to': 'ship', 'type': 'HasA', 'score': 0.006246347911655903, 'wm_score': 0.53296566, 'final': 0.16426214153815916}, {'fro': 'ship', 'to': 'atlantic', 'type': 'AtLocation', 'score': 0.005446997471153736, 'wm_score': 0.53296566, 'final': 0.16370259622980765}, {'fro': 'atlantic', 'to': 'sail', 'type': 'HasA', 'score': 0.006952281109988689, 'wm_score': 0.4980873, 'final': 0.1542927867769921}, {'fro': 'sail', 'to': 'atlantic', 'type': 'AtLocation', 'score': 0.004466600716114044, 'wm_score': 0.4980873, 'final': 0.15255281050127983}, {'fro': 'atlantic', 'to': 'it', 'type': 'HasA', 'score': 0.004696150775998831, 'wm_score': 0.4580392, 'final': 0.1406990655431992}, {'fro': 'atlantic', 'to': 'many', 'type': 'HasA', 'score': 0.0027045225724577904, 'wm_score': 0.35195667, 'final': 0.10748016680072048}, {'fro': 'atlantic', 'to': 'most', 'type': 'HasA', 'score': 0.0022127723786979914, 'wm_score': 0.4018947, 'final': 0.12211735066508861}, {'fro': 'atlantic', 'to': 'other', 'type': 'HasA', 'score': 0.004372517578303814, 'wm_score': 0.39025465, 'final': 0.12013715730481268}, {'fro': 'atlantic', 'to': 'great', 'type': 'HasA', 'score': 0.006539053283631802, 'wm_score': 0.4083885, 'final': 0.12709388729854226}, {'fro': 'atlantic', 'to': 'long', 'type': 'HasA', 'score': 0.004275549203157425, 'wm_score': 0.46091723, 'final': 0.14126805344221022}, {'fro': 'atlantic', 'to': 'common', 'type': 'HasA', 'score': 0.0028328232001513243, 'wm_score': 0.36199078, 'final': 0.11058021024010595}, {'fro': 'atlantic', 'to': 'single', 'type': 'HasA', 'score': 0.007290039677172899, 'wm_score': 0.32949844, 'final': 0.10395255977402104}, {'fro': 'atlantic', 'to': 'international', 'type': 'HasA', 'score': 0.0038356247823685408, 'wm_score': 0.49184093, 'final': 0.15023721634765802}, {'fro': 'atlantic', 'to': 'travel', 'type': 'HasA', 'score': 0.007432529702782631, 'wm_score': 0.48796767, 'final': 0.15159307179194786}, {'fro': 'atlantic', 'to': 'whole', 'type': 'HasA', 'score': 0.003482228145003319, 'wm_score': 0.37536943, 'final': 0.11504838870150234}, {'fro': 'atlantic', 'to': 'cold', 'type': 'HasA', 'score': 0.009417636319994926, 'wm_score': 0.4224619, 'final': 0.13333091542399647}, {'fro': 'atlantic', 'to': 'break', 'type': 'HasA', 'score': 0.008431916125118732, 'wm_score': 0.34025773, 'final': 0.10797966028758313}, {'fro': 'atlantic', 'to': 'cover', 'type': 'HasA', 'score': 0.02899702452123165, 'wm_score': 0.3207353, 'final': 0.11651850716486216}, {'fro': 'atlantic', 'to': 'western', 'type': 'HasA', 'score': 0.007293594069778919, 'wm_score': 0.54689825, 'final': 0.16917499084884527}, {'fro': 'atlantic', 'to': 'press', 'type': 'HasA', 'score': 0.003370701102539897, 'wm_score': 0.33054367, 'final': 0.10152259177177794}, {'fro': 'atlantic', 'to': 'deep', 'type': 'HasA', 'score': 0.0034428751096129417, 'wm_score': 0.41400602, 'final': 0.12661181857672907}, {'fro': 'atlantic', 'to': 'vast', 'type': 'HasA', 'score': 0.004957355093210936, 'wm_score': 0.38007247, 'final': 0.11749188956524767}, {'fro': 'atlantic', 'to': 'advance', 'type': 'HasA', 'score': 0.0026011832524091005, 'wm_score': 0.3957795, 'final': 0.12055467827668638}, {'fro': 'atlantic', 'to': 'annual', 'type': 'HasA', 'score': 0.007469953969120979, 'wm_score': 0.35125938, 'final': 0.1106067817783847}, {'fro': 'atlantic', 'to': 'philippines', 'type': 'HasA', 'score': 0.004453494679182768, 'wm_score': 0.3639832, 'final': 0.11231240627542796}, {'fro': 'atlantic', 'to': 'us', 'type': 'HasA', 'score': 0.005065727513283491, 'wm_score': 0.379954, 'final': 0.11753220925929847}, {'fro': 'atlantic', 'to': 'netherlands', 'type': 'HasA', 'score': 0.007405297365039587, 'wm_score': 0.34879804, 'final': 0.10982312015552773}, {'fro': 'atlantic', 'to': 'titanic', 'type': 'HasA', 'score': 0.0033601478207856417, 'wm_score': 0.32555622, 'final': 0.10001896947454997}, {'fro': 'atlantic', 'to': 'pipeline', 'type': 'HasA', 'score': 0.009534671902656555, 'wm_score': 0.39672738, 'final': 0.12569248433185962}, {'fro': 'pipeline', 'to': 'atlantic', 'type': 'AtLocation', 'score': 0.00031820370350033045, 'wm_score': 0.39672738, 'final': 0.11924095659245025}, {'fro': 'atlantic', 'to': 'clouds', 'type': 'HasA', 'score': 0.004707351792603731, 'wm_score': 0.38659868, 'final': 0.11927475025482262}, {'fro': 'atlantic', 'to': 'caribbean', 'type': 'HasA', 'score': 0.004240606911480427, 'wm_score': 0.71885335, 'final': 0.21862442983803632}, {'fro': 'atlantic', 'to': 'parallel', 'type': 'HasA', 'score': 0.003521242644637823, 'wm_score': 0.38423556, 'final': 0.11773553785124648}, {'fro': 'atlantic', 'to': 'century', 'type': 'HasA', 'score': 0.0028144093230366707, 'wm_score': 0.3510273, 'final': 0.10727827652612568}, {'fro': 'atlantic', 'to': 'galaxy', 'type': 'HasA', 'score': 0.0019119849894195795, 'wm_score': 0.33789054, 'final': 0.10270555149259374}, {'fro': 'atlantic', 'to': 'hurricane', 'type': 'HasA', 'score': 0.05548295006155968, 'wm_score': 0.48566306, 'final': 0.1845369830430918}, {'fro': 'hurricane', 'to': 'atlantic', 'type': 'AtLocation', 'score': 0.006717253476381302, 'wm_score': 0.48566306, 'final': 0.1504009954334669}, {'fro': 'atlantic', 'to': 'wild', 'type': 'HasA', 'score': 0.005487280432134867, 'wm_score': 0.3317579, 'final': 0.10336846630249442}, {'fro': 'atlantic', 'to': 'whale', 'type': 'HasA', 'score': 0.014587702229619026, 'wm_score': 0.35778105, 'final': 0.11754570656073333}, {'fro': 'atlantic', 'to': 'shark', 'type': 'HasA', 'score': 0.022109240293502808, 'wm_score': 0.3454137, 'final': 0.11910057820545199}, {'fro': 'atlantic', 'to': 'globe', 'type': 'HasA', 'score': 0.015651563182473183, 'wm_score': 0.37832838, 'final': 0.12445460822773124}, {'fro': 'atlantic', 'to': 'running', 'type': 'HasA', 'score': 0.003078911453485489, 'wm_score': 0.35763896, 'final': 0.10944692601743987}, {'fro': 'atlantic', 'to': 'pirate', 'type': 'HasA', 'score': 0.009876195341348648, 'wm_score': 0.4315927, 'final': 0.1363911467389441}, {'fro': 'atlantic', 'to': 'dolphin', 'type': 'HasA', 'score': 0.008640620857477188, 'wm_score': 0.3346426, 'final': 0.10644121460023405}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">presentation</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "presentation"
+    let relations = [{'fro': 'bbc', 'to': 'presentation', 'type': 'HasA', 'score': 0.030138179659843445, 'wm_score': 0.38461214, 'final': 0.13648036776189043}, {'fro': 'museum', 'to': 'presentation', 'type': 'HasA', 'score': 0.01197961438447237, 'wm_score': 0.35627335, 'final': 0.11526773506913067}, {'fro': 'event', 'to': 'presentation', 'type': 'HasA', 'score': 0.011196949519217014, 'wm_score': 0.52892435, 'final': 0.16651516966345195}, {'fro': 'conference', 'to': 'presentation', 'type': 'HasA', 'score': 0.01103051844984293, 'wm_score': 0.54039884, 'final': 0.1698410149148901}, {'fro': 'institute', 'to': 'presentation', 'type': 'HasA', 'score': 0.010604598559439182, 'wm_score': 0.39348352, 'final': 0.12546827499160743}, {'fro': 'academy', 'to': 'presentation', 'type': 'HasA', 'score': 0.009923931211233139, 'wm_score': 0.46116233, 'final': 0.14529545084786322}, {'fro': 'project', 'to': 'presentation', 'type': 'HasA', 'score': 0.009061885997653008, 'wm_score': 0.4406492, 'final': 0.13853808019835712}, {'fro': 'workshop', 'to': 'presentation', 'type': 'HasA', 'score': 0.007900060154497623, 'wm_score': 0.5458032, 'final': 0.16927100210814838}, {'fro': 'company', 'to': 'presentation', 'type': 'HasA', 'score': 0.007783219683915377, 'wm_score': 0.3328683, 'final': 0.10530874377874078}, {'fro': 'exhibition', 'to': 'presentation', 'type': 'HasA', 'score': 0.0075295669957995415, 'wm_score': 0.5518569, 'final': 0.1708277668970597}, {'fro': 'committee', 'to': 'presentation', 'type': 'HasA', 'score': 0.006402228493243456, 'wm_score': 0.44411403, 'final': 0.13771576894527043}, {'fro': 'future', 'to': 'presentation', 'type': 'HasA', 'score': 0.0058175381273031235, 'wm_score': 0.33075556, 'final': 0.1032989446891122}, {'fro': 'paper', 'to': 'presentation', 'type': 'HasA', 'score': 0.004781941417604685, 'wm_score': 0.41549575, 'final': 0.1279960839923233}, {'fro': 'panel', 'to': 'presentation', 'type': 'HasA', 'score': 0.004733740352094173, 'wm_score': 0.543016, 'final': 0.16621841824646597}, {'fro': 'exhibit', 'to': 'presentation', 'type': 'HasA', 'score': 0.004509731661528349, 'wm_score': 0.47239172, 'final': 0.14487432816306986}, {'fro': 'show', 'to': 'presentation', 'type': 'HasA', 'score': 0.004398517310619354, 'wm_score': 0.5581125, 'final': 0.17051271211743357}, {'fro': 'site', 'to': 'presentation', 'type': 'HasA', 'score': 0.004171945620328188, 'wm_score': 0.3746248, 'final': 0.11530780193422974}, {'fro': 'library', 'to': 'presentation', 'type': 'HasA', 'score': 0.004054571967571974, 'wm_score': 0.43305293, 'final': 0.13275407937730038}, {'fro': 'chamber', 'to': 'presentation', 'type': 'HasA', 'score': 0.003949321806430817, 'wm_score': 0.3422794, 'final': 0.1054483452645016}, {'fro': 'council', 'to': 'presentation', 'type': 'HasA', 'score': 0.0038509895093739033, 'wm_score': 0.32611454, 'final': 0.10053005465656176}, {'fro': 'presentation', 'to': 'transcript', 'type': 'HasA', 'score': 0.16033858060836792, 'wm_score': 0.4969532, 'final': 0.26132296642585756}, {'fro': 'presentation', 'to': 'disclaimer', 'type': 'HasA', 'score': 0.10669470578432083, 'wm_score': 0.26823017, 'final': 0.1551553450490246}, {'fro': 'presentation', 'to': 'video', 'type': 'HasA', 'score': 0.026840073987841606, 'wm_score': 0.54336303, 'final': 0.18179696079148913}, {'fro': 'presentation', 'to': 'link', 'type': 'HasA', 'score': 0.026792481541633606, 'wm_score': 0.2913015, 'final': 0.10614518707914353}, {'fro': 'presentation', 'to': 'theme', 'type': 'HasA', 'score': 0.024195203557610512, 'wm_score': 0.48028994, 'final': 0.1610236244903274}, {'fro': 'presentation', 'to': 'summary', 'type': 'HasA', 'score': 0.01900835521519184, 'wm_score': 0.42783207, 'final': 0.1416554696506343}, {'fro': 'presentation', 'to': 'slideshow', 'type': 'HasA', 'score': 0.016817951574921608, 'wm_score': 0.3793112, 'final': 0.12556592610244516}, {'fro': 'presentation', 'to': 'brief', 'type': 'HasA', 'score': 0.016660643741488457, 'wm_score': 0.45338976, 'final': 0.14767937861904193}, {'fro': 'presentation', 'to': 'format', 'type': 'HasA', 'score': 0.014599306508898735, 'wm_score': 0.4307558, 'final': 0.13944625455622914}, {'fro': 'presentation', 'to': 'website', 'type': 'HasA', 'score': 0.009084820747375488, 'wm_score': 0.40082863, 'final': 0.12660796352316286}, {'fro': 'presentation', 'to': 'conclusion', 'type': 'HasA', 'score': 0.008043571375310421, 'wm_score': 0.5114877, 'final': 0.15907680996271734}, {'fro': 'presentation', 'to': 'description', 'type': 'HasA', 'score': 0.007877237163484097, 'wm_score': 0.5260442, 'final': 0.1633273260144389}, {'fro': 'presentation', 'to': 'synopsis', 'type': 'HasA', 'score': 0.005534665193408728, 'wm_score': 0.3519189, 'final': 0.10944993563538612}, {'fro': 'presentation', 'to': 'twist', 'type': 'HasA', 'score': 0.005322350654751062, 'wm_score': 0.33436507, 'final': 0.10403516645832575}, {'fro': 'presentation', 'to': 'logo', 'type': 'HasA', 'score': 0.0046188849955797195, 'wm_score': 0.38432828, 'final': 0.11853170349690582}, {'fro': 'presentation', 'to': 'highlight', 'type': 'HasA', 'score': 0.004407320637255907, 'wm_score': 0.4768986, 'final': 0.14615470444607917}, {'fro': 'presentation', 'to': 'purpose', 'type': 'HasA', 'score': 0.004007759038358927, 'wm_score': 0.43218124, 'final': 0.13245980332685126}, {'fro': 'presentation', 'to': 'schedule', 'type': 'HasA', 'score': 0.0035420702770352364, 'wm_score': 0.44080144, 'final': 0.1347198811939247}, {'fro': 'slide', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.10687850415706635, 'wm_score': 0.24433449, 'final': 0.14811529990994643}, {'fro': 'video', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.027768412604928017, 'wm_score': 0.54336303, 'final': 0.1824467978234496}, {'fro': 'poster', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.021596794947981834, 'wm_score': 0.46549374, 'final': 0.1547658784635873}, {'fro': 'photo', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.021493198350071907, 'wm_score': 0.49440193, 'final': 0.16336581784505033}, {'fro': 'photograph', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.020155342295765877, 'wm_score': 0.38246667, 'final': 0.12884874060703613}, {'fro': 'picture', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.017511582002043724, 'wm_score': 0.56926465, 'final': 0.18303750240143063}, {'fro': 'sample', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.01689024642109871, 'wm_score': 0.43736783, 'final': 0.14303352149476914}, {'fro': 'transcript', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.014848228543996811, 'wm_score': 0.4969532, 'final': 0.1594797199807978}, {'fro': 'participant', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.014465204440057278, 'wm_score': 0.36193812, 'final': 0.1187070791080401}, {'fro': 'demo', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.012766667641699314, 'wm_score': 0.36063722, 'final': 0.11712783334918953}, {'fro': 'sketch', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.012347591109573841, 'wm_score': 0.42529887, 'final': 0.1362329747767017}, {'fro': 'slideshow', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.012306022457778454, 'wm_score': 0.3793112, 'final': 0.12240757572044494}, {'fro': 'speaker', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.010583545081317425, 'wm_score': 0.33045435, 'final': 0.10654478655692222}, {'fro': 'student', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.009973669424653053, 'wm_score': 0.33488923, 'final': 0.10744833759725715}, {'fro': 'graphic', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.00825676042586565, 'wm_score': 0.44854826, 'final': 0.14034421029810598}, {'fro': 'logo', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.008245649747550488, 'wm_score': 0.38432828, 'final': 0.12107043882328536}, {'fro': 'projector', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.007091788109391928, 'wm_score': 0.32328987, 'final': 0.10195121267657437}, {'fro': 'note', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.006023482885211706, 'wm_score': 0.4162797, 'final': 0.1291003480196482}, {'fro': 'powerpoint', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.004962603561580181, 'wm_score': 0.5159739, 'final': 0.15826599249310613}, {'fro': 'table', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.004899995401501656, 'wm_score': 0.43797824, 'final': 0.1348234687810512}, {'fro': 'demonstration', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.00480487709864974, 'wm_score': 0.39156717, 'final': 0.12083356496905484}, {'fro': 'discussion', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.004211843013763428, 'wm_score': 0.5123755, 'final': 0.1566609401096344}, {'fro': 'panel', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.004088320769369602, 'wm_score': 0.543016, 'final': 0.16576662453855875}, {'fro': 'clip', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.00406528078019619, 'wm_score': 0.414052, 'final': 0.12706129654613735}, {'fro': 'presentation', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.5221195816993713, 'wm_score': 0.07756253, 'final': 0.38875246618955994}, {'fro': 'presentation', 'to': 'works', 'type': 'AtLocation', 'score': 0.3795267343521118, 'wm_score': 0.46433815, 'final': 0.40497015904647826}, {'fro': 'presentation', 'to': 'background', 'type': 'AtLocation', 'score': 0.0050047957338392735, 'wm_score': 0.4605236, 'final': 0.1416604370136875}, {'fro': 'presentation', 'to': 'library', 'type': 'AtLocation', 'score': 0.002847352996468544, 'wm_score': 0.43305293, 'final': 0.131909026097528}, {'fro': 'presentation', 'to': 'schedule', 'type': 'AtLocation', 'score': 0.0025552904698997736, 'wm_score': 0.44080144, 'final': 0.13402913532892985}, {'fro': 'presentation', 'to': 'workshop', 'type': 'AtLocation', 'score': 0.0021556192077696323, 'wm_score': 0.5458032, 'final': 0.16524989344543878}, {'fro': 'presentation', 'to': 'making', 'type': 'AtLocation', 'score': 0.002102680504322052, 'wm_score': 0.43430114, 'final': 0.13176221835302543}, {'fro': 'presentation', 'to': 'video', 'type': 'AtLocation', 'score': 0.0014028073055669665, 'wm_score': 0.54336303, 'final': 0.16399087411389687}, {'fro': 'presentation', 'to': 'future', 'type': 'AtLocation', 'score': 0.0012369700707495213, 'wm_score': 0.33075556, 'final': 0.10009254704952468}, {'fro': 'presentation', 'to': 'papers', 'type': 'AtLocation', 'score': 0.0011328407563269138, 'wm_score': 0.35958377, 'final': 0.10866811952942887}, {'fro': 'presentation', 'to': 'agenda', 'type': 'AtLocation', 'score': 0.00108801678288728, 'wm_score': 0.38459533, 'final': 0.11614021074802112}, {'fro': 'presentation', 'to': 'books', 'type': 'AtLocation', 'score': 0.0008740167832002044, 'wm_score': 0.33730167, 'final': 0.10180231274824016}, {'fro': 'presentation', 'to': 'progress', 'type': 'AtLocation', 'score': 0.0007986737182363868, 'wm_score': 0.37953812, 'final': 0.11442050760276548}, {'fro': 'presentation', 'to': 'paper', 'type': 'AtLocation', 'score': 0.0007494678720831871, 'wm_score': 0.41549575, 'final': 0.12517335251045825}, {'fro': 'presentation', 'to': 'collection', 'type': 'AtLocation', 'score': 0.0007125025149434805, 'wm_score': 0.45972547, 'final': 0.13841639276046047}, {'fro': 'presentation', 'to': 'room', 'type': 'AtLocation', 'score': 0.0006527637015096843, 'wm_score': 0.4140161, 'final': 0.1246617645910568}, {'fro': 'presentation', 'to': 'session', 'type': 'AtLocation', 'score': 0.0006276417407207191, 'wm_score': 0.488789, 'final': 0.1470760492185045}, {'fro': 'presentation', 'to': 'preview', 'type': 'AtLocation', 'score': 0.0006148930406197906, 'wm_score': 0.5962646, 'final': 0.1793098051284339}, {'fro': 'presentation', 'to': 'gallery', 'type': 'AtLocation', 'score': 0.0006072930991649628, 'wm_score': 0.411372, 'final': 0.1238367051694155}, {'fro': 'presentation', 'to': 'abstract', 'type': 'AtLocation', 'score': 0.0006034831749275327, 'wm_score': 0.37552908, 'final': 0.1130811622224493}, {'fro': 'presentation', 'to': 'manuscript', 'type': 'AtLocation', 'score': 0.000587353715673089, 'wm_score': 0.33225605, 'final': 0.10008796260097118}, {'fro': 'presentation', 'to': 'development', 'type': 'AtLocation', 'score': 0.000583395070862025, 'wm_score': 0.43848497, 'final': 0.13195386754960342}, {'fro': 'presentation', 'to': 'series', 'type': 'AtLocation', 'score': 0.0005351206636987627, 'wm_score': 0.38318536, 'final': 0.11533019246458914}, {'fro': 'presentation', 'to': 'process', 'type': 'AtLocation', 'score': 0.0005126132746227086, 'wm_score': 0.43936843, 'final': 0.13216935829223592}, {'fro': 'presentation', 'to': 'news', 'type': 'AtLocation', 'score': 0.0005064995493739843, 'wm_score': 0.444756, 'final': 0.1337813496845618}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

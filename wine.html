@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">wine</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "wine"
+    let relations = [{'fro': 'wine', 'to': 'mixture', 'type': 'HasA', 'score': 0.00694409990683198, 'wm_score': 0.4263989, 'final': 0.1327805399347824}, {'fro': 'wine', 'to': 'salt', 'type': 'HasA', 'score': 0.006105460692197084, 'wm_score': 0.50883615, 'final': 0.15692466748453798}, {'fro': 'wine', 'to': 'taste', 'type': 'HasA', 'score': 0.015236051753163338, 'wm_score': 0.6462581, 'final': 0.20454266622721434}, {'fro': 'wine', 'to': 'taste', 'type': 'AtLocation', 'score': 0.00386069156229496, 'wm_score': 0.6462581, 'final': 0.19657991409360648}, {'fro': 'wine', 'to': 'glass', 'type': 'HasA', 'score': 0.004082369152456522, 'wm_score': 0.4750455, 'final': 0.14537130840671958}, {'fro': 'wine', 'to': 'juice', 'type': 'HasA', 'score': 0.0038592559285461903, 'wm_score': 0.59389824, 'final': 0.18087095114998236}, {'fro': 'wine', 'to': 'cup', 'type': 'HasA', 'score': 0.0034461594186723232, 'wm_score': 0.35348523, 'final': 0.10845788059307063}, {'fro': 'brewery', 'to': 'wine', 'type': 'HasA', 'score': 0.018874075263738632, 'wm_score': 0.40844628, 'final': 0.13574573668461706}, {'fro': 'bottle', 'to': 'wine', 'type': 'HasA', 'score': 0.016669373959302902, 'wm_score': 0.634267, 'final': 0.20194866177151208}, {'fro': 'cellar', 'to': 'wine', 'type': 'HasA', 'score': 0.00804966688156128, 'wm_score': 0.39364594, 'final': 0.12372854881709291}, {'fro': 'pub', 'to': 'wine', 'type': 'HasA', 'score': 0.007893196307122707, 'wm_score': 0.43509102, 'final': 0.1360525434149859}, {'fro': 'author', 'to': 'wine', 'type': 'HasA', 'score': 0.007174346596002579, 'wm_score': 0.3470531, 'final': 0.10913797261720183}, {'fro': 'chef', 'to': 'wine', 'type': 'HasA', 'score': 0.00670448737218976, 'wm_score': 0.4969494, 'final': 0.15377796116053283}, {'fro': 'kitchen', 'to': 'wine', 'type': 'HasA', 'score': 0.00570364436134696, 'wm_score': 0.44086272, 'final': 0.1362513670529429}, {'fro': 'restaurant', 'to': 'wine', 'type': 'HasA', 'score': 0.00522476714104414, 'wm_score': 0.58367467, 'final': 0.1787597379987309}, {'fro': 'supermarket', 'to': 'wine', 'type': 'HasA', 'score': 0.004787516314536333, 'wm_score': 0.33961397, 'final': 0.10523545242017544}, {'fro': 'company', 'to': 'wine', 'type': 'HasA', 'score': 0.0035718732979148626, 'wm_score': 0.37163514, 'final': 0.11399085330854042}, {'fro': 'recipe', 'to': 'wine', 'type': 'HasA', 'score': 0.00264360592700541, 'wm_score': 0.5247297, 'final': 0.15926943414890382}, {'fro': 'wine', 'to': 'twist', 'type': 'HasA', 'score': 0.053918562829494476, 'wm_score': 0.2307496, 'final': 0.10696787398064614}, {'fro': 'wine', 'to': 'flavour', 'type': 'HasA', 'score': 0.03467255458235741, 'wm_score': 0.3945878, 'final': 0.1426471282076502}, {'fro': 'wine', 'to': 'smell', 'type': 'HasA', 'score': 0.012519290670752525, 'wm_score': 0.38604015, 'final': 0.1245755484695268}, {'fro': 'wine', 'to': 'reputation', 'type': 'HasA', 'score': 0.011984296143054962, 'wm_score': 0.33804578, 'final': 0.10980274130013849}, {'fro': 'wine', 'to': 'history', 'type': 'HasA', 'score': 0.009162751026451588, 'wm_score': 0.3146352, 'final': 0.10080448571851612}, {'fro': 'wine', 'to': 'bottle', 'type': 'HasA', 'score': 0.00862517673522234, 'wm_score': 0.634267, 'final': 0.19631772371465567}, {'fro': 'wine', 'to': 'flavor', 'type': 'HasA', 'score': 0.007150679361075163, 'wm_score': 0.56156707, 'final': 0.1734755965527526}, {'fro': 'wine', 'to': 'scent', 'type': 'HasA', 'score': 0.0070924414321780205, 'wm_score': 0.38910806, 'final': 0.12169712700252462}, {'fro': 'wine', 'to': 'name', 'type': 'HasA', 'score': 0.006948438473045826, 'wm_score': 0.3331617, 'final': 0.1048124169311321}, {'fro': 'wine', 'to': 'lemon', 'type': 'HasA', 'score': 0.005770266987383366, 'wm_score': 0.4577935, 'final': 0.14137723689116838}, {'fro': 'wine', 'to': 'label', 'type': 'HasA', 'score': 0.005532213021069765, 'wm_score': 0.3599586, 'final': 0.11186012911474887}, {'fro': 'wine', 'to': 'fragrance', 'type': 'HasA', 'score': 0.005346211139112711, 'wm_score': 0.41861534, 'final': 0.1293269497973789}, {'fro': 'wine', 'to': 'purpose', 'type': 'HasA', 'score': 0.00432234862819314, 'wm_score': 0.33571178, 'final': 0.10373917803973522}, {'fro': 'grape', 'to': 'wine', 'type': 'AtLocation', 'score': 0.04050131514668465, 'wm_score': 0.71326923, 'final': 0.24233168960267926}, {'fro': 'cherry', 'to': 'wine', 'type': 'AtLocation', 'score': 0.036512088030576706, 'wm_score': 0.41189447, 'final': 0.1491268026214037}, {'fro': 'raspberry', 'to': 'wine', 'type': 'AtLocation', 'score': 0.029230261221528053, 'wm_score': 0.36972213, 'final': 0.13137782185506963}, {'fro': 'pear', 'to': 'wine', 'type': 'AtLocation', 'score': 0.027063677087426186, 'wm_score': 0.41972944, 'final': 0.14486340596119834}, {'fro': 'lemon', 'to': 'wine', 'type': 'AtLocation', 'score': 0.022742677479982376, 'wm_score': 0.4577935, 'final': 0.1532579242359877}, {'fro': 'yeast', 'to': 'wine', 'type': 'AtLocation', 'score': 0.01679883524775505, 'wm_score': 0.35320878, 'final': 0.11772181867342854}, {'fro': 'taste', 'to': 'wine', 'type': 'AtLocation', 'score': 0.014532731845974922, 'wm_score': 0.6462581, 'final': 0.20405034229218247}, {'fro': 'peach', 'to': 'wine', 'type': 'AtLocation', 'score': 0.012430623173713684, 'wm_score': 0.35751766, 'final': 0.1159567342215996}, {'fro': 'strawberry', 'to': 'wine', 'type': 'AtLocation', 'score': 0.009057513438165188, 'wm_score': 0.37271312, 'final': 0.11815419540671565}, {'fro': 'bottle', 'to': 'wine', 'type': 'AtLocation', 'score': 0.007997368462383747, 'wm_score': 0.634267, 'final': 0.19587825792366867}, {'fro': 'horse', 'to': 'wine', 'type': 'AtLocation', 'score': 0.006549197714775801, 'wm_score': 0.33940497, 'final': 0.10640592940034306}, {'fro': 'flavour', 'to': 'wine', 'type': 'AtLocation', 'score': 0.006242616567760706, 'wm_score': 0.3945878, 'final': 0.12274617159743251}, {'fro': 'fish', 'to': 'wine', 'type': 'AtLocation', 'score': 0.005385173484683037, 'wm_score': 0.47463542, 'final': 0.14616024743927813}, {'fro': 'drop', 'to': 'wine', 'type': 'AtLocation', 'score': 0.005246082786470652, 'wm_score': 0.33650827, 'final': 0.10462473895052947}, {'fro': 'beer', 'to': 'wine', 'type': 'AtLocation', 'score': 0.005020993761718273, 'wm_score': 0.72445107, 'final': 0.2208500166332028}, {'fro': 'tomato', 'to': 'wine', 'type': 'AtLocation', 'score': 0.004988010041415691, 'wm_score': 0.5196633, 'final': 0.15939059702899103}, {'fro': 'spirit', 'to': 'wine', 'type': 'AtLocation', 'score': 0.004883236717432737, 'wm_score': 0.34932506, 'final': 0.10821578370220293}, {'fro': 'banana', 'to': 'wine', 'type': 'AtLocation', 'score': 0.004878530744463205, 'wm_score': 0.4352022, 'final': 0.13397563152112427}, {'fro': 'fruit', 'to': 'wine', 'type': 'AtLocation', 'score': 0.004822291899472475, 'wm_score': 0.6117992, 'final': 0.18691536432963077}, {'fro': 'grain', 'to': 'wine', 'type': 'AtLocation', 'score': 0.004443952813744545, 'wm_score': 0.45839942, 'final': 0.1406305929696212}, {'fro': 'pumpkin', 'to': 'wine', 'type': 'AtLocation', 'score': 0.004272546153515577, 'wm_score': 0.40747374, 'final': 0.12523290430746092}, {'fro': 'drink', 'to': 'wine', 'type': 'AtLocation', 'score': 0.004129160661250353, 'wm_score': 0.6808559, 'final': 0.20714718246287525}, {'fro': 'wine', 'to': 'bottle', 'type': 'AtLocation', 'score': 0.32497987151145935, 'wm_score': 0.634267, 'final': 0.41776601005802155}, {'fro': 'wine', 'to': 'fridge', 'type': 'AtLocation', 'score': 0.1576167792081833, 'wm_score': 0.26850954, 'final': 0.1908846074457283}, {'fro': 'wine', 'to': 'cellar', 'type': 'AtLocation', 'score': 0.08993230015039444, 'wm_score': 0.39364594, 'final': 0.18104639210527612}, {'fro': 'wine', 'to': 'works', 'type': 'AtLocation', 'score': 0.028795259073376656, 'wm_score': 0.38044575, 'final': 0.1342904063513637}, {'fro': 'wine', 'to': 'glass', 'type': 'AtLocation', 'score': 0.013749789446592331, 'wm_score': 0.4750455, 'final': 0.15213850261261466}, {'fro': 'wine', 'to': 'bag', 'type': 'AtLocation', 'score': 0.012993975542485714, 'wm_score': 0.34844354, 'final': 0.11362884487974001}, {'fro': 'wine', 'to': 'making', 'type': 'AtLocation', 'score': 0.01206500455737114, 'wm_score': 0.3769359, 'final': 0.12152627319015981}, {'fro': 'wine', 'to': 'water', 'type': 'AtLocation', 'score': 0.010778591968119144, 'wm_score': 0.44807655, 'final': 0.14196797937768343}, {'fro': 'wine', 'to': 'garden', 'type': 'AtLocation', 'score': 0.010526435449719429, 'wm_score': 0.43984425, 'final': 0.13932177981480362}, {'fro': 'wine', 'to': 'barrel', 'type': 'AtLocation', 'score': 0.010367212817072868, 'wm_score': 0.31143153, 'final': 0.10068650797195103}, {'fro': 'wine', 'to': 'bottles', 'type': 'AtLocation', 'score': 0.0063003795221447945, 'wm_score': 0.54296726, 'final': 0.16730044366550134}, {'fro': 'wine', 'to': 'kitchen', 'type': 'AtLocation', 'score': 0.005089785438030958, 'wm_score': 0.44086272, 'final': 0.1358216658066217}, {'fro': 'wine', 'to': 'cup', 'type': 'AtLocation', 'score': 0.004899245221167803, 'wm_score': 0.35348523, 'final': 0.10947504065481747}, {'fro': 'wine', 'to': 'mix', 'type': 'AtLocation', 'score': 0.0035102826077491045, 'wm_score': 0.4799028, 'final': 0.14642803782542438}, {'fro': 'wine', 'to': 'barrels', 'type': 'AtLocation', 'score': 0.0030876174569129944, 'wm_score': 0.34155667, 'final': 0.10462833321983911}, {'fro': 'wine', 'to': 'pot', 'type': 'AtLocation', 'score': 0.002315839985385537, 'wm_score': 0.4619282, 'final': 0.14019954798976988}, {'fro': 'wine', 'to': 'jar', 'type': 'AtLocation', 'score': 0.0020116972737014294, 'wm_score': 0.33467752, 'final': 0.10181144409159101}, {'fro': 'wine', 'to': 'dish', 'type': 'AtLocation', 'score': 0.0015380503609776497, 'wm_score': 0.4549593, 'final': 0.1375644252526844}, {'fro': 'wine', 'to': 'sweet', 'type': 'HasA', 'score': 0.003995584324002266, 'wm_score': 0.4828375, 'final': 0.1476481590268016}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

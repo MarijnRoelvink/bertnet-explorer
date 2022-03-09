@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">rope</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "rope"
+    let relations = [{'fro': 'ladder', 'to': 'rope', 'type': 'HasA', 'score': 0.011485514231026173, 'wm_score': 0.6150316, 'final': 0.19254933996171836}, {'fro': 'rope', 'to': 'bridge', 'type': 'AtLocation', 'score': 0.010200867429375648, 'wm_score': 0.4166941, 'final': 0.13214883720056297}, {'fro': 'rope', 'to': 'hook', 'type': 'HasA', 'score': 0.0035885446704924107, 'wm_score': 0.58763444, 'final': 0.1788023132693447}, {'fro': 'rope', 'to': 'bend', 'type': 'HasA', 'score': 0.003128107637166977, 'wm_score': 0.38257134, 'final': 0.11696107734601689}, {'fro': 'rope', 'to': 'bend', 'type': 'AtLocation', 'score': 0.0043524461798369884, 'wm_score': 0.38257134, 'final': 0.1178181143258859}, {'fro': 'ring', 'to': 'rope', 'type': 'HasA', 'score': 0.00506266625598073, 'wm_score': 0.4619102, 'final': 0.14211692637918655}, {'fro': 'rope', 'to': 'roof', 'type': 'AtLocation', 'score': 0.00431822007521987, 'wm_score': 0.4332242, 'final': 0.13299001405265393}, {'fro': 'bridge', 'to': 'rope', 'type': 'HasA', 'score': 0.013247823342680931, 'wm_score': 0.4166941, 'final': 0.13428170633987668}, {'fro': 'horse', 'to': 'rope', 'type': 'HasA', 'score': 0.012172512710094452, 'wm_score': 0.43009946, 'final': 0.1375505968970661}, {'fro': 'tree', 'to': 'rope', 'type': 'HasA', 'score': 0.009178678505122662, 'wm_score': 0.39092517, 'final': 0.12370262595358587}, {'fro': 'boat', 'to': 'rope', 'type': 'HasA', 'score': 0.008215733803808689, 'wm_score': 0.43463868, 'final': 0.1361426176626661}, {'fro': 'cat', 'to': 'rope', 'type': 'HasA', 'score': 0.00814799778163433, 'wm_score': 0.3579622, 'final': 0.11309225844714406}, {'fro': 'snake', 'to': 'rope', 'type': 'HasA', 'score': 0.007613587658852339, 'wm_score': 0.47060937, 'final': 0.14651232236119666}, {'fro': 'toilet', 'to': 'rope', 'type': 'HasA', 'score': 0.006349317263811827, 'wm_score': 0.3278025, 'final': 0.1027852720846683}, {'fro': 'dog', 'to': 'rope', 'type': 'HasA', 'score': 0.005643850192427635, 'wm_score': 0.37159806, 'final': 0.11543011313469936}, {'fro': 'fence', 'to': 'rope', 'type': 'HasA', 'score': 0.005262122489511967, 'wm_score': 0.5607134, 'final': 0.17189750574265839}, {'fro': 'dragon', 'to': 'rope', 'type': 'HasA', 'score': 0.004929395392537117, 'wm_score': 0.34241566, 'final': 0.106175274774776}, {'fro': 'monkey', 'to': 'rope', 'type': 'HasA', 'score': 0.00468436349183321, 'wm_score': 0.37626976, 'final': 0.11615998244428327}, {'fro': 'wall', 'to': 'rope', 'type': 'HasA', 'score': 0.004624851047992706, 'wm_score': 0.35358673, 'final': 0.10931341473359492}, {'fro': 'camel', 'to': 'rope', 'type': 'HasA', 'score': 0.004519633948802948, 'wm_score': 0.35167265, 'final': 0.10866553876416207}, {'fro': 'spider', 'to': 'rope', 'type': 'HasA', 'score': 0.0038866361137479544, 'wm_score': 0.37414396, 'final': 0.11496383327962359}, {'fro': 'roof', 'to': 'rope', 'type': 'HasA', 'score': 0.0037449451629072428, 'wm_score': 0.4332242, 'final': 0.1325887216140351}, {'fro': 'ceiling', 'to': 'rope', 'type': 'HasA', 'score': 0.0035133364144712687, 'wm_score': 0.368024, 'final': 0.11286653549012991}, {'fro': 'train', 'to': 'rope', 'type': 'HasA', 'score': 0.003501837607473135, 'wm_score': 0.3696289, 'final': 0.11333995632523121}, {'fro': 'rope', 'to': 'twist', 'type': 'HasA', 'score': 0.06617274880409241, 'wm_score': 0.35286343, 'final': 0.1521799531628647}, {'fro': 'rope', 'to': 'hitch', 'type': 'HasA', 'score': 0.048895202577114105, 'wm_score': 0.45519972, 'final': 0.1707865578039799}, {'fro': 'rope', 'to': 'slit', 'type': 'HasA', 'score': 0.028301125392317772, 'wm_score': 0.4128778, 'final': 0.14367412777462246}, {'fro': 'rope', 'to': 'handle', 'type': 'HasA', 'score': 0.02512877620756626, 'wm_score': 0.29143333, 'final': 0.10502014234529639}, {'fro': 'rope', 'to': 'hole', 'type': 'HasA', 'score': 0.018067948520183563, 'wm_score': 0.48677728, 'final': 0.1586807479641285}, {'fro': 'rope', 'to': 'cord', 'type': 'HasA', 'score': 0.015636179596185684, 'wm_score': 0.54508984, 'final': 0.17447227771733}, {'fro': 'rope', 'to': 'knot', 'type': 'HasA', 'score': 0.01080284733325243, 'wm_score': 0.56741977, 'final': 0.17778792413327674}, {'fro': 'rope', 'to': 'zipper', 'type': 'HasA', 'score': 0.010553697124123573, 'wm_score': 0.4268699, 'final': 0.13544855798688651}, {'fro': 'rope', 'to': 'buckle', 'type': 'HasA', 'score': 0.009502744302153587, 'wm_score': 0.46465543, 'final': 0.14604855001150754}, {'fro': 'rope', 'to': 'loop', 'type': 'HasA', 'score': 0.00947294756770134, 'wm_score': 0.4829455, 'final': 0.15151471329739097}, {'fro': 'rope', 'to': 'lock', 'type': 'HasA', 'score': 0.00846641231328249, 'wm_score': 0.39136112, 'final': 0.12333482461929776}, {'fro': 'rope', 'to': 'parachute', 'type': 'HasA', 'score': 0.006971231661736965, 'wm_score': 0.44168922, 'final': 0.1373866281632159}, {'fro': 'rope', 'to': 'cut', 'type': 'HasA', 'score': 0.006589599885046482, 'wm_score': 0.40827027, 'final': 0.12709380091953257}, {'fro': 'rope', 'to': 'tie', 'type': 'HasA', 'score': 0.006202660035341978, 'wm_score': 0.43501782, 'final': 0.1348472080247394}, {'fro': 'rope', 'to': 'diameter', 'type': 'HasA', 'score': 0.006065635941922665, 'wm_score': 0.35416055, 'final': 0.11049411015934589}, {'fro': 'rope', 'to': 'hump', 'type': 'HasA', 'score': 0.005674423649907112, 'wm_score': 0.37402773, 'final': 0.116180415554935}, {'fro': 'rope', 'to': 'connector', 'type': 'HasA', 'score': 0.005579038523137569, 'wm_score': 0.38301548, 'final': 0.11880997096619633}, {'fro': 'rope', 'to': 'ring', 'type': 'HasA', 'score': 0.005303999874740839, 'wm_score': 0.4619102, 'final': 0.14228585991231862}, {'fro': 'rope', 'to': 'length', 'type': 'HasA', 'score': 0.005031035281717777, 'wm_score': 0.45237848, 'final': 0.13923526869720246}, {'fro': 'rope', 'to': 'tail', 'type': 'HasA', 'score': 0.00460992194712162, 'wm_score': 0.4600619, 'final': 0.14124551536298516}, {'fro': 'rope', 'to': 'sling', 'type': 'HasA', 'score': 0.004225737880915403, 'wm_score': 0.44424748, 'final': 0.1362322605166408}, {'fro': 'rope', 'to': 'bridge', 'type': 'HasA', 'score': 0.004119594115763903, 'wm_score': 0.4166941, 'final': 0.12789194588103475}, {'fro': 'rope', 'to': 'tether', 'type': 'HasA', 'score': 0.003907319158315659, 'wm_score': 0.50636727, 'final': 0.154645304410821}, {'fro': 'rope', 'to': 'collar', 'type': 'HasA', 'score': 0.003755403682589531, 'wm_score': 0.3776182, 'final': 0.11591424257781269}, {'fro': 'rope', 'to': 'fuse', 'type': 'HasA', 'score': 0.003702714340761304, 'wm_score': 0.37541577, 'final': 0.11521663103853291}, {'fro': 'knot', 'to': 'rope', 'type': 'AtLocation', 'score': 0.05920989811420441, 'wm_score': 0.56741977, 'final': 0.2116728596799431}, {'fro': 'needle', 'to': 'rope', 'type': 'AtLocation', 'score': 0.04373019188642502, 'wm_score': 0.43561727, 'final': 0.1612963153204975}, {'fro': 'snake', 'to': 'rope', 'type': 'AtLocation', 'score': 0.028037570416927338, 'wm_score': 0.47060937, 'final': 0.16080911029184916}, {'fro': 'knife', 'to': 'rope', 'type': 'AtLocation', 'score': 0.017614487558603287, 'wm_score': 0.49959683, 'final': 0.16220919029102232}, {'fro': 'hole', 'to': 'rope', 'type': 'AtLocation', 'score': 0.01571711152791977, 'wm_score': 0.48677728, 'final': 0.15703516206954385}, {'fro': 'spider', 'to': 'rope', 'type': 'AtLocation', 'score': 0.014138919301331043, 'wm_score': 0.37414396, 'final': 0.12214043151093175}, {'fro': 'horse', 'to': 'rope', 'type': 'AtLocation', 'score': 0.011226847767829895, 'wm_score': 0.43009946, 'final': 0.13688863143748092}, {'fro': 'bullet', 'to': 'rope', 'type': 'AtLocation', 'score': 0.008776543661952019, 'wm_score': 0.38772106, 'final': 0.12245989856336643}, {'fro': 'rat', 'to': 'rope', 'type': 'AtLocation', 'score': 0.008599725551903248, 'wm_score': 0.3425204, 'final': 0.1087759278863323}, {'fro': 'thread', 'to': 'rope', 'type': 'AtLocation', 'score': 0.007515822071582079, 'wm_score': 0.59388995, 'final': 0.18342806045010748}, {'fro': 'monkey', 'to': 'rope', 'type': 'AtLocation', 'score': 0.007011364679783583, 'wm_score': 0.37626976, 'final': 0.11778888327584852}, {'fro': 'cat', 'to': 'rope', 'type': 'AtLocation', 'score': 0.006882602348923683, 'wm_score': 0.3579622, 'final': 0.1122064816442466}, {'fro': 'parachute', 'to': 'rope', 'type': 'AtLocation', 'score': 0.006537754088640213, 'wm_score': 0.44168922, 'final': 0.13708319386204817}, {'fro': 'man', 'to': 'rope', 'type': 'AtLocation', 'score': 0.006229059305042028, 'wm_score': 0.33309636, 'final': 0.10428924951352943}, {'fro': 'bolt', 'to': 'rope', 'type': 'AtLocation', 'score': 0.00583471916615963, 'wm_score': 0.46409228, 'final': 0.14331198741631176}, {'fro': 'dog', 'to': 'rope', 'type': 'AtLocation', 'score': 0.00513678602874279, 'wm_score': 0.37159806, 'final': 0.11507516822011998}, {'fro': 'sword', 'to': 'rope', 'type': 'AtLocation', 'score': 0.005059130489826202, 'wm_score': 0.51598775, 'final': 0.15833771634287835}, {'fro': 'rabbit', 'to': 'rope', 'type': 'AtLocation', 'score': 0.00428004702553153, 'wm_score': 0.36954033, 'final': 0.11385813191787207}, {'fro': 'wire', 'to': 'rope', 'type': 'AtLocation', 'score': 0.004211039282381535, 'wm_score': 0.59690875, 'final': 0.1820203524976671}, {'fro': 'cord', 'to': 'rope', 'type': 'AtLocation', 'score': 0.004159899894148111, 'wm_score': 0.54508984, 'final': 0.1664388819259037}, {'fro': 'fork', 'to': 'rope', 'type': 'AtLocation', 'score': 0.003960526082664728, 'wm_score': 0.33427352, 'final': 0.10305442425786532}, {'fro': 'ladder', 'to': 'rope', 'type': 'AtLocation', 'score': 0.0037780830170959234, 'wm_score': 0.6150316, 'final': 0.18715413811196718}, {'fro': 'bow', 'to': 'rope', 'type': 'AtLocation', 'score': 0.0036293466109782457, 'wm_score': 0.45918322, 'final': 0.1402955086276848}, {'fro': 'serpent', 'to': 'rope', 'type': 'AtLocation', 'score': 0.0036168904043734074, 'wm_score': 0.38596416, 'final': 0.1183210712830614}, {'fro': 'chain', 'to': 'rope', 'type': 'AtLocation', 'score': 0.003568032756447792, 'wm_score': 0.35418516, 'final': 0.10875317092951348}, {'fro': 'rope', 'to': 'air', 'type': 'AtLocation', 'score': 0.19211071729660034, 'wm_score': 0.17665794, 'final': 0.18747488410762023}, {'fro': 'rope', 'to': 'water', 'type': 'AtLocation', 'score': 0.04246033728122711, 'wm_score': 0.303217, 'final': 0.120687336096859}, {'fro': 'rope', 'to': 'middle', 'type': 'AtLocation', 'score': 0.040272586047649384, 'wm_score': 0.24399409, 'final': 0.10138903723335457}, {'fro': 'rope', 'to': 'ground', 'type': 'AtLocation', 'score': 0.031023938208818436, 'wm_score': 0.31166884, 'final': 0.11521740874617292}, {'fro': 'rope', 'to': 'distance', 'type': 'AtLocation', 'score': 0.025914622470736504, 'wm_score': 0.3957168, 'final': 0.13685527572951556}, {'fro': 'rope', 'to': 'wind', 'type': 'AtLocation', 'score': 0.017844438552856445, 'wm_score': 0.29872626, 'final': 0.10210898498699954}, {'fro': 'rope', 'to': 'sand', 'type': 'AtLocation', 'score': 0.014307660982012749, 'wm_score': 0.47224915, 'final': 0.15169010768740895}, {'fro': 'rope', 'to': 'sling', 'type': 'AtLocation', 'score': 0.013731895945966244, 'wm_score': 0.44424748, 'final': 0.14288657116217637}, {'fro': 'rope', 'to': 'bag', 'type': 'AtLocation', 'score': 0.011944128200411797, 'wm_score': 0.45307142, 'final': 0.14428231574028827}, {'fro': 'rope', 'to': 'ring', 'type': 'AtLocation', 'score': 0.006769710686057806, 'wm_score': 0.4619102, 'final': 0.1433118574802405}, {'fro': 'rope', 'to': 'trunk', 'type': 'AtLocation', 'score': 0.006291089113801718, 'wm_score': 0.45941767, 'final': 0.1422290633796612}, {'fro': 'rope', 'to': 'trench', 'type': 'AtLocation', 'score': 0.00614047609269619, 'wm_score': 0.45405704, 'final': 0.14051544526488735}, {'fro': 'rope', 'to': 'pit', 'type': 'AtLocation', 'score': 0.0061401426792144775, 'wm_score': 0.4066199, 'final': 0.12628406987545016}, {'fro': 'rope', 'to': 'wall', 'type': 'AtLocation', 'score': 0.005343487020581961, 'wm_score': 0.35358673, 'final': 0.10981645991440739}, {'fro': 'rope', 'to': 'way', 'type': 'AtLocation', 'score': 0.005258046090602875, 'wm_score': 0.3321455, 'final': 0.10332428226342202}, {'fro': 'rope', 'to': 'corner', 'type': 'AtLocation', 'score': 0.005241624545305967, 'wm_score': 0.32704523, 'final': 0.1017827061817142}, {'fro': 'rope', 'to': 'hole', 'type': 'AtLocation', 'score': 0.005128011107444763, 'wm_score': 0.48677728, 'final': 0.14962279177521134}, {'fro': 'long', 'to': 'rope', 'type': 'HasA', 'score': 0.004384571220725775, 'wm_score': 0.37686014, 'final': 0.11612724185450807}, {'fro': 'rope', 'to': 'long', 'type': 'AtLocation', 'score': 0.00407915934920311, 'wm_score': 0.37686014, 'final': 0.1159134535444422}, {'fro': 'rope', 'to': 'lift', 'type': 'AtLocation', 'score': 0.006895809434354305, 'wm_score': 0.40796077, 'final': 0.12721529760404804}, {'fro': 'rope', 'to': 'hitch', 'type': 'AtLocation', 'score': 0.004228934179991484, 'wm_score': 0.45519972, 'final': 0.13952016992599403}, {'fro': 'rope', 'to': 'fence', 'type': 'AtLocation', 'score': 0.007149667013436556, 'wm_score': 0.5607134, 'final': 0.17321878690940562}, {'fro': 'rope', 'to': 'tunnel', 'type': 'AtLocation', 'score': 0.007478160783648491, 'wm_score': 0.35298377, 'final': 0.11112984354855394}, {'fro': 'rope', 'to': 'ceiling', 'type': 'AtLocation', 'score': 0.004717768635600805, 'wm_score': 0.368024, 'final': 0.11370963804492058}, {'fro': 'rope', 'to': 'cliff', 'type': 'AtLocation', 'score': 0.019725317135453224, 'wm_score': 0.30915076, 'final': 0.10655294999481728}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">pond</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "pond"
+    let relations = [{'fro': 'area', 'to': 'pond', 'type': 'HasA', 'score': 0.013244980946183205, 'wm_score': 0.43481755, 'final': 0.13971675166232825}, {'fro': 'pond', 'to': 'fishing', 'type': 'HasA', 'score': 0.0031852310057729483, 'wm_score': 0.5093236, 'final': 0.1550267417040411}, {'fro': 'pond', 'to': 'lake', 'type': 'HasA', 'score': 0.007068871054798365, 'wm_score': 0.75077695, 'final': 0.23018129473835888}, {'fro': 'lake', 'to': 'pond', 'type': 'HasA', 'score': 0.011589070782065392, 'wm_score': 0.75077695, 'final': 0.2333454345474458}, {'fro': 'pond', 'to': 'mud', 'type': 'HasA', 'score': 0.009239047765731812, 'wm_score': 0.5663935, 'final': 0.1763853834360123}, {'fro': 'town', 'to': 'pond', 'type': 'HasA', 'score': 0.005807817913591862, 'wm_score': 0.37399286, 'final': 0.11626333053951432}, {'fro': 'village', 'to': 'pond', 'type': 'HasA', 'score': 0.008901050314307213, 'wm_score': 0.46553144, 'final': 0.14589016722001508}, {'fro': 'pond', 'to': 'water', 'type': 'HasA', 'score': 0.014986907131969929, 'wm_score': 0.55788517, 'final': 0.177856385992379}, {'fro': 'water', 'to': 'pond', 'type': 'AtLocation', 'score': 0.007158840075135231, 'wm_score': 0.55788517, 'final': 0.17237673905259468}, {'fro': 'pond', 'to': 'fish', 'type': 'HasA', 'score': 0.0213150717318058, 'wm_score': 0.5392084, 'final': 0.1766830702122641}, {'fro': 'fish', 'to': 'pond', 'type': 'AtLocation', 'score': 0.02741415612399578, 'wm_score': 0.5392084, 'final': 0.18095242928679706}, {'fro': 'pond', 'to': 'soil', 'type': 'HasA', 'score': 0.009365951642394066, 'wm_score': 0.3396109, 'final': 0.10843943614967586}, {'fro': 'garden', 'to': 'pond', 'type': 'HasA', 'score': 0.013029360212385654, 'wm_score': 0.53744924, 'final': 0.17035532414867}, {'fro': 'pond', 'to': 'ice', 'type': 'HasA', 'score': 0.0046442728489637375, 'wm_score': 0.5032364, 'final': 0.15422191099427465}, {'fro': 'pond', 'to': 'north', 'type': 'HasA', 'score': 0.0036783029790967703, 'wm_score': 0.34875572, 'final': 0.10720152808536774}, {'fro': 'pond', 'to': 'square', 'type': 'HasA', 'score': 0.0034679218661040068, 'wm_score': 0.33656383, 'final': 0.10339669430627282}, {'fro': 'square', 'to': 'pond', 'type': 'HasA', 'score': 0.00393054960295558, 'wm_score': 0.33656383, 'final': 0.10372053372206892}, {'fro': 'park', 'to': 'pond', 'type': 'HasA', 'score': 0.0141074787825346, 'wm_score': 0.56021756, 'final': 0.17794050314777424}, {'fro': 'land', 'to': 'pond', 'type': 'HasA', 'score': 0.00416160374879837, 'wm_score': 0.36492902, 'final': 0.11239182862415886}, {'fro': 'pond', 'to': 'pipe', 'type': 'HasA', 'score': 0.004648073110729456, 'wm_score': 0.3728244, 'final': 0.11510097117751063}, {'fro': 'pond', 'to': 'swimming', 'type': 'HasA', 'score': 0.010713990777730942, 'wm_score': 0.50521225, 'final': 0.1590634685444117}, {'fro': 'swimming', 'to': 'pond', 'type': 'AtLocation', 'score': 0.003872101427987218, 'wm_score': 0.50521225, 'final': 0.15427414599959108}, {'fro': 'farm', 'to': 'pond', 'type': 'HasA', 'score': 0.0180627703666687, 'wm_score': 0.47823972, 'final': 0.1561158552566681}, {'fro': 'pond', 'to': 'sand', 'type': 'HasA', 'score': 0.005043707322329283, 'wm_score': 0.57724124, 'final': 0.17670296712563052}, {'fro': 'pond', 'to': 'pool', 'type': 'HasA', 'score': 0.010769827291369438, 'wm_score': 0.5218281, 'final': 0.16408730910395863}, {'fro': 'pool', 'to': 'pond', 'type': 'AtLocation', 'score': 0.006679503247141838, 'wm_score': 0.5218281, 'final': 0.1612240822729993}, {'fro': 'yard', 'to': 'pond', 'type': 'HasA', 'score': 0.007388626225292683, 'wm_score': 0.4010921, 'final': 0.1254996683577049}, {'fro': 'pond', 'to': 'snow', 'type': 'HasA', 'score': 0.004463713150471449, 'wm_score': 0.39615697, 'final': 0.12197169020533002}, {'fro': 'pond', 'to': 'grass', 'type': 'HasA', 'score': 0.005232544150203466, 'wm_score': 0.45978728, 'final': 0.14159896490514245}, {'fro': 'pond', 'to': 'natural', 'type': 'HasA', 'score': 0.005441851448267698, 'wm_score': 0.35282815, 'final': 0.1096577410137874}, {'fro': 'pond', 'to': 'green', 'type': 'HasA', 'score': 0.004583416972309351, 'wm_score': 0.46239525, 'final': 0.14192696688061657}, {'fro': 'pond', 'to': 'spring', 'type': 'HasA', 'score': 0.005355907138437033, 'wm_score': 0.42503223, 'final': 0.13125880399690595}, {'fro': 'pond', 'to': 'swim', 'type': 'HasA', 'score': 0.004586142022162676, 'wm_score': 0.4059489, 'final': 0.12499496941551388}, {'fro': 'pond', 'to': 'sink', 'type': 'HasA', 'score': 0.013187583535909653, 'wm_score': 0.36854082, 'final': 0.11979355447513677}, {'fro': 'sink', 'to': 'pond', 'type': 'AtLocation', 'score': 0.014414692297577858, 'wm_score': 0.36854082, 'final': 0.12065253060830451}, {'fro': 'mine', 'to': 'pond', 'type': 'HasA', 'score': 0.014188187196850777, 'wm_score': 0.32933962, 'final': 0.10873361703779556}, {'fro': 'pond', 'to': 'swamp', 'type': 'HasA', 'score': 0.011522320099174976, 'wm_score': 0.57849824, 'final': 0.18161509606942253}, {'fro': 'pond', 'to': 'deer', 'type': 'HasA', 'score': 0.0035796058364212513, 'wm_score': 0.51495296, 'final': 0.1569916120854949}, {'fro': 'pond', 'to': 'frog', 'type': 'HasA', 'score': 0.015542695298790932, 'wm_score': 0.48366433, 'final': 0.15597918570915367}, {'fro': 'frog', 'to': 'pond', 'type': 'AtLocation', 'score': 0.025467870756983757, 'wm_score': 0.48366433, 'final': 0.16292680852988864}, {'fro': 'pond', 'to': 'rocks', 'type': 'HasA', 'score': 0.005631457082927227, 'wm_score': 0.39207006, 'final': 0.12156303795804908}, {'fro': 'pond', 'to': 'butterfly', 'type': 'HasA', 'score': 0.006294087506830692, 'wm_score': 0.35627, 'final': 0.11128686125478149}, {'fro': 'butterfly', 'to': 'pond', 'type': 'AtLocation', 'score': 0.0029265503399074078, 'wm_score': 0.35627, 'final': 0.1089295852379352}, {'fro': 'pond', 'to': 'snake', 'type': 'HasA', 'score': 0.003737867344170809, 'wm_score': 0.48082483, 'final': 0.1468639561409196}, {'fro': 'pond', 'to': 'shark', 'type': 'HasA', 'score': 0.006668855901807547, 'wm_score': 0.43017977, 'final': 0.1337221301312653}, {'fro': 'shark', 'to': 'pond', 'type': 'AtLocation', 'score': 0.005608953069895506, 'wm_score': 0.43017977, 'final': 0.13298019814892686}, {'fro': 'pond', 'to': 'rainbow', 'type': 'HasA', 'score': 0.003074983600527048, 'wm_score': 0.42696345, 'final': 0.13024152352036894}, {'fro': 'vicinity', 'to': 'pond', 'type': 'HasA', 'score': 0.0070671262219548225, 'wm_score': 0.3903497, 'final': 0.1220518983553684}, {'fro': 'pond', 'to': 'ditch', 'type': 'HasA', 'score': 0.005616399925202131, 'wm_score': 0.39775705, 'final': 0.1232585949476415}, {'fro': 'ditch', 'to': 'pond', 'type': 'HasA', 'score': 0.004092672374099493, 'wm_score': 0.39775705, 'final': 0.12219198566186966}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

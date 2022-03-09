@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">lighthouse</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "lighthouse"
+    let relations = [{'fro': 'area', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.005483071785420179, 'wm_score': 0.39575604, 'final': 0.12256496224979414}, {'fro': 'lake', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.019583703950047493, 'wm_score': 0.35178745, 'final': 0.11924482776503326}, {'fro': 'lighthouse', 'to': 'lake', 'type': 'AtLocation', 'score': 0.004686341155320406, 'wm_score': 0.35178745, 'final': 0.1088166738087243}, {'fro': 'town', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.01402568444609642, 'wm_score': 0.30518585, 'final': 0.1013737341122675}, {'fro': 'river', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.004184626042842865, 'wm_score': 0.373192, 'final': 0.11488683822999002}, {'fro': 'coast', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.10336185246706009, 'wm_score': 0.4022905, 'final': 0.1930404467269421}, {'fro': 'lighthouse', 'to': 'coast', 'type': 'AtLocation', 'score': 0.14330048859119415, 'wm_score': 0.4022905, 'final': 0.22099749201383592}, {'fro': 'sea', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.006212448235601187, 'wm_score': 0.41520762, 'final': 0.12891099976492085}, {'fro': 'lighthouse', 'to': 'sea', 'type': 'AtLocation', 'score': 0.009717374108731747, 'wm_score': 0.41520762, 'final': 0.13136444787611223}, {'fro': 'lighthouse', 'to': 'beach', 'type': 'HasA', 'score': 0.004503544420003891, 'wm_score': 0.38447684, 'final': 0.11849553309400274}, {'fro': 'beach', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.09452533721923828, 'wm_score': 0.38447684, 'final': 0.18151078805346682}, {'fro': 'lighthouse', 'to': 'beach', 'type': 'AtLocation', 'score': 0.00470146955922246, 'wm_score': 0.38447684, 'final': 0.11863408069145574}, {'fro': 'lighthouse', 'to': 'east', 'type': 'AtLocation', 'score': 0.016208669170737267, 'wm_score': 0.31174576, 'final': 0.1048697964195161}, {'fro': 'mountain', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.004914504010230303, 'wm_score': 0.32701117, 'final': 0.10154350380716123}, {'fro': 'island', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.18736928701400757, 'wm_score': 0.53943354, 'final': 0.29298856290980535}, {'fro': 'lighthouse', 'to': 'island', 'type': 'AtLocation', 'score': 0.05522811412811279, 'wm_score': 0.53943354, 'final': 0.20048974188967897}, {'fro': 'lighthouse', 'to': 'tower', 'type': 'HasA', 'score': 0.004395472351461649, 'wm_score': 0.6211201, 'final': 0.18941286064602317}, {'fro': 'lighthouse', 'to': 'dock', 'type': 'HasA', 'score': 0.005172164179384708, 'wm_score': 0.42484438, 'final': 0.13107382892556932}, {'fro': 'volcano', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.004494772292673588, 'wm_score': 0.40106207, 'final': 0.12346496160487153}, {'fro': 'lighthouse', 'to': 'ruins', 'type': 'HasA', 'score': 0.004225634038448334, 'wm_score': 0.38691506, 'final': 0.11903246182691385}, {'fro': 'ruins', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.005020780023187399, 'wm_score': 0.38691506, 'final': 0.11958906401623119}, {'fro': 'lighthouse', 'to': 'ruins', 'type': 'AtLocation', 'score': 0.019971814006567, 'wm_score': 0.38691506, 'final': 0.13005478780459692}, {'fro': 'hill', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.005006225313991308, 'wm_score': 0.3547719, 'final': 0.10993592771979392}, {'fro': 'observatory', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.004357755649834871, 'wm_score': 0.5684722, 'final': 0.17359208895488443}, {'fro': 'moon', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.043811943382024765, 'wm_score': 0.24778101, 'final': 0.10500266336741734}, {'fro': 'titanic', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.04255180060863495, 'wm_score': 0.28795874, 'final': 0.11617388242604447}, {'fro': 'city', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.036484163254499435, 'wm_score': 0.27813607, 'final': 0.10897973527814961}, {'fro': 'harbour', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.013493465259671211, 'wm_score': 0.538494, 'final': 0.17099362568176987}, {'fro': 'ocean', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.011593399569392204, 'wm_score': 0.44210202, 'final': 0.14074598569857455}, {'fro': 'ship', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.008739880286157131, 'wm_score': 0.46152505, 'final': 0.14457543120031002}, {'fro': 'castle', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.008241219446063042, 'wm_score': 0.4191025, 'final': 0.13149960361224414}, {'fro': 'bay', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.006735915783792734, 'wm_score': 0.45237523, 'final': 0.14042771004865495}, {'fro': 'cave', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.005530297290533781, 'wm_score': 0.4254433, 'final': 0.1315041981033737}, {'fro': 'harbor', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.004236208274960518, 'wm_score': 0.5160388, 'final': 0.1577769857924724}, {'fro': 'church', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.0039007102604955435, 'wm_score': 0.3981405, 'final': 0.12217264718234691}, {'fro': 'port', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.0037761363200843334, 'wm_score': 0.34605905, 'final': 0.10646101042405903}, {'fro': 'museum', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.003762612584978342, 'wm_score': 0.41757601, 'final': 0.12790663180948486}, {'fro': 'thames', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.003428604220971465, 'wm_score': 0.37003326, 'final': 0.11341000095468004}, {'fro': 'lighthouse', 'to': 'keeper', 'type': 'HasA', 'score': 0.04409627243876457, 'wm_score': 0.386128, 'final': 0.14670579070713521}, {'fro': 'lighthouse', 'to': 'plaque', 'type': 'HasA', 'score': 0.028247302398085594, 'wm_score': 0.3396353, 'final': 0.12166370167865992}, {'fro': 'lighthouse', 'to': 'ghost', 'type': 'HasA', 'score': 0.012776903808116913, 'wm_score': 0.33338636, 'final': 0.10895974066568186}, {'fro': 'lighthouse', 'to': 'staircase', 'type': 'HasA', 'score': 0.012774783186614513, 'wm_score': 0.40107515, 'final': 0.12926489323063017}, {'fro': 'lighthouse', 'to': 'graveyard', 'type': 'HasA', 'score': 0.009662308730185032, 'wm_score': 0.3538916, 'final': 0.11293109611112953}, {'fro': 'lighthouse', 'to': 'dome', 'type': 'HasA', 'score': 0.009515720419585705, 'wm_score': 0.4046711, 'final': 0.12806233429371}, {'fro': 'lighthouse', 'to': 'beacon', 'type': 'HasA', 'score': 0.007863668724894524, 'wm_score': 0.55482876, 'final': 0.1719531961074262}, {'fro': 'lighthouse', 'to': 'pier', 'type': 'HasA', 'score': 0.0063691893592476845, 'wm_score': 0.561872, 'final': 0.1730200325514734}, {'fro': 'lighthouse', 'to': 'roof', 'type': 'HasA', 'score': 0.006356743164360523, 'wm_score': 0.42595947, 'final': 0.13223756121505237}, {'fro': 'lighthouse', 'to': 'candle', 'type': 'HasA', 'score': 0.005965585354715586, 'wm_score': 0.3254454, 'final': 0.10180952974830093}, {'fro': 'lighthouse', 'to': 'lock', 'type': 'HasA', 'score': 0.005141538102179766, 'wm_score': 0.3574099, 'final': 0.11082204667152586}, {'fro': 'lighthouse', 'to': 'landmark', 'type': 'HasA', 'score': 0.004401852376759052, 'wm_score': 0.3350061, 'final': 0.10358312666373133}, {'fro': 'lighthouse', 'to': 'chapel', 'type': 'HasA', 'score': 0.003942481242120266, 'wm_score': 0.56109715, 'final': 0.17108888186948423}, {'fro': 'lighthouse', 'to': 'harbour', 'type': 'HasA', 'score': 0.0033746117260307074, 'wm_score': 0.538494, 'final': 0.16391042820822152}, {'fro': 'lighthouse', 'to': 'museum', 'type': 'HasA', 'score': 0.003212087322026491, 'wm_score': 0.41757601, 'final': 0.12752126412541856}, {'fro': 'shark', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.030241068452596664, 'wm_score': 0.30688596, 'final': 0.11323453591681769}, {'fro': 'lantern', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.028533754870295525, 'wm_score': 0.3005271, 'final': 0.11013175840920689}, {'fro': 'candle', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.020783668383955956, 'wm_score': 0.3254454, 'final': 0.11218218786876918}, {'fro': 'boat', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.012798745185136795, 'wm_score': 0.41349557, 'final': 0.13300779262959578}, {'fro': 'ghost', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.012196144089102745, 'wm_score': 0.33338636, 'final': 0.10855320886237194}, {'fro': 'rainbow', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.011942844837903976, 'wm_score': 0.3223133, 'final': 0.1050539813865328}, {'fro': 'whale', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.010619238018989563, 'wm_score': 0.3506934, 'final': 0.11264148661329271}, {'fro': 'plaque', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.008885212242603302, 'wm_score': 0.3396353, 'final': 0.10811023856982231}, {'fro': 'ship', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.008473438210785389, 'wm_score': 0.46152505, 'final': 0.1443889217475498}, {'fro': 'tree', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.006855824962258339, 'wm_score': 0.3186842, 'final': 0.10040433747358085}, {'fro': 'beacon', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.006121679209172726, 'wm_score': 0.55482876, 'final': 0.17073380344642095}, {'fro': 'lamp', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.005969340912997723, 'wm_score': 0.394391, 'final': 0.12249583863909842}, {'fro': 'fire', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.0050360700115561485, 'wm_score': 0.32294136, 'final': 0.10040765700808932}, {'fro': 'statue', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.004833257757127285, 'wm_score': 0.4677278, 'final': 0.14370162042998913}, {'fro': 'lizard', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.004069487098604441, 'wm_score': 0.3327132, 'final': 0.10266260096902312}, {'fro': 'seal', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.0037054233253002167, 'wm_score': 0.38835895, 'final': 0.11910148132771016}, {'fro': 'submarine', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.0036113846581429243, 'wm_score': 0.3591554, 'final': 0.11027458926070006}, {'fro': 'lighthouse', 'to': 'distance', 'type': 'AtLocation', 'score': 0.24222879111766815, 'wm_score': 0.1880861, 'final': 0.2259859837823677}, {'fro': 'lighthouse', 'to': 'sky', 'type': 'AtLocation', 'score': 0.14532555639743805, 'wm_score': 0.27357537, 'final': 0.18380050047820662}, {'fro': 'lighthouse', 'to': 'foreground', 'type': 'AtLocation', 'score': 0.12930183112621307, 'wm_score': 0.06513056, 'final': 0.11005044978834916}, {'fro': 'lighthouse', 'to': 'harbor', 'type': 'AtLocation', 'score': 0.02698233723640442, 'wm_score': 0.5160388, 'final': 0.17369927606548313}, {'fro': 'lighthouse', 'to': 'harbour', 'type': 'AtLocation', 'score': 0.025521427392959595, 'wm_score': 0.538494, 'final': 0.17941319917507176}, {'fro': 'lighthouse', 'to': 'horizon', 'type': 'AtLocation', 'score': 0.015695879235863686, 'wm_score': 0.31186384, 'final': 0.10454626746510459}, {'fro': 'lighthouse', 'to': 'bay', 'type': 'AtLocation', 'score': 0.006744973361492157, 'wm_score': 0.45237523, 'final': 0.14043405035304454}, {'fro': 'lighthouse', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.006232698448002338, 'wm_score': 0.4099527, 'final': 0.12734869891360165}, {'fro': 'lighthouse', 'to': 'wilderness', 'type': 'AtLocation', 'score': 0.005118001718074083, 'wm_score': 0.3456102, 'final': 0.10726566120265187}, {'fro': 'lighthouse', 'to': 'ocean', 'type': 'AtLocation', 'score': 0.0041202339343726635, 'wm_score': 0.44210202, 'final': 0.13551476975406088}, {'fro': 'lighthouse', 'to': 'corner', 'type': 'AtLocation', 'score': 0.002216419205069542, 'wm_score': 0.3592724, 'final': 0.1093332134435487}, {'fro': 'lighthouse', 'to': 'cliff', 'type': 'AtLocation', 'score': 0.008332256227731705, 'wm_score': 0.3564431, 'final': 0.11276550935941222}, {'fro': 'vicinity', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.013573495671153069, 'wm_score': 0.4099527, 'final': 0.13248725696980718}, {'fro': 'citadel', 'to': 'lighthouse', 'type': 'HasA', 'score': 0.015614952892065048, 'wm_score': 0.33485663, 'final': 0.11138745602444554}, {'fro': 'lighthouse', 'to': 'citadel', 'type': 'AtLocation', 'score': 0.016515808179974556, 'wm_score': 0.33485663, 'final': 0.1120180547259822}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

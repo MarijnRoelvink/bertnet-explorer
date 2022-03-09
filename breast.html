@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">breast</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "breast"
+    let relations = [{'fro': 'cancer', 'to': 'breast', 'type': 'AtLocation', 'score': 0.004195746500045061, 'wm_score': 0.8210739, 'final': 0.24925919255003157}, {'fro': 'baby', 'to': 'breast', 'type': 'HasA', 'score': 0.0753898173570633, 'wm_score': 0.5223383, 'final': 0.20947436214994433}, {'fro': 'girl', 'to': 'breast', 'type': 'HasA', 'score': 0.0704256147146225, 'wm_score': 0.3425133, 'final': 0.15205192030023576}, {'fro': 'woman', 'to': 'breast', 'type': 'HasA', 'score': 0.06135353446006775, 'wm_score': 0.40332288, 'final': 0.16394433812204742}, {'fro': 'boy', 'to': 'breast', 'type': 'HasA', 'score': 0.03577638417482376, 'wm_score': 0.31076315, 'final': 0.11827241392237664}, {'fro': 'patient', 'to': 'breast', 'type': 'HasA', 'score': 0.028599660843610764, 'wm_score': 0.58043665, 'final': 0.19415075759052758}, {'fro': 'child', 'to': 'breast', 'type': 'HasA', 'score': 0.02536163665354252, 'wm_score': 0.44715208, 'final': 0.15189876965747978}, {'fro': 'recipient', 'to': 'breast', 'type': 'HasA', 'score': 0.023696478456258774, 'wm_score': 0.29842222, 'final': 0.10611420091938116}, {'fro': 'fetus', 'to': 'breast', 'type': 'HasA', 'score': 0.019056860357522964, 'wm_score': 0.49931374, 'final': 0.1631339242502661}, {'fro': 'cat', 'to': 'breast', 'type': 'HasA', 'score': 0.015634747222065926, 'wm_score': 0.33105963, 'final': 0.11026221205544615}, {'fro': 'victim', 'to': 'breast', 'type': 'HasA', 'score': 0.013234511949121952, 'wm_score': 0.3605854, 'final': 0.11743977836438538}, {'fro': 'toddler', 'to': 'breast', 'type': 'HasA', 'score': 0.012233749032020569, 'wm_score': 0.31081104, 'final': 0.1018069363224144}, {'fro': 'infant', 'to': 'breast', 'type': 'HasA', 'score': 0.009501691907644272, 'wm_score': 0.52809936, 'final': 0.16508099233535103}, {'fro': 'mother', 'to': 'breast', 'type': 'HasA', 'score': 0.008430405519902706, 'wm_score': 0.3567682, 'final': 0.1129317438639319}, {'fro': 'calf', 'to': 'breast', 'type': 'HasA', 'score': 0.008284141309559345, 'wm_score': 0.46472123, 'final': 0.14521526791669156}, {'fro': 'donor', 'to': 'breast', 'type': 'HasA', 'score': 0.007654217071831226, 'wm_score': 0.37475792, 'final': 0.11778532795028188}, {'fro': 'dog', 'to': 'breast', 'type': 'HasA', 'score': 0.007240794599056244, 'wm_score': 0.36742842, 'final': 0.11529708221933938}, {'fro': 'bird', 'to': 'breast', 'type': 'HasA', 'score': 0.007105730939656496, 'wm_score': 0.41619906, 'final': 0.12983372965775958}, {'fro': 'teen', 'to': 'breast', 'type': 'HasA', 'score': 0.005562361795455217, 'wm_score': 0.39733517, 'final': 0.12309420425681866}, {'fro': 'female', 'to': 'breast', 'type': 'HasA', 'score': 0.0053097945638000965, 'wm_score': 0.39913416, 'final': 0.12345710419466009}, {'fro': 'shark', 'to': 'breast', 'type': 'HasA', 'score': 0.003981052897870541, 'wm_score': 0.3517738, 'final': 0.1083188770285094}, {'fro': 'breast', 'to': 'nipple', 'type': 'HasA', 'score': 0.09406739473342896, 'wm_score': 0.41888237, 'final': 0.19151188731340027}, {'fro': 'breast', 'to': 'cavity', 'type': 'HasA', 'score': 0.05688551813364029, 'wm_score': 0.46136212, 'final': 0.17822849869354823}, {'fro': 'breast', 'to': 'heartbeat', 'type': 'HasA', 'score': 0.03295642510056496, 'wm_score': 0.3073391, 'final': 0.11527122757039548}, {'fro': 'breast', 'to': 'penis', 'type': 'HasA', 'score': 0.010063447058200836, 'wm_score': 0.40252072, 'final': 0.1278006289407406}, {'fro': 'breast', 'to': 'slit', 'type': 'HasA', 'score': 0.00924871675670147, 'wm_score': 0.33932862, 'final': 0.10827268772969105}, {'fro': 'breast', 'to': 'heart', 'type': 'HasA', 'score': 0.008600509725511074, 'wm_score': 0.5760118, 'final': 0.17882389680785776}, {'fro': 'breast', 'to': 'hole', 'type': 'HasA', 'score': 0.00855021458119154, 'wm_score': 0.31472123, 'final': 0.10040151920683409}, {'fro': 'breast', 'to': 'vagina', 'type': 'HasA', 'score': 0.007626499980688095, 'wm_score': 0.34238598, 'final': 0.10805434398648169}, {'fro': 'breast', 'to': 'cover', 'type': 'HasA', 'score': 0.00471083028241992, 'wm_score': 0.3800097, 'final': 0.11730049119769395}, {'fro': 'breast', 'to': 'scar', 'type': 'HasA', 'score': 0.004651992581784725, 'wm_score': 0.47446248, 'final': 0.14559513880724934}, {'fro': 'breast', 'to': 'tumor', 'type': 'HasA', 'score': 0.004320209845900536, 'wm_score': 0.65416855, 'final': 0.1992747118921304}, {'fro': 'breast', 'to': 'belly', 'type': 'HasA', 'score': 0.004245243966579437, 'wm_score': 0.48457778, 'final': 0.14834500477660562}, {'fro': 'breast', 'to': 'flap', 'type': 'HasA', 'score': 0.004220832604914904, 'wm_score': 0.3867536, 'final': 0.11898066282344044}, {'fro': 'breast', 'to': 'lining', 'type': 'HasA', 'score': 0.004039528779685497, 'wm_score': 0.35342512, 'final': 0.10885520614577986}, {'fro': 'breast', 'to': 'difference', 'type': 'HasA', 'score': 0.003583489451557398, 'wm_score': 0.32557976, 'final': 0.10018237061609019}, {'fro': 'breast', 'to': 'baby', 'type': 'HasA', 'score': 0.0034774262458086014, 'wm_score': 0.5223383, 'final': 0.15913568837206604}, {'fro': 'nipple', 'to': 'breast', 'type': 'AtLocation', 'score': 0.11621751636266708, 'wm_score': 0.41888237, 'final': 0.20701697245386697}, {'fro': 'baby', 'to': 'breast', 'type': 'AtLocation', 'score': 0.08837307244539261, 'wm_score': 0.5223383, 'final': 0.21856264071177484}, {'fro': 'fetus', 'to': 'breast', 'type': 'AtLocation', 'score': 0.0699911117553711, 'wm_score': 0.49931374, 'final': 0.1987879002287598}, {'fro': 'tumor', 'to': 'breast', 'type': 'AtLocation', 'score': 0.04879610612988472, 'wm_score': 0.65416855, 'final': 0.23040783929091932}, {'fro': 'child', 'to': 'breast', 'type': 'AtLocation', 'score': 0.03092515841126442, 'wm_score': 0.44715208, 'final': 0.1557932348878851}, {'fro': 'lump', 'to': 'breast', 'type': 'AtLocation', 'score': 0.028761547058820724, 'wm_score': 0.47061458, 'final': 0.16131745694117453}, {'fro': 'cow', 'to': 'breast', 'type': 'AtLocation', 'score': 0.023648248985409737, 'wm_score': 0.43840575, 'final': 0.1480754992897868}, {'fro': 'woman', 'to': 'breast', 'type': 'AtLocation', 'score': 0.0203359667211771, 'wm_score': 0.40332288, 'final': 0.13523204070482397}, {'fro': 'bullet', 'to': 'breast', 'type': 'AtLocation', 'score': 0.017645444720983505, 'wm_score': 0.3621405, 'final': 0.12099396130468845}, {'fro': 'boy', 'to': 'breast', 'type': 'AtLocation', 'score': 0.01678735949099064, 'wm_score': 0.31076315, 'final': 0.10498009664369345}, {'fro': 'girl', 'to': 'breast', 'type': 'AtLocation', 'score': 0.015872836112976074, 'wm_score': 0.3425133, 'final': 0.11386497527908326}, {'fro': 'shark', 'to': 'breast', 'type': 'AtLocation', 'score': 0.015759140253067017, 'wm_score': 0.3517738, 'final': 0.11656353817714693}, {'fro': 'cat', 'to': 'breast', 'type': 'AtLocation', 'score': 0.0157492533326149, 'wm_score': 0.33105963, 'final': 0.11034236633283043}, {'fro': 'patient', 'to': 'breast', 'type': 'AtLocation', 'score': 0.01324924360960722, 'wm_score': 0.58043665, 'final': 0.1834054655267251}, {'fro': 'calf', 'to': 'breast', 'type': 'AtLocation', 'score': 0.009658279828727245, 'wm_score': 0.46472123, 'final': 0.1461771648801091}, {'fro': 'needle', 'to': 'breast', 'type': 'AtLocation', 'score': 0.009601661004126072, 'wm_score': 0.3746399, 'final': 0.11911313270288827}, {'fro': 'newborn', 'to': 'breast', 'type': 'AtLocation', 'score': 0.009522153995931149, 'wm_score': 0.5301415, 'final': 0.16570795779715183}, {'fro': 'bird', 'to': 'breast', 'type': 'AtLocation', 'score': 0.008900458924472332, 'wm_score': 0.41619906, 'final': 0.13109003924713064}, {'fro': 'nurse', 'to': 'breast', 'type': 'AtLocation', 'score': 0.008324814029037952, 'wm_score': 0.36996806, 'final': 0.11681778782032658}, {'fro': 'mosquito', 'to': 'breast', 'type': 'AtLocation', 'score': 0.006630370393395424, 'wm_score': 0.36129335, 'final': 0.11302926427537682}, {'fro': 'chicken', 'to': 'breast', 'type': 'AtLocation', 'score': 0.00660333689302206, 'wm_score': 0.4608932, 'final': 0.14289029582511548}, {'fro': 'penis', 'to': 'breast', 'type': 'AtLocation', 'score': 0.005765687674283981, 'wm_score': 0.40252072, 'final': 0.1247921973719988}, {'fro': 'pig', 'to': 'breast', 'type': 'AtLocation', 'score': 0.00528179295361042, 'wm_score': 0.38735032, 'final': 0.11990235106752732}, {'fro': 'female', 'to': 'breast', 'type': 'AtLocation', 'score': 0.004896898753941059, 'wm_score': 0.39913416, 'final': 0.12316807712775876}, {'fro': 'knife', 'to': 'breast', 'type': 'AtLocation', 'score': 0.0036678104661405087, 'wm_score': 0.37275922, 'final': 0.11439523332629838}, {'fro': 'breast', 'to': 'freezer', 'type': 'AtLocation', 'score': 0.12315984070301056, 'wm_score': 0.22896963, 'final': 0.1549027774921074}, {'fro': 'breast', 'to': 'tank', 'type': 'AtLocation', 'score': 0.03554347902536392, 'wm_score': 0.27940917, 'final': 0.10870318631775475}, {'fro': 'breast', 'to': 'womb', 'type': 'AtLocation', 'score': 0.03184192255139351, 'wm_score': 0.44725847, 'final': 0.15646688678597548}, {'fro': 'breast', 'to': 'uterus', 'type': 'AtLocation', 'score': 0.019454704597592354, 'wm_score': 0.5315275, 'final': 0.17307654321831467}, {'fro': 'breast', 'to': 'vagina', 'type': 'AtLocation', 'score': 0.015910131856799126, 'wm_score': 0.34238598, 'final': 0.1138528862997594}, {'fro': 'breast', 'to': 'water', 'type': 'AtLocation', 'score': 0.014148402959108353, 'wm_score': 0.3198456, 'final': 0.10585756207137587}, {'fro': 'breast', 'to': 'belly', 'type': 'AtLocation', 'score': 0.010917576029896736, 'wm_score': 0.48457778, 'final': 0.15301563722092773}, {'fro': 'breast', 'to': 'bag', 'type': 'AtLocation', 'score': 0.01062171533703804, 'wm_score': 0.32665658, 'final': 0.10543217473592663}, {'fro': 'breast', 'to': 'milk', 'type': 'AtLocation', 'score': 0.00888519175350666, 'wm_score': 0.41842604, 'final': 0.13174744622745468}, {'fro': 'breast', 'to': 'chest', 'type': 'AtLocation', 'score': 0.006621351931244135, 'wm_score': 0.5356985, 'final': 0.1653444963518709}, {'fro': 'breast', 'to': 'flesh', 'type': 'AtLocation', 'score': 0.005411854013800621, 'wm_score': 0.424142, 'final': 0.13103089780966046}, {'fro': 'breast', 'to': 'abdomen', 'type': 'AtLocation', 'score': 0.004557859618216753, 'wm_score': 0.5513607, 'final': 0.16859871173275176}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

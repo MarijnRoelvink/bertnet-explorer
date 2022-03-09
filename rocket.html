@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">rocket</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "rocket"
+    let relations = [{'fro': 'rocket', 'to': 'direction', 'type': 'AtLocation', 'score': 0.02704203687608242, 'wm_score': 0.2858441, 'final': 0.10468265581325771}, {'fro': 'rocket', 'to': 'flight', 'type': 'AtLocation', 'score': 0.006897282786667347, 'wm_score': 0.42697453, 'final': 0.13292045695066715}, {'fro': 'rocket', 'to': 'delivery', 'type': 'AtLocation', 'score': 0.004666738212108612, 'wm_score': 0.33067366, 'final': 0.10246881474847604}, {'fro': 'rocket', 'to': 'atmosphere', 'type': 'AtLocation', 'score': 0.0113137848675251, 'wm_score': 0.3170156, 'final': 0.10302432940726758}, {'fro': 'rocket', 'to': 'air', 'type': 'AtLocation', 'score': 0.01982196979224682, 'wm_score': 0.5004259, 'final': 0.1640031488545728}, {'fro': 'rocket', 'to': 'line', 'type': 'AtLocation', 'score': 0.007360634859651327, 'wm_score': 0.3174113, 'final': 0.10037583440175595}, {'fro': 'rocket', 'to': 'light', 'type': 'AtLocation', 'score': 0.00814804993569851, 'wm_score': 0.4235615, 'final': 0.13277208495498896}, {'fro': 'rocket', 'to': 'test', 'type': 'AtLocation', 'score': 0.007169472984969616, 'wm_score': 0.4348783, 'final': 0.13548212108947874}, {'fro': 'rocket', 'to': 'range', 'type': 'HasA', 'score': 0.004811611957848072, 'wm_score': 0.4407574, 'final': 0.1355953483704937}, {'fro': 'rocket', 'to': 'range', 'type': 'AtLocation', 'score': 0.0067157926969230175, 'wm_score': 0.4407574, 'final': 0.13692827488784615}, {'fro': 'rocket', 'to': 'side', 'type': 'AtLocation', 'score': 0.004691130947321653, 'wm_score': 0.33456522, 'final': 0.10365335766312517}, {'fro': 'rocket', 'to': 'space', 'type': 'AtLocation', 'score': 0.01625903695821762, 'wm_score': 0.4994304, 'final': 0.16121044587075234}, {'fro': 'rocket', 'to': 'attempt', 'type': 'AtLocation', 'score': 0.004372952505946159, 'wm_score': 0.45471707, 'final': 0.13947618775416235}, {'fro': 'rocket', 'to': 'star', 'type': 'AtLocation', 'score': 0.006974478252232075, 'wm_score': 0.33459616, 'final': 0.10526098277656246}, {'fro': 'rocket', 'to': 'front', 'type': 'AtLocation', 'score': 0.004218479618430138, 'wm_score': 0.35408548, 'final': 0.10917857973290111}, {'fro': 'rocket', 'to': 'wing', 'type': 'AtLocation', 'score': 0.006712491624057293, 'wm_score': 0.40320945, 'final': 0.12566157913684012}, {'fro': 'rocket', 'to': 'base', 'type': 'AtLocation', 'score': 0.009235686622560024, 'wm_score': 0.3888284, 'final': 0.12311350063579203}, {'fro': 'rocket', 'to': 'distance', 'type': 'AtLocation', 'score': 0.008370548486709595, 'wm_score': 0.32826555, 'final': 0.10433904894069673}, {'fro': 'rocket', 'to': 'target', 'type': 'AtLocation', 'score': 0.014276728965342045, 'wm_score': 0.534165, 'final': 0.17024321027573944}, {'fro': 'rocket', 'to': 'ground', 'type': 'AtLocation', 'score': 0.00314878998324275, 'wm_score': 0.4424618, 'final': 0.13494269298826994}, {'fro': 'rocket', 'to': 'phase', 'type': 'AtLocation', 'score': 0.004585901275277138, 'wm_score': 0.38252574, 'final': 0.11796785289269401}, {'fro': 'rocket', 'to': 'sky', 'type': 'AtLocation', 'score': 0.02411561645567417, 'wm_score': 0.3921823, 'final': 0.13453562151897192}, {'fro': 'rocket', 'to': 'stage', 'type': 'AtLocation', 'score': 0.006618782412260771, 'wm_score': 0.37315977, 'final': 0.11658107868858256}, {'fro': 'rocket', 'to': 'trip', 'type': 'AtLocation', 'score': 0.0057339174672961235, 'wm_score': 0.3199755, 'final': 0.10000639222710732}, {'fro': 'rocket', 'to': 'gear', 'type': 'AtLocation', 'score': 0.003560963785275817, 'wm_score': 0.38381624, 'final': 0.11763754664969309}, {'fro': 'rocket', 'to': 'path', 'type': 'AtLocation', 'score': 0.010504502803087234, 'wm_score': 0.3330949, 'final': 0.10728162196216108}, {'fro': 'rocket', 'to': 'mission', 'type': 'AtLocation', 'score': 0.006033221259713173, 'wm_score': 0.50349236, 'final': 0.15527096288179923}, {'fro': 'rocket', 'to': 'tank', 'type': 'AtLocation', 'score': 0.007329887244850397, 'wm_score': 0.62841797, 'final': 0.1936563120713953}, {'fro': 'rocket', 'to': 'fuel', 'type': 'HasA', 'score': 0.003109351731836796, 'wm_score': 0.5274049, 'final': 0.16039801621228575}, {'fro': 'rocket', 'to': 'fuel', 'type': 'AtLocation', 'score': 0.004725505132228136, 'wm_score': 0.5274049, 'final': 0.1615293235925597}, {'fro': 'rocket', 'to': 'counter', 'type': 'AtLocation', 'score': 0.0035033957101404667, 'wm_score': 0.39068902, 'final': 0.11965908299709835}, {'fro': 'rocket', 'to': 'might', 'type': 'AtLocation', 'score': 0.004362056497484446, 'wm_score': 0.3590407, 'final': 0.11076564954823913}, {'fro': 'rocket', 'to': 'start', 'type': 'AtLocation', 'score': 0.0031702304258942604, 'wm_score': 0.37836927, 'final': 0.11572994229812598}, {'fro': 'rocket', 'to': 'produce', 'type': 'AtLocation', 'score': 0.004197658039629459, 'wm_score': 0.32865882, 'final': 0.10153600662774065}, {'fro': 'rocket', 'to': 'reach', 'type': 'AtLocation', 'score': 0.0035120423417538404, 'wm_score': 0.34769207, 'final': 0.1067660506392277}, {'fro': 'rocket', 'to': 'beyond', 'type': 'AtLocation', 'score': 0.00629446329548955, 'wm_score': 0.32669085, 'final': 0.10241337930684269}, {'fro': 'rocket', 'to': 'lift', 'type': 'AtLocation', 'score': 0.004458290059119463, 'wm_score': 0.38924226, 'final': 0.11989348104138364}, {'fro': 'rocket', 'to': 'fly', 'type': 'AtLocation', 'score': 0.011797144077718258, 'wm_score': 0.41185755, 'final': 0.1318152658544028}, {'fro': 'rocket', 'to': 'heavy', 'type': 'AtLocation', 'score': 0.006763757206499577, 'wm_score': 0.5180307, 'final': 0.16014384004454973}, {'fro': 'rocket', 'to': 'push', 'type': 'AtLocation', 'score': 0.0037872837856411934, 'wm_score': 0.36993262, 'final': 0.11363088464994885}, {'fro': 'rocket', 'to': 'moon', 'type': 'AtLocation', 'score': 0.019160540774464607, 'wm_score': 0.4995805, 'final': 0.16328652854212525}, {'fro': 'rocket', 'to': 'spark', 'type': 'HasA', 'score': 0.003024482633918524, 'wm_score': 0.35911655, 'final': 0.10985210284374299}, {'fro': 'rocket', 'to': 'spark', 'type': 'AtLocation', 'score': 0.0015575516736134887, 'wm_score': 0.35911655, 'final': 0.10882525117152946}, {'fro': 'rocket', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.015597555786371231, 'wm_score': 0.3147704, 'final': 0.10534940905045988}, {'fro': 'rocket', 'to': 'threat', 'type': 'AtLocation', 'score': 0.00412003556266427, 'wm_score': 0.39475715, 'final': 0.121311169893865}, {'fro': 'rocket', 'to': 'prototype', 'type': 'AtLocation', 'score': 0.0045142159797251225, 'wm_score': 0.4963757, 'final': 0.1520726611858076}, {'fro': 'rocket', 'to': 'intercept', 'type': 'AtLocation', 'score': 0.0036696174647659063, 'wm_score': 0.41459775, 'final': 0.12694805722533614}, {'fro': 'rocket', 'to': 'comet', 'type': 'AtLocation', 'score': 0.0047952644526958466, 'wm_score': 0.35989714, 'final': 0.11132582711688711}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

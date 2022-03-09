@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">landscape</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "landscape"
+    let relations = [{'fro': 'arctic', 'to': 'landscape', 'type': 'HasA', 'score': 0.034100428223609924, 'wm_score': 0.3894536, 'final': 0.14070637975652697}, {'fro': 'city', 'to': 'landscape', 'type': 'HasA', 'score': 0.03171294182538986, 'wm_score': 0.39769745, 'final': 0.14150829427777292}, {'fro': 'desert', 'to': 'landscape', 'type': 'HasA', 'score': 0.02778024971485138, 'wm_score': 0.5181259, 'final': 0.17488394480039599}, {'fro': 'world', 'to': 'landscape', 'type': 'HasA', 'score': 0.01737797074019909, 'wm_score': 0.35664487, 'final': 0.11915804051813937}, {'fro': 'mediterranean', 'to': 'landscape', 'type': 'HasA', 'score': 0.017183292657136917, 'wm_score': 0.31361347, 'final': 0.10611234585999586}, {'fro': 'forest', 'to': 'landscape', 'type': 'HasA', 'score': 0.016387751325964928, 'wm_score': 0.5240545, 'final': 0.16868777592817547}, {'fro': 'valley', 'to': 'landscape', 'type': 'HasA', 'score': 0.012749546207487583, 'wm_score': 0.43727383, 'final': 0.1401068313452413}, {'fro': 'park', 'to': 'landscape', 'type': 'HasA', 'score': 0.012682920321822166, 'wm_score': 0.4240305, 'final': 0.13608719422527554}, {'fro': 'countryside', 'to': 'landscape', 'type': 'HasA', 'score': 0.012282032519578934, 'wm_score': 0.6053875, 'final': 0.19021367276370527}, {'fro': 'island', 'to': 'landscape', 'type': 'HasA', 'score': 0.011606003157794476, 'wm_score': 0.3418746, 'final': 0.11068658221045614}, {'fro': 'ocean', 'to': 'landscape', 'type': 'HasA', 'score': 0.01074203196913004, 'wm_score': 0.4348171, 'final': 0.13796455237839106}, {'fro': 'jungle', 'to': 'landscape', 'type': 'HasA', 'score': 0.010277977213263512, 'wm_score': 0.35859463, 'final': 0.11477297304928448}, {'fro': 'earth', 'to': 'landscape', 'type': 'HasA', 'score': 0.00912634376436472, 'wm_score': 0.45871556, 'final': 0.14400310863505533}, {'fro': 'region', 'to': 'landscape', 'type': 'HasA', 'score': 0.007626792881637812, 'wm_score': 0.43696466, 'final': 0.1364281530171465}, {'fro': 'future', 'to': 'landscape', 'type': 'HasA', 'score': 0.006722031626850367, 'wm_score': 0.42790744, 'final': 0.13307765413879527}, {'fro': 'planet', 'to': 'landscape', 'type': 'HasA', 'score': 0.006167165469378233, 'wm_score': 0.36096966, 'final': 0.11260791382856479}, {'fro': 'sea', 'to': 'landscape', 'type': 'HasA', 'score': 0.00564259197562933, 'wm_score': 0.3574514, 'final': 0.11118523438294055}, {'fro': 'beach', 'to': 'landscape', 'type': 'HasA', 'score': 0.005319385789334774, 'wm_score': 0.39418495, 'final': 0.12197905505253435}, {'fro': 'continent', 'to': 'landscape', 'type': 'HasA', 'score': 0.004900536499917507, 'wm_score': 0.38127553, 'final': 0.11781303454994227}, {'fro': 'town', 'to': 'landscape', 'type': 'HasA', 'score': 0.004634171724319458, 'wm_score': 0.4131507, 'final': 0.12718913020702363}, {'fro': 'mountain', 'to': 'landscape', 'type': 'HasA', 'score': 0.0045697325840592384, 'wm_score': 0.41757536, 'final': 0.12847142080884147}, {'fro': 'country', 'to': 'landscape', 'type': 'HasA', 'score': 0.004470380023121834, 'wm_score': 0.3933683, 'final': 0.1211397560161853}, {'fro': 'landscape', 'to': 'future', 'type': 'HasA', 'score': 0.02167412079870701, 'wm_score': 0.42790744, 'final': 0.1435441165590949}, {'fro': 'landscape', 'to': 'history', 'type': 'HasA', 'score': 0.018520215526223183, 'wm_score': 0.5281369, 'final': 0.17140522086835625}, {'fro': 'landscape', 'to': 'pattern', 'type': 'HasA', 'score': 0.0091399559751153, 'wm_score': 0.4587893, 'final': 0.14403475918258074}, {'fro': 'landscape', 'to': 'story', 'type': 'HasA', 'score': 0.008886206895112991, 'wm_score': 0.37615058, 'final': 0.11906551882657912}, {'fro': 'landscape', 'to': 'past', 'type': 'HasA', 'score': 0.008216178975999355, 'wm_score': 0.37976208, 'final': 0.11967994928319957}, {'fro': 'landscape', 'to': 'beauty', 'type': 'HasA', 'score': 0.007630123291164637, 'wm_score': 0.52169305, 'final': 0.16184900130381527}, {'fro': 'landscape', 'to': 'change', 'type': 'HasA', 'score': 0.0070430622436106205, 'wm_score': 0.42956465, 'final': 0.13379953857052745}, {'fro': 'landscape', 'to': 'transformation', 'type': 'HasA', 'score': 0.006914428900927305, 'wm_score': 0.44625098, 'final': 0.13871539423064916}, {'fro': 'landscape', 'to': 'niche', 'type': 'HasA', 'score': 0.0066664693877100945, 'wm_score': 0.42122412, 'final': 0.1310337645713971}, {'fro': 'landscape', 'to': 'meaning', 'type': 'HasA', 'score': 0.005777370650321245, 'wm_score': 0.33041745, 'final': 0.1031693944552249}, {'fro': 'landscape', 'to': 'watershed', 'type': 'HasA', 'score': 0.0049183364026248455, 'wm_score': 0.37493175, 'final': 0.11592236048183742}, {'fro': 'landscape', 'to': 'theme', 'type': 'HasA', 'score': 0.004704850725829601, 'wm_score': 0.41609997, 'final': 0.12812338650808075}, {'fro': 'landscape', 'to': 'place', 'type': 'HasA', 'score': 0.004629342816770077, 'wm_score': 0.38356233, 'final': 0.11830923897173908}, {'fro': 'landscape', 'to': 'reputation', 'type': 'HasA', 'score': 0.0039515309035778046, 'wm_score': 0.40553498, 'final': 0.12442656563250447}, {'fro': 'landscape', 'to': 'turn', 'type': 'HasA', 'score': 0.0037702498957514763, 'wm_score': 0.37604338, 'final': 0.11545218892702605}, {'fro': 'deer', 'to': 'landscape', 'type': 'AtLocation', 'score': 0.12206165492534637, 'wm_score': 0.2052113, 'final': 0.14700654844774247}, {'fro': 'tree', 'to': 'landscape', 'type': 'AtLocation', 'score': 0.017695359885692596, 'wm_score': 0.402174, 'final': 0.13303895191998483}, {'fro': 'mountain', 'to': 'landscape', 'type': 'AtLocation', 'score': 0.007268417626619339, 'wm_score': 0.41757536, 'final': 0.13036050033863356}, {'fro': 'forest', 'to': 'landscape', 'type': 'AtLocation', 'score': 0.007180552929639816, 'wm_score': 0.5240545, 'final': 0.16224273705074788}, {'fro': 'ghost', 'to': 'landscape', 'type': 'AtLocation', 'score': 0.004376058932393789, 'wm_score': 0.3288951, 'final': 0.10173177125267567}, {'fro': 'landscape', 'to': 'foreground', 'type': 'AtLocation', 'score': 0.1579696089029312, 'wm_score': 0.37913403, 'final': 0.22431893523205187}, {'fro': 'landscape', 'to': 'air', 'type': 'AtLocation', 'score': 0.08214447647333145, 'wm_score': 0.24898994, 'final': 0.132198115531332}, {'fro': 'landscape', 'to': 'works', 'type': 'AtLocation', 'score': 0.06265854090452194, 'wm_score': 0.50682354, 'final': 0.19590804063316536}, {'fro': 'landscape', 'to': 'balance', 'type': 'AtLocation', 'score': 0.06014881283044815, 'wm_score': 0.3235227, 'final': 0.13916097898131372}, {'fro': 'landscape', 'to': 'clouds', 'type': 'AtLocation', 'score': 0.04689735919237137, 'wm_score': 0.36054277, 'final': 0.14099098243465996}, {'fro': 'landscape', 'to': 'distance', 'type': 'AtLocation', 'score': 0.04276243597269058, 'wm_score': 0.29302913, 'final': 0.11784244418088344}, {'fro': 'landscape', 'to': 'making', 'type': 'AtLocation', 'score': 0.035137467086315155, 'wm_score': 0.3064519, 'final': 0.11653179696042061}, {'fro': 'landscape', 'to': 'background', 'type': 'AtLocation', 'score': 0.024947745725512505, 'wm_score': 0.49490303, 'final': 0.1659343310078588}, {'fro': 'landscape', 'to': 'wild', 'type': 'AtLocation', 'score': 0.02097913809120655, 'wm_score': 0.33391112, 'final': 0.1148587326638446}, {'fro': 'landscape', 'to': 'picture', 'type': 'AtLocation', 'score': 0.015869341790676117, 'wm_score': 0.4770712, 'final': 0.15422989925347327}, {'fro': 'landscape', 'to': 'water', 'type': 'AtLocation', 'score': 0.015499096363782883, 'wm_score': 0.3267432, 'final': 0.10887232745464803}, {'fro': 'landscape', 'to': 'wilderness', 'type': 'AtLocation', 'score': 0.014462088234722614, 'wm_score': 0.4416965, 'final': 0.14263241176430586}, {'fro': 'landscape', 'to': 'way', 'type': 'AtLocation', 'score': 0.013763375580310822, 'wm_score': 0.4417851, 'final': 0.1421698929062176}, {'fro': 'landscape', 'to': 'open', 'type': 'AtLocation', 'score': 0.013496717438101768, 'wm_score': 0.37251914, 'final': 0.12120344420667126}, {'fro': 'landscape', 'to': 'clear', 'type': 'AtLocation', 'score': 0.010590320453047752, 'wm_score': 0.35837305, 'final': 0.11492513931713345}, {'fro': 'landscape', 'to': 'shadows', 'type': 'AtLocation', 'score': 0.009221657179296017, 'wm_score': 0.40797243, 'final': 0.12884688902550723}, {'fro': 'landscape', 'to': 'desert', 'type': 'AtLocation', 'score': 0.00875950325280428, 'wm_score': 0.5181259, 'final': 0.16156942227696303}, {'fro': 'landscape', 'to': 'future', 'type': 'AtLocation', 'score': 0.008525320328772068, 'wm_score': 0.42790744, 'final': 0.13433995623014044}, {'fro': 'landscape', 'to': 'sky', 'type': 'AtLocation', 'score': 0.008031858131289482, 'wm_score': 0.39887536, 'final': 0.12528490869190265}, {'fro': 'landscape', 'to': 'trees', 'type': 'AtLocation', 'score': 0.007478245068341494, 'wm_score': 0.48524252, 'final': 0.15080752754783908}, {'fro': 'landscape', 'to': 'unknown', 'type': 'AtLocation', 'score': 0.006851926911622286, 'wm_score': 0.35326844, 'final': 0.11077688083813561}, {'fro': 'landscape', 'to': 'woods', 'type': 'AtLocation', 'score': 0.006707567255944014, 'wm_score': 0.37279662, 'final': 0.11653428307916083}, {'fro': 'landscape', 'to': 'mix', 'type': 'AtLocation', 'score': 0.006416313350200653, 'wm_score': 0.37105957, 'final': 0.11580929034514047}, {'fro': 'landscape', 'to': 'middle', 'type': 'AtLocation', 'score': 0.006320290733128786, 'wm_score': 0.3983434, 'final': 0.12392722351319016}, {'fro': 'landscape', 'to': 'shade', 'type': 'AtLocation', 'score': 0.00524703087285161, 'wm_score': 0.36641395, 'final': 0.11359710661099613}, {'fro': 'landscape', 'to': 'dark', 'type': 'AtLocation', 'score': 0.00493480172008276, 'wm_score': 0.45015287, 'final': 0.13850022220405794}, {'fro': 'landscape', 'to': 'wind', 'type': 'AtLocation', 'score': 0.004196859896183014, 'wm_score': 0.35880914, 'final': 0.11058054392732813}, {'fro': 'landscape', 'to': 'present', 'type': 'AtLocation', 'score': 0.004069532733410597, 'wm_score': 0.37089974, 'final': 0.11411859491338743}, {'fro': 'landscape', 'to': 'forest', 'type': 'AtLocation', 'score': 0.003980197478085756, 'wm_score': 0.5240545, 'final': 0.16000248823466004}, {'fro': 'landscape', 'to': 'garden', 'type': 'AtLocation', 'score': 0.0038108215667307377, 'wm_score': 0.5527686, 'final': 0.16849815509671154}, {'fro': 'landscape', 'to': 'sights', 'type': 'AtLocation', 'score': 0.0037156064063310623, 'wm_score': 0.38203505, 'final': 0.11721143948443176}, {'fro': 'landscape', 'to': 'dust', 'type': 'AtLocation', 'score': 0.0037006863858550787, 'wm_score': 0.36057025, 'final': 0.11076155547009855}, {'fro': 'landscape', 'to': 'window', 'type': 'AtLocation', 'score': 0.0032866972032934427, 'wm_score': 0.3445624, 'final': 0.10566940804230542}, {'fro': 'landscape', 'to': 'vast', 'type': 'HasA', 'score': 0.005216322839260101, 'wm_score': 0.5274699, 'final': 0.16189239598748212}, {'fro': 'landscape', 'to': 'shift', 'type': 'HasA', 'score': 0.016412431374192238, 'wm_score': 0.37398756, 'final': 0.12368496996193458}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

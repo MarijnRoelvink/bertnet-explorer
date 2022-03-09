@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">remote</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "remote"
+    let relations = [{'fro': 'remote', 'to': 'drive', 'type': 'HasA', 'score': 0.0035260096192359924, 'wm_score': 0.47773337, 'final': 0.14578821773346523}, {'fro': 'cabin', 'to': 'remote', 'type': 'HasA', 'score': 0.018135249614715576, 'wm_score': 0.40034285, 'final': 0.1327975297303009}, {'fro': 'site', 'to': 'remote', 'type': 'HasA', 'score': 0.009888260625302792, 'wm_score': 0.5389869, 'final': 0.168617852437712}, {'fro': 'facility', 'to': 'remote', 'type': 'HasA', 'score': 0.009275184944272041, 'wm_score': 0.44972783, 'final': 0.14141097846099046}, {'fro': 'station', 'to': 'remote', 'type': 'HasA', 'score': 0.009074801579117775, 'wm_score': 0.42177385, 'final': 0.13288451610538246}, {'fro': 'airport', 'to': 'remote', 'type': 'HasA', 'score': 0.008620467968285084, 'wm_score': 0.40806285, 'final': 0.12845318257779956}, {'fro': 'camera', 'to': 'remote', 'type': 'HasA', 'score': 0.008408481255173683, 'wm_score': 0.44635844, 'final': 0.1397934688786216}, {'fro': 'building', 'to': 'remote', 'type': 'HasA', 'score': 0.007980959489941597, 'wm_score': 0.3622426, 'final': 0.11425945164295914}, {'fro': 'drone', 'to': 'remote', 'type': 'HasA', 'score': 0.007615346927195787, 'wm_score': 0.4167925, 'final': 0.1303684928490371}, {'fro': 'helicopter', 'to': 'remote', 'type': 'HasA', 'score': 0.007390309125185013, 'wm_score': 0.48729503, 'final': 0.15136172538762954}, {'fro': 'house', 'to': 'remote', 'type': 'HasA', 'score': 0.006712513510137796, 'wm_score': 0.3256448, 'final': 0.10239219945709647}, {'fro': 'cave', 'to': 'remote', 'type': 'HasA', 'score': 0.006670020520687103, 'wm_score': 0.43071312, 'final': 0.133882950364481}, {'fro': 'plane', 'to': 'remote', 'type': 'HasA', 'score': 0.006369630340486765, 'wm_score': 0.46239498, 'final': 0.14317723523834075}, {'fro': 'village', 'to': 'remote', 'type': 'HasA', 'score': 0.006072509102523327, 'wm_score': 0.5321417, 'final': 0.16389326637176638}, {'fro': 'car', 'to': 'remote', 'type': 'HasA', 'score': 0.005539764650166035, 'wm_score': 0.39783782, 'final': 0.12322918125511625}, {'fro': 'device', 'to': 'remote', 'type': 'HasA', 'score': 0.004956312943249941, 'wm_score': 0.54090744, 'final': 0.16574165106027497}, {'fro': 'farm', 'to': 'remote', 'type': 'HasA', 'score': 0.004275682382285595, 'wm_score': 0.34786752, 'final': 0.10735323366759993}, {'fro': 'mountain', 'to': 'remote', 'type': 'HasA', 'score': 0.004200008697807789, 'wm_score': 0.5552182, 'final': 0.16950546608846548}, {'fro': 'camp', 'to': 'remote', 'type': 'HasA', 'score': 0.00401198398321867, 'wm_score': 0.42010963, 'final': 0.12884127778825308}, {'fro': 'island', 'to': 'remote', 'type': 'HasA', 'score': 0.003839364042505622, 'wm_score': 0.5382699, 'final': 0.16416852482975394}, {'fro': 'office', 'to': 'remote', 'type': 'HasA', 'score': 0.003529827343299985, 'wm_score': 0.3307541, 'final': 0.10169710914031001}, {'fro': 'pilot', 'to': 'remote', 'type': 'HasA', 'score': 0.0033023450523614883, 'wm_score': 0.44452864, 'final': 0.13567023353665306}, {'fro': 'hospital', 'to': 'remote', 'type': 'HasA', 'score': 0.0032223982270807028, 'wm_score': 0.32790986, 'final': 0.1006286367589565}, {'fro': 'remote', 'to': 'microphone', 'type': 'HasA', 'score': 0.07331137359142303, 'wm_score': 0.3081758, 'final': 0.14377070151399612}, {'fro': 'remote', 'to': 'touchscreen', 'type': 'HasA', 'score': 0.047606948763132095, 'wm_score': 0.22444734, 'final': 0.10065906613419248}, {'fro': 'remote', 'to': 'camera', 'type': 'HasA', 'score': 0.04255259409546852, 'wm_score': 0.44635844, 'final': 0.163694347866828}, {'fro': 'remote', 'to': 'webcam', 'type': 'HasA', 'score': 0.024281790480017662, 'wm_score': 0.31300557, 'final': 0.11089892433601238}, {'fro': 'remote', 'to': 'password', 'type': 'HasA', 'score': 0.018946925178170204, 'wm_score': 0.33997816, 'final': 0.11525629562471915}, {'fro': 'remote', 'to': 'transmitter', 'type': 'HasA', 'score': 0.01852799579501152, 'wm_score': 0.43802652, 'final': 0.1443775530565081}, {'fro': 'remote', 'to': 'gps', 'type': 'HasA', 'score': 0.011962126940488815, 'wm_score': 0.44411558, 'final': 0.14160816285834218}, {'fro': 'remote', 'to': 'handle', 'type': 'HasA', 'score': 0.01105560828000307, 'wm_score': 0.3454343, 'final': 0.11136921579600217}, {'fro': 'remote', 'to': 'controller', 'type': 'HasA', 'score': 0.005869724787771702, 'wm_score': 0.36450315, 'final': 0.11345975235144021}, {'fro': 'remote', 'to': 'problem', 'type': 'HasA', 'score': 0.0052360231056809425, 'wm_score': 0.41622624, 'final': 0.12853308817397668}, {'fro': 'remote', 'to': 'home', 'type': 'HasA', 'score': 0.005163727328181267, 'wm_score': 0.48335952, 'final': 0.1486224651297269}, {'fro': 'remote', 'to': 'sensor', 'type': 'HasA', 'score': 0.004512937739491463, 'wm_score': 0.40237594, 'final': 0.12387183841764404}, {'fro': 'remote', 'to': 'sound', 'type': 'HasA', 'score': 0.00407156627625227, 'wm_score': 0.3889683, 'final': 0.1195405863933766}, {'fro': 'remote', 'to': 'voice', 'type': 'HasA', 'score': 0.0037665925920009613, 'wm_score': 0.35438934, 'final': 0.10895341681440068}, {'fro': 'remote', 'to': 'view', 'type': 'HasA', 'score': 0.0034841899760067463, 'wm_score': 0.40015724, 'final': 0.12248610498320474}, {'fro': 'deer', 'to': 'remote', 'type': 'AtLocation', 'score': 0.0323147177696228, 'wm_score': 0.28794438, 'final': 0.10900361643873598}, {'fro': 'helicopter', 'to': 'remote', 'type': 'AtLocation', 'score': 0.023679884150624275, 'wm_score': 0.48729503, 'final': 0.16276442790543702}, {'fro': 'cave', 'to': 'remote', 'type': 'AtLocation', 'score': 0.017106952145695686, 'wm_score': 0.43071312, 'final': 0.141188802501987}, {'fro': 'tree', 'to': 'remote', 'type': 'AtLocation', 'score': 0.016917424276471138, 'wm_score': 0.35809374, 'final': 0.11927031899352981}, {'fro': 'drone', 'to': 'remote', 'type': 'AtLocation', 'score': 0.015938561409711838, 'wm_score': 0.4167925, 'final': 0.13619474298679832}, {'fro': 'cabin', 'to': 'remote', 'type': 'AtLocation', 'score': 0.015683766454458237, 'wm_score': 0.40034285, 'final': 0.13108149151812076}, {'fro': 'house', 'to': 'remote', 'type': 'AtLocation', 'score': 0.010610416531562805, 'wm_score': 0.3256448, 'final': 0.10512073157209398}, {'fro': 'camera', 'to': 'remote', 'type': 'AtLocation', 'score': 0.00932246819138527, 'wm_score': 0.44635844, 'final': 0.14043325973396972}, {'fro': 'mountain', 'to': 'remote', 'type': 'AtLocation', 'score': 0.008600701577961445, 'wm_score': 0.5552182, 'final': 0.17258595110457303}, {'fro': 'car', 'to': 'remote', 'type': 'AtLocation', 'score': 0.008251635357737541, 'wm_score': 0.39783782, 'final': 0.1251274907504163}, {'fro': 'bird', 'to': 'remote', 'type': 'AtLocation', 'score': 0.007994777522981167, 'wm_score': 0.33232468, 'final': 0.10529374826608683}, {'fro': 'village', 'to': 'remote', 'type': 'AtLocation', 'score': 0.007533748634159565, 'wm_score': 0.5321417, 'final': 0.16491613404391173}, {'fro': 'hole', 'to': 'remote', 'type': 'AtLocation', 'score': 0.006304379086941481, 'wm_score': 0.35102424, 'final': 0.10972033736085904}, {'fro': 'volcano', 'to': 'remote', 'type': 'AtLocation', 'score': 0.00587106216698885, 'wm_score': 0.3332033, 'final': 0.10407073351689221}, {'fro': 'bomb', 'to': 'remote', 'type': 'AtLocation', 'score': 0.005778567865490913, 'wm_score': 0.44321284, 'final': 0.13700884950584366}, {'fro': 'man', 'to': 'remote', 'type': 'AtLocation', 'score': 0.005380826536566019, 'wm_score': 0.35267663, 'final': 0.10956956757559623}, {'fro': 'remote', 'to': 'foreground', 'type': 'AtLocation', 'score': 0.14935146272182465, 'wm_score': 0.12606433, 'final': 0.14236532290527726}, {'fro': 'remote', 'to': 'air', 'type': 'AtLocation', 'score': 0.14636138081550598, 'wm_score': 0.40565154, 'final': 0.22414842857085418}, {'fro': 'remote', 'to': 'background', 'type': 'AtLocation', 'score': 0.10673932731151581, 'wm_score': 0.27622512, 'final': 0.15758506511806109}, {'fro': 'remote', 'to': 'sky', 'type': 'AtLocation', 'score': 0.07427497208118439, 'wm_score': 0.31813166, 'final': 0.1474319784568291}, {'fro': 'remote', 'to': 'distance', 'type': 'AtLocation', 'score': 0.04199150204658508, 'wm_score': 0.4598418, 'final': 0.1673465914326096}, {'fro': 'remote', 'to': 'woods', 'type': 'AtLocation', 'score': 0.027032438665628433, 'wm_score': 0.29123962, 'final': 0.10629459306593991}, {'fro': 'remote', 'to': 'wild', 'type': 'AtLocation', 'score': 0.02677668072283268, 'wm_score': 0.3705184, 'final': 0.1298991965059829}, {'fro': 'remote', 'to': 'dark', 'type': 'AtLocation', 'score': 0.023558873683214188, 'wm_score': 0.29225725, 'final': 0.10416838657824995}, {'fro': 'remote', 'to': 'water', 'type': 'AtLocation', 'score': 0.013436299748718739, 'wm_score': 0.37297547, 'final': 0.12129805082410314}, {'fro': 'remote', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.011632118374109268, 'wm_score': 0.50633323, 'final': 0.16004245186187652}, {'fro': 'remote', 'to': 'wilderness', 'type': 'AtLocation', 'score': 0.011587022803723812, 'wm_score': 0.42716947, 'final': 0.13626175696260667}, {'fro': 'remote', 'to': 'open', 'type': 'AtLocation', 'score': 0.010073203593492508, 'wm_score': 0.4202795, 'final': 0.13313509251544475}, {'fro': 'remote', 'to': 'skies', 'type': 'AtLocation', 'score': 0.00678767915815115, 'wm_score': 0.3194868, 'final': 0.10059741541070583}, {'fro': 'remote', 'to': 'desert', 'type': 'AtLocation', 'score': 0.005832520313560963, 'wm_score': 0.5482637, 'final': 0.1685618742194927}, {'fro': 'remote', 'to': 'ground', 'type': 'AtLocation', 'score': 0.005719305481761694, 'wm_score': 0.48407602, 'final': 0.1492263198372332}, {'fro': 'remote', 'to': 'middle', 'type': 'AtLocation', 'score': 0.005358569789677858, 'wm_score': 0.41052115, 'final': 0.12690734385277452}, {'fro': 'remote', 'to': 'unknown', 'type': 'AtLocation', 'score': 0.004576478153467178, 'wm_score': 0.4538565, 'final': 0.13936048470742704}, {'fro': 'remote', 'to': 'area', 'type': 'AtLocation', 'score': 0.004484226461499929, 'wm_score': 0.6303086, 'final': 0.19223153852305}, {'fro': 'remote', 'to': 'forest', 'type': 'AtLocation', 'score': 0.0044440459460020065, 'wm_score': 0.4220944, 'final': 0.12973915216220142}, {'fro': 'remote', 'to': 'region', 'type': 'AtLocation', 'score': 0.003968366421759129, 'wm_score': 0.5308406, 'final': 0.1620300364952314}, {'fro': 'remote', 'to': 'making', 'type': 'AtLocation', 'score': 0.003910227213054895, 'wm_score': 0.39406163, 'final': 0.12095564804913844}, {'fro': 'remote', 'to': 'mountains', 'type': 'AtLocation', 'score': 0.003394909668713808, 'wm_score': 0.5080839, 'final': 0.1548016067680997}, {'fro': 'remote', 'to': 'trees', 'type': 'AtLocation', 'score': 0.002979758195579052, 'wm_score': 0.38066727, 'final': 0.11628601173690535}, {'fro': 'remote', 'to': 'way', 'type': 'AtLocation', 'score': 0.002802672330290079, 'wm_score': 0.4581406, 'final': 0.1394040506312031}, {'fro': 'remote', 'to': 'field', 'type': 'AtLocation', 'score': 0.002419457770884037, 'wm_score': 0.3767649, 'final': 0.11472309043961884}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

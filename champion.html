@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">champion</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "champion"
+    let relations = [{'fro': 'world', 'to': 'champion', 'type': 'HasA', 'score': 0.004150864668190479, 'wm_score': 0.6413027, 'final': 0.19529641526773336}, {'fro': 'tennis', 'to': 'champion', 'type': 'HasA', 'score': 0.005229154601693153, 'wm_score': 0.6087104, 'final': 0.18627352822118523}, {'fro': 'champion', 'to': 'tennis', 'type': 'AtLocation', 'score': 0.0049962615594267845, 'wm_score': 0.6087104, 'final': 0.18611050309159877}, {'fro': 'champion', 'to': 'championship', 'type': 'AtLocation', 'score': 0.030418001115322113, 'wm_score': 0.7280562, 'final': 0.23970946078072553}, {'fro': 'champion', 'to': 'challenge', 'type': 'AtLocation', 'score': 0.004511347506195307, 'wm_score': 0.5597829, 'final': 0.17109281325433673}, {'fro': 'champion', 'to': 'fight', 'type': 'AtLocation', 'score': 0.005072140600532293, 'wm_score': 0.49896526, 'final': 0.15324007642037263}, {'fro': 'ufc', 'to': 'champion', 'type': 'HasA', 'score': 0.15801212191581726, 'wm_score': 0.33325142, 'final': 0.2105839113410721}, {'fro': 'nba', 'to': 'champion', 'type': 'HasA', 'score': 0.06571277230978012, 'wm_score': 0.44976532, 'final': 0.18092853661684613}, {'fro': 'nfl', 'to': 'champion', 'type': 'HasA', 'score': 0.042725224047899246, 'wm_score': 0.34081239, 'final': 0.13215137383352948}, {'fro': 'wwe', 'to': 'champion', 'type': 'HasA', 'score': 0.039078306406736374, 'wm_score': 0.31353202, 'final': 0.12141442048471549}, {'fro': 'sport', 'to': 'champion', 'type': 'HasA', 'score': 0.03353547304868698, 'wm_score': 0.444605, 'final': 0.1568563311340809}, {'fro': 'netherlands', 'to': 'champion', 'type': 'HasA', 'score': 0.016009755432605743, 'wm_score': 0.33683932, 'final': 0.11225862480282403}, {'fro': 'league', 'to': 'champion', 'type': 'HasA', 'score': 0.012558198533952236, 'wm_score': 0.48528713, 'final': 0.1543768779737666}, {'fro': 'us', 'to': 'champion', 'type': 'HasA', 'score': 0.012211424298584461, 'wm_score': 0.32356435, 'final': 0.10561730200900912}, {'fro': 'game', 'to': 'champion', 'type': 'HasA', 'score': 0.010185692459344864, 'wm_score': 0.45955846, 'final': 0.14499752272154143}, {'fro': 'nhl', 'to': 'champion', 'type': 'HasA', 'score': 0.009185679256916046, 'wm_score': 0.34956753, 'final': 0.11130023447984125}, {'fro': 'ncaa', 'to': 'champion', 'type': 'HasA', 'score': 0.00868091732263565, 'wm_score': 0.43880126, 'final': 0.137717020125845}, {'fro': 'team', 'to': 'champion', 'type': 'HasA', 'score': 0.008352457545697689, 'wm_score': 0.58080983, 'final': 0.18008966928198838}, {'fro': 'bundesliga', 'to': 'champion', 'type': 'HasA', 'score': 0.006855183281004429, 'wm_score': 0.35010907, 'final': 0.10983134929670313}, {'fro': 'olympics', 'to': 'champion', 'type': 'HasA', 'score': 0.005543502513319254, 'wm_score': 0.61625344, 'final': 0.18875648375932352}, {'fro': 'usa', 'to': 'champion', 'type': 'HasA', 'score': 0.0055114575661718845, 'wm_score': 0.45619953, 'final': 0.14071787929632035}, {'fro': 'tournament', 'to': 'champion', 'type': 'HasA', 'score': 0.005295411217957735, 'wm_score': 0.6639453, 'final': 0.20289037785257044}, {'fro': 'country', 'to': 'champion', 'type': 'HasA', 'score': 0.0043873256072402, 'wm_score': 0.36962327, 'final': 0.11395810892506816}, {'fro': 'nation', 'to': 'champion', 'type': 'HasA', 'score': 0.004378126002848148, 'wm_score': 0.3250185, 'final': 0.10057023820199372}, {'fro': 'wwf', 'to': 'champion', 'type': 'HasA', 'score': 0.004259891342371702, 'wm_score': 0.35189062, 'final': 0.1085491099396602}, {'fro': 'afc', 'to': 'champion', 'type': 'HasA', 'score': 0.003861255245283246, 'wm_score': 0.38979304, 'final': 0.11964079067169828}, {'fro': 'future', 'to': 'champion', 'type': 'HasA', 'score': 0.003758154110983014, 'wm_score': 0.32876134, 'final': 0.10125910987768813}, {'fro': 'sec', 'to': 'champion', 'type': 'HasA', 'score': 0.003483293578028679, 'wm_score': 0.33776778, 'final': 0.10376863950462009}, {'fro': 'champion', 'to': 'chance', 'type': 'HasA', 'score': 0.059310343116521835, 'wm_score': 0.44244796, 'final': 0.17425162818156528}, {'fro': 'champion', 'to': 'choice', 'type': 'HasA', 'score': 0.05660523101687431, 'wm_score': 0.3224059, 'final': 0.13634543171181204}, {'fro': 'champion', 'to': 'shot', 'type': 'HasA', 'score': 0.023605933412909508, 'wm_score': 0.38722527, 'final': 0.13269173438903667}, {'fro': 'champion', 'to': 'future', 'type': 'HasA', 'score': 0.019379785284399986, 'wm_score': 0.32876134, 'final': 0.11219425169908001}, {'fro': 'champion', 'to': 'trophy', 'type': 'HasA', 'score': 0.012808658182621002, 'wm_score': 0.5203241, 'final': 0.1650632907278347}, {'fro': 'champion', 'to': 'rematch', 'type': 'HasA', 'score': 0.011914539150893688, 'wm_score': 0.53954935, 'final': 0.17020498240562562}, {'fro': 'champion', 'to': 'title', 'type': 'HasA', 'score': 0.009823061525821686, 'wm_score': 0.7444861, 'final': 0.23022197306807524}, {'fro': 'champion', 'to': 'comeback', 'type': 'HasA', 'score': 0.008022412657737732, 'wm_score': 0.5206055, 'final': 0.16179733886041645}, {'fro': 'champion', 'to': 'dream', 'type': 'HasA', 'score': 0.006653287913650274, 'wm_score': 0.45620537, 'final': 0.1415189125395552}, {'fro': 'champion', 'to': 'ring', 'type': 'HasA', 'score': 0.006614676211029291, 'wm_score': 0.36992764, 'final': 0.11560856534772053}, {'fro': 'champion', 'to': 'challenger', 'type': 'HasA', 'score': 0.006036168895661831, 'wm_score': 0.5538914, 'final': 0.17039273822696333}, {'fro': 'champion', 'to': 'goal', 'type': 'HasA', 'score': 0.005876121111214161, 'wm_score': 0.36484084, 'final': 0.11356553677784993}, {'fro': 'champion', 'to': 'belt', 'type': 'HasA', 'score': 0.005357085727155209, 'wm_score': 0.35639057, 'final': 0.11066713100900867}, {'fro': 'champion', 'to': 'leg', 'type': 'HasA', 'score': 0.004860950633883476, 'wm_score': 0.46755162, 'final': 0.14366815144371844}, {'fro': 'champion', 'to': 'medal', 'type': 'HasA', 'score': 0.004699476063251495, 'wm_score': 0.63723636, 'final': 0.19446054124427606}, {'fro': 'champion', 'to': 'rival', 'type': 'HasA', 'score': 0.004332553129643202, 'wm_score': 0.4533181, 'final': 0.13902821719075026}, {'fro': 'champion', 'to': 'coach', 'type': 'HasA', 'score': 0.0038134977221488953, 'wm_score': 0.49389896, 'final': 0.15083913640550425}, {'fro': 'champion', 'to': 'history', 'type': 'HasA', 'score': 0.0036002525594085455, 'wm_score': 0.39710334, 'final': 0.121651178791586}, {'fro': 'champion', 'to': 'point', 'type': 'HasA', 'score': 0.0035953561309725046, 'wm_score': 0.35846677, 'final': 0.11005678029168076}, {'fro': 'champion', 'to': 'favorite', 'type': 'HasA', 'score': 0.0035076045896857977, 'wm_score': 0.5102139, 'final': 0.15551949321278008}, {'fro': 'winner', 'to': 'champion', 'type': 'AtLocation', 'score': 0.05077236518263817, 'wm_score': 0.7406767, 'final': 0.25774366562784673}, {'fro': 'horse', 'to': 'champion', 'type': 'AtLocation', 'score': 0.0188609566539526, 'wm_score': 0.45470178, 'final': 0.14961320365776684}, {'fro': 'competitor', 'to': 'champion', 'type': 'AtLocation', 'score': 0.013080635108053684, 'wm_score': 0.50760114, 'final': 0.1614367865756376}, {'fro': 'contender', 'to': 'champion', 'type': 'AtLocation', 'score': 0.010195130482316017, 'wm_score': 0.62420136, 'final': 0.19439699933762125}, {'fro': 'man', 'to': 'champion', 'type': 'AtLocation', 'score': 0.009067044593393803, 'wm_score': 0.4411167, 'final': 0.13868194121537566}, {'fro': 'fighter', 'to': 'champion', 'type': 'AtLocation', 'score': 0.008572740480303764, 'wm_score': 0.33571443, 'final': 0.10671524733621265}, {'fro': 'seed', 'to': 'champion', 'type': 'AtLocation', 'score': 0.00694035179913044, 'wm_score': 0.5183885, 'final': 0.16037479625939133}, {'fro': 'spot', 'to': 'champion', 'type': 'AtLocation', 'score': 0.006938147824257612, 'wm_score': 0.4711933, 'final': 0.14621469347698035}, {'fro': 'rider', 'to': 'champion', 'type': 'AtLocation', 'score': 0.006905656307935715, 'wm_score': 0.58908457, 'final': 0.18155933041555505}, {'fro': 'loser', 'to': 'champion', 'type': 'AtLocation', 'score': 0.006895666476339102, 'wm_score': 0.4534068, 'final': 0.14084900653343738}, {'fro': 'belt', 'to': 'champion', 'type': 'AtLocation', 'score': 0.006313590798527002, 'wm_score': 0.35639057, 'final': 0.11133668455896892}, {'fro': 'player', 'to': 'champion', 'type': 'AtLocation', 'score': 0.006245866883546114, 'wm_score': 0.5748748, 'final': 0.1768345468184823}, {'fro': 'challenger', 'to': 'champion', 'type': 'AtLocation', 'score': 0.005857717711478472, 'wm_score': 0.5538914, 'final': 0.17026782239803498}, {'fro': 'prize', 'to': 'champion', 'type': 'AtLocation', 'score': 0.005255039781332016, 'wm_score': 0.38662454, 'final': 0.11966588984693244}, {'fro': 'team', 'to': 'champion', 'type': 'AtLocation', 'score': 0.0050571383908391, 'wm_score': 0.58080983, 'final': 0.17778294587358737}, {'fro': 'match', 'to': 'champion', 'type': 'AtLocation', 'score': 0.0049602678045630455, 'wm_score': 0.5682235, 'final': 0.17393923746319417}, {'fro': 'legend', 'to': 'champion', 'type': 'AtLocation', 'score': 0.004775659646838903, 'wm_score': 0.46362928, 'final': 0.14243174575278725}, {'fro': 'wrestler', 'to': 'champion', 'type': 'AtLocation', 'score': 0.004412719514220953, 'wm_score': 0.56296444, 'final': 0.1719782356599547}, {'fro': 'king', 'to': 'champion', 'type': 'AtLocation', 'score': 0.004386619199067354, 'wm_score': 0.3461306, 'final': 0.10690981343934716}, {'fro': 'knockout', 'to': 'champion', 'type': 'AtLocation', 'score': 0.004118629731237888, 'wm_score': 0.44348106, 'final': 0.13592735881186654}, {'fro': 'woman', 'to': 'champion', 'type': 'AtLocation', 'score': 0.004020699765533209, 'wm_score': 0.36831474, 'final': 0.11330891183587326}, {'fro': 'teammate', 'to': 'champion', 'type': 'AtLocation', 'score': 0.003985482268035412, 'wm_score': 0.6650716, 'final': 0.20231131758762483}, {'fro': 'fight', 'to': 'champion', 'type': 'AtLocation', 'score': 0.0038576782681047916, 'wm_score': 0.49896526, 'final': 0.15238995278767337}, {'fro': 'result', 'to': 'champion', 'type': 'AtLocation', 'score': 0.0037913473788648844, 'wm_score': 0.34335804, 'final': 0.10566135516520543}, {'fro': 'champion', 'to': 'mix', 'type': 'AtLocation', 'score': 0.1345941722393036, 'wm_score': 0.12589793, 'final': 0.1319852995675125}, {'fro': 'champion', 'to': 'hunt', 'type': 'AtLocation', 'score': 0.06596697121858597, 'wm_score': 0.30269206, 'final': 0.13698449785301017}, {'fro': 'champion', 'to': 'saddle', 'type': 'AtLocation', 'score': 0.05947837233543396, 'wm_score': 0.21612428, 'final': 0.10647214463480378}, {'fro': 'champion', 'to': 'ring', 'type': 'AtLocation', 'score': 0.04344593361020088, 'wm_score': 0.36992764, 'final': 0.14139044552714064}, {'fro': 'champion', 'to': 'spotlight', 'type': 'AtLocation', 'score': 0.036665935069322586, 'wm_score': 0.263497, 'final': 0.10471525454852582}, {'fro': 'champion', 'to': 'finals', 'type': 'AtLocation', 'score': 0.02468479983508587, 'wm_score': 0.705387, 'final': 0.22889545988456014}, {'fro': 'champion', 'to': 'tournament', 'type': 'AtLocation', 'score': 0.022198287770152092, 'wm_score': 0.6639453, 'final': 0.21472239143910649}, {'fro': 'champion', 'to': 'semifinals', 'type': 'AtLocation', 'score': 0.018120048567652702, 'wm_score': 0.65245986, 'final': 0.20842199199735692}, {'fro': 'champion', 'to': 'game', 'type': 'AtLocation', 'score': 0.01715998724102974, 'wm_score': 0.45955846, 'final': 0.14987952906872082}, {'fro': 'champion', 'to': 'playoffs', 'type': 'AtLocation', 'score': 0.012623836286365986, 'wm_score': 0.4765855, 'final': 0.1518123354004562}, {'fro': 'champion', 'to': 'race', 'type': 'AtLocation', 'score': 0.009812962263822556, 'wm_score': 0.6127583, 'final': 0.1906965635846758}, {'fro': 'champion', 'to': 'final', 'type': 'AtLocation', 'score': 0.009785591624677181, 'wm_score': 0.5796745, 'final': 0.18075226413727405}, {'fro': 'champion', 'to': 'running', 'type': 'AtLocation', 'score': 0.00946493074297905, 'wm_score': 0.41495162, 'final': 0.13111093752008535}, {'fro': 'champion', 'to': 'competition', 'type': 'AtLocation', 'score': 0.008475719951093197, 'wm_score': 0.57882047, 'final': 0.17957914496576527}, {'fro': 'champion', 'to': 'field', 'type': 'AtLocation', 'score': 0.007505842484533787, 'wm_score': 0.3798385, 'final': 0.11920563973917368}, {'fro': 'champion', 'to': 'making', 'type': 'AtLocation', 'score': 0.007337062619626522, 'wm_score': 0.33049747, 'final': 0.10428518483373858}, {'fro': 'champion', 'to': 'pool', 'type': 'AtLocation', 'score': 0.0046991826966404915, 'wm_score': 0.33442482, 'final': 0.10361687388764836}, {'fro': 'champion', 'to': 'arena', 'type': 'AtLocation', 'score': 0.004085509106516838, 'wm_score': 0.369265, 'final': 0.11363935637456181}, {'fro': 'champion', 'to': 'standings', 'type': 'AtLocation', 'score': 0.003757353173568845, 'wm_score': 0.5347265, 'final': 0.1630480972214982}, {'fro': 'tough', 'to': 'champion', 'type': 'HasA', 'score': 0.004695854149758816, 'wm_score': 0.4148804, 'final': 0.12775121790483118}, {'fro': 'champion', 'to': 'round', 'type': 'AtLocation', 'score': 0.0039887940511107445, 'wm_score': 0.5915793, 'final': 0.18026594583577757}, {'fro': 'right', 'to': 'champion', 'type': 'HasA', 'score': 0.003680445021018386, 'wm_score': 0.33893424, 'final': 0.10425658351471288}, {'fro': 'wild', 'to': 'champion', 'type': 'HasA', 'score': 0.010080528445541859, 'wm_score': 0.35936302, 'final': 0.11486527591187931}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

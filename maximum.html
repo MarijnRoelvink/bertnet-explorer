@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">maximum</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "maximum"
+    let relations = [{'fro': 'maximum', 'to': 'amount', 'type': 'AtLocation', 'score': 0.007365897763520479, 'wm_score': 0.6707374, 'final': 0.20637734843446437}, {'fro': 'limit', 'to': 'maximum', 'type': 'HasA', 'score': 0.05896332114934921, 'wm_score': 0.719061, 'final': 0.2569926248045445}, {'fro': 'cap', 'to': 'maximum', 'type': 'HasA', 'score': 0.02075604908168316, 'wm_score': 0.4192656, 'final': 0.14030891435717824}, {'fro': 'ceiling', 'to': 'maximum', 'type': 'HasA', 'score': 0.019999423995614052, 'wm_score': 0.3304242, 'final': 0.11312685679692984}, {'fro': 'penalty', 'to': 'maximum', 'type': 'HasA', 'score': 0.018609486520290375, 'wm_score': 0.43771437, 'final': 0.1443409515642033}, {'fro': 'quota', 'to': 'maximum', 'type': 'HasA', 'score': 0.012977808713912964, 'wm_score': 0.38028276, 'final': 0.12316929409973909}, {'fro': 'ban', 'to': 'maximum', 'type': 'HasA', 'score': 0.01197604089975357, 'wm_score': 0.3063364, 'final': 0.10028414862982751}, {'fro': 'rule', 'to': 'maximum', 'type': 'HasA', 'score': 0.0065098172053694725, 'wm_score': 0.3464096, 'final': 0.10847975204375863}, {'fro': 'threshold', 'to': 'maximum', 'type': 'HasA', 'score': 0.006062171887606382, 'wm_score': 0.57913387, 'final': 0.1779836813213245}, {'fro': 'minimum', 'to': 'maximum', 'type': 'HasA', 'score': 0.005666500423103571, 'wm_score': 0.83595127, 'final': 0.2547519312961725}, {'fro': 'allowance', 'to': 'maximum', 'type': 'HasA', 'score': 0.005663359072059393, 'wm_score': 0.40259808, 'final': 0.1247437753504416}, {'fro': 'clock', 'to': 'maximum', 'type': 'HasA', 'score': 0.00470253499224782, 'wm_score': 0.3513732, 'final': 0.10870373449457349}, {'fro': 'bonus', 'to': 'maximum', 'type': 'HasA', 'score': 0.0038896347396075726, 'wm_score': 0.38000673, 'final': 0.11672476331772533}, {'fro': 'law', 'to': 'maximum', 'type': 'HasA', 'score': 0.003462827065959573, 'wm_score': 0.33885103, 'final': 0.10407928794617172}, {'fro': 'punishment', 'to': 'maximum', 'type': 'HasA', 'score': 0.003343281801789999, 'wm_score': 0.52889454, 'final': 0.16100865926125305}, {'fro': 'ratio', 'to': 'maximum', 'type': 'HasA', 'score': 0.0033322221133857965, 'wm_score': 0.44859654, 'final': 0.13691151747937008}, {'fro': 'suspension', 'to': 'maximum', 'type': 'HasA', 'score': 0.0032570946495980024, 'wm_score': 0.46885842, 'final': 0.14293749225471863}, {'fro': 'term', 'to': 'maximum', 'type': 'HasA', 'score': 0.002843062160536647, 'wm_score': 0.43270415, 'final': 0.13180138851237566}, {'fro': 'total', 'to': 'maximum', 'type': 'HasA', 'score': 0.002749399282038212, 'wm_score': 0.5991956, 'final': 0.18168325949742678}, {'fro': 'hour', 'to': 'maximum', 'type': 'HasA', 'score': 0.0026596260722726583, 'wm_score': 0.52610016, 'final': 0.15969178625059088}, {'fro': 'sentence', 'to': 'maximum', 'type': 'HasA', 'score': 0.0025314681697636843, 'wm_score': 0.57801, 'final': 0.1751750277188346}, {'fro': 'number', 'to': 'maximum', 'type': 'HasA', 'score': 0.0021263568196445704, 'wm_score': 0.45918056, 'final': 0.13924261777375124}, {'fro': 'charge', 'to': 'maximum', 'type': 'HasA', 'score': 0.0021232948638498783, 'wm_score': 0.5356868, 'final': 0.16219234640469493}, {'fro': 'maximum', 'to': 'limit', 'type': 'HasA', 'score': 0.35922545194625854, 'wm_score': 0.719061, 'final': 0.467176116362381}, {'fro': 'maximum', 'to': 'ceiling', 'type': 'HasA', 'score': 0.15081532299518585, 'wm_score': 0.3304242, 'final': 0.2046979860966301}, {'fro': 'maximum', 'to': 'penalty', 'type': 'HasA', 'score': 0.01500033587217331, 'wm_score': 0.43771437, 'final': 0.14181454611052133}, {'fro': 'maximum', 'to': 'cap', 'type': 'HasA', 'score': 0.014607925899326801, 'wm_score': 0.4192656, 'final': 0.13600522812952878}, {'fro': 'maximum', 'to': 'guarantee', 'type': 'HasA', 'score': 0.010450214147567749, 'wm_score': 0.5060637, 'final': 0.15913425990329746}, {'fro': 'maximum', 'to': 'quota', 'type': 'HasA', 'score': 0.010448688641190529, 'wm_score': 0.38028276, 'final': 0.12139891004883338}, {'fro': 'maximum', 'to': 'limitation', 'type': 'HasA', 'score': 0.008036195300519466, 'wm_score': 0.39375824, 'final': 0.12375280871036363}, {'fro': 'maximum', 'to': 'chance', 'type': 'HasA', 'score': 0.005886874161660671, 'wm_score': 0.4032628, 'final': 0.12509965191316247}, {'fro': 'maximum', 'to': 'difference', 'type': 'HasA', 'score': 0.005119157489389181, 'wm_score': 0.45452446, 'final': 0.13994074824257244}, {'fro': 'maximum', 'to': 'definition', 'type': 'HasA', 'score': 0.004995681811124086, 'wm_score': 0.4531375, 'final': 0.1394382272677869}, {'fro': 'maximum', 'to': 'priority', 'type': 'HasA', 'score': 0.004011089447885752, 'wm_score': 0.3749016, 'final': 0.11527824261352004}, {'fro': 'maximum', 'to': 'target', 'type': 'HasA', 'score': 0.003662808332592249, 'wm_score': 0.48067382, 'final': 0.14676611183281457}, {'fro': 'maximum', 'to': 'threshold', 'type': 'HasA', 'score': 0.0036441709380596876, 'wm_score': 0.57913387, 'final': 0.1762910806566418}, {'fro': 'maximum', 'to': 'point', 'type': 'HasA', 'score': 0.0031702620908617973, 'wm_score': 0.43946135, 'final': 0.13405758846360327}, {'fro': 'maximum', 'to': 'premium', 'type': 'HasA', 'score': 0.0027856300584971905, 'wm_score': 0.45331517, 'final': 0.13794449204094805}, {'fro': 'maximum', 'to': 'consequence', 'type': 'HasA', 'score': 0.002522922120988369, 'wm_score': 0.3362634, 'final': 0.10264506548469188}, {'fro': 'maximum', 'to': 'cut', 'type': 'HasA', 'score': 0.002510820049792528, 'wm_score': 0.42024988, 'final': 0.12783253803485478}, {'fro': 'maximum', 'to': 'bonus', 'type': 'HasA', 'score': 0.0025052924174815416, 'wm_score': 0.38000673, 'final': 0.1157557236922371}, {'fro': 'maximum', 'to': 'possibility', 'type': 'HasA', 'score': 0.0024138239677995443, 'wm_score': 0.35203406, 'final': 0.10729989477745969}, {'fro': 'maximum', 'to': 'toll', 'type': 'HasA', 'score': 0.0023073167540133, 'wm_score': 0.36551666, 'final': 0.11127011972780933}, {'fro': 'maximum', 'to': 'lifespan', 'type': 'HasA', 'score': 0.0022926777601242065, 'wm_score': 0.43180203, 'final': 0.13114548343208698}, {'fro': 'maximum', 'to': 'cost', 'type': 'HasA', 'score': 0.0019417626317590475, 'wm_score': 0.5638275, 'final': 0.17050748384223136}, {'fro': 'maximum', 'to': 'function', 'type': 'HasA', 'score': 0.0019063259242102504, 'wm_score': 0.4049258, 'final': 0.12281216814694719}, {'fro': 'maximum', 'to': 'fine', 'type': 'HasA', 'score': 0.0018977262079715729, 'wm_score': 0.453902, 'final': 0.13749900834558013}, {'fro': 'maximum', 'to': 'mandate', 'type': 'HasA', 'score': 0.0018584065837785602, 'wm_score': 0.3910896, 'final': 0.118627764608645}, {'fro': 'maximum', 'to': 'meaning', 'type': 'HasA', 'score': 0.001830048393458128, 'wm_score': 0.4086838, 'final': 0.12388617387542071}, {'fro': 'maximum', 'to': 'catch', 'type': 'HasA', 'score': 0.0018073758110404015, 'wm_score': 0.3298704, 'final': 0.1002262830677283}, {'fro': 'quota', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.022712351754307747, 'wm_score': 0.38028276, 'final': 0.12998347422801543}, {'fro': 'penalty', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.01853887178003788, 'wm_score': 0.43771437, 'final': 0.14429152124602654}, {'fro': 'limit', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.012539315968751907, 'wm_score': 0.719061, 'final': 0.22449582117812636}, {'fro': 'cap', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.008198550902307034, 'wm_score': 0.4192656, 'final': 0.13151866563161496}, {'fro': 'bonus', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.007145402487367392, 'wm_score': 0.38000673, 'final': 0.1190038007411572}, {'fro': 'risk', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.006460641976445913, 'wm_score': 0.459929, 'final': 0.14250114938351216}, {'fro': 'minimum', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.004963010549545288, 'wm_score': 0.83595127, 'final': 0.2542594883846817}, {'fro': 'deficit', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.004321377724409103, 'wm_score': 0.35115927, 'final': 0.1083727454070864}, {'fro': 'chance', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.0035287821665406227, 'wm_score': 0.4032628, 'final': 0.12344898751657844}, {'fro': 'charge', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.003411655081436038, 'wm_score': 0.5356868, 'final': 0.16309419855700524}, {'fro': 'lifetime', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.003290585707873106, 'wm_score': 0.48561692, 'final': 0.1479884859955112}, {'fro': 'liability', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.003093642182648182, 'wm_score': 0.35456795, 'final': 0.10853593452785375}, {'fro': 'violation', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.0030264989472925663, 'wm_score': 0.3868127, 'final': 0.11816235926310482}, {'fro': 'sentence', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.0029318141750991344, 'wm_score': 0.57801, 'final': 0.17545526992256943}, {'fro': 'mile', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.0027213057037442923, 'wm_score': 0.38217968, 'final': 0.11655881799262104}, {'fro': 'breach', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.0024799921084195375, 'wm_score': 0.35450417, 'final': 0.1080872454758937}, {'fro': 'reward', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.002417465904727578, 'wm_score': 0.49874833, 'final': 0.15131672513330932}, {'fro': 'warning', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.0023284521885216236, 'wm_score': 0.33248293, 'final': 0.10137479553196516}, {'fro': 'balance', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.0022752988152205944, 'wm_score': 0.49026215, 'final': 0.14867135417065444}, {'fro': 'life', 'to': 'maximum', 'type': 'AtLocation', 'score': 0.0022078680340200663, 'wm_score': 0.3584909, 'final': 0.10909277762381406}, {'fro': 'maximum', 'to': 'limit', 'type': 'AtLocation', 'score': 0.05457335710525513, 'wm_score': 0.719061, 'final': 0.2539196499736786}, {'fro': 'maximum', 'to': 'cards', 'type': 'AtLocation', 'score': 0.04607667028903961, 'wm_score': 0.2834795, 'final': 0.11729751920232775}, {'fro': 'maximum', 'to': 'calculation', 'type': 'AtLocation', 'score': 0.04202937334775925, 'wm_score': 0.3281578, 'final': 0.12786790134343148}, {'fro': 'maximum', 'to': 'balance', 'type': 'AtLocation', 'score': 0.02605743706226349, 'wm_score': 0.49026215, 'final': 0.16531885094358448}, {'fro': 'maximum', 'to': 'range', 'type': 'AtLocation', 'score': 0.023423073813319206, 'wm_score': 0.55276996, 'final': 0.18222713966932347}, {'fro': 'maximum', 'to': 'forecast', 'type': 'AtLocation', 'score': 0.016879376024007797, 'wm_score': 0.33873555, 'final': 0.11343622821680546}, {'fro': 'maximum', 'to': 'cap', 'type': 'AtLocation', 'score': 0.011224267072975636, 'wm_score': 0.4192656, 'final': 0.13363666695108298}, {'fro': 'maximum', 'to': 'case', 'type': 'AtLocation', 'score': 0.008180606178939342, 'wm_score': 0.38642412, 'final': 0.12165366032525755}, {'fro': 'maximum', 'to': 'air', 'type': 'AtLocation', 'score': 0.0077607473358511925, 'wm_score': 0.37752566, 'final': 0.11869022113509585}, {'fro': 'maximum', 'to': 'budget', 'type': 'AtLocation', 'score': 0.007029609754681587, 'wm_score': 0.3490596, 'final': 0.10963860682827714}, {'fro': 'maximum', 'to': 'zone', 'type': 'AtLocation', 'score': 0.006418619770556688, 'wm_score': 0.32988873, 'final': 0.1034596528393897}, {'fro': 'maximum', 'to': 'law', 'type': 'AtLocation', 'score': 0.005957594141364098, 'wm_score': 0.33885103, 'final': 0.10582562489895488}, {'fro': 'maximum', 'to': 'limits', 'type': 'AtLocation', 'score': 0.0059523978270590305, 'wm_score': 0.6035014, 'final': 0.18521709847894133}, {'fro': 'maximum', 'to': 'order', 'type': 'AtLocation', 'score': 0.005308657418936491, 'wm_score': 0.45414007, 'final': 0.13995808119325556}, {'fro': 'maximum', 'to': 'statute', 'type': 'AtLocation', 'score': 0.004908253904432058, 'wm_score': 0.33073023, 'final': 0.10265484673310246}, {'fro': 'maximum', 'to': 'ceiling', 'type': 'AtLocation', 'score': 0.004796086344867945, 'wm_score': 0.3304242, 'final': 0.10248452044140757}, {'fro': 'maximum', 'to': '150', 'type': 'AtLocation', 'score': 0.004743000026792288, 'wm_score': 0.5167628, 'final': 0.1583489400187546}, {'fro': 'maximum', 'to': 'water', 'type': 'AtLocation', 'score': 0.004071666859090328, 'wm_score': 0.38503858, 'final': 0.11836174080136325}, {'fro': 'maximum', 'to': 'minimum', 'type': 'HasA', 'score': 0.004670416936278343, 'wm_score': 0.83595127, 'final': 0.25405467285539485}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

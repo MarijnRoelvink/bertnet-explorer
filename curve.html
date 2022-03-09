@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">curve</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "curve"
+    let relations = [{'fro': 'road', 'to': 'curve', 'type': 'HasA', 'score': 0.01058690994977951, 'wm_score': 0.41565058, 'final': 0.13210601096484567}, {'fro': 'length', 'to': 'curve', 'type': 'HasA', 'score': 0.005964276846498251, 'wm_score': 0.5540764, 'final': 0.1703979137925488}, {'fro': 'highway', 'to': 'curve', 'type': 'HasA', 'score': 0.011042295955121517, 'wm_score': 0.3321555, 'final': 0.10737625716858508}, {'fro': 'balance', 'to': 'curve', 'type': 'HasA', 'score': 0.004344398155808449, 'wm_score': 0.39342237, 'final': 0.12106778970906594}, {'fro': 'shape', 'to': 'curve', 'type': 'HasA', 'score': 0.007871262729167938, 'wm_score': 0.5531992, 'final': 0.17146964391041758}, {'fro': 'ball', 'to': 'curve', 'type': 'HasA', 'score': 0.022342678159475327, 'wm_score': 0.45267004, 'final': 0.15144088671163275}, {'fro': 'earth', 'to': 'curve', 'type': 'HasA', 'score': 0.013505755923688412, 'wm_score': 0.33665687, 'final': 0.1104510901465819}, {'fro': 'graph', 'to': 'curve', 'type': 'HasA', 'score': 0.010837318375706673, 'wm_score': 0.53294975, 'final': 0.1674710478629947}, {'fro': 'needle', 'to': 'curve', 'type': 'HasA', 'score': 0.007893599569797516, 'wm_score': 0.3917871, 'final': 0.12306164969885827}, {'fro': 'wheel', 'to': 'curve', 'type': 'HasA', 'score': 0.006713275797665119, 'wm_score': 0.42331642, 'final': 0.13169421905836562}, {'fro': 'triangle', 'to': 'curve', 'type': 'HasA', 'score': 0.004398686345666647, 'wm_score': 0.4971413, 'final': 0.15222147044196666}, {'fro': 'slider', 'to': 'curve', 'type': 'HasA', 'score': 0.004095931071788073, 'wm_score': 0.47319582, 'final': 0.14482589775025168}, {'fro': 'clock', 'to': 'curve', 'type': 'HasA', 'score': 0.00398112740367651, 'wm_score': 0.3448192, 'final': 0.10623254918257356}, {'fro': 'cube', 'to': 'curve', 'type': 'HasA', 'score': 0.0038438320625573397, 'wm_score': 0.35854283, 'final': 0.11025353144379016}, {'fro': 'line', 'to': 'curve', 'type': 'HasA', 'score': 0.003452255856245756, 'wm_score': 0.45027715, 'final': 0.13749972409937206}, {'fro': 'map', 'to': 'curve', 'type': 'HasA', 'score': 0.003061580238863826, 'wm_score': 0.39736098, 'final': 0.12135140016720468}, {'fro': 'curve', 'to': 'slope', 'type': 'HasA', 'score': 0.07301218062639236, 'wm_score': 0.60349464, 'final': 0.2321569184384747}, {'fro': 'curve', 'to': 'twist', 'type': 'HasA', 'score': 0.06733770668506622, 'wm_score': 0.37909052, 'final': 0.16086355067954636}, {'fro': 'curve', 'to': 'bend', 'type': 'HasA', 'score': 0.03226883336901665, 'wm_score': 0.46452546, 'final': 0.16194582135831168}, {'fro': 'curve', 'to': 'tendency', 'type': 'HasA', 'score': 0.027533769607543945, 'wm_score': 0.39579034, 'final': 0.1380107407252808}, {'fro': 'curve', 'to': 'tail', 'type': 'HasA', 'score': 0.021308308467268944, 'wm_score': 0.43497998, 'final': 0.14540980992708827}, {'fro': 'curve', 'to': 'gradient', 'type': 'HasA', 'score': 0.011774547398090363, 'wm_score': 0.5660636, 'final': 0.1780612631786633}, {'fro': 'curve', 'to': 'skew', 'type': 'HasA', 'score': 0.009021507576107979, 'wm_score': 0.35333002, 'final': 0.1123140613032756}, {'fro': 'curve', 'to': 'correlation', 'type': 'HasA', 'score': 0.007565384730696678, 'wm_score': 0.49172395, 'final': 0.1528129543114877}, {'fro': 'curve', 'to': 'peak', 'type': 'HasA', 'score': 0.006605653557926416, 'wm_score': 0.40053952, 'final': 0.1247858134905485}, {'fro': 'curve', 'to': 'tip', 'type': 'HasA', 'score': 0.006286115851253271, 'wm_score': 0.38771448, 'final': 0.1207146250958773}, {'fro': 'curve', 'to': 'pattern', 'type': 'HasA', 'score': 0.006032093428075314, 'wm_score': 0.5559291, 'final': 0.17100119539965272}, {'fro': 'curve', 'to': 'bump', 'type': 'HasA', 'score': 0.00599968945607543, 'wm_score': 0.473127, 'final': 0.14613788261925284}, {'fro': 'curve', 'to': 'shape', 'type': 'HasA', 'score': 0.005586744286119938, 'wm_score': 0.5531992, 'final': 0.16987048100028396}, {'fro': 'curve', 'to': 'trend', 'type': 'HasA', 'score': 0.005469243507832289, 'wm_score': 0.44513962, 'final': 0.13737035645548262}, {'fro': 'curve', 'to': 'difference', 'type': 'HasA', 'score': 0.005238979589194059, 'wm_score': 0.46312815, 'final': 0.14260573071243587}, {'fro': 'curve', 'to': 'dip', 'type': 'HasA', 'score': 0.004981598351150751, 'wm_score': 0.38163283, 'final': 0.11797696784580552}, {'fro': 'curve', 'to': 'definition', 'type': 'HasA', 'score': 0.004473676905035973, 'wm_score': 0.37093514, 'final': 0.11441211583352519}, {'fro': 'curve', 'to': 'correction', 'type': 'HasA', 'score': 0.004307663068175316, 'wm_score': 0.3828809, 'final': 0.11787963414772273}, {'fro': 'curve', 'to': 'rise', 'type': 'HasA', 'score': 0.004002006258815527, 'wm_score': 0.34961674, 'final': 0.10768642638117087}, {'fro': 'curve', 'to': 'bounce', 'type': 'HasA', 'score': 0.003928221296519041, 'wm_score': 0.46547815, 'final': 0.14239319990756333}, {'fro': 'curve', 'to': 'problem', 'type': 'HasA', 'score': 0.003876536386087537, 'wm_score': 0.3872643, 'final': 0.11889286547026129}, {'fro': 'curve', 'to': 'crest', 'type': 'HasA', 'score': 0.0038584342692047358, 'wm_score': 0.37762707, 'final': 0.11598902498844334}, {'fro': 'needle', 'to': 'curve', 'type': 'AtLocation', 'score': 0.024692071601748466, 'wm_score': 0.3917871, 'final': 0.13482058012122394}, {'fro': 'dot', 'to': 'curve', 'type': 'AtLocation', 'score': 0.015505044721066952, 'wm_score': 0.3284578, 'final': 0.10939087130474688}, {'fro': 'ball', 'to': 'curve', 'type': 'AtLocation', 'score': 0.009816274978220463, 'wm_score': 0.45267004, 'final': 0.14267240448475435}, {'fro': 'triangle', 'to': 'curve', 'type': 'AtLocation', 'score': 0.007046984508633614, 'wm_score': 0.4971413, 'final': 0.15407527915604355}, {'fro': 'correction', 'to': 'curve', 'type': 'AtLocation', 'score': 0.006878694985061884, 'wm_score': 0.3828809, 'final': 0.11967935648954334}, {'fro': 'wedge', 'to': 'curve', 'type': 'AtLocation', 'score': 0.006715250201523304, 'wm_score': 0.40029842, 'final': 0.12479020114106633}, {'fro': 'line', 'to': 'curve', 'type': 'AtLocation', 'score': 0.006613649427890778, 'wm_score': 0.45027715, 'final': 0.13971269959952357}, {'fro': 'thumb', 'to': 'curve', 'type': 'AtLocation', 'score': 0.00551912235096097, 'wm_score': 0.3247661, 'final': 0.10129321564567269}, {'fro': 'leaf', 'to': 'curve', 'type': 'AtLocation', 'score': 0.004489758517593145, 'wm_score': 0.36664757, 'final': 0.1131371019623152}, {'fro': 'slope', 'to': 'curve', 'type': 'AtLocation', 'score': 0.004271571524441242, 'wm_score': 0.60349464, 'final': 0.1840384920671089}, {'fro': 'bend', 'to': 'curve', 'type': 'AtLocation', 'score': 0.004212592262774706, 'wm_score': 0.46452546, 'final': 0.14230645258394234}, {'fro': 'gradient', 'to': 'curve', 'type': 'AtLocation', 'score': 0.003584914607927203, 'wm_score': 0.5660636, 'final': 0.1723285202255491}, {'fro': 'tree', 'to': 'curve', 'type': 'AtLocation', 'score': 0.003507327986881137, 'wm_score': 0.3372159, 'final': 0.10361989959081681}, {'fro': 'circle', 'to': 'curve', 'type': 'AtLocation', 'score': 0.003131918143481016, 'wm_score': 0.43688327, 'final': 0.13325732370043675}, {'fro': 'bump', 'to': 'curve', 'type': 'AtLocation', 'score': 0.0029099350795149803, 'wm_score': 0.473127, 'final': 0.14397505455566054}, {'fro': 'curve', 'to': 'sky', 'type': 'AtLocation', 'score': 0.11046642065048218, 'wm_score': 0.19529626, 'final': 0.13591537245533752}, {'fro': 'curve', 'to': 'background', 'type': 'AtLocation', 'score': 0.08969267457723618, 'wm_score': 0.19370724, 'final': 0.12089704420406533}, {'fro': 'curve', 'to': 'middle', 'type': 'AtLocation', 'score': 0.056000933051109314, 'wm_score': 0.2909658, 'final': 0.12649039313577654}, {'fro': 'curve', 'to': 'distance', 'type': 'AtLocation', 'score': 0.02322816103696823, 'wm_score': 0.52368736, 'final': 0.17336592072587778}, {'fro': 'curve', 'to': 'picture', 'type': 'AtLocation', 'score': 0.014721679501235485, 'wm_score': 0.30178124, 'final': 0.10083954765086485}, {'fro': 'curve', 'to': 'balance', 'type': 'AtLocation', 'score': 0.01429643202573061, 'wm_score': 0.39342237, 'final': 0.12803421341801144}, {'fro': 'curve', 'to': 'corner', 'type': 'AtLocation', 'score': 0.009272785857319832, 'wm_score': 0.3582705, 'final': 0.11397210010012389}, {'fro': 'curve', 'to': 'diagram', 'type': 'AtLocation', 'score': 0.008147081360220909, 'wm_score': 0.54637045, 'final': 0.16961409195215466}, {'fro': 'curve', 'to': 'wind', 'type': 'AtLocation', 'score': 0.007963357493281364, 'wm_score': 0.35807177, 'final': 0.11299588124529697}, {'fro': 'curve', 'to': 'zone', 'type': 'AtLocation', 'score': 0.006882194895297289, 'wm_score': 0.3195508, 'final': 0.10068277642670811}, {'fro': 'curve', 'to': 'graph', 'type': 'AtLocation', 'score': 0.006701472215354443, 'wm_score': 0.53294975, 'final': 0.1645759555507481}, {'fro': 'curve', 'to': 'equation', 'type': 'AtLocation', 'score': 0.006288993638008833, 'wm_score': 0.61961913, 'final': 0.1902880345466062}, {'fro': 'curve', 'to': 'forecast', 'type': 'AtLocation', 'score': 0.005427462514489889, 'wm_score': 0.33903593, 'final': 0.10551000276014294}, {'fro': 'curve', 'to': 'process', 'type': 'AtLocation', 'score': 0.003994600847363472, 'wm_score': 0.32658458, 'final': 0.10077159459315445}, {'fro': 'bend', 'to': 'curve', 'type': 'HasA', 'score': 0.005270485766232014, 'wm_score': 0.46452546, 'final': 0.14304697803636243}, {'fro': 'curve', 'to': 'bend', 'type': 'AtLocation', 'score': 0.004927726928144693, 'wm_score': 0.46452546, 'final': 0.14280704684970133}, {'fro': 'swing', 'to': 'curve', 'type': 'HasA', 'score': 0.0042607830837368965, 'wm_score': 0.39890006, 'final': 0.12265256615861585}, {'fro': 'gradient', 'to': 'curve', 'type': 'HasA', 'score': 0.0032817574683576822, 'wm_score': 0.5660636, 'final': 0.17211631022785043}, {'fro': 'curve', 'to': 'gradient', 'type': 'AtLocation', 'score': 0.003873571753501892, 'wm_score': 0.5660636, 'final': 0.17253058022745135}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

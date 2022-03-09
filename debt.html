@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">debt</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "debt"
+    let relations = [{'fro': 'nation', 'to': 'debt', 'type': 'HasA', 'score': 0.01087748073041439, 'wm_score': 0.54192436, 'final': 0.1701915445112901}, {'fro': 'debt', 'to': 'payment', 'type': 'AtLocation', 'score': 0.004605592228472233, 'wm_score': 0.6797796, 'final': 0.2071577945599306}, {'fro': 'company', 'to': 'debt', 'type': 'HasA', 'score': 0.030489856377243996, 'wm_score': 0.49273753, 'final': 0.1691641584640708}, {'fro': 'imf', 'to': 'debt', 'type': 'HasA', 'score': 0.029511593282222748, 'wm_score': 0.6007016, 'final': 0.20086859529755594}, {'fro': 'government', 'to': 'debt', 'type': 'HasA', 'score': 0.026127202436327934, 'wm_score': 0.52757764, 'final': 0.17656233370542956}, {'fro': 'ecb', 'to': 'debt', 'type': 'HasA', 'score': 0.01862107403576374, 'wm_score': 0.34460032, 'final': 0.11641484782503464}, {'fro': 'philippines', 'to': 'debt', 'type': 'HasA', 'score': 0.01774364709854126, 'wm_score': 0.3283507, 'final': 0.1109257629689789}, {'fro': 'bank', 'to': 'debt', 'type': 'HasA', 'score': 0.017733920365571976, 'wm_score': 0.56226885, 'final': 0.18109439925590043}, {'fro': 'country', 'to': 'debt', 'type': 'HasA', 'score': 0.017361516132950783, 'wm_score': 0.538856, 'final': 0.17380986129306555}, {'fro': 'eu', 'to': 'debt', 'type': 'HasA', 'score': 0.015867333859205246, 'wm_score': 0.43192488, 'final': 0.1406845977014437}, {'fro': 'us', 'to': 'debt', 'type': 'HasA', 'score': 0.014890721999108791, 'wm_score': 0.4669716, 'final': 0.15051498539937616}, {'fro': 'state', 'to': 'debt', 'type': 'HasA', 'score': 0.008697077631950378, 'wm_score': 0.43421915, 'final': 0.13635369934236527}, {'fro': 'fed', 'to': 'debt', 'type': 'HasA', 'score': 0.007837271317839622, 'wm_score': 0.41422805, 'final': 0.12975450492248775}, {'fro': 'world', 'to': 'debt', 'type': 'HasA', 'score': 0.006118522956967354, 'wm_score': 0.39466745, 'final': 0.12268320106987715}, {'fro': 'firm', 'to': 'debt', 'type': 'HasA', 'score': 0.0059029655531048775, 'wm_score': 0.42157665, 'final': 0.1306050708871734}, {'fro': 'treasury', 'to': 'debt', 'type': 'HasA', 'score': 0.005683083552867174, 'wm_score': 0.5711144, 'final': 0.17531247848700707}, {'fro': 'airline', 'to': 'debt', 'type': 'HasA', 'score': 0.005530614405870438, 'wm_score': 0.46537596, 'final': 0.14348421808410933}, {'fro': 'president', 'to': 'debt', 'type': 'HasA', 'score': 0.005151551216840744, 'wm_score': 0.34374765, 'final': 0.10673038085178854}, {'fro': 'dollar', 'to': 'debt', 'type': 'HasA', 'score': 0.004976924043148756, 'wm_score': 0.5994373, 'final': 0.18331503683020414}, {'fro': 'public', 'to': 'debt', 'type': 'HasA', 'score': 0.003969740122556686, 'wm_score': 0.45139217, 'final': 0.1381964690857897}, {'fro': 'debt', 'to': 'ceiling', 'type': 'HasA', 'score': 0.24787326157093048, 'wm_score': 0.43138045, 'final': 0.30292541809965134}, {'fro': 'debt', 'to': 'future', 'type': 'HasA', 'score': 0.06254183501005173, 'wm_score': 0.53078496, 'final': 0.2030147725070362}, {'fro': 'debt', 'to': 'downside', 'type': 'HasA', 'score': 0.048090748488903046, 'wm_score': 0.32883197, 'final': 0.13231311494223214}, {'fro': 'debt', 'to': 'problem', 'type': 'HasA', 'score': 0.04625565558671951, 'wm_score': 0.49829608, 'final': 0.18186778291070368}, {'fro': 'debt', 'to': 'limit', 'type': 'HasA', 'score': 0.0439012311398983, 'wm_score': 0.5148338, 'final': 0.18518100179792882}, {'fro': 'debt', 'to': 'history', 'type': 'HasA', 'score': 0.0267119612544775, 'wm_score': 0.313645, 'final': 0.11279187287813426}, {'fro': 'debt', 'to': 'price', 'type': 'HasA', 'score': 0.011097789742052555, 'wm_score': 0.5733771, 'final': 0.1797815828194368}, {'fro': 'debt', 'to': 'solution', 'type': 'HasA', 'score': 0.0097020473331213, 'wm_score': 0.36628997, 'final': 0.11667842413318492}, {'fro': 'debt', 'to': 'chance', 'type': 'HasA', 'score': 0.009427225217223167, 'wm_score': 0.3133126, 'final': 0.10059283765205623}, {'fro': 'debt', 'to': 'bubble', 'type': 'HasA', 'score': 0.008432574570178986, 'wm_score': 0.34933868, 'final': 0.1107044061991253}, {'fro': 'debt', 'to': 'premium', 'type': 'HasA', 'score': 0.006570916157215834, 'wm_score': 0.46757764, 'final': 0.1448729333100511}, {'fro': 'debt', 'to': 'consequence', 'type': 'HasA', 'score': 0.006067635957151651, 'wm_score': 0.36455065, 'final': 0.11361254017000617}, {'fro': 'debt', 'to': 'return', 'type': 'HasA', 'score': 0.006026173010468483, 'wm_score': 0.4553157, 'final': 0.14081303110732796}, {'fro': 'debt', 'to': 'risk', 'type': 'HasA', 'score': 0.00596104608848691, 'wm_score': 0.5741627, 'final': 0.17642154226194087}, {'fro': 'debt', 'to': 'value', 'type': 'HasA', 'score': 0.005921553820371628, 'wm_score': 0.5976491, 'final': 0.18343981767426018}, {'fro': 'debt', 'to': 'cost', 'type': 'HasA', 'score': 0.005841324105858803, 'wm_score': 0.62227035, 'final': 0.1907700318741012}, {'fro': 'debt', 'to': 'legacy', 'type': 'HasA', 'score': 0.005224960390478373, 'wm_score': 0.43590868, 'final': 0.13443007627333486}, {'fro': 'debt', 'to': 'crisis', 'type': 'HasA', 'score': 0.004984707571566105, 'wm_score': 0.64319694, 'final': 0.19644837730009632}, {'fro': 'debt', 'to': 'toll', 'type': 'HasA', 'score': 0.0048597222194075584, 'wm_score': 0.37594256, 'final': 0.1161845735535853}, {'fro': 'debt', 'to': 'dilemma', 'type': 'HasA', 'score': 0.004072398412972689, 'wm_score': 0.32561183, 'final': 0.1005342278890809}, {'fro': 'debt', 'to': 'rise', 'type': 'HasA', 'score': 0.003400702029466629, 'wm_score': 0.5454012, 'final': 0.16600085142062665}, {'fro': 'debt', 'to': 'stake', 'type': 'HasA', 'score': 0.0032831577118486166, 'wm_score': 0.53491896, 'final': 0.16277389839829406}, {'fro': 'debt', 'to': 'potential', 'type': 'HasA', 'score': 0.003093741601333022, 'wm_score': 0.44670063, 'final': 0.13617580812093313}, {'fro': 'debt', 'to': 'record', 'type': 'HasA', 'score': 0.0030331944581121206, 'wm_score': 0.4342243, 'final': 0.1323905261206785}, {'fro': 'debt', 'to': 'payoff', 'type': 'HasA', 'score': 0.0029100675601512194, 'wm_score': 0.39878616, 'final': 0.12167289529210587}, {'fro': 'debt', 'to': 'guarantee', 'type': 'HasA', 'score': 0.0028819385915994644, 'wm_score': 0.58419526, 'final': 0.17727593501411965}, {'fro': 'debt', 'to': 'burden', 'type': 'HasA', 'score': 0.002570853102952242, 'wm_score': 0.617062, 'final': 0.1869181971720666}, {'fro': 'dollar', 'to': 'debt', 'type': 'AtLocation', 'score': 0.018883902579545975, 'wm_score': 0.5994373, 'final': 0.19304992180568217}, {'fro': 'debtor', 'to': 'debt', 'type': 'AtLocation', 'score': 0.01634327881038189, 'wm_score': 0.45535928, 'final': 0.14804807916726734}, {'fro': 'lot', 'to': 'debt', 'type': 'AtLocation', 'score': 0.01557888649404049, 'wm_score': 0.35678628, 'final': 0.11794110454582837}, {'fro': 'borrower', 'to': 'debt', 'type': 'AtLocation', 'score': 0.010275845415890217, 'wm_score': 0.5181384, 'final': 0.16263461179112318}, {'fro': 'loan', 'to': 'debt', 'type': 'AtLocation', 'score': 0.00803400482982397, 'wm_score': 0.72381663, 'final': 0.2227687923808768}, {'fro': 'house', 'to': 'debt', 'type': 'AtLocation', 'score': 0.007567170076072216, 'wm_score': 0.31591225, 'final': 0.10007069405325057}, {'fro': 'child', 'to': 'debt', 'type': 'AtLocation', 'score': 0.00742082204669714, 'wm_score': 0.34673354, 'final': 0.10921463743268803}, {'fro': 'creditor', 'to': 'debt', 'type': 'AtLocation', 'score': 0.006876083556562662, 'wm_score': 0.5409242, 'final': 0.16709051848959386}, {'fro': 'buyer', 'to': 'debt', 'type': 'AtLocation', 'score': 0.006459119264036417, 'wm_score': 0.41936818, 'final': 0.13033183748482552}, {'fro': 'lender', 'to': 'debt', 'type': 'AtLocation', 'score': 0.005506142042577267, 'wm_score': 0.5100733, 'final': 0.15687628942980408}, {'fro': 'bubble', 'to': 'debt', 'type': 'AtLocation', 'score': 0.0044775716960430145, 'wm_score': 0.34933868, 'final': 0.10793590418723013}, {'fro': 'debt', 'to': 'balance', 'type': 'AtLocation', 'score': 0.22277472913265228, 'wm_score': 0.5893564, 'final': 0.33274923039285664}, {'fro': 'debt', 'to': 'air', 'type': 'AtLocation', 'score': 0.118421770632267, 'wm_score': 0.22571811, 'final': 0.1506106724425869}, {'fro': 'debt', 'to': 'cards', 'type': 'AtLocation', 'score': 0.0941382348537445, 'wm_score': 0.41802248, 'final': 0.19130350839762117}, {'fro': 'debt', 'to': 'bank', 'type': 'AtLocation', 'score': 0.046735771000385284, 'wm_score': 0.56226885, 'final': 0.20139569470026975}, {'fro': 'debt', 'to': 'works', 'type': 'AtLocation', 'score': 0.037234969437122345, 'wm_score': 0.25540513, 'final': 0.10268601760598564}, {'fro': 'debt', 'to': 'books', 'type': 'AtLocation', 'score': 0.03213680535554886, 'wm_score': 0.30328882, 'final': 0.11348240974888421}, {'fro': 'debt', 'to': 'making', 'type': 'AtLocation', 'score': 0.02199963852763176, 'wm_score': 0.44360554, 'final': 0.14848140896934225}, {'fro': 'debt', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.014650322496891022, 'wm_score': 0.32950413, 'final': 0.10910646474782373}, {'fro': 'debt', 'to': 'trillions', 'type': 'AtLocation', 'score': 0.011681179516017437, 'wm_score': 0.4517762, 'final': 0.14370968566121223}, {'fro': 'debt', 'to': 'future', 'type': 'AtLocation', 'score': 0.00832164566963911, 'wm_score': 0.53078496, 'final': 0.1650606399687474}, {'fro': 'debt', 'to': 'system', 'type': 'AtLocation', 'score': 0.005279772449284792, 'wm_score': 0.4432105, 'final': 0.13665899071449938}, {'fro': 'debt', 'to': 'way', 'type': 'AtLocation', 'score': 0.004732409957796335, 'wm_score': 0.37149042, 'final': 0.11475981297045744}, {'fro': 'debt', 'to': 'past', 'type': 'AtLocation', 'score': 0.00451003760099411, 'wm_score': 0.39152953, 'final': 0.1206158853206959}, {'fro': 'debt', 'to': 'news', 'type': 'AtLocation', 'score': 0.003307982347905636, 'wm_score': 0.3649955, 'final': 0.11181423764353395}, {'fro': 'debt', 'to': 'supply', 'type': 'AtLocation', 'score': 0.003125570248812437, 'wm_score': 0.4649384, 'final': 0.14166941917416873}, {'fro': 'debt', 'to': 'process', 'type': 'AtLocation', 'score': 0.002908987458795309, 'wm_score': 0.33634993, 'final': 0.10294127022115673}, {'fro': 'debt', 'to': 'billions', 'type': 'AtLocation', 'score': 0.002693711081519723, 'wm_score': 0.62573457, 'final': 0.18960596875706384}, {'fro': 'debt', 'to': 'obligation', 'type': 'AtLocation', 'score': 0.004293083678930998, 'wm_score': 0.56863815, 'final': 0.1735966035752517}, {'fro': 'debt', 'to': 'trust', 'type': 'AtLocation', 'score': 0.004533716477453709, 'wm_score': 0.49424034, 'final': 0.1514457035342176}, {'fro': 'debt', 'to': 'high', 'type': 'HasA', 'score': 0.006693587638437748, 'wm_score': 0.45272547, 'final': 0.14050315234690644}, {'fro': 'debt', 'to': 'high', 'type': 'AtLocation', 'score': 0.005347169935703278, 'wm_score': 0.45272547, 'final': 0.1395606599549923}, {'fro': 'debt', 'to': 'low', 'type': 'HasA', 'score': 0.0028278427198529243, 'wm_score': 0.5311136, 'final': 0.16131356990389706}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

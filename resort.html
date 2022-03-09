@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">resort</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "resort"
+    let relations = [{'fro': 'resort', 'to': 'lake', 'type': 'HasA', 'score': 0.003901334246620536, 'wm_score': 0.50906634, 'final': 0.1554508359726344}, {'fro': 'resort', 'to': 'hotel', 'type': 'HasA', 'score': 0.009006842970848083, 'wm_score': 0.71406245, 'final': 0.22052352507959372}, {'fro': 'resort', 'to': 'beach', 'type': 'HasA', 'score': 0.00911142397671938, 'wm_score': 0.6394384, 'final': 0.19820951678370358}, {'fro': 'resort', 'to': 'tourist', 'type': 'HasA', 'score': 0.0032180272974073887, 'wm_score': 0.6495652, 'final': 0.1971221791081852}, {'fro': 'resort', 'to': 'pool', 'type': 'HasA', 'score': 0.004013804253190756, 'wm_score': 0.3723123, 'final': 0.11450335297723355}, {'fro': 'bahamas', 'to': 'resort', 'type': 'HasA', 'score': 0.08291611820459366, 'wm_score': 0.37201306, 'final': 0.1696452007432156}, {'fro': 'philippines', 'to': 'resort', 'type': 'HasA', 'score': 0.053126879036426544, 'wm_score': 0.39865845, 'final': 0.1567863503254986}, {'fro': 'island', 'to': 'resort', 'type': 'HasA', 'score': 0.04039745032787323, 'wm_score': 0.61999595, 'final': 0.2142770002295113}, {'fro': 'queen', 'to': 'resort', 'type': 'HasA', 'score': 0.0174036156386137, 'wm_score': 0.2937494, 'final': 0.1003073509470296}, {'fro': 'zoo', 'to': 'resort', 'type': 'HasA', 'score': 0.016546715050935745, 'wm_score': 0.2958818, 'final': 0.10034724053565502}, {'fro': 'caribbean', 'to': 'resort', 'type': 'HasA', 'score': 0.014505724422633648, 'wm_score': 0.5149571, 'final': 0.16464113709584355}, {'fro': 'city', 'to': 'resort', 'type': 'HasA', 'score': 0.012074083089828491, 'wm_score': 0.49009746, 'final': 0.15548109616287994}, {'fro': 'world', 'to': 'resort', 'type': 'HasA', 'score': 0.01032691914588213, 'wm_score': 0.33987468, 'final': 0.1091912474021175}, {'fro': 'country', 'to': 'resort', 'type': 'HasA', 'score': 0.007485501933842897, 'wm_score': 0.41965726, 'final': 0.13113702935369004}, {'fro': 'beach', 'to': 'resort', 'type': 'HasA', 'score': 0.007099584676325321, 'wm_score': 0.6394384, 'final': 0.19680122927342772}, {'fro': 'town', 'to': 'resort', 'type': 'HasA', 'score': 0.006480819080024958, 'wm_score': 0.5317006, 'final': 0.16404675335601748}, {'fro': 'spa', 'to': 'resort', 'type': 'HasA', 'score': 0.00609989371150732, 'wm_score': 0.5716324, 'final': 0.17575964559805515}, {'fro': 'mediterranean', 'to': 'resort', 'type': 'HasA', 'score': 0.005719313398003578, 'wm_score': 0.5244228, 'final': 0.16133035937860252}, {'fro': 'hotel', 'to': 'resort', 'type': 'HasA', 'score': 0.0056550754234194756, 'wm_score': 0.71406245, 'final': 0.21817728779639367}, {'fro': 'airport', 'to': 'resort', 'type': 'HasA', 'score': 0.005319371819496155, 'wm_score': 0.45284253, 'final': 0.13957631927364733}, {'fro': 'area', 'to': 'resort', 'type': 'HasA', 'score': 0.004392034374177456, 'wm_score': 0.5203564, 'final': 0.15918134406192425}, {'fro': 'taj', 'to': 'resort', 'type': 'HasA', 'score': 0.004067030269652605, 'wm_score': 0.4139396, 'final': 0.12702880118875684}, {'fro': 'site', 'to': 'resort', 'type': 'HasA', 'score': 0.0040242657996714115, 'wm_score': 0.44339854, 'final': 0.13583654805977002}, {'fro': 'park', 'to': 'resort', 'type': 'HasA', 'score': 0.0034796774853020906, 'wm_score': 0.51198757, 'final': 0.15603204523971148}, {'fro': 'lake', 'to': 'resort', 'type': 'HasA', 'score': 0.003444189205765724, 'wm_score': 0.50906634, 'final': 0.15513083444403603}, {'fro': 'castle', 'to': 'resort', 'type': 'HasA', 'score': 0.003301723627373576, 'wm_score': 0.41327754, 'final': 0.12629446853916154}, {'fro': 'resort', 'to': 'casino', 'type': 'HasA', 'score': 0.09512433409690857, 'wm_score': 0.6341103, 'final': 0.25682012386783604}, {'fro': 'resort', 'to': 'spa', 'type': 'HasA', 'score': 0.08707723021507263, 'wm_score': 0.5716324, 'final': 0.23244378115055087}, {'fro': 'resort', 'to': 'waterfall', 'type': 'HasA', 'score': 0.01901985891163349, 'wm_score': 0.32465744, 'final': 0.11071113323814345}, {'fro': 'resort', 'to': 'gym', 'type': 'HasA', 'score': 0.017246972769498825, 'wm_score': 0.30485594, 'final': 0.1035296629386492}, {'fro': 'resort', 'to': 'cafe', 'type': 'HasA', 'score': 0.012804815545678139, 'wm_score': 0.4658961, 'final': 0.1487322008819747}, {'fro': 'resort', 'to': 'restaurant', 'type': 'HasA', 'score': 0.01186708640307188, 'wm_score': 0.54902786, 'final': 0.17301531848215035}, {'fro': 'resort', 'to': 'courtyard', 'type': 'HasA', 'score': 0.011572380550205708, 'wm_score': 0.32558763, 'final': 0.105776955385144}, {'fro': 'resort', 'to': 'lobby', 'type': 'HasA', 'score': 0.011008438654243946, 'wm_score': 0.38386562, 'final': 0.12286559305797079}, {'fro': 'resort', 'to': 'lift', 'type': 'HasA', 'score': 0.010825959965586662, 'wm_score': 0.31838116, 'final': 0.10309251997591068}, {'fro': 'resort', 'to': 'bar', 'type': 'HasA', 'score': 0.00865876954048872, 'wm_score': 0.4199546, 'final': 0.1320475186783421}, {'fro': 'resort', 'to': 'buffet', 'type': 'HasA', 'score': 0.00699168536812067, 'wm_score': 0.3585757, 'final': 0.11246688975768449}, {'fro': 'resort', 'to': 'chef', 'type': 'HasA', 'score': 0.006017119158059359, 'wm_score': 0.33252653, 'final': 0.10396994241064156}, {'fro': 'resort', 'to': 'playground', 'type': 'HasA', 'score': 0.005977454595267773, 'wm_score': 0.38092422, 'final': 0.11846148421668745}, {'fro': 'resort', 'to': 'pier', 'type': 'HasA', 'score': 0.00560383964329958, 'wm_score': 0.36109447, 'final': 0.11225102875030973}, {'fro': 'resort', 'to': 'garden', 'type': 'HasA', 'score': 0.005322332959622145, 'wm_score': 0.40438488, 'final': 0.12504109707173552}, {'fro': 'helicopter', 'to': 'resort', 'type': 'AtLocation', 'score': 0.04848296940326691, 'wm_score': 0.35064346, 'final': 0.13913111658228686}, {'fro': 'yacht', 'to': 'resort', 'type': 'AtLocation', 'score': 0.038989756256341934, 'wm_score': 0.39626676, 'final': 0.14617285737943936}, {'fro': 'hotel', 'to': 'resort', 'type': 'AtLocation', 'score': 0.02637670747935772, 'wm_score': 0.71406245, 'final': 0.23268243023555046}, {'fro': 'spa', 'to': 'resort', 'type': 'AtLocation', 'score': 0.02596551924943924, 'wm_score': 0.5716324, 'final': 0.1896655834746075}, {'fro': 'waterfall', 'to': 'resort', 'type': 'AtLocation', 'score': 0.020642513409256935, 'wm_score': 0.32465744, 'final': 0.11184699138647987}, {'fro': 'casino', 'to': 'resort', 'type': 'AtLocation', 'score': 0.017093410715460777, 'wm_score': 0.6341103, 'final': 0.20219847750082257}, {'fro': 'beach', 'to': 'resort', 'type': 'AtLocation', 'score': 0.014502009376883507, 'wm_score': 0.6394384, 'final': 0.20198292656381847}, {'fro': 'restaurant', 'to': 'resort', 'type': 'AtLocation', 'score': 0.011293432675302029, 'wm_score': 0.54902786, 'final': 0.17261376087271144}, {'fro': 'castle', 'to': 'resort', 'type': 'AtLocation', 'score': 0.011248234659433365, 'wm_score': 0.41327754, 'final': 0.1318570262616034}, {'fro': 'volcano', 'to': 'resort', 'type': 'AtLocation', 'score': 0.010965299792587757, 'wm_score': 0.35651004, 'final': 0.11462872185481145}, {'fro': 'boat', 'to': 'resort', 'type': 'AtLocation', 'score': 0.009709150530397892, 'wm_score': 0.37322015, 'final': 0.11876245037127854}, {'fro': 'wedding', 'to': 'resort', 'type': 'AtLocation', 'score': 0.008444245904684067, 'wm_score': 0.35957336, 'final': 0.11378298013327887}, {'fro': 'tent', 'to': 'resort', 'type': 'AtLocation', 'score': 0.007760589476674795, 'wm_score': 0.34373513, 'final': 0.10855295163367237}, {'fro': 'ferry', 'to': 'resort', 'type': 'AtLocation', 'score': 0.005680102854967117, 'wm_score': 0.3377462, 'final': 0.105299931998477}, {'fro': 'chef', 'to': 'resort', 'type': 'AtLocation', 'score': 0.005513141397386789, 'wm_score': 0.33252653, 'final': 0.10361715797817075}, {'fro': 'cafe', 'to': 'resort', 'type': 'AtLocation', 'score': 0.00497384462505579, 'wm_score': 0.4658961, 'final': 0.14325052123753906}, {'fro': 'fire', 'to': 'resort', 'type': 'AtLocation', 'score': 0.004479536786675453, 'wm_score': 0.36128852, 'final': 0.11152223175067284}, {'fro': 'tourist', 'to': 'resort', 'type': 'AtLocation', 'score': 0.0044537317007780075, 'wm_score': 0.6495652, 'final': 0.19798717219054462}, {'fro': 'resort', 'to': 'works', 'type': 'AtLocation', 'score': 0.5275965332984924, 'wm_score': 0.1637885, 'final': 0.41845412330894466}, {'fro': 'resort', 'to': 'area', 'type': 'AtLocation', 'score': 0.03031143732368946, 'wm_score': 0.5203564, 'final': 0.17732492612658265}, {'fro': 'resort', 'to': 'water', 'type': 'AtLocation', 'score': 0.016713881865143776, 'wm_score': 0.30968264, 'final': 0.10460450930560065}, {'fro': 'resort', 'to': 'vicinity', 'type': 'AtLocation', 'score': 0.011646824888885021, 'wm_score': 0.41417792, 'final': 0.13240615342221954}, {'fro': 'resort', 'to': 'open', 'type': 'AtLocation', 'score': 0.011500732973217964, 'wm_score': 0.44904664, 'final': 0.1427645050812526}, {'fro': 'resort', 'to': 'region', 'type': 'AtLocation', 'score': 0.00961692351847887, 'wm_score': 0.42431006, 'final': 0.1340248644629352}, {'fro': 'resort', 'to': 'south', 'type': 'AtLocation', 'score': 0.007996543310582638, 'wm_score': 0.45304903, 'final': 0.14151228931740786}, {'fro': 'resort', 'to': 'air', 'type': 'AtLocation', 'score': 0.007610507775098085, 'wm_score': 0.3187651, 'final': 0.10095688544256867}, {'fro': 'resort', 'to': 'bahamas', 'type': 'AtLocation', 'score': 0.007054354064166546, 'wm_score': 0.37201306, 'final': 0.1165419658449166}, {'fro': 'resort', 'to': 'philippines', 'type': 'AtLocation', 'score': 0.006208128295838833, 'wm_score': 0.39865845, 'final': 0.12394322480708721}, {'fro': 'resort', 'to': 'woods', 'type': 'AtLocation', 'score': 0.005677865818142891, 'wm_score': 0.3377882, 'final': 0.10531096607270003}, {'fro': 'resort', 'to': 'harbour', 'type': 'AtLocation', 'score': 0.005503412336111069, 'wm_score': 0.3947173, 'final': 0.12226757863527776}, {'fro': 'resort', 'to': 'way', 'type': 'AtLocation', 'score': 0.0052934992127120495, 'wm_score': 0.35930693, 'final': 0.11149752844889846}, {'fro': 'resort', 'to': 'mediterranean', 'type': 'AtLocation', 'score': 0.004906791727989912, 'wm_score': 0.5244228, 'final': 0.16076159420959296}, {'fro': 'resort', 'to': 'north', 'type': 'AtLocation', 'score': 0.004260338842868805, 'wm_score': 0.44731605, 'final': 0.1371770521900082}, {'fro': 'resort', 'to': 'west', 'type': 'AtLocation', 'score': 0.003474204335361719, 'wm_score': 0.44026986, 'final': 0.13451290103475322}, {'fro': 'resort', 'to': 'alps', 'type': 'AtLocation', 'score': 0.0027361740358173847, 'wm_score': 0.4914763, 'final': 0.1493582118250722}, {'fro': 'resort', 'to': 'highlands', 'type': 'AtLocation', 'score': 0.00264893751591444, 'wm_score': 0.4607675, 'final': 0.14008450626114013}, {'fro': 'resort', 'to': 'northwest', 'type': 'AtLocation', 'score': 0.0023303604684770107, 'wm_score': 0.4855754, 'final': 0.14730387232793393}, {'fro': 'resort', 'to': 'east', 'type': 'AtLocation', 'score': 0.0022016451694071293, 'wm_score': 0.43781513, 'final': 0.132885690618585}, {'fro': 'resort', 'to': 'mountains', 'type': 'AtLocation', 'score': 0.001998844323679805, 'wm_score': 0.4521201, 'final': 0.1370352210265759}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

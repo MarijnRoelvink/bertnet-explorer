@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">statue</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "statue"
+    let relations = [{'fro': 'statue', 'to': 'library', 'type': 'AtLocation', 'score': 0.00536588067188859, 'wm_score': 0.33906272, 'final': 0.10547493247032201}, {'fro': 'statue', 'to': 'location', 'type': 'AtLocation', 'score': 0.008607967756688595, 'wm_score': 0.34551966, 'final': 0.10968147542968204}, {'fro': 'statue', 'to': 'painting', 'type': 'HasA', 'score': 0.005560317076742649, 'wm_score': 0.54623234, 'final': 0.16776192395371986}, {'fro': 'statue', 'to': 'wood', 'type': 'HasA', 'score': 0.005522521678358316, 'wm_score': 0.36508378, 'final': 0.11339089917485085}, {'fro': 'city', 'to': 'statue', 'type': 'HasA', 'score': 0.0035523928236216307, 'wm_score': 0.32515684, 'final': 0.10003372697653515}, {'fro': 'statue', 'to': 'city', 'type': 'AtLocation', 'score': 0.01555222924798727, 'wm_score': 0.32515684, 'final': 0.1084336124735911}, {'fro': 'statue', 'to': 'foundation', 'type': 'AtLocation', 'score': 0.004701513331383467, 'wm_score': 0.37759745, 'final': 0.11657029433196844}, {'fro': 'statue', 'to': 'collection', 'type': 'AtLocation', 'score': 0.005992565304040909, 'wm_score': 0.39204368, 'final': 0.12180789971282865}, {'fro': 'statue', 'to': 'tradition', 'type': 'AtLocation', 'score': 0.0029390035197138786, 'wm_score': 0.3746015, 'final': 0.11443775246379972}, {'fro': 'statue', 'to': 'construction', 'type': 'HasA', 'score': 0.00912458822131157, 'wm_score': 0.33722854, 'final': 0.10755577375491812}, {'fro': 'statue', 'to': 'height', 'type': 'HasA', 'score': 0.01135331206023693, 'wm_score': 0.40363854, 'final': 0.12903888044216585}, {'fro': 'statue', 'to': 'mall', 'type': 'AtLocation', 'score': 0.007813616655766964, 'wm_score': 0.3293332, 'final': 0.10426949165903689}, {'fro': 'statue', 'to': 'church', 'type': 'AtLocation', 'score': 0.014089932665228844, 'wm_score': 0.46001786, 'final': 0.1478683108656602}, {'fro': 'statue', 'to': 'significance', 'type': 'HasA', 'score': 0.009872804395854473, 'wm_score': 0.3256436, 'final': 0.10460404307709813}, {'fro': 'statue', 'to': 'town', 'type': 'AtLocation', 'score': 0.01820162683725357, 'wm_score': 0.29409236, 'final': 0.10096884678607751}, {'fro': 'statue', 'to': 'gate', 'type': 'AtLocation', 'score': 0.007465879432857037, 'wm_score': 0.47531283, 'final': 0.14781996460299995}, {'fro': 'statue', 'to': 'hall', 'type': 'AtLocation', 'score': 0.0324162021279335, 'wm_score': 0.4576718, 'final': 0.15999288148955348}, {'fro': 'statue', 'to': 'place', 'type': 'AtLocation', 'score': 0.014642712660133839, 'wm_score': 0.31666836, 'final': 0.10525040686209369}, {'fro': 'statue', 'to': 'building', 'type': 'AtLocation', 'score': 0.006640241015702486, 'wm_score': 0.48312783, 'final': 0.14958651771099177}, {'fro': 'statue', 'to': 'design', 'type': 'HasA', 'score': 0.006003343500196934, 'wm_score': 0.35998434, 'final': 0.11219764245013787}, {'fro': 'statue', 'to': 'outside', 'type': 'AtLocation', 'score': 0.004961090628057718, 'wm_score': 0.33429208, 'final': 0.1037603874396404}, {'fro': 'statue', 'to': 'frame', 'type': 'HasA', 'score': 0.0053225429728627205, 'wm_score': 0.41761553, 'final': 0.12901043908100393}, {'fro': 'statue', 'to': 'frame', 'type': 'AtLocation', 'score': 0.004214708227664232, 'wm_score': 0.41761553, 'final': 0.12823495475936497}, {'fro': 'statue', 'to': 'metal', 'type': 'HasA', 'score': 0.0050974078476428986, 'wm_score': 0.323, 'final': 0.10046818549335004}, {'fro': 'statue', 'to': 'paint', 'type': 'HasA', 'score': 0.009307128377258778, 'wm_score': 0.31334007, 'final': 0.10051701086408116}, {'fro': 'statue', 'to': 'structure', 'type': 'HasA', 'score': 0.019472023472189903, 'wm_score': 0.3789497, 'final': 0.12731532643053295}, {'fro': 'statue', 'to': 'shape', 'type': 'HasA', 'score': 0.004381642211228609, 'wm_score': 0.3447103, 'final': 0.10648023954786005}, {'fro': 'statue', 'to': 'square', 'type': 'HasA', 'score': 0.004685801919549704, 'wm_score': 0.48648658, 'final': 0.14922603534368484}, {'fro': 'square', 'to': 'statue', 'type': 'HasA', 'score': 0.003854261012747884, 'wm_score': 0.48648658, 'final': 0.14864395670892355}, {'fro': 'statue', 'to': 'square', 'type': 'AtLocation', 'score': 0.045490093529224396, 'wm_score': 0.48648658, 'final': 0.1777890394704571}, {'fro': 'statue', 'to': 'bridge', 'type': 'AtLocation', 'score': 0.00859837606549263, 'wm_score': 0.4392555, 'final': 0.13779551324584485}, {'fro': 'statue', 'to': 'park', 'type': 'AtLocation', 'score': 0.02624000795185566, 'wm_score': 0.38358766, 'final': 0.133444303566299}, {'fro': 'statue', 'to': 'red', 'type': 'HasA', 'score': 0.0028653477784246206, 'wm_score': 0.36404306, 'final': 0.11121866144489724}, {'fro': 'statue', 'to': 'street', 'type': 'AtLocation', 'score': 0.011064114049077034, 'wm_score': 0.32409766, 'final': 0.10497417783435395}, {'fro': 'statue', 'to': 'blue', 'type': 'HasA', 'score': 0.003940706141293049, 'wm_score': 0.33303183, 'final': 0.10266804329890514}, {'fro': 'statue', 'to': 'gold', 'type': 'HasA', 'score': 0.003975636325776577, 'wm_score': 0.4012009, 'final': 0.12314321542804363}, {'fro': 'statue', 'to': 'block', 'type': 'AtLocation', 'score': 0.005128161981701851, 'wm_score': 0.33857742, 'final': 0.10516293938719132}, {'fro': 'statue', 'to': 'cross', 'type': 'HasA', 'score': 0.019354231655597687, 'wm_score': 0.3570683, 'final': 0.12066845215891839}, {'fro': 'statue', 'to': 'silver', 'type': 'HasA', 'score': 0.003203915897756815, 'wm_score': 0.45649886, 'final': 0.1391923991284298}, {'fro': 'statue', 'to': 'brick', 'type': 'HasA', 'score': 0.006333650555461645, 'wm_score': 0.44045028, 'final': 0.1365686393888232}, {'fro': 'statue', 'to': 'flower', 'type': 'HasA', 'score': 0.008108767680823803, 'wm_score': 0.35119665, 'final': 0.11103513237657667}, {'fro': 'statue', 'to': 'purple', 'type': 'HasA', 'score': 0.005644193384796381, 'wm_score': 0.32548144, 'final': 0.10159536736935748}, {'fro': 'statue', 'to': 'entrance', 'type': 'AtLocation', 'score': 0.01583852246403694, 'wm_score': 0.4922698, 'final': 0.15876790572482588}, {'fro': 'statue', 'to': 'tower', 'type': 'AtLocation', 'score': 0.016103070229291916, 'wm_score': 0.5424218, 'final': 0.17399868916050434}, {'fro': 'statue', 'to': 'beautiful', 'type': 'HasA', 'score': 0.0034385165199637413, 'wm_score': 0.42886406, 'final': 0.13106617956397465}, {'fro': 'statue', 'to': 'walk', 'type': 'HasA', 'score': 0.005186853930354118, 'wm_score': 0.3457563, 'final': 0.1073576877512479}, {'fro': 'statue', 'to': 'walk', 'type': 'AtLocation', 'score': 0.011994649656116962, 'wm_score': 0.3457563, 'final': 0.1121231447592819}, {'fro': 'statue', 'to': 'stand', 'type': 'AtLocation', 'score': 0.0053435866720974445, 'wm_score': 0.32556686, 'final': 0.10141056867046823}, {'fro': 'statue', 'to': 'bearing', 'type': 'HasA', 'score': 0.003445242065936327, 'wm_score': 0.5162288, 'final': 0.15728030944615545}, {'fro': 'statue', 'to': 'shadow', 'type': 'AtLocation', 'score': 0.004578072112053633, 'wm_score': 0.38057965, 'final': 0.11737854547843755}, {'fro': 'statue', 'to': 'museum', 'type': 'AtLocation', 'score': 0.050906773656606674, 'wm_score': 0.53553486, 'final': 0.19629519955962468}, {'fro': 'statue', 'to': 'exhibition', 'type': 'AtLocation', 'score': 0.007763522677123547, 'wm_score': 0.4209391, 'final': 0.1317161958739865}, {'fro': 'statue', 'to': 'ruins', 'type': 'HasA', 'score': 0.004022729117423296, 'wm_score': 0.54207647, 'final': 0.16543885138219633}, {'fro': 'statue', 'to': 'ruins', 'type': 'AtLocation', 'score': 0.04196786880493164, 'wm_score': 0.54207647, 'final': 0.19200044916345216}, {'fro': 'statue', 'to': 'smithsonian', 'type': 'AtLocation', 'score': 0.008629987016320229, 'wm_score': 0.31418252, 'final': 0.10029574691142418}, {'fro': 'statue', 'to': 'crater', 'type': 'HasA', 'score': 0.0027073028031736612, 'wm_score': 0.37421542, 'final': 0.11415973796222158}, {'fro': 'statue', 'to': 'lighthouse', 'type': 'AtLocation', 'score': 0.004833257757127285, 'wm_score': 0.4677278, 'final': 0.14370162042998913}, {'fro': 'statue', 'to': 'castle', 'type': 'AtLocation', 'score': 0.025783773511648178, 'wm_score': 0.43653068, 'final': 0.14900784545815374}, {'fro': 'statue', 'to': 'centre', 'type': 'AtLocation', 'score': 0.02111521176993847, 'wm_score': 0.3146475, 'final': 0.10917489823895696}, {'fro': 'statue', 'to': 'center', 'type': 'AtLocation', 'score': 0.025535592809319496, 'wm_score': 0.3341223, 'final': 0.11811160496652365}, {'fro': 'statue', 'to': 'memorial', 'type': 'HasA', 'score': 0.007105017546564341, 'wm_score': 0.60912585, 'final': 0.18771126728259507}, {'fro': 'statue', 'to': 'memorial', 'type': 'AtLocation', 'score': 0.019861426204442978, 'wm_score': 0.60912585, 'final': 0.19664075334311013}, {'fro': 'statue', 'to': 'citadel', 'type': 'AtLocation', 'score': 0.03689276799559593, 'wm_score': 0.31632715, 'final': 0.12072308259691716}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

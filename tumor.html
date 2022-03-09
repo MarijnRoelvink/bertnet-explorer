@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">tumor</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "tumor"
+    let relations = [{'fro': 'tumor', 'to': 'disease', 'type': 'AtLocation', 'score': 0.00698141660541296, 'wm_score': 0.5676804, 'final': 0.17519111162378911}, {'fro': 'tumor', 'to': 'cell', 'type': 'AtLocation', 'score': 0.06862267851829529, 'wm_score': 0.5859668, 'final': 0.22382591496280674}, {'fro': 'tumor', 'to': 'heart', 'type': 'AtLocation', 'score': 0.007201667875051498, 'wm_score': 0.53061056, 'final': 0.16422433551253607}, {'fro': 'tumor', 'to': 'cancer', 'type': 'AtLocation', 'score': 0.03193264082074165, 'wm_score': 0.70568717, 'final': 0.2340589995745192}, {'fro': 'tumor', 'to': 'sample', 'type': 'AtLocation', 'score': 0.006694791838526726, 'wm_score': 0.35111392, 'final': 0.11002053028696873}, {'fro': 'tumor', 'to': 'lab', 'type': 'AtLocation', 'score': 0.006477018818259239, 'wm_score': 0.3464992, 'final': 0.10848367317278149}, {'fro': 'tumor', 'to': 'chest', 'type': 'AtLocation', 'score': 0.004547652788460255, 'wm_score': 0.48143816, 'final': 0.1476148049519222}, {'fro': 'tumor', 'to': 'ear', 'type': 'AtLocation', 'score': 0.004776765126734972, 'wm_score': 0.40550482, 'final': 0.12499518158871449}, {'fro': 'tumor', 'to': 'gene', 'type': 'AtLocation', 'score': 0.005238206125795841, 'wm_score': 0.5643987, 'final': 0.17298635428805711}, {'fro': 'throat', 'to': 'tumor', 'type': 'HasA', 'score': 0.0044442713260650635, 'wm_score': 0.43899298, 'final': 0.13480888392824555}, {'fro': 'tumor', 'to': 'throat', 'type': 'AtLocation', 'score': 0.022823477163910866, 'wm_score': 0.43899298, 'final': 0.14767432801473762}, {'fro': 'tumor', 'to': 'study', 'type': 'AtLocation', 'score': 0.006696788128465414, 'wm_score': 0.34550452, 'final': 0.1083391076899258}, {'fro': 'tumor', 'to': 'body', 'type': 'AtLocation', 'score': 0.12888172268867493, 'wm_score': 0.3725285, 'final': 0.20197575588207245}, {'fro': 'tumor', 'to': 'brain', 'type': 'AtLocation', 'score': 0.15492317080497742, 'wm_score': 0.7079196, 'final': 0.3208220995634842}, {'fro': 'tumor', 'to': 'skin', 'type': 'AtLocation', 'score': 0.01588299311697483, 'wm_score': 0.5547075, 'final': 0.17753034518188243}, {'fro': 'tumor', 'to': 'muscle', 'type': 'AtLocation', 'score': 0.04625238850712776, 'wm_score': 0.54005146, 'final': 0.19439210995498946}, {'fro': 'tumor', 'to': 'bone', 'type': 'AtLocation', 'score': 0.035551074892282486, 'wm_score': 0.6444244, 'final': 0.21821307242459775}, {'fro': 'tumor', 'to': 'nose', 'type': 'AtLocation', 'score': 0.006822406779974699, 'wm_score': 0.36823612, 'final': 0.11524652074598231}, {'fro': 'patient', 'to': 'tumor', 'type': 'HasA', 'score': 0.01415060181170702, 'wm_score': 0.53295505, 'final': 0.16979193626819492}, {'fro': 'tumor', 'to': 'patient', 'type': 'AtLocation', 'score': 0.06123637035489082, 'wm_score': 0.53295505, 'final': 0.2027519742484236}, {'fro': 'tumor', 'to': 'shoulder', 'type': 'AtLocation', 'score': 0.005356964189559221, 'wm_score': 0.34640145, 'final': 0.10767030993269147}, {'fro': 'tumor', 'to': 'stomach', 'type': 'AtLocation', 'score': 0.03163526579737663, 'wm_score': 0.5460608, 'final': 0.18596292605816367}, {'fro': 'breast', 'to': 'tumor', 'type': 'HasA', 'score': 0.004320209845900536, 'wm_score': 0.65416855, 'final': 0.1992747118921304}, {'fro': 'tumor', 'to': 'breast', 'type': 'AtLocation', 'score': 0.04879610612988472, 'wm_score': 0.65416855, 'final': 0.23040783929091932}, {'fro': 'tumor', 'to': 'knee', 'type': 'AtLocation', 'score': 0.006015202030539513, 'wm_score': 0.37177467, 'final': 0.11574304242137766}, {'fro': 'tumor', 'to': 'neck', 'type': 'AtLocation', 'score': 0.007139391265809536, 'wm_score': 0.39778268, 'final': 0.12433237788606669}, {'fro': 'tumor', 'to': 'nerve', 'type': 'AtLocation', 'score': 0.028318865224719048, 'wm_score': 0.4860234, 'final': 0.16563022565730334}, {'fro': 'tumor', 'to': 'human', 'type': 'AtLocation', 'score': 0.0074990903958678246, 'wm_score': 0.33427256, 'final': 0.10553113127710749}, {'fro': 'tumor', 'to': 'physical', 'type': 'AtLocation', 'score': 0.010969319380819798, 'wm_score': 0.32953566, 'final': 0.10653922156657387}, {'fro': 'tumor', 'to': 'treat', 'type': 'AtLocation', 'score': 0.006254571955651045, 'wm_score': 0.41335303, 'final': 0.12838410936895575}, {'fro': 'tumor', 'to': 'penis', 'type': 'AtLocation', 'score': 0.007582738064229488, 'wm_score': 0.44268978, 'final': 0.13811485064496065}, {'fro': 'fetus', 'to': 'tumor', 'type': 'HasA', 'score': 0.011414414271712303, 'wm_score': 0.4751534, 'final': 0.15053610999019865}, {'fro': 'tumor', 'to': 'fetus', 'type': 'AtLocation', 'score': 0.07405826449394226, 'wm_score': 0.4751534, 'final': 0.1943868051457596}, {'fro': 'tumor', 'to': 'parasite', 'type': 'AtLocation', 'score': 0.006126522086560726, 'wm_score': 0.4575709, 'final': 0.14155983546059253}, {'fro': 'tumor', 'to': 'worm', 'type': 'AtLocation', 'score': 0.003054800909012556, 'wm_score': 0.40825284, 'final': 0.12461421263630881}, {'fro': 'tumor', 'to': 'genes', 'type': 'AtLocation', 'score': 0.007368660531938076, 'wm_score': 0.5827873, 'final': 0.1799942523723567}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

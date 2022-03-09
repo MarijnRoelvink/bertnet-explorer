@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">driveway</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "driveway"
+    let relations = [{'fro': 'apartment', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.013589058071374893, 'wm_score': 0.5279667, 'final': 0.16790235064996245}, {'fro': 'driver', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.005825399421155453, 'wm_score': 0.36304253, 'final': 0.11299053859480883}, {'fro': 'elevator', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.004360596649348736, 'wm_score': 0.50920796, 'final': 0.15581480565454414}, {'fro': 'refrigerator', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.012518164701759815, 'wm_score': 0.35743386, 'final': 0.1159928732912319}, {'fro': 'mud', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.003565860213711858, 'wm_score': 0.4315978, 'final': 0.1319754421495983}, {'fro': 'vehicle', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.043718814849853516, 'wm_score': 0.37860328, 'final': 0.14418415439489746}, {'fro': 'gate', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.004561019595712423, 'wm_score': 0.44407636, 'final': 0.13641562171699873}, {'fro': 'garbage', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.008558385074138641, 'wm_score': 0.38230512, 'final': 0.12068240555189706}, {'fro': 'ladder', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.002330482006072998, 'wm_score': 0.35439628, 'final': 0.10795022140425112}, {'fro': 'bathroom', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.004824279807507992, 'wm_score': 0.46738514, 'final': 0.1435925378652556}, {'fro': 'bedroom', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.005814738105982542, 'wm_score': 0.5332871, 'final': 0.1640564466741878}, {'fro': 'dirt', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.00487215630710125, 'wm_score': 0.62729853, 'final': 0.1916000684149709}, {'fro': 'house', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.017367498949170113, 'wm_score': 0.35870987, 'final': 0.11977021026441909}, {'fro': 'building', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.0023576393723487854, 'wm_score': 0.36838707, 'final': 0.11216646856064416}, {'fro': 'car', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.06906535476446152, 'wm_score': 0.49504903, 'final': 0.19686045733512308}, {'fro': 'bus', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.0052881985902786255, 'wm_score': 0.34365106, 'final': 0.10679705701319506}, {'fro': 'kitchen', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.0038177194073796272, 'wm_score': 0.33233762, 'final': 0.10237368958516575}, {'fro': 'shop', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.0036052109207957983, 'wm_score': 0.3767734, 'final': 0.11555566764455708}, {'fro': 'block', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.007292707916349173, 'wm_score': 0.35000598, 'final': 0.11010668954144442}, {'fro': 'door', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.0055220467038452625, 'wm_score': 0.6094916, 'final': 0.18671291269269172}, {'fro': 'garage', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.03689759969711304, 'wm_score': 0.57640046, 'final': 0.19874845778797914}, {'fro': 'parking', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.030900878831744194, 'wm_score': 0.5781931, 'final': 0.19508854518222096}, {'fro': 'wheel', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.009712465107440948, 'wm_score': 0.36767003, 'final': 0.11709973457520867}, {'fro': 'bar', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.005552407819777727, 'wm_score': 0.33719838, 'final': 0.10504619947384443}, {'fro': 'bike', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.034579139202833176, 'wm_score': 0.47543094, 'final': 0.16683467944198324}, {'fro': 'brick', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.008615924045443535, 'wm_score': 0.4478312, 'final': 0.1403805068318105}, {'fro': 'yard', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.014694739133119583, 'wm_score': 0.43104342, 'final': 0.13959934339318372}, {'fro': 'bicycle', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.02442065067589283, 'wm_score': 0.4066689, 'final': 0.139095125473125}, {'fro': 'plate', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.004360388033092022, 'wm_score': 0.3485899, 'final': 0.10762924162316444}, {'fro': 'trash', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.007519244682043791, 'wm_score': 0.45921952, 'final': 0.14302932727743067}, {'fro': 'entrance', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.007517279125750065, 'wm_score': 0.50050384, 'final': 0.1554132473880251}, {'fro': 'roof', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.004581820219755173, 'wm_score': 0.5167035, 'final': 0.15821832415382864}, {'fro': 'truck', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.0777902752161026, 'wm_score': 0.46027228, 'final': 0.19253487665127184}, {'fro': 'drive', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.000771441322285682, 'wm_score': 0.36259782, 'final': 0.1093193549256}, {'fro': 'fence', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.005132187623530626, 'wm_score': 0.5517788, 'final': 0.16912617133647148}, {'fro': 'coffin', 'to': 'driveway', 'type': 'AtLocation', 'score': 0.0152344461530447, 'wm_score': 0.4536736, 'final': 0.1467661923071313}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

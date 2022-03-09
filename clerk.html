@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">clerk</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "clerk"
+    let relations = [{'fro': 'clerk', 'to': 'hearing', 'type': 'AtLocation', 'score': 0.00675317132845521, 'wm_score': 0.37855077, 'final': 0.11829245092991866}, {'fro': 'clerk', 'to': 'court', 'type': 'AtLocation', 'score': 0.00859422143548727, 'wm_score': 0.49832556, 'final': 0.15551362300484112}, {'fro': 'library', 'to': 'clerk', 'type': 'HasA', 'score': 0.022432498633861542, 'wm_score': 0.3562719, 'final': 0.1225843190437031}, {'fro': 'supermarket', 'to': 'clerk', 'type': 'HasA', 'score': 0.0168568417429924, 'wm_score': 0.33218238, 'final': 0.1114545032200947}, {'fro': 'courthouse', 'to': 'clerk', 'type': 'HasA', 'score': 0.016717303544282913, 'wm_score': 0.45610034, 'final': 0.14853221448099804}, {'fro': 'store', 'to': 'clerk', 'type': 'HasA', 'score': 0.016021834686398506, 'wm_score': 0.48610833, 'final': 0.15704778328047897}, {'fro': 'dmv', 'to': 'clerk', 'type': 'HasA', 'score': 0.01344077754765749, 'wm_score': 0.37034875, 'final': 0.12051316928336026}, {'fro': 'city', 'to': 'clerk', 'type': 'HasA', 'score': 0.01341827493160963, 'wm_score': 0.3280333, 'final': 0.10780278245212675}, {'fro': 'hotel', 'to': 'clerk', 'type': 'HasA', 'score': 0.012462736107409, 'wm_score': 0.33680028, 'final': 0.10976399927518632}, {'fro': 'department', 'to': 'clerk', 'type': 'HasA', 'score': 0.010695177130401134, 'wm_score': 0.4820762, 'final': 0.15210948399128082}, {'fro': 'restaurant', 'to': 'clerk', 'type': 'HasA', 'score': 0.010504529811441898, 'wm_score': 0.39383897, 'final': 0.12550486186800935}, {'fro': 'school', 'to': 'clerk', 'type': 'HasA', 'score': 0.010423149913549423, 'wm_score': 0.34809312, 'final': 0.11172414093948461}, {'fro': 'hospital', 'to': 'clerk', 'type': 'HasA', 'score': 0.00988697912544012, 'wm_score': 0.33205187, 'final': 0.1065364463878081}, {'fro': 'office', 'to': 'clerk', 'type': 'HasA', 'score': 0.00975761841982603, 'wm_score': 0.5963652, 'final': 0.18573989289387827}, {'fro': 'bakery', 'to': 'clerk', 'type': 'HasA', 'score': 0.007957316935062408, 'wm_score': 0.3238784, 'final': 0.1027336418545437}, {'fro': 'county', 'to': 'clerk', 'type': 'HasA', 'score': 0.006172779947519302, 'wm_score': 0.47705898, 'final': 0.14743863996326353}, {'fro': 'district', 'to': 'clerk', 'type': 'HasA', 'score': 0.0058574615977704525, 'wm_score': 0.4516887, 'final': 0.13960683311843936}, {'fro': 'bar', 'to': 'clerk', 'type': 'HasA', 'score': 0.005133535247296095, 'wm_score': 0.46680245, 'final': 0.1436342096731073}, {'fro': 'pub', 'to': 'clerk', 'type': 'HasA', 'score': 0.004742521792650223, 'wm_score': 0.37815392, 'final': 0.11676594125485516}, {'fro': 'company', 'to': 'clerk', 'type': 'HasA', 'score': 0.004614992067217827, 'wm_score': 0.3390978, 'final': 0.1049598344470525}, {'fro': 'register', 'to': 'clerk', 'type': 'HasA', 'score': 0.004493620712310076, 'wm_score': 0.37353536, 'final': 0.11520614249861706}, {'fro': 'clerk', 'to': 'clipboard', 'type': 'HasA', 'score': 0.13062770664691925, 'wm_score': 0.15209506, 'final': 0.13706791265284346}, {'fro': 'clerk', 'to': 'gun', 'type': 'HasA', 'score': 0.05651383846998215, 'wm_score': 0.2762712, 'final': 0.12244104692898752}, {'fro': 'clerk', 'to': 'ticket', 'type': 'HasA', 'score': 0.02606862224638462, 'wm_score': 0.3625155, 'final': 0.12700268557246924}, {'fro': 'clerk', 'to': 'receipt', 'type': 'HasA', 'score': 0.025825947523117065, 'wm_score': 0.388633, 'final': 0.13466806326618197}, {'fro': 'clerk', 'to': 'lawyer', 'type': 'HasA', 'score': 0.014959830790758133, 'wm_score': 0.5452733, 'final': 0.1740538715535307}, {'fro': 'clerk', 'to': 'copy', 'type': 'HasA', 'score': 0.014105948619544506, 'wm_score': 0.36728704, 'final': 0.12006027603368116}, {'fro': 'clerk', 'to': 'complaint', 'type': 'HasA', 'score': 0.013210002332925797, 'wm_score': 0.39428443, 'final': 0.12753233063304809}, {'fro': 'clerk', 'to': 'passport', 'type': 'HasA', 'score': 0.010988228023052216, 'wm_score': 0.34353513, 'final': 0.11075229861613657}, {'fro': 'clerk', 'to': 'warrant', 'type': 'HasA', 'score': 0.006560219451785088, 'wm_score': 0.32145166, 'final': 0.10102765161624958}, {'fro': 'clerk', 'to': 'desk', 'type': 'HasA', 'score': 0.004688757471740246, 'wm_score': 0.46639642, 'final': 0.1432010562302182}, {'fro': 'child', 'to': 'clerk', 'type': 'AtLocation', 'score': 0.010272503830492496, 'wm_score': 0.3418382, 'final': 0.10974221268134476}, {'fro': 'woman', 'to': 'clerk', 'type': 'AtLocation', 'score': 0.010196879506111145, 'wm_score': 0.42514908, 'final': 0.13468253965427782}, {'fro': 'man', 'to': 'clerk', 'type': 'AtLocation', 'score': 0.008544344455003738, 'wm_score': 0.36896783, 'final': 0.11667139011850264}, {'fro': 'girl', 'to': 'clerk', 'type': 'AtLocation', 'score': 0.007863691076636314, 'wm_score': 0.32155058, 'final': 0.10196975775364542}, {'fro': 'customer', 'to': 'clerk', 'type': 'AtLocation', 'score': 0.006734007503837347, 'wm_score': 0.37946337, 'final': 0.11855281625268616}, {'fro': 'complaint', 'to': 'clerk', 'type': 'AtLocation', 'score': 0.006348006892949343, 'wm_score': 0.39428443, 'final': 0.12272893382506456}, {'fro': 'boy', 'to': 'clerk', 'type': 'AtLocation', 'score': 0.006285578943789005, 'wm_score': 0.3356616, 'final': 0.10509838526065232}, {'fro': 'check', 'to': 'clerk', 'type': 'AtLocation', 'score': 0.005763270426541567, 'wm_score': 0.37165484, 'final': 0.11553074129857911}, {'fro': 'nurse', 'to': 'clerk', 'type': 'AtLocation', 'score': 0.0044029769487679005, 'wm_score': 0.4571942, 'final': 0.14024034386413756}, {'fro': 'printer', 'to': 'clerk', 'type': 'AtLocation', 'score': 0.003574798349291086, 'wm_score': 0.36324394, 'final': 0.11147554084450377}, {'fro': 'clerk', 'to': 'bathroom', 'type': 'AtLocation', 'score': 0.07486945390701294, 'wm_score': 0.32764018, 'final': 0.1507006717349091}, {'fro': 'clerk', 'to': 'kitchen', 'type': 'AtLocation', 'score': 0.04451357200741768, 'wm_score': 0.37226728, 'final': 0.1428396844051924}, {'fro': 'clerk', 'to': 'building', 'type': 'AtLocation', 'score': 0.02838663011789322, 'wm_score': 0.29319453, 'final': 0.10782900008252527}, {'fro': 'clerk', 'to': 'office', 'type': 'AtLocation', 'score': 0.024649331346154213, 'wm_score': 0.5963652, 'final': 0.196164091942308}, {'fro': 'clerk', 'to': 'courtroom', 'type': 'AtLocation', 'score': 0.023510664701461792, 'wm_score': 0.3531177, 'final': 0.12239277529102326}, {'fro': 'clerk', 'to': 'hallway', 'type': 'AtLocation', 'score': 0.021753059700131416, 'wm_score': 0.28484046, 'final': 0.10067927979009202}, {'fro': 'clerk', 'to': 'store', 'type': 'AtLocation', 'score': 0.021740306168794632, 'wm_score': 0.48610833, 'final': 0.16105071331815624}, {'fro': 'clerk', 'to': 'room', 'type': 'AtLocation', 'score': 0.019614674150943756, 'wm_score': 0.3935079, 'final': 0.13178264190566064}, {'fro': 'clerk', 'to': 'street', 'type': 'AtLocation', 'score': 0.018915994092822075, 'wm_score': 0.3627443, 'final': 0.12206448586497547}, {'fro': 'clerk', 'to': 'hospital', 'type': 'AtLocation', 'score': 0.014318891800940037, 'wm_score': 0.33205187, 'final': 0.10963878526065804}, {'fro': 'clerk', 'to': 'cafeteria', 'type': 'AtLocation', 'score': 0.012086036615073681, 'wm_score': 0.35962158, 'final': 0.11634669963055158}, {'fro': 'clerk', 'to': 'house', 'type': 'AtLocation', 'score': 0.009955963119864464, 'wm_score': 0.44588265, 'final': 0.14073396918390516}, {'fro': 'clerk', 'to': 'supermarket', 'type': 'AtLocation', 'score': 0.009653673507273197, 'wm_score': 0.33218238, 'final': 0.10641228545509125}, {'fro': 'clerk', 'to': 'shop', 'type': 'AtLocation', 'score': 0.00943674799054861, 'wm_score': 0.52136654, 'final': 0.16301568559338406}, {'fro': 'clerk', 'to': 'elevator', 'type': 'AtLocation', 'score': 0.006235180422663689, 'wm_score': 0.37002516, 'final': 0.1153721742958646}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

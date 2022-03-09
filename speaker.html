@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">speaker</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "speaker"
+    let relations = [{'fro': 'speaker', 'to': 'person', 'type': 'HasA', 'score': 0.0028802957385778427, 'wm_score': 0.41083223, 'final': 0.1252658760170045}, {'fro': 'speaker', 'to': 'language', 'type': 'HasA', 'score': 0.009593998081982136, 'wm_score': 0.4329015, 'final': 0.13658624865738753}, {'fro': 'speaker', 'to': 'language', 'type': 'AtLocation', 'score': 0.003315158188343048, 'wm_score': 0.4329015, 'final': 0.13219106073184017}, {'fro': 'speaker', 'to': 'audience', 'type': 'AtLocation', 'score': 0.010340803302824497, 'wm_score': 0.30981642, 'final': 0.10018348831197715}, {'fro': 'speaker', 'to': 'role', 'type': 'HasA', 'score': 0.0038183031138032675, 'wm_score': 0.33401847, 'final': 0.1028783531796623}, {'fro': 'phone', 'to': 'speaker', 'type': 'HasA', 'score': 0.0176088884472847, 'wm_score': 0.42946517, 'final': 0.1411657729130993}, {'fro': 'speaker', 'to': 'phone', 'type': 'AtLocation', 'score': 0.011587163433432579, 'wm_score': 0.42946517, 'final': 0.13695056540340284}, {'fro': 'speaker', 'to': 'secretary', 'type': 'HasA', 'score': 0.004403581842780113, 'wm_score': 0.4913103, 'final': 0.15047559728994608}, {'fro': 'device', 'to': 'speaker', 'type': 'HasA', 'score': 0.0056986212730407715, 'wm_score': 0.3339364, 'final': 0.10416995489112855}, {'fro': 'speaker', 'to': 'device', 'type': 'AtLocation', 'score': 0.007166776340454817, 'wm_score': 0.3339364, 'final': 0.10519766343831839}, {'fro': 'speaker', 'to': 'presentation', 'type': 'AtLocation', 'score': 0.010583545081317425, 'wm_score': 0.33045435, 'final': 0.10654478655692222}, {'fro': 'speaker', 'to': 'resolution', 'type': 'HasA', 'score': 0.0054010734893381596, 'wm_score': 0.42554718, 'final': 0.13144490544253673}, {'fro': 'speaker', 'to': 'session', 'type': 'HasA', 'score': 0.01610342226922512, 'wm_score': 0.49331436, 'final': 0.1592667035884576}, {'fro': 'session', 'to': 'speaker', 'type': 'HasA', 'score': 0.0032918862998485565, 'wm_score': 0.49331436, 'final': 0.150298628409894}, {'fro': 'speaker', 'to': 'session', 'type': 'AtLocation', 'score': 0.07066284120082855, 'wm_score': 0.49331436, 'final': 0.19745829684058}, {'fro': 'speaker', 'to': 'cabinet', 'type': 'HasA', 'score': 0.00522755179554224, 'wm_score': 0.55482024, 'final': 0.17010535825687956}, {'fro': 'speaker', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.009993546642363071, 'wm_score': 0.55482024, 'final': 0.17344155464965416}, {'fro': 'speaker', 'to': 'appointment', 'type': 'HasA', 'score': 0.008704982697963715, 'wm_score': 0.49393708, 'final': 0.15427461188857464}, {'fro': 'speaker', 'to': 'committee', 'type': 'AtLocation', 'score': 0.00923644658178091, 'wm_score': 0.5540895, 'final': 0.17269236260724669}, {'fro': 'speaker', 'to': 'speech', 'type': 'HasA', 'score': 0.016793791204690933, 'wm_score': 0.57113266, 'final': 0.18309545184328366}, {'fro': 'speaker', 'to': 'speech', 'type': 'AtLocation', 'score': 0.005560221616178751, 'wm_score': 0.57113266, 'final': 0.17523195313132514}, {'fro': 'voice', 'to': 'speaker', 'type': 'HasA', 'score': 0.006578711327165365, 'wm_score': 0.5012964, 'final': 0.15499401792901576}, {'fro': 'house', 'to': 'speaker', 'type': 'HasA', 'score': 0.005902491509914398, 'wm_score': 0.57984954, 'final': 0.1780866060569401}, {'fro': 'room', 'to': 'speaker', 'type': 'HasA', 'score': 0.003955373540520668, 'wm_score': 0.37636125, 'final': 0.11567713647836447}, {'fro': 'speaker', 'to': 'microphone', 'type': 'HasA', 'score': 0.4563566744327545, 'wm_score': 0.4210366, 'final': 0.44576065210292815}, {'fro': 'speaker', 'to': 'keyboard', 'type': 'HasA', 'score': 0.006026097107678652, 'wm_score': 0.3195302, 'final': 0.10007732797537507}, {'fro': 'speaker', 'to': 'voice', 'type': 'HasA', 'score': 0.005540689453482628, 'wm_score': 0.5012964, 'final': 0.15426740261743785}, {'fro': 'speaker', 'to': 'podium', 'type': 'HasA', 'score': 0.0028769595082849264, 'wm_score': 0.331082, 'final': 0.10133847165579946}, {'fro': 'speaker', 'to': 'lawyer', 'type': 'HasA', 'score': 0.002332029165700078, 'wm_score': 0.41697782, 'final': 0.12672576641599007}, {'fro': 'woman', 'to': 'speaker', 'type': 'AtLocation', 'score': 0.05197476968169212, 'wm_score': 0.32467517, 'final': 0.1337848897771845}, {'fro': 'microphone', 'to': 'speaker', 'type': 'AtLocation', 'score': 0.033709727227687836, 'wm_score': 0.4210366, 'final': 0.1499077890593815}, {'fro': 'man', 'to': 'speaker', 'type': 'AtLocation', 'score': 0.01400789711624384, 'wm_score': 0.32600036, 'final': 0.1076056359813707}, {'fro': 'guest', 'to': 'speaker', 'type': 'AtLocation', 'score': 0.00934966467320919, 'wm_score': 0.39018095, 'final': 0.12359905027124646}, {'fro': 'student', 'to': 'speaker', 'type': 'AtLocation', 'score': 0.009237081743776798, 'wm_score': 0.40834045, 'final': 0.1289680922206438}, {'fro': 'friend', 'to': 'speaker', 'type': 'AtLocation', 'score': 0.004635739605873823, 'wm_score': 0.40661928, 'final': 0.12523080172411172}, {'fro': 'speaker', 'to': 'background', 'type': 'AtLocation', 'score': 0.12432380020618439, 'wm_score': 0.25476545, 'final': 0.16345629514432908}, {'fro': 'speaker', 'to': 'room', 'type': 'AtLocation', 'score': 0.0840609073638916, 'wm_score': 0.37636125, 'final': 0.17175101015472413}, {'fro': 'speaker', 'to': 'studio', 'type': 'AtLocation', 'score': 0.04664815217256546, 'wm_score': 0.24769352, 'final': 0.10696176252079584}, {'fro': 'speaker', 'to': 'hall', 'type': 'AtLocation', 'score': 0.017207669094204903, 'wm_score': 0.37484255, 'final': 0.12449813336594344}, {'fro': 'speaker', 'to': 'works', 'type': 'AtLocation', 'score': 0.01457967609167099, 'wm_score': 0.305796, 'final': 0.10194457326416971}, {'fro': 'speaker', 'to': 'lobby', 'type': 'AtLocation', 'score': 0.008575192652642727, 'wm_score': 0.3823563, 'final': 0.12070952485684991}, {'fro': 'speaker', 'to': 'house', 'type': 'AtLocation', 'score': 0.003560552606359124, 'wm_score': 0.57984954, 'final': 0.1764472488244514}, {'fro': 'speaker', 'to': 'meeting', 'type': 'AtLocation', 'score': 0.003044967772439122, 'wm_score': 0.50576633, 'final': 0.1538613764407074}, {'fro': 'speaker', 'to': 'word', 'type': 'HasA', 'score': 0.005011801142245531, 'wm_score': 0.33209482, 'final': 0.10313670679957189}, {'fro': 'speaker', 'to': 'term', 'type': 'HasA', 'score': 0.002709020860493183, 'wm_score': 0.3841365, 'final': 0.11713726460234523}, {'fro': 'speaker', 'to': 'matter', 'type': 'HasA', 'score': 0.007096906658262014, 'wm_score': 0.32146055, 'final': 0.10140599966078342}, {'fro': 'speaker', 'to': 'board', 'type': 'AtLocation', 'score': 0.0031761147547513247, 'wm_score': 0.39646858, 'final': 0.12116385432832595}, {'fro': 'speaker', 'to': 'position', 'type': 'HasA', 'score': 0.007025172468274832, 'wm_score': 0.43128568, 'final': 0.1343033247277924}, {'fro': 'speaker', 'to': 'seat', 'type': 'HasA', 'score': 0.009865128435194492, 'wm_score': 0.4757391, 'final': 0.14962731990463615}, {'fro': 'speaker', 'to': 'lecture', 'type': 'AtLocation', 'score': 0.012466172687709332, 'wm_score': 0.30659622, 'final': 0.10070518688139654}, {'fro': 'speaker', 'to': 'meeting', 'type': 'HasA', 'score': 0.007254214957356453, 'wm_score': 0.50576633, 'final': 0.15680784947014956}, {'fro': 'speaker', 'to': 'telephone', 'type': 'AtLocation', 'score': 0.0042125266045331955, 'wm_score': 0.42491528, 'final': 0.13042335262317326}, {'fro': 'speaker', 'to': 'bill', 'type': 'HasA', 'score': 0.005000930745154619, 'wm_score': 0.4875958, 'final': 0.14977939152160824}, {'fro': 'speaker', 'to': 'conference', 'type': 'AtLocation', 'score': 0.017635002732276917, 'wm_score': 0.43748045, 'final': 0.14358863691259385}, {'fro': 'speaker', 'to': 'personal', 'type': 'HasA', 'score': 0.0018670791760087013, 'wm_score': 0.3397677, 'final': 0.1032372654232061}, {'fro': 'speaker', 'to': 'talk', 'type': 'HasA', 'score': 0.0037128489930182695, 'wm_score': 0.383194, 'final': 0.1175571942951128}, {'fro': 'speaker', 'to': 'talk', 'type': 'AtLocation', 'score': 0.006855833809822798, 'wm_score': 0.383194, 'final': 0.11975728366687596}, {'fro': 'speaker', 'to': 'veto', 'type': 'HasA', 'score': 0.01649603620171547, 'wm_score': 0.47111195, 'final': 0.15288081034120085}, {'fro': 'speaker', 'to': 'vote', 'type': 'HasA', 'score': 0.006721773184835911, 'wm_score': 0.5089695, 'final': 0.15739609122938517}, {'fro': 'speaker', 'to': 'interim', 'type': 'AtLocation', 'score': 0.004979421384632587, 'wm_score': 0.3812899, 'final': 0.11787256496924282}, {'fro': 'speaker', 'to': 'senate', 'type': 'AtLocation', 'score': 0.013211484998464584, 'wm_score': 0.65916896, 'final': 0.20699872749892526}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">escape</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "escape"
+    let relations = [{'fro': 'devil', 'to': 'escape', 'type': 'HasA', 'score': 0.010049226693809032, 'wm_score': 0.31877553, 'final': 0.10266711768566633}, {'fro': 'cat', 'to': 'escape', 'type': 'HasA', 'score': 0.006224275100976229, 'wm_score': 0.3575187, 'final': 0.1116126025706834}, {'fro': 'thief', 'to': 'escape', 'type': 'HasA', 'score': 0.006062617991119623, 'wm_score': 0.39139476, 'final': 0.12166226059378375}, {'fro': 'taliban', 'to': 'escape', 'type': 'HasA', 'score': 0.00520881125703454, 'wm_score': 0.37962675, 'final': 0.1175341928799242}, {'fro': 'girl', 'to': 'escape', 'type': 'HasA', 'score': 0.0051069846376776695, 'wm_score': 0.44008908, 'final': 0.1356016132463744}, {'fro': 'shark', 'to': 'escape', 'type': 'HasA', 'score': 0.00465729832649231, 'wm_score': 0.33765614, 'final': 0.10455695082854463}, {'fro': 'killer', 'to': 'escape', 'type': 'HasA', 'score': 0.004583010915666819, 'wm_score': 0.5036992, 'final': 0.1543178676409668}, {'fro': 'gunman', 'to': 'escape', 'type': 'HasA', 'score': 0.0045381151139736176, 'wm_score': 0.39132857, 'final': 0.12057525157978154}, {'fro': 'man', 'to': 'escape', 'type': 'HasA', 'score': 0.0043558222241699696, 'wm_score': 0.5524651, 'final': 0.168788605556919}, {'fro': 'gang', 'to': 'escape', 'type': 'HasA', 'score': 0.0039648148231208324, 'wm_score': 0.5157653, 'final': 0.1575049603761846}, {'fro': 'boy', 'to': 'escape', 'type': 'HasA', 'score': 0.0036396614741533995, 'wm_score': 0.4544931, 'final': 0.13889569303190738}, {'fro': 'wolf', 'to': 'escape', 'type': 'HasA', 'score': 0.0036126086488366127, 'wm_score': 0.44226155, 'final': 0.13520729105418566}, {'fro': 'suspect', 'to': 'escape', 'type': 'HasA', 'score': 0.0035840063355863094, 'wm_score': 0.45989242, 'final': 0.14047653043491046}, {'fro': 'attacker', 'to': 'escape', 'type': 'HasA', 'score': 0.003574155503883958, 'wm_score': 0.4198411, 'final': 0.1284542388527188}, {'fro': 'fugitive', 'to': 'escape', 'type': 'HasA', 'score': 0.0032197663094848394, 'wm_score': 0.38045093, 'final': 0.1163891154166394}, {'fro': 'bomber', 'to': 'escape', 'type': 'HasA', 'score': 0.0031071435660123825, 'wm_score': 0.38184035, 'final': 0.11672710549620868}, {'fro': 'castle', 'to': 'escape', 'type': 'HasA', 'score': 0.0030982072930783033, 'wm_score': 0.37502363, 'final': 0.11467583410515483}, {'fro': 'victim', 'to': 'escape', 'type': 'HasA', 'score': 0.003052877727895975, 'wm_score': 0.5717257, 'final': 0.1736547244095272}, {'fro': 'prisoner', 'to': 'escape', 'type': 'HasA', 'score': 0.002967194886878133, 'wm_score': 0.51963377, 'final': 0.1579671674208147}, {'fro': 'murderer', 'to': 'escape', 'type': 'HasA', 'score': 0.002850783057510853, 'wm_score': 0.40519062, 'final': 0.12355273414025761}, {'fro': 'prince', 'to': 'escape', 'type': 'HasA', 'score': 0.002838159678503871, 'wm_score': 0.33763894, 'final': 0.10327839377495272}, {'fro': 'woman', 'to': 'escape', 'type': 'HasA', 'score': 0.002812641207128763, 'wm_score': 0.46767762, 'final': 0.14227213484499016}, {'fro': 'escape', 'to': 'twist', 'type': 'HasA', 'score': 0.32705676555633545, 'wm_score': 0.34302106, 'final': 0.33184605388943483}, {'fro': 'escape', 'to': 'motive', 'type': 'HasA', 'score': 0.03524480387568474, 'wm_score': 0.44900817, 'final': 0.15937381371297935}, {'fro': 'escape', 'to': 'secret', 'type': 'HasA', 'score': 0.016869567334651947, 'wm_score': 0.48290467, 'final': 0.15668009813425637}, {'fro': 'escape', 'to': 'purpose', 'type': 'HasA', 'score': 0.01414627768099308, 'wm_score': 0.35912883, 'final': 0.11764104337669518}, {'fro': 'escape', 'to': 'plan', 'type': 'HasA', 'score': 0.009468764998018742, 'wm_score': 0.42964602, 'final': 0.13552194149861316}, {'fro': 'escape', 'to': 'consequence', 'type': 'HasA', 'score': 0.008969267830252647, 'wm_score': 0.39651695, 'final': 0.12523357248117686}, {'fro': 'escape', 'to': 'cost', 'type': 'HasA', 'score': 0.008620956912636757, 'wm_score': 0.33810675, 'final': 0.10746669483884576}, {'fro': 'escape', 'to': 'solution', 'type': 'HasA', 'score': 0.008610398508608341, 'wm_score': 0.3461533, 'final': 0.10987326895602585}, {'fro': 'escape', 'to': 'link', 'type': 'HasA', 'score': 0.008204557932913303, 'wm_score': 0.3596944, 'final': 0.11365151055303935}, {'fro': 'escape', 'to': 'chance', 'type': 'HasA', 'score': 0.008072313852608204, 'wm_score': 0.52751315, 'final': 0.16390456469682574}, {'fro': 'escape', 'to': 'toll', 'type': 'HasA', 'score': 0.007893015630543232, 'wm_score': 0.3485341, 'final': 0.11008534094138028}, {'fro': 'escape', 'to': 'future', 'type': 'HasA', 'score': 0.007240863051265478, 'wm_score': 0.43234944, 'final': 0.13477343613588585}, {'fro': 'escape', 'to': 'sequel', 'type': 'HasA', 'score': 0.006705394946038723, 'wm_score': 0.39453197, 'final': 0.12305336746222711}, {'fro': 'escape', 'to': 'reward', 'type': 'HasA', 'score': 0.0061452873051166534, 'wm_score': 0.3257528, 'final': 0.10202754111358169}, {'fro': 'escape', 'to': 'history', 'type': 'HasA', 'score': 0.006141532212495804, 'wm_score': 0.33337033, 'final': 0.10431017154874707}, {'fro': 'escape', 'to': 'legacy', 'type': 'HasA', 'score': 0.005051101092249155, 'wm_score': 0.33218437, 'final': 0.10319108176457442}, {'fro': 'escape', 'to': 'mystery', 'type': 'HasA', 'score': 0.004595826379954815, 'wm_score': 0.41075933, 'final': 0.12644487746596839}, {'fro': 'escape', 'to': 'problem', 'type': 'HasA', 'score': 0.004568732809275389, 'wm_score': 0.42790192, 'final': 0.1315686889664928}, {'fro': 'escape', 'to': 'catch', 'type': 'HasA', 'score': 0.004495358094573021, 'wm_score': 0.46248785, 'final': 0.14189310566620114}, {'fro': 'escape', 'to': 'destination', 'type': 'HasA', 'score': 0.004330901894718409, 'wm_score': 0.33887863, 'final': 0.10469522032630289}, {'fro': 'escape', 'to': 'story', 'type': 'HasA', 'score': 0.004181671887636185, 'wm_score': 0.49362886, 'final': 0.15101582832134533}, {'fro': 'escape', 'to': 'reason', 'type': 'HasA', 'score': 0.004012682009488344, 'wm_score': 0.5063225, 'final': 0.15470562740664187}, {'fro': 'prisoner', 'to': 'escape', 'type': 'AtLocation', 'score': 0.041369080543518066, 'wm_score': 0.51963377, 'final': 0.18484848738046267}, {'fro': 'woman', 'to': 'escape', 'type': 'AtLocation', 'score': 0.03196056932210922, 'wm_score': 0.46767762, 'final': 0.16267568452547648}, {'fro': 'child', 'to': 'escape', 'type': 'AtLocation', 'score': 0.03080889955163002, 'wm_score': 0.48217165, 'final': 0.16621772468614104}, {'fro': 'man', 'to': 'escape', 'type': 'AtLocation', 'score': 0.029099734500050545, 'wm_score': 0.5524651, 'final': 0.1861093441500354}, {'fro': 'survivor', 'to': 'escape', 'type': 'AtLocation', 'score': 0.028280895203351974, 'wm_score': 0.3797444, 'final': 0.13371994664234638}, {'fro': 'girl', 'to': 'escape', 'type': 'AtLocation', 'score': 0.027485517784953117, 'wm_score': 0.44008908, 'final': 0.15126658644946722}, {'fro': 'suspect', 'to': 'escape', 'type': 'AtLocation', 'score': 0.019056245684623718, 'wm_score': 0.45989242, 'final': 0.15130709797923664}, {'fro': 'boy', 'to': 'escape', 'type': 'AtLocation', 'score': 0.01818246953189373, 'wm_score': 0.4544931, 'final': 0.1490756586723256}, {'fro': 'knife', 'to': 'escape', 'type': 'AtLocation', 'score': 0.017378365620970726, 'wm_score': 0.37721986, 'final': 0.12533081393467954}, {'fro': 'sniper', 'to': 'escape', 'type': 'AtLocation', 'score': 0.01623406633734703, 'wm_score': 0.3299343, 'final': 0.11034413643614294}, {'fro': 'hostage', 'to': 'escape', 'type': 'AtLocation', 'score': 0.016042636707425117, 'wm_score': 0.49807268, 'final': 0.1606516496951976}, {'fro': 'soldier', 'to': 'escape', 'type': 'AtLocation', 'score': 0.015494465827941895, 'wm_score': 0.4104636, 'final': 0.13398520607955933}, {'fro': 'dog', 'to': 'escape', 'type': 'AtLocation', 'score': 0.014236973598599434, 'wm_score': 0.38510263, 'final': 0.12549667051901964}, {'fro': 'cat', 'to': 'escape', 'type': 'AtLocation', 'score': 0.01415393315255642, 'wm_score': 0.3575187, 'final': 0.11716336320678952}, {'fro': 'gunman', 'to': 'escape', 'type': 'AtLocation', 'score': 0.013922753743827343, 'wm_score': 0.39132857, 'final': 0.12714449862067914}, {'fro': 'baby', 'to': 'escape', 'type': 'AtLocation', 'score': 0.011013931594789028, 'wm_score': 0.37805867, 'final': 0.12112735311635232}, {'fro': 'corpse', 'to': 'escape', 'type': 'AtLocation', 'score': 0.010281014256179333, 'wm_score': 0.33661228, 'final': 0.10818039397932554}, {'fro': 'thief', 'to': 'escape', 'type': 'AtLocation', 'score': 0.01018528826534748, 'wm_score': 0.39139476, 'final': 0.12454812978574326}, {'fro': 'passenger', 'to': 'escape', 'type': 'AtLocation', 'score': 0.008670422248542309, 'wm_score': 0.3631671, 'final': 0.11501942557397964}, {'fro': 'bullet', 'to': 'escape', 'type': 'AtLocation', 'score': 0.007796309422701597, 'wm_score': 0.3246423, 'final': 0.10285010659589114}, {'fro': 'victim', 'to': 'escape', 'type': 'AtLocation', 'score': 0.007735217455774546, 'wm_score': 0.5717257, 'final': 0.1769323622190422}, {'fro': 'tiger', 'to': 'escape', 'type': 'AtLocation', 'score': 0.007230017799884081, 'wm_score': 0.32223788, 'final': 0.10173237645991887}, {'fro': 'fugitive', 'to': 'escape', 'type': 'AtLocation', 'score': 0.006355156656354666, 'wm_score': 0.38045093, 'final': 0.11858388865944829}, {'fro': 'policeman', 'to': 'escape', 'type': 'AtLocation', 'score': 0.005788991693407297, 'wm_score': 0.35965884, 'final': 0.11194994618538512}, {'fro': 'gun', 'to': 'escape', 'type': 'AtLocation', 'score': 0.005093603394925594, 'wm_score': 0.4282314, 'final': 0.13203494237644792}, {'fro': 'bomb', 'to': 'escape', 'type': 'AtLocation', 'score': 0.004953230265527964, 'wm_score': 0.40674296, 'final': 0.1254901491858696}, {'fro': 'wolf', 'to': 'escape', 'type': 'AtLocation', 'score': 0.004847953096032143, 'wm_score': 0.44226155, 'final': 0.13607203216722252}, {'fro': 'guard', 'to': 'escape', 'type': 'AtLocation', 'score': 0.004842306487262249, 'wm_score': 0.3584894, 'final': 0.1109364345410836}, {'fro': 'hero', 'to': 'escape', 'type': 'AtLocation', 'score': 0.004652454983443022, 'wm_score': 0.404602, 'final': 0.12463731848841013}, {'fro': 'doctor', 'to': 'escape', 'type': 'AtLocation', 'score': 0.004568206612020731, 'wm_score': 0.38901454, 'final': 0.11990210662841454}, {'fro': 'terrorist', 'to': 'escape', 'type': 'AtLocation', 'score': 0.004460397642105818, 'wm_score': 0.44121212, 'final': 0.13548591434947407}, {'fro': 'shark', 'to': 'escape', 'type': 'AtLocation', 'score': 0.004418340045958757, 'wm_score': 0.33765614, 'final': 0.10438968003217114}, {'fro': 'friend', 'to': 'escape', 'type': 'AtLocation', 'score': 0.004294270183891058, 'wm_score': 0.39704955, 'final': 0.12212085412872375}, {'fro': 'escape', 'to': 'works', 'type': 'AtLocation', 'score': 0.44912630319595337, 'wm_score': 0.2661299, 'final': 0.39422738223716736}, {'fro': 'escape', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.08271027356386185, 'wm_score': 0.17598842, 'final': 0.1106937174947033}, {'fro': 'escape', 'to': 'cards', 'type': 'AtLocation', 'score': 0.05841368809342384, 'wm_score': 0.25644824, 'final': 0.1178240536653967}, {'fro': 'escape', 'to': 'air', 'type': 'AtLocation', 'score': 0.05196629837155342, 'wm_score': 0.41583076, 'final': 0.1611256368600874}, {'fro': 'escape', 'to': 'making', 'type': 'AtLocation', 'score': 0.04430050775408745, 'wm_score': 0.4494891, 'final': 0.16585708542786123}, {'fro': 'escape', 'to': 'bag', 'type': 'AtLocation', 'score': 0.012803095392882824, 'wm_score': 0.31164843, 'final': 0.10245669577501798}, {'fro': 'escape', 'to': 'wild', 'type': 'AtLocation', 'score': 0.008797205984592438, 'wm_score': 0.39540887, 'final': 0.12478070518921472}, {'fro': 'escape', 'to': 'way', 'type': 'AtLocation', 'score': 0.007842685095965862, 'wm_score': 0.54745185, 'final': 0.16972543456717612}, {'fro': 'escape', 'to': 'open', 'type': 'AtLocation', 'score': 0.007443001493811607, 'wm_score': 0.38064605, 'final': 0.11940391604566815}, {'fro': 'escape', 'to': 'distance', 'type': 'AtLocation', 'score': 0.007201287429779768, 'wm_score': 0.32224804, 'final': 0.10171531320084586}, {'fro': 'escape', 'to': 'background', 'type': 'AtLocation', 'score': 0.006366318557411432, 'wm_score': 0.32184198, 'final': 0.10100901699018802}, {'fro': 'escape', 'to': 'shadows', 'type': 'AtLocation', 'score': 0.0041309017688035965, 'wm_score': 0.45220017, 'final': 0.13855168223816255}, {'fro': 'escape', 'to': 'water', 'type': 'AtLocation', 'score': 0.00412024324759841, 'wm_score': 0.40813547, 'final': 0.1253248112733189}, {'fro': 'escape', 'to': 'streets', 'type': 'AtLocation', 'score': 0.0036671932321041822, 'wm_score': 0.4394999, 'final': 0.13441700526247294}, {'fro': 'escape', 'to': 'future', 'type': 'AtLocation', 'score': 0.003185954876244068, 'wm_score': 0.43234944, 'final': 0.13193500041337086}, {'fro': 'escape', 'to': 'running', 'type': 'AtLocation', 'score': 0.0026225275360047817, 'wm_score': 0.38178664, 'final': 0.11637176127520336}, {'fro': 'escape', 'to': 'window', 'type': 'AtLocation', 'score': 0.0024395014625042677, 'wm_score': 0.42152148, 'final': 0.128164095023753}, {'fro': 'escape', 'to': 'picture', 'type': 'AtLocation', 'score': 0.002201095689088106, 'wm_score': 0.33401662, 'final': 0.10174575298236169}, {'fro': 'escape', 'to': 'clear', 'type': 'AtLocation', 'score': 0.001752033713273704, 'wm_score': 0.4566367, 'final': 0.13821743359929162}, {'fro': 'escape', 'to': 'supply', 'type': 'AtLocation', 'score': 0.0016153780743479729, 'wm_score': 0.3480922, 'final': 0.1055584246520436}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">politician</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "politician"
+    let relations = [{'fro': 'politician', 'to': 'government', 'type': 'AtLocation', 'score': 0.004068761132657528, 'wm_score': 0.43347156, 'final': 0.1328896007928603}, {'fro': 'politician', 'to': 'army', 'type': 'AtLocation', 'score': 0.0029133858624845743, 'wm_score': 0.33514225, 'final': 0.10258204510373921}, {'fro': 'politician', 'to': 'secretary', 'type': 'AtLocation', 'score': 0.004402679391205311, 'wm_score': 0.38160145, 'final': 0.11756231057384374}, {'fro': 'politician', 'to': 'leadership', 'type': 'AtLocation', 'score': 0.00324849016033113, 'wm_score': 0.44310912, 'final': 0.1352066791122318}, {'fro': 'politician', 'to': 'cabinet', 'type': 'AtLocation', 'score': 0.006048382259905338, 'wm_score': 0.38945287, 'final': 0.12106972858193375}, {'fro': 'politician', 'to': 'position', 'type': 'AtLocation', 'score': 0.0036609976086765528, 'wm_score': 0.40193015, 'final': 0.1231417433260736}, {'fro': 'politician', 'to': 'influence', 'type': 'AtLocation', 'score': 0.006085000466555357, 'wm_score': 0.38055307, 'final': 0.11842542132658877}, {'fro': 'politician', 'to': 'campaign', 'type': 'AtLocation', 'score': 0.004330291412770748, 'wm_score': 0.38095176, 'final': 0.11731673198893953}, {'fro': 'politician', 'to': 'party', 'type': 'AtLocation', 'score': 0.014398861676454544, 'wm_score': 0.5999148, 'final': 0.1900536431735182}, {'fro': 'politician', 'to': 'seat', 'type': 'AtLocation', 'score': 0.003952485974878073, 'wm_score': 0.4015528, 'final': 0.12323258018241467}, {'fro': 'politician', 'to': 'leading', 'type': 'AtLocation', 'score': 0.003898307681083679, 'wm_score': 0.42561287, 'final': 0.13041267637675857}, {'fro': 'politician', 'to': 'quit', 'type': 'HasA', 'score': 0.0036059750709682703, 'wm_score': 0.32824257, 'final': 0.1009969535496778}, {'fro': 'politician', 'to': 'minority', 'type': 'AtLocation', 'score': 0.004609907977283001, 'wm_score': 0.3709759, 'final': 0.11451970558409813}, {'fro': 'politician', 'to': 'coalition', 'type': 'AtLocation', 'score': 0.003780101193115115, 'wm_score': 0.44921076, 'final': 0.1374092988351806}, {'fro': 'politician', 'to': 'senate', 'type': 'AtLocation', 'score': 0.0029291831888258457, 'wm_score': 0.4299909, 'final': 0.13104769823217813}, {'fro': 'politician', 'to': 'opposition', 'type': 'AtLocation', 'score': 0.019941093400120735, 'wm_score': 0.5553316, 'final': 0.18055824538008453}, {'fro': 'politician', 'to': 'majority', 'type': 'AtLocation', 'score': 0.005754783283919096, 'wm_score': 0.40165228, 'final': 0.12452403229874337}, {'fro': 'netherlands', 'to': 'politician', 'type': 'HasA', 'score': 0.09823288023471832, 'wm_score': 0.19973451, 'final': 0.12868336916430284}, {'fro': 'uk', 'to': 'politician', 'type': 'HasA', 'score': 0.08864949643611908, 'wm_score': 0.23972763, 'final': 0.13397293650528336}, {'fro': 'bbc', 'to': 'politician', 'type': 'HasA', 'score': 0.07265488058328629, 'wm_score': 0.18837023, 'final': 0.10736948540830041}, {'fro': 'us', 'to': 'politician', 'type': 'HasA', 'score': 0.03577417880296707, 'wm_score': 0.26767734, 'final': 0.10534512716207695}, {'fro': 'guardian', 'to': 'politician', 'type': 'HasA', 'score': 0.01901387795805931, 'wm_score': 0.29581273, 'final': 0.10205353357064154}, {'fro': 'bjp', 'to': 'politician', 'type': 'HasA', 'score': 0.017535710707306862, 'wm_score': 0.38011384, 'final': 0.12630914949511482}, {'fro': 'country', 'to': 'politician', 'type': 'HasA', 'score': 0.015581552870571613, 'wm_score': 0.35407197, 'final': 0.11712867800940015}, {'fro': 'independent', 'to': 'politician', 'type': 'HasA', 'score': 0.005823883693665266, 'wm_score': 0.47672975, 'final': 0.1470956435855657}, {'fro': 'state', 'to': 'politician', 'type': 'HasA', 'score': 0.004765957128256559, 'wm_score': 0.38867998, 'final': 0.11994016398977961}, {'fro': 'republic', 'to': 'politician', 'type': 'HasA', 'score': 0.004191047511994839, 'wm_score': 0.3236196, 'final': 0.1000196132583964}, {'fro': 'australian', 'to': 'politician', 'type': 'HasA', 'score': 0.004137091804295778, 'wm_score': 0.40030587, 'final': 0.12298772526300707}, {'fro': 'ndp', 'to': 'politician', 'type': 'HasA', 'score': 0.0035876964684575796, 'wm_score': 0.42684528, 'final': 0.13056497152792032}, {'fro': 'party', 'to': 'politician', 'type': 'HasA', 'score': 0.0033898763358592987, 'wm_score': 0.5999148, 'final': 0.18234735343510153}, {'fro': 'opposition', 'to': 'politician', 'type': 'HasA', 'score': 0.003214083146303892, 'wm_score': 0.5553316, 'final': 0.16884933820241274}, {'fro': 'coalition', 'to': 'politician', 'type': 'HasA', 'score': 0.0030526944901794195, 'wm_score': 0.44921076, 'final': 0.1369001141431256}, {'fro': 'gop', 'to': 'politician', 'type': 'HasA', 'score': 0.003045605029910803, 'wm_score': 0.3931504, 'final': 0.12007704352093758}, {'fro': 'politician', 'to': 'lawyer', 'type': 'HasA', 'score': 0.030464930459856987, 'wm_score': 0.59170383, 'final': 0.19883660032189993}, {'fro': 'politician', 'to': 'son', 'type': 'HasA', 'score': 0.02941138483583927, 'wm_score': 0.48440486, 'final': 0.16590942738508752}, {'fro': 'politician', 'to': 'daughter', 'type': 'HasA', 'score': 0.018501702696084976, 'wm_score': 0.40632543, 'final': 0.1348488208872595}, {'fro': 'politician', 'to': 'reputation', 'type': 'HasA', 'score': 0.015634635463356972, 'wm_score': 0.40920907, 'final': 0.1337069658243499}, {'fro': 'politician', 'to': 'choice', 'type': 'HasA', 'score': 0.010022401809692383, 'wm_score': 0.37039495, 'final': 0.11813416626678469}, {'fro': 'politician', 'to': 'history', 'type': 'HasA', 'score': 0.008258122019469738, 'wm_score': 0.34856716, 'final': 0.11035083341362883}, {'fro': 'politician', 'to': 'job', 'type': 'HasA', 'score': 0.00768251484259963, 'wm_score': 0.3189213, 'final': 0.10105415038981976}, {'fro': 'politician', 'to': 'career', 'type': 'HasA', 'score': 0.007081373129040003, 'wm_score': 0.33873576, 'final': 0.106577689190328}, {'fro': 'politician', 'to': 'rival', 'type': 'HasA', 'score': 0.00662486394867301, 'wm_score': 0.34478754, 'final': 0.10807366676407112}, {'fro': 'politician', 'to': 'boyfriend', 'type': 'HasA', 'score': 0.006466673221439123, 'wm_score': 0.32926843, 'final': 0.1033072002550074}, {'fro': 'politician', 'to': 'say', 'type': 'HasA', 'score': 0.005421333014965057, 'wm_score': 0.3338523, 'final': 0.10395062311047555}, {'fro': 'politician', 'to': 'name', 'type': 'HasA', 'score': 0.004734337795525789, 'wm_score': 0.37934667, 'final': 0.11711803745686807}, {'fro': 'politician', 'to': 'brother', 'type': 'HasA', 'score': 0.0047336602583527565, 'wm_score': 0.4891615, 'final': 0.15006201218084697}, {'fro': 'name', 'to': 'politician', 'type': 'AtLocation', 'score': 0.004449036438018084, 'wm_score': 0.37934667, 'final': 0.11691832650661267}, {'fro': 'suspect', 'to': 'politician', 'type': 'AtLocation', 'score': 0.00349166220985353, 'wm_score': 0.3863595, 'final': 0.11835201354689749}, {'fro': 'politician', 'to': 'spotlight', 'type': 'AtLocation', 'score': 0.0799809917807579, 'wm_score': 0.15582792, 'final': 0.10273507024653053}, {'fro': 'politician', 'to': 'news', 'type': 'AtLocation', 'score': 0.050666797906160355, 'wm_score': 0.28604308, 'final': 0.12127968253431226}, {'fro': 'politician', 'to': 'running', 'type': 'AtLocation', 'score': 0.04497622698545456, 'wm_score': 0.31167167, 'final': 0.1249848598898182}, {'fro': 'politician', 'to': 'polls', 'type': 'AtLocation', 'score': 0.010160396806895733, 'wm_score': 0.3752842, 'final': 0.11969753776482703}, {'fro': 'politician', 'to': 'office', 'type': 'AtLocation', 'score': 0.004604717250913382, 'wm_score': 0.3609022, 'final': 0.11149396207563939}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

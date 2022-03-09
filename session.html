@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">session</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "session"
+    let relations = [{'fro': 'exam', 'to': 'session', 'type': 'AtLocation', 'score': 0.0013570203445851803, 'wm_score': 0.3898931, 'final': 0.11791784424120964}, {'fro': 'discussion', 'to': 'session', 'type': 'AtLocation', 'score': 0.0010909461416304111, 'wm_score': 0.5781028, 'final': 0.17419450229914132}, {'fro': 'presentation', 'to': 'session', 'type': 'AtLocation', 'score': 0.0006276417407207191, 'wm_score': 0.488789, 'final': 0.1470760492185045}, {'fro': 'resolution', 'to': 'session', 'type': 'AtLocation', 'score': 0.001013021799735725, 'wm_score': 0.43048474, 'final': 0.12985453725981502}, {'fro': 'council', 'to': 'session', 'type': 'HasA', 'score': 0.041134629398584366, 'wm_score': 0.47740716, 'final': 0.17201638857900908}, {'fro': 'committee', 'to': 'session', 'type': 'HasA', 'score': 0.03874421864748001, 'wm_score': 0.58059895, 'final': 0.201300638053236}, {'fro': 'legislature', 'to': 'session', 'type': 'HasA', 'score': 0.0359644889831543, 'wm_score': 0.49161318, 'final': 0.17265909628820802}, {'fro': 'assembly', 'to': 'session', 'type': 'HasA', 'score': 0.019557785242795944, 'wm_score': 0.57827455, 'final': 0.18717281466995722}, {'fro': 'panel', 'to': 'session', 'type': 'HasA', 'score': 0.018463686108589172, 'wm_score': 0.53515846, 'final': 0.17347211827601244}, {'fro': 'senate', 'to': 'session', 'type': 'HasA', 'score': 0.016106631606817245, 'wm_score': 0.52116686, 'final': 0.1676247001247721}, {'fro': 'speaker', 'to': 'session', 'type': 'HasA', 'score': 0.01610342226922512, 'wm_score': 0.49331436, 'final': 0.1592667035884576}, {'fro': 'meeting', 'to': 'session', 'type': 'HasA', 'score': 0.01518226694315672, 'wm_score': 0.7201075, 'final': 0.22665983686020974}, {'fro': 'house', 'to': 'session', 'type': 'HasA', 'score': 0.013626751489937305, 'wm_score': 0.5022026, 'final': 0.16019950604295616}, {'fro': 'group', 'to': 'session', 'type': 'HasA', 'score': 0.009236091747879982, 'wm_score': 0.3922231, 'final': 0.124132194223516}, {'fro': 'workshop', 'to': 'session', 'type': 'HasA', 'score': 0.009093393571674824, 'wm_score': 0.43948406, 'final': 0.1382105935001724}, {'fro': 'board', 'to': 'session', 'type': 'HasA', 'score': 0.007331141736358404, 'wm_score': 0.45865846, 'final': 0.1427293372154509}, {'fro': 'conference', 'to': 'session', 'type': 'HasA', 'score': 0.006704613100737333, 'wm_score': 0.6246649, 'final': 0.19209269917051613}, {'fro': 'subcommittee', 'to': 'session', 'type': 'HasA', 'score': 0.006647427566349506, 'wm_score': 0.40562302, 'final': 0.12634010529644465}, {'fro': 'parliament', 'to': 'session', 'type': 'HasA', 'score': 0.006264686584472656, 'wm_score': 0.5479307, 'final': 0.16876449060913087}, {'fro': 'event', 'to': 'session', 'type': 'HasA', 'score': 0.005155540537089109, 'wm_score': 0.4677863, 'final': 0.1439447683759624}, {'fro': 'audience', 'to': 'session', 'type': 'HasA', 'score': 0.005096453242003918, 'wm_score': 0.35911512, 'final': 0.11130205326940276}, {'fro': 'commission', 'to': 'session', 'type': 'HasA', 'score': 0.005046506877988577, 'wm_score': 0.4336367, 'final': 0.133623564814592}, {'fro': 'chamber', 'to': 'session', 'type': 'HasA', 'score': 0.004913609009236097, 'wm_score': 0.5082173, 'final': 0.1559047163064653}, {'fro': 'public', 'to': 'session', 'type': 'HasA', 'score': 0.004354569595307112, 'wm_score': 0.37773886, 'final': 0.116369856716715}, {'fro': 'ioc', 'to': 'session', 'type': 'HasA', 'score': 0.0036405727732926607, 'wm_score': 0.36721843, 'final': 0.11271392994130487}, {'fro': 'session', 'to': 'moderator', 'type': 'HasA', 'score': 0.20375484228134155, 'wm_score': 0.23908491, 'final': 0.2143538625969391}, {'fro': 'session', 'to': 'transcript', 'type': 'HasA', 'score': 0.15035492181777954, 'wm_score': 0.24755584, 'final': 0.1795151972724457}, {'fro': 'session', 'to': 'break', 'type': 'HasA', 'score': 0.055793002247810364, 'wm_score': 0.5111535, 'final': 0.1924011515734673}, {'fro': 'session', 'to': 'recess', 'type': 'HasA', 'score': 0.03172030299901962, 'wm_score': 0.52507126, 'final': 0.17972559009931377}, {'fro': 'session', 'to': 'schedule', 'type': 'HasA', 'score': 0.027248188853263855, 'wm_score': 0.5518103, 'final': 0.1846168221972847}, {'fro': 'session', 'to': 'resolution', 'type': 'HasA', 'score': 0.013758102431893349, 'wm_score': 0.43048474, 'final': 0.13877609370232535}, {'fro': 'session', 'to': 'conclusion', 'type': 'HasA', 'score': 0.009776314720511436, 'wm_score': 0.41746584, 'final': 0.132083172304358}, {'fro': 'session', 'to': 'delay', 'type': 'HasA', 'score': 0.00905697513371706, 'wm_score': 0.503348, 'final': 0.15734428259360198}, {'fro': 'session', 'to': 'pause', 'type': 'HasA', 'score': 0.008731872774660587, 'wm_score': 0.37643445, 'final': 0.11904264594226242}, {'fro': 'session', 'to': 'theme', 'type': 'HasA', 'score': 0.008519737981259823, 'wm_score': 0.37754697, 'final': 0.11922790758688188}, {'fro': 'session', 'to': 'restart', 'type': 'HasA', 'score': 0.007295564748346806, 'wm_score': 0.39019424, 'final': 0.12216516732384278}, {'fro': 'session', 'to': 'deadline', 'type': 'HasA', 'score': 0.006277353502810001, 'wm_score': 0.44993266, 'final': 0.13937394545196702}, {'fro': 'session', 'to': 'brief', 'type': 'HasA', 'score': 0.005890131462365389, 'wm_score': 0.5050812, 'final': 0.1556474520236558}, {'fro': 'session', 'to': 'split', 'type': 'HasA', 'score': 0.005374187137931585, 'wm_score': 0.35842824, 'final': 0.11129040299655213}, {'fro': 'session', 'to': 'start', 'type': 'HasA', 'score': 0.004880362655967474, 'wm_score': 0.5786689, 'final': 0.17701692385917728}, {'fro': 'session', 'to': 'close', 'type': 'HasA', 'score': 0.004380903672426939, 'wm_score': 0.5028989, 'final': 0.1539363025706989}, {'fro': 'session', 'to': 'discussion', 'type': 'HasA', 'score': 0.004230930935591459, 'wm_score': 0.5781028, 'final': 0.17639249165491405}, {'fro': 'session', 'to': 'minute', 'type': 'HasA', 'score': 0.004229361657053232, 'wm_score': 0.45509738, 'final': 0.13948976715993727}, {'fro': 'session', 'to': 'closing', 'type': 'HasA', 'score': 0.0036982388701289892, 'wm_score': 0.66206956, 'final': 0.2012096352090903}, {'fro': 'session', 'to': 'beginning', 'type': 'HasA', 'score': 0.0033111523371189833, 'wm_score': 0.5329002, 'final': 0.16218786663598334}, {'fro': 'session', 'to': 'speaker', 'type': 'HasA', 'score': 0.0032918862998485565, 'wm_score': 0.49331436, 'final': 0.150298628409894}, {'fro': 'session', 'to': 'agenda', 'type': 'HasA', 'score': 0.0032855600584298372, 'wm_score': 0.46402192, 'final': 0.14150646804090092}, {'fro': 'session', 'to': 'limit', 'type': 'HasA', 'score': 0.00322888046503067, 'wm_score': 0.3414687, 'final': 0.10470082632552148}, {'fro': 'session', 'to': 'floor', 'type': 'HasA', 'score': 0.0031722313724458218, 'wm_score': 0.5264142, 'final': 0.1601448219607121}, {'fro': 'session', 'to': 'cancellation', 'type': 'HasA', 'score': 0.003159565618261695, 'wm_score': 0.34699434, 'final': 0.1063099979327832}, {'fro': 'speaker', 'to': 'session', 'type': 'AtLocation', 'score': 0.07066284120082855, 'wm_score': 0.49331436, 'final': 0.19745829684058}, {'fro': 'moderator', 'to': 'session', 'type': 'AtLocation', 'score': 0.046213965862989426, 'wm_score': 0.23908491, 'final': 0.1040752491040926}, {'fro': 'student', 'to': 'session', 'type': 'AtLocation', 'score': 0.020871568471193314, 'wm_score': 0.3043993, 'final': 0.10592988792983533}, {'fro': 'delegate', 'to': 'session', 'type': 'AtLocation', 'score': 0.02040323242545128, 'wm_score': 0.30128625, 'final': 0.1046681376978159}, {'fro': 'participant', 'to': 'session', 'type': 'AtLocation', 'score': 0.017573025077581406, 'wm_score': 0.33732605, 'final': 0.11349893255430699}, {'fro': 'judge', 'to': 'session', 'type': 'AtLocation', 'score': 0.014593676663935184, 'wm_score': 0.34609798, 'final': 0.11404496766475465}, {'fro': 'guest', 'to': 'session', 'type': 'AtLocation', 'score': 0.012804036028683186, 'wm_score': 0.36075294, 'final': 0.11718870722007825}, {'fro': 'delegation', 'to': 'session', 'type': 'AtLocation', 'score': 0.01108295563608408, 'wm_score': 0.49750352, 'final': 0.15700912494525887}, {'fro': 'microphone', 'to': 'session', 'type': 'AtLocation', 'score': 0.010840270668268204, 'wm_score': 0.31574574, 'final': 0.10231191146778776}, {'fro': 'chair', 'to': 'session', 'type': 'AtLocation', 'score': 0.007999390363693237, 'wm_score': 0.41597167, 'final': 0.1303910742545853}, {'fro': 'jury', 'to': 'session', 'type': 'AtLocation', 'score': 0.00607638293877244, 'wm_score': 0.37966284, 'final': 0.11815232005714073}, {'fro': 'representative', 'to': 'session', 'type': 'AtLocation', 'score': 0.006049501709640026, 'wm_score': 0.3647233, 'final': 0.11365164119674802}, {'fro': 'recess', 'to': 'session', 'type': 'AtLocation', 'score': 0.005381574854254723, 'wm_score': 0.52507126, 'final': 0.16128848039797836}, {'fro': 'committee', 'to': 'session', 'type': 'AtLocation', 'score': 0.0050614699721336365, 'wm_score': 0.58059895, 'final': 0.17772271398049355}, {'fro': 'recording', 'to': 'session', 'type': 'AtLocation', 'score': 0.004344906657934189, 'wm_score': 0.47850463, 'final': 0.14659282366055396}, {'fro': 'seat', 'to': 'session', 'type': 'AtLocation', 'score': 0.004160827957093716, 'wm_score': 0.3350586, 'final': 0.10343015956996561}, {'fro': 'session', 'to': 'works', 'type': 'AtLocation', 'score': 0.5704822540283203, 'wm_score': 0.30204856, 'final': 0.4899521458198242}, {'fro': 'session', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.19060513377189636, 'wm_score': 0.06303798, 'final': 0.15233498764032743}, {'fro': 'session', 'to': 'schedule', 'type': 'AtLocation', 'score': 0.008943067863583565, 'wm_score': 0.5518103, 'final': 0.1718032375045085}, {'fro': 'session', 'to': 'open', 'type': 'AtLocation', 'score': 0.007791063282638788, 'wm_score': 0.44011402, 'final': 0.13748795029784716}, {'fro': 'session', 'to': 'making', 'type': 'AtLocation', 'score': 0.006774185225367546, 'wm_score': 0.42738035, 'final': 0.1329560346577573}, {'fro': 'session', 'to': 'room', 'type': 'AtLocation', 'score': 0.00465239817276597, 'wm_score': 0.47902548, 'final': 0.1469643227209362}, {'fro': 'session', 'to': 'running', 'type': 'AtLocation', 'score': 0.004619518294930458, 'wm_score': 0.37292108, 'final': 0.11510998680645135}, {'fro': 'session', 'to': 'agenda', 'type': 'AtLocation', 'score': 0.003682828741148114, 'wm_score': 0.46402192, 'final': 0.1417845561188037}, {'fro': 'session', 'to': 'hall', 'type': 'AtLocation', 'score': 0.003245603060349822, 'wm_score': 0.3451631, 'final': 0.10582085214224489}, {'fro': 'session', 'to': 'workshop', 'type': 'AtLocation', 'score': 0.002437836956232786, 'wm_score': 0.43948406, 'final': 0.13355170386936296}, {'fro': 'session', 'to': 'future', 'type': 'AtLocation', 'score': 0.0022989697754383087, 'wm_score': 0.33430338, 'final': 0.10190029284280683}, {'fro': 'session', 'to': 'interim', 'type': 'AtLocation', 'score': 0.0020958806853741407, 'wm_score': 0.38671649, 'final': 0.11748206347976192}, {'fro': 'session', 'to': 'progress', 'type': 'AtLocation', 'score': 0.0018181423656642437, 'wm_score': 0.4132339, 'final': 0.12524286965596498}, {'fro': 'session', 'to': 'meantime', 'type': 'AtLocation', 'score': 0.001728108269162476, 'wm_score': 0.40756622, 'final': 0.12347954178841375}, {'fro': 'session', 'to': 'beginning', 'type': 'AtLocation', 'score': 0.0016019974136725068, 'wm_score': 0.5329002, 'final': 0.16099145818957078}, {'fro': 'session', 'to': 'planning', 'type': 'AtLocation', 'score': 0.0013866935623809695, 'wm_score': 0.3307364, 'final': 0.10019160549366668}, {'fro': 'session', 'to': 'process', 'type': 'AtLocation', 'score': 0.0013037456665188074, 'wm_score': 0.48282415, 'final': 0.14575986696656318}, {'fro': 'session', 'to': 'plan', 'type': 'AtLocation', 'score': 0.0012389824260026217, 'wm_score': 0.39963806, 'final': 0.12075870569820187}, {'fro': 'session', 'to': 'news', 'type': 'AtLocation', 'score': 0.0011955220252275467, 'wm_score': 0.39177826, 'final': 0.1183703434176593}, {'fro': 'session', 'to': 'calendar', 'type': 'AtLocation', 'score': 0.0011772330617532134, 'wm_score': 0.38125604, 'final': 0.11520087514322727}, {'fro': 'session', 'to': 'way', 'type': 'AtLocation', 'score': 0.001149477786384523, 'wm_score': 0.4206599, 'final': 0.12700260445046918}, {'fro': 'session', 'to': 'middle', 'type': 'AtLocation', 'score': 0.0010858549503609538, 'wm_score': 0.41928822, 'final': 0.12654656446525267}, {'fro': 'session', 'to': 'afternoon', 'type': 'AtLocation', 'score': 0.0010721159633249044, 'wm_score': 0.6941771, 'final': 0.20900361117432747}, {'fro': 'hearing', 'to': 'session', 'type': 'AtLocation', 'score': 0.0018030557548627257, 'wm_score': 0.58921105, 'final': 0.17802545402840392}, {'fro': 'examination', 'to': 'session', 'type': 'AtLocation', 'score': 0.001848197658546269, 'wm_score': 0.37010616, 'final': 0.1123255863609824}, {'fro': 'board', 'to': 'session', 'type': 'AtLocation', 'score': 0.0045427968725562096, 'wm_score': 0.45865846, 'final': 0.14077749581078935}, {'fro': 'minute', 'to': 'session', 'type': 'AtLocation', 'score': 0.00573679618537426, 'wm_score': 0.45509738, 'final': 0.140544971329762}, {'fro': 'lecture', 'to': 'session', 'type': 'AtLocation', 'score': 0.0011107905302196741, 'wm_score': 0.35158482, 'final': 0.1062529993711538}, {'fro': 'meeting', 'to': 'session', 'type': 'AtLocation', 'score': 0.0016321305884048343, 'wm_score': 0.7201075, 'final': 0.21717474141188342}, {'fro': 'bill', 'to': 'session', 'type': 'AtLocation', 'score': 0.00028009360539726913, 'wm_score': 0.4551313, 'final': 0.13673545552377814}, {'fro': 'talk', 'to': 'session', 'type': 'AtLocation', 'score': 0.0006223461241461337, 'wm_score': 0.4370867, 'final': 0.1315616522869023}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

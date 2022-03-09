@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">flow</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "flow"
+    let relations = [{'fro': 'thanks', 'to': 'flow', 'type': 'AtLocation', 'score': 0.001311172847636044, 'wm_score': 0.3682075, 'final': 0.11138007099334525}, {'fro': 'blood', 'to': 'flow', 'type': 'HasA', 'score': 0.005185428541153669, 'wm_score': 0.5424903, 'final': 0.1663768899788076}, {'fro': 'point', 'to': 'flow', 'type': 'AtLocation', 'score': 0.0028098670300096273, 'wm_score': 0.4607582, 'final': 0.14019436692100676}, {'fro': 'manner', 'to': 'flow', 'type': 'AtLocation', 'score': 0.002504308708012104, 'wm_score': 0.39688587, 'final': 0.12081877709560848}, {'fro': 'go', 'to': 'flow', 'type': 'AtLocation', 'score': 0.0021138987503945827, 'wm_score': 0.4197962, 'final': 0.12741858912527623}, {'fro': 'river', 'to': 'flow', 'type': 'HasA', 'score': 0.10251501202583313, 'wm_score': 0.5183548, 'final': 0.2272669484180832}, {'fro': 'water', 'to': 'flow', 'type': 'HasA', 'score': 0.029261447489261627, 'wm_score': 0.6462784, 'final': 0.21436653324248317}, {'fro': 'stream', 'to': 'flow', 'type': 'HasA', 'score': 0.022427678108215332, 'wm_score': 0.73449326, 'final': 0.23604735267575078}, {'fro': 'pipeline', 'to': 'flow', 'type': 'HasA', 'score': 0.011529870331287384, 'wm_score': 0.4904859, 'final': 0.1552166792319012}, {'fro': 'line', 'to': 'flow', 'type': 'HasA', 'score': 0.009298926219344139, 'wm_score': 0.5071142, 'final': 0.1586435083535409}, {'fro': 'tide', 'to': 'flow', 'type': 'HasA', 'score': 0.00874797161668539, 'wm_score': 0.5324485, 'final': 0.1658581301316798}, {'fro': 'lake', 'to': 'flow', 'type': 'HasA', 'score': 0.008211049251258373, 'wm_score': 0.4120788, 'final': 0.12937137447588087}, {'fro': 'ocean', 'to': 'flow', 'type': 'HasA', 'score': 0.00670252600684762, 'wm_score': 0.5133309, 'final': 0.15869103820479336}, {'fro': 'wind', 'to': 'flow', 'type': 'HasA', 'score': 0.005953316576778889, 'wm_score': 0.5414324, 'final': 0.16659704160374525}, {'fro': 'boat', 'to': 'flow', 'type': 'HasA', 'score': 0.005948849953711033, 'wm_score': 0.33862236, 'final': 0.10575090296759773}, {'fro': 'channel', 'to': 'flow', 'type': 'HasA', 'score': 0.005311725195497274, 'wm_score': 0.40450162, 'final': 0.1250686936368481}, {'fro': 'earth', 'to': 'flow', 'type': 'HasA', 'score': 0.005088442470878363, 'wm_score': 0.4576472, 'final': 0.14085606972961487}, {'fro': 'rain', 'to': 'flow', 'type': 'HasA', 'score': 0.005017129238694906, 'wm_score': 0.3938009, 'final': 0.12165226046708645}, {'fro': 'lava', 'to': 'flow', 'type': 'HasA', 'score': 0.004144025035202503, 'wm_score': 0.46131068, 'final': 0.14129402152464177}, {'fro': 'canal', 'to': 'flow', 'type': 'HasA', 'score': 0.004077543504536152, 'wm_score': 0.4633172, 'final': 0.14184944045317532}, {'fro': 'pipe', 'to': 'flow', 'type': 'HasA', 'score': 0.003876141970977187, 'wm_score': 0.40684575, 'final': 0.12476702437968405}, {'fro': 'system', 'to': 'flow', 'type': 'HasA', 'score': 0.0037106971722096205, 'wm_score': 0.56511056, 'final': 0.17213065602054678}, {'fro': 'fluid', 'to': 'flow', 'type': 'HasA', 'score': 0.003578263334929943, 'wm_score': 0.6209372, 'final': 0.18878594433445098}, {'fro': 'funnel', 'to': 'flow', 'type': 'HasA', 'score': 0.0035091370809823275, 'wm_score': 0.4165849, 'final': 0.12743186595668765}, {'fro': 'air', 'to': 'flow', 'type': 'HasA', 'score': 0.0035061282105743885, 'wm_score': 0.44659182, 'final': 0.13643183574740209}, {'fro': 'ship', 'to': 'flow', 'type': 'HasA', 'score': 0.003493170253932476, 'wm_score': 0.3798146, 'final': 0.11638959917775274}, {'fro': 'liquid', 'to': 'flow', 'type': 'HasA', 'score': 0.0032531311735510826, 'wm_score': 0.5394261, 'final': 0.16410502182148579}, {'fro': 'bridge', 'to': 'flow', 'type': 'HasA', 'score': 0.0032495453488081694, 'wm_score': 0.37995487, 'final': 0.11626114274416573}, {'fro': 'train', 'to': 'flow', 'type': 'HasA', 'score': 0.0032404682133346796, 'wm_score': 0.40058494, 'final': 0.12244380974933429}, {'fro': 'bank', 'to': 'flow', 'type': 'HasA', 'score': 0.0030260724015533924, 'wm_score': 0.3851551, 'final': 0.11766478068108738}, {'fro': 'flow', 'to': 'limit', 'type': 'HasA', 'score': 0.031345952302217484, 'wm_score': 0.51049685, 'final': 0.17509122161155227}, {'fro': 'flow', 'to': 'rhythm', 'type': 'HasA', 'score': 0.02135206013917923, 'wm_score': 0.42283487, 'final': 0.14179690309742546}, {'fro': 'flow', 'to': 'tendency', 'type': 'HasA', 'score': 0.020133033394813538, 'wm_score': 0.40298533, 'final': 0.13498872237636947}, {'fro': 'flow', 'to': 'bottleneck', 'type': 'HasA', 'score': 0.015039565041661263, 'wm_score': 0.39284527, 'final': 0.12838127652916292}, {'fro': 'flow', 'to': 'pattern', 'type': 'HasA', 'score': 0.01383733656257391, 'wm_score': 0.5285188, 'final': 0.16824177559380174}, {'fro': 'flow', 'to': 'purpose', 'type': 'HasA', 'score': 0.01238664984703064, 'wm_score': 0.36860722, 'final': 0.11925282089292147}, {'fro': 'flow', 'to': 'link', 'type': 'HasA', 'score': 0.011906093917787075, 'wm_score': 0.4851548, 'final': 0.15388070574245097}, {'fro': 'flow', 'to': 'problem', 'type': 'HasA', 'score': 0.01143378671258688, 'wm_score': 0.47859728, 'final': 0.15158283469881084}, {'fro': 'flow', 'to': 'consequence', 'type': 'HasA', 'score': 0.009758900851011276, 'wm_score': 0.39684367, 'final': 0.1258843315957079}, {'fro': 'flow', 'to': 'trickle', 'type': 'HasA', 'score': 0.008854526095092297, 'wm_score': 0.5470495, 'final': 0.17031301826656461}, {'fro': 'flow', 'to': 'pulse', 'type': 'HasA', 'score': 0.007536858785897493, 'wm_score': 0.43576065, 'final': 0.13600399615012826}, {'fro': 'flow', 'to': 'break', 'type': 'HasA', 'score': 0.007506845518946648, 'wm_score': 0.41037768, 'final': 0.12836809586326267}, {'fro': 'flow', 'to': 'difference', 'type': 'HasA', 'score': 0.007160937413573265, 'wm_score': 0.42970604, 'final': 0.1339244681895013}, {'fro': 'flow', 'to': 'correlation', 'type': 'HasA', 'score': 0.007060359697788954, 'wm_score': 0.32073295, 'final': 0.10116213678845229}, {'fro': 'flow', 'to': 'point', 'type': 'HasA', 'score': 0.006075385957956314, 'wm_score': 0.4607582, 'final': 0.14248023017056943}, {'fro': 'flow', 'to': 'gradient', 'type': 'HasA', 'score': 0.005597297567874193, 'wm_score': 0.46711642, 'final': 0.14405303429751196}, {'fro': 'flow', 'to': 'chill', 'type': 'HasA', 'score': 0.0053282855078577995, 'wm_score': 0.32738167, 'final': 0.10194430085550048}, {'fro': 'flow', 'to': 'path', 'type': 'HasA', 'score': 0.005185785237699747, 'wm_score': 0.51946187, 'final': 0.15946861066638984}, {'fro': 'flow', 'to': 'stop', 'type': 'HasA', 'score': 0.00461771572008729, 'wm_score': 0.4793328, 'final': 0.14703224100406112}, {'fro': 'flow', 'to': 'ripple', 'type': 'HasA', 'score': 0.004585894290357828, 'wm_score': 0.34992552, 'final': 0.1081877820032505}, {'fro': 'flow', 'to': 'lag', 'type': 'HasA', 'score': 0.004471898078918457, 'wm_score': 0.33591008, 'final': 0.10390335265524293}, {'fro': 'flow', 'to': 'filter', 'type': 'HasA', 'score': 0.00422867015004158, 'wm_score': 0.47250676, 'final': 0.14471209710502914}, {'fro': 'flow', 'to': 'breakdown', 'type': 'HasA', 'score': 0.004189048893749714, 'wm_score': 0.34939587, 'final': 0.10775109522562482}, {'fro': 'flow', 'to': 'connection', 'type': 'HasA', 'score': 0.004155660979449749, 'wm_score': 0.41329962, 'final': 0.12689884868561482}, {'fro': 'fork', 'to': 'flow', 'type': 'AtLocation', 'score': 0.0851406455039978, 'wm_score': 0.28530517, 'final': 0.14519000285279848}, {'fro': 'needle', 'to': 'flow', 'type': 'AtLocation', 'score': 0.057582564651966095, 'wm_score': 0.28399196, 'final': 0.12550538325637628}, {'fro': 'fish', 'to': 'flow', 'type': 'AtLocation', 'score': 0.041186876595020294, 'wm_score': 0.3290955, 'final': 0.1275594636165142}, {'fro': 'river', 'to': 'flow', 'type': 'AtLocation', 'score': 0.016314249485731125, 'wm_score': 0.5183548, 'final': 0.16692641464001182}, {'fro': 'ripple', 'to': 'flow', 'type': 'AtLocation', 'score': 0.008878706023097038, 'wm_score': 0.34992552, 'final': 0.11119275021616794}, {'fro': 'dam', 'to': 'flow', 'type': 'AtLocation', 'score': 0.008115786127746105, 'wm_score': 0.41535652, 'final': 0.1302880062894223}, {'fro': 'boat', 'to': 'flow', 'type': 'AtLocation', 'score': 0.006868827156722546, 'wm_score': 0.33862236, 'final': 0.1063948870097058}, {'fro': 'line', 'to': 'flow', 'type': 'AtLocation', 'score': 0.006306761875748634, 'wm_score': 0.5071142, 'final': 0.15654899331302408}, {'fro': 'spark', 'to': 'flow', 'type': 'AtLocation', 'score': 0.006281719543039799, 'wm_score': 0.3224024, 'final': 0.10111792368012787}, {'fro': 'stream', 'to': 'flow', 'type': 'AtLocation', 'score': 0.005496471654623747, 'wm_score': 0.73449326, 'final': 0.2241955081582367}, {'fro': 'chill', 'to': 'flow', 'type': 'AtLocation', 'score': 0.0042017181403934956, 'wm_score': 0.32738167, 'final': 0.10115570369827546}, {'fro': 'pulse', 'to': 'flow', 'type': 'AtLocation', 'score': 0.0038056140765547752, 'wm_score': 0.43576065, 'final': 0.13339212485358837}, {'fro': 'leak', 'to': 'flow', 'type': 'AtLocation', 'score': 0.003449501935392618, 'wm_score': 0.4007599, 'final': 0.12264262135477486}, {'fro': 'turbine', 'to': 'flow', 'type': 'AtLocation', 'score': 0.0033807314466685057, 'wm_score': 0.37098706, 'final': 0.11366263001266796}, {'fro': 'rock', 'to': 'flow', 'type': 'AtLocation', 'score': 0.0033161325845867395, 'wm_score': 0.33874783, 'final': 0.10394564180921073}, {'fro': 'flow', 'to': 'air', 'type': 'AtLocation', 'score': 0.2011561393737793, 'wm_score': 0.44659182, 'final': 0.2747868435616455}, {'fro': 'flow', 'to': 'pipeline', 'type': 'AtLocation', 'score': 0.11357510089874268, 'wm_score': 0.4904859, 'final': 0.22664834062911987}, {'fro': 'flow', 'to': 'water', 'type': 'AtLocation', 'score': 0.09575299173593521, 'wm_score': 0.6462784, 'final': 0.26091061421515466}, {'fro': 'flow', 'to': 'background', 'type': 'AtLocation', 'score': 0.02884124219417572, 'wm_score': 0.34142402, 'final': 0.122616075535923}, {'fro': 'flow', 'to': 'works', 'type': 'AtLocation', 'score': 0.020901422947645187, 'wm_score': 0.34522516, 'final': 0.11819854406335165}, {'fro': 'flow', 'to': 'clouds', 'type': 'AtLocation', 'score': 0.0203577671200037, 'wm_score': 0.39193735, 'final': 0.1318316419840026}, {'fro': 'flow', 'to': 'balance', 'type': 'AtLocation', 'score': 0.01629018969833851, 'wm_score': 0.56879044, 'final': 0.18204026478883698}, {'fro': 'flow', 'to': 'middle', 'type': 'AtLocation', 'score': 0.014136165380477905, 'wm_score': 0.3897553, 'final': 0.12682190576633456}, {'fro': 'flow', 'to': 'blood', 'type': 'AtLocation', 'score': 0.01082565076649189, 'wm_score': 0.5424903, 'final': 0.17032504553654434}, {'fro': 'flow', 'to': 'sky', 'type': 'AtLocation', 'score': 0.00899472739547491, 'wm_score': 0.31399018, 'final': 0.10049336317683245}, {'fro': 'flow', 'to': 'way', 'type': 'AtLocation', 'score': 0.00881368201225996, 'wm_score': 0.517905, 'final': 0.16154107740858198}, {'fro': 'flow', 'to': 'ocean', 'type': 'AtLocation', 'score': 0.008474878966808319, 'wm_score': 0.5133309, 'final': 0.15993168527676585}, {'fro': 'flow', 'to': 'system', 'type': 'AtLocation', 'score': 0.007636150810867548, 'wm_score': 0.56511056, 'final': 0.17487847356760733}, {'fro': 'flow', 'to': 'zone', 'type': 'AtLocation', 'score': 0.006319738924503326, 'wm_score': 0.4164742, 'final': 0.12936607724715235}, {'fro': 'flow', 'to': 'process', 'type': 'AtLocation', 'score': 0.006247905548661947, 'wm_score': 0.50378954, 'final': 0.15551039588406337}, {'fro': 'flow', 'to': 'river', 'type': 'AtLocation', 'score': 0.0061401803977787495, 'wm_score': 0.5183548, 'final': 0.15980456627844514}, {'fro': 'flow', 'to': 'horizon', 'type': 'AtLocation', 'score': 0.006044778507202864, 'wm_score': 0.33985966, 'final': 0.10618924295504202}, {'fro': 'flow', 'to': 'bank', 'type': 'AtLocation', 'score': 0.005408442113548517, 'wm_score': 0.3851551, 'final': 0.11933243947948396}, {'fro': 'flow', 'to': 'pipe', 'type': 'AtLocation', 'score': 0.005183050408959389, 'wm_score': 0.40684575, 'final': 0.1256818602862716}, {'fro': 'flow', 'to': 'wind', 'type': 'AtLocation', 'score': 0.0051110913045704365, 'wm_score': 0.5414324, 'final': 0.16600748391319933}, {'fro': 'flow', 'to': 'making', 'type': 'AtLocation', 'score': 0.005023240111768246, 'wm_score': 0.44135213, 'final': 0.13592190707823779}, {'fro': 'flow', 'to': 'channel', 'type': 'AtLocation', 'score': 0.004549377132207155, 'wm_score': 0.40450162, 'final': 0.12453504999254503}, {'fro': 'flow', 'to': 'ground', 'type': 'AtLocation', 'score': 0.004351121839135885, 'wm_score': 0.34783837, 'final': 0.10739729628739514}, {'fro': 'flow', 'to': 'mix', 'type': 'AtLocation', 'score': 0.0036875337827950716, 'wm_score': 0.38371855, 'final': 0.11769683864795656}, {'fro': 'flow', 'to': 'atmosphere', 'type': 'AtLocation', 'score': 0.0036110926885157824, 'wm_score': 0.45496738, 'final': 0.13901797888196107}, {'fro': 'flow', 'to': 'distance', 'type': 'AtLocation', 'score': 0.0035889139398932457, 'wm_score': 0.51886785, 'final': 0.1581725947579253}, {'fro': 'flow', 'to': 'sewer', 'type': 'AtLocation', 'score': 0.0032638937700539827, 'wm_score': 0.37365314, 'final': 0.1143806676390378}, {'fro': 'flow', 'to': 'stream', 'type': 'AtLocation', 'score': 0.0029967373702675104, 'wm_score': 0.73449326, 'final': 0.2224456941591873}, {'fro': 'flow', 'to': 'sand', 'type': 'AtLocation', 'score': 0.0028764260932803154, 'wm_score': 0.41410348, 'final': 0.12624454226529624}, {'fro': 'flow', 'to': 'future', 'type': 'AtLocation', 'score': 0.002675787778571248, 'wm_score': 0.41252053, 'final': 0.1256292104449999}, {'fro': 'flow', 'to': 'sea', 'type': 'AtLocation', 'score': 0.002599115250632167, 'wm_score': 0.45100585, 'final': 0.13712113567544254}, {'fro': 'loop', 'to': 'flow', 'type': 'AtLocation', 'score': 0.0027350184973329306, 'wm_score': 0.51977706, 'final': 0.1578476309481331}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">bench</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "bench"
+    let relations = [{'fro': 'bench', 'to': 'player', 'type': 'HasA', 'score': 0.004683304112404585, 'wm_score': 0.5668963, 'final': 0.17334720287868324}, {'fro': 'bench', 'to': 'depth', 'type': 'HasA', 'score': 0.009503484703600407, 'wm_score': 0.33198333, 'final': 0.1062474382925203}, {'fro': 'nrl', 'to': 'bench', 'type': 'HasA', 'score': 0.11374129354953766, 'wm_score': 0.23638538, 'final': 0.1505345194846764}, {'fro': 'team', 'to': 'bench', 'type': 'HasA', 'score': 0.04842393100261688, 'wm_score': 0.5073507, 'final': 0.18610196170183185}, {'fro': 'nba', 'to': 'bench', 'type': 'HasA', 'score': 0.040508124977350235, 'wm_score': 0.4842653, 'final': 0.17363527748414517}, {'fro': 'afl', 'to': 'bench', 'type': 'HasA', 'score': 0.039803728461265564, 'wm_score': 0.2419939, 'final': 0.1004607799228859}, {'fro': 'nfl', 'to': 'bench', 'type': 'HasA', 'score': 0.0339653454720974, 'wm_score': 0.4753784, 'final': 0.1663892618304682}, {'fro': 'club', 'to': 'bench', 'type': 'HasA', 'score': 0.03253066539764404, 'wm_score': 0.43104565, 'final': 0.15208516077835083}, {'fro': 'league', 'to': 'bench', 'type': 'HasA', 'score': 0.024777591228485107, 'wm_score': 0.5126067, 'final': 0.1711263238599396}, {'fro': 'nhl', 'to': 'bench', 'type': 'HasA', 'score': 0.014019367285072803, 'wm_score': 0.43620232, 'final': 0.14067425309955095}, {'fro': 'squad', 'to': 'bench', 'type': 'HasA', 'score': 0.013255408965051174, 'wm_score': 0.5164796, 'final': 0.16422266627553586}, {'fro': 'fa', 'to': 'bench', 'type': 'HasA', 'score': 0.006728670094162226, 'wm_score': 0.34174526, 'final': 0.10723364706591358}, {'fro': 'game', 'to': 'bench', 'type': 'HasA', 'score': 0.006122458726167679, 'wm_score': 0.58615184, 'final': 0.1801312731083174}, {'fro': 'heat', 'to': 'bench', 'type': 'HasA', 'score': 0.0058339680545032024, 'wm_score': 0.37032658, 'final': 0.11518175163815225}, {'fro': 'stadium', 'to': 'bench', 'type': 'HasA', 'score': 0.005559595767408609, 'wm_score': 0.43755853, 'final': 0.13515927603718605}, {'fro': 'lions', 'to': 'bench', 'type': 'HasA', 'score': 0.0036568983923643827, 'wm_score': 0.3846916, 'final': 0.11796730887465509}, {'fro': 'pitch', 'to': 'bench', 'type': 'HasA', 'score': 0.0036436456721276045, 'wm_score': 0.5176405, 'final': 0.15784270197048933}, {'fro': 'coach', 'to': 'bench', 'type': 'HasA', 'score': 0.0036017969250679016, 'wm_score': 0.5407982, 'final': 0.16476071784754756}, {'fro': 'bench', 'to': 'vacancy', 'type': 'HasA', 'score': 0.1858329176902771, 'wm_score': 0.39257032, 'final': 0.24785413838319398}, {'fro': 'bench', 'to': 'dilemma', 'type': 'HasA', 'score': 0.10063622891902924, 'wm_score': 0.22549677, 'final': 0.13809439124332046}, {'fro': 'bench', 'to': 'problem', 'type': 'HasA', 'score': 0.036068256944417953, 'wm_score': 0.305985, 'final': 0.11704327986109259}, {'fro': 'bench', 'to': 'choice', 'type': 'HasA', 'score': 0.014555475674569607, 'wm_score': 0.45562822, 'final': 0.14687729897219873}, {'fro': 'bench', 'to': 'seat', 'type': 'HasA', 'score': 0.005821532104164362, 'wm_score': 0.46697378, 'final': 0.1441672064729151}, {'fro': 'bench', 'to': 'lot', 'type': 'HasA', 'score': 0.005228455178439617, 'wm_score': 0.439459, 'final': 0.13549761862490775}, {'fro': 'bench', 'to': 'ceiling', 'type': 'HasA', 'score': 0.005121336318552494, 'wm_score': 0.36083153, 'final': 0.11183439442298676}, {'fro': 'bench', 'to': 'chance', 'type': 'HasA', 'score': 0.005013733636587858, 'wm_score': 0.4864614, 'final': 0.1494480335456115}, {'fro': 'bench', 'to': 'role', 'type': 'HasA', 'score': 0.004590968135744333, 'wm_score': 0.3266593, 'final': 0.10121146769502105}, {'fro': 'bench', 'to': 'lock', 'type': 'HasA', 'score': 0.003929313272237778, 'wm_score': 0.48343238, 'final': 0.14778023329056647}, {'fro': 'bench', 'to': 'spot', 'type': 'HasA', 'score': 0.0038717829156666994, 'wm_score': 0.4559294, 'final': 0.13948906804096672}, {'fro': 'bench', 'to': 'record', 'type': 'HasA', 'score': 0.0035714830737560987, 'wm_score': 0.3562455, 'final': 0.10937368815162929}, {'fro': 'bench', 'to': 'penalty', 'type': 'HasA', 'score': 0.003366986056789756, 'wm_score': 0.51469517, 'final': 0.15676544123975283}, {'fro': 'bench', 'to': 'challenge', 'type': 'HasA', 'score': 0.0029531139880418777, 'wm_score': 0.33681402, 'final': 0.10311138579162933}, {'fro': 'man', 'to': 'bench', 'type': 'AtLocation', 'score': 0.039550114423036575, 'wm_score': 0.38122517, 'final': 0.14205263109612562}, {'fro': 'player', 'to': 'bench', 'type': 'AtLocation', 'score': 0.020936809480190277, 'wm_score': 0.5668963, 'final': 0.18472465663613322}, {'fro': 'captain', 'to': 'bench', 'type': 'AtLocation', 'score': 0.020491773262619972, 'wm_score': 0.47790816, 'final': 0.15771668928383403}, {'fro': 'coach', 'to': 'bench', 'type': 'AtLocation', 'score': 0.01928439736366272, 'wm_score': 0.5407982, 'final': 0.17573853815456394}, {'fro': 'veteran', 'to': 'bench', 'type': 'AtLocation', 'score': 0.013941722922027111, 'wm_score': 0.40248412, 'final': 0.130504442045419}, {'fro': 'referee', 'to': 'bench', 'type': 'AtLocation', 'score': 0.011638695374131203, 'wm_score': 0.42527395, 'final': 0.13572927176189187}, {'fro': 'defender', 'to': 'bench', 'type': 'AtLocation', 'score': 0.009891707450151443, 'wm_score': 0.47018635, 'final': 0.14798010021510602}, {'fro': 'youngster', 'to': 'bench', 'type': 'AtLocation', 'score': 0.009468809701502323, 'wm_score': 0.32656062, 'final': 0.10459635279105166}, {'fro': 'replacement', 'to': 'bench', 'type': 'AtLocation', 'score': 0.007496139965951443, 'wm_score': 0.5095739, 'final': 0.15811946797616605}, {'fro': 'ball', 'to': 'bench', 'type': 'AtLocation', 'score': 0.007357421796768904, 'wm_score': 0.5487888, 'final': 0.16978683525773824}, {'fro': 'substitute', 'to': 'bench', 'type': 'AtLocation', 'score': 0.0070034353993833065, 'wm_score': 0.50178325, 'final': 0.15543737977956834}, {'fro': 'bat', 'to': 'bench', 'type': 'AtLocation', 'score': 0.005781078245490789, 'wm_score': 0.4467956, 'final': 0.13808543477184357}, {'fro': 'guy', 'to': 'bench', 'type': 'AtLocation', 'score': 0.005736499559134245, 'wm_score': 0.43047476, 'final': 0.133157977691394}, {'fro': 'striker', 'to': 'bench', 'type': 'AtLocation', 'score': 0.005410508718341589, 'wm_score': 0.44810468, 'final': 0.13821876010283912}, {'fro': 'rookie', 'to': 'bench', 'type': 'AtLocation', 'score': 0.004735879134386778, 'wm_score': 0.46081966, 'final': 0.1415610133940708}, {'fro': 'winger', 'to': 'bench', 'type': 'AtLocation', 'score': 0.00424137432128191, 'wm_score': 0.47023734, 'final': 0.14404016402489736}, {'fro': 'fullback', 'to': 'bench', 'type': 'AtLocation', 'score': 0.004183685407042503, 'wm_score': 0.4906996, 'final': 0.15013845978492976}, {'fro': 'bench', 'to': 'works', 'type': 'AtLocation', 'score': 0.19124211370944977, 'wm_score': 0.24059562, 'final': 0.20604816559661485}, {'fro': 'bench', 'to': 'shade', 'type': 'AtLocation', 'score': 0.0653003379702568, 'wm_score': 0.24706309, 'final': 0.11982916357917978}, {'fro': 'bench', 'to': 'middle', 'type': 'AtLocation', 'score': 0.04207366704940796, 'wm_score': 0.2896025, 'final': 0.11633231693458558}, {'fro': 'bench', 'to': 'corner', 'type': 'AtLocation', 'score': 0.02352379821240902, 'wm_score': 0.48303917, 'final': 0.16137840974868634}, {'fro': 'bench', 'to': 'park', 'type': 'AtLocation', 'score': 0.021909993141889572, 'wm_score': 0.3081953, 'final': 0.10779558519932272}, {'fro': 'bench', 'to': 'wings', 'type': 'AtLocation', 'score': 0.01988416537642479, 'wm_score': 0.38162857, 'final': 0.12840748676349736}, {'fro': 'bench', 'to': 'balance', 'type': 'AtLocation', 'score': 0.019693821668624878, 'wm_score': 0.3130056, 'final': 0.10768735516803743}, {'fro': 'bench', 'to': 'way', 'type': 'AtLocation', 'score': 0.017534933984279633, 'wm_score': 0.39224738, 'final': 0.12994866778899575}, {'fro': 'bench', 'to': 'open', 'type': 'AtLocation', 'score': 0.013687929138541222, 'wm_score': 0.30775604, 'final': 0.10190836239697887}, {'fro': 'bench', 'to': 'centre', 'type': 'AtLocation', 'score': 0.011944415979087353, 'wm_score': 0.32552373, 'final': 0.10601821018536116}, {'fro': 'bench', 'to': 'making', 'type': 'AtLocation', 'score': 0.011785101145505905, 'wm_score': 0.3766201, 'final': 0.12123560080185415}, {'fro': 'bench', 'to': 'ground', 'type': 'AtLocation', 'score': 0.008970995433628559, 'wm_score': 0.41325957, 'final': 0.13025756780354003}, {'fro': 'bench', 'to': 'stadium', 'type': 'AtLocation', 'score': 0.0037018521688878536, 'wm_score': 0.43755853, 'final': 0.13385885551822152}, {'fro': 'bench', 'to': 'kitchen', 'type': 'AtLocation', 'score': 0.0036144338082522154, 'wm_score': 0.34632716, 'final': 0.10642825166577657}, {'fro': 'bench', 'to': 'room', 'type': 'AtLocation', 'score': 0.003525607753545046, 'wm_score': 0.5693123, 'final': 0.17326161542748156}, {'fro': 'bench', 'to': 'box', 'type': 'AtLocation', 'score': 0.0032332653645426035, 'wm_score': 0.44286865, 'final': 0.13512388075517984}, {'fro': 'bench', 'to': 'cap', 'type': 'HasA', 'score': 0.0025278113316744566, 'wm_score': 0.3929706, 'final': 0.11966064793217213}, {'fro': 'bench', 'to': 'judge', 'type': 'HasA', 'score': 0.009999703615903854, 'wm_score': 0.48252434, 'final': 0.15175709453113273}, {'fro': 'bench', 'to': 'chair', 'type': 'HasA', 'score': 0.004446155391633511, 'wm_score': 0.49063504, 'final': 0.15030282077414348}, {'fro': 'bench', 'to': 'entrance', 'type': 'AtLocation', 'score': 0.006052635610103607, 'wm_score': 0.34959435, 'final': 0.10911514992707254}, {'fro': 'bench', 'to': 'guard', 'type': 'HasA', 'score': 0.003610470797866583, 'wm_score': 0.48445582, 'final': 0.1478640755585066}, {'fro': 'bench', 'to': 'serve', 'type': 'HasA', 'score': 0.0024092758540064096, 'wm_score': 0.41718236, 'final': 0.1268412010978045}, {'fro': 'bench', 'to': 'lift', 'type': 'HasA', 'score': 0.00318185705691576, 'wm_score': 0.34621853, 'final': 0.10609285893984105}, {'fro': 'bench', 'to': 'fill', 'type': 'HasA', 'score': 0.005141620524227619, 'wm_score': 0.5386312, 'final': 0.16518849436695934}, {'fro': 'bench', 'to': 'solid', 'type': 'HasA', 'score': 0.002666921354830265, 'wm_score': 0.43403462, 'final': 0.1320772309483812}, {'fro': 'bench', 'to': 'verdict', 'type': 'HasA', 'score': 0.000833467987831682, 'wm_score': 0.35127974, 'final': 0.1059673495914822}, {'fro': 'bench', 'to': 'third', 'type': 'HasA', 'score': 0.004250125028192997, 'wm_score': 0.43643925, 'final': 0.13390686251973513}, {'fro': 'bench', 'to': 'fourth', 'type': 'HasA', 'score': 0.0029119171667844057, 'wm_score': 0.43513745, 'final': 0.13257957701674908}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BertNet</title>
+    <style>
+         #relations {
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+         .rel-container {
+             width: fit-content;
+             margin: 0 20px;
+         }
+
+         #title {
+             text-transform: capitalize;
+         }
+
+         .rel-item, .scores {
+             display: flex;
+             justify-content: space-between;
+         }
+
+         .rel-item a {
+             margin-right: 15px;
+         }
+
+         .scores span {
+             width: 50px;
+             text-align: center;
+         }
+
+         .caption {
+             font-weight: bold;
+         }
+
+         .caption .scores {
+             cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+<h1 id="title">cabin</h1>
+<div id="relations"></div>
+</body>
+<script>
+    let name = "cabin"
+    let relations = [{'fro': 'cabin', 'to': 'safety', 'type': 'HasA', 'score': 0.0032856196630746126, 'wm_score': 0.36708593, 'final': 0.11242571276415225}, {'fro': 'cabin', 'to': 'wood', 'type': 'HasA', 'score': 0.026120265945792198, 'wm_score': 0.3779075, 'final': 0.13165643616205455}, {'fro': 'flight', 'to': 'cabin', 'type': 'HasA', 'score': 0.006347709335386753, 'wm_score': 0.54247326, 'final': 0.16718537453477073}, {'fro': 'cabin', 'to': 'lake', 'type': 'HasA', 'score': 0.004383029881864786, 'wm_score': 0.39088577, 'final': 0.12033385191730538}, {'fro': 'cabin', 'to': 'atmosphere', 'type': 'HasA', 'score': 0.010034456849098206, 'wm_score': 0.32445395, 'final': 0.10436030479436875}, {'fro': 'cabin', 'to': 'refrigerator', 'type': 'HasA', 'score': 0.004120511468499899, 'wm_score': 0.3346306, 'final': 0.10327353802794993}, {'fro': 'cabin', 'to': 'maintenance', 'type': 'HasA', 'score': 0.0033360887318849564, 'wm_score': 0.41897076, 'final': 0.12802649011231948}, {'fro': 'cabin', 'to': 'passenger', 'type': 'HasA', 'score': 0.011115645058453083, 'wm_score': 0.57014894, 'final': 0.17882563354091718}, {'fro': 'passenger', 'to': 'cabin', 'type': 'AtLocation', 'score': 0.04852874204516411, 'wm_score': 0.57014894, 'final': 0.2050148014316149}, {'fro': 'boat', 'to': 'cabin', 'type': 'HasA', 'score': 0.00525509612634778, 'wm_score': 0.49215207, 'final': 0.1513241882884435}, {'fro': 'cabin', 'to': 'fire', 'type': 'HasA', 'score': 0.012965966016054153, 'wm_score': 0.45347914, 'final': 0.14511991821123793}, {'fro': 'cabin', 'to': 'structure', 'type': 'HasA', 'score': 0.002914952579885721, 'wm_score': 0.3469024, 'final': 0.10611118680592002}, {'fro': 'cabin', 'to': 'kitchen', 'type': 'HasA', 'score': 0.007291921880096197, 'wm_score': 0.48268646, 'final': 0.14991028331606737}, {'fro': 'crew', 'to': 'cabin', 'type': 'HasA', 'score': 0.013483679853379726, 'wm_score': 0.55042917, 'final': 0.17456732689736582}, {'fro': 'crew', 'to': 'cabin', 'type': 'AtLocation', 'score': 0.005838593002408743, 'wm_score': 0.55042917, 'final': 0.16921576610168615}, {'fro': 'cabin', 'to': 'garage', 'type': 'HasA', 'score': 0.0031795797403901815, 'wm_score': 0.55090743, 'final': 0.16749793481827316}, {'fro': 'cabin', 'to': 'mountain', 'type': 'AtLocation', 'score': 0.005156819708645344, 'wm_score': 0.4065327, 'final': 0.12556958379605176}, {'fro': 'cabin', 'to': 'noise', 'type': 'HasA', 'score': 0.00547589547932148, 'wm_score': 0.34657466, 'final': 0.10780552483552504}, {'fro': 'cabin', 'to': 'smoke', 'type': 'HasA', 'score': 0.012483252212405205, 'wm_score': 0.41603237, 'final': 0.13354798754868366}, {'fro': 'smoke', 'to': 'cabin', 'type': 'AtLocation', 'score': 0.0009091866668313742, 'wm_score': 0.41603237, 'final': 0.12544614166678197}, {'fro': 'cabin', 'to': 'floor', 'type': 'HasA', 'score': 0.004450077190995216, 'wm_score': 0.5617119, 'final': 0.1716286240336967}, {'fro': 'plane', 'to': 'cabin', 'type': 'HasA', 'score': 0.018775880336761475, 'wm_score': 0.5560212, 'final': 0.17994947623573304}, {'fro': 'cabin', 'to': 'plane', 'type': 'AtLocation', 'score': 0.003614577930420637, 'wm_score': 0.5560212, 'final': 0.16933656455129445}, {'fro': 'cabin', 'to': 'leather', 'type': 'HasA', 'score': 0.008967455476522446, 'wm_score': 0.32784864, 'final': 0.10463181083356574}, {'fro': 'ship', 'to': 'cabin', 'type': 'HasA', 'score': 0.007760149426758289, 'wm_score': 0.47070783, 'final': 0.14664445359873082}, {'fro': 'cabin', 'to': 'roof', 'type': 'HasA', 'score': 0.01976870745420456, 'wm_score': 0.50855803, 'final': 0.1664055042179432}, {'fro': 'cabin', 'to': 'comfortable', 'type': 'HasA', 'score': 0.006337796803563833, 'wm_score': 0.36199942, 'final': 0.11303628376249471}, {'fro': 'cabin', 'to': 'remote', 'type': 'HasA', 'score': 0.018135249614715576, 'wm_score': 0.40034285, 'final': 0.1327975297303009}, {'fro': 'cabin', 'to': 'remote', 'type': 'AtLocation', 'score': 0.015683766454458237, 'wm_score': 0.40034285, 'final': 0.13108149151812076}, {'fro': 'cabin', 'to': 'crash', 'type': 'HasA', 'score': 0.004365189932286739, 'wm_score': 0.40024376, 'final': 0.12312876095260074}, {'fro': 'cabin', 'to': 'quiet', 'type': 'HasA', 'score': 0.005048686638474464, 'wm_score': 0.34869573, 'final': 0.10814279964693214}, {'fro': 'cabin', 'to': 'fence', 'type': 'HasA', 'score': 0.0044604153372347355, 'wm_score': 0.3278311, 'final': 0.10147162073606433}, {'fro': 'cabin', 'to': 'ceiling', 'type': 'HasA', 'score': 0.006864883005619049, 'wm_score': 0.34019828, 'final': 0.10686490210393336}, {'fro': 'helicopter', 'to': 'cabin', 'type': 'HasA', 'score': 0.005591940134763718, 'wm_score': 0.44186, 'final': 0.1364723580943346}];
+    let relation_types = [{'label': 'RelatedTo', 'info': 'The most general relation. There is some positive relationship between A and B, but ConceptNet cant determine what that relationship is based on the data. This was called ConceptuallyRelatedTo in ConceptNet 2 through 4. Symmetric.', 'mask': ''}, {'label': 'FormOf', 'info': 'A is an inflected form of B; B is the root word of A.', 'mask': ''}, {'label': 'IsA', 'info': 'A is a subtype or a specific instance of B; every A is a B. This can include specific instances; the distinction between subtypes and instances is often blurry in language. This is the hyponym relation in WordNet.', 'mask': ''}, {'label': 'PartOf', 'info': 'A is a part of B. This is the part meronym relation in WordNet.', 'mask': ''}, {'label': 'HasA', 'info': 'B belongs to A, either as an inherent part or due to a social construct of possession. HasA is often the reverse of PartOf.', 'mask': 'The OBJECT1 has a OBJECT2'}, {'label': 'UsedFor', 'info': 'A is used for B; the purpose of A is B.', 'mask': ''}, {'label': 'CapableOf', 'info': 'Something that A can typically do is B.', 'mask': ''}, {'label': 'AtLocation', 'info': 'A is a typical location for B, or A is the inherent location of B. Some instances of this would be considered meronyms in WordNet.', 'mask': 'A OBJECT1 is in the OBJECT2'}, {'label': 'Causes', 'info': 'A and B are events, and it is typical for A to cause B.', 'mask': ''}, {'label': 'HasSubevent', 'info': 'A and B are events, and B happens as a subevent of A.', 'mask': ''}, {'label': 'HasFirstSubevent', 'info': 'A is an event that begins with subevent B.', 'mask': ''}, {'label': 'HasLastSubevent', 'info': 'A is an event that concludes with subevent B.', 'mask': ''}, {'label': 'HasPrerequisite', 'info': 'In order for A to happen, B needs to happen; B is a dependency of A.', 'mask': ''}, {'label': 'HasProperty', 'info': 'A has B as a property; A can be described as B.', 'mask': ''}, {'label': 'MotivatedByGoal', 'info': 'Someone does A because they want result B; A is a step toward accomplishing the goal B.', 'mask': ''}, {'label': 'ObstructedBy', 'info': 'A is a goal that can be prevented by B; B is an obstacle in the way of A.', 'mask': ''}, {'label': 'Desires', 'info': 'A is a conscious entity that typically wants B. Many assertions of this type use the appropriate languages word for person as A.', 'mask': ''}, {'label': 'CreatedBy', 'info': 'B is a process or agent that creates A.', 'mask': ''}, {'label': 'Synonym', 'info': 'A and B have very similar meanings. They may be translations of each other in different languages. This is the synonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'Antonym', 'info': 'A and B are opposites in some relevant way, such as being opposite ends of a scale, or fundamentally similar things with a key difference between them. Counterintuitively, two concepts must be quite similar before people consider them antonyms. This is the antonym relation in WordNet as well. Symmetric.', 'mask': ''}, {'label': 'DistinctFrom', 'info': 'A and B are distinct member of a set; something that is A is not B. Symmetric.', 'mask': ''}, {'label': 'DerivedFrom', 'info': 'A is a word or phrase that appears within B and contributes to Bs meaning.', 'mask': ''}, {'label': 'SymbolOf', 'info': 'A symbolically represents B.', 'mask': ''}, {'label': 'DefinedAs', 'info': 'A and B overlap considerably in meaning, and B is a more explanatory version of A.', 'mask': ''}, {'label': 'MannerOf', 'info': 'A is a specific way to do B. Similar to IsA, but for verbs.', 'mask': ''}, {'label': 'LocatedNear', 'info': 'A and B are typically found near each other. Symmetric.', 'mask': ''}, {'label': 'HasContext', 'info': 'A is a word used in the context of B, which could be a topic area, technical field, or regional dialect.', 'mask': ''}, {'label': 'SimilarTo', 'info': 'A is similar to B. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyRelatedTo', 'info': 'A and B have a common origin. Symmetric.', 'mask': ''}, {'label': 'EtymologicallyDerivedFrom', 'info': 'A is derived from B.', 'mask': ''}, {'label': 'CausesDesire', 'info': 'A makes someone want B.', 'mask': ''}, {'label': 'MadeOf', 'info': 'A is made of B.', 'mask': ''}, {'label': 'ReceivesAction', 'info': 'B can be done to A.', 'mask': ''}];
+
+        function fillHTML(sortBy) {
+        document.getElementById("relations").innerHTML = "";
+
+        relation_types.forEach(r => {
+            let frels_from = relations.filter(rel => rel.type === r.label && rel.fro === name);
+            let title_from = r.mask.replace("OBJECT1", name).replace("OBJECT2", "...");
+            generateList(r, sortBy, frels_from.map(frel => {
+                return {label: frel.to, ...frel}
+            }), title_from);
+            let frels_to = relations.filter(rel => rel.type === r.label && rel.to === name);
+            let title_to = r.mask.replace("OBJECT1", "...").replace("OBJECT2", name);
+            generateList(r, sortBy, frels_to.map(frel => {
+                return {label: frel.fro, ...frel}
+            }), title_to);
+
+        })
+    }
+
+    function generateList(r, sortBy, frels, title) {
+        if (frels.length > 0) {
+            frels = frels.sort(sortBy);
+            let str = `<div class="rel-container"><h2>${title}</h2>`
+            str += `<div class="rel-item caption"><a>Name</a>
+                            <div class="scores">
+                            <span  onclick="fillHTML(sortByBERT)">BERT</span>
+                            <span onclick="fillHTML(sortByW2V)">W2V</span>
+                            <span  onclick="fillHTML(sortByFinal)">Score</span></div></div>`
+            str += "<div>" + frels.map(frel => {
+                let score = parseFloat(frel.score).toFixed(3);
+                let wm_score = parseFloat(frel.wm_score).toFixed(3);
+                let interpolated_score = frel.final.toFixed(3);
+                return `<div class="rel-item"><a href="${frel.label}.html">${frel.label}</a>
+                            <div class="scores"><span>${score}</span>
+                            <span>${wm_score}</span>
+                            <span>${interpolated_score}</span></div></div>`
+            }).join("\n") + " </div></div>"
+            document.getElementById("relations").insertAdjacentHTML("beforeend", str)
+        }
+    }
+
+    function sortByFinal(fr1, fr2) {
+        return fr2.final - fr1.final;
+    }
+
+    function sortByBERT(fr1, fr2) {
+        return fr2.score - fr1.score;
+    }
+
+    function sortByW2V(fr1, fr2) {
+        return fr2.wm_score - fr1.wm_score;
+    }
+
+    fillHTML(sortByFinal)
+</script>
+</html>
+
